@@ -40,10 +40,26 @@ try:
   page.wait_for_function('()=>document.querySelector("#encounter-status").textContent.includes("REJECTED")')
   assert 'No accepted observation' in page.locator('#encounter-result').inner_text()
   page.get_by_role('button',name='Clear packet and pins').click();assert 'UNAVAILABLE' in page.locator('#encounter-status').inner_text()
+  # Clearing pending verification and file reads must prevent stale acceptance.
+  page.get_by_role('button',name='Load REFUSE fixture').click()
+  page.wait_for_function('()=>document.querySelector("#encounter-status").textContent.includes("Loaded")')
+  page.get_by_label('Use these reviewed public pins for this local verification.').check()
+  page.evaluate('''()=>{const original=crypto.subtle.digest.bind(crypto.subtle);window.restoreDigest=()=>{delete crypto.subtle.digest};let once=true;crypto.subtle.digest=(...args)=>{if(!once)return original(...args);once=false;return new Promise(resolve=>{window.releaseDigest=()=>resolve(original(...args))})}}''')
+  page.get_by_role('button',name='Verify reviewed packet').click();page.wait_for_function('()=>typeof window.releaseDigest==="function"')
+  page.get_by_role('button',name='Clear packet and pins').click();page.evaluate('()=>window.releaseDigest()')
+  page.wait_for_function('()=>document.querySelector("#encounter-status").textContent.includes("UNAVAILABLE")');page.wait_for_timeout(150)
+  assert page.locator('#encounter-result').inner_text()=='No accepted observation.'
+  page.evaluate('()=>window.restoreDigest()')
+  page.evaluate('''()=>{const original=File.prototype.text;File.prototype.text=function(){return new Promise(resolve=>{window.releaseFile=()=>resolve(original.call(this))})};window.restoreFile=()=>{File.prototype.text=original}}''')
+  page.locator('#encounter-packet').set_input_files(str(ROOT/'evidence/first-encounter-002/refuse.packet.json'))
+  page.wait_for_function('()=>typeof window.releaseFile==="function"');page.get_by_role('button',name='Clear packet and pins').click();page.evaluate('()=>window.releaseFile()');page.wait_for_timeout(150)
+  assert 'cleared' in page.locator('#encounter-status').inner_text().lower()
+  assert page.locator('#encounter-result').inner_text()=='No accepted observation.'
+  page.evaluate('()=>window.restoreFile()')
   assert not errors,errors
   allowed={f'http://127.0.0.1:{s.server_port}' for s in servers}
   assert all(method=='GET' and any(url.startswith(origin+'/') for origin in allowed) for method,url in requests),requests
-  result={'schema':'webz/encounter-browser-witness/v0','scope':'synthetic preflight; two automated isolated browser processes/origins, no human field proof','two_isolated_processes':True,'separate_origins':True,'node_browser_projections_equal':True,'wrong_pin_rejected':True,'approval_reset_on_pin_change':True,'delivery_requests':0,'browser_storage_entries':0,'page_errors':errors,'authenticated_transport':'UNOBSERVED','two_device_encounter':'UNOBSERVED','projection':cold}
+  result={'schema':'webz/encounter-browser-witness/v0','scope':'synthetic preflight; two automated isolated browser processes/origins, no human field proof','two_isolated_processes':True,'separate_origins':True,'node_browser_projections_equal':True,'wrong_pin_rejected':True,'approval_reset_on_pin_change':True,'clear_cancels_delayed_verification':True,'clear_cancels_delayed_file_load':True,'delivery_requests':0,'browser_storage_entries':0,'page_errors':errors,'authenticated_transport':'UNOBSERVED','two_device_encounter':'UNOBSERVED','projection':cold}
   (OUT/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
   for browser in browsers:browser.close()
 finally:

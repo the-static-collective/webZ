@@ -47,6 +47,11 @@ async function verifySignature(s,body,domain,pin){
 }
 async function verifyNative(o,type,pin){
  const cross=type==='crossing';exact(o,cross?CROSSING:RECEIPT);
+ // Native identity construction uses asRecord for extensions. A valid signature
+ // over a raw JSON scalar/array is not a valid native v0 receipt or crossing.
+ if(!o.extensions||typeof o.extensions!=='object'||Array.isArray(o.extensions))throw Error('NATIVE_EXTENSIONS_OBJECT_REQUIRED');
+ for(const k of cross?['source_particular','source_world','declared_kind']:['crossing_id','world_id','receiver_particular','kind','semantic_effect'])nonempty(o[k]);
+ for(const k of cross?['parents','payload_refs']:['descendant_refs','residual_refs'])if(!Array.isArray(o[k]))throw Error('NATIVE_ARRAY_REQUIRED');
  const idField=cross?'crossing_id':'receipt_id',domain=cross?'relatte.crossing-signature/v0':'relatte.receipt-signature/v0';
  if(o.schema!==(cross?'relatte.crossing-envelope/v0':'relatte.receipt/v0'))throw Error('INVALID_NATIVE_SCHEMA');
  timestamp(o.created_at);if(cross&&o.protocol_version!=='0')throw Error('INVALID_PROTOCOL_VERSION');

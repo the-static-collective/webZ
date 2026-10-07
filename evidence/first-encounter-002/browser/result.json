@@ -6,6 +6,8 @@
   "node_browser_projections_equal": true,
   "wrong_pin_rejected": true,
   "approval_reset_on_pin_change": true,
+  "clear_cancels_delayed_verification": true,
+  "clear_cancels_delayed_file_load": true,
   "delivery_requests": 0,
   "browser_storage_entries": 0,
   "page_errors": [],
