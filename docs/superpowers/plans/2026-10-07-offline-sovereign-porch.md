@@ -19,32 +19,34 @@ Check malformed/extra JSON fields, secret-bearing reports, counterfeit booleans,
 
 Produces: validated world manifests; append-only voyage/local decision records; deterministic export/import projection. Consumed by Task 3. Files: app/model.mjs, tests/model.test.mjs, scripts/replay.mjs.
 
-- [ ] Write tests for explicit journey, safe destinations, manifests, sequence/tamper handling, consent/UTF-8 limits, separate world choices and deterministic cold replay.
-- [ ] Run `node --test tests/model.test.mjs`; expected RED because model is missing.
-- [ ] Implement strict local model with no protected carry or automatic authority.
-- [ ] Run tests; expected GREEN. Commit.
+- [x] Write tests for explicit journey, safe destinations, manifests, sequence/tamper handling, consent/UTF-8 limits, separate world choices and deterministic cold replay.
+- [x] Run `node --test tests/model.test.mjs`; expected RED because model is missing.
+- [x] Implement strict local model with no protected carry or automatic authority.
+- [x] Run tests; expected GREEN. Commit.
 
 ## Task 2: Read-only proof verification
 
 Produces: bounded sanitized report parser and independent signature/custody observations. Consumed by Task 3. Files: app/proof.mjs, tests/proof.test.mjs, evidence/public-simulation.json, evidence/provenance.json.
 
-- [ ] Write tests against real public signed simulation for signatures, missing/counterfeit custody, tampering, source changes, key substitution, injected LIVE and secret fields.
-- [ ] Run `node --test tests/proof.test.mjs`; expected RED because verifier is missing.
-- [ ] Implement verify-only reLATTE v0 canonical ID/signature rules pinned to donor. Report unavailable evidence explicitly; do not authorize or unlock.
-- [ ] Run full `npm test`; expected GREEN. Commit.
+- [x] Write tests against real public signed simulation for signatures, missing/counterfeit custody, tampering, source changes, key substitution, injected LIVE and secret fields.
+- [x] Run `node --test tests/proof.test.mjs`; expected RED because verifier is missing.
+- [x] Implement verify-only reLATTE v0 canonical ID/signature rules pinned to donor. Report unavailable evidence explicitly; do not authorize or unlock.
+- [x] Run full `npm test`; expected GREEN. Commit.
 
 ## Task 3: Static portal and browser witness
 
 Consumes Task 1 model and Task 2 verifier. Produces separate world pages, offline cache, mobile porch, read-only proof page and real browser evidence. Files: index.html, worlds/*/index.html, porch/index.html, proof/index.html, app/ui.mjs, app/style.css, sw.js, scripts/serve.mjs, tests/browser.py.
 
-- [ ] Write browser tests for inspect/remain/cross/return, no default carry, explicit local owner choices, proof lock, offline and nested base, cold import, mobile overflow and unsafe/corrupt inputs.
-- [ ] Run browser tests; expected RED because documents are missing.
-- [ ] Implement mobile documents and deterministic observation UI; fixed static cache only, imported reports memory-only.
-- [ ] Run unit and browser suites; expected GREEN. Capture desktop/mobile screenshots and cold exports. Commit.
+- [x] Write browser tests for inspect/remain/cross/return, no default carry, explicit local owner choices, proof lock, offline and nested base, cold import, mobile overflow and unsafe/corrupt inputs.
+- [x] Run browser tests; expected RED because documents are missing.
+- [x] Implement mobile documents and deterministic observation UI; fixed static cache only, imported reports memory-only.
+- [x] Run unit and browser suites; expected GREEN. Capture desktop/mobile screenshots and cold exports. Commit.
 
 ## Task 4: Reviewable delivery
 
-- [ ] Add executable instructions, authority/verification report, blockers and CI. Preserve original specifications byte-for-byte.
-- [ ] Verify full suite and fresh-process replay; inspect tracked files for secrets and fixture provenance.
-- [ ] Obtain fresh-context whole-branch review; fix significant findings with regression RED→GREEN.
-- [ ] Push feature branch and open stacked review PR against design/webz-maxhinal-porch-001. No merge or deployment.
+- [x] Add executable instructions, authority/verification report, blockers and CI. Preserve original specifications byte-for-byte.
+- [x] Verify full suite and fresh-process replay; inspect tracked files for secrets and fixture provenance.
+- [x] Obtain fresh-context whole-branch review; fix significant findings with regression RED→GREEN.
+- [x] Push feature branch and open stacked review PR against design/webz-maxhinal-porch-001. No merge or deployment.
+
+Delivery: draft webZ PR #3, stacked on the design PR #2. Local unit/browser/cold replay checks are green; MAXHINAL prerequisites remain blocked as documented.
