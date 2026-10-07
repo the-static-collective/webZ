@@ -54,7 +54,7 @@ export function canonical(v){
 }
 export function sensitive(s){return /Bearer\s|-----BEGIN|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.|(?:password|secret|api[_-]?key|access[_-]?token)["']?\s*[:=]/i.test(s);}
 export async function proposal(value,consent){
- if(typeof value!=='string'||!consent||sensitive(value))throw Error('PUBLIC_TEXT_AND_CONSENT_REQUIRED');
+ if(typeof value!=='string'||consent!==true||sensitive(value))throw Error('PUBLIC_TEXT_AND_CONSENT_REQUIRED');
  const length=new TextEncoder().encode(value).length;if(!value.trim()||length>2048)throw Error('TEXT_LIMIT_2048_BYTES');
  return {id:await hash(value),byte_length:length};
 }

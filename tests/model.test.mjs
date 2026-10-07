@@ -52,3 +52,27 @@ test('Remain resolves a pending explicit departure without inventing arrival',()
  j=M.append(j,{kind:'REMAIN',from:M.WORLDS[0],to:M.WORLDS[1]});
  assert.equal(M.project(j).pending_departure,null);assert.equal(M.project(j).arrivals,0);
 });
+
+for (const [label, consent] of [
+ ['string true', 'true'],
+ ['string false', 'false'],
+ ['empty string', ''],
+ ['empty object', {}],
+ ['object with consent flag', {consent: true}],
+ ['empty array', []],
+ ['array containing true', [true]],
+ ['number zero', 0],
+ ['number one', 1],
+ ['negative number', -1],
+ ['NaN', NaN],
+ ['Infinity', Infinity],
+ ['null', null],
+ ['undefined', undefined],
+]) {
+ test(`proposal rejects ${label} consent`, async () => {
+  await assert.rejects(
+   () => M.proposal('A bounded public seed.', consent),
+   /PUBLIC_TEXT_AND_CONSENT_REQUIRED/,
+  );
+ });
+}
