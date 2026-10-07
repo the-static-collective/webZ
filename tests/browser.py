@@ -52,6 +52,31 @@ with sync_playwright() as p:
  assert 'ADMIT' in page.locator('#decision-history').inner_text()
  assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
  page.screenshot(path=str(out/'porch-mobile.png'),full_page=True)
+ # Static Pressing is a native offline webZ surface: local bytes become metadata only.
+ page.get_by_role('link',name='Static Press').click()
+ page.get_by_role('heading',name='Bring one thing.',exact=True).wait_for()
+ assert page.get_by_role('button',name='Deliver pressing').is_disabled()
+ assert page.get_by_role('button',name='Pay').is_disabled()
+ page.get_by_label('Particular type').select_option('local-file')
+ page.get_by_label('Public label').fill('demo audio')
+ before_prepare_requests=len(requests)
+ page.locator('#source-file').set_input_files({'name':'private-song-name.mp3','mimeType':'audio/mpeg','buffer':b'private-local-audio'})
+ page.get_by_label('Requested return').select_option('MANGA_CARD')
+ page.get_by_role('button',name='Prepare pressing').click()
+ page.wait_for_function("()=>document.querySelector('#pressing-preview').textContent.includes('webz/static-pressing-proposal/v0')")
+ pressing_text=page.locator('#pressing-preview').inner_text()
+ pressing=json.loads(pressing_text)
+ assert pressing['webz_address']=='webz:the-static-collective/static-pressing-001'
+ assert pressing['particular']['kind']=='local-file'
+ assert pressing['particular']['media_type']=='audio/mpeg'
+ assert 'private-song-name.mp3' not in pressing_text
+ assert 'private-local-audio' not in pressing_text
+ assert len(requests)==before_prepare_requests
+ page.get_by_label('Public label').fill('changed label')
+ assert page.locator('#pressing-preview').is_hidden()
+ assert 'not prepared' in page.locator('#pressing-status').inner_text().lower()
+ assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+ page.screenshot(path=str(out/'press-mobile.png'),full_page=True)
  page.get_by_role('link',name='Crossing evidence').click()
  page.get_by_role('button',name='Inspect public simulation').click()
  page.wait_for_function("()=>document.querySelector('#proof-status').textContent.includes('4 verified crossings')")
@@ -104,6 +129,7 @@ with sync_playwright() as p:
  # No imported evidence or text enters either browser storage or the static asset cache.
  stored=page.evaluate("JSON.stringify({...localStorage})")
  assert 'A small seed' not in stored and 'ECDSA' not in stored
+ assert 'private-local-audio' not in stored and 'private-song-name.mp3' not in stored
  cache_urls=page.evaluate("async()=>{const a=[];for(const k of await caches.keys()){for(const r of await (await caches.open(k)).keys())a.push(r.url)}return a}")
  assert not any('fake-live' in u or 'voyage' in u for u in cache_urls)
  assert not errors,errors
