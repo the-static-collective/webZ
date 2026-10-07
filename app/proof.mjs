@@ -69,6 +69,7 @@ export async function observe(input){
   if(crossings.has(x.crossing_id)&&crossings.get(x.crossing_id).snapshot!==snapshot)throw Error('DUPLICATE_CONFLICT');
   crossings.set(x.crossing_id,{x,snapshot});if(!custody.has(x.crossing_id))custody.set(x.crossing_id,new Set());custody.get(x.crossing_id).add(t.node_id);
   const h=t.signed_hold,d=t.signed_disposition;
+  for(const v of [h,d])if(v!==null&&(!v||typeof v!=='object'||Array.isArray(v)))throw Error('INVALID_RECEIPT_ABSENCE');
   if(!Array.isArray(t.relation_observations))throw Error('INVALID_OBSERVATIONS');
   if(!h){if(d||t.relation_observations.length)throw Error('DISPOSITION_WITHOUT_HOLD');unresolved.add(x.crossing_id);continue;}
   for(const o of [h,d,...t.relation_observations]){if(!o)continue;await receipt(o);

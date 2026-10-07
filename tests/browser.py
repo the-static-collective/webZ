@@ -1,5 +1,5 @@
 """Real Chromium mobile/offline/nested-base and fresh-browser replay witness."""
-import json, pathlib, subprocess, threading, functools
+import json, pathlib, subprocess, threading, importlib.metadata
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright
 ROOT=pathlib.Path(__file__).resolve().parents[1]
@@ -108,7 +108,7 @@ with sync_playwright() as p:
  assert not any('fake-live' in u or 'voyage' in u for u in cache_urls)
  assert not errors,errors
  assert all(u.startswith(base) for u in requests),requests
- result={'schema':'webz/browser-witness/v0','browser':'Chromium','base_scope':'nested /nested/webZ/','offline_round_trip':True,'explicit_human_choices':['Sanctuary HOLD → ADMIT','Orchard REFUSE'],'mobile_no_overflow':True,'reload_durable_trace':True,'cold_node_browser_equal':True,'corrupt_storage':'UNAVAILABLE, explicit ERASE','denied_storage':'navigation works without durable trace','fake_live':'REJECTED; Rack locked','missing_target':'UNRESOLVED; no arrival','default_discovery':'no durable storage or destination fetch','proof_node_browser_equal':True,'external_requests':0,'page_errors':errors,'projection':node}
+ result={'schema':'webz/browser-witness/v0','browser':'Chromium','browser_version':browser.version,'playwright_version':importlib.metadata.version('playwright'),'base_scope':'nested /nested/webZ/','offline_round_trip':True,'explicit_human_choices':['Sanctuary HOLD → ADMIT','Orchard REFUSE'],'mobile_no_overflow':True,'reload_durable_trace':True,'cold_node_browser_equal':True,'corrupt_storage':'UNAVAILABLE, explicit ERASE','denied_storage':'navigation works without durable trace','fake_live':'REJECTED; Rack locked','missing_target':'UNRESOLVED; no arrival','default_discovery':'no durable storage or destination fetch','proof_node_browser_equal':True,'external_requests':0,'page_errors':errors,'projection':node}
  (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
  browser.close()
 server.shutdown()

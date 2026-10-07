@@ -47,3 +47,8 @@ test('frozen export verifies integrity and replays without repairing malformed h
  const extra=structuredClone(j);extra.secret='no';assert.throws(()=>M.project(extra));
  const event=structuredClone(j);event.events[0].authority='MAXHINAL';assert.throws(()=>M.project(event));
 });
+test('Remain resolves a pending explicit departure without inventing arrival',()=>{
+ let j=M.append(M.empty(),{kind:'DEPART',from:M.WORLDS[0],to:M.WORLDS[1]});
+ j=M.append(j,{kind:'REMAIN',from:M.WORLDS[0],to:M.WORLDS[1]});
+ assert.equal(M.project(j).pending_departure,null);assert.equal(M.project(j).arrivals,0);
+});

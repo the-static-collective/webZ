@@ -34,7 +34,7 @@ export function project(j){
   }
   if(e.from_world_id===e.to_world_id||e.door_id!==manifests[WORLDS.indexOf(e.from_world_id)].doors[0].door_id||e.proposal_ref!==null||e.byte_length!==null||e.decision!==null)throw Error('INVALID_NAVIGATION');
   if(['DEPART','RETURN'].includes(e.kind)){if(pending||e.basis_departure_seq!==null)throw Error('PENDING_DEPARTURE');pending=e;}
-  else if(['ARRIVE','UNRESOLVED'].includes(e.kind)){
+  else if(['ARRIVE','UNRESOLVED'].includes(e.kind)||(e.kind==='REMAIN'&&pending)){
    if(!pending||e.basis_departure_seq!==pending.seq||e.from_world_id!==pending.from_world_id||e.to_world_id!==pending.to_world_id)throw Error('UNOBSERVED_DEPARTURE');
    if(e.kind==='ARRIVE'){current=e.to_world_id;arrivals++;}pending=null;
   }else if(!['INSPECT','REMAIN'].includes(e.kind)||e.basis_departure_seq!==null)throw Error('INVALID_ACTION');
@@ -43,7 +43,7 @@ export function project(j){
 }
 export function append(j,action){
  exact(action,['kind','from','to']);const p=project(j);
- const e={seq:j.events.length+1,kind:action.kind,from_world_id:action.from,to_world_id:action.to,door_id:manifests[WORLDS.indexOf(action.from)]?.doors[0].door_id,carry_mode:'none',basis_departure_seq:['ARRIVE','UNRESOLVED'].includes(action.kind)?p.pending_departure?.seq:null,authority:'browser-local-observation',proposal_ref:null,byte_length:null,decision:null};
+ const e={seq:j.events.length+1,kind:action.kind,from_world_id:action.from,to_world_id:action.to,door_id:manifests[WORLDS.indexOf(action.from)]?.doors[0].door_id,carry_mode:'none',basis_departure_seq:(['ARRIVE','UNRESOLVED'].includes(action.kind)||(action.kind==='REMAIN'&&p.pending_departure))?p.pending_departure?.seq:null,authority:'browser-local-observation',proposal_ref:null,byte_length:null,decision:null};
  const next={...j,events:[...j.events,e]};project(next);return next;
 }
 export async function hash(value){return 'sha256:'+Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),b=>b.toString(16).padStart(2,'0')).join('');}
@@ -52,7 +52,7 @@ export function canonical(v){
  if(Array.isArray(v))return '['+v.map(canonical).join(',')+']';
  return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}';
 }
-export function sensitive(s){return /Bearer\s|-----BEGIN|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.|(?:password|secret|api[_-]?key|access[_-]?token)\s*[:=]/i.test(s);}
+export function sensitive(s){return /Bearer\s|-----BEGIN|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.|(?:password|secret|api[_-]?key|access[_-]?token)["']?\s*[:=]/i.test(s);}
 export async function proposal(value,consent){
  if(typeof value!=='string'||!consent||sensitive(value))throw Error('PUBLIC_TEXT_AND_CONSENT_REQUIRED');
  const length=new TextEncoder().encode(value).length;if(!value.trim()||length>2048)throw Error('TEXT_LIMIT_2048_BYTES');

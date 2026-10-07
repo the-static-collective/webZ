@@ -1,6 +1,8 @@
 {
   "schema": "webz/browser-witness/v0",
   "browser": "Chromium",
+  "browser_version": "151.0.7922.34",
+  "playwright_version": "1.62.0",
   "base_scope": "nested /nested/webZ/",
   "offline_round_trip": true,
   "explicit_human_choices": [

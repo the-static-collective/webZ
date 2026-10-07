@@ -53,3 +53,13 @@ A `porch_invite` text proposal is a different object and can never substitute. O
 2. In a protected, actually configured operator environment, run MAXHINAL runbook step 3 to bootstrap independent host-local identities without exposing private material. Recover and hash the exact original specimen.
 3. Execute actual HTTPS 01 → 02 → 01. Independently acquire both host histories, verify signed receipts/ancestry/byte identity and cold replay; earn MAXHINAL's genuine two-host LIVE report. Only then design the trusted read-only Rack unlock seam.
 4. Public two-device PORCH/reLATTE delivery, 13-node routing and live SINEW each need their own review and proof gates. Navigation does not grant any of them.
+
+## Branch review and regression results
+
+An independent fresh-context reviewer reproduced two async defects: Remain could lose to a delayed crossing, and Erase could lose to a pending export. Both now have RED→GREEN real Chromium regressions. Remain resolves its pending departure without arrival and invalidates delayed navigation. Erase invalidates pending export/import operations and clears reviewed data. The full browser command includes three delayed-operation tests.
+
+Quoted credential text and malformed falsey receipt fields were also tightened with RED→GREEN tests. Only literal null represents absent custody receipts. Final unit suite: **15/15**; main browser witness and **3/3 race regressions** pass. Node 22 and local Node 24 are supported; CI uses Node 22 and pinned Playwright 1.62.0.
+
+Deferred minor: the exported `proposal()` helper uses truthiness for its consent argument. The actual porch supplies the checkbox's boolean `checked` value and does not accept an imported consent or network request. A future reusable API should enforce literal `true` before exposing additional callers. This does not permit delivery or signed admission.
+
+Implementation rulings: the user's explicit execution request authorizes this offline feature branch and review PR without another design approval; a fresh dedicated clone isolates approved baselines; manual ledger substitutes for unavailable cloud helper scripts. Strict sanitation findings were treated as important because malformed/credential-bearing reports must not masquerade as valid observations. Real MAXHINAL proof remains outside this slice because protected configuration and original media are unavailable.

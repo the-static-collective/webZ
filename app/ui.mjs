@@ -1,7 +1,7 @@
 import {WORLDS,manifests,validateManifest,empty,project,append,proposal,choose,freeze,thaw,safeEntry} from './model.mjs';
 import {observe} from './proof.mjs';
 const base=new URL('../',import.meta.url),$=id=>document.getElementById(id),page=document.body.dataset.page;
-const KEY='webz.observations.v0';let record=empty(),durable=false,unavailable=null,raw=null,reviewed=null,exported=null;
+const KEY='webz.observations.v0';let record=empty(),durable=false,unavailable=null,raw=null,reviewed=null,exported=null,traceVersion=0;
 const status=(id,s)=>{if($(id))$(id).textContent=s;};
 try{raw=localStorage.getItem(KEY);if(raw!==null){record=JSON.parse(raw);project(record);durable=true;}}catch{unavailable='Durable trace UNAVAILABLE. No history repaired. Erase explicitly to start a new trace.';record=empty();}
 function save(next){
@@ -10,6 +10,7 @@ function save(next){
  renderTrace();
 }
 function renderTrace(){
+ traceVersion++;
  const p=project(record);$('record-consent').checked=durable;$('record-consent').disabled=!!unavailable;
  status('trace-status',unavailable??`${p.arrivals} arrivals · ${p.events} observations · ${durable?'saved locally with consent':'volatile; no durable trace'} · no carried particular`);
  $('raw-export').hidden=!(unavailable&&raw);$('export-preview').hidden=true;$('download-trace').hidden=true;exported=null;
@@ -23,11 +24,12 @@ $('record-consent').onchange=()=>{
 };
 $('erase-trace').onclick=()=>{
  try{localStorage.removeItem(KEY);unavailable=null;}catch{unavailable='Storage UNAVAILABLE; volatile trace cleared.';}
- record=empty();durable=false;raw=null;reviewed=null;$('import-preview').hidden=true;$('restore-trace').hidden=true;renderTrace();
+ importGeneration++;record=empty();durable=false;raw=null;reviewed=null;$('export-preview').textContent='';$('import-preview').textContent='';$('import-preview').hidden=true;$('restore-trace').hidden=true;renderTrace();
 };
 $('raw-export').onclick=()=>download('webz-unavailable-raw.txt',raw);
 $('export-trace').onclick=async()=>{
- try{exported=await freeze(record);$('export-preview').textContent=JSON.stringify(exported,null,2);$('export-preview').hidden=false;$('download-trace').hidden=false;}catch{status('trace-status','Export UNAVAILABLE; raw record remains inspectable.');}
+ const version=traceVersion;
+ try{const frozen=await freeze(record);if(version!==traceVersion)return;exported=frozen;$('export-preview').textContent=JSON.stringify(exported,null,2);$('export-preview').hidden=false;$('download-trace').hidden=false;}catch{if(version===traceVersion)status('trace-status','Export UNAVAILABLE; raw record remains inspectable.');}
 };
 $('download-trace').onclick=()=>{if(exported)download('webz-local-trace.json',JSON.stringify(exported,null,2));};
 let importGeneration=0;
@@ -55,17 +57,19 @@ if(page==='world'){
   const lines=[`Source: ${m.world_id}`,`Destination: ${d.to_world_id}`,`Manifest source: first-party app/model.mjs · ${m.revision}`,`Door: ${d.door_id} · destination: ${safeEntry(d.to_entry,base.href)}`,'Carry: NONE · no proposal text, private note or credential','Unknowns: remote ownership and live-network state are not authenticated. This is a same-origin local portal.'];
   for(const line of lines){const div=document.createElement('div');div.textContent=line;panel.append(div);}panel.hidden=false;$('cross').hidden=false;
  }
- $('inspect').onclick=inspect;$('remain').onclick=()=>{localObservation({kind:'REMAIN',from:m.world_id,to:d.to_world_id});$('door-contract').hidden=true;$('cross').hidden=true;status('door-status','REMAIN — no crossing occurred.');};
- let dispatching=false;
+ let dispatching=false,navigationGeneration=0;
+ $('inspect').onclick=inspect;$('remain').onclick=()=>{const cancelling=dispatching;navigationGeneration++;dispatching=false;localObservation({kind:'REMAIN',from:m.world_id,to:d.to_world_id});$('door-contract').hidden=true;$('cross').hidden=true;status('door-status',cancelling?'REMAIN — pending crossing cancelled. No arrival.':'REMAIN — no crossing occurred.');};
  async function cross(kind){
-  if(dispatching)return;dispatching=true;
+  if(dispatching)return;dispatching=true;const generation=++navigationGeneration;
   try{
    const current=project(record).pending_departure;
    if(current){status('door-status','webZ HOLD — unresolved departure remains. Erase or inspect the trace before another crossing.');dispatching=false;return;}
    localObservation({kind,from:m.world_id,to:d.to_world_id});
    const href=safeEntry(d.to_entry,base.href);const response=await fetch(href,{cache:'no-cache',credentials:'omit'});
+   if(generation!==navigationGeneration)return;
    if(!response.ok)throw Error('UNREACHABLE_TARGET');location.assign(href);
   }catch(error){
+   if(generation!==navigationGeneration)return;
    if(project(record).pending_departure)localObservation({kind:'UNRESOLVED',from:m.world_id,to:d.to_world_id});
    status('door-status','webZ UNRESOLVED / HOLD — destination unavailable; remain here or use the return address.');dispatching=false;
   }

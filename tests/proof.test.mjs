@@ -39,3 +39,13 @@ test('public proof carrier retains the webZ contract and declares no LIVE author
  const r=await P.observe(sample);assert.equal(r.schema,'webz/proof-view/v0');assert.equal(r.system,'MAXHINAL-13');assert.equal(r.status,'NOT_EARNED');assert.equal(r.claim,'NO_LIVE_TWO_HOST_PROOF');
  assert.equal(r.verification.exact_particular_checked,false);assert.equal(r.verification.cold_replay_checked,false);
 });
+test('quoted credential keys in text are rejected before proof observation',async()=>{
+ const r=clone();r.scope='{"password":"example-sensitive-value"}';await assert.rejects(()=>P.observe(r),/UNSANITIZED_TEXT/);
+});
+test('signed receipt absence must be literal null; malformed falsey values reject',async()=>{
+ for(const bad of [false,0,'']){
+  const r=clone();r.traces[3].signed_hold=bad;r.traces[3].signed_disposition=null;r.traces[3].relation_observations=[];
+  await assert.rejects(()=>P.observe(r));
+  const d=clone();d.traces[3].signed_disposition=bad;await assert.rejects(()=>P.observe(d));
+ }
+});
