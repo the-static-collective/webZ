@@ -1,0 +1,51 @@
+{
+  "schema": "webz/browser-witness/v0",
+  "browser": "Chromium",
+  "browser_version": "151.0.7922.34",
+  "playwright_version": "1.62.0",
+  "base_scope": "nested /nested/webZ/",
+  "offline_round_trip": true,
+  "explicit_human_choices": [
+    "Sanctuary HOLD \u2192 ADMIT",
+    "Orchard REFUSE"
+  ],
+  "mobile_no_overflow": true,
+  "reload_durable_trace": true,
+  "cold_node_browser_equal": true,
+  "corrupt_storage": "UNAVAILABLE, explicit ERASE",
+  "denied_storage": "navigation works without durable trace",
+  "fake_live": "REJECTED; Rack locked",
+  "missing_target": "UNRESOLVED; no arrival",
+  "default_discovery": "no durable storage or destination fetch",
+  "proof_node_browser_equal": true,
+  "external_requests": 0,
+  "page_errors": [],
+  "projection": {
+    "schema": "webz/local-projection/v0",
+    "authority": "browser-local-observation",
+    "current_world": "webz:the-static-collective/sanctuary",
+    "arrivals": 4,
+    "pending_departure": null,
+    "decisions": [
+      {
+        "world": "webz:the-static-collective/sanctuary",
+        "proposal": "sha256:519a598194ac269bb7f0da44b86853e593f06d7ee147dfe5a513323a1cf1b840",
+        "decision": "HOLD",
+        "seq": 13
+      },
+      {
+        "world": "webz:the-static-collective/orchard-022100",
+        "proposal": "sha256:519a598194ac269bb7f0da44b86853e593f06d7ee147dfe5a513323a1cf1b840",
+        "decision": "REFUSE",
+        "seq": 14
+      },
+      {
+        "world": "webz:the-static-collective/sanctuary",
+        "proposal": "sha256:519a598194ac269bb7f0da44b86853e593f06d7ee147dfe5a513323a1cf1b840",
+        "decision": "ADMIT",
+        "seq": 15
+      }
+    ],
+    "events": 15
+  }
+}
