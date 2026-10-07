@@ -25,7 +25,7 @@ The traveler is a person, not an account object owned by webZ. Narrative is navi
 
 ### Design assumptions for review
 
-For Genesis-001, "our own WWW layer" means **our own addressing, portal and portable-voyage model above standard browser/HTTP infrastructure**, not a custom network stack, top-level domain, browser extension or registered URL scheme. The first worlds will be separate web documents on one ordinary static origin so we can reliably test navigation with no backend.
+For Genesis-001, "our own WWW layer" means **our own addressing, portal and portable-voyage model above standard browser/HTTP infrastructure**, not a custom network stack, top-level domain, browser extension or registered URL scheme. The first worlds will be separate web documents on one ordinary static origin so we can reliably test navigation with no backend. **Same-origin documents do not provide a security isolation boundary:** both are trusted first-party code; untrusted third-party worlds are out of scope until distinct origins or equivalent sandboxing exist.
 
 ## 2. Architectural approaches and decision
 
@@ -71,7 +71,7 @@ webz:the-static-collective/sanctuary
 webz:the-static-collective/orchard-022100
 ```
 
-This is **not** a browser-registerable `webz://` protocol. Clicking a door resolves to an ordinary **relative or HTTPS URL**. In the first same-origin fixture:
+This is **not** a browser-registerable `webz://` protocol. Clicking a door resolves to an ordinary **relative or HTTPS URL**. In the first same-origin fixture (shown relative to the **site base**, not the origin root; GitHub Pages project paths must work):
 
 ```text
 /worlds/sanctuary/
@@ -135,7 +135,7 @@ A symmetrical orchard manifest has its own `world_id`, entry and return door. Do
     page reload + cold browser reopening can reconstruct the same itinerary
 ```
 
-**Do not encode private helm notes, memories, access credentials or other sensitive payloads into query strings, fragments, referrers or implicit `postMessage` handshakes.** Even URL fragments can be captured in history, screenshots and client telemetry. For Genesis-001, the default carry is **none**. The permitted optional carry is a **non-sensitive, traveler-selected voyage summary** explicitly reviewed on-screen, held in same-origin local storage or manually imported/exported as a JSON file.
+**Do not encode private helm notes, memories, access credentials or other sensitive payloads into query strings, fragments, referrers or implicit `postMessage` handshakes.** Even URL fragments can be captured in history, screenshots and client telemetry. For Genesis-001, the default carry is **none**. The permitted optional carry is a **non-sensitive, traveler-selected voyage summary** explicitly reviewed on-screen, held in same-origin local storage or manually imported/exported as a JSON file. Both first-party worlds can access same-origin local storage, so it cannot be used as a secret vault or an inter-world security boundary. No sensitive notes are written into the shared voyage store. A future untrusted-world experiment requires origin separation.
 
 A destination can display a received proposal. Only the receiving owner can constitute destination-local authority. "HOLD" in webZ's local navigation UI is not a claim to be reLATTE/SupaBardo HOLD; use distinct namespaced statuses and explain them.
 
@@ -192,7 +192,7 @@ The first executable implementation is complete only if tests and an inspected b
 3. **No-carry default** and inspectable, explicitly gated optional non-sensitive summary.
 4. **Scope-correct browser-local receipt** on departure and arrival; no destination authorization or STORYSHIP provenance falsely claimed.
 5. **Cold replay**: identical canonical itinerary across fresh-process runs from the same exported events; history survives ordinary browser reload.
-6. **Negative cases**: unknown destination, rejected scheme, invalid manifest, malformed/corrupted local log, browser storage denied, and attempted transfer of protected/sensitive notes.
+6. **Negative cases**: unknown destination, rejected scheme, invalid manifest, malformed/corrupted local log, browser storage denied, attempted transfer of protected/sensitive notes, and a nested GitHub Pages-style base path.
 7. **Static, no-spend execution**: no login, cloud backend, third-party API, undocumented browser extension or special protocol handler.
 8. **Usable interface**: responsive desktop/mobile, keyboard focus, readable labels, visible return/erase and reduced motion.
 9. **No silent adoption**: textual narrative, a LIFE sibling, or a foreign crossing receipt cannot become owner-local authoritative state merely because a portal displayed it.
@@ -203,7 +203,7 @@ The first executable implementation is complete only if tests and an inspected b
 ```text
 README.md
 docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md
-docs/superpowers/plans/<date>-webz-door-001.md           # after spec approval
+docs/superpowers/plans/2026-10-06-webz-door-001.md       # after spec approval
 src/manifest.mjs           # schema and safe resolution
 src/voyage.mjs             # browser-local record / pure replay
 src/portal.mjs             # proposal + human gate
@@ -211,8 +211,8 @@ worlds/sanctuary/index.html
 worlds/sanctuary/world.webz.json
 worlds/orchard/index.html
 worlds/orchard/world.webz.json
-worlds/shared/...
-fixtures/webz-door-001/...
+worlds/shared/styles.css
+fixtures/webz-door-001/voyage.json
 test/manifest.test.mjs
 test/voyage.test.mjs
 test/portal.test.mjs
