@@ -1,30 +1,37 @@
-# webZ
+# webZ — World Wide Web of Worlds
 
-**World Wide Web of Worlds** — a proposed local-first addressing and portal layer for independently authored, inhabitable worlds.
+A world gets an address. A door gets a contract. A traveler gets a choice. A crossing gets a trace.
 
-> A world gets an address. A door gets a contract. A traveler gets a choice. A crossing gets a trace.
+The first executable slice is **Sanctuary → Orchard → Sanctuary**: two distinct first-party documents, a mobile invitation porch, and a read-only MAXHINAL proof viewer. It works offline after one successful initial load and static cache installation. No backend, accounts, telemetry, external media, signing keys or new infrastructure.
 
-## Genesis
+```sh
+# Node 22+; no runtime dependencies
+npm test
+npm run serve
+# Open http://127.0.0.1:8080/
+```
 
-**WEBZ-DOOR-001: Sanctuary → Orchard → Sanctuary**
+Use **Inspect door**, then **Cross** or **Remain**. Orchard offers an explicit **Return**. Default carry is always none. Optionally enable a non-sensitive local trace; inspect/export it, then reconstruct the same projection in a new browser or process:
 
-Start with two distinct authored documents from the STORYSHIP Phase 01 visual world. Declare each world in a manifest, show a genuine portal, preserve a human decision to cross or stay, and reconstruct a browser-local voyage from a frozen export.
+```sh
+npm run replay -- evidence/browser/voyage.frozen.json
+node scripts/verify-report.mjs evidence/public-simulation.json
+```
 
-The traveler owns the decision. Merely viewing a place does not import its authority or grant that place authority over the traveler. A narrative interpretation is not an historical fact.
+Mobile/browser validation requires Python 3.12+ and Playwright with Chromium:
 
-**Current status:** founding design written for human review. **No executable runtime, portal, deployment or browser proof exists in this repository yet.**
+```sh
+python -m pip install -r tests/requirements.txt
+python -m playwright install chromium
+npm run test:browser
+```
 
-[Read the Genesis-001 design](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md).
+The browser test starts its own loopback server under a nested `/nested/webZ/` base. It exercises online/offline round trips, independent unsigned human decisions, failed destinations, corrupt/denied storage, counterfeit LIVE imports, static-cache privacy, and Node/fresh-browser cold replay. [Browser results and screenshots](evidence/browser/) are generated from real Chromium.
 
-## Working boundaries
+The porch is **NOT_ISSUED / delivery disabled**. Prepare up to 2048 UTF-8 bytes of consented public text; rehearse each world's HOLD / REFUSE / ADMIT independently. Draft text stays in page memory. Only proposal hashes, lengths and unsigned local decisions enter an optional trace. Neither consent nor ADMIT grants publication, reuse, execution or STORYSHIP canon. Closing/clearing the draft revokes the local offer; there is no remote receiver or capability.
 
-- Standard browser/HTTP routes first; `webz:the-static-collective/sanctuary` is a logical manifest ID, **not** a registered browser scheme.
-- No spend, login, shared backend, undocumented API, silent telemetry or auto-navigation.
-- Public manga assets will not be copied without a separate confirmed publication scope.
-- STORYSHIP remains the owner of its voyage history; webZ's local navigation traces are **not** canonical STORYSHIP events.
-- Hosted same-origin worlds are independently addressable pages, **not** security-isolated tenants; Genesis uses only trusted first-party code.
-- reLATTE, SupaBardo and other neighbors remain optional; no borrowing their authority by naming them.
+The evidence viewer accepts only a bounded `webz/sanitized-maxhinal/v0` public carrier; it independently checks reLATTE v0 signatures, identity hashes, world/particular binding, ancestry, conflicting duplicates and each custodian record. It produces a `webz/proof-view/v0` observation. Imported reports remain in memory. The included signed fixture is a simulation with incomplete paired custody. Uploaded fingerprints cannot authenticate actual hosts, and flags cannot grant LIVE. The **Constellation Rack stays locked**.
 
-## Next gate
+[Crossing and verification report, boundaries, blockers, next gates](docs/OFFLINE-001-VERIFICATION.md) · [Implementation plan](docs/superpowers/plans/2026-10-07-offline-sovereign-porch.md).
 
-Review and approve the written design. Then prepare the Superpowers implementation plan and build WEBZ-DOOR-001 with Riqor-style verifiable tests and browser evidence.
+Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). The feature PR is stacked on webZ PR #2; it does not merge or deploy its design or alter neighboring approved baselines.

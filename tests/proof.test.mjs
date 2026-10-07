@@ -28,3 +28,14 @@ test('strict sanitization rejects authority flags, private material, bearer data
   const r=clone();mutate(r);await assert.rejects(()=>P.observe(r));
  }await assert.rejects(()=>P.observe(' '.repeat(524289)));
 });
+test('out of order custody remains valid and duplicates do not become new crossings',async()=>{
+ const r=clone();r.traces.reverse();r.traces.push(structuredClone(r.traces[0]));const a=await P.observe(r),b=await P.observe(sample);
+ assert.equal(a.verified_crossings,4);assert.equal(a.verified_receipts,9);assert.deepEqual(a.ancestry,b.ancestry);assert.deepEqual(a.branches,b.branches);
+});
+test('missing ancestral history is rejected even though signatures remain valid',async()=>{
+ const r=clone();r.traces.splice(2,1);await assert.rejects(()=>P.observe(r),/PARENT_UNOBSERVED/);
+});
+test('public proof carrier retains the webZ contract and declares no LIVE authority',async()=>{
+ const r=await P.observe(sample);assert.equal(r.schema,'webz/proof-view/v0');assert.equal(r.system,'MAXHINAL-13');assert.equal(r.status,'NOT_EARNED');assert.equal(r.claim,'NO_LIVE_TWO_HOST_PROOF');
+ assert.equal(r.verification.exact_particular_checked,false);assert.equal(r.verification.cold_replay_checked,false);
+});
