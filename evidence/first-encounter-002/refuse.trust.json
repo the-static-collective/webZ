@@ -1,0 +1,15 @@
+{
+  "scope": "SYNTHETIC_FIXTURE_PINS; not authenticated host or human identity",
+  "at": "2026-10-06T20:14:00.000Z",
+  "trust": {
+    "schema": "webz/encounter-trust/v0",
+    "issuer_world_id": "world:first-encounter-a",
+    "source_world_id": "world:first-encounter-b",
+    "source_particular": "particular:first-encounter-b",
+    "receiver_particular": "particular:first-encounter-a",
+    "issuer_key_fingerprint": "sha256:d1c37d5bc9c0722aaf1dde8b53bc776499e6ba36ebcc2b4402e463b01b81eacd",
+    "source_key_fingerprint": "sha256:e68133868f0cfc6f788a3b8328fc69bea28dca5a3117a40f4cdf2804b9525d04",
+    "approved_origin": "https://world-a.example",
+    "revoked_invitation_ids": []
+  }
+}

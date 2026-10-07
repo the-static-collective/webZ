@@ -1,0 +1,25 @@
+{
+  "schema": "webz/encounter-fixture-provenance/v0",
+  "scope": "native signed synthetic fixtures; no transport, actual participant or two-device encounter",
+  "protocol_owner": "https://github.com/the-static-collective/reLATTE/pull/62",
+  "commit": "ae3fd0f56860683245dfd27ff32edf64311046bf",
+  "native_modules_sha256": {
+    "protocol.ts": "856b2c9da5403c204e64c35899a50b9ec9efaacf9a65a1464eca9cfcb40ffb31",
+    "canonical.ts": "b6d24d216b4b58da105f3f776021b34fd4ed73984dae676f776b070e477c35b3",
+    "receiver.ts": "0ee04e45dc66f4aac25b66148eb272ac56f5f22b00ca2b87f4326273321564c5",
+    "sovereign.ts": "647953a82b2c09c8d4ee76e20726e9e370718758a36718b39f3a41fc4b259890"
+  },
+  "generator": "tests/generate-encounter-fixtures.mjs",
+  "keys": "temporary protected native receiver and independent visitor key; private material deleted",
+  "files": {
+    "hold.packet.json": "f9ff28f4e0b820e5c9175ed9f8465920ad0f6e806ddafbc5c8d7d3f05a83f731",
+    "hold.trust.json": "74b0ba6390bd935f1aaa304a0b37edd4dab6b9e7db77c1805e608471a229d45e",
+    "hold.native-journal.jsonl": "ea14b8b14c612a9acb409039df5e652ef1e93ea41dca6c0d951f1148de0c16b2",
+    "refuse.packet.json": "d9a68ae69a6a8a5cefbe2d487cac93e4a20466945048556f77a1541b80d0b215",
+    "refuse.trust.json": "373d5eddad800985e6f6d00d61d3915e35bef84142e3a994a64cf94cc2ec340a",
+    "refuse.native-journal.jsonl": "ecff2eef07affea660ba3f24fe2ecd3931c5c2750e10a42d301664d70962d5a7",
+    "admit.packet.json": "b27bff22304e11b16aa4d67f55fef3e1441cec3e2929495427317d63bfcf8728",
+    "admit.trust.json": "290a703a63cf4c310a036681decb84db3de4495b62ce263fb99fc6fcc189ad4e",
+    "admit.native-journal.jsonl": "fabcd4925ca6e92d21038620cca4a13b4992c10716ea943f0055540ea8ff7f18"
+  }
+}
