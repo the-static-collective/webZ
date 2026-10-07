@@ -34,4 +34,14 @@ The evidence viewer accepts only a bounded `webz/sanitized-maxhinal/v0` public c
 
 [Crossing and verification report, boundaries, blockers, next gates](docs/OFFLINE-001-VERIFICATION.md) · [Implementation plan](docs/superpowers/plans/2026-10-07-offline-sovereign-porch.md).
 
-Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). The feature PR is stacked on webZ PR #2; it does not merge or deploy its design or alter neighboring approved baselines.
+Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). PR #2 merged before PR #3; the offline implementation is now on main. Neighboring repositories retain their independent authority.
+
+FIRST-ENCOUNTER-002 begins at **[Encounter preflight](encounter/)**, a separate read-only page. Load a public signed invitation/proposal/return packet, independently supply and review public identity pins, then explicitly verify. It uses native reLATTE v0 source and receiver signatures, exact text hashes, receiver binding, and the receive/disposition link. Historical signed returns remain inspectable when an invitation expires or is locally revoked. Public delivery stays unavailable; no signing keys, receiver, or sovereign history live in this page. The new page does not install an offline cache.
+
+```sh
+node scripts/inspect-encounter.mjs evidence/first-encounter-002/refuse.packet.json evidence/first-encounter-002/refuse.trust.json
+```
+
+The native HOLD / REFUSE / ADMIT fixtures are synthetic automation. Two isolated browser processes/origins and fresh Node replay test the same frozen public records; they do **not** earn authenticated transport, real participant action, or two-device field proof. [Encounter report, public fixture provenance and next gates](docs/FIRST-ENCOUNTER-002-VERIFICATION.md) · [Invitation and authenticated-edge design](docs/superpowers/specs/2026-10-07-first-encounter-002-design.md).
+
+The visitor encounter has its own security and protected endpoint gates. It does **not** wait for MAXHINAL's missing invitation image. MAXHINAL's protected bootstrap, exact-byte image recovery, independent two-host LIVE proof, and Rack gate remain separate and unchanged.

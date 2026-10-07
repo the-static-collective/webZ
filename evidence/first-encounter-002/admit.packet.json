@@ -1,0 +1,165 @@
+{
+  "schema": "webz/encounter-packet/v0",
+  "invitation": {
+    "schema": "webz/porch-invitation/v0",
+    "issuer_world_id": "world:first-encounter-a",
+    "receiver_particular": "particular:first-encounter-a",
+    "source_world_id": "world:first-encounter-b",
+    "source_key_fingerprint": "sha256:a4f56f81335f9409b0c9f3ac35c87369b8710408df7419fae437625118719afb",
+    "purpose": "FIRST-ENCOUNTER-002",
+    "origin": "https://world-a.example",
+    "media_type": "text/plain",
+    "max_bytes": 2048,
+    "issued_at": "2026-10-06T20:10:00.000Z",
+    "expires_at": "2026-10-06T20:25:00.000Z",
+    "rights": "inspection-only-no-publication",
+    "signing": {
+      "algorithm": "ECDSA-P256-SHA256",
+      "public_key": {
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "SdNeVm9bMzA8f49f8KSWRrMkpAeiZx2P5gxuuW-9ako",
+        "y": "WeA_FEQp2Jg3PZ1l9kqzewFTu2miD8ZcS7Xv6sRjD5E"
+      },
+      "domain": "webz.porch-invitation-signature/v0",
+      "signature": "jVOedhl4yN3iK7_Ubovq4AgSKI03v2oy8ivQVmaklgMXNeFyBRGFvi3EYjdaGGGnjHnJmACILfsaqgc0x4Ed_g"
+    },
+    "invitation_id": "webz-porch-invitation-v0:bd5b03c6c25a9b53b44a1721c073a0cb10bd607f2ba891b4f8adeab638d3679a"
+  },
+  "crossing": {
+    "schema": "relatte.crossing-envelope/v0",
+    "protocol_version": "0",
+    "source_particular": "particular:first-encounter-b",
+    "source_world": "world:first-encounter-b",
+    "source_history_head": null,
+    "parents": [],
+    "declared_kind": "FIRST_ENCOUNTER_002_TEXT",
+    "payload_refs": [
+      {
+        "address": "sha256:78050bac3b1b52cad180b412d1188268cd43e04ae500fa1720850e2600e27382",
+        "role": "proposed-contribution",
+        "media_type": "text/plain",
+        "byte_length": 44
+      }
+    ],
+    "requested_effect": {
+      "kind": "bounded-text-candidate",
+      "authority": "receiver-local"
+    },
+    "capability_ref": "webz-porch-invitation-v0:bd5b03c6c25a9b53b44a1721c073a0cb10bd607f2ba891b4f8adeab638d3679a",
+    "privacy_policy": {
+      "publication": "not-granted"
+    },
+    "audience_policy": {
+      "destination": "world:first-encounter-a"
+    },
+    "return_address": "world:first-encounter-b",
+    "created_at": "2026-10-06T20:11:00.000Z",
+    "extensions": {
+      "specimen": "FIRST-ENCOUNTER-002",
+      "rights": "inspection-only-no-publication",
+      "payload_is_synthetic": true
+    },
+    "crossing_id": "relatte-crossing-v0:e380757e3249dfacd41ba8684bd9a2c3205124673f9018288d1ba294832cd6b4",
+    "signing": {
+      "algorithm": "ECDSA-P256-SHA256",
+      "public_key": {
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "6M0Ot0EcBf7wXRiXmglQb4rfYEdYquwUkxk3PVE2s-I",
+        "y": "9DrTyFH7S0Op4CESbr_-vAyxGRjpEnqzpGj4JPyDr3g"
+      },
+      "signature": "g4x2NOMfSLpvjxDt_Hgqlus-RJmBWGtDTa49gdDSj0YDqn7w9LBSu8W6JFtRL3_f3icHMyo7oDGJkVJaE_Da8Q",
+      "domain": "relatte.crossing-signature/v0"
+    }
+  },
+  "material": "One small seed, offered for inspection only.",
+  "response": {
+    "schema": "relatte.sovereign-response-bundle/v0",
+    "crossing_id": "relatte-crossing-v0:e380757e3249dfacd41ba8684bd9a2c3205124673f9018288d1ba294832cd6b4",
+    "world_id": "world:first-encounter-a",
+    "receiver_particular": "particular:first-encounter-a",
+    "receive_receipt": {
+      "schema": "relatte.receipt/v0",
+      "crossing_id": "relatte-crossing-v0:e380757e3249dfacd41ba8684bd9a2c3205124673f9018288d1ba294832cd6b4",
+      "world_id": "world:first-encounter-a",
+      "receiver_particular": "particular:first-encounter-a",
+      "kind": "RECEIVED",
+      "semantic_effect": "none",
+      "contract_ref": "FIRST-ENCOUNTER-002/v0",
+      "pre_state_ref": "relatte-local-state-v0:0a3a1dde97ba0c0b1cc254262d5878a5c26f3211efb9998d2b835136d3bab2ff",
+      "post_state_ref": "relatte-local-state-v0:0a3a1dde97ba0c0b1cc254262d5878a5c26f3211efb9998d2b835136d3bab2ff",
+      "descendant_refs": [],
+      "residual_refs": [
+        "sha256:78050bac3b1b52cad180b412d1188268cd43e04ae500fa1720850e2600e27382"
+      ],
+      "note": "crossing verified and received; no admission implied",
+      "created_at": "2026-10-06T20:12:00.000Z",
+      "extensions": {
+        "local_receiver": {
+          "law": "RECEIVED != ADMITTED",
+          "history_head_before": null
+        }
+      },
+      "receipt_id": "relatte-receipt-v0:03403aa0a76ff098b1f8c86d2164dfb846a57203af46edd92af53e356b443ba6",
+      "signing": {
+        "algorithm": "ECDSA-P256-SHA256",
+        "public_key": {
+          "kty": "EC",
+          "crv": "P-256",
+          "x": "SdNeVm9bMzA8f49f8KSWRrMkpAeiZx2P5gxuuW-9ako",
+          "y": "WeA_FEQp2Jg3PZ1l9kqzewFTu2miD8ZcS7Xv6sRjD5E"
+        },
+        "signature": "xDLVQn4uFlVXc0VKIXv-CMgBAglszhEsZ3qL6kBDkIohNz38bOINBydsVQqyMTqoADYWERqQpTEG9EOPhYi1xw",
+        "domain": "relatte.receipt-signature/v0"
+      }
+    },
+    "disposition_receipt": {
+      "schema": "relatte.receipt/v0",
+      "crossing_id": "relatte-crossing-v0:e380757e3249dfacd41ba8684bd9a2c3205124673f9018288d1ba294832cd6b4",
+      "world_id": "world:first-encounter-a",
+      "receiver_particular": "particular:first-encounter-a",
+      "kind": "R3_ADMIT",
+      "semantic_effect": "encounter-local-candidate-only",
+      "contract_ref": "FIRST-ENCOUNTER-002/v0",
+      "pre_state_ref": "relatte-local-state-v0:8a543f3dc98e50068d2d1b026e43e6b082607ad7ecd410a86c2670c5cd503316",
+      "post_state_ref": "relatte-local-state-v0:e8b7c054aa7a2bbabe1ddc02c35157c257b4f2da5e04b7dd711e08148eb15cbe",
+      "descendant_refs": [],
+      "residual_refs": [],
+      "note": "admit",
+      "created_at": "2026-10-06T20:13:00.000Z",
+      "extensions": {
+        "local_receiver": {
+          "disposition": "ADMIT",
+          "receive_receipt_id": "relatte-receipt-v0:03403aa0a76ff098b1f8c86d2164dfb846a57203af46edd92af53e356b443ba6",
+          "protected_payload_effect": true,
+          "history_head_before": "relatte-local-event-v0:248a6afdc7ea7f109161bab0f8a37451737486097fd478b399e1edce74a6a606",
+          "laws": [
+            "RECEIPT != ADMISSION",
+            "REFUSE != DELETE",
+            "HOLD != ADMIT",
+            "RETURN != TRANSFER OF AUTHORITY"
+          ]
+        }
+      },
+      "receipt_id": "relatte-receipt-v0:766545d2c291c14fdce365dfa3efbb0f7067b7ea3b61c14afd331d27405349bf",
+      "signing": {
+        "algorithm": "ECDSA-P256-SHA256",
+        "public_key": {
+          "kty": "EC",
+          "crv": "P-256",
+          "x": "SdNeVm9bMzA8f49f8KSWRrMkpAeiZx2P5gxuuW-9ako",
+          "y": "WeA_FEQp2Jg3PZ1l9kqzewFTu2miD8ZcS7Xv6sRjD5E"
+        },
+        "signature": "dtwMGzxfUdElijSM-cD0pDBXYh7Y_nQ7T-dzKUM9fuTEJ47IwKDEjSUEfnm7xLWGHBz8kO4kqA5AWVycEdXrcA",
+        "domain": "relatte.receipt-signature/v0"
+      }
+    },
+    "laws": [
+      "BUNDLE != RECEIPT",
+      "RESPONSE != SHARED DATABASE",
+      "VERIFICATION != AGREEMENT"
+    ],
+    "bundle_id": "relatte-sovereign-response-v0:e21f062dd8dac431e866985a2014102c2f030c597e022f0d0434d91b9f2b777d"
+  }
+}
