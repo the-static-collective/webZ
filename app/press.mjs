@@ -34,10 +34,8 @@ function validateMediaType(value) {
 }
 
 async function sha256Bytes(bytes) {
-  const digest = await crypto.subtle.digest(
-    'SHA-256',
-    bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
-  );
+  const view = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+  const digest = await globalThis.crypto.subtle.digest('SHA-256', view);
   return 'sha256:' + Array.from(new Uint8Array(digest), (byte) =>
     byte.toString(16).padStart(2, '0')
   ).join('');
@@ -93,4 +91,108 @@ export function preparePressingProposal({ particular, returnKind }) {
     requested_return_kind: returnKind,
     particular: Object.freeze({ ...particular }),
   });
+}
+
+if (typeof document !== 'undefined' && document.body?.dataset.page === 'press') {
+  const base = new URL('../', import.meta.url);
+  const $ = (id) => document.getElementById(id);
+  const status = (id, value) => { if ($(id)) $(id).textContent = value; };
+  const sourceKind = $('source-kind');
+  const textPanel = $('text-source');
+  const filePanel = $('file-source');
+  const sourceText = $('source-text');
+  const sourceFile = $('source-file');
+  const publicLabel = $('public-label');
+  const returnKind = $('return-kind');
+  const preview = $('pressing-preview');
+  let generation = 0;
+
+  status('press-address', PRESS_ADDRESS + ' · owner-declared local surface');
+  status('file-status', 'No local file selected.');
+
+  function invalidate(message = 'Not prepared. Source or requested return changed.') {
+    generation += 1;
+    preview.textContent = '';
+    preview.hidden = true;
+    status('pressing-status', message);
+  }
+
+  function setMode() {
+    const fileMode = sourceKind.value === 'local-file';
+    textPanel.hidden = fileMode;
+    filePanel.hidden = !fileMode;
+    invalidate('Not prepared. Choose one particular.');
+  }
+
+  sourceKind.onchange = setMode;
+  sourceText.oninput = () => invalidate();
+  publicLabel.oninput = () => invalidate();
+  returnKind.onchange = () => invalidate();
+  sourceFile.onchange = () => {
+    invalidate();
+    const file = sourceFile.files?.[0];
+    status(
+      'file-status',
+      file
+        ? `Selected locally · ${file.size} bytes · ${file.type || 'application/octet-stream'} · filename excluded from proposal`
+        : 'No local file selected.',
+    );
+  };
+
+  $('prepare-pressing').onclick = async () => {
+    const run = ++generation;
+    preview.textContent = '';
+    preview.hidden = true;
+    status('pressing-status', 'Preparing locally… no delivery.');
+
+    try {
+      let particular;
+      if (sourceKind.value === 'public-text') {
+        particular = await prepareTextParticular({
+          text: sourceText.value,
+          publicLabel: publicLabel.value,
+        });
+      } else {
+        const file = sourceFile.files?.[0];
+        if (!file) throw Error('FILE_REQUIRED');
+        if (file.size > MAX_FILE_BYTES) throw Error('FILE_LIMIT');
+        const bytes = new Uint8Array(await file.arrayBuffer());
+        if (run !== generation) return;
+        particular = await prepareFileParticular({
+          bytes,
+          publicLabel: publicLabel.value,
+          mediaType: file.type,
+        });
+      }
+
+      if (run !== generation) return;
+      const prepared = preparePressingProposal({
+        particular,
+        returnKind: returnKind.value,
+      });
+      preview.textContent = JSON.stringify(prepared, null, 2);
+      preview.hidden = false;
+      status(
+        'pressing-status',
+        `PREPARED LOCALLY · ${particular.byte_length} bytes · ${particular.sha256} · delivery/payment unissued`,
+      );
+    } catch (error) {
+      if (run !== generation) return;
+      status('pressing-status', `NOT PREPARED · ${error.message}. Nothing was delivered.`);
+    }
+  };
+
+  setMode();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(new URL('sw.js', base), { scope: base.pathname })
+      .then(() => navigator.serviceWorker.ready)
+      .then(() => {
+        document.documentElement.dataset.offlineReady = 'true';
+        status('offline-state', navigator.onLine ? 'OFFLINE READY' : 'OFFLINE');
+      })
+      .catch(() => status('offline-state', 'CACHE UNAVAILABLE'));
+    window.addEventListener('offline', () => status('offline-state', 'OFFLINE'));
+    window.addEventListener('online', () => status('offline-state', 'OFFLINE READY'));
+  }
 }
