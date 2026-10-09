@@ -97,6 +97,17 @@ try:
   assert "LEG1_MOVING_CLAIM" in a.locator("#head").inner_text()
   assert "LEG1_MOVING_CLAIM" in b.locator("#head").inner_text()
   assert a.evaluate("document.documentElement.scrollWidth <= innerWidth")
+  if not b.evaluate("document.documentElement.scrollWidth <= innerWidth"):
+   print("POSTAL-MOBILE-OVERFLOW",b.evaluate("""() => ({
+    width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
+    elements:[...document.querySelectorAll('*')].filter(e=>{
+     const box=e.getBoundingClientRect();
+     return box.right>innerWidth+1 || box.left<-1;
+    }).slice(0,18).map(e=>({tag:e.tagName,id:e.id,cls:e.className,
+      right:Math.round(e.getBoundingClientRect().right),
+      width:Math.round(e.getBoundingClientRect().width),
+      scroll:e.scrollWidth,client:e.clientWidth}))
+   })"""))
   assert b.evaluate("document.documentElement.scrollWidth <= innerWidth")
   # Both phone profiles install first-party static-only service workers.
   for page in (a,b):
