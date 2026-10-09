@@ -39,7 +39,7 @@ function session(base){return {
   assert.equal(res.status,200);
   return res.headers.get('set-cookie').split(';')[0];
  },
- request:async function(cookie,path,method='GET',opts={})=>{
+ request:async (cookie,path,method='GET',opts={})=>{
   const res=await fetch(base.replace(/\/worlds\/music-field\/$/,'')+path,{
    method,redirect:'manual',headers:{
     Cookie:cookie,'Origin':opts.origin??base.replace(/\/worlds\/music-field\/$/,''),
