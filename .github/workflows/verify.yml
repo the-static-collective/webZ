@@ -19,6 +19,7 @@ jobs:
       - run: npm run test:browser
       - run: python tests/wandering_lens_browser.py
       - run: python tests/wandering_lens_annex_browser.py
+      - run: python tests/founder_node_browser.py
       - run: npm run replay -- evidence/browser/voyage.frozen.json
       - uses: actions/upload-artifact@v4
         with:
