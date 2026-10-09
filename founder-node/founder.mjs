@@ -82,7 +82,7 @@ function validatePetition(b){
  requireThat(label(b.world.title,64)&&label(b.world.description,420)&&
   b.world.type==='INDEPENDENT_EXPERIMENTAL_WORLD'&&
   b.world.parent_address===b.source.source_address&&
-  b.world.child_address===b.source.child_address,'WORLD_DESCRIPTION');
+  typeof b.world.child_address==='string','WORLD_DESCRIPTION');
  // Child location is strictly an appended centered dial.
  requireThat(b.world.child_address===b.world.parent_address+'/t06g06','CHILD_ADDRESS_INVALID');
  checkPub(b.candidate);
