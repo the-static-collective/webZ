@@ -72,7 +72,9 @@ test('arbitrary third party URLs and parameter leakage refused',()=>{
 test('invalid JSON data and invalid platform fail closed',()=>{
  assert.throws(()=>importText('{}','SUNO','json'));
  assert.throws(()=>importText('[{"title":"Hello"}]','APPLE','json'));
- assert.throws(()=>importText('[{"title":"Hello"}]','YOUTUBE','json'));
+ const manual=importText('[{"title":"Hello"}]','YOUTUBE','json');
+ assert.match(manual.records[0].key,/^youtube:local-/);
+ assert.equal(manual.records[0].source_url,null);
 });
 test('stable merge idempotence and conflicting source rejection',()=>{
  const a=one('SUNO');assert.equal(merge(a,a).records.length,1);
