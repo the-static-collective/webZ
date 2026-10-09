@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {request as rawRequest} from 'node:http';
 import {
  SCOPE,GOOGLE_AUTH,makeAuthorization,secret,challenge,compareState,tokenAccept,
- playlistsResponse,itemsResponse,fetchPlaylistPage,fetchItemsPage,requestToken
+ playlistsResponse,itemsResponse,fetchPlaylistPage,fetchItemsPage,requestToken,parsePlaylistURL,fetchNamedPlaylist
 } from '../scripts/music-field-003-core.mjs';
 import {createBridge} from '../scripts/music-field-003-server.mjs';
 import {importText,merge,empty,scope,freshView} from '../worlds/music-field/model.mjs';
@@ -22,6 +22,10 @@ const upstream=async(url,init={})=>{
  }
  if(uri.hostname==='oauth2.googleapis.com'&&uri.pathname==='/revoke')return new Response('',{status:200});
  if(uri.hostname==='www.googleapis.com'&&uri.pathname.endsWith('/playlists')){
+  if(uri.searchParams.has('id'))return Response.json({items:[
+   {id:uri.searchParams.get('id'),snippet:{title:'Public Link Candidate'},
+    contentDetails:{itemCount:3}}
+  ]});
   return Response.json({items:[{id:'PL0000000001',snippet:{title:'My Radio List',description:'PRIVATE_UNUSED'},
    contentDetails:{itemCount:2}}]});
  }
@@ -227,4 +231,80 @@ test('no Google client id or token literals in first party UI and snapshots',()=
  assert.ok(!code.includes('localStorage'));
  assert.ok(!code.includes('access_token'));
  assert.ok(!code.includes('Authorization: Bearer'));
+});
+
+
+test('playlist share URLs canonicalize to exact ID without si tracking',()=>{
+ const accepted=parsePlaylistURL('https://youtube.com/playlist?list=PLmock-direct1&si=fixture-share-tag');
+ assert.deepEqual(accepted,{id:'PLmock-direct1',
+  canonical_url:'https://www.youtube.com/playlist?list=PLmock-direct1'});
+ assert.deepEqual(parsePlaylistURL('https://www.youtube.com/watch?v=abcDEF12345&list=PLmock-direct1'),accepted);
+});
+test('playlist URL parser refuses lookalikes, credentials and duplicate list IDs',()=>{
+ for(const url of [
+  'https://youtube.com.evil.test/playlist?list=PLmock-direct1',
+  'http://youtube.com/playlist?list=PLmock-direct1',
+  'https://user:secret@youtube.com/playlist?list=PLmock-direct1',
+  'https://youtube.com/playlist?list=PLmock-direct1&list=PLmock-direct2',
+  'https://youtube.com/playlist?list=too',
+  'https://youtube.com/playlist?list=PLmock-direct1&token=abc',
+  'https://youtube.com/@an-artist?list=PLmock-direct1',
+  'https://youtube.com/playlist?list=PLmock-direct1#secret'
+ ])assert.throws(()=>parsePlaylistURL(url));
+});
+test('named playlist lookup uses official id filter, not mine=true, and exact API ID',async()=>{
+ calls.length=0;
+ const found=await fetchNamedPlaylist(upstream,'fake-local-test-access-token','PLmock-direct1');
+ assert.deepEqual(found,{id:'PLmock-direct1',title:'Public Link Candidate',count:3});
+ assert.equal(calls.length,1);
+ const url=new URL(calls[0].url);
+ assert.equal(url.pathname,'/youtube/v3/playlists');
+ assert.equal(url.searchParams.get('id'),'PLmock-direct1');
+ assert.equal(url.searchParams.has('mine'),false);
+});
+test('operator-submitted playlist share link is API verified before preview; never auto imported',async()=>{
+ const bridge=createBridge({clientId,fetchImpl:upstream}),base=await bridge.listen(),s=session(base);
+ const root=base.replace('/worlds/music-field/','');
+ try{
+  const cookie=await s.first(),start=await s.request(cookie,'/api/youtube/connect','POST');
+  const state=new URL(start.body.authorization_url).searchParams.get('state');
+  await s.request(cookie,'/oauth/youtube/callback?state='+state+'&code=MOCK_CODE');
+  const send=(url)=>fetch(root+'/api/youtube/playlist-link',{
+   method:'POST',headers:{Cookie:cookie,Origin:root,'x-music-field-action':'003',
+    'content-type':'application/json'},
+   body:JSON.stringify({url})
+  });
+  const result=await send('https://youtube.com/playlist?list=PLmock-direct1&si=remove-me');
+  assert.equal(result.status,200);
+  const body=await result.json();
+  assert.equal(body.playlist.id,'PLmock-direct1');
+  assert.equal(body.source,'EXPLICIT_PASTED_LINK');
+  assert.equal(body.imported,false);
+  assert.equal(body.canonical_url,'https://www.youtube.com/playlist?list=PLmock-direct1');
+  assert.equal(bridge.inspect().selectedCount,1);
+  const preview=await s.request(cookie,'/api/youtube/playlist-items?id=PLmock-direct1');
+  assert.equal(preview.status,200);assert.equal(preview.body.autoSaved,false);
+  assert.ok(!JSON.stringify(preview.body).includes('remove-me'));
+  const invalid=await send('https://evil.test/playlist?list=PLmock-direct2');
+  assert.equal(invalid.status,400);
+  assert.equal(bridge.inspect().selectedCount,1);
+ }finally{await bridge.stop()}
+});
+test('pasted-link action enforces CSRF and a valid OAuth session',async()=>{
+ const bridge=createBridge({clientId,fetchImpl:upstream}),base=await bridge.listen(),s=session(base);
+ const root=base.replace('/worlds/music-field/','');
+ try{
+  const cookie=await s.first();
+  const res=await fetch(root+'/api/youtube/playlist-link',{
+   method:'POST',headers:{Cookie:cookie,Origin:root,'x-music-field-action':'003','content-type':'application/json'},
+   body:JSON.stringify({url:'https://youtube.com/playlist?list=PLmock-direct1'})
+  });
+  assert.equal(res.status,401);
+  const origin=await fetch(root+'/api/youtube/playlist-link',{
+   method:'POST',headers:{Cookie:cookie,Origin:'https://evil.test',
+    'x-music-field-action':'003','content-type':'application/json'},
+   body:JSON.stringify({url:'https://youtube.com/playlist?list=PLmock-direct1'})
+  });
+  assert.equal(origin.status,403);
+ }finally{await bridge.stop()}
 });
