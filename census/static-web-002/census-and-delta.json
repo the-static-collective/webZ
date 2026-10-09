@@ -1,0 +1,2207 @@
+{
+  "census": {
+    "schema": "webz/public-field-census/v0",
+    "parentSnapshotHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+    "observations": [
+      {
+        "fragmentHash": "sha256:c52e36a41b7e82f04ebcfb7979dd901883608fb66501c844cdfccccb2724352d",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "cannon-12-observation",
+          "source": {
+            "repository": "the-static-collective/CANNON",
+            "exactCommit": "e04137681b4f14d723b50e291919a0f894795c43",
+            "pathOrContract": "docs/CONVERSATION-COLLIDER-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 12,
+            "headBranch": "experiment/conversation-collider-001",
+            "baseBranch": "experiment/kinship-bridge-africa-007",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "conversation-collider",
+          "ownerClaim": "the-static-collective/CANNON",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Conversation Collider",
+          "humanSummary": "Declared OFFER and NEED artifacts produce typed compatibility candidates.",
+          "observedCapabilities": [
+            "Declared OFFER and NEED artifacts produce typed compatibility candidates."
+          ],
+          "observedClosures": [
+            "Candidate is not fit, authority, execution or permission to inspect private chats."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "conversation-collider-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/CANNON/tree/e04137681b4f14d723b50e291919a0f894795c43",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:445c471c2b1dae8d4c31b6eec50f85e72c9ac6a839c65f7aeed4312a9105418c"
+          },
+          "externalObservation": {
+            "observedBy": "CANNON",
+            "relationClaim": {
+              "producer": "Git-pinned declared source artifacts",
+              "consumer": "independent receiving owners",
+              "compatibilityState": "CANDIDATE_ONLY",
+              "exactReceipt": null
+            }
+          }
+        }
+      },
+      {
+        "fragmentHash": "sha256:7c7a28502b2d6d2e49a33d6e09dd9b421ab92370df660086c5f31eff0cc156b3",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "cannon-13-observation",
+          "source": {
+            "repository": "the-static-collective/CANNON",
+            "exactCommit": "3e646484eaaaa9e326145ae7281d27b243adde1b",
+            "pathOrContract": "docs/CONVERSATION-COLLIDER-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 13,
+            "headBranch": "experiment/conversation-collider-source-002",
+            "baseBranch": "experiment/conversation-collider-001",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "conversation-collider",
+          "ownerClaim": "the-static-collective/CANNON",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Conversation Collider",
+          "humanSummary": "Exact Git-object inspection binds source bytes and exposes a real schema incompatibility.",
+          "observedCapabilities": [
+            "Exact Git-object inspection binds source bytes and exposes a real schema incompatibility."
+          ],
+          "observedClosures": [
+            "Schema verification is not semantic acceptance, rights or execution."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "conversation-collider-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/CANNON/tree/3e646484eaaaa9e326145ae7281d27b243adde1b",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:04b8acccca79c259a9e6da9e25aeafb4eee14c548ac42f3bb01fb3e7e01573c1"
+          },
+          "externalObservation": {
+            "observedBy": "CANNON",
+            "relationClaim": {
+              "producer": "Git-pinned declared source artifacts",
+              "consumer": "independent receiving owners",
+              "compatibilityState": "CANDIDATE_ONLY",
+              "exactReceipt": null
+            }
+          }
+        }
+      },
+      {
+        "fragmentHash": "sha256:a02d2bf6e43b32e16f05fe43db7e2cc6b7f4cf4f15bf7c131eb6fef62b2068fe",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "cannon-14-observation",
+          "source": {
+            "repository": "the-static-collective/CANNON",
+            "exactCommit": "aabd276e4edb2ae4229ccf94eed8a7f561b17a0a",
+            "pathOrContract": "docs/CONVERSATION-COLLIDER-003.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 14,
+            "headBranch": "experiment/conversation-collider-work-003",
+            "baseBranch": "experiment/conversation-collider-source-002",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "conversation-collider",
+          "ownerClaim": "the-static-collective/CANNON",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Conversation Collider",
+          "humanSummary": "Git-pinned capability and media-role observations expose conditional seams and printer HOLD.",
+          "observedCapabilities": [
+            "Git-pinned capability and media-role observations expose conditional seams and printer HOLD."
+          ],
+          "observedClosures": [
+            "Discovery is not executor availability, media rights, physical print or webZ public admission."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "conversation-collider-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/CANNON/tree/aabd276e4edb2ae4229ccf94eed8a7f561b17a0a",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:1d568a7ab23c5dd6fa4635ad931792872f23a16b1b4f581a67e5deed61bf475e"
+          },
+          "externalObservation": {
+            "observedBy": "CANNON",
+            "relationClaim": {
+              "producer": "Git-pinned declared source artifacts",
+              "consumer": "independent receiving owners",
+              "compatibilityState": "CANDIDATE_ONLY",
+              "exactReceipt": null
+            }
+          }
+        }
+      },
+      {
+        "fragmentHash": "sha256:1c8faeeb5a0a109ef61f4dbbd2f1efe6e775feea34412c7b1ef5f7c1f55f527b",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-112-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "5b3be498082d3faf9e45a9e552bc5bb58d14086d",
+            "pathOrContract": "experiments/020-postemahhn-addressed-print.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 112,
+            "headBranch": "experiment/postemahhn-001-addressed-local-print",
+            "baseBranch": "experiment/orshot-002-physical-receipt-router",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "Signed addressed PDF proposals require recipient-station release before local export.",
+          "observedCapabilities": [
+            "Signed addressed PDF proposals require recipient-station release before local export."
+          ],
+          "observedClosures": [
+            "No physical print, public transport or delivery."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/5b3be498082d3faf9e45a9e552bc5bb58d14086d",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:6785f93d6c675491bdc8cd527980a4eb6344a4f47472d8c1f8cbdce223e4d1c6"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:417fa1e974ed7c494d61e094bb123beac47d0ea268cc9094fd963b320c867ae0",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-113-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "a63624f1be6a533f5ab927b1e4e8b1a629f1ba53",
+            "pathOrContract": "docs/THE-RIFF-RAFT-002-TERRAFORMER.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 113,
+            "headBranch": "experiment/riff-raft-002-rube-goldberg-terraformer",
+            "baseBranch": "experiment/riff-raft-001-distributed-commons",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "riff-raft",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Riff Raft experiment",
+          "humanSummary": "Simulated ecological cue and conserved-mass model.",
+          "observedCapabilities": [
+            "Simulated ecological cue and conserved-mass model."
+          ],
+          "observedClosures": [
+            "Simulation is not field intervention; this PR is not postal work."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "riff-raft-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/a63624f1be6a533f5ab927b1e4e8b1a629f1ba53",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:2b651098ff64c851100b5431ed0ca66f01a901e0cfe1c15f9f6d0da3a5c035c0"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:082f3bfe3bdd126496fed9c16d85bd1777c60025a6c835cb1a3fb5c798c672c2",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-114-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "4912104167748556674f5c58a08867ae7fb7bc67",
+            "pathOrContract": "experiments/021-postemahhn-traveling-post-office.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 114,
+            "headBranch": "experiment/postemahhn-002-traveling-post-office",
+            "baseBranch": "experiment/postemahhn-001-addressed-local-print",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "Encrypted parcels cross independent local loopback nodes and remain recipient-station HELD.",
+          "observedCapabilities": [
+            "Encrypted parcels cross independent local loopback nodes and remain recipient-station HELD."
+          ],
+          "observedClosures": [
+            "No TLS public transport, physical mail, print or deployed service."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/4912104167748556674f5c58a08867ae7fb7bc67",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:7f18daf63a4987292d27b474c36a92718e59b0140f0b9479a9b33abece8f9b0e"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:329c638220600b3d3d064d2e9bd37ebf3bf7f40276e03b4c793c300279fafee9",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-115-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "fb96d79a072aae986159c869ebe83df9e88b00da",
+            "pathOrContract": "experiments/022-postemahhn-wallet-doors.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 115,
+            "headBranch": "experiment/postemahhn-003-wallet-doors",
+            "baseBranch": "experiment/postemahhn-002-traveling-post-office",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "Typed station-bound wallet-control proofs and guardian checks stage print HOLD.",
+          "observedCapabilities": [
+            "Typed station-bound wallet-control proofs and guardian checks stage print HOLD."
+          ],
+          "observedClosures": [
+            "No financial spend, wallet ownership certification or physical print."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/fb96d79a072aae986159c869ebe83df9e88b00da",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:eee5cab3c37edf921a165954d5b119b7ba60b7d0b2202e986e76f789afe64809"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:fb8dad671716607d39cd1d95f001fc2e2accac0d5b823f770fd2277ce58c8d57",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-116-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "ff8d91568165ccb89db7231bde20f2b6bdf06362",
+            "pathOrContract": "experiments/023-postemahhn-passkey-door.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 116,
+            "headBranch": "experiment/postemahhn-004-passkey-door",
+            "baseBranch": "experiment/postemahhn-003-wallet-doors",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "RP-bound passkey proof adds a second station-admission factor in synthetic tests.",
+          "observedCapabilities": [
+            "RP-bound passkey proof adds a second station-admission factor in synthetic tests."
+          ],
+          "observedClosures": [
+            "No hardware passkey witness, deployed relying party, spend or print."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/ff8d91568165ccb89db7231bde20f2b6bdf06362",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:5a1fc36eaff0e16186e454b4a87dd335a6debd8910c2dfb8e95031b696c0e010"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:9e38554a4edde64fd248c82c0878eb57595db0811a3fd5a93ad0a54f7b72e0ad",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-117-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "c16de87bc574e17205e86be3dde80ea6829ecb5d",
+            "pathOrContract": "experiments/024-postemahhn-external-wallets.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 117,
+            "headBranch": "experiment/postemahhn-005-external-wallet-proofs",
+            "baseBranch": "experiment/postemahhn-004-passkey-door",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "Off-chain Solana control proof is bound to a separate mail-owner signature and request.",
+          "observedCapabilities": [
+            "Off-chain Solana control proof is bound to a separate mail-owner signature and request."
+          ],
+          "observedClosures": [
+            "No RPC provider, transaction, wallet spend or physical print."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/c16de87bc574e17205e86be3dde80ea6829ecb5d",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:657996222e9b9d009c47057542c06fed456425b844ebd658718930f06ce6bf0c"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:1b87b035e74044e5903fa4719a5cad8cd49f7a9d803d324c25dd8ee92e564035",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "ghot-118-observation",
+          "source": {
+            "repository": "the-static-collective/GHoT",
+            "exactCommit": "b8f80f840b6054bbf37ca9c9be9f70187248d6e5",
+            "pathOrContract": "experiments/025-postal-corps-first-mile.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 118,
+            "headBranch": "experiment/postal-corps-001-first-mile",
+            "baseBranch": "experiment/postemahhn-005-external-wallet-proofs",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "postal-custody",
+          "ownerClaim": "the-static-collective/GHoT",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Postal and print-hold experiments",
+          "humanSummary": "Signed synthetic two-carrier custody chain yields pending native dispatch work candidates.",
+          "observedCapabilities": [
+            "Signed synthetic two-carrier custody chain yields pending native dispatch work candidates."
+          ],
+          "observedClosures": [
+            "No physical carrier trip, delivery, compensation or public service."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "postal-custody-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GHoT/tree/b8f80f840b6054bbf37ca9c9be9f70187248d6e5",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:526993f35f6c0ee5158f6e2ef903c3b0481c6ca2f2e4a47f77472290c54c7f7d"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:2f51e3f6dc3e69763d1fa4b1bf0b5b294d7b4e13e1eab137d82f3179de406d2f",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "gro-21-observation",
+          "source": {
+            "repository": "the-static-collective/GrO",
+            "exactCommit": "85e47caa71a7e76cbb76ce55e59da9c0521cdaf0",
+            "pathOrContract": "docs/FORAGE-001-WALLE-PHONE.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 21,
+            "headBranch": "experiment/gro-forage-001-wall-e-phone",
+            "baseBranch": "main",
+            "state": "MERGED",
+            "mergedAt": "2026-10-09T19:17:55Z",
+            "closedAt": "2026-10-09T19:17:55Z"
+          },
+          "subjectId": "gro-forage",
+          "ownerClaim": "the-static-collective/GrO",
+          "kind": "EXPERIMENT",
+          "humanLabel": "GrO forage",
+          "humanSummary": "Local photo and forage-lead source binding keeps encounters actor-local and HOLD.",
+          "observedCapabilities": [
+            "Local photo and forage-lead source binding keeps encounters actor-local and HOLD."
+          ],
+          "observedClosures": [
+            "No verified pickup, public trace, rights or robot action."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "gro-forage-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GrO/tree/85e47caa71a7e76cbb76ce55e59da9c0521cdaf0",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:fd4759e6d8df6bea02ea062d8af0b02cac830694a2fd7d9c5cee9b19012514f1"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:e730ce8aff9e21804ce0416e03b9b074566beb6eb80583c5fa200e2cc701e8f4",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "gro-22-observation",
+          "source": {
+            "repository": "the-static-collective/GrO",
+            "exactCommit": "d32009710645380adb852a119715b771bafd3684",
+            "pathOrContract": "docs/FIELD-QUEST-ENGINE-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 22,
+            "headBranch": "experiment/field-quest-encounters-001",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "field-quests",
+          "ownerClaim": "the-static-collective/GrO",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Field quests",
+          "humanSummary": "Opt-in physical-test prompts preserve human attempts as actor-held observations.",
+          "observedCapabilities": [
+            "Opt-in physical-test prompts preserve human attempts as actor-held observations."
+          ],
+          "observedClosures": [
+            "No technical pass, deed certification, signed receipt or deployed geographic quest."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "field-quests-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/GrO/tree/d32009710645380adb852a119715b771bafd3684",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:ed47e0323eff1577dc8b2d820968d841faf7aa0491577c1cf7e996d2baedf3d9"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:a5d9e881da122cb84ecad0118014ca27fcc20f9244e25406ab9126fb4f3b3723",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "groove-rooms-11-observation",
+          "source": {
+            "repository": "the-static-collective/groove-rooms",
+            "exactCommit": "ffa9719615b847d211314c9e395d76db02fa658f",
+            "pathOrContract": "docs/groove-post-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 11,
+            "headBranch": "feat/groove-post-001",
+            "baseBranch": "feat/return-address-import-001",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "groove-post",
+          "ownerClaim": "the-static-collective/groove-rooms",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Groove Post",
+          "humanSummary": "Local sealed cross-media metadata parcels with manual human transport and asserted rights.",
+          "observedCapabilities": [
+            "Local sealed cross-media metadata parcels with manual human transport and asserted rights."
+          ],
+          "observedClosures": [
+            "No automatic delivery, encryption claim or cross-repository execution."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "groove-post-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/groove-rooms/tree/ffa9719615b847d211314c9e395d76db02fa658f",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:d6794fd14473358fe2f13961703a0e250165a9bf5f80e2c94bd0709a02b8f433"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:10c662a38eeba5a0d0e2e59434d42c5ef25d163552c537dd351bad0109fc1ff8",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "groove-rooms-12-observation",
+          "source": {
+            "repository": "the-static-collective/groove-rooms",
+            "exactCommit": "6f812c46e3ce71bba3b7ac41e8cb4ba66ee30d5f",
+            "pathOrContract": "docs/groove-post-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 12,
+            "headBranch": "feat/groove-post-mailboxes-002",
+            "baseBranch": "feat/groove-post-001",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "groove-post",
+          "ownerClaim": "the-static-collective/groove-rooms",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Groove Post",
+          "humanSummary": "Proposed addressed-mail tables and append-only receipt ledger replayed in ephemeral PostgreSQL.",
+          "observedCapabilities": [
+            "Proposed addressed-mail tables and append-only receipt ledger replayed in ephemeral PostgreSQL."
+          ],
+          "observedClosures": [
+            "No live migration, deployed delivery or end-to-end encryption; framework blockers remain."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "groove-post-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/groove-rooms/tree/6f812c46e3ce71bba3b7ac41e8cb4ba66ee30d5f",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:39e823390744590ccb4788ae41e2ed0a7e549c2a0737a403db41794a0b1fe69a"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:3758f6104134af547b44d6501637b7f456624e097b170c7c58de4b7bfff9567d",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-100-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "1c1eba59ff93507f05b2d863cf2210b46e5d7811",
+            "pathOrContract": "docs/RELATTE-CHATGPT-MCP-003.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 100,
+            "headBranch": "experiment/relatte-chatgpt-mcp-003",
+            "baseBranch": "experiment/relatte-chatgpt-mcp-002",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-mcp",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "reLATTE inspection aperture",
+          "humanSummary": "Official MCP SDK and configured-issuer OAuth resource checks fail closed without configuration.",
+          "observedCapabilities": [
+            "Official MCP SDK and configured-issuer OAuth resource checks fail closed without configuration."
+          ],
+          "observedClosures": [
+            "No public URL, deployment, ChatGPT connection or platform approval."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-mcp-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/1c1eba59ff93507f05b2d863cf2210b46e5d7811",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:05ac8c3a825b4de655f8778b90c43b97780a785a2df1a6667109f433db490789"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:036f7fbbd53d3be253b628d8e7c1d6c341438de79caf19dab3593bd276ea00c9",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-89-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+            "pathOrContract": "docs/RELATTE-VM-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 89,
+            "headBranch": "experiment/relatte-vm-001-self-hosted-world",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-vm",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Crossings and admitted computation",
+          "humanSummary": "Bounded owner-admitted VM interpreter inspection.",
+          "observedCapabilities": [
+            "Bounded owner-admitted VM interpreter inspection."
+          ],
+          "observedClosures": [
+            "No general sandbox, public compute service or physical host attestation."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-vm-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:59e7cb0a023e6ba397ec9eebfb588fb5bcbd9a6bdc85115b7f4942ba36399a3d"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:e68921bf9c748773b92c820b7004b6852347b2484ff2cf2f0e1bbaaca1284cf3",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-90-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "283bc4afe63eef1df44f39ef4d45ad899e62ed15",
+            "pathOrContract": "docs/RELATTE-VM-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 90,
+            "headBranch": "experiment/relatte-vm-002-isolated-wasm",
+            "baseBranch": "experiment/relatte-vm-001-self-hosted-world",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-vm",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Crossings and admitted computation",
+          "humanSummary": "Constrained no-import WebAssembly execution in separate processes after owner admission.",
+          "observedCapabilities": [
+            "Constrained no-import WebAssembly execution in separate processes after owner admission."
+          ],
+          "observedClosures": [
+            "No general sandbox, public compute service or physical host attestation."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-vm-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/283bc4afe63eef1df44f39ef4d45ad899e62ed15",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:02b24ba159d36817329e932d334de111666e1f6532d4db988d9752d159a20950"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:874d97e402bcc40da638271572fab380c909a5c43447cc8cb9cafd678ed1991a",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-91-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "477c68075919b09e51a5888133370dc9df0f0b9e",
+            "pathOrContract": "docs/RELATTE-VM-003.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 91,
+            "headBranch": "experiment/relatte-vm-003-witnessed-execution",
+            "baseBranch": "experiment/relatte-vm-002-isolated-wasm",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-vm",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Crossings and admitted computation",
+          "humanSummary": "Separately signed host-observed results bind witness receipts to constrained execution.",
+          "observedCapabilities": [
+            "Separately signed host-observed results bind witness receipts to constrained execution."
+          ],
+          "observedClosures": [
+            "Separate CI jobs are not physical-host attestation or public compute service."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-vm-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/477c68075919b09e51a5888133370dc9df0f0b9e",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:34e4fa98061ef7452c097713c21c6d195ecead8b7f3d068bf9c44929f34375a5"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:bf0028bc3a053f915d33ea2d237bbb60b1c992e1d6ac3b6641a79a0da010c879",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-92-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "b2cf5b917d5fa93a70764ab4eb94a246e98c2ed4",
+            "pathOrContract": "docs/RELATTE-VM-004.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 92,
+            "headBranch": "experiment/relatte-vm-004-authenticated-leases",
+            "baseBranch": "experiment/relatte-vm-003-witnessed-execution",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-vm",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Crossings and admitted computation",
+          "humanSummary": "Signed file handoffs and expiring single-use owner-local grants extend constrained WASM execution.",
+          "observedCapabilities": [
+            "Signed file handoffs and expiring single-use owner-local grants extend constrained WASM execution."
+          ],
+          "observedClosures": [
+            "No public transport or execution service; rollback, clock and hardware trust remain bounded."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-vm-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/b2cf5b917d5fa93a70764ab4eb94a246e98c2ed4",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:70fada07a627e2da834862e6fea843eb7ff0fe0a83c3a36fae3c963bbb3953a2"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:16c440fd9557f2cbc7685e57ef1a155fc444037d41ff2d767e5fcdcf8cbd3a68",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-93-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "f7b51ec13ab084aa3c4d3880758f5f0f0562c5c8",
+            "pathOrContract": "docs/TRANSPORT-COMPOSITION-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 93,
+            "headBranch": "experiment/transport-composition-001-many-roads",
+            "baseBranch": "experiment/relatte-vm-004-authenticated-leases",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "transport-composition",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Transport composition",
+          "humanSummary": "Signed crossing fragments recover through eight simulated carriers and signed arrival inspection.",
+          "observedCapabilities": [
+            "Signed crossing fragments recover through eight simulated carriers and signed arrival inspection."
+          ],
+          "observedClosures": [
+            "No physical transmission, public transport, admission or remote effect; amateur-radio path denied."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "transport-composition-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/f7b51ec13ab084aa3c4d3880758f5f0f0562c5c8",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:9e5fabbb292248c980a9f248b95288baa0623a1a500a29e48f3a8a66582ef545"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:d38f47a277d5b2105797677752d917b6730718d6c6435be61f8a2a90b97bf2bd",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-94-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "8236600cdf8d95246b65d6343bbd336bd925f5fc",
+            "pathOrContract": "experiments/SKYMIRROR-001/README.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 94,
+            "headBranch": "experiment/skymirror-001-passive-optical-road",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "optical-bench",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Optical software bench",
+          "humanSummary": "Manchester optical model and CRC inspection exist as software experiments.",
+          "observedCapabilities": [
+            "Manchester optical model and CRC inspection exist as software experiments."
+          ],
+          "observedClosures": [
+            "No actual sensor, space transmission or signed crossing."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "optical-bench-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/8236600cdf8d95246b65d6343bbd336bd925f5fc",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:9802511759a365ab7358acda8eabc34e2a7c8deab87ca5a3e1070a9ce4e7af9c"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:b6102bffb5d875797e3238b7c450e8cb76ef2230f3ca2ca9a37cd3db33c6095a",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-95-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "540da48104a8a76a87f2acefd60df00ffa76237c",
+            "pathOrContract": "experiments/SKYMIRROR-002/README.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 95,
+            "headBranch": "experiment/skymirror-002-two-phone-light-link",
+            "baseBranch": "experiment/skymirror-001-passive-optical-road",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "optical-bench",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Optical software bench",
+          "humanSummary": "Screen and camera laboratory bounds a 24-byte CRC-inspected optical frame.",
+          "observedCapabilities": [
+            "Screen and camera laboratory bounds a 24-byte CRC-inspected optical frame."
+          ],
+          "observedClosures": [
+            "Physically testable is not physically witnessed or source-authorized crossing."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "optical-bench-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/540da48104a8a76a87f2acefd60df00ffa76237c",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:de304aa5d63adaf7d890fc5d0ab9c34e93d00982cf951e0e69fc38506ce25e77"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:bdb97e7c61af63e6b164bc6e37284ea002d25746dea28eda1b78955ae75e16a7",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-98-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "0dd287204265d1b8151806bbc675b4ffdf8332a4",
+            "pathOrContract": "docs/RELATTE-CHATGPT-MCP-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 98,
+            "headBranch": "experiment/relatte-chatgpt-mcp-001",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-mcp",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "reLATTE inspection aperture",
+          "humanSummary": "Local loopback read-only inspection of signed crossing evidence using native verifiers.",
+          "observedCapabilities": [
+            "Local loopback read-only inspection of signed crossing evidence using native verifiers."
+          ],
+          "observedClosures": [
+            "No deployed MCP service, ChatGPT connection, OAuth approval or effect endpoint."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-mcp-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/0dd287204265d1b8151806bbc675b4ffdf8332a4",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:8dff0a8215498f32bd1ac9f9a0e896a4114680338f64e8241af592a793dfcf64"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:d381ad4ee57c3f9a54d8fe797395fd5764cac115f7db8cea683eeff8a3851aaa",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "relatte-99-observation",
+          "source": {
+            "repository": "the-static-collective/reLATTE",
+            "exactCommit": "936f88605ce6034fbd00a5a18e43d32f65b5cccc",
+            "pathOrContract": "docs/RELATTE-CHATGPT-MCP-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 99,
+            "headBranch": "experiment/relatte-chatgpt-mcp-002",
+            "baseBranch": "experiment/relatte-chatgpt-mcp-001",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "relatte-mcp",
+          "ownerClaim": "the-static-collective/reLATTE",
+          "kind": "EXPERIMENT",
+          "humanLabel": "reLATTE inspection aperture",
+          "humanSummary": "Independent local MCP wire client and metadata checks with staging bearer credentials.",
+          "observedCapabilities": [
+            "Independent local MCP wire client and metadata checks with staging bearer credentials."
+          ],
+          "observedClosures": [
+            "Staging bearer is not production OAuth, SDK certification or hosted ChatGPT connection."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "relatte-mcp-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/reLATTE/tree/936f88605ce6034fbd00a5a18e43d32f65b5cccc",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:6608e5b093c59c0696dc0f5b5f9061826f7ddcad0e5e58616b5af5a54ad71a91"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:7781ea9f600bb66cc7aec29828efa08533fa3d2018028ba88966bb8b356518fa",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "static-live-35-observation",
+          "source": {
+            "repository": "the-static-collective/static-live",
+            "exactCommit": "eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+            "pathOrContract": "docs/RADIO-WORLD-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 35,
+            "headBranch": "experiment/radio-world-001-two-doors",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "radio-world",
+          "ownerClaim": "the-static-collective/static-live",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Radio World",
+          "humanSummary": "Local two-owner media world permits explicit official-site handoffs.",
+          "observedCapabilities": [
+            "Local two-owner media world permits explicit official-site handoffs."
+          ],
+          "observedClosures": [
+            "No direct audio, license, independent-owner adoption or public Radio World deployment."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "radio-world-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/static-live/tree/eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:515a632e4c56ca7505ee43007dd2bdd5ab6ae127f38933211b75c13d732bdf3f"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:8eee39c473639c51d7d409651bda87be2647c223c7e88b9226b17b770b2ffd1a",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "static-os-80-observation",
+          "source": {
+            "repository": "the-static-collective/static-os",
+            "exactCommit": "03539a6c2c39be28395c0df57ecfb7234136c4e1",
+            "pathOrContract": "docs/forage-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 80,
+            "headBranch": "experiment/forage-001-permission-custody",
+            "baseBranch": "main",
+            "state": "MERGED",
+            "mergedAt": "2026-10-09T19:17:40Z",
+            "closedAt": "2026-10-09T19:17:40Z"
+          },
+          "subjectId": "forage-glean",
+          "ownerClaim": "the-static-collective/static-os",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Forage and glean",
+          "humanSummary": "Permission-first salvage lead and provenance ledger retains human-review HOLD.",
+          "observedCapabilities": [
+            "Permission-first salvage lead and provenance ledger retains human-review HOLD."
+          ],
+          "observedClosures": [
+            "No legal certification, pickup, custody or inventory authority."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "forage-glean-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/static-os/tree/03539a6c2c39be28395c0df57ecfb7234136c4e1",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:16083af14ecbcb418aea92c994cd29d6c8699c17c158187ece1f2ea8e17d0059"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:932e228ee811b57b0f732b0c06a7f7bb9fda021d66d1b4892f430eb97a4c1cc4",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "static-os-83-observation",
+          "source": {
+            "repository": "the-static-collective/static-os",
+            "exactCommit": "7a3ede43d635205bdf465a284f0053d7c0963b3c",
+            "pathOrContract": "docs/forage-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 83,
+            "headBranch": "experiment/forage-002-walle-field-scout",
+            "baseBranch": "main",
+            "state": "MERGED",
+            "mergedAt": "2026-10-09T19:18:06Z",
+            "closedAt": "2026-10-09T19:18:07Z"
+          },
+          "subjectId": "forage-glean",
+          "ownerClaim": "the-static-collective/static-os",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Forage and glean",
+          "humanSummary": "Local photo picker and manual categories bind original bytes into held forage evidence.",
+          "observedCapabilities": [
+            "Local photo picker and manual categories bind original bytes into held forage evidence."
+          ],
+          "observedClosures": [
+            "No automatic classifier, legal admission, machine action or deployed phone proof."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "forage-glean-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/static-os/tree/7a3ede43d635205bdf465a284f0053d7c0963b3c",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:428a962fd7862a4808133fa252bd79c0cd3020515cf31230b8a7a4ada6f929b9"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:c61a6f344ba12d03bdb593f55780beb5063a675e2c8db346b71ed49fb86732d9",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "static-os-85-observation",
+          "source": {
+            "repository": "the-static-collective/static-os",
+            "exactCommit": "1190446dd09e158491d79c36dad6502027c98a9d",
+            "pathOrContract": "docs/glean-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 85,
+            "headBranch": "experiment/glean-001-steward-remainder",
+            "baseBranch": "main",
+            "state": "MERGED",
+            "mergedAt": "2026-10-09T19:47:37Z",
+            "closedAt": "2026-10-09T19:47:37Z"
+          },
+          "subjectId": "forage-glean",
+          "ownerClaim": "the-static-collective/static-os",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Forage and glean",
+          "humanSummary": "Separate crop-glean and nonfood-surplus assertions preserve steward and conservation reports.",
+          "observedCapabilities": [
+            "Separate crop-glean and nonfood-surplus assertions preserve steward and conservation reports."
+          ],
+          "observedClosures": [
+            "No verified custody, legal certification, machine actuation or deployment proof."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "forage-glean-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/static-os/tree/1190446dd09e158491d79c36dad6502027c98a9d",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:5766174348982cdbbbcf3862f69f30379ff814e10decbb84ddf771387e02c1b6"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:27e59e17505e715749e31d4db482b22308332ee7e659e39360a88441974f9770",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-10-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "36a18117f31b7ade59148a3b82ac1fb9167b1d01",
+            "pathOrContract": "docs/WANDERING-LENS-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 10,
+            "headBranch": "experiment/wandering-lens-001-question-engine",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "wandering-lens",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Wandering Lens",
+          "humanSummary": "Local world laboratory with spatial questions, exact MWF1 addresses and volatile private reflections.",
+          "observedCapabilities": [
+            "Local world laboratory with spatial questions, exact MWF1 addresses and volatile private reflections."
+          ],
+          "observedClosures": [
+            "No sovereign world admission, media upload, publication or crossing."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "wandering-lens-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/36a18117f31b7ade59148a3b82ac1fb9167b1d01",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:273339787a4cb5e2ff21a55ca7545bb42b7538835435b80813e72cf6615b1806"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:96cd0ffa3d6ef59731c66bd436fc9cdd5401efce75a479e8fac04cd7ab1c8f54",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-12-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "785a075c8be867f6e8d9a6a115ff457151f53970",
+            "pathOrContract": "docs/WANDERING-LENS-002.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 12,
+            "headBranch": "experiment/wandering-lens-002-visitor-annex",
+            "baseBranch": "experiment/wandering-lens-001-question-engine",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "wandering-lens",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Wandering Lens",
+          "humanSummary": "Local inspected visitor-object and world-sketch proposals extend the question laboratory.",
+          "observedCapabilities": [
+            "Local inspected visitor-object and world-sketch proposals extend the question laboratory."
+          ],
+          "observedClosures": [
+            "Local operator decisions are not independently authenticated curation or sovereign world admission."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "wandering-lens-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/785a075c8be867f6e8d9a6a115ff457151f53970",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:151e15635828e7cdf641c7638de7636f0d93893ef25c12472b16ff71c0c4623e"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:91cd0b8bb76c31ecd0ef3f73f00dd7ba73cb5b51341b722a447e2f508a42c3dd",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-15-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "237da36c0503c998ccc003b47fa26d1e9102c03d",
+            "pathOrContract": "docs/FIELD-PORCH-001-WALLE-GRO.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 15,
+            "headBranch": "experiment/webz-gro-forage-001-field-porch",
+            "baseBranch": "main",
+            "state": "MERGED",
+            "mergedAt": "2026-10-09T19:18:13Z",
+            "closedAt": "2026-10-09T19:18:13Z"
+          },
+          "subjectId": "field-porch",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Field Porch",
+          "humanSummary": "Local original-byte inspection and consent-reviewed minimal public fingerprint postcards.",
+          "observedCapabilities": [
+            "Local original-byte inspection and consent-reviewed minimal public fingerprint postcards."
+          ],
+          "observedClosures": [
+            "Manual copy is not publication, delivery, rights or machine admission."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "field-porch-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/237da36c0503c998ccc003b47fa26d1e9102c03d",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:21aef211ab53999f3771996cabc8b0c2949765c19272ae4a12e12bba59ae308c"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:0f610faff33809f47f9d29e2a7694a8a4b30ca039467208cd157ac9ff964ba51",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-16-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "45ca3f586cda98fc19ee84d6bf76a3eef0f0a1e3",
+            "pathOrContract": "docs/FOUNDER-NODE-003.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 16,
+            "headBranch": "experiment/founder-node-003-dual-custody",
+            "baseBranch": "experiment/wandering-lens-002-visitor-annex",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "founder-namespace",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Founder Node namespace",
+          "humanSummary": "Distinct candidate and founder keys sign experimental namespace petitions, admissions and acceptance.",
+          "observedCapabilities": [
+            "Distinct candidate and founder keys sign experimental namespace petitions, admissions and acceptance."
+          ],
+          "observedClosures": [
+            "Namespace is not hosted sovereign world; key is not person or source-rights admission."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "founder-namespace-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/45ca3f586cda98fc19ee84d6bf76a3eef0f0a1e3",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:cc0dd23dec5975b41f49fdcc35f7f746bb47703cf792089126be511dec7f4d2e"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:9825053ff5bdcba91cf79b5b19e7e2a9ea48e86463c017110cf57b04aadb4ee9",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-20-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "c56b2298d992fb06ab6ed80c61c4bda579e4d1e0",
+            "pathOrContract": "docs/SUNO-ATLAS-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 20,
+            "headBranch": "experiment/suno-atlas-001-library-dials",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "suno-atlas",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "Suno Atlas",
+          "humanSummary": "Local metadata explorer for manually supplied discography records, dataset addresses and tag counts.",
+          "observedCapabilities": [
+            "Local metadata explorer for manually supplied discography records, dataset addresses and tag counts."
+          ],
+          "observedClosures": [
+            "No Suno account integration, API extraction, audio playback or audio-causality claim."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "suno-atlas-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/c56b2298d992fb06ab6ed80c61c4bda579e4d1e0",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:0b421eb61dd95948f03898d849f5f97f7f942490192177885f903218b1bb77c3"
+          },
+          "externalObservation": null
+        }
+      },
+      {
+        "fragmentHash": "sha256:071ff3913f72ae1017c2922f642f4142609a46bc2956e1cea9ff43b60958404f",
+        "fragment": {
+          "schema": "webz/public-field-fragment/v0",
+          "fragmentId": "webz-9-observation",
+          "source": {
+            "repository": "the-static-collective/webZ",
+            "exactCommit": "a890a1ca30b2327262909a8eed58e0fc5db5fc87",
+            "pathOrContract": "docs/SKYMIRROR-WEBZ-001.md",
+            "observedAt": "2026-10-09T19:55:27Z"
+          },
+          "history": {
+            "pr": 9,
+            "headBranch": "experiment/skymirror-webz-optical-lab-001",
+            "baseBranch": "main",
+            "state": "OPEN",
+            "mergedAt": null,
+            "closedAt": null
+          },
+          "subjectId": "skymirror-lab",
+          "ownerClaim": "the-static-collective/webZ",
+          "kind": "EXPERIMENT",
+          "humanLabel": "SKYMIRROR laboratory",
+          "humanSummary": "Opt-in reflected-light laboratory; CRC inspection is not signed crossing or physical proof.",
+          "observedCapabilities": [
+            "Opt-in reflected-light laboratory; CRC inspection is not signed crossing or physical proof."
+          ],
+          "observedClosures": [
+            "Laboratory, not sovereign world; no actual camera/light/space proof or remote effect."
+          ],
+          "candidateDoors": [
+            {
+              "doorId": "skymirror-lab-candidate-source",
+              "label": "Inspect pinned source",
+              "kind": "SOURCE",
+              "effectClass": "EXTERNAL_NAVIGATION",
+              "target": "https://github.com/the-static-collective/webZ/tree/a890a1ca30b2327262909a8eed58e0fc5db5fc87",
+              "owner": "GitHub source inspection",
+              "availability": "AVAILABLE",
+              "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+              "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+            }
+          ],
+          "relations": [],
+          "laws": [
+            "FRAGMENT != FIELD ENTRY",
+            "PUBLIC OBSERVATION != CODE INTEGRATION"
+          ],
+          "verification": {
+            "sourceLevel": "CONTENT_ADDRESSED",
+            "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+            "contentHash": "sha256:44f8da35048c06860079993acd72b16794ef2567eed2eca2604cd0780e715b8b"
+          },
+          "externalObservation": null
+        }
+      }
+    ],
+    "authority": "NONE",
+    "scope": "Explicit supplied observations only; not public admission, deployment or authority.",
+    "censusHash": "sha256:71e00c48ac8e79dd54655d40b9ba90abb4d227e7d08fc8d5da735a528a1122b3"
+  },
+  "delta": {
+    "schema": "webz/public-field-delta/v0",
+    "parentSnapshotHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+    "censusHash": "sha256:71e00c48ac8e79dd54655d40b9ba90abb4d227e7d08fc8d5da735a528a1122b3",
+    "changes": [
+      {
+        "subjectId": "conversation-collider",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:c52e36a41b7e82f04ebcfb7979dd901883608fb66501c844cdfccccb2724352d",
+          "sha256:7c7a28502b2d6d2e49a33d6e09dd9b421ab92370df660086c5f31eff0cc156b3",
+          "sha256:a02d2bf6e43b32e16f05fe43db7e2cc6b7f4cf4f15bf7c131eb6fef62b2068fe"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "crossing-evidence",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "fabrication",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "field-porch",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:91cd0b8bb76c31ecd0ef3f73f00dd7ba73cb5b51341b722a447e2f508a42c3dd"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "field-quests",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:e730ce8aff9e21804ce0416e03b9b074566beb6eb80583c5fa200e2cc701e8f4"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "forage-glean",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:8eee39c473639c51d7d409651bda87be2647c223c7e88b9226b17b770b2ffd1a",
+          "sha256:932e228ee811b57b0f732b0c06a7f7bb9fda021d66d1b4892f430eb97a4c1cc4",
+          "sha256:c61a6f344ba12d03bdb593f55780beb5063a675e2c8db346b71ed49fb86732d9"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "founder-namespace",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:0f610faff33809f47f9d29e2a7694a8a4b30ca039467208cd157ac9ff964ba51"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "gro-forage",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:2f51e3f6dc3e69763d1fa4b1bf0b5b294d7b4e13e1eab137d82f3179de406d2f"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "groove-post",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:a5d9e881da122cb84ecad0118014ca27fcc20f9244e25406ab9126fb4f3b3723",
+          "sha256:10c662a38eeba5a0d0e2e59434d42c5ef25d163552c537dd351bad0109fc1ff8"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "haunted-arcade",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "invitation-porch",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "kinship-bridge",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "optical-bench",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:d38f47a277d5b2105797677752d917b6730718d6c6435be61f8a2a90b97bf2bd",
+          "sha256:b6102bffb5d875797e3238b7c450e8cb76ef2230f3ca2ca9a37cd3db33c6095a"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "postal-custody",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:1c8faeeb5a0a109ef61f4dbbd2f1efe6e775feea34412c7b1ef5f7c1f55f527b",
+          "sha256:082f3bfe3bdd126496fed9c16d85bd1777c60025a6c835cb1a3fb5c798c672c2",
+          "sha256:329c638220600b3d3d064d2e9bd37ebf3bf7f40276e03b4c793c300279fafee9",
+          "sha256:fb8dad671716607d39cd1d95f001fc2e2accac0d5b823f770fd2277ce58c8d57",
+          "sha256:9e38554a4edde64fd248c82c0878eb57595db0811a3fd5a93ad0a54f7b72e0ad",
+          "sha256:1b87b035e74044e5903fa4719a5cad8cd49f7a9d803d324c25dd8ee92e564035"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "publishing",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "radio-house",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "radio-world",
+        "classifications": [
+          "UNCHANGED"
+        ],
+        "fragmentHashes": [
+          "sha256:7781ea9f600bb66cc7aec29828efa08533fa3d2018028ba88966bb8b356518fa"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "relatte-mcp",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:3758f6104134af547b44d6501637b7f456624e097b170c7c58de4b7bfff9567d",
+          "sha256:bdb97e7c61af63e6b164bc6e37284ea002d25746dea28eda1b78955ae75e16a7",
+          "sha256:d381ad4ee57c3f9a54d8fe797395fd5764cac115f7db8cea683eeff8a3851aaa"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "relatte-vm",
+        "classifications": [
+          "SOURCE_UPDATED"
+        ],
+        "fragmentHashes": [
+          "sha256:036f7fbbd53d3be253b628d8e7c1d6c341438de79caf19dab3593bd276ea00c9",
+          "sha256:e68921bf9c748773b92c820b7004b6852347b2484ff2cf2f0e1bbaaca1284cf3",
+          "sha256:874d97e402bcc40da638271572fab380c909a5c43447cc8cb9cafd678ed1991a",
+          "sha256:bf0028bc3a053f915d33ea2d237bbb60b1c992e1d6ac3b6641a79a0da010c879"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "riff-raft",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:417fa1e974ed7c494d61e094bb123beac47d0ea268cc9094fd963b320c867ae0"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "sanctuary-orchard",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "skymirror-lab",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:071ff3913f72ae1017c2922f642f4142609a46bc2956e1cea9ff43b60958404f"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "static-pressing",
+        "classifications": [
+          "NOT_REOBSERVED"
+        ],
+        "fragmentHashes": [],
+        "meaning": "NOT OBSERVED IN THIS CENSUS; previous public representation retained. No withdrawal inferred."
+      },
+      {
+        "subjectId": "suno-atlas",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:9825053ff5bdcba91cf79b5b19e7e2a9ea48e86463c017110cf57b04aadb4ee9"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "transport-composition",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:16c440fd9557f2cbc7685e57ef1a155fc444037d41ff2d767e5fcdcf8cbd3a68"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      },
+      {
+        "subjectId": "wandering-lens",
+        "classifications": [
+          "NEW_CANDIDATE"
+        ],
+        "fragmentHashes": [
+          "sha256:27e59e17505e715749e31d4db482b22308332ee7e659e39360a88441974f9770",
+          "sha256:96cd0ffa3d6ef59731c66bd436fc9cdd5401efce75a479e8fac04cd7ab1c8f54"
+        ],
+        "meaning": "Observation only; change is not improvement or public admission."
+      }
+    ],
+    "authority": "NONE",
+    "deltaHash": "sha256:821cc5cdccc83d04bc090d6357f3ce653060e90dbb926c28e76612fa6fd76e8d"
+  }
+}

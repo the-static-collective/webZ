@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-115-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "fb96d79a072aae986159c869ebe83df9e88b00da",
+    "pathOrContract": "experiments/022-postemahhn-wallet-doors.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 115,
+    "headBranch": "experiment/postemahhn-003-wallet-doors",
+    "baseBranch": "experiment/postemahhn-002-traveling-post-office",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "postal-custody",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Postal and print-hold experiments",
+  "humanSummary": "Typed station-bound wallet-control proofs and guardian checks stage print HOLD.",
+  "observedCapabilities": [
+    "Typed station-bound wallet-control proofs and guardian checks stage print HOLD."
+  ],
+  "observedClosures": [
+    "No financial spend, wallet ownership certification or physical print."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "postal-custody-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/fb96d79a072aae986159c869ebe83df9e88b00da",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:eee5cab3c37edf921a165954d5b119b7ba60b7d0b2202e986e76f789afe64809"
+  },
+  "externalObservation": null
+}

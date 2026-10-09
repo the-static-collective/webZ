@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-113-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "a63624f1be6a533f5ab927b1e4e8b1a629f1ba53",
+    "pathOrContract": "docs/THE-RIFF-RAFT-002-TERRAFORMER.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 113,
+    "headBranch": "experiment/riff-raft-002-rube-goldberg-terraformer",
+    "baseBranch": "experiment/riff-raft-001-distributed-commons",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "riff-raft",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Riff Raft experiment",
+  "humanSummary": "Simulated ecological cue and conserved-mass model.",
+  "observedCapabilities": [
+    "Simulated ecological cue and conserved-mass model."
+  ],
+  "observedClosures": [
+    "Simulation is not field intervention; this PR is not postal work."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "riff-raft-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/a63624f1be6a533f5ab927b1e4e8b1a629f1ba53",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:2b651098ff64c851100b5431ed0ca66f01a901e0cfe1c15f9f6d0da3a5c035c0"
+  },
+  "externalObservation": null
+}

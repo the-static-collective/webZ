@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-116-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "ff8d91568165ccb89db7231bde20f2b6bdf06362",
+    "pathOrContract": "experiments/023-postemahhn-passkey-door.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 116,
+    "headBranch": "experiment/postemahhn-004-passkey-door",
+    "baseBranch": "experiment/postemahhn-003-wallet-doors",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "postal-custody",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Postal and print-hold experiments",
+  "humanSummary": "RP-bound passkey proof adds a second station-admission factor in synthetic tests.",
+  "observedCapabilities": [
+    "RP-bound passkey proof adds a second station-admission factor in synthetic tests."
+  ],
+  "observedClosures": [
+    "No hardware passkey witness, deployed relying party, spend or print."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "postal-custody-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/ff8d91568165ccb89db7231bde20f2b6bdf06362",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:5a1fc36eaff0e16186e454b4a87dd335a6debd8910c2dfb8e95031b696c0e010"
+  },
+  "externalObservation": null
+}

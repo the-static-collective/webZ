@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "webz-15-observation",
+  "source": {
+    "repository": "the-static-collective/webZ",
+    "exactCommit": "237da36c0503c998ccc003b47fa26d1e9102c03d",
+    "pathOrContract": "docs/FIELD-PORCH-001-WALLE-GRO.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 15,
+    "headBranch": "experiment/webz-gro-forage-001-field-porch",
+    "baseBranch": "main",
+    "state": "MERGED",
+    "mergedAt": "2026-10-09T19:18:13Z",
+    "closedAt": "2026-10-09T19:18:13Z"
+  },
+  "subjectId": "field-porch",
+  "ownerClaim": "the-static-collective/webZ",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Field Porch",
+  "humanSummary": "Local original-byte inspection and consent-reviewed minimal public fingerprint postcards.",
+  "observedCapabilities": [
+    "Local original-byte inspection and consent-reviewed minimal public fingerprint postcards."
+  ],
+  "observedClosures": [
+    "Manual copy is not publication, delivery, rights or machine admission."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "field-porch-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/webZ/tree/237da36c0503c998ccc003b47fa26d1e9102c03d",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:21aef211ab53999f3771996cabc8b0c2949765c19272ae4a12e12bba59ae308c"
+  },
+  "externalObservation": null
+}

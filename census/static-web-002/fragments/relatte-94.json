@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-94-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "8236600cdf8d95246b65d6343bbd336bd925f5fc",
+    "pathOrContract": "experiments/SKYMIRROR-001/README.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 94,
+    "headBranch": "experiment/skymirror-001-passive-optical-road",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "optical-bench",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Optical software bench",
+  "humanSummary": "Manchester optical model and CRC inspection exist as software experiments.",
+  "observedCapabilities": [
+    "Manchester optical model and CRC inspection exist as software experiments."
+  ],
+  "observedClosures": [
+    "No actual sensor, space transmission or signed crossing."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "optical-bench-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/8236600cdf8d95246b65d6343bbd336bd925f5fc",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:9802511759a365ab7358acda8eabc34e2a7c8deab87ca5a3e1070a9ce4e7af9c"
+  },
+  "externalObservation": null
+}

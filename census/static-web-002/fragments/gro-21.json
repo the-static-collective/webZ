@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "gro-21-observation",
+  "source": {
+    "repository": "the-static-collective/GrO",
+    "exactCommit": "85e47caa71a7e76cbb76ce55e59da9c0521cdaf0",
+    "pathOrContract": "docs/FORAGE-001-WALLE-PHONE.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 21,
+    "headBranch": "experiment/gro-forage-001-wall-e-phone",
+    "baseBranch": "main",
+    "state": "MERGED",
+    "mergedAt": "2026-10-09T19:17:55Z",
+    "closedAt": "2026-10-09T19:17:55Z"
+  },
+  "subjectId": "gro-forage",
+  "ownerClaim": "the-static-collective/GrO",
+  "kind": "EXPERIMENT",
+  "humanLabel": "GrO forage",
+  "humanSummary": "Local photo and forage-lead source binding keeps encounters actor-local and HOLD.",
+  "observedCapabilities": [
+    "Local photo and forage-lead source binding keeps encounters actor-local and HOLD."
+  ],
+  "observedClosures": [
+    "No verified pickup, public trace, rights or robot action."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "gro-forage-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GrO/tree/85e47caa71a7e76cbb76ce55e59da9c0521cdaf0",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:fd4759e6d8df6bea02ea062d8af0b02cac830694a2fd7d9c5cee9b19012514f1"
+  },
+  "externalObservation": null
+}

@@ -13,6 +13,17 @@ npm run field:verify  # cold schema/source/authority/route/hash/generated-asset 
 
 [Static hosting and PWA readiness](docs/STATIC-WEB-001-DEPLOYMENT-READINESS.md) covers HTTPS, root/subpath hosting, scoped cache updates, MIME/CSP, 404, rollback and offline bootstrap. No host or domain is selected and nothing is deployed. [320px and desktop field/porch screenshots and network/cache witness](evidence/static-web-001/browser/) come from real Chromium software tests; they do not claim an actual public-human encounter or physical Android test.
 
+**STATIC-WEB-002 is prepared for human public-field review.** [The lifecycle](docs/STATIC-WEB-002-LIFECYCLE.md) separates 34 source fragments, an explicit local census, a candidate delta, human admission and immutable descendant snapshots. [The exact 13-entry proposal](docs/STATIC-WEB-002-PUBLIC-REVIEW.md) retains ten founding cards, updates the bounded reLATTE VM observation and adds source-inspection cards for Wandering Lens and Suno Atlas. Until that wording is approved, the production field remains the original eleven entries. No synthetic test admission is published.
+
+```sh
+npm run field:census -- census/static-web-002/inputs.json
+npm run field:replay  # reports HUMAN_ADMISSION_PENDING until a real review record exists
+npm run test:moving-browser  # isolated, clearly labeled proposal preview while pending
+npm run field:export -- /absolute/empty/directory  # public allowlist only; no deployment
+```
+
+The reviewed renderer supplies `/field/changes/`, offline history and local intent/search over admitted doors, including HOLD paths. [Mobile preview screenshots](evidence/static-web-002/review-preview/) exercise the exact proposal in an isolated synthetic test site; they are not an admission or public deployment.
+
 The first executable slice is **Sanctuary → Orchard → Sanctuary**: two distinct first-party documents, a mobile invitation porch, and a read-only MAXHINAL proof viewer. It works offline after one successful initial load and static cache installation. No backend, accounts, telemetry, external media, signing keys or new infrastructure.
 
 ```sh

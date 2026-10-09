@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-99-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "936f88605ce6034fbd00a5a18e43d32f65b5cccc",
+    "pathOrContract": "docs/RELATTE-CHATGPT-MCP-002.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 99,
+    "headBranch": "experiment/relatte-chatgpt-mcp-002",
+    "baseBranch": "experiment/relatte-chatgpt-mcp-001",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "relatte-mcp",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "reLATTE inspection aperture",
+  "humanSummary": "Independent local MCP wire client and metadata checks with staging bearer credentials.",
+  "observedCapabilities": [
+    "Independent local MCP wire client and metadata checks with staging bearer credentials."
+  ],
+  "observedClosures": [
+    "Staging bearer is not production OAuth, SDK certification or hosted ChatGPT connection."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "relatte-mcp-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/936f88605ce6034fbd00a5a18e43d32f65b5cccc",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:6608e5b093c59c0696dc0f5b5f9061826f7ddcad0e5e58616b5af5a54ad71a91"
+  },
+  "externalObservation": null
+}

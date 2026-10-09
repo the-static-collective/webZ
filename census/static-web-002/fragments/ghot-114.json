@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-114-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "4912104167748556674f5c58a08867ae7fb7bc67",
+    "pathOrContract": "experiments/021-postemahhn-traveling-post-office.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 114,
+    "headBranch": "experiment/postemahhn-002-traveling-post-office",
+    "baseBranch": "experiment/postemahhn-001-addressed-local-print",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "postal-custody",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Postal and print-hold experiments",
+  "humanSummary": "Encrypted parcels cross independent local loopback nodes and remain recipient-station HELD.",
+  "observedCapabilities": [
+    "Encrypted parcels cross independent local loopback nodes and remain recipient-station HELD."
+  ],
+  "observedClosures": [
+    "No TLS public transport, physical mail, print or deployed service."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "postal-custody-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/4912104167748556674f5c58a08867ae7fb7bc67",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:7f18daf63a4987292d27b474c36a92718e59b0140f0b9479a9b33abece8f9b0e"
+  },
+  "externalObservation": null
+}

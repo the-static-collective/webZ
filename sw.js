@@ -1,5 +1,5 @@
 // Generated fixed public shell. Run npm run field:build after any cached asset change.
-const root=new URL('./',self.location.href),prefix='webz-static:'+root.pathname+':',name=prefix+'761c5d6e67e76d194e5189a1b2fd02eebbb500c4e0a73f28ea0f832febd8ad3c';
+const root=new URL('./',self.location.href),prefix='webz-static:'+root.pathname+':',name=prefix+'5cc652b4e0a35bb386dc783957aab8bda57b7812d014303fd12b6f409ad89d96';
 const paths=["","index.html","404.html","manifest.webmanifest","worlds/sanctuary/","worlds/orchard/","porch/","press/","proof/","field/","field/public-field.json","field/public-field.schema.json","field/source-observations.json","field/public-field-receipt.json","app/ui.mjs","app/model.mjs","app/press.mjs","app/proof.mjs","app/shell.mjs","app/style.css","app/icon.svg","app/icon-192.png","app/icon-512.png","evidence/public-simulation.json"];
 const urls=paths.map(p=>new URL(p,root).href);
 self.addEventListener('install',event=>event.waitUntil((async()=>{
@@ -12,6 +12,7 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{
  await self.clients.claim();
 })()));
 self.addEventListener('fetch',event=>{
- if(event.request.method!=='GET'||!urls.includes(event.request.url))return;
- event.respondWith(caches.open(name).then(cache=>cache.match(event.request)).then(cached=>cached||fetch(event.request)));
+ const target=new URL(event.request.url);target.hash='';
+ if(event.request.method!=='GET'||!urls.includes(target.href))return;
+ event.respondWith(caches.open(name).then(cache=>cache.match(target.href)).then(cached=>cached||fetch(event.request)));
 });

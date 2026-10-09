@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "groove-rooms-12-observation",
+  "source": {
+    "repository": "the-static-collective/groove-rooms",
+    "exactCommit": "6f812c46e3ce71bba3b7ac41e8cb4ba66ee30d5f",
+    "pathOrContract": "docs/groove-post-002.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 12,
+    "headBranch": "feat/groove-post-mailboxes-002",
+    "baseBranch": "feat/groove-post-001",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "groove-post",
+  "ownerClaim": "the-static-collective/groove-rooms",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Groove Post",
+  "humanSummary": "Proposed addressed-mail tables and append-only receipt ledger replayed in ephemeral PostgreSQL.",
+  "observedCapabilities": [
+    "Proposed addressed-mail tables and append-only receipt ledger replayed in ephemeral PostgreSQL."
+  ],
+  "observedClosures": [
+    "No live migration, deployed delivery or end-to-end encryption; framework blockers remain."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "groove-post-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/groove-rooms/tree/6f812c46e3ce71bba3b7ac41e8cb4ba66ee30d5f",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:39e823390744590ccb4788ae41e2ed0a7e549c2a0737a403db41794a0b1fe69a"
+  },
+  "externalObservation": null
+}

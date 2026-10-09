@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "static-live-35-observation",
+  "source": {
+    "repository": "the-static-collective/static-live",
+    "exactCommit": "eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+    "pathOrContract": "docs/RADIO-WORLD-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 35,
+    "headBranch": "experiment/radio-world-001-two-doors",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "radio-world",
+  "ownerClaim": "the-static-collective/static-live",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Radio World",
+  "humanSummary": "Local two-owner media world permits explicit official-site handoffs.",
+  "observedCapabilities": [
+    "Local two-owner media world permits explicit official-site handoffs."
+  ],
+  "observedClosures": [
+    "No direct audio, license, independent-owner adoption or public Radio World deployment."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "radio-world-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/static-live/tree/eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:515a632e4c56ca7505ee43007dd2bdd5ab6ae127f38933211b75c13d732bdf3f"
+  },
+  "externalObservation": null
+}

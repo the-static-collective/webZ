@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "groove-rooms-11-observation",
+  "source": {
+    "repository": "the-static-collective/groove-rooms",
+    "exactCommit": "ffa9719615b847d211314c9e395d76db02fa658f",
+    "pathOrContract": "docs/groove-post-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 11,
+    "headBranch": "feat/groove-post-001",
+    "baseBranch": "feat/return-address-import-001",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "groove-post",
+  "ownerClaim": "the-static-collective/groove-rooms",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Groove Post",
+  "humanSummary": "Local sealed cross-media metadata parcels with manual human transport and asserted rights.",
+  "observedCapabilities": [
+    "Local sealed cross-media metadata parcels with manual human transport and asserted rights."
+  ],
+  "observedClosures": [
+    "No automatic delivery, encryption claim or cross-repository execution."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "groove-post-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/groove-rooms/tree/ffa9719615b847d211314c9e395d76db02fa658f",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:d6794fd14473358fe2f13961703a0e250165a9bf5f80e2c94bd0709a02b8f433"
+  },
+  "externalObservation": null
+}

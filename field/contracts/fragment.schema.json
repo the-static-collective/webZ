@@ -1,0 +1,352 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "fragmentId",
+    "source",
+    "history",
+    "subjectId",
+    "ownerClaim",
+    "kind",
+    "humanLabel",
+    "humanSummary",
+    "observedCapabilities",
+    "observedClosures",
+    "candidateDoors",
+    "relations",
+    "laws",
+    "verification",
+    "externalObservation"
+  ],
+  "properties": {
+    "schema": {
+      "const": "webz/public-field-fragment/v0"
+    },
+    "fragmentId": {
+      "type": "string",
+      "maxLength": 1400,
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "exactCommit",
+        "pathOrContract",
+        "observedAt"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "exactCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "pathOrContract": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "observedAt": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pr",
+        "headBranch",
+        "baseBranch",
+        "state",
+        "mergedAt",
+        "closedAt"
+      ],
+      "properties": {
+        "pr": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "headBranch": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "baseBranch": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "state": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "mergedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "closedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "subjectId": {
+      "type": "string",
+      "maxLength": 1400,
+      "minLength": 1
+    },
+    "ownerClaim": {
+      "type": "string",
+      "pattern": "^the-static-collective/[A-Za-z0-9-]+$"
+    },
+    "kind": {
+      "enum": [
+        "EXPERIMENT",
+        "OBSERVATION",
+        "WITHDRAWAL"
+      ]
+    },
+    "humanLabel": {
+      "type": "string",
+      "maxLength": 1400,
+      "minLength": 1
+    },
+    "humanSummary": {
+      "type": "string",
+      "maxLength": 1400,
+      "minLength": 1
+    },
+    "observedCapabilities": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "maxLength": 1400,
+        "minLength": 1
+      }
+    },
+    "observedClosures": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "maxLength": 1400,
+        "minLength": 1
+      }
+    },
+    "candidateDoors": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "doorId",
+          "label",
+          "kind",
+          "effectClass",
+          "target",
+          "owner",
+          "availability",
+          "reason",
+          "requiredNextAuthority"
+        ],
+        "properties": {
+          "doorId": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "effectClass": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "target": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "availability": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          },
+          "requiredNextAuthority": {
+            "type": "string",
+            "maxLength": 1400,
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to",
+          "kind",
+          "description"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "to": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "kind": {
+            "enum": [
+              "observes",
+              "references",
+              "neighbor-of",
+              "can-propose-to",
+              "can-receive-from"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1400
+          }
+        }
+      }
+    },
+    "laws": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "maxLength": 1400,
+        "minLength": 1
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceLevel",
+        "verifier",
+        "contentHash"
+      ],
+      "properties": {
+        "sourceLevel": {
+          "enum": [
+            "CLAIMED",
+            "CONTENT_ADDRESSED",
+            "LOCALLY_VERIFIED",
+            "INDEPENDENTLY_REPLAYED"
+          ]
+        },
+        "verifier": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        },
+        "contentHash": {
+          "type": "string",
+          "maxLength": 1400,
+          "minLength": 1
+        }
+      }
+    },
+    "externalObservation": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "observedBy",
+            "relationClaim"
+          ],
+          "properties": {
+            "observedBy": {
+              "const": "CANNON"
+            },
+            "relationClaim": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "producer",
+                "consumer",
+                "compatibilityState",
+                "exactReceipt"
+              ],
+              "properties": {
+                "producer": {
+                  "type": "string",
+                  "maxLength": 1400
+                },
+                "consumer": {
+                  "type": "string",
+                  "maxLength": 1400
+                },
+                "compatibilityState": {
+                  "enum": [
+                    "CANDIDATE_ONLY",
+                    "INSPECTED_COMPATIBILITY",
+                    "INCOMPATIBLE",
+                    "HOLD"
+                  ]
+                },
+                "exactReceipt": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "webz/public-field-fragment/v0",
+  "description": "Structural bounds. The dependency-free lifecycle verifier enforces source pins, source-file content addresses, owner/door constraints and authority boundaries."
+}

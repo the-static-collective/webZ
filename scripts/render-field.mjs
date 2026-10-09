@@ -1,4 +1,7 @@
 import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const cacheList=new URL('./public-field-cache.json',import.meta.url);
+const movingPaths=existsSync(cacheList)?JSON.parse(readFileSync(cacheList,'utf8')):[];
 export const escape = s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const e=escape;
 const names={LIVE:'Public service evidenced',LOCAL_ONLY:'Local world',INSPECTABLE:'Inspection only',PROPOSAL_ONLY:'Proposal only',HOLD:'HOLD · intentional pause',NOT_CONNECTED:'Not connected',EXPERIMENTAL:'Experimental source'};
@@ -21,16 +24,17 @@ export function renderField(field,observations,receipt){
 <main id="main"><section class="intro field-intro"><div class="eyebrow">THE STATIC COLLECTIVE / PUBLIC FIELD</div><h1>See what’s<br>growing.</h1><p class="lede">The web is a porch,<br>not the house.</p><p>A few worlds, their owners, and their doors. Some you can enter here. Some you can only inspect. Every closed door has a reason.</p><p>These are committed observations from ${e(field.observedOn)}, not a live availability monitor. No public service deployment is claimed.</p><nav class="field-index" aria-label="Find a world">${field.worlds.map(w=>`<a href="#${e(w.id)}">${e(w.label)}</a>`).join('')}</nav></section><aside class="field-key" aria-label="Understanding closed doors"><h2>A pause has a meaning.</h2><p><strong>HOLD</strong> — a required owner or evidence gate is missing. <strong>Not yet</strong> — a path is not implemented. <strong>Unknown</strong> — availability has not been established. <strong>No</strong> — a scoped refusal. None of these means the website is broken.</p><p>Visible door ≠ authority. A site link opens that owner’s site; it grants no integration rights.</p></aside><section class="field-grid" aria-label="Founding worlds">${cards}</section><section class="field-relations"><h2>Neighbors, not one house.</h2><p>CANNON can observe relationships. Each world keeps its own authority.</p><ul>${relations}</ul><details><summary>Founding laws & field integrity</summary><p>The receipt authorizes nothing. Its hash detects changes to this committed manifest; it authenticates neither operators nor machines.</p><p class="hash">Field hash: ${receipt.fieldHash}</p><p><a href="public-field.json">Read the manifest</a> · <a href="source-observations.json">Read the source observations</a> · <a href="public-field-receipt.json">Read the receipt</a></p><ul>${field.laws.map(l=>`<li>${e(l)}</li>`).join('')}</ul></details></section></main><footer><span>RELATION ≠ AUTHORITY. HOLD ≠ FAILURE.</span><span>webZ · STATIC-WEB-001 / DEPLOYABLE ≠ DEPLOYED</span></footer></body></html>
 `;
 }
-export const STATIC_PATHS=['','index.html','404.html','manifest.webmanifest','worlds/sanctuary/','worlds/orchard/','porch/','press/','proof/','field/','field/public-field.json','field/public-field.schema.json','field/source-observations.json','field/public-field-receipt.json','app/ui.mjs','app/model.mjs','app/press.mjs','app/proof.mjs','app/shell.mjs','app/style.css','app/icon.svg','app/icon-192.png','app/icon-512.png','evidence/public-simulation.json'];
+export const STATIC_BASE_PATHS=['','index.html','404.html','manifest.webmanifest','worlds/sanctuary/','worlds/orchard/','porch/','press/','proof/','field/','field/public-field.json','field/public-field.schema.json','field/source-observations.json','field/public-field-receipt.json','app/ui.mjs','app/model.mjs','app/press.mjs','app/proof.mjs','app/shell.mjs','app/style.css','app/icon.svg','app/icon-192.png','app/icon-512.png','evidence/public-simulation.json'];
+export const STATIC_PATHS=[...new Set([...STATIC_BASE_PATHS,...movingPaths])];
 export function assetVersion(assets){
  const h=createHash('sha256');for(const [path,bytes] of assets){h.update(path+'\0');h.update(bytes);h.update('\0');}return h.digest('hex');
 }
 // Worker-contract changes also need a new cache: a failed new installation must
 // never delete the cache still used by the old active worker.
-export function workerVersion(assets){return assetVersion([...assets,['sw-contract',Buffer.from(renderWorker('contract'))]]);}
-export function renderWorker(version){return `// Generated fixed public shell. Run npm run field:build after any cached asset change.
+export function workerVersion(assets,paths=STATIC_PATHS){return assetVersion([...assets,['sw-contract',Buffer.from(renderWorker('contract',paths))]]);}
+export function renderWorker(version,paths=STATIC_PATHS){return `// Generated fixed public shell. Run npm run field:build after any cached asset change.
 const root=new URL('./',self.location.href),prefix='webz-static:'+root.pathname+':',name=prefix+'${version}';
-const paths=${JSON.stringify(STATIC_PATHS)};
+const paths=${JSON.stringify(paths)};
 const urls=paths.map(p=>new URL(p,root).href);
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(name);
@@ -42,7 +46,8 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{
  await self.clients.claim();
 })()));
 self.addEventListener('fetch',event=>{
- if(event.request.method!=='GET'||!urls.includes(event.request.url))return;
- event.respondWith(caches.open(name).then(cache=>cache.match(event.request)).then(cached=>cached||fetch(event.request)));
+ const target=new URL(event.request.url);target.hash='';
+ if(event.request.method!=='GET'||!urls.includes(target.href))return;
+ event.respondWith(caches.open(name).then(cache=>cache.match(target.href)).then(cached=>cached||fetch(event.request)));
 });
 `;}

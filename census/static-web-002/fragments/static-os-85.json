@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "static-os-85-observation",
+  "source": {
+    "repository": "the-static-collective/static-os",
+    "exactCommit": "1190446dd09e158491d79c36dad6502027c98a9d",
+    "pathOrContract": "docs/glean-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 85,
+    "headBranch": "experiment/glean-001-steward-remainder",
+    "baseBranch": "main",
+    "state": "MERGED",
+    "mergedAt": "2026-10-09T19:47:37Z",
+    "closedAt": "2026-10-09T19:47:37Z"
+  },
+  "subjectId": "forage-glean",
+  "ownerClaim": "the-static-collective/static-os",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Forage and glean",
+  "humanSummary": "Separate crop-glean and nonfood-surplus assertions preserve steward and conservation reports.",
+  "observedCapabilities": [
+    "Separate crop-glean and nonfood-surplus assertions preserve steward and conservation reports."
+  ],
+  "observedClosures": [
+    "No verified custody, legal certification, machine actuation or deployment proof."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "forage-glean-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/static-os/tree/1190446dd09e158491d79c36dad6502027c98a9d",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:5766174348982cdbbbcf3862f69f30379ff814e10decbb84ddf771387e02c1b6"
+  },
+  "externalObservation": null
+}

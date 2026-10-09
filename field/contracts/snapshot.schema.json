@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "webz/public-field-snapshot/v0",
+  "description": "Structural contract; app/field-lifecycle.mjs additionally enforces closed fields, bounded content, canonical identities, exact lineage and authority constraints.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "parentSnapshotHash",
+    "censusHash",
+    "admissionHashes",
+    "fieldHash",
+    "field",
+    "observations",
+    "fragments",
+    "provenance",
+    "doorTags",
+    "paths",
+    "publicChanges",
+    "laws",
+    "snapshotHash"
+  ],
+  "properties": {
+    "schema": {
+      "const": "webz/public-field-snapshot/v0"
+    },
+    "parentSnapshotHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "censusHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "admissionHashes": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "fieldHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "field": {
+      "$ref": "../public-field.schema.json"
+    },
+    "observations": {
+      "type": "object"
+    },
+    "fragments": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "provenance": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "doorTags": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "paths": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "publicChanges": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "laws": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "snapshotHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

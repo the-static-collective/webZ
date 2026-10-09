@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "static-os-80-observation",
+  "source": {
+    "repository": "the-static-collective/static-os",
+    "exactCommit": "03539a6c2c39be28395c0df57ecfb7234136c4e1",
+    "pathOrContract": "docs/forage-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 80,
+    "headBranch": "experiment/forage-001-permission-custody",
+    "baseBranch": "main",
+    "state": "MERGED",
+    "mergedAt": "2026-10-09T19:17:40Z",
+    "closedAt": "2026-10-09T19:17:40Z"
+  },
+  "subjectId": "forage-glean",
+  "ownerClaim": "the-static-collective/static-os",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Forage and glean",
+  "humanSummary": "Permission-first salvage lead and provenance ledger retains human-review HOLD.",
+  "observedCapabilities": [
+    "Permission-first salvage lead and provenance ledger retains human-review HOLD."
+  ],
+  "observedClosures": [
+    "No legal certification, pickup, custody or inventory authority."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "forage-glean-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/static-os/tree/03539a6c2c39be28395c0df57ecfb7234136c4e1",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:16083af14ecbcb418aea92c994cd29d6c8699c17c158187ece1f2ea8e17d0059"
+  },
+  "externalObservation": null
+}

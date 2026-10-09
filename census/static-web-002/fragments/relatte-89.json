@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-89-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+    "pathOrContract": "docs/RELATTE-VM-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 89,
+    "headBranch": "experiment/relatte-vm-001-self-hosted-world",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "relatte-vm",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Crossings and admitted computation",
+  "humanSummary": "Bounded owner-admitted VM interpreter inspection.",
+  "observedCapabilities": [
+    "Bounded owner-admitted VM interpreter inspection."
+  ],
+  "observedClosures": [
+    "No general sandbox, public compute service or physical host attestation."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "relatte-vm-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:59e7cb0a023e6ba397ec9eebfb588fb5bcbd9a6bdc85115b7f4942ba36399a3d"
+  },
+  "externalObservation": null
+}
