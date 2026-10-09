@@ -28,7 +28,7 @@ try:
         context=browser.new_context(viewport={'width':390,'height':844},device_scale_factor=1)
         page=context.new_page()
         page.on('pageerror',lambda e:errors.append(str(e)))
-        page.on('request',lambda r:external.append(r.url) if not r.url.startswith(base) else None)
+        page.on('request',lambda r:external.append(r.url) if not (r.url.startswith(base) or r.url.startswith('blob:')) else None)
         page.goto(base+'worlds/wandering-lens/')
         page.get_by_role('heading',name='There is more inside.').wait_for()
         assert page.get_by_role('heading',name='The Miracle Automaton').is_visible()
