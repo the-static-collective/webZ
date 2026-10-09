@@ -48,3 +48,14 @@ world. Explicit choice remains with the traveler and each receiver.
 See [the field crossing guide](docs/FIELD-PORCH-001-WALLE-GRO.md).
 The source files are runnable locally, but are **not** a verified live
 internet deployment.
+
+## GLEAN-001 · The Remainder Porch
+
+A distinct source of opportunity from scavenging: a steward **offers a
+bounded remainder** while maintaining control over the original resource.
+The [GLEAN porch](glean/) accepts the Static OS donor-offer and GrO local
+HOLD, verifies matching source records, and proposes a **consent-only,
+unsigned** limited invitation for manual WEBZ porch review. It does not
+transmit, collect or authenticate actual physical resources.
+
+See [GLEAN-001 guide](docs/GLEAN-001-REMAINDER-PORCH.md).
