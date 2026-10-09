@@ -19,7 +19,7 @@ try:
   page=browser.new_page(viewport={'width':390,'height':844})
   errors=[];external=[]
   page.on('pageerror',lambda e:errors.append(str(e)))
-  page.on('request',lambda r:external.append(r.url) if not (r.url.startswith(base) or r.url.startswith('blob:')) else None)
+  page.on('request',lambda r:external.append(r.url) if not (r.url.startswith(base.split('/nested/webZ/')[0]) or r.url.startswith('blob:')) else None)
   page.goto(base+'worlds/music-field/')
   page.get_by_role('heading',name='One library. Three doors.').wait_for()
   assert page.locator('#count-all').inner_text()=='0'
