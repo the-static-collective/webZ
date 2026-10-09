@@ -11,7 +11,7 @@ const upstream=async(raw)=>{
   return Response.json({access_token:'fixture-only-test-token',token_type:'Bearer',scope:SCOPE,expires_in:3600});
  if(u.hostname==='oauth2.googleapis.com'&&u.pathname==='/revoke')return new Response('',{status:200});
  if(u.hostname==='www.googleapis.com'&&u.pathname.endsWith('/playlists'))
-  return Response.json({items:[{id:'PL12345678901',snippet:{title:'Synthetic Music'},contentDetails:{itemCount:1}}]});
+  return Response.json({items:[{id:u.searchParams.get('id')||'PL12345678901',snippet:{title:'Synthetic Music'},contentDetails:{itemCount:1}}]});
  if(u.hostname==='www.googleapis.com'&&u.pathname.endsWith('/playlistItems'))
   return Response.json({items:[{snippet:{title:'Witness Sound',videoOwnerChannelTitle:'Mock Artist',description:'DO_NOT_IMPORT'},
    contentDetails:{videoId:'abcDEF12345',videoPublishedAt:'2026-10-09T00:00:00Z'}}]});
@@ -54,6 +54,14 @@ try:
   page.wait_for_url('**/worlds/music-field/#youtube=connected')
   page.wait_for_function("()=>document.querySelector('#youtube-state').textContent.includes('YouTube connected')")
   assert page.locator('#count-all').inner_text()=='0'
+  page.locator('#yt-link').fill('https://youtube.com/playlist?list=PLmock-direct1&si=SHARE_TRACKER')
+  page.locator('#yt-link-review').click()
+  page.wait_for_function("()=>document.querySelector('#yt-choose').value==='PLmock-direct1'")
+  assert page.locator('#yt-link').input_value()=='https://www.youtube.com/playlist?list=PLmock-direct1'
+  assert page.locator('#count-all').inner_text()=='0'
+  page.locator('#yt-select').click()
+  page.wait_for_function("()=>document.querySelector('#yt-preview').textContent.includes('Witness Sound')")
+  assert page.locator('#count-all').inner_text()=='0'
   page.locator('#yt-playlists').click()
   page.wait_for_function("()=>document.querySelectorAll('#yt-choose option').length===2")
   page.locator('#yt-choose').select_option('PL12345678901')
@@ -80,7 +88,7 @@ try:
   page.screenshot(path=str(out/'music-field-003-mobile.png'),full_page=True)
   print(json.dumps({'schema':'webz/music-field-003-browser/v0','mocked_google':True,
    'real_account_requests':0,'explicit_pkce':True,'playlist_selection':True,
-   'preview_before_import':True,'imported_records':1,'auto_saved':False,
+   'preview_before_import':True,'pasted_share_link_verified':True,'share_tracking_discarded':True,'imported_records':1,'auto_saved':False,
    'disconnect_and_revocation':True,'reload_without_autoload':True,
    'mobile_390':True,'errors':bad},indent=2))
   browser.close()
