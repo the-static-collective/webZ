@@ -44,10 +44,10 @@ function isSameOrigin(req,expected,mutation=false){
 }
 export function createBridge({
  clientId,clientSecret='',fetchImpl=globalThis.fetch,
- authEndpoint,tokenEndpoint,apiRoot,revocationEndpoint=GOOGLE_REVOKE
+ tokenEndpoint,apiRoot,revocationEndpoint=GOOGLE_REVOKE
 }={}){
  const configured=validClient(clientId);
- let sid=secret(),pending=null,token=null,selected=new Map(),closing=false,server;
+ let sid=secret(),pending=null,token=null,selected=new Map(),server;
  async function upstream(fn,res){
   try{return await fn()}
   catch(e){
@@ -108,12 +108,13 @@ export function createBridge({
   }
   if(req.method==='POST'&&path==='/api/youtube/connect'){
    if(!configured){no(res,409,'GOOGLE_DESKTOP_CLIENT_ID_REQUIRED');return}
-   // Re-connect requires a separate new opt-in; do not silently replace an active session.
-   reset();const state=secret(),verifier=secret();
+   if(token){no(res,409,'DISCONNECT_BEFORE_RECONNECT');return}
+   if(pending){no(res,409,'OAUTH_ALREADY_PENDING');return}
+   const state=secret(),verifier=secret();
    pending={state,verifier,time:Date.now()};
    const authorize=makeAuthorization({clientId,state,verifier,redirectUri:origin+'/oauth/youtube/callback'});
-   // Production auth endpoint always Google's pinned HTTPS host.
-   answer(res,200,{authorization_url:authEndpoint?new URL(authorize).href.replace('https://accounts.google.com/o/oauth2/v2/auth',authEndpoint):authorize});
+   // Authorization always goes to Google's pinned HTTPS origin.
+   answer(res,200,{authorization_url:authorize});
    return;
   }
   if(req.method==='POST'&&path==='/api/youtube/disconnect'){
