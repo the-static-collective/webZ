@@ -30,3 +30,6 @@ input[type=checkbox]{width:22px;height:22px;vertical-align:middle}
 .qr svg {display:block;max-width:100%;min-width:0;width:100%;height:auto}
 .qr small {max-width:100%;overflow-wrap:anywhere}
 textarea,pre {max-width:100%;overflow-wrap:anywhere}
+
+/* Signed SHA-256 heads in Phone B's live status are long unbroken words. */
+#status {overflow-wrap:anywhere;word-break:break-word;max-width:100%}
