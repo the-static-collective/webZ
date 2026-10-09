@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test tests/*.test.mjs labs/skymirror/protocol.test.mjs",
     "serve": "node scripts/serve.mjs",
-    "test:browser": "python tests/browser.py && python tests/races.py",
+    "test:browser": "python tests/browser.py && python tests/races.py && python tests/optical_lab_browser.py",
     "replay": "node scripts/replay.mjs"
   },
   "engines": {

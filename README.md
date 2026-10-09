@@ -4,6 +4,12 @@ A world gets an address. A door gets a contract. A traveler gets a choice. A cro
 
 The first executable slice is **Sanctuary → Orchard → Sanctuary**: two distinct first-party documents, a mobile invitation porch, and a read-only MAXHINAL proof viewer. It works offline after one successful initial load and static cache installation. No backend, accounts, telemetry, external media, signing keys or new infrastructure.
 
+### Experimental transport laboratory: SKYMIRROR × webZ
+
+[Open the optical lab](labs/skymirror/) from the webZ landing page, or use the local static preview at `/labs/skymirror/`. It offers a two-phone screen-light transmitter and camera receiver for a **passively reflected, 24-byte text packet**, plus a synthetic mode. After a successful **real camera CRC decode**, a separate explicit inspection can produce an **unsigned webZ optical observation containing only a payload digest, length, and capture descriptors**. This is not a new world, an authenticated crossing, network delivery or admission. Synthetic mode alone cannot open the inspection gate. Lab code caches after an explicit visit, not during initial boot. Source is pinned to [reLATTE SKYMIRROR-002 draft PR #95](https://github.com/the-static-collective/reLATTE/pull/95); see [SKYMIRROR-WEBZ-001](docs/SKYMIRROR-WEBZ-001.md) for tested boundaries and the still-unmet physical field gate.
+
+
+
 ```sh
 # Node 22+; no runtime dependencies
 npm test
