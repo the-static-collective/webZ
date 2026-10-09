@@ -228,3 +228,6 @@ window.addEventListener('hashchange',recover);
 spots();const initial=urlState();if(initial)state=initial;
 else if(location.hash.startsWith('#world='))say('Invalid address refused; opening root.');
 hashState();paint();traceView();
+if('serviceWorker' in navigator && location.protocol!=='file:'){
+ navigator.serviceWorker.register('../../sw.js',{scope:'../../'}).catch(()=>{});
+}
