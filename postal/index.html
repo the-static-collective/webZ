@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142523">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; worker-src 'self'; img-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+<title>PostEmahh'n / Postal Porch — webZ × GrO</title>
+<link rel="stylesheet" href="../forage/field.css">
+<script type="module" src="./ui.mjs"></script>
+</head><body>
+<header><a class="brand" href="../">web<span>Z</span></a><span>POSTAL PORCH / GRO × GHOT</span><a class="back" href="../">Return to webZ</a></header>
+<main>
+<section class="hero">
+<p class="kicker">POSTAL-CORPS-003 · THREE INDEPENDENT DOORS</p>
+<h1>Two phones.<br><em>One optional encounter.</em></h1>
+<p>webZ hosts the static field interface. GHoT verifies exact cryptographic custody claims. GrO may <strong>notice, hold, refuse or leave open</strong> an encounter after you review it. None of them can deliver a parcel, pay a carrier or create an authoritative Deed by appearing on this page.</p>
+<div class="status"><span class="light"></span> LOCAL SIMULATION · NO PUBLIC DELIVERY</div>
+<p><a href="./pocket/two-phones.html">Open the two-phone field-test interface →</a></p>
+<p class="footnote">This route is a source-pinned static app shell, not yet a deployed webZ service. Real phone access requires independently configured HTTPS hosting and human enrollment. Its QR transfers run offline after the static files are loaded.</p>
+</section>
+<section class="panel">
+<h2>01 · Bring back your GHoT synthetic fieldkit</h2>
+<p>A completed offline phone experiment can export a portable JSON fieldkit. This page checks the origin/first-carrier P-256 signatures, exact synthetic state, nonce and receipt history locally. It cannot verify who owns the keys or whether any physical item exists.</p>
+<label>Local fieldkit JSON (up to 35 KB)<input type="file" id="fieldkit" accept=".json,application/json"></label>
+<p class="footnote">No upload, network submission, automatic publication or browser storage. The original source stays on this device; do not select files containing real names, addresses, phone numbers or financial data.</p>
+</section>
+<section class="panel">
+<h2>02 · Your local GrO choice</h2>
+<p>The presence of a valid signature does not demand participation. Even a successful imported simulation may be left untouched.</p>
+<label for="choice">What would you like to do?</label>
+<select id="choice">
+<option value="notice">Notice only</option>
+<option value="hold">HOLD unresolved</option>
+<option value="refuse">Refuse</option>
+<option value="leave-open">Leave open</option>
+</select>
+<label class="consent"><input id="consent" type="checkbox"><span>I deliberately choose to inspect a fictional signed custody claim and prepare a local GrO encounter; I know the resulting route/history fingerprints can be correlated by someone who has the source file.</span></label>
+<button id="review" type="button" class="primary">Verify and prepare local GrO encounter</button>
+<p id="message" role="status" aria-live="polite"></p>
+</section>
+<section id="result" class="panel result" hidden>
+<h2>03 · Examine the GrO HOLD projection</h2>
+<p class="status compact">SIGNED CLAIM INSPECTED · SOURCE IDENTITY UNVERIFIED · NO PUBLIC TRACE</p>
+<pre id="preview"></pre>
+<div class="actions">
+<button id="download" type="button">Save local GrO encounter.json</button>
+<button id="copy" type="button">Copy reviewed encounter</button>
+<button id="clear" type="button" class="quiet">Clear all local input</button>
+</div>
+<p class="footnote">For independent source admission, return the original fieldkit—not this minimized GrO projection—to the separately controlled GHoT station verifier. Neither the webZ page nor its generated file can do that for you.</p>
+</section>
+</main><footer><span>HOSTING ≠ AUTHORITY · CRYPTO SIGNATURE ≠ PHYSICAL CUSTODY · LOCAL HOLD ≠ PENNY</span></footer>
+</body></html>
