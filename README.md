@@ -52,3 +52,7 @@ internet deployment.
 ## Suno Atlas 001 / Local-first 11-dial music library browser
 
 [Explore Suno Atlas](worlds/suno-atlas/). Import your own CSV/JSON song metadata; tune 11 musical families and 11 view granularities, inspect real time/style-co-occurrence graphs, and explicitly save named IndexedDB snapshots. Portable metadata-only exports are supported. No Suno login, unofficial API, scraping, downloads or playback. See [Suno Atlas instructions](docs/SUNO-ATLAS-001.md).
+
+## Music Field 002 — Suno × Bandcamp × YouTube
+
+[Music Field](worlds/music-field/) is a separate first-party WebZ experiment stacked on Suno Atlas 001. It uses local user-selected metadata files from three sources; platform-qualified IDs, explicit human-supplied cross-source links, a dataset-bound 11×11 dial field, real provider/date/tag counts and optional named IndexedDB snapshots. No cookies, credentials, scraping, account automation, streaming or original media are present. See [docs/MUSIC-FIELD-002.md](docs/MUSIC-FIELD-002.md). Source site policy and OAuth requirements are treated per provider.
