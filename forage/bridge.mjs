@@ -13,7 +13,7 @@ const keys = [
   "schema", "scope", "proposal", "public_text", "source_encounter_id",
   "source_kind", "receiver_choice", "private_source_transported",
   "camera_authenticated", "owner_title_verified", "permission_to_collect",
-  "machine_execution", "signed_relattte_crossing", "webz_world_admission",
+  "machine_execution", "signed_relatte_crossing", "webz_world_admission",
 ];
 const scope = "opt-in unsigned offline public-text rehearsal; not published, transported, licensed, owned, admitted or a physical pickup grant";
 
@@ -68,7 +68,7 @@ export async function prepareForageDoor({
     owner_title_verified: false,
     permission_to_collect: false,
     machine_execution: false,
-    signed_relattte_crossing: false,
+    signed_relatte_crossing: false,
     webz_world_admission: false,
   };
 }
