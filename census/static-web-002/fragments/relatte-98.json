@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-98-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "0dd287204265d1b8151806bbc675b4ffdf8332a4",
+    "pathOrContract": "docs/RELATTE-CHATGPT-MCP-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 98,
+    "headBranch": "experiment/relatte-chatgpt-mcp-001",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "relatte-mcp",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "reLATTE inspection aperture",
+  "humanSummary": "Local loopback read-only inspection of signed crossing evidence using native verifiers.",
+  "observedCapabilities": [
+    "Local loopback read-only inspection of signed crossing evidence using native verifiers."
+  ],
+  "observedClosures": [
+    "No deployed MCP service, ChatGPT connection, OAuth approval or effect endpoint."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "relatte-mcp-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/0dd287204265d1b8151806bbc675b4ffdf8332a4",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:8dff0a8215498f32bd1ac9f9a0e896a4114680338f64e8241af592a793dfcf64"
+  },
+  "externalObservation": null
+}

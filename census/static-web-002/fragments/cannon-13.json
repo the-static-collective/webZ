@@ -1,0 +1,61 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "cannon-13-observation",
+  "source": {
+    "repository": "the-static-collective/CANNON",
+    "exactCommit": "3e646484eaaaa9e326145ae7281d27b243adde1b",
+    "pathOrContract": "docs/CONVERSATION-COLLIDER-002.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 13,
+    "headBranch": "experiment/conversation-collider-source-002",
+    "baseBranch": "experiment/conversation-collider-001",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "conversation-collider",
+  "ownerClaim": "the-static-collective/CANNON",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Conversation Collider",
+  "humanSummary": "Exact Git-object inspection binds source bytes and exposes a real schema incompatibility.",
+  "observedCapabilities": [
+    "Exact Git-object inspection binds source bytes and exposes a real schema incompatibility."
+  ],
+  "observedClosures": [
+    "Schema verification is not semantic acceptance, rights or execution."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "conversation-collider-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/CANNON/tree/3e646484eaaaa9e326145ae7281d27b243adde1b",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:04b8acccca79c259a9e6da9e25aeafb4eee14c548ac42f3bb01fb3e7e01573c1"
+  },
+  "externalObservation": {
+    "observedBy": "CANNON",
+    "relationClaim": {
+      "producer": "Git-pinned declared source artifacts",
+      "consumer": "independent receiving owners",
+      "compatibilityState": "CANDIDATE_ONLY",
+      "exactReceipt": null
+    }
+  }
+}

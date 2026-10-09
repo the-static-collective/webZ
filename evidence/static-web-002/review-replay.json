@@ -1,0 +1,13 @@
+{
+  "schema": "webz/public-field-review-replay/v0",
+  "state": "HUMAN_ADMISSION_PENDING",
+  "authority": "NONE",
+  "foundingFieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "censusHash": "sha256:71e00c48ac8e79dd54655d40b9ba90abb4d227e7d08fc8d5da735a528a1122b3",
+  "deltaHash": "sha256:821cc5cdccc83d04bc090d6357f3ce653060e90dbb926c28e76612fa6fd76e8d",
+  "reviewHash": "sha256:b7ff79e825c8a40362855f3b15760daa180232e585a83a5bc7c129e2f7120bf1",
+  "candidateFragments": 34,
+  "candidateSubjects": 17,
+  "currentlyAdmittedEntries": 11,
+  "proposedEntries": 13
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "webz-12-observation",
+  "source": {
+    "repository": "the-static-collective/webZ",
+    "exactCommit": "785a075c8be867f6e8d9a6a115ff457151f53970",
+    "pathOrContract": "docs/WANDERING-LENS-002.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 12,
+    "headBranch": "experiment/wandering-lens-002-visitor-annex",
+    "baseBranch": "experiment/wandering-lens-001-question-engine",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "wandering-lens",
+  "ownerClaim": "the-static-collective/webZ",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Wandering Lens",
+  "humanSummary": "Local inspected visitor-object and world-sketch proposals extend the question laboratory.",
+  "observedCapabilities": [
+    "Local inspected visitor-object and world-sketch proposals extend the question laboratory."
+  ],
+  "observedClosures": [
+    "Local operator decisions are not independently authenticated curation or sovereign world admission."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "wandering-lens-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/webZ/tree/785a075c8be867f6e8d9a6a115ff457151f53970",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:151e15635828e7cdf641c7638de7636f0d93893ef25c12472b16ff71c0c4623e"
+  },
+  "externalObservation": null
+}

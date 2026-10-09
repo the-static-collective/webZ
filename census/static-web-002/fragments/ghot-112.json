@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-112-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "5b3be498082d3faf9e45a9e552bc5bb58d14086d",
+    "pathOrContract": "experiments/020-postemahhn-addressed-print.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 112,
+    "headBranch": "experiment/postemahhn-001-addressed-local-print",
+    "baseBranch": "experiment/orshot-002-physical-receipt-router",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "postal-custody",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Postal and print-hold experiments",
+  "humanSummary": "Signed addressed PDF proposals require recipient-station release before local export.",
+  "observedCapabilities": [
+    "Signed addressed PDF proposals require recipient-station release before local export."
+  ],
+  "observedClosures": [
+    "No physical print, public transport or delivery."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "postal-custody-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/5b3be498082d3faf9e45a9e552bc5bb58d14086d",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:6785f93d6c675491bdc8cd527980a4eb6344a4f47472d8c1f8cbdce223e4d1c6"
+  },
+  "externalObservation": null
+}

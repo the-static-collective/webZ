@@ -6,7 +6,7 @@ function worker(failed=false){
  const handlers={},requests=[],stored=new Map(),deleted=[];
  const prefix='webz-static:/nested/webZ/:';
  const names=new Set([prefix+'old','webz-offline-001:/nested/webZ/','webz-static:/other/:old','other-app']);
- const cache={put:async(u,r)=>stored.set(u,r),match:async r=>stored.get(r.url)};
+ const cache={put:async(u,r)=>stored.set(u,r),match:async r=>stored.get(typeof r==='string'?r:r.url)};
  const sandbox={URL,Request,Error,caches:{open:async n=>{names.add(n);return cache;},keys:async()=>[...names],delete:async n=>{deleted.push(n);names.delete(n);stored.clear();}},fetch:async r=>{requests.push(r);return {ok:!failed};},self:{location:{href:'https://example.org/nested/webZ/sw.js'},addEventListener:(k,h)=>handlers[k]=h,skipWaiting:async()=>{},clients:{claim:async()=>{}}}};
  vm.runInNewContext(renderWorker('current'),sandbox);
  const run=async kind=>{let task;handlers[kind]({waitUntil:p=>task=p});await task;};
@@ -33,4 +33,10 @@ test('asset version deterministically changes when field bytes or any shell byte
  assert.equal(assetVersion(assets),assetVersion(assets));
  assert.notEqual(assetVersion(assets),assetVersion([[assets[0][0],Buffer.from('b')],assets[1]]));
  assert.notEqual(assetVersion(assets),assetVersion([assets[0],[assets[1][0],Buffer.from('y')]]));
+});
+
+test('fixed-route deep links work offline while arbitrary query requests stay outside the cache',async()=>{
+ const w=worker();await w.run('install');const before=w.requests.length;let task;
+ w.handlers.fetch({request:new Request('https://example.org/nested/webZ/field/#intent-print'),respondWith:p=>task=p});assert.ok(task);await task;assert.equal(w.requests.length,before);
+ let handled=false;w.handlers.fetch({request:new Request('https://example.org/nested/webZ/field/?private=ignored#intent-print'),respondWith:()=>handled=true});assert.equal(handled,false);
 });

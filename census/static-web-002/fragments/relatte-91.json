@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-91-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "477c68075919b09e51a5888133370dc9df0f0b9e",
+    "pathOrContract": "docs/RELATTE-VM-003.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 91,
+    "headBranch": "experiment/relatte-vm-003-witnessed-execution",
+    "baseBranch": "experiment/relatte-vm-002-isolated-wasm",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "relatte-vm",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Crossings and admitted computation",
+  "humanSummary": "Separately signed host-observed results bind witness receipts to constrained execution.",
+  "observedCapabilities": [
+    "Separately signed host-observed results bind witness receipts to constrained execution."
+  ],
+  "observedClosures": [
+    "Separate CI jobs are not physical-host attestation or public compute service."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "relatte-vm-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/477c68075919b09e51a5888133370dc9df0f0b9e",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:34e4fa98061ef7452c097713c21c6d195ecead8b7f3d068bf9c44929f34375a5"
+  },
+  "externalObservation": null
+}

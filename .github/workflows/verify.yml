@@ -15,6 +15,7 @@ jobs:
           python-version: '3.12'
       - run: npm test
       - run: npm run field:verify
+      - run: npm run field:replay
       - run: python -m pip install -r tests/requirements.txt
       - run: python -m playwright install --with-deps chromium
       - run: npm run test:browser
@@ -25,3 +26,4 @@ jobs:
           path: |
             evidence/browser/
             evidence/static-web-001/browser/
+            evidence/static-web-002/

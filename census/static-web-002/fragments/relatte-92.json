@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "relatte-92-observation",
+  "source": {
+    "repository": "the-static-collective/reLATTE",
+    "exactCommit": "b2cf5b917d5fa93a70764ab4eb94a246e98c2ed4",
+    "pathOrContract": "docs/RELATTE-VM-004.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 92,
+    "headBranch": "experiment/relatte-vm-004-authenticated-leases",
+    "baseBranch": "experiment/relatte-vm-003-witnessed-execution",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "relatte-vm",
+  "ownerClaim": "the-static-collective/reLATTE",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Crossings and admitted computation",
+  "humanSummary": "Signed file handoffs and expiring single-use owner-local grants extend constrained WASM execution.",
+  "observedCapabilities": [
+    "Signed file handoffs and expiring single-use owner-local grants extend constrained WASM execution."
+  ],
+  "observedClosures": [
+    "No public transport or execution service; rollback, clock and hardware trust remain bounded."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "relatte-vm-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/reLATTE/tree/b2cf5b917d5fa93a70764ab4eb94a246e98c2ed4",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:70fada07a627e2da834862e6fea843eb7ff0fe0a83c3a36fae3c963bbb3953a2"
+  },
+  "externalObservation": null
+}

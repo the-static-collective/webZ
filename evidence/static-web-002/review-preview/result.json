@@ -1,0 +1,122 @@
+{
+  "schema": "webz/first-human-field-witness/v0",
+  "scope": "Synthetic fixture preview of the exact review proposal. These screenshots and hashes do not assert public admission.",
+  "snapshotHash": "sha256:ff7f9f241ff93bd94729b2ffe2989b0ce6bd60079192ae246a56103b87cedb85",
+  "fieldHash": "sha256:52a93ca9cbf1c2efb1bad9a44634d9475f078994bcf3e2722c8647561e2a3990",
+  "oldFieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "browserVersion": "151.0.7922.34",
+  "playwrightVersion": "1.62.0",
+  "journeys": [
+    {
+      "scope": "/",
+      "intent": "LISTEN",
+      "owned_result": "radio-world",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/",
+      "intent": "MAKE",
+      "owned_result": "static-pressing",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/",
+      "intent": "BUILD",
+      "owned_result": "fabrication",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/",
+      "intent": "SEND",
+      "owned_result": "invitation-porch",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/",
+      "intent": "WANDER",
+      "owned_result": "sanctuary-orchard",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/",
+      "intent": "PRINT",
+      "owned_result": "fabrication",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "LISTEN",
+      "owned_result": "radio-world",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "MAKE",
+      "owned_result": "static-pressing",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "BUILD",
+      "owned_result": "fabrication",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "SEND",
+      "owned_result": "invitation-porch",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "WANDER",
+      "owned_result": "sanctuary-orchard",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "intent": "PRINT",
+      "owned_result": "fabrication",
+      "provenance": true,
+      "hold_not_enabled": true,
+      "return_home": true
+    }
+  ],
+  "external_requests": 0,
+  "page_errors": [],
+  "csp_violations": [],
+  "offline_history_reconstructs": true,
+  "candidate_cache_entries": 0,
+  "private_choice_storage_entries": 0,
+  "screenshots": {
+    "changes-desktop.png": "sha256:6db74937839aa95497e26546a16704686d5b2b5956eed639c711dade404582b1",
+    "changes-mobile-320-viewport.png": "sha256:fa6891eb8e28c968fda9346e979a3205ce21a271664c4e9e93d4ec332b0b59f7",
+    "changes-mobile-320.png": "sha256:bd2809146ba52f357bb2447f22f080388414a5c62c1fa66a77d0d77148315173",
+    "wayfinding-print-mobile-320-viewport.png": "sha256:21669ed098092d2c3133dbc20c902f6e330499654532a973a0ad7c710c9ecaf6",
+    "wayfinding-print-mobile-320.png": "sha256:9fc9530fde0f53c514e813079c685acc36d5ea3b351f19cd97aeb6b173eb811a",
+    "wayfinding-make-mobile-320.png": "sha256:d5a7e46c14100369ad4c105bc17ff9d542054927cdba1093560ddde08b80f78f"
+  },
+  "publicAdmission": "PENDING"
+}

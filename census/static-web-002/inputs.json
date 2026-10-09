@@ -1,0 +1,209 @@
+{
+  "schema": "webz/explicit-census-inputs/v0",
+  "inputs": [
+    {
+      "input": "fragments/webz-9.json",
+      "sourceFile": "sources/webZ-9-SKYMIRROR-WEBZ-001.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/9",
+      "patchHash": "sha256:b73314161be1a158abb6fb05d8110da96605cf1c359eaf2ac533a36d98ca718a"
+    },
+    {
+      "input": "fragments/webz-10.json",
+      "sourceFile": "sources/webZ-10-WANDERING-LENS-001.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/10",
+      "patchHash": "sha256:f1784cda4dba2e2f66074fb45424c955d29661eb4b12105cef999cca7c107f5a"
+    },
+    {
+      "input": "fragments/webz-12.json",
+      "sourceFile": "sources/webZ-12-WANDERING-LENS-002.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/12",
+      "patchHash": "sha256:9de4c1cf27f3443070afc5c57e97d4c82189b9e4a608b71661dc99eea55b5b93"
+    },
+    {
+      "input": "fragments/webz-15.json",
+      "sourceFile": "sources/webZ-15-FIELD-PORCH-001-WALLE-GRO.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/15",
+      "patchHash": "sha256:40e2dbbf832ea09a4cc3ea9654c8d4484d7e3636ca7412b88c0aa46493d55418"
+    },
+    {
+      "input": "fragments/webz-16.json",
+      "sourceFile": "sources/webZ-16-FOUNDER-NODE-003.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/16",
+      "patchHash": "sha256:50102cd89008c4d1f32642028fe48322c4e9c4e97ea04f18a5b88e65bc057bed"
+    },
+    {
+      "input": "fragments/webz-20.json",
+      "sourceFile": "sources/webZ-20-SUNO-ATLAS-001.md",
+      "prUrl": "https://github.com/the-static-collective/webZ/pull/20",
+      "patchHash": "sha256:0a6a30409bba00b5851555169bc2964915611fa5f1cab3af594504e52e5f5eff"
+    },
+    {
+      "input": "fragments/relatte-98.json",
+      "sourceFile": "sources/reLATTE-98-RELATTE-CHATGPT-MCP-001.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/98",
+      "patchHash": "sha256:b95cc2ba2d89082c870128f2e70785e1d63750b3dd157533e87105eca9a86ae2"
+    },
+    {
+      "input": "fragments/relatte-99.json",
+      "sourceFile": "sources/reLATTE-99-RELATTE-CHATGPT-MCP-002.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/99",
+      "patchHash": "sha256:b8b22552ede1644b2868d507302233ce998a7bf2d3c2a83f65acc3f3404c60be"
+    },
+    {
+      "input": "fragments/relatte-100.json",
+      "sourceFile": "sources/reLATTE-100-RELATTE-CHATGPT-MCP-003.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/100",
+      "patchHash": "sha256:caeb5cd81e367a68ab0fb4aba5dd684cfe27d0adcdb42de1beca89e87b51abad"
+    },
+    {
+      "input": "fragments/cannon-12.json",
+      "sourceFile": "sources/CANNON-12-CONVERSATION-COLLIDER-001.md",
+      "prUrl": "https://github.com/the-static-collective/CANNON/pull/12",
+      "patchHash": "sha256:71b53195cacc045a00b8ab74da8ce283c37a385fe2010c8102609e6d1b74cffe"
+    },
+    {
+      "input": "fragments/cannon-13.json",
+      "sourceFile": "sources/CANNON-13-CONVERSATION-COLLIDER-002.md",
+      "prUrl": "https://github.com/the-static-collective/CANNON/pull/13",
+      "patchHash": "sha256:1c0b376c22a8dfa0047314bfa5593e0e9b92c4bf6035504a3aa472316f75c36e"
+    },
+    {
+      "input": "fragments/cannon-14.json",
+      "sourceFile": "sources/CANNON-14-CONVERSATION-COLLIDER-003.md",
+      "prUrl": "https://github.com/the-static-collective/CANNON/pull/14",
+      "patchHash": "sha256:2b4254edd92fbb0f0e6dd3cd3508cabe793ba19cf0a5e32bba53a31ff6b2116c"
+    },
+    {
+      "input": "fragments/ghot-112.json",
+      "sourceFile": "sources/GHoT-112-020-postemahhn-addressed-print.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/112",
+      "patchHash": "sha256:3593fd33380656ca3f0c59f4425526a63020c3dc4c39e8b6093356129200585b"
+    },
+    {
+      "input": "fragments/ghot-113.json",
+      "sourceFile": "sources/GHoT-113-THE-RIFF-RAFT-002-TERRAFORMER.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/113",
+      "patchHash": "sha256:26a7dbc3a436123310b6c8b49a05dcbed6fb15fb94584de849f8d62a7058e2cf"
+    },
+    {
+      "input": "fragments/ghot-114.json",
+      "sourceFile": "sources/GHoT-114-021-postemahhn-traveling-post-office.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/114",
+      "patchHash": "sha256:6fc026a29071a31d781c513096d202d5772218a2fc48e6b8d1967729ba273cf3"
+    },
+    {
+      "input": "fragments/ghot-115.json",
+      "sourceFile": "sources/GHoT-115-022-postemahhn-wallet-doors.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/115",
+      "patchHash": "sha256:a8235ca68016f7dd7143b6eaae23e07c1171e9483670a79813f63d0b92b36bab"
+    },
+    {
+      "input": "fragments/ghot-116.json",
+      "sourceFile": "sources/GHoT-116-023-postemahhn-passkey-door.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/116",
+      "patchHash": "sha256:140cf4f717e8013946ec4bc60ed788ea1b3b1b6ea867c5e1f41f2afcf4a31f38"
+    },
+    {
+      "input": "fragments/ghot-117.json",
+      "sourceFile": "sources/GHoT-117-024-postemahhn-external-wallets.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/117",
+      "patchHash": "sha256:5dc4bc9c0ee75c25d3c540665c13034edcebd266304a4729dbfe0fb73dcc4f8e"
+    },
+    {
+      "input": "fragments/ghot-118.json",
+      "sourceFile": "sources/GHoT-118-025-postal-corps-first-mile.md",
+      "prUrl": "https://github.com/the-static-collective/GHoT/pull/118",
+      "patchHash": "sha256:1bbcd044cb9b31d8a769115e88686ed02a7d320798b7900dac687dc6cb38b04d"
+    },
+    {
+      "input": "fragments/groove-rooms-11.json",
+      "sourceFile": "sources/groove-rooms-11-groove-post-001.md",
+      "prUrl": "https://github.com/the-static-collective/groove-rooms/pull/11",
+      "patchHash": "sha256:9fb46e302c2e4eb0fd15fa8407153a7c23924dd4c1e290dababe63b6df32ceb5"
+    },
+    {
+      "input": "fragments/groove-rooms-12.json",
+      "sourceFile": "sources/groove-rooms-12-groove-post-002.md",
+      "prUrl": "https://github.com/the-static-collective/groove-rooms/pull/12",
+      "patchHash": "sha256:375760f4e49a9520d661b87bcaf02e9915f957ad7cc92503c28c913a6b866573"
+    },
+    {
+      "input": "fragments/gro-21.json",
+      "sourceFile": "sources/GrO-21-FORAGE-001-WALLE-PHONE.md",
+      "prUrl": "https://github.com/the-static-collective/GrO/pull/21",
+      "patchHash": "sha256:cb6bf12e42dde8d4e25180ddf889ec843c5f82081dc2c49c8f18e3bacd05ffac"
+    },
+    {
+      "input": "fragments/gro-22.json",
+      "sourceFile": "sources/GrO-22-FIELD-QUEST-ENGINE-001.md",
+      "prUrl": "https://github.com/the-static-collective/GrO/pull/22",
+      "patchHash": "sha256:8be6d05c1ff77d7436308adb8d97b88331ee39b6ecfd5d30e78ba35ec9741cf0"
+    },
+    {
+      "input": "fragments/static-os-80.json",
+      "sourceFile": "sources/static-os-80-forage-001.md",
+      "prUrl": "https://github.com/the-static-collective/static-os/pull/80",
+      "patchHash": "sha256:155092d5da0be1577005e365c63bd60f874ecb1a40adb2eb7d7cbb7f2d3eb4d4"
+    },
+    {
+      "input": "fragments/static-os-83.json",
+      "sourceFile": "sources/static-os-83-forage-002.md",
+      "prUrl": "https://github.com/the-static-collective/static-os/pull/83",
+      "patchHash": "sha256:ff25207a3c264ecb7bc10081f200143d5f6a2c35583691811746b5276b0d25b8"
+    },
+    {
+      "input": "fragments/static-os-85.json",
+      "sourceFile": "sources/static-os-85-glean-001.md",
+      "prUrl": "https://github.com/the-static-collective/static-os/pull/85",
+      "patchHash": "sha256:27147e4641ec08b828896a854856052a6d61a1443f6446f18b7205c578bdc7e8"
+    },
+    {
+      "input": "fragments/static-live-35.json",
+      "sourceFile": "sources/static-live-35-RADIO-WORLD-001.md",
+      "prUrl": "https://github.com/the-static-collective/static-live/pull/35",
+      "patchHash": "sha256:d150aa5fcc0d790044b307216fb66baa9b45f9a76c384ab22a5e17f9c2176996"
+    },
+    {
+      "input": "fragments/relatte-89.json",
+      "sourceFile": "sources/reLATTE-89-RELATTE-VM-001.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/89",
+      "patchHash": "sha256:f836178abab4e2dbc51cc210808cb4fd35fb8839f44c252e779b829dc4767c4a"
+    },
+    {
+      "input": "fragments/relatte-90.json",
+      "sourceFile": "sources/reLATTE-90-RELATTE-VM-002.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/90",
+      "patchHash": "sha256:be5e90a32f5626a50c248a5c45472e381ec33b17fa119e7780520c7dd17e1a3c"
+    },
+    {
+      "input": "fragments/relatte-91.json",
+      "sourceFile": "sources/reLATTE-91-RELATTE-VM-003.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/91",
+      "patchHash": "sha256:a26c2053651e36f460ef81dae961a4b6a514fae2f033ed7c9cd7550a52c7d5be"
+    },
+    {
+      "input": "fragments/relatte-92.json",
+      "sourceFile": "sources/reLATTE-92-RELATTE-VM-004.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/92",
+      "patchHash": "sha256:137c7b5e8f8fbe000134f61ddba79501749bc0ebce5036fc288fca0a493fad2e"
+    },
+    {
+      "input": "fragments/relatte-93.json",
+      "sourceFile": "sources/reLATTE-93-TRANSPORT-COMPOSITION-001.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/93",
+      "patchHash": "sha256:f3c470469bf9eb6d15cff8d808158a50333704313a5ab23930f3daefe9b0a074"
+    },
+    {
+      "input": "fragments/relatte-94.json",
+      "sourceFile": "sources/reLATTE-94-README.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/94",
+      "patchHash": "sha256:43b6ec28d7fdc27f4ce0d569f774dd2cf180e2635e22be1b5fc7c8731f961ef5"
+    },
+    {
+      "input": "fragments/relatte-95.json",
+      "sourceFile": "sources/reLATTE-95-README.md",
+      "prUrl": "https://github.com/the-static-collective/reLATTE/pull/95",
+      "patchHash": "sha256:4d8dbe53829abe4c0e14c63b8f593445b81d44e07649b9d4787579fced35bf85"
+    }
+  ]
+}

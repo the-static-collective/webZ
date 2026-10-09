@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "ghot-117-observation",
+  "source": {
+    "repository": "the-static-collective/GHoT",
+    "exactCommit": "c16de87bc574e17205e86be3dde80ea6829ecb5d",
+    "pathOrContract": "experiments/024-postemahhn-external-wallets.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 117,
+    "headBranch": "experiment/postemahhn-005-external-wallet-proofs",
+    "baseBranch": "experiment/postemahhn-004-passkey-door",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "postal-custody",
+  "ownerClaim": "the-static-collective/GHoT",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Postal and print-hold experiments",
+  "humanSummary": "Off-chain Solana control proof is bound to a separate mail-owner signature and request.",
+  "observedCapabilities": [
+    "Off-chain Solana control proof is bound to a separate mail-owner signature and request."
+  ],
+  "observedClosures": [
+    "No RPC provider, transaction, wallet spend or physical print."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "postal-custody-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/GHoT/tree/c16de87bc574e17205e86be3dde80ea6829ecb5d",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:657996222e9b9d009c47057542c06fed456425b844ebd658718930f06ce6bf0c"
+  },
+  "externalObservation": null
+}

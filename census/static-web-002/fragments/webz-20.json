@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "webz-20-observation",
+  "source": {
+    "repository": "the-static-collective/webZ",
+    "exactCommit": "c56b2298d992fb06ab6ed80c61c4bda579e4d1e0",
+    "pathOrContract": "docs/SUNO-ATLAS-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 20,
+    "headBranch": "experiment/suno-atlas-001-library-dials",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "suno-atlas",
+  "ownerClaim": "the-static-collective/webZ",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Suno Atlas",
+  "humanSummary": "Local metadata explorer for manually supplied discography records, dataset addresses and tag counts.",
+  "observedCapabilities": [
+    "Local metadata explorer for manually supplied discography records, dataset addresses and tag counts."
+  ],
+  "observedClosures": [
+    "No Suno account integration, API extraction, audio playback or audio-causality claim."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "suno-atlas-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/webZ/tree/c56b2298d992fb06ab6ed80c61c4bda579e4d1e0",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:0b421eb61dd95948f03898d849f5f97f7f942490192177885f903218b1bb77c3"
+  },
+  "externalObservation": null
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "webz/public-field-census/v0",
+  "description": "Structural contract; app/field-lifecycle.mjs additionally enforces closed fields, bounded content, canonical identities, exact lineage and authority constraints.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "parentSnapshotHash",
+    "observations",
+    "authority",
+    "scope",
+    "censusHash"
+  ],
+  "properties": {
+    "schema": {
+      "const": "webz/public-field-census/v0"
+    },
+    "parentSnapshotHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "observations": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "authority": {
+      "const": "NONE"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "censusHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

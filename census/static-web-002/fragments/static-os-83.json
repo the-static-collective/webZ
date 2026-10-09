@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "static-os-83-observation",
+  "source": {
+    "repository": "the-static-collective/static-os",
+    "exactCommit": "7a3ede43d635205bdf465a284f0053d7c0963b3c",
+    "pathOrContract": "docs/forage-002.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 83,
+    "headBranch": "experiment/forage-002-walle-field-scout",
+    "baseBranch": "main",
+    "state": "MERGED",
+    "mergedAt": "2026-10-09T19:18:06Z",
+    "closedAt": "2026-10-09T19:18:07Z"
+  },
+  "subjectId": "forage-glean",
+  "ownerClaim": "the-static-collective/static-os",
+  "kind": "EXPERIMENT",
+  "humanLabel": "Forage and glean",
+  "humanSummary": "Local photo picker and manual categories bind original bytes into held forage evidence.",
+  "observedCapabilities": [
+    "Local photo picker and manual categories bind original bytes into held forage evidence."
+  ],
+  "observedClosures": [
+    "No automatic classifier, legal admission, machine action or deployed phone proof."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "forage-glean-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/static-os/tree/7a3ede43d635205bdf465a284f0053d7c0963b3c",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:428a962fd7862a4808133fa252bd79c0cd3020515cf31230b8a7a4ada6f929b9"
+  },
+  "externalObservation": null
+}

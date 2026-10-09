@@ -1,0 +1,53 @@
+{
+  "schema": "webz/public-field-fragment/v0",
+  "fragmentId": "webz-9-observation",
+  "source": {
+    "repository": "the-static-collective/webZ",
+    "exactCommit": "a890a1ca30b2327262909a8eed58e0fc5db5fc87",
+    "pathOrContract": "docs/SKYMIRROR-WEBZ-001.md",
+    "observedAt": "2026-10-09T19:55:27Z"
+  },
+  "history": {
+    "pr": 9,
+    "headBranch": "experiment/skymirror-webz-optical-lab-001",
+    "baseBranch": "main",
+    "state": "OPEN",
+    "mergedAt": null,
+    "closedAt": null
+  },
+  "subjectId": "skymirror-lab",
+  "ownerClaim": "the-static-collective/webZ",
+  "kind": "EXPERIMENT",
+  "humanLabel": "SKYMIRROR laboratory",
+  "humanSummary": "Opt-in reflected-light laboratory; CRC inspection is not signed crossing or physical proof.",
+  "observedCapabilities": [
+    "Opt-in reflected-light laboratory; CRC inspection is not signed crossing or physical proof."
+  ],
+  "observedClosures": [
+    "Laboratory, not sovereign world; no actual camera/light/space proof or remote effect."
+  ],
+  "candidateDoors": [
+    {
+      "doorId": "skymirror-lab-candidate-source",
+      "label": "Inspect pinned source",
+      "kind": "SOURCE",
+      "effectClass": "EXTERNAL_NAVIGATION",
+      "target": "https://github.com/the-static-collective/webZ/tree/a890a1ca30b2327262909a8eed58e0fc5db5fc87",
+      "owner": "GitHub source inspection",
+      "availability": "AVAILABLE",
+      "reason": "Source inspection only; route and service are not integrated into this snapshot.",
+      "requiredNextAuthority": "Independent public-field admission before this candidate door appears."
+    }
+  ],
+  "relations": [],
+  "laws": [
+    "FRAGMENT != FIELD ENTRY",
+    "PUBLIC OBSERVATION != CODE INTEGRATION"
+  ],
+  "verification": {
+    "sourceLevel": "CONTENT_ADDRESSED",
+    "verifier": "Manual exact-commit contract read and SHA-256; donor execution was not replayed.",
+    "contentHash": "sha256:44f8da35048c06860079993acd72b16794ef2567eed2eca2604cd0780e715b8b"
+  },
+  "externalObservation": null
+}

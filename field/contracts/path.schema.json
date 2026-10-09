@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "webz/public-field-path/v0",
+  "description": "Structural contract; app/field-lifecycle.mjs additionally enforces closed fields, bounded content, canonical identities, exact lineage and authority constraints.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "pathId",
+    "label",
+    "intent",
+    "steps",
+    "relationKeys",
+    "authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "webz/public-field-path/v0"
+    },
+    "pathId": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "intent": {
+      "enum": [
+        "LISTEN",
+        "MAKE",
+        "BRING",
+        "SEND",
+        "WANDER",
+        "PROOF",
+        "BUILD",
+        "MACHINES",
+        "PRINT"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "relationKeys": {
+      "type": "array",
+      "maxItems": 64
+    },
+    "authority": {
+      "const": "NONE"
+    }
+  }
+}
