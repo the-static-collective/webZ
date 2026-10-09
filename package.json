@@ -5,8 +5,11 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "serve": "node scripts/serve.mjs",
-    "test:browser": "python tests/browser.py && python tests/races.py",
-    "replay": "node scripts/replay.mjs"
+    "test:browser": "python tests/browser.py && python tests/races.py && python tests/field-browser.py",
+    "replay": "node scripts/replay.mjs",
+    "field:build": "node scripts/build-field.mjs",
+    "field:verify": "node scripts/build-field.mjs --check",
+    "test:field-browser": "python tests/field-browser.py"
   },
   "engines": {
     "node": ">=22"

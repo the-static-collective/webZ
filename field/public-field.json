@@ -1,0 +1,790 @@
+{
+  "schema": "webz/public-field/v0",
+  "profile": "inspection-only-001",
+  "observedOn": "2026-10-09",
+  "laws": [
+    "THE WEB IS A PORCH, NOT THE HOUSE",
+    "VISIBLE DOOR != AUTHORITY",
+    "DOOR != EFFECT",
+    "CLICK != ADMISSION",
+    "LINK != CROSSING",
+    "CODE EXISTS != SERVICE EXISTS",
+    "CI GREEN != PUBLIC DEPLOYMENT",
+    "DEPLOYABLE != DEPLOYED",
+    "RELATION != AUTHORITY",
+    "PUBLIC SOURCE != PUBLIC CAPABILITY",
+    "HOLD != FAILURE",
+    "UNKNOWN != DENIED",
+    "FILE != UPLOAD",
+    "WEBZ != RADIO PLAYER",
+    "WEBZ != BROADCASTER",
+    "WEBZ != STATION",
+    "WEB VISIBILITY != MACHINE CAPABILITY",
+    "EXECUTOR EXISTS != PUBLIC EXECUTION SERVICE",
+    "SOURCE != EXECUTION",
+    "PROPOSAL != ADMISSION"
+  ],
+  "worlds": [
+    {
+      "id": "sanctuary-orchard",
+      "label": "Sanctuary & Orchard",
+      "shortDescription": "Two small worlds, each with its own door. Enter, remain, and return with nothing carried.",
+      "category": "ENTER",
+      "ownerSystem": "webZ",
+      "ownerRepo": [
+        "the-static-collective/webZ"
+      ],
+      "source": {
+        "repository": "the-static-collective/webZ",
+        "ref": "refs/heads/feat/static-pressing-001",
+        "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+        "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery."
+      },
+      "additionalSources": [],
+      "state": "LOCAL_ONLY",
+      "current": "Static local worlds. Public hosting is not observed.",
+      "publicSurface": {
+        "mode": "LOCAL_ROUTE",
+        "target": "worlds/sanctuary/",
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "enter-sanctuary",
+          "label": "Enter Sanctuary",
+          "kind": "LOCAL",
+          "effectClass": "LOCAL_NAVIGATION",
+          "target": "worlds/sanctuary/",
+          "owner": "webZ",
+          "availability": "AVAILABLE",
+          "reason": "Explicit local choice only.",
+          "requiredNextAuthority": "No additional authority for local inspection."
+        },
+        {
+          "doorId": "enter-orchard",
+          "label": "Enter Orchard",
+          "kind": "LOCAL",
+          "effectClass": "LOCAL_NAVIGATION",
+          "target": "worlds/orchard/",
+          "owner": "webZ",
+          "availability": "AVAILABLE",
+          "reason": "Explicit local choice only.",
+          "requiredNextAuthority": "No additional authority for local inspection."
+        }
+      ],
+      "authoritySummary": "Navigation records optional unsigned observations; it grants no sovereign crossing.",
+      "nextGate": "Any consequential crossing requires independent owner admission.",
+      "laws": [
+        "THE WEB IS A PORCH, NOT THE HOUSE",
+        "VISIBLE DOOR != AUTHORITY",
+        "CLICK != ADMISSION",
+        "LINK != CROSSING"
+      ]
+    },
+    {
+      "id": "invitation-porch",
+      "label": "Invitation porch",
+      "shortDescription": "Offer a small piece of public text and rehearse a separate human choice for each world.",
+      "category": "MAKE",
+      "ownerSystem": "webZ",
+      "ownerRepo": [
+        "the-static-collective/webZ"
+      ],
+      "source": {
+        "repository": "the-static-collective/webZ",
+        "ref": "refs/heads/feat/static-pressing-001",
+        "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+        "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery."
+      },
+      "additionalSources": [
+        {
+          "repository": "the-static-collective/webZ",
+          "ref": "refs/pull/4/head",
+          "exactCommit": "8153c60393e4e206160b284082f7eb3161d3f379",
+          "observedContract": "Signed invitation and native response preflight; no authenticated delivery edge."
+        }
+      ],
+      "state": "PROPOSAL_ONLY",
+      "current": "Local invitation rehearsal. Neighboring signed preflight is inspectable source, not installed here.",
+      "publicSurface": {
+        "mode": "LOCAL_ROUTE",
+        "target": "porch/",
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "porch-rehearsal",
+          "label": "Visit the invitation porch",
+          "kind": "LOCAL",
+          "effectClass": "LOCAL_PROPOSAL",
+          "target": "porch/",
+          "owner": "webZ",
+          "availability": "AVAILABLE",
+          "reason": "Explicit local choice only.",
+          "requiredNextAuthority": "No additional authority for local inspection."
+        },
+        {
+          "doorId": "porch-delivery",
+          "label": "Deliver an invitation",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Receiving world owner",
+          "availability": "HOLD",
+          "reason": "No authenticated delivery edge or independent receiving configuration exists here.",
+          "requiredNextAuthority": "Separate reviewed authenticated edge and actual owner consent."
+        }
+      ],
+      "authoritySummary": "Local HOLD, REFUSE and ADMIT are unsigned rehearsals; no delivery or publication.",
+      "nextGate": "An actual encounter needs protected independent signers, receiving journals and an authenticated edge.",
+      "laws": [
+        "CLICK != ADMISSION",
+        "SOURCE != EXECUTION",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "static-pressing",
+      "label": "Bring one thing",
+      "shortDescription": "Keep the source. Prepare a local request for a manga card, micro-zine, lyric object, machine-readable page, or surprise.",
+      "category": "MAKE",
+      "ownerSystem": "webZ",
+      "ownerRepo": [
+        "the-static-collective/webZ"
+      ],
+      "source": {
+        "repository": "the-static-collective/webZ",
+        "ref": "refs/heads/feat/static-pressing-001",
+        "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+        "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery."
+      },
+      "additionalSources": [],
+      "state": "PROPOSAL_ONLY",
+      "current": "Local preparation only. Potential return families are requests, never delivered outputs.",
+      "publicSurface": {
+        "mode": "LOCAL_ROUTE",
+        "target": "press/",
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "press-prepare",
+          "label": "Prepare a pressing",
+          "kind": "LOCAL",
+          "effectClass": "LOCAL_PROPOSAL",
+          "target": "press/",
+          "owner": "webZ",
+          "availability": "AVAILABLE",
+          "reason": "Explicit local choice only.",
+          "requiredNextAuthority": "No additional authority for local inspection."
+        },
+        {
+          "doorId": "press-deliver",
+          "label": "Deliver a return",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Future independently admitted producer",
+          "availability": "HOLD",
+          "reason": "No producer crossing, upload, publication or payment is connected.",
+          "requiredNextAuthority": "Separate source consent, producer admission and return contract."
+        }
+      ],
+      "authoritySummary": "A file stays in the browser session; only label, type, length and hash enter the proposal.",
+      "nextGate": "A separately reviewed producer may later receive an explicitly consented source; none is connected.",
+      "laws": [
+        "FILE != UPLOAD",
+        "SOURCE != EXECUTION",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "crossing-evidence",
+      "label": "Crossing evidence",
+      "shortDescription": "Inspect public signed evidence and see which parts of the crossing remain unobserved.",
+      "category": "CROSS",
+      "ownerSystem": "webZ",
+      "ownerRepo": [
+        "the-static-collective/webZ"
+      ],
+      "source": {
+        "repository": "the-static-collective/webZ",
+        "ref": "refs/heads/feat/static-pressing-001",
+        "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+        "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery."
+      },
+      "additionalSources": [],
+      "state": "INSPECTABLE",
+      "current": "Read-only local verifier. The Constellation Rack remains locked.",
+      "publicSurface": {
+        "mode": "LOCAL_ROUTE",
+        "target": "proof/",
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "proof-inspect",
+          "label": "Inspect crossing evidence",
+          "kind": "LOCAL",
+          "effectClass": "PROOF_INSPECTION",
+          "target": "proof/",
+          "owner": "webZ",
+          "availability": "AVAILABLE",
+          "reason": "Explicit local choice only.",
+          "requiredNextAuthority": "No additional authority for local inspection."
+        },
+        {
+          "doorId": "rack-unlock",
+          "label": "Open the Constellation Rack",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "MAXHINAL / Human-Witness",
+          "availability": "HOLD",
+          "reason": "Independent histories, actual transport and exact original specimen remain unobserved here.",
+          "requiredNextAuthority": "Source-owned genuine two-host proof and separate trusted acquisition design."
+        }
+      ],
+      "authoritySummary": "Signature consistency is inspectable; imported records cannot grant LIVE or execution.",
+      "nextGate": "Independently acquire exact source and both owner histories through the source-owned proof gate.",
+      "laws": [
+        "VISIBLE DOOR != AUTHORITY",
+        "PUBLIC SOURCE != PUBLIC CAPABILITY",
+        "SOURCE != EXECUTION",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "radio-world",
+      "label": "Radio World",
+      "shortDescription": "Two independently owned media worlds, introduced by Static Live. You can open their official sites.",
+      "category": "LISTEN",
+      "ownerSystem": "Static Live; Kinship Radio and Rock Impact Makers own their own sites/media",
+      "ownerRepo": [
+        "the-static-collective/static-live"
+      ],
+      "source": {
+        "repository": "the-static-collective/static-live",
+        "ref": "refs/pull/35/head",
+        "exactCommit": "eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+        "observedContract": "Local Radio World PWA with two independent official-site handoffs; no in-app audio."
+      },
+      "additionalSources": [],
+      "state": "EXPERIMENTAL",
+      "current": "Experimental local PWA in Static Live; no public Radio World deployment is observed.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "radio-world-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/static-live/tree/eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "kinship-official",
+          "label": "Open Kinship Radio’s site",
+          "kind": "OWNER_SITE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://kinshipradio.org/main/",
+          "owner": "Kinship Radio",
+          "availability": "AVAILABLE",
+          "reason": "Official target pinned by Static Live; present availability and playback are unknown.",
+          "requiredNextAuthority": "That owner decides what its site offers; no integration rights granted."
+        },
+        {
+          "doorId": "rock-impact-official",
+          "label": "Open Rock Impact Makers’ site",
+          "kind": "OWNER_SITE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://rockimpactmakersglobal.org/",
+          "owner": "Rock Impact Makers",
+          "availability": "AVAILABLE",
+          "reason": "Official target pinned by Static Live; present availability and playback are unknown.",
+          "requiredNextAuthority": "That owner decides what its site offers; no integration rights granted."
+        },
+        {
+          "doorId": "radio-audio",
+          "label": "Play direct audio here",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Static Live + each independent media owner",
+          "availability": "HOLD",
+          "reason": "Direct streams, licensing and an approved listener adapter are not established.",
+          "requiredNextAuthority": "Independent owner permission, exact approved endpoints and device/data compatibility."
+        }
+      ],
+      "authoritySummary": "webZ offers site handoffs only. Direct audio, broadcasting, listener tracking and remote compute stay closed. Neither organization is claimed to have adopted this prototype.",
+      "nextGate": "Each source owner independently chooses any future Static Live integration.",
+      "laws": [
+        "LINK != CROSSING",
+        "WEBZ != RADIO PLAYER",
+        "WEBZ != BROADCASTER",
+        "WEBZ != STATION",
+        "PUBLIC SOURCE != PUBLIC CAPABILITY"
+      ]
+    },
+    {
+      "id": "publishing",
+      "label": "Manga & publishing",
+      "shortDescription": "LemonPRESS explores source-preserving manga and publishing. Material Memory keeps a world’s history separate from its presentation.",
+      "category": "READ",
+      "ownerSystem": "LemonPRESS",
+      "ownerRepo": [
+        "the-static-collective/lemonPRESS"
+      ],
+      "source": {
+        "repository": "the-static-collective/lemonPRESS",
+        "ref": "refs/pull/49/head",
+        "exactCommit": "3ea755da14db9ecdd3b3b6e45dcbc56f9cbc58cd",
+        "observedContract": "Material Memory visual laws and proposed ledger seam; documentation only, no runtime claimed."
+      },
+      "additionalSources": [],
+      "state": "PROPOSAL_ONLY",
+      "current": "The observed Material Memory seam is documentation only; no published edition or runtime is claimed.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "publishing-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/lemonPRESS/tree/3ea755da14db9ecdd3b3b6e45dcbc56f9cbc58cd",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "publish-edition",
+          "label": "Publish an edition",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "LemonPRESS + source rights owners",
+          "availability": "HOLD",
+          "reason": "The observed law is a proposal; no admitted production or publication exists here.",
+          "requiredNextAuthority": "Source rights, implemented producer, editorial review and separate publication admission."
+        }
+      ],
+      "authoritySummary": "Source inspection can teach the visual law; it cannot commission, render or publish a work.",
+      "nextGate": "Implement and verify the source-owned ledger seam before proposing an edition.",
+      "laws": [
+        "DEPLOYABLE != DEPLOYED",
+        "PUBLIC SOURCE != PUBLIC CAPABILITY",
+        "SOURCE != EXECUTION",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "relatte-vm",
+      "label": "Crossings & admitted computation",
+      "shortDescription": "reLATTE keeps source proposals separate from receiving owners. Its VM experiment runs constrained WebAssembly after local admission.",
+      "category": "COMPUTE",
+      "ownerSystem": "reLATTE",
+      "ownerRepo": [
+        "the-static-collective/reLATTE"
+      ],
+      "source": {
+        "repository": "the-static-collective/reLATTE",
+        "ref": "refs/pull/90/head",
+        "exactCommit": "283bc4afe63eef1df44f39ef4d45ad899e62ed15",
+        "observedContract": "Admitted constrained no-import WebAssembly execution in separate OS processes, with live receiver journal reopen."
+      },
+      "additionalSources": [
+        {
+          "repository": "the-static-collective/reLATTE",
+          "ref": "refs/pull/89/head",
+          "exactCommit": "9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+          "observedContract": "Self-describing bounded VM candidates require independent owner-local admission and fresh successor identity."
+        }
+      ],
+      "state": "EXPERIMENTAL",
+      "current": "Admitted constrained no-import WASM in separate OS processes on one host. No public execution service.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "relatte-vm-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/reLATTE/tree/283bc4afe63eef1df44f39ef4d45ad899e62ed15",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "vm-public-execute",
+          "label": "Run public code",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "reLATTE + actual receiving host owner",
+          "availability": "HOLD",
+          "reason": "A bounded executor is not a general sandbox, physical host attestation or public service.",
+          "requiredNextAuthority": "Separate network/service/security design, host trust and fresh owner-local admission."
+        }
+      ],
+      "authoritySummary": "Guest descriptions and archived admissions do not give webZ execution authority.",
+      "nextGate": "Review a specific service and security contract independently of the VM experiment.",
+      "laws": [
+        "EXECUTOR EXISTS != PUBLIC EXECUTION SERVICE",
+        "SOURCE != EXECUTION",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "fabrication",
+      "label": "Design & fabrication",
+      "shortDescription": "Real CAD and real slicing reach printer proposals. Synthetic inspection can check a mock image. Physical start stays on HOLD.",
+      "category": "BUILD",
+      "ownerSystem": "Static OS + GHoT; real machine owners remain independent",
+      "ownerRepo": [
+        "the-static-collective/static-os",
+        "the-static-collective/GHoT"
+      ],
+      "source": {
+        "repository": "the-static-collective/static-os",
+        "ref": "refs/pull/68/head",
+        "exactCommit": "a40d9ee1ee7d59c1d1dede6a0ba88ae7b99014c1",
+        "observedContract": "Source-bound synthetic image inspection measures pixel geometry and cold-replays MATCH or MISMATCH."
+      },
+      "additionalSources": [
+        {
+          "repository": "the-static-collective/static-os",
+          "ref": "refs/pull/66/head",
+          "exactCommit": "7bc551610421bd60a8dbf624d93d7a6682ce3987",
+          "observedContract": "Verified real CAD and real virtual-profile slicing yield three selected simulated printer-owner proposals, zero printing rights."
+        },
+        {
+          "repository": "the-static-collective/GHoT",
+          "ref": "refs/pull/105/head",
+          "exactCommit": "bd05633274da9165d32a0e11392d618fd5340054",
+          "observedContract": "Real CAD and slicer source composed with GHoT adapters and signed simulated owner worlds; physical start HOLD."
+        },
+        {
+          "repository": "the-static-collective/GHoT",
+          "ref": "refs/pull/102/head",
+          "exactCommit": "aefac61b8731de8a1f8c5cac1518a93879021b67",
+          "observedContract": "Owner-provisioned printer status and proposal adapter; proposal-only HOLD."
+        }
+      ],
+      "state": "HOLD",
+      "current": "DESIGN EXISTS · GCODE EXISTS · PRINTER PROPOSAL EXISTS · PHYSICAL START = HOLD",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "fabrication-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/static-os/tree/a40d9ee1ee7d59c1d1dede6a0ba88ae7b99014c1",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "printer-start",
+          "label": "Print something",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Authenticated physical printer owner",
+          "availability": "HOLD",
+          "reason": "No authenticated physical printer owner has admitted a print. Proposal grants and signed simulated worlds are not start authority.",
+          "requiredNextAuthority": "Real machine authentication, verified material/profile, owner-local admission and supervised durable actuation."
+        },
+        {
+          "doorId": "robot-inspect",
+          "label": "Inspect a physical part",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Actual camera/robot station owner",
+          "availability": "HOLD",
+          "reason": "Only synthetic pixel geometry is observed. No real camera, robot or part custody is authenticated.",
+          "requiredNextAuthority": "Commissioned station, calibration, specific local grants and independent physical witness."
+        }
+      ],
+      "authoritySummary": "webZ cannot call GHoT adapters, OctoPrint, printer, camera or robot controls. Synthetic inspection is not physical QA.",
+      "nextGate": "A particular real machine and its owner must independently admit any physical action.",
+      "laws": [
+        "HOLD != FAILURE",
+        "WEB VISIBILITY != MACHINE CAPABILITY",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "radio-house",
+      "label": "Media-first spare compute",
+      "shortDescription": "GHoT explores optional owner-local compute that yields to media work, with a bounded signed manual-file courier.",
+      "category": "COMPUTE",
+      "ownerSystem": "GHoT; actual media operators retain local control",
+      "ownerRepo": [
+        "the-static-collective/GHoT"
+      ],
+      "source": {
+        "repository": "the-static-collective/GHoT",
+        "ref": "refs/pull/103/head",
+        "exactCommit": "96bb7e39d8e558ab07f3bdbf39e54dd3cdcb3aec",
+        "observedContract": "Native signed manual-file courier, owner-local admission and bounded hash execution receipts."
+      },
+      "additionalSources": [
+        {
+          "repository": "the-static-collective/GHoT",
+          "ref": "refs/pull/100/head",
+          "exactCommit": "88be4205b65e54d568b50564bfaa0a9fd381f8ed",
+          "observedContract": "Opt-in owner-local SQLite public-hash queue; media and power gates stop the next chunk."
+        },
+        {
+          "repository": "the-static-collective/GHoT",
+          "ref": "refs/pull/98/head",
+          "exactCommit": "db1c84c7a7116ca9a91d4baaca37fc0963a3dd00",
+          "observedContract": "Offline synthetic media spool with independent source and recipient selections; held, never aired."
+        }
+      ],
+      "state": "EXPERIMENTAL",
+      "current": "Local media spool and public-hash checkpoints. Manual JSON-file courier inside one runner; no network dispatch.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "radio-house-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/GHoT/tree/96bb7e39d8e558ab07f3bdbf39e54dd3cdcb3aec",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "compute-dispatch",
+          "label": "Dispatch remote work",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Actual GHoT machine operator",
+          "availability": "HOLD",
+          "reason": "No public worker registration, authenticated network courier or independently verified station identity exists.",
+          "requiredNextAuthority": "Machine opt-in, authenticated pilot, media/resource priority and a separate network/security design."
+        }
+      ],
+      "authoritySummary": "Media comes first. Checkpoints, signatures and idle offers grant no public remote execution or broadcasting.",
+      "nextGate": "Test an independently authorized machine/operator pilot with bounded network and interruption design.",
+      "laws": [
+        "CI GREEN != PUBLIC DEPLOYMENT",
+        "PUBLIC SOURCE != PUBLIC CAPABILITY",
+        "EXECUTOR EXISTS != PUBLIC EXECUTION SERVICE",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "haunted-arcade",
+      "label": "Haunted Jubilee Arcade",
+      "shortDescription": "A local haunted photo-and-postcard experiment. Its durable crank recovery remembers spent turns without retrying an uncertain print.",
+      "category": "PLAY",
+      "ownerSystem": "Jubilee Treasury + separate physical device operators",
+      "ownerRepo": [
+        "the-static-collective/Jubilee-treasury"
+      ],
+      "source": {
+        "repository": "the-static-collective/Jubilee-treasury",
+        "ref": "refs/pull/23/head",
+        "exactCommit": "33fa9c4bddc35fca77834ece45cfeee50f482afc",
+        "observedContract": "Durable consumed-edge claim and postcard spool; explicit local CUPS seam and read-only recovery without retry."
+      },
+      "additionalSources": [
+        {
+          "repository": "the-static-collective/Jubilee-treasury",
+          "ref": "refs/pull/22/head",
+          "exactCommit": "f2a3989209f309c077dd5c7b595e1d3ba08f61a9",
+          "observedContract": "Local synthetic arcade, image-bound metadata treatments and independent human choices; MAIL remains HOLD."
+        }
+      ],
+      "state": "EXPERIMENTAL",
+      "current": "Local synthetic cabinet and device-capable recovery seams, tested with simulated hardware and stub printer effects.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "haunted-arcade-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/Jubilee-treasury/tree/33fa9c4bddc35fca77834ece45cfeee50f482afc",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        },
+        {
+          "doorId": "arcade-physical",
+          "label": "Turn a real crank / print a postcard",
+          "kind": "CAPABILITY",
+          "effectClass": "REMOTE_EFFECT",
+          "target": null,
+          "owner": "Commissioned device and printer operators",
+          "availability": "HOLD",
+          "reason": "No physical cabinet or authenticated machine is commissioned here. Spooler acceptance cannot prove paper.",
+          "requiredNextAuthority": "Source-owned device commissioning, independent operator approvals and physical paper witness."
+        }
+      ],
+      "authoritySummary": "No webZ camera upload, crank action, print dispatch, treasury issuance, payment or coin backing.",
+      "nextGate": "Independently commission a specific device and retain source-owned durable recovery.",
+      "laws": [
+        "HOLD != FAILURE",
+        "FILE != UPLOAD",
+        "WEB VISIBILITY != MACHINE CAPABILITY",
+        "PROPOSAL != ADMISSION"
+      ]
+    },
+    {
+      "id": "kinship-bridge",
+      "label": "Relationship observations",
+      "shortDescription": "CANNON describes readiness and possible relationships between independently owned worlds. It grants none of their authority.",
+      "category": "OBSERVE",
+      "ownerSystem": "CANNON",
+      "ownerRepo": [
+        "the-static-collective/CANNON"
+      ],
+      "source": {
+        "repository": "the-static-collective/CANNON",
+        "ref": "refs/pull/11/head",
+        "exactCommit": "8906a7b559565e844ed0a7791eced89ac5a549d4",
+        "observedContract": "Offline aggregate finance counterfactual and unranked readiness worksheet; even passed gates mean no deployment."
+      },
+      "additionalSources": [],
+      "state": "INSPECTABLE",
+      "current": "Offline readiness and counterfactual finance research. Unknown, blocked and review-ready remain distinct.",
+      "publicSurface": {
+        "mode": "SOURCE_ONLY",
+        "target": null,
+        "deploymentEvidence": null,
+        "adoption": "NOT_CLAIMED"
+      },
+      "doors": [
+        {
+          "doorId": "kinship-bridge-source",
+          "label": "Inspect pinned source",
+          "kind": "SOURCE",
+          "effectClass": "EXTERNAL_NAVIGATION",
+          "target": "https://github.com/the-static-collective/CANNON/tree/8906a7b559565e844ed0a7791eced89ac5a549d4",
+          "owner": "GitHub source inspection",
+          "availability": "AVAILABLE",
+          "reason": "Public source inspection opens GitHub only after your click.",
+          "requiredNextAuthority": "Source inspection grants no capability."
+        }
+      ],
+      "authoritySummary": "No station endorsement, ministry adoption, money, audience targeting or ownership follows from a relation.",
+      "nextGate": "Any real pilot follows a separately willing partner and that owner’s permission.",
+      "laws": [
+        "RELATION != AUTHORITY",
+        "PUBLIC SOURCE != PUBLIC CAPABILITY",
+        "UNKNOWN != DENIED"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "radio-world",
+      "to": "radio-house",
+      "kind": "references",
+      "source": {
+        "repository": "the-static-collective/static-live",
+        "ref": "refs/pull/35/head",
+        "exactCommit": "eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+        "observedContract": "Local Radio World PWA with two independent official-site handoffs; no in-app audio."
+      },
+      "description": "Static Live describes GHoT as a separate optional owner-local computer, never listener control."
+    },
+    {
+      "from": "radio-house",
+      "to": "kinship-bridge",
+      "kind": "references",
+      "source": {
+        "repository": "the-static-collective/GHoT",
+        "ref": "refs/pull/98/head",
+        "exactCommit": "db1c84c7a7116ca9a91d4baaca37fc0963a3dd00",
+        "observedContract": "Offline synthetic media spool with independent source and recipient selections; held, never aired."
+      },
+      "description": "Radio House cites CANNON readiness research as neighboring observation, not a grant."
+    },
+    {
+      "from": "kinship-bridge",
+      "to": "radio-world",
+      "kind": "neighbor-of",
+      "source": {
+        "repository": "the-static-collective/CANNON",
+        "ref": "refs/pull/11/head",
+        "exactCommit": "8906a7b559565e844ed0a7791eced89ac5a549d4",
+        "observedContract": "Offline aggregate finance counterfactual and unranked readiness worksheet; even passed gates mean no deployment."
+      },
+      "description": "Readiness research and source-owned listening worlds meet at an independently consented future pilot."
+    },
+    {
+      "from": "static-pressing",
+      "to": "publishing",
+      "kind": "neighbor-of",
+      "source": {
+        "repository": "the-static-collective/webZ",
+        "ref": "refs/heads/feat/static-pressing-001",
+        "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+        "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery."
+      },
+      "description": "Potential return family only. No producer crossing or delivery is connected."
+    },
+    {
+      "from": "fabrication",
+      "to": "relatte-vm",
+      "kind": "neighbor-of",
+      "source": {
+        "repository": "the-static-collective/static-os",
+        "ref": "refs/pull/66/head",
+        "exactCommit": "7bc551610421bd60a8dbf624d93d7a6682ce3987",
+        "observedContract": "Verified real CAD and real virtual-profile slicing yield three selected simulated printer-owner proposals, zero printing rights."
+      },
+      "description": "Fabrication owner-world proposals and VM admission are separate reLATTE experiments, not one effect."
+    }
+  ]
+}

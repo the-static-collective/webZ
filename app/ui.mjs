@@ -110,9 +110,4 @@ if(page==='proof'){
  $('sample').onclick=()=>inspectReport(async()=>{const r=await fetch(new URL('evidence/public-simulation.json',base),{credentials:'omit'});if(!r.ok)throw Error('FIXTURE_UNAVAILABLE');return r.text();});
  $('proof-file').onchange=e=>{const file=e.target.files[0];if(file)inspectReport(async()=>{if(file.size>524288)throw Error('FILE_LIMIT_512_KIB');return file.text();});};
 }
-if('serviceWorker' in navigator){
- navigator.serviceWorker.register(new URL('sw.js',base),{scope:base.pathname}).then(()=>navigator.serviceWorker.ready).then(()=>{
-  document.documentElement.dataset.offlineReady='true';status('offline-state',navigator.onLine?'OFFLINE READY':'OFFLINE');
- }).catch(()=>status('offline-state','CACHE UNAVAILABLE'));
- window.addEventListener('offline',()=>status('offline-state','OFFLINE'));window.addEventListener('online',()=>status('offline-state','OFFLINE READY'));
-}
+import './shell.mjs';

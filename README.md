@@ -2,6 +2,17 @@
 
 A world gets an address. A door gets a contract. A traveler gets a choice. A crossing gets a trace.
 
+**THE WEB IS A PORCH, NOT THE HOUSE.** The homepage offers Enter a world, Bring one thing, Listen, and See what’s growing. [`/field/`](field/) is a static, inspectable founding map: ownership, available local/site doors, intentional HOLD, exact committed sources, and each next gate. No public deployment, institutional adoption, machine permission or compute service is inferred from source or CI. All remote-effect doors stay HOLD.
+
+The [public-field manifest](field/public-field.json), [schema](field/public-field.schema.json), [source observations](field/source-observations.json) and [authority-free receipt](field/public-field-receipt.json) are committed. Node tooling generates the human cards; browsers need no API, runtime dependency or JavaScript to read them. Static Pressing remains browser-local: **FILE != UPLOAD**.
+
+```sh
+npm run field:build   # regenerate field HTML, receipt and byte-versioned fixed cache
+npm run field:verify  # cold schema/source/authority/route/hash/generated-asset verification
+```
+
+[Static hosting and PWA readiness](docs/STATIC-WEB-001-DEPLOYMENT-READINESS.md) covers HTTPS, root/subpath hosting, scoped cache updates, MIME/CSP, 404, rollback and offline bootstrap. No host or domain is selected and nothing is deployed. [320px and desktop field/porch screenshots and network/cache witness](evidence/static-web-001/browser/) come from real Chromium software tests; they do not claim an actual public-human encounter or physical Android test.
+
 The first executable slice is **Sanctuary → Orchard → Sanctuary**: two distinct first-party documents, a mobile invitation porch, and a read-only MAXHINAL proof viewer. It works offline after one successful initial load and static cache installation. No backend, accounts, telemetry, external media, signing keys or new infrastructure.
 
 ```sh
