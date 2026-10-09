@@ -59,7 +59,7 @@ try:
         assert 'MWF1/t04g06' in page.locator('#address').inner_text()
         page.get_by_role('button',name='Enter this particular').click()
         assert 'MWF1/t04g06/t06g06' in page.locator('#address').inner_text()
-        page.get_by_role('button',name='Rise',exact=True).click()
+        page.locator('#rise').click()
         assert 'MWF1/t04g06' in page.locator('#address').inner_text()
 
         # Non-user synthetic media is read via in-browser object URL, never uploaded.
