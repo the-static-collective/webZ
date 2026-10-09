@@ -48,3 +48,7 @@ world. Explicit choice remains with the traveler and each receiver.
 See [the field crossing guide](docs/FIELD-PORCH-001-WALLE-GRO.md).
 The source files are runnable locally, but are **not** a verified live
 internet deployment.
+
+## Suno Atlas 001 / Local-first 11-dial music library browser
+
+[Explore Suno Atlas](worlds/suno-atlas/). Import your own CSV/JSON song metadata; tune 11 musical families and 11 view granularities, inspect real time/style-co-occurrence graphs, and explicitly save named IndexedDB snapshots. Portable metadata-only exports are supported. No Suno login, unofficial API, scraping, downloads or playback. See [Suno Atlas instructions](docs/SUNO-ATLAS-001.md).
