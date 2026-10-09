@@ -35,7 +35,7 @@ const upstream=async(url,init={})=>{
 };
 function session(base){return {
  async first(){
-  const res=await fetch(base+'worlds/music-field/',{redirect:'manual'});
+  const res=await fetch(base,{redirect:'manual'});
   assert.equal(res.status,200);
   return res.headers.get('set-cookie').split(';')[0];
  },
