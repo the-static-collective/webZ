@@ -84,14 +84,12 @@ try:
   # Browser reload keeps no active in-memory index, despite previously saved snapshot.
   page.reload()
   assert page.locator('#count-all').inner_text()=='0'
-  page.wait_for_timeout(1400)
-  print('AFTER_RELOAD_DEBUG',page.locator('#status').inner_text(),page.locator('#snapshots').inner_text(),page.evaluate('async()=>{const x=await indexedDB.databases();return x.map(d=>d.name)}'),flush=True)
-  page.wait_for_function("()=>document.querySelector('#snapshots option').length===2")
+  page.wait_for_function("()=>document.querySelectorAll('#snapshots option').length===2")
   page.locator('#snapshots').select_option('Three Sources')
   page.locator('#load').click()
   page.wait_for_function("()=>document.querySelector('#count-all').textContent==='3'")
   page.locator('#delete').click()
-  page.wait_for_function("()=>document.querySelector('#snapshots option').length===1")
+  page.wait_for_function("()=>document.querySelectorAll('#snapshots option').length===1")
   assert page.locator('#count-all').inner_text()=='3'
   assert page.evaluate('document.querySelectorAll("audio,iframe").length')==0
   assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
