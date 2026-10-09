@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#142523">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<title>GLEAN-001 · WEBZ Remainder Porch</title>
+<link rel="stylesheet" href="../forage/field.css">
+<script type="module" src="./ui.mjs"></script></head>
+<body>
+<header><a class="brand" href="../">web<span>Z</span></a><span>GLEAN-001 / THE REMAINDER</span><a class="back" href="../forage/">FORAGE Field Porch</a></header>
+<main>
+<section class="hero">
+<p class="kicker">WEBZ / GLEAN-001 · STEWARD OFFERED SURPLUS</p>
+<h1>Leave something<br><em>for somebody else.</em></h1>
+<p>A steward's remainder can become an invitation without surrendering the field, the workshop, or anyone else's authority. Review the original local GrO HOLD before deciding whether to share a small public postcard.</p>
+<div class="status"><span class="light"></span> LOCAL ONLY · NO REMOVAL · NO DELIVERY</div>
+</section>
+<section class="panel">
+<h2>01 · Carry the invitation, not the crop</h2>
+<p>Supply the original steward's GLEAN-001 JSON offer and the GrO held quest. These files are read locally. They are not uploaded, published, or automatically carried into another world.</p>
+<div class="fields">
+<label>Original steward offer JSON <small>static-os.glean-offer/v0</small>
+<input id="offer" type="file" accept=".json,application/json"></label>
+<label>GrO local glean HOLD JSON <small>gro.glean-held-quest/v0</small>
+<input id="held" type="file" accept=".json,application/json"></label>
+</div>
+<p class="footnote">No location, owner or recipient reference is placed in the postcard. Its source fingerprint may still allow correlation if someone else possesses the original records.</p>
+</section>
+<section class="panel">
+<h2>02 · Choose to prepare a public invitation</h2>
+<label class="consent"><input id="consent" type="checkbox"><span>I agree to prepare a potentially shareable, unsigned postcard with the material category, intended use, and a correlatable source fingerprint. I know this does not prove the owner's grant or food safety.</span></label>
+<button type="button" class="primary" id="prepare">Prepare GLEAN invitation</button>
+<p id="message" class="message" role="status" aria-live="polite"></p>
+</section>
+<section id="result" class="panel result" hidden>
+<h2>03 · Inspect the exact postcard</h2>
+<p class="status compact">HOLD · UNSIGNED · NO PUBLICATION</p>
+<p class="footnote">The following is the only text offered for manual copy. Do not include original steward records or actual harvest locations.</p>
+<pre id="public" aria-label="Exact public GLEAN invitation"></pre>
+<p id="hash" class="digest"></p>
+<div class="actions">
+<button type="button" id="copy">Copy public invitation</button>
+<button type="button" id="download">Save unsigned invitation.json</button>
+<button type="button" class="quiet" id="clear">Clear inputs and proposal</button>
+</div>
+<p class="footnote">Optionally paste it into the <a href="../porch/">existing WEBZ invitation porch</a>. A separate public receiver must decide independently; no transport or legal permission occurs here.</p>
+</section>
+</main><footer><span>LEFT ACCESSIBLE ≠ ABANDONED · OWNER OFFER ≠ VERIFIED TITLE · POSTCARD ≠ HARVEST</span><a href="../">Return</a></footer>
+</body></html>
