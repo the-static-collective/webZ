@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171a19"><meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Wandering Lens · webZ</title><link rel="stylesheet" href="./lens.css"><script type="module" src="./lens.mjs"></script></head>
+<body><a class="skip" href="#room">Skip to scene</a>
+<div class="shell">
+<header class="mast"><a class="brand" href="../../">web<span>Z</span></a><div class="mast-right">WORLD LAB 001 · OWNER-LOCAL MEDIA <span class="dot"></span></div></header>
+<section class="intro"><div><div class="kicker">THE WANDERING LENS / THE FIRST INHABITED WORLD</div><h1>There is more <em>inside.</em></h1>
+<p>An illustrated room, a second carrier of narrative time, and a machine that asks questions. Eleven things may be noticed; none of them has to explain the whole world.</p></div>
+<div class="seal" aria-hidden="true">11 <span>×</span> 11<small>TUNE / GRANULARITY</small></div></section>
+<main class="two-cols">
+<section class="left">
+ <div class="sectionline"><span>01 / PHYSICAL SCENE</span><span id="scene-badge">IMAGE HELD LOCALLY</span></div>
+ <div class="scene" id="room" tabindex="0" aria-label="Spatial world. Arrow up/down tunes among eleven particulars, left/right changes granularity. Enter descends, Backspace rises.">
+  <div class="scene-zoom" id="scene-zoom">
+   <div id="scene-fallback" class="scene-fallback" aria-hidden="true">
+    <div class="light-source"></div><div class="arch"></div><div class="table"></div><div class="machine"><div class="machine-eye"></div></div><div class="case"></div>
+    <div class="fallback-caption">THE ROOM WAITS FOR ITS ORIGINAL CARRIER</div>
+   </div>
+   <img id="scene-image" alt="Locally supplied Wandering Lens illustration; eleven particular objects can be selected by position." hidden draggable="false">
+   <div id="hotspots" class="hotspots" aria-label="Eleven spatial particulars"></div>
+  </div>
+  <div class="cornertag top">WANDERING LENS · 001</div><div class="cornertag bottom" id="corner-depth">ROOT / LOOK, DON'T ASSUME</div>
+  <div class="help">↕ TUNE &nbsp; ↔ GRANULARITY</div>
+ </div>
+ <div class="upload-row">
+  <label class="file">Load your original illustration <input id="image-input" type="file" accept="image/jpeg,image/png,image/webp"></label>
+  <span class="file-state" id="image-status">No artwork uploaded to WebZ</span>
+ </div>
+ <div class="dials">
+  <div class="dial"><div class="dialhead"><label for="tuning">↕ VERTICAL / TUNING</label><strong id="tuning-value">06 / 11</strong></div>
+   <div class="range"><button id="tune-minus" aria-label="Tune down">−</button><input id="tuning" type="range" min="1" max="11" step="1" value="6"><button id="tune-plus" aria-label="Tune up">+</button></div>
+   <div class="ends"><span>01 · LOWER</span><span>11 · HIGHER</span></div></div>
+  <div class="dial"><div class="dialhead"><label for="granularity">↔ GRANULARITY</label><strong id="granularity-value">06 / 11</strong></div>
+   <div class="range"><button id="grain-minus" aria-label="Less granularity">−</button><input id="granularity" type="range" min="1" max="11" step="1" value="6"><button id="grain-plus" aria-label="More granularity">+</button></div>
+   <div class="ends"><span>01 · WHOLE SCENE</span><span>11 · PARTICULAR</span></div></div>
+ </div>
+ <div class="actions"><button id="enter" class="primary">↘ Enter this particular</button><button id="rise">↖ Rise</button><button id="root">⌂ Root</button><button id="bookmark">◇ Copy address</button></div>
+ <div class="panel addressbox"><div class="sectionline"><span>02 / RECONSTRUCTIBLE ADDRESS</span><span>BASE ELEVEN</span></div>
+  <code id="address">MWF1/t06g06</code><div id="ancestry" class="ancestry">ROOT</div><details><summary>Exact cell witness</summary><pre id="exact"></pre></details></div>
+</section>
+<aside class="right">
+ <div class="panel particular"><div class="sectionline"><span>03 / THE PARTICULAR</span><span id="kind">QUESTION</span></div>
+  <p class="kicker" id="focus-location">CENTER / KIOSK</p><h2 id="focus-title">The Miracle Automaton</h2>
+  <p class="muted">Spatial placement is interpretive. The scene does not prove a historical sequence or source ownership.</p>
+  <div class="question"><div class="kicker">THE MACHINE ASKS</div><blockquote id="question"></blockquote></div>
+  <label class="response" for="answer">Your answer <small>Optional · private to this browser tab</small></label>
+  <textarea id="answer" rows="4" maxlength="2048" placeholder="Notice something, preserve an uncertainty, or describe a question of your own."></textarea>
+  <div class="actions"><button id="hold-answer" class="primary">Hold reflection locally</button><button id="clear-answer">Clear draft</button></div>
+  <p class="small muted" id="answer-status">Nothing entered into a journal. The machine will not answer for you.</p>
+ </div>
+ <div class="panel soundtrack"><div class="sectionline"><span>04 / THE SECOND CARRIER</span><span>MANUAL PLAYBACK</span></div>
+  <h3>Jubilee Engine / Thread Anchor</h3><p class="small muted">Choose your recording locally. AI-directed lyrics remain artistic content, not operating instructions.</p>
+  <label class="file">Load original soundtrack <input id="audio-input" type="file" accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg"></label>
+  <p id="audio-status" class="small muted">No audio selected. Nothing plays automatically.</p>
+  <audio id="audio" preload="none" controls controlslist="nodownload"></audio>
+  <div class="cuehead">APPROXIMATE NARRATIVE CUES · NOT VERIFIED TIMECODES</div>
+  <div class="cues"><button data-cue="0">00:00 Threshold</button><button data-cue="40">00:40 Anchors</button><button data-cue="90">01:30 Account</button><button data-cue="130">02:10 Protocol</button><button data-cue="165">02:45 Return</button></div>
+ </div>
+ <div class="panel"><div class="sectionline"><span>05 / LOCAL TRACE</span><span>NOT AN EVIDENCE CLAIM</span></div>
+  <p id="trace-status">0 visitor reflections held in page memory. No storage or transmission.</p>
+  <div class="actions"><button id="review-export">Review export</button><label class="file">Inspect local JSON<input id="import-file" type="file" accept="application/json,.json"></label><button id="erase" class="danger">Erase journal</button></div>
+  <pre id="export-preview" hidden></pre><button id="download" hidden>Download reviewed reflections</button>
+  <pre id="import-preview" hidden></pre><button id="restore" hidden>Restore inspected journal</button>
+ </div>
+ <div class="panel"><div class="sectionline"><span>06 / THE NESTED FIELD</span><span id="fractal-status">NUMERICAL PREVIEW</span></div>
+  <canvas id="fractal" width="280" height="170" aria-label="Finite numerical Mandelbrot preview"></canvas>
+  <p class="small muted">The fractal is a navigational companion. Geometric proximity does not establish provenance.</p>
+ </div>
+</aside>
+</main>
+<footer><div><strong>ONE SCENE · MANY PARTICULARS</strong> · Navigation is not selection, crossing, recording or publishing. Your files and reflections are not sent to the server.</div><p id="notice" role="status" aria-live="polite">At the Miracle Automaton. No audio or compute has begun.</p></footer></div></body></html>
