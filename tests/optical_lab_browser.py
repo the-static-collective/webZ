@@ -36,6 +36,7 @@ try:
         page.on('request', lambda request: outgoing.append(request.url))
 
         page.goto(base)
+        page.wait_for_function("() => navigator.serviceWorker.controller !== null", timeout=15000)
         page.get_by_role('link', name='Optical laboratory', exact=True).click()
         page.get_by_role('heading', name='SKYMIRROR 002').wait_for()
         assert page.url.endswith('/labs/skymirror/')
