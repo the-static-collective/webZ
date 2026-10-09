@@ -6,6 +6,9 @@ test('executable loopback preview serves the landing document and refuses hidden
   const base=line.match(/http:\/\/127\.0\.0\.1:\d+/)[0];
   assert.equal((await fetch(base+'/')).status,200);
   assert.equal((await fetch(base+'/press/')).status,200);
+  assert.equal((await fetch(base+'/field/')).status,200);
+  assert.match((await fetch(base+'/manifest.webmanifest')).headers.get('content-type'),/manifest\+json/);
+  const missing=await fetch(base+'/missing/');assert.equal(missing.status,404);assert.match(await missing.text(),/This address is unavailable/);
   const module=await fetch(base+'/app/model.mjs');assert.equal(module.status,200);assert.match(module.headers.get('content-type'),/javascript/);
   assert.equal((await fetch(base+'/.git/config')).status,404);
  }finally{child.kill();}

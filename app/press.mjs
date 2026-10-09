@@ -94,7 +94,6 @@ export function preparePressingProposal({ particular, returnKind }) {
 }
 
 if (typeof document !== 'undefined' && document.body?.dataset.page === 'press') {
-  const base = new URL('../', import.meta.url);
   const $ = (id) => document.getElementById(id);
   const status = (id, value) => { if ($(id)) $(id).textContent = value; };
   const sourceKind = $('source-kind');
@@ -183,16 +182,6 @@ if (typeof document !== 'undefined' && document.body?.dataset.page === 'press') 
   };
 
   setMode();
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(new URL('sw.js', base), { scope: base.pathname })
-      .then(() => navigator.serviceWorker.ready)
-      .then(() => {
-        document.documentElement.dataset.offlineReady = 'true';
-        status('offline-state', navigator.onLine ? 'OFFLINE READY' : 'OFFLINE');
-      })
-      .catch(() => status('offline-state', 'CACHE UNAVAILABLE'));
-    window.addEventListener('offline', () => status('offline-state', 'OFFLINE'));
-    window.addEventListener('online', () => status('offline-state', 'OFFLINE READY'));
-  }
 }
+
+if (typeof document !== 'undefined') await import('./shell.mjs');
