@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142523">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; worker-src 'self'; img-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Field Porch · webZ × GrO</title>
+  <link rel="stylesheet" href="./field.css">
+  <script type="module" src="./ui.mjs"></script>
+</head>
+<body>
+<header>
+  <a class="brand" href="../">web<span>Z</span></a>
+  <span>FIELD PORCH / GRO × FORAGE</span>
+  <a class="back" href="../porch/">Existing invitation porch</a>
+</header>
+<main>
+  <section class="hero">
+    <p class="kicker">A WORLD WIDE WEB OF WORLDS · FORAGE 001</p>
+    <h1>The world has a pantry.<br><em>Not a free-for-all.</em></h1>
+    <p>WALL-E notices something worth caring about. GrO keeps the encounter held. WEBZ can let you <strong>offer a small, optional invitation to investigate</strong>—not the thing itself, its location, or its ownership.</p>
+    <div class="status"><span class="light"></span> LOCAL HOLD · NO DELIVERY · NO COLLECTION</div>
+  </section>
+
+  <section class="panel" aria-labelledby="load-title">
+    <h2 id="load-title">01 · Bring your own encounter</h2>
+    <p>From your GrO Field Scout session, choose these three JSON records and the unchanged original JPEG/PNG photo. Everything is read in this page's memory. Nothing is transmitted or stored automatically.</p>
+    <div class="fields">
+      <label>GrO local HOLD encounter <small>gro-forage-hold-…json</small><input id="held" type="file" accept=".json,application/json"></label>
+      <label>FORAGE-001 lead <small>forage-lead-…json</small><input id="lead" type="file" accept=".json,application/json"></label>
+      <label>FORAGE photo evidence <small>forage-photo-evidence-…json</small><input id="evidence" type="file" accept=".json,application/json"></label>
+      <label>Unchanged original photograph <small>JPEG or PNG · maximum 16 MiB</small><input id="photo" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png"></label>
+    </div>
+    <p class="footnote">No personal photos or private source metadata are copied into the exported invitation. The proposal's <strong>source fingerprint remains linkable</strong> to the original GrO encounter if another person later obtains that source record.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="decision-title">
+    <h2 id="decision-title">02 · Decide whether to offer a door</h2>
+    <p>The proposal discloses only a generic material category, static possible uses and a pseudonymous source fingerprint. It does <strong>not</strong> disclose site, steward, freeform description, raw photo, geolocation or camera metadata.</p>
+    <label class="consent"><input id="consent" type="checkbox"><span>I choose to prepare this limited public invitation. I understand a source fingerprint can be correlated, and that this is not collection permission or an actual publication.</span></label>
+    <button id="prepare" class="primary">Prepare local WEBZ invitation</button>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="panel result" id="result" hidden>
+    <h2>03 · Inspect before carrying</h2>
+    <p class="status compact">PROPOSAL ONLY · UNSIGNED · NO AUTOMATIC WEBZ CROSSING</p>
+    <p class="footnote">Review every byte of the exact public text below before you copy or export it. The GrO source remains a local HOLD, not an admitted physical part.</p>
+    <pre id="public-text" aria-label="Exact proposed public postcard"></pre>
+    <p id="digest" class="digest"></p>
+    <div class="actions">
+      <button id="copy">Copy reviewed public text</button>
+      <button id="download">Save proposal JSON</button>
+      <button id="clear" class="quiet">Clear local proposal</button>
+    </div>
+    <p class="footnote">To rehearse independently, <a href="../porch/">open the original WEBZ porch</a> and paste the reviewed text into its invitation draft. Its Sanctuary and Orchard decisions remain separate. This page never sends or carries a proposal for you.</p>
+  </section>
+</main>
+<footer>
+  <span>NOTICE ≠ TAKE. GrO HOLD ≠ OWNER GRANT. PROPOSAL ≠ ADMISSION.</span>
+  <a href="../">Return to WEBZ</a>
+</footer>
+</body>
+</html>
