@@ -1,5 +1,5 @@
 /* webZ postal pocket app-shell only. Never cache signed device artifacts. */
-const CACHE="webz-postal-pocket-003-v1";
+const CACHE="webz-postal-pocket-003-v2";
 const ASSETS=["./two-phones.html","./two-phones.css","./two-phones-ui.js","./two-phone-core.js","./vendor/qrgen.min.js","./manifest.webmanifest"];
 const scope=self.registration.scope;
 const urls=new Set(ASSETS.map(path=>new URL(path,scope).href));
