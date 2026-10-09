@@ -1,0 +1,32 @@
+name: webZ GrO postal porch
+on:
+  pull_request:
+    paths:
+      - 'postal/**'
+      - 'tests/postal.test.mjs'
+      - 'index.html'
+      - 'sw.js'
+      - 'docs/POSTAL-PORCH-001-WEBZ-GRO.md'
+      - '.github/workflows/postal-porch-001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-pinned-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Replay signed two-phone fixture into GrO local HOLD
+        run: npm test
+      - name: Validate content-security-compatible source scripts
+        run: |
+          node --check postal/pocket/two-phone-core.js
+          node --check postal/pocket/two-phones-ui.js
+          node --check postal/pocket/vendor/qrgen.min.js
+          node --check postal/pocket/sw.js
+          node --check postal/ui.mjs
+          node --check postal/bridge.mjs

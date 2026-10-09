@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#183942">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Two Phones • One Parcel — PostEmahh'n</title>
+<link rel="stylesheet" href="./two-phones.css"></head>
+<body><main>
+<div class="eyebrow">THE STATIC COLLECTIVE / POSTAL-CORPS-003</div>
+<h1>Two phones.<br>One fictional parcel.</h1><p><a href="../">Return to the webZ Postal Porch</a></p>
+<p>Air-gapped, role-signed QR handoff. No network is needed <em>after the page and device keys are prepared</em>.</p>
+<div class="warning"><strong>Simulation, not physical delivery.</strong> Only origin and carrier1 are tested. This page neither verifies human identities nor creates Full Measure Deeds, PENNY units, wages, or real custody. There is no real postal route.</div>
+
+<section class="card">
+<h2>01 — Enroll separate device keys</h2>
+<label for="role">This phone's role</label>
+<select id="role"><option value="origin">Phone A — origin</option><option value="carrier1">Phone B — first carrier</option></select>
+<button id="key-setup">Create / reopen this phone's key</button>
+<button id="copy-public" class="light">Copy public JWK</button>
+<pre id="key-pub">No key loaded.</pre>
+<small>The local WebCrypto private key is nonextractable and remains in this device's browser storage. Operator verifies who owns the public keys independently before route signing.</small>
+</section>
+
+<section class="card">
+<h2>02 — Establish a signed synthetic route</h2>
+<p>Phone A: paste a synthetic setup manifest with the LemonPRESS dispatch and all six independent public JWK role pins. Phone B: paste the final setup packet signed by Phone A.</p>
+<label for="setup-in">Setup JSON (initial manifest on A; signed setup on B)</label>
+<textarea id="setup-in" spellcheck="false" placeholder='{"dispatch":{...},"role_pins":{...},"parcel_sha256":"..."}'></textarea>
+<div class="row">
+<button id="sign-route">A: sign route</button>
+<button id="load-route" class="light">B: verify signed route</button>
+</div>
+<button id="copy-setup" class="light">Copy signed setup</button>
+<button id="export-setup" class="light">Save signed setup file</button>
+<pre id="route-summary">No signed route loaded.</pre>
+<small>Public setup can be transferred before going offline by file/USB/device-share. The two on-screen QR transfers begin at step 03.</small>
+</section>
+
+<section class="card">
+<h2>03 — Phone B accepts simulated first leg</h2>
+<p>Phone B signs ACCEPT_LEG1; Phone A scans the resulting QR. This is an event proposal only.</p>
+<button id="accept">B: sign leg acceptance</button>
+</section>
+
+<section class="card">
+<h2>04 — Phone A offers a signed pickup QR</h2>
+<p>After Phone A verifies the acceptance QR, it issues an expiring PICKUP_LEG1 request tied to the current signed route history.</p>
+<button id="issue">A: issue pickup QR</button>
+</section>
+
+<section class="card">
+<h2>05 — Phone B explicitly cosigns</h2>
+<p>After scanning A's request, B inspects its exact scope and either refuses or signs.</p>
+<pre id="scope">No verified handoff request.</pre>
+<label><input id="consent" type="checkbox"> I deliberately approve only this synthetic custody-claim test.</label>
+<button id="approve">B: sign one response</button>
+</section>
+
+<section class="card">
+<h2>06 — A admits locally, B syncs the signed history</h2>
+<p>A verifies B's return QR and stores the complete signed history <strong>as a pending workstation import</strong>. B then scans A's signed-history QR; both phones display the same SHA-256 history head.</p>
+<button id="commit">A: verify returned response</button>
+<button id="sync" class="light">B: verify and sync final history</button>
+<button id="export-fieldkit" class="light">A: save station reconciliation bundle</button>
+<pre id="head">No matched signed history.</pre>
+</section>
+
+<section class="card">
+<h2>Offline QR transfer / paper fallback</h2>
+<p>Every transfer is a signed JSON envelope. One phone displays the QR, the other scans it. Camera support varies; a copy/paste text fallback is always available.</p>
+<div id="qr-out" class="qr"><small>Nothing to display yet.</small></div>
+<button id="copy-qr" class="light">Copy outgoing packet</button>
+<button id="scan">Scan an incoming QR</button>
+<button id="stop" class="light">Stop camera</button>
+<video id="video" autoplay playsinline hidden></video>
+<label for="in">Incoming transfer JSON</label>
+<textarea id="in" spellcheck="false" placeholder='{"type":"accept|offer|reply|sync",...}'></textarea>
+<button id="read-in">Verify and import incoming packet</button>
+<button id="recover" class="light">Recover saved last outgoing packet</button>
+</section>
+<div id="status" role="status">Preparing local storage.</div>
+<small>OFFLINE ≠ AUTHENTICATED HUMAN · TWO SIGNATURES ≠ PHYSICAL OBSERVATION · PHONE HEADS ≠ SOURCE ADMISSION · NO POSTAGE OR PAYMENT</small>
+</main>
+<script src="./vendor/qrgen.min.js"></script>
+<script src="./two-phone-core.js"></script>
+<script src="./two-phones-ui.js"></script></body></html>
