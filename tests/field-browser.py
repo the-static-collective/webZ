@@ -9,10 +9,11 @@ scratch=tempfile.TemporaryDirectory(prefix='webz-field-witness-')
 SITE=pathlib.Path(scratch.name)/'site'
 shutil.copytree(ROOT,SITE,ignore=shutil.ignore_patterns('.git','__pycache__','node_modules','browser'))
 # Reconstruct the untouched founding shell for its inherited regression witness.
-# Its scratch upgrade predates immutable admission; production replay separately
+# Its frozen compiler fixture predates immutable admission; production replay separately
 # refuses any founding-history mutation. No descendant admission is issued here.
 for moving_input in ['census/static-web-002/human-admission.json','scripts/public-field-cache.json']:
  (SITE/moving_input).unlink(missing_ok=True)
+shutil.copyfile(ROOT/'tests/fixtures/static-web-001-build-field.mjs',SITE/'scripts/build-field.mjs')
 subprocess.check_output(['node','scripts/build-field.mjs'],cwd=SITE,text=True)
 class Handler(SimpleHTTPRequestHandler):
  def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(SITE),**kwargs)
