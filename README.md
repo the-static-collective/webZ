@@ -35,3 +35,16 @@ The evidence viewer accepts only a bounded `webz/sanitized-maxhinal/v0` public c
 [Crossing and verification report, boundaries, blockers, next gates](docs/OFFLINE-001-VERIFICATION.md) · [Implementation plan](docs/superpowers/plans/2026-10-07-offline-sovereign-porch.md).
 
 Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). The feature PR is stacked on webZ PR #2; it does not merge or deploy its design or alter neighboring approved baselines.
+
+## GrO × WALL-E — Field Porch 001
+
+The first opt-in **GrO/FORAGE field crossing** lives at [WEBZ Field Porch](forage/).
+Bring the GrO local HOLD, FORAGE lead and original-byte photo evidence;
+WEBZ independently replays the source files before allowing a reviewed,
+sanitary **public invitation postcard**. It does **not** take the item,
+transfer photos, admit a GrO prospect as property, or add any sovereign WEBZ
+world. Explicit choice remains with the traveler and each receiver.
+
+See [the field crossing guide](docs/FIELD-PORCH-001-WALLE-GRO.md).
+The source files are runnable locally, but are **not** a verified live
+internet deployment.
