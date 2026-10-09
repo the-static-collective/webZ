@@ -76,7 +76,7 @@ function validatePetition(b){
  requireThat(b.schema==='webz/founder-petition/v0'&&b.scope==='EXPERIMENTAL_NAMESPACE_ONLY','PETITION_SCOPE');
  exact(b.source,['annex_export_ref','reflection_ref','source_address']);
  requireThat(hex(b.source.annex_export_ref)&&hex(b.source.reflection_ref)&&typeof b.source.source_address==='string'&&
-  /^MWF1\/(?:t(?:0[1-9]|1[01])g(?:0[1-9]|1[01])\/){1,96}t(?:0[1-9]|1[01])g(?:0[1-9]|1[01])$/.test(b.source.source_address),'SOURCE_REFERENCE');
+  /^MWF1\/(?:t(?:0[1-9]|1[01])g(?:0[1-9]|1[01])\/){0,96}t(?:0[1-9]|1[01])g(?:0[1-9]|1[01])$/.test(b.source.source_address),'SOURCE_REFERENCE');
  requireThat(/^wl2-\d{3}$/.test(b.proposal_id),'PROPOSAL_ID');
  exact(b.world,['title','description','parent_address','child_address','type']);
  requireThat(label(b.world.title,64)&&label(b.world.description,420)&&
