@@ -77,6 +77,7 @@ function downloadJSON(name,value){
 }
 async function ensureKey(){
  role=$("role").value;
+ await store("field003","last-selected-role",role);
  let existing=await get("keys",role);
  if(!existing){existing=await C.newKey();await store("keys",role,existing);}
  key=existing;
@@ -241,6 +242,8 @@ $("scan").onclick=()=>guarded(async()=>{
   };
   req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
  });
+ const lastRole=await get("field003","last-selected-role");
+ if(lastRole==="origin"||lastRole==="carrier1")$("role").value=lastRole;
  if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
- say("Storage prepared. Each phone must enroll a different role and public key.");
+ say("Storage prepared. Reopen the saved role key for this device.");
 }catch(err){say("HOLD: device setup failed: "+err?.message)}})();
