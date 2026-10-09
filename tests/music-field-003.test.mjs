@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {request as rawRequest} from 'node:http';
 import {
  SCOPE,GOOGLE_AUTH,makeAuthorization,secret,challenge,compareState,tokenAccept,
  playlistsResponse,itemsResponse,fetchPlaylistPage,fetchItemsPage,requestToken
@@ -136,9 +137,13 @@ test('local HTTP bridge enforces exact Host, session cookie, same-origin actions
   assert.equal((await s.request('wrong=token','/api/youtube/status')).status,403);
   assert.equal((await s.request(cookie,'/api/youtube/connect','POST',{origin:'https://evil.com'})).status,403);
   assert.equal((await s.request(cookie,'/api/youtube/connect','POST',{action:'WRONG'})).status,403);
-  const wrongHost=await fetch(base.replace('/worlds/music-field/','')+'/api/youtube/status',
-   {headers:{Cookie:cookie,Host:'evil.com:12345'}});
-  assert.equal(wrongHost.status,403);
+  const wrongHost=await new Promise((resolve,reject)=>{
+   const uri=new URL(base),req=rawRequest({host:'127.0.0.1',port:Number(uri.port),
+    path:'/api/youtube/status',headers:{Host:'evil.com:12345',Cookie:cookie}},
+    response=>{response.resume();resolve(response.statusCode)});
+   req.on('error',reject);req.end();
+  });
+  assert.equal(wrongHost,403);
  }finally{await b.stop()}
 });
 test('state tampering cannot issue a token, legitimate consent can issue one, and callback is one-use',async()=>{
