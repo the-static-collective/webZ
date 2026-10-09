@@ -19,7 +19,7 @@
     <div class="fallback-caption">THE ROOM WAITS FOR ITS ORIGINAL CARRIER</div>
    </div>
    <img id="scene-image" alt="Locally supplied Wandering Lens illustration; eleven particular objects can be selected by position." hidden draggable="false">
-   <div id="hotspots" class="hotspots" aria-label="Eleven spatial particulars"></div>
+   <div id="hotspots" class="hotspots" aria-label="Eleven spatial particulars"></div><div id="visitor-hotspots" class="hotspots visitor-hotspots" aria-label="Separately admitted visitor objects"></div>
   </div>
   <div class="cornertag top">WANDERING LENS · 001</div><div class="cornertag bottom" id="corner-depth">ROOT / LOOK, DON'T ASSUME</div>
   <div class="help">↕ TUNE &nbsp; ↔ GRANULARITY</div>
@@ -69,5 +69,25 @@
   <p class="small muted">The fractal is a navigational companion. Geometric proximity does not establish provenance.</p>
  </div>
 </aside>
+<section class="annex-section panel" aria-labelledby="annex-title">
+ <div class="sectionline"><span>07 / VISITOR ANNEX LAB</span><span>HUMAN INSPECTION REQUIRED</span></div>
+ <h2 id="annex-title">Let the world grow—without rewriting its source.</h2>
+ <p class="muted">Only an already-held reflection can propose a new object or nested world sketch. Each proposal remains pending until a second explicit Inspect and Admit action. These are local clicks, not authenticated organizational review.</p>
+ <div class="annex-composer">
+  <div><label for="annex-source">Source reflection</label><select id="annex-source" aria-label="Source held reflection"></select><p class="small muted" id="annex-count">0 held reflections available</p></div>
+  <div><label for="annex-kind">Kind of addition</label><select id="annex-kind"><option value="OBJECT">Visitor object overlay</option><option value="WORLD_SKETCH">Nested world sketch</option></select></div>
+  <div><label for="annex-title-input">Proposed name</label><input id="annex-title-input" type="text" maxlength="64" placeholder="A particular worth exploring"></div>
+  <div><label for="annex-detail">Why this might matter</label><textarea id="annex-detail" maxlength="420" rows="2" placeholder="A short description—not a claim that this happened."></textarea></div>
+ </div>
+ <div class="actions"><button id="annex-propose" class="primary" disabled>Propose for review</button><span id="annex-summary" class="small muted">0 proposals · no sovereign worlds</span></div>
+ <p id="annex-message" class="small" role="status" aria-live="polite">The annex begins empty. No visitor idea is canonized automatically.</p>
+ <div id="annex-queue" class="visitor-queue"></div>
+ <div class="annex-files">
+  <strong>Private, inspectable proposal history</strong>
+  <p class="small muted">Export joins the original reflections and this local review ledger. Nothing is uploaded, signed, published or saved automatically.</p>
+  <div class="actions"><button id="annex-review-export">Review annex export</button><button id="annex-download" hidden>Download private annex</button><label class="file">Inspect annex JSON<input id="annex-import" type="file" accept="application/json,.json"></label><button id="annex-restore" hidden>Restore inspected annex</button></div>
+  <pre id="annex-export-preview" hidden></pre><pre id="annex-import-preview" hidden></pre>
+ </div>
+</section>
 </main>
 <footer><div><strong>ONE SCENE · MANY PARTICULARS</strong> · Navigation is not selection, crossing, recording or publishing. Your files and reflections are not sent to the server.</div><p id="notice" role="status" aria-live="polite">At the Miracle Automaton. No audio or compute has begun.</p></footer></div></body></html>

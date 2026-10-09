@@ -1,4 +1,5 @@
 import {fresh,validate,dialTo,descend,ascend,address,parseAddress,cell,preview,questionFor,OBJECTS,emptyJournal,holdReflection,projectJournal,freezeJournal,inspectExport,sourceClaim} from './model.mjs';
+import {installAnnexUI} from './annex-ui.mjs';
 const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
 const sourceDigests={
  image:'98bc094c7dc721f3f0e642966c672ed97a1ac06b67f8174e3aa0a8afa0f11e0d',
@@ -141,7 +142,7 @@ $('bookmark').addEventListener('click',async()=>{
 $('hold-answer').addEventListener('click',()=>{
  try{
   journal=holdReflection(journal,state,$('answer').value);$('answer').value='';
-  traceView();$('answer-status').textContent='Unverified visitor reflection held at '+address(state)+'.';
+  traceView();annexController.refresh();$('answer-status').textContent='Unverified visitor reflection held at '+address(state)+'.';
  }catch(e){$('answer-status').textContent='HOLD: '+e.message+'. No trace created.'}
 });
 $('clear-answer').addEventListener('click',()=>{$('answer').value='';$('answer-status').textContent='Draft cleared.'});
@@ -179,11 +180,11 @@ $('import-file').addEventListener('change',async e=>{
 $('restore').addEventListener('click',()=>{
  if(!reviewed)return;
  journal=structuredClone(reviewed);reviewed=null;$('restore').hidden=true;
- traceView();say('Local journal restored without navigation, playback or crossing.');
+ traceView();annexController.reset();say('Local journal restored without navigation, playback or crossing.');
 });
 $('erase').addEventListener('click',()=>{
  journal=emptyJournal();reviewed=null;importVersion++;
- $('import-preview').hidden=true;$('restore').hidden=true;traceView();
+ $('import-preview').hidden=true;$('restore').hidden=true;traceView();annexController.reset();
  say('Reflections erased from this tab; any downloaded copies remain independent.');
 });
 document.querySelectorAll('[data-cue]').forEach(b=>b.addEventListener('click',()=>{
@@ -231,3 +232,13 @@ hashState();paint();traceView();
 if('serviceWorker' in navigator && location.protocol!=='file:'){
  navigator.serviceWorker.register('../../sw.js',{scope:'../../'}).catch(()=>{});
 }
+
+const annexController=installAnnexUI({
+ getJournal:()=>journal,
+ setJournal:value=>{journal=value;traceView();},
+ navigate:target=>{
+  const restored=parseAddress(target);
+  update(restored,{push:true,message:'Local visitor annex address selected. No sovereign door was crossed.'});
+ }
+});
+annexController.refresh();

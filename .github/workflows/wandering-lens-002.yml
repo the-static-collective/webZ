@@ -1,0 +1,41 @@
+name: Wandering Lens 002 — local human review and annex
+on:
+  push:
+    branches:
+      - experiment/wandering-lens-002-visitor-annex
+  pull_request:
+    paths:
+      - worlds/wandering-lens/**
+      - tests/wandering-lens-annex.test.mjs
+      - tests/wandering_lens_annex_browser.py
+      - docs/WANDERING-LENS-002.md
+      - .github/workflows/wandering-lens-002.yml
+permissions:
+  contents: read
+jobs:
+  proposal-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original WebZ tests and 26 adversarial review tests
+        run: npm test
+      - name: Syntax and first-party browser safety
+        run: |
+          node --check worlds/wandering-lens/annex.mjs
+          node --check worlds/wandering-lens/annex-ui.mjs
+          node --check worlds/wandering-lens/lens.mjs
+          node --input-type=module - <<'JS'
+          import {readFileSync} from 'node:fs';
+          const sw=readFileSync('sw.js','utf8');
+          const app=readFileSync('worlds/wandering-lens/annex-ui.mjs','utf8');
+          if(!sw.includes('worlds/wandering-lens/annex.mjs'))throw Error('NO_OFFLINE_MODEL');
+          if(/fetch\(|localStorage|WebSocket\(/.test(app))throw Error('UNINTENDED_EXTERNAL_EFFECT');
+          if(sw.includes('.mp3')||sw.includes('visitor-private.json'))throw Error('PRIVATE_MEDIA_CACHED');
+          console.log('Private source and review boundaries held.');
+          JS
