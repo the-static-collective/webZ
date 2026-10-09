@@ -1,0 +1,44 @@
+name: Wandering Lens 001 — exact questions and private source
+on:
+  push:
+    branches:
+      - experiment/wandering-lens-001-question-engine
+  pull_request:
+    paths:
+      - worlds/wandering-lens/**
+      - tests/wandering-lens.test.mjs
+      - docs/WANDERING-LENS-001.md
+      - index.html
+      - sw.js
+      - README.md
+      - .github/workflows/wandering-lens-001.yml
+permissions:
+  contents: read
+jobs:
+  question-organ:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: All native WebZ checks and new Wandering Lens threats
+        run: npm test
+      - name: Browser code syntax
+        run: |
+          node --check worlds/wandering-lens/model.mjs
+          node --check worlds/wandering-lens/lens.mjs
+      - name: Explicitly forbid publishing original user media
+        run: |
+          node --input-type=module - <<'JS'
+          import {existsSync, readFileSync} from 'node:fs';
+          for(const file of ['worlds/wandering-lens/wandering-lens.jpg','worlds/wandering-lens/jubilee-engine-anchor.mp3','worlds/wandering-lens/assets/wandering-lens.jpg','worlds/wandering-lens/assets/jubilee-engine-anchor.mp3']){
+            if(existsSync(file))throw Error('PRIVATE_MEDIA_LEAK:'+file);
+          }
+          const sw=readFileSync('sw.js','utf8');
+          if(sw.includes('.mp3')||sw.includes('wandering-lens.jpg'))throw Error('MEDIA_CACHED');
+          console.log('Original source media remains private; local reflections are not published.');
+          JS
