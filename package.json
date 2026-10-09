@@ -6,7 +6,8 @@
     "test": "node --test tests/*.test.mjs",
     "serve": "node scripts/serve.mjs",
     "test:browser": "python tests/browser.py && python tests/races.py && python tests/forage_browser.py",
-    "replay": "node scripts/replay.mjs"
+    "replay": "node scripts/replay.mjs",
+    "music:live": "node scripts/music-field-003-server.mjs"
   },
   "engines": {
     "node": ">=22"

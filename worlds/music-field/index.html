@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101722">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
-<title>Music Field · WebZ</title><link rel="stylesheet" href="./field.css"><script type="module" src="./field.mjs"></script></head>
+<title>Music Field 003 · WebZ</title><link rel="stylesheet" href="./field.css"><script type="module" src="./field.mjs"></script></head>
 <body><div class="frame">
-<header><a class="brand" href="../../">web<span>Z</span></a><nav><a href="../suno-atlas/">Suno Atlas 001</a><span> MUSIC FIELD / 002 </span></nav></header>
+<header><a class="brand" href="../../">web<span>Z</span></a><nav><a href="../suno-atlas/">Suno Atlas 001</a><span> MUSIC FIELD / 003 </span></nav></header>
 <section class="hero"><div><div class="overline">MULTIWORLD DISCOGRAPHY / THE ELEVEN-DIAL INSTRUMENT</div><h1>One library.<br><em>Three doors.</em></h1><p>Explore Suno creations, Bandcamp releases and YouTube videos in one metadata constellation. Every source keeps its identity. Connections belong to their evidence—not a matching title.</p></div>
 <div class="orbit" aria-hidden="true"><span>S</span><span>B</span><span>Y</span><strong>11×11</strong></div></section>
 <main>
@@ -16,6 +16,18 @@
 <label class="filepick">Choose CSV / JSON files<input id="files" type="file" multiple accept=".csv,.json,text/csv,application/json"></label><button id="demo" class="secondary">Load fictional demo</button><button id="clear" class="secondary">Clear current index</button></div>
 <p class="small muted">Local imports only. No cookies, password fields, streaming keys, scraping, or automatic media playback. Imported music is not uploaded to WebZ.</p>
 <div class="metrics"><div><span>TOTAL RECORDS</span><strong id="count-all">0</strong></div><div><span>SUNO</span><strong id="count-suno">0</strong></div><div><span>BANDCAMP</span><strong id="count-bandcamp">0</strong></div><div><span>YOUTUBE</span><strong id="count-youtube">0</strong></div></div>
+</section>
+<section class="panel youtube-connector" aria-labelledby="yt-title">
+<div class="overline">01B / OFFICIAL YOUTUBE CONNECTION · LOCAL DESKTOP ONLY</div>
+<div class="headline"><div><h2 id="yt-title">A read-only account door.</h2>
+<p class="small muted">Connect through Google OAuth in your own browser. Music Field never asks for your Google password or caches OAuth tokens in an exported library.</p></div><span class="chip">YOU CHOOSE WHAT ENTERS</span></div>
+<div class="actions"><button id="yt-connect" disabled>Connect YouTube through Google</button><button id="yt-playlists" disabled>List my playlists</button><button id="yt-disconnect" disabled class="danger">Disconnect / revoke</button></div>
+<label class="search-label" for="yt-link">Or paste a YouTube playlist share URL<input id="yt-link" type="url" placeholder="https://youtube.com/playlist?list=..." autocomplete="off" spellcheck="false" maxlength="750"></label><div class="actions"><button id="yt-link-review" disabled>Check pasted playlist</button><span class="small muted">The link is verified with the official API; its share-tracking parameter is discarded.</span></div>
+<label class="search-label" for="yt-choose">Choose one YouTube playlist<select id="yt-choose"><option value="">Nothing selected</option></select></label>
+<div class="actions" style="margin-top:12px"><button id="yt-select" disabled>Preview selected playlist</button><button class="primary" id="yt-import" disabled>Import selected metadata into my graph</button></div>
+<div id="yt-preview" class="yt-preview" aria-live="polite"></div>
+<p class="status" id="youtube-state" role="status">Live OAuth is inactive on the static preview. Run the 003 desktop bridge with your own Google OAuth client ID.</p>
+<p class="small muted">No automatic playlist syncing, no background polling, no video streaming, no Bandcamp/Suno account harvesting. Playlist search is bounded to 100; chosen playlist imports are capped at 150 videos per selection. Imported records remain locally after disconnect unless you clear them.</p>
 </section>
 <section class="panel dial-panel"><div class="headline"><div><div class="overline">02 / THE NESTED RADIO FIELD</div><h2>Tune the discography.</h2></div><div class="capsule" id="current-family">EVERYTHING</div></div>
 <div class="filters"><label for="platform">Source world</label><select id="platform"><option value="ALL">All platforms</option><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option></select><span class="small muted">Choose a source, or tune the whole field</span></div>
