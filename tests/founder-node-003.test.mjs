@@ -73,17 +73,17 @@ test('cannot assign identical key to candidate and founder roles',async()=>{
 test('failed unsigned proposal or refusal never becomes a founder petition',async()=>{
  const candidate=newIdentity(),journal=holdReflection(emptyJournal(),fresh(),'Not yet admitted');
  const pending=await proposeAnnex(emptyAnnex(),journal,1,'WORLD_SKETCH','Pending World','A held trial.');
- await assert.rejects(()=>candidatePetition(await exportAnnex(pending,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
+ await assert.rejects(async()=>candidatePetition(await exportAnnex(pending,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
  const inspected=await inspectProposal(pending,journal,'wl2-001');
  const refused=await disposeProposal(inspected,journal,'wl2-001','REFUSE');
- await assert.rejects(()=>candidatePetition(await exportAnnex(refused,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
+ await assert.rejects(async()=>candidatePetition(await exportAnnex(refused,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
 });
 test('ordinary OBJECT overlays are never independently founded worlds',async()=>{
  const candidate=newIdentity(),journal=holdReflection(emptyJournal(),fresh(),'Object only');
  let l=await proposeAnnex(emptyAnnex(),journal,1,'OBJECT','A trunk','Only an object.');
  l=await inspectProposal(l,journal,'wl2-001');
  l=await disposeProposal(l,journal,'wl2-001','ADMIT');
- await assert.rejects(()=>candidatePetition(await exportAnnex(l,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
+ await assert.rejects(async()=>candidatePetition(await exportAnnex(l,journal),'wl2-001',candidate.privatePem),/NOT_LOCAL_ADMITTED_SKETCH/);
 });
 test('tampered private annex is rejected before any petition is signed',async()=>{
  const a=await forged();const altered=structuredClone(a.annex);
