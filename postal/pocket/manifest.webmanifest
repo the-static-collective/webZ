@@ -1,0 +1,9 @@
+{
+  "name": "webZ / PostEmahh'n Two Phones (Simulation)",
+  "short_name": "Postal Pocket",
+  "start_url": "./two-phones.html",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#183942",
+  "description": "Offline synthetic two-phone custody-claim lab, not a real delivery service."
+}
