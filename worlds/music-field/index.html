@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101722">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Music Field · WebZ</title><link rel="stylesheet" href="./field.css"><script type="module" src="./field.mjs"></script></head>
+<body><div class="frame">
+<header><a class="brand" href="../../">web<span>Z</span></a><nav><a href="../suno-atlas/">Suno Atlas 001</a><span> MUSIC FIELD / 002 </span></nav></header>
+<section class="hero"><div><div class="overline">MULTIWORLD DISCOGRAPHY / THE ELEVEN-DIAL INSTRUMENT</div><h1>One library.<br><em>Three doors.</em></h1><p>Explore Suno creations, Bandcamp releases and YouTube videos in one metadata constellation. Every source keeps its identity. Connections belong to their evidence—not a matching title.</p></div>
+<div class="orbit" aria-hidden="true"><span>S</span><span>B</span><span>Y</span><strong>11×11</strong></div></section>
+<main>
+<section class="panel source-panel"><div class="headline"><div><div class="overline">01 / THE SOURCE GATES</div><h2>Bring the metadata you control.</h2></div><span class="chip">NO ACCOUNT PASSWORDS</span></div>
+<div class="sources">
+<article><div class="provider">S</div><h3>Suno</h3><p>User-selected CSV, JSON, or your existing Suno Atlas backup.</p><span>Account sync not connected</span></article>
+<article><div class="provider">B</div><h3>Bandcamp</h3><p>Release/track CSV or JSON. Private/artist API requires separate approval.</p><span>Metadata only</span></article>
+<article><div class="provider">Y</div><h3>YouTube</h3><p>Saved playlist/video metadata, including exported YouTube Data API JSON.</p><span>OAuth connector not connected</span></article>
+</div>
+<div class="import-controls"><label>Import source<select id="import-platform"><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option></select></label>
+<label class="filepick">Choose CSV / JSON files<input id="files" type="file" multiple accept=".csv,.json,text/csv,application/json"></label><button id="demo" class="secondary">Load fictional demo</button><button id="clear" class="secondary">Clear current index</button></div>
+<p class="small muted">Local imports only. No cookies, password fields, streaming keys, scraping, or automatic media playback. Imported music is not uploaded to WebZ.</p>
+<div class="metrics"><div><span>TOTAL RECORDS</span><strong id="count-all">0</strong></div><div><span>SUNO</span><strong id="count-suno">0</strong></div><div><span>BANDCAMP</span><strong id="count-bandcamp">0</strong></div><div><span>YOUTUBE</span><strong id="count-youtube">0</strong></div></div>
+</section>
+<section class="panel dial-panel"><div class="headline"><div><div class="overline">02 / THE NESTED RADIO FIELD</div><h2>Tune the discography.</h2></div><div class="capsule" id="current-family">EVERYTHING</div></div>
+<div class="filters"><label for="platform">Source world</label><select id="platform"><option value="ALL">All platforms</option><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option></select><span class="small muted">Choose a source, or tune the whole field</span></div>
+<div class="dials">
+<div class="dial"><div class="dial-head"><label for="tuning">↕ VERTICAL / MUSICAL FAMILY</label><strong id="t-label">01 / 11</strong></div><div class="range"><button id="t-minus" aria-label="Previous family">−</button><input id="tuning" type="range" min="1" max="11" value="1"><button id="t-plus" aria-label="Next family">+</button></div><div class="scale"><span>01 ALL</span><span>11 SPECIFIC</span></div></div>
+<div class="dial"><div class="dial-head"><label for="grain">↔ HORIZONTAL / GRANULARITY</label><strong id="g-label">06 / 11</strong></div><div class="range"><button id="g-minus" aria-label="Broader granularity">−</button><input id="grain" type="range" min="1" max="11" value="6"><button id="g-plus" aria-label="Finer granularity">+</button></div><div class="scale"><span>01 OVERVIEW</span><span>11 INDIVIDUAL</span></div></div></div>
+<div class="actions"><button id="enter" class="primary">↓ Enter family</button><button id="rise">↑ Rise</button><button id="root">⌂ Root</button><button id="copy">◇ Copy address</button><span id="depth" class="small muted">LEVEL 0</span></div>
+<div class="address"><div class="overline">EXACT DATASET-BOUND WORLD ADDRESS</div><code id="view-address">MF2/mf-0000000000000000/pALL/t01g06</code><p class="small muted">Source filters and nested dials are included. Importing different data makes an old bookmark intentionally refuse to resolve.</p></div></section>
+<section class="graphs"><div class="panel"><div class="overline">03 / CREATION TIMELINE</div><h2>When it appeared</h2><p class="muted small" id="timeline-meta">Actual dates only. No playback or listening counts inferred.</p><div id="timeline" class="chart" aria-label="Imported metadata creation dates chart"></div></div>
+<div class="panel"><div class="overline">04 / SOURCE CONSTELLATION</div><h2>How records connect</h2><p class="muted small">Provider and tag counts come from your metadata. Explicit cross-platform relations are counted separately from similarities.</p><div id="graph" class="chart" aria-label="Source platforms and tag co-occurrences"></div><p id="relations" class="small muted">0 explicitly linked source records.</p></div></section>
+<section class="panel track-panel"><div class="headline"><div><div class="overline">05 / THE PARTICULARS</div><h2>Tracks, releases and videos</h2></div><span class="small muted" id="visible">0 records</span></div>
+<label class="search-label" for="search">Search this musical field<input type="search" id="search" placeholder="Title, artist, album, genre, source ID…"></label>
+<div id="records" class="records"><p class="muted">Import metadata or load the fictional demo to begin.</p></div>
+<button id="more" hidden>Show more records</button></section>
+<section class="panel save-panel"><div class="overline">06 / OPERATOR-LOCAL CUSTODY</div><h2>Keep your own index.</h2><p class="small muted">Named snapshots are saved only after you click Save, on this device in IndexedDB. The library is not automatically reopened after a reload. Export a JSON backup if you need portability.</p>
+<div class="save-grid"><label>Snapshot name<input id="snapshot-name" maxlength="60" value="My Music Field"></label><button id="save">Save locally</button><button id="export">Export portable JSON</button></div>
+<div class="save-grid"><label>Saved snapshots<select id="snapshots"><option value="">No saved index chosen</option></select></label><button id="load">Load selected</button><button id="delete" class="danger">Delete selected</button></div>
+<p id="status" class="status" role="status" aria-live="polite">No metadata loaded and no account connected.</p></section>
+<footer>WEBZ / MUSIC FIELD 002 — SOURCE IDENTITY ≠ SONG IDENTITY · CHART ≠ CAUSALITY · TUNE ≠ PLAY</footer>
+</main></div></body></html>
