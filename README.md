@@ -35,3 +35,7 @@ The evidence viewer accepts only a bounded `webz/sanitized-maxhinal/v0` public c
 [Crossing and verification report, boundaries, blockers, next gates](docs/OFFLINE-001-VERIFICATION.md) · [Implementation plan](docs/superpowers/plans/2026-10-07-offline-sovereign-porch.md).
 
 Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). The feature PR is stacked on webZ PR #2; it does not merge or deploy its design or alter neighboring approved baselines.
+
+## Wandering Lens / Question-machine lab
+
+The independent exploratory [`Wandering Lens`](worlds/wandering-lens/) room uses exact 11×11 nested dial navigation, eleven spatial particulars and a **Miracle Automaton that asks rather than answers**. It is a first-party *discovery lab*, **not** a newly admitted sovereign crossing or a modification of Sanctuary/Orchard. You may optionally load the original Wandering Lens image and Jubilee Engine audio through local browser file pickers. Media is kept off the public repository and the network; no playback starts from tuning or question selection. Reflective answers stay in volatile page memory unless you review and explicitly download a private JSON export. Source photographs/art and lyrics are content, not authority. See [`docs/WANDERING-LENS-001.md`](docs/WANDERING-LENS-001.md).
