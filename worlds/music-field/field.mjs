@@ -4,6 +4,7 @@ import {
  fingerprint,freshView,validView,setView,descend,ascend,address,parseAddress,lanes
 } from './model.mjs';
 import {names,save,load,remove} from './storage.mjs';
+import {installYoutubeBridge} from './youtube-bridge.mjs';
 const $=id=>document.getElementById(id),bounds=x=>Math.max(1,Math.min(11,x));
 let library=empty(),view=freshView(),visible=30,version=0;
 const say=msg=>$('status').textContent=msg;
@@ -204,3 +205,9 @@ document.addEventListener('keydown',e=>{
  if(d){e.preventDefault();dial(d[0],view[d[0]]+d[1])}
 });
 paint();refresh().catch(()=>say('IndexedDB unavailable; in-memory import and explicit JSON export still work.'));
+
+installYoutubeBridge({onImport:(rows)=>{
+ const additional=importText(JSON.stringify(rows),'YOUTUBE','json','USER_SELECTED');
+ const merged=merge(library,additional);
+ catalog(merged,rows.length+' YouTube entries imported after explicit playlist review. Nothing auto-saved.');
+}});

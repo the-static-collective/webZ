@@ -56,3 +56,7 @@ internet deployment.
 ## Music Field 002 — Suno × Bandcamp × YouTube
 
 [Music Field](worlds/music-field/) is a separate first-party WebZ experiment stacked on Suno Atlas 001. It uses local user-selected metadata files from three sources; platform-qualified IDs, explicit human-supplied cross-source links, a dataset-bound 11×11 dial field, real provider/date/tag counts and optional named IndexedDB snapshots. No cookies, credentials, scraping, account automation, streaming or original media are present. See [docs/MUSIC-FIELD-002.md](docs/MUSIC-FIELD-002.md). Source site policy and OAuth requirements are treated per provider.
+
+## Music Field 003 — consented YouTube live bridge
+
+Run `MUSIC_FIELD_GOOGLE_CLIENT_ID=<your Desktop OAuth client id> npm run music:live` on your own desktop computer to open a random loopback port. This separately starts a local read-only Google OAuth PKCE bridge serving the Music Field 003 UI. Connect, list, preview and **explicitly import** one playlist. The server never persists tokens, refreshes, stores passwords or exposes third-party account data over the network. Google consent / correct OAuth client setup is required; no personal account connection is made by this branch. Bandcamp and Suno remain user-file imports. Details: `docs/MUSIC-FIELD-003.md`.
