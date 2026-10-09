@@ -6,7 +6,8 @@
     "test": "node --test tests/*.test.mjs",
     "serve": "node scripts/serve.mjs",
     "test:browser": "python tests/browser.py && python tests/races.py",
-    "replay": "node scripts/replay.mjs"
+    "replay": "node scripts/replay.mjs",
+    "founder:003": "node scripts/founder-node-003.mjs"
   },
   "engines": {
     "node": ">=22"
