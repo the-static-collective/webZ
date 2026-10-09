@@ -122,6 +122,11 @@ export function importText(text,platform,format='auto',origin='USER_SELECTED'){
  else{
   try{data=JSON.parse(text)}catch{throw Error('JSON_INVALID')}
   if(data?.schema===PORTABLE){assert(data.catalog&&data.scope==='USER_SELECTED_METADATA','PORTABLE_SCOPE');return structuredClone(validate(data.catalog))}
+  if(data?.schema==='webz/suno-atlas-portable/v0'){
+    assert(platform==='SUNO'&&data.catalog?.schema==='webz/suno-atlas-catalog/v0'&&Array.isArray(data.catalog.tracks),
+      'SUNO_ATLAS_FORMAT_REQUIRED');
+    rows=data.catalog.tracks;
+  }
   if(data?.schema===SCHEMA)return structuredClone(validate(data));
   rows=Array.isArray(data)?data:data?.records??data?.tracks??data?.songs??data?.items;
  }
