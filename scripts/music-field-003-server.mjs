@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve,extname} from 'node:path';
 import {
  secret,compareState,makeAuthorization,requestToken,fetchPlaylistPage,fetchItemsPage,
- MAX_PLAYLIST_PAGES,MAX_ITEM_PAGES,boundedId,GOOGLE_REVOKE
+ MAX_PLAYLIST_PAGES,MAX_ITEM_PAGES,boundedId,parsePlaylistURL,fetchNamedPlaylist,GOOGLE_REVOKE
 } from './music-field-003-core.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
@@ -147,6 +147,32 @@ export function createBridge({
      signedInWith:'GOOGLE_OAUTH_READONLY',autoImported:false};
    },res);
    if(result)answer(res,200,result);return;
+  }
+
+  if(req.method==='POST'&&path==='/api/youtube/playlist-link'){
+   let raw='';
+   try{
+    for await(const part of req){
+     raw+=part.toString('utf8');
+     if(raw.length>1000)throw Error('LINK_BODY_TOO_LARGE');
+    }
+    const payload=JSON.parse(raw);
+    if(!payload||typeof payload!=='object'||Array.isArray(payload)||
+     Object.keys(payload).length!==1||typeof payload.url!=='string')throw Error('LINK_BODY_INVALID');
+    const candidate=parsePlaylistURL(payload.url);
+    const record=await fetchNamedPlaylist(fetchImpl,token.accessToken,candidate.id,apiRoot);
+    // A lookup only grants a *local preview gate*; it is neither ownership nor
+    // content import, and the share-tracking token never leaves this route.
+    selected.set(record.id,record.title);
+    answer(res,200,{schema:'webz/music-field-link-review/v0',
+     playlist:record,canonical_url:candidate.canonical_url,
+     source:'EXPLICIT_PASTED_LINK',imported:false,authorized_by_source:false});
+   }catch(e){
+    const blocked=['LINK_BODY_TOO_LARGE','LINK_BODY_INVALID','PLAYLIST_URL_INVALID',
+     'PLAYLIST_ORIGIN_DENIED','PLAYLIST_ID_INVALID','PLAYLIST_QUERY_DENIED'].includes(e.message);
+    no(res,blocked?400:502,blocked?e.message:'PLAYLIST_UNAVAILABLE_OR_NOT_AUTHORIZED');
+   }
+   return;
   }
   if(req.method==='GET'&&path==='/api/youtube/playlist-items'){
    const playlistId=u.searchParams.get('id');

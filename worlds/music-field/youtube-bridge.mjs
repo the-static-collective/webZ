@@ -4,10 +4,11 @@
 const $=id=>document.getElementById(id);
 const text=(id,value)=>$(id).textContent=value;
 const origin=window.location.origin;
-async function request(path,{method='GET'}={}){
+async function request(path,{method='GET',body=null}={}){
  const headers={'accept':'application/json'};
+ if(body!==null)headers['content-type']='application/json';
  if(method==='POST')headers['x-music-field-action']='003';
- const response=await fetch(path,{method,credentials:'same-origin',mode:'same-origin',cache:'no-store',headers,
+ const response=await fetch(path,{method,body:body===null?undefined:JSON.stringify(body),credentials:'same-origin',mode:'same-origin',cache:'no-store',headers,
    redirect:'error',referrerPolicy:'no-referrer'});
  let result;try{result=await response.json()}catch{throw Error('LOCAL_BRIDGE_UNAVAILABLE')}
  if(!response.ok)throw Error(result.error||'LOCAL_BRIDGE_HOLD');
@@ -19,6 +20,7 @@ export function installYoutubeBridge({onImport}){
  function controls(){
   $('yt-connect').disabled=!configured;
   $('yt-playlists').disabled=!connected;
+  $('yt-link-review').disabled=!connected;
   $('yt-disconnect').disabled=!connected;
   $('yt-select').disabled=!connected||!$('yt-choose').value;
   $('yt-import').disabled=!pending||!pending.rows?.length;
@@ -64,6 +66,29 @@ export function installYoutubeBridge({onImport}){
     ' Choose one to preview; no import has occurred.');
    controls();
   }catch(e){say('HOLD: '+e.message);await status()}
+ });
+
+ $('yt-link-review').addEventListener('click',async()=>{
+  pending=null;$('yt-preview').replaceChildren();controls();
+  const url=$('yt-link').value.trim();
+  try{
+   if(!url)throw Error('PASTE_PLAYLIST_URL_FIRST');
+   say('Checking the exact shared playlist using the official YouTube API; no import.');
+   const response=await request('/api/youtube/playlist-link',{method:'POST',body:{url}});
+   if(response.schema!=='webz/music-field-link-review/v0'||!response.playlist?.id)
+    throw Error('PLAYLIST_RESPONSE_INVALID');
+   const id=response.playlist.id;
+   let option=[...$('yt-choose').options].find(x=>x.value===id);
+   if(!option){
+    option=document.createElement('option');option.value=id;
+    $('yt-choose').append(option);
+   }
+   option.textContent=response.playlist.title+' ('+response.playlist.count+' items)';
+   $('yt-choose').value=id;
+   $('yt-link').value=response.canonical_url; // drops YouTube "si" share tracking
+   say('Verified playlist metadata: '+response.playlist.title+'. Click Preview selected playlist, then choose Import.');
+   controls();
+  }catch(e){say('HOLD: '+e.message+'. No content imported.');controls()}
  });
  $('yt-choose').addEventListener('change',()=>{
   pending=null;$('yt-preview').replaceChildren();controls();

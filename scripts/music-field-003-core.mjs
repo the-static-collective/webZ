@@ -90,6 +90,35 @@ export async function fetchPlaylistPage(fetchImpl,accessToken,pageToken,apiRoot=
  const data=await fetchJSON(fetchImpl,url,{headers:{Authorization:'Bearer '+accessToken}});
  return playlistsResponse(data);
 }
+
+/* A pasted public/share playlist is an address proposal, not evidence of
+ * access or ownership. The only accepted origin is YouTube HTTPS.
+ * "si" is share tracking and intentionally never retained. */
+export function parsePlaylistURL(text){
+ requireIt(typeof text==='string'&&text.length>0&&text.length<=750,'PLAYLIST_URL_INVALID');
+ let u;try{u=new URL(text.trim())}catch{throw Error('PLAYLIST_URL_INVALID')}
+ requireIt(u.protocol==='https:'&&['youtube.com','www.youtube.com','m.youtube.com'].includes(u.hostname)&&
+  !u.username&&!u.password&&!u.port&&!u.hash&&
+  ['/playlist','/watch'].includes(u.pathname),'PLAYLIST_ORIGIN_DENIED');
+ const values=u.searchParams.getAll('list');
+ requireIt(values.length===1&&/^[A-Za-z0-9_-]{8,120}$/.test(values[0]),'PLAYLIST_ID_INVALID');
+ requireIt([...u.searchParams.keys()].every(x=>['list','si','v'].includes(x)),'PLAYLIST_QUERY_DENIED');
+ return {id:values[0],canonical_url:'https://www.youtube.com/playlist?list='+encodeURIComponent(values[0])};
+}
+export async function fetchNamedPlaylist(fetchImpl,accessToken,id,apiRoot=YOUTUBE_API){
+ requireIt(typeof id==='string'&&/^[A-Za-z0-9_-]{8,120}$/.test(id),'PLAYLIST_ID_INVALID');
+ const url=new URL(apiRoot+'/playlists');
+ url.searchParams.set('part','snippet,contentDetails');
+ url.searchParams.set('id',id);url.searchParams.set('maxResults','1');
+ const result=await fetchJSON(fetchImpl,url,{headers:{Authorization:'Bearer '+accessToken}});
+ requireIt(Array.isArray(result.items)&&result.items.length<=1,'PLAYLIST_LOOKUP_INVALID');
+ const item=result.items[0];
+ requireIt(item&&item.id===id&&item.snippet&&typeof item.snippet.title==='string',
+  'PLAYLIST_NOT_ACCESSIBLE');
+ return {id,title:safeString(item.snippet.title,140),
+  count:Math.max(0,Math.min(50000,Number(item.contentDetails?.itemCount)||0))};
+}
+
 export async function fetchItemsPage(fetchImpl,accessToken,playlistId,playlistName,pageToken,apiRoot=YOUTUBE_API){
  requireIt(boundedId(playlistId),'PLAYLIST_ID_INVALID');
  const url=new URL(apiRoot+'/playlistItems');
