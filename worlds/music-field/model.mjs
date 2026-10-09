@@ -8,7 +8,7 @@ export const VIEW='webz/music-field-view/v0';
 export const PORTABLE='webz/music-field-portable/v0';
 export const MAX_TRACKS=20000,MAX_BYTES=6000000,MAX_DEPTH=24;
 export const PLATFORMS=['SUNO','BANDCAMP','YOUTUBE'];
-const keys=['key','platform','source_id','id_kind','title','artist','album','created_at','seconds','tags','source_url','relations','origin','kind'];
+const keys=['key','platform','source_id','id_kind','title','artist','album','model','created_at','seconds','tags','source_url','relations','origin','kind'];
 const assert=(v,err)=>{if(!v)throw Error(err)};
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const exact=(o,k)=>o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).length===k.length&&k.every(x=>own(o,x));
@@ -61,6 +61,7 @@ function normalize(r,platform,index,origin){
  assert(title&&validText(title,180),'TITLE_REQUIRED');
  const artist=clean(choose(r,['artist','creator','channel','channel_title','artist_name','author']),140);
  const album=clean(choose(r,['album','release','collection','playlist','project']),140);
+ const model=clean(choose(r,['model','model_name','version']),90);
  const created=date(choose(r,['created_at','createdAt','date','published_at','publishedAt','release_date']));
  const seconds=duration(choose(r,['seconds','duration','length','duration_seconds']));
  const tags=asTags(choose(r,['tags','styles','style','genres','genre','moods']));
@@ -75,7 +76,7 @@ function normalize(r,platform,index,origin){
  assert(Array.isArray(relations)&&relations.length<=16,'RELATION_LIMIT');
  const links=[...new Set(relations.map(x=>clean(x,150)))].sort();
  for(const x of links)assert(/^(suno|bandcamp|youtube):[A-Za-z0-9_-]{4,120}$/.test(x)&&x!==key,'RELATION_INVALID');
- return {key,platform,source_id:sourceId,id_kind:idKind,title,artist,album,created_at:created,
+ return {key,platform,source_id:sourceId,id_kind:idKind,title,artist,album,model,created_at:created,
   seconds,tags,source_url:sourceUrl,relations:links,origin,kind};
 }
 function youtubeRows(data){
@@ -84,8 +85,8 @@ function youtubeRows(data){
  assert(Array.isArray(rows),'YOUTUBE_ITEMS_REQUIRED');
  return rows.map(x=>{
   if(!plain(x)||!plain(x.snippet))return x;
-  const snippet=x.snippet,videoId=typeof x.id==='string'?x.id:
-   x.contentDetails?.videoId||snippet.resourceId?.videoId;
+  const snippet=x.snippet,videoId=x.contentDetails?.videoId||snippet.resourceId?.videoId||
+   (typeof x.id==='string'?x.id:x.id?.videoId);
   assert(typeof videoId==='string'&&/^[A-Za-z0-9_-]{11}$/.test(videoId),'YOUTUBE_VIDEO_ID_REQUIRED');
   return {source_id:videoId,title:snippet.title,
     artist:snippet.videoOwnerChannelTitle||snippet.channelTitle||'',
@@ -103,7 +104,7 @@ export function validate(c){
     typeof r.key==='string'&&r.key===r.platform.toLowerCase()+':'+r.source_id&&
     typeof r.source_id==='string'&&/^[A-Za-z0-9_-]{4,120}$/.test(r.source_id)&&
     ['SOURCE_FIELD','LOCAL_DERIVED'].includes(r.id_kind),'RECORD_ID_INVALID');
-  assert(validText(r.title,180)&&r.title.length>0&&validText(r.artist,140)&&validText(r.album,140),'RECORD_TEXT_INVALID');
+  assert(validText(r.title,180)&&r.title.length>0&&validText(r.artist,140)&&validText(r.album,140)&&validText(r.model,90),'RECORD_TEXT_INVALID');
   assert((r.created_at===null||typeof r.created_at==='string'&&date(r.created_at)===r.created_at)&&
     (r.seconds===null||Number.isInteger(r.seconds)&&r.seconds>=0&&r.seconds<=86400),'RECORD_TIME_INVALID');
   assert(Array.isArray(r.tags)&&r.tags.length<=24&&r.tags.every(t=>validText(t,55)&&t===t.toLowerCase()&&t),'RECORD_TAGS_INVALID');
@@ -126,9 +127,8 @@ export function importText(text,platform,format='auto',origin='USER_SELECTED'){
     assert(platform==='SUNO'&&data.catalog?.schema==='webz/suno-atlas-catalog/v0'&&Array.isArray(data.catalog.tracks),
       'SUNO_ATLAS_FORMAT_REQUIRED');
     rows=data.catalog.tracks;
-  }
-  if(data?.schema===SCHEMA)return structuredClone(validate(data));
-  rows=Array.isArray(data)?data:data?.records??data?.tracks??data?.songs??data?.items;
+  }else if(data?.schema===SCHEMA)return structuredClone(validate(data));
+  else rows=Array.isArray(data)?data:data?.records??data?.tracks??data?.songs??data?.items;
  }
  assert(PLATFORMS.includes(platform),'PLATFORM_REQUIRED');
  assert(Array.isArray(rows)&&rows.length<=MAX_TRACKS,'RECORD_ARRAY_REQUIRED');
