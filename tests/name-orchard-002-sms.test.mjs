@@ -25,7 +25,8 @@ test('missing fragments must HOLD instead of accepting partial signature or name
 test('same-index disagreement and mixed messages fail closed',()=>{
  const parts=packClaim(candidate());
  const other=packClaim(candidate());
- assert.throws(()=>assembleTexts([...parts,parts[0].slice(0,-1)+'X']),/SMS_CONFLICTING_DUPLICATE/);
+ const changed=parts[0].slice(0,-1)+(parts[0].at(-1)==='X'?'Y':'X');
+ assert.throws(()=>assembleTexts([...parts,changed]),/SMS_CONFLICTING_DUPLICATE/);
  assert.throws(()=>assembleTexts([parts[0],other[0]]),/SMS_MIXED_MESSAGES/);
 });
 test('altered transport content and signature fail independently',()=>{
