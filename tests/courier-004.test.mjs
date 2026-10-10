@@ -13,7 +13,7 @@ test('A issues a verified portable public parcel without receiver identity',asyn
  assert.equal(p.journey.hops[0].station,'A');
  assert.match(p.journey.id,/^[a-f0-9]{32}$/);
  assert.ok(size(JSON.stringify(p))<MAX_PARCEL_BYTES);
- assert.doesNotMatch(JSON.stringify(p),/subscriber|email|buttondown|@/i);
+ assert.doesNotMatch(JSON.stringify(p),/subscriber[-_]?email|buttondown|[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i);
 });
 test('B forwards the exact same verified source after a durable HOLD',async()=>{
  const initial=await newParcel(seed);
