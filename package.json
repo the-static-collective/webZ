@@ -10,7 +10,8 @@
     "music:live": "node scripts/music-field-003-server.mjs",
     "music:audius": "node scripts/music-field-004-audius.mjs",
     "name:demo": "node scripts/name-orchard-001.mjs demo",
-    "name:verify": "node scripts/name-orchard-001.mjs verify"
+    "name:verify": "node scripts/name-orchard-001.mjs verify",
+    "name:sms": "node scripts/name-orchard-002-cli.mjs"
   },
   "engines": {
     "node": ">=22"
