@@ -7,7 +7,7 @@ export const SCHEMA='webz/music-field-records/v0';
 export const VIEW='webz/music-field-view/v0';
 export const PORTABLE='webz/music-field-portable/v0';
 export const MAX_TRACKS=20000,MAX_BYTES=6000000,MAX_DEPTH=24;
-export const PLATFORMS=['SUNO','BANDCAMP','YOUTUBE'];
+export const PLATFORMS=['SUNO','BANDCAMP','YOUTUBE','AUDIUS'];
 const keys=['key','platform','source_id','id_kind','title','artist','album','model','created_at','seconds','tags','source_url','relations','origin','kind'];
 const assert=(v,err)=>{if(!v)throw Error(err)};
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -45,6 +45,11 @@ function platformURL(provider,raw){
     /^\/(?:track|album)\/[A-Za-z0-9-]+\/?$/.test(url.pathname)&&!url.search,
     'BANDCAMP_URL_INVALID');
  }
+ if(provider==='AUDIUS'){
+  assert(['audius.co','www.audius.co'].includes(url.hostname)&&
+    /^\/[A-Za-z0-9_.@%-]+\/[A-Za-z0-9_.%-]+\/?$/.test(url.pathname)&&!url.search,
+    'AUDIUS_URL_INVALID');
+ }
  if(provider==='YOUTUBE'){
   const isWatch=(url.hostname==='youtube.com'||url.hostname==='www.youtube.com')&&
     url.pathname==='/watch'&&url.searchParams.has('v')&&[...url.searchParams.keys()].every(x=>x==='v');
@@ -75,7 +80,7 @@ function normalize(r,platform,index,origin){
  const relations=Array.isArray(r.related)||Array.isArray(r.relations)?(r.related??r.relations):[];
  assert(Array.isArray(relations)&&relations.length<=16,'RELATION_LIMIT');
  const links=[...new Set(relations.map(x=>clean(x,150)))].sort();
- for(const x of links)assert(/^(suno|bandcamp|youtube):[A-Za-z0-9_-]{4,120}$/.test(x)&&x!==key,'RELATION_INVALID');
+ for(const x of links)assert(/^(suno|bandcamp|youtube|audius):[A-Za-z0-9_-]{4,120}$/.test(x)&&x!==key,'RELATION_INVALID');
  return {key,platform,source_id:sourceId,id_kind:idKind,title,artist,album,model,created_at:created,
   seconds,tags,source_url:sourceUrl,relations:links,origin,kind};
 }
@@ -109,7 +114,7 @@ export function validate(c){
     (r.seconds===null||Number.isInteger(r.seconds)&&r.seconds>=0&&r.seconds<=86400),'RECORD_TIME_INVALID');
   assert(Array.isArray(r.tags)&&r.tags.length<=24&&r.tags.every(t=>validText(t,55)&&t===t.toLowerCase()&&t),'RECORD_TAGS_INVALID');
   assert(r.source_url===null||platformURL(r.platform,r.source_url)===r.source_url,'RECORD_URL_INVALID');
-  assert(Array.isArray(r.relations)&&r.relations.length<=16&&r.relations.every(x=>typeof x==='string'&&/^(suno|bandcamp|youtube):[A-Za-z0-9_-]{4,120}$/.test(x)&&x!==r.key),'RECORD_RELATION_INVALID');
+  assert(Array.isArray(r.relations)&&r.relations.length<=16&&r.relations.every(x=>typeof x==='string'&&/^(suno|bandcamp|youtube|audius):[A-Za-z0-9_-]{4,120}$/.test(x)&&x!==r.key),'RECORD_RELATION_INVALID');
   assert(['USER_SELECTED','SYNTHETIC_DEMO'].includes(r.origin)&&['TRACK','VIDEO','RELEASE'].includes(r.kind),'RECORD_ORIGIN_INVALID');
   assert(!seen.has(r.key),'DUPLICATE_SOURCE_RECORD:'+r.key);seen.add(r.key);
  }

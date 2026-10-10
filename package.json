@@ -7,7 +7,8 @@
     "serve": "node scripts/serve.mjs",
     "test:browser": "python tests/browser.py && python tests/races.py && python tests/forage_browser.py",
     "replay": "node scripts/replay.mjs",
-    "music:live": "node scripts/music-field-003-server.mjs"
+    "music:live": "node scripts/music-field-003-server.mjs",
+    "music:audius": "node scripts/music-field-004-audius.mjs"
   },
   "engines": {
     "node": ">=22"

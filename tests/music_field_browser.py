@@ -1,4 +1,4 @@
-"""Mobile Chromium witness for 3-source Music Field and manual IndexedDB custody."""
+"""Mobile Chromium witness for 4-source Music Field and manual IndexedDB custody."""
 import json,pathlib,threading
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright
@@ -21,9 +21,27 @@ try:
   page.on('pageerror',lambda e:errors.append(str(e)))
   page.on('request',lambda r:external.append(r.url) if not (r.url.startswith(base.split('/nested/webZ/')[0]) or r.url.startswith('blob:')) else None)
   page.goto(base+'worlds/music-field/')
-  page.get_by_role('heading',name='One library. Three doors.').wait_for()
+  page.get_by_role('heading',name='One library. Four doors.').wait_for()
   assert page.locator('#count-all').inner_text()=='0'
   assert page.locator('#snapshots option').count()==1
+  # A deliberate real-song metadata admission; no media or network requests.
+  page.locator('#load-first-capsule').click()
+  assert page.locator('#count-all').inner_text()=='1'
+  assert page.locator('#count-suno').inner_text()=='1'
+  assert 'Let It Find Us' in page.locator('#records').inner_text()
+  assert 'suno:G0cLbwecX7g0qFUB' in page.locator('#records').inner_text()
+  assert 'No audio imported, played or saved' in page.locator('#status').inner_text()
+  # The fourth provider can coexist without inferred equivalence.
+  page.locator('#import-platform').select_option('AUDIUS')
+  page.locator('#files').set_input_files({'name':'audius.json','mimeType':'application/json','buffer':
+    json.dumps([{'source_id':'D7KyD','title':'Other Artist Recording','artist':'An Audius Artist',
+      'source_url':'https://audius.co/artist/other-recording'}]).encode()})
+  page.wait_for_function("()=>document.querySelector('#count-all').textContent==='2'")
+  assert page.locator('#count-audius').inner_text()=='1'
+  assert 'audius:D7KyD' in page.locator('#records').inner_text()
+  assert '0 user-declared' in page.locator('#relations').inner_text()
+  page.locator('#clear').click()
+  assert page.locator('#count-all').inner_text()=='0'
   page.locator('#demo').click()
   assert page.locator('#count-all').inner_text()=='36'
   assert [page.locator('#count-'+provider).inner_text() for provider in ['suno','bandcamp','youtube']]==['12','12','12']
@@ -96,7 +114,7 @@ try:
   assert not errors,errors
   assert not external,external
   print(json.dumps({'schema':'webz/music-field-browser-witness/v0','mobile_390':True,
-   'providers':3,'actual_imported_records':3,'synthetic_demo':True,
+   'providers':4,'actual_imported_records':3,'synthetic_demo':True,
    'nested_address':True,'provider_qualified':True,'timeline_and_graph':True,
    'conflict_refusal':True,'opt_in_local_save_restore_delete':True,
    'no_external_requests':True,'no_autoplay':True,'browser_errors':errors},indent=2))
