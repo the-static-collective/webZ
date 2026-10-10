@@ -20,6 +20,7 @@ jobs:
       - run: python tests/suno_atlas_browser.py
       - run: python tests/music_field_browser.py
       - run: python tests/music_field_003_browser.py
+      - run: python tests/name_orchard_browser.py
       - run: npm run replay -- evidence/browser/voyage.frozen.json
       - uses: actions/upload-artifact@v4
         with:
