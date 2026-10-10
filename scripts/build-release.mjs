@@ -24,7 +24,7 @@ catch{
 // Tracked shell drift cannot masquerade as an immutable committed release.
 // The letterbox is deliberately ONLINE-ONLY: no subscriber data or provider flow in offline caches.
 // This is a reviewed public export allowlist, not an arbitrary directory copy.
-const LETTER_PATHS=['post-office/','post-office/style.css','post-office/provider.mjs','post-office/subscribe.mjs','post-office/archive/','post-office/archive/000/','post-office/seed-lab/','post-office/seed-lab/style.css','post-office/seed-lab/seed.mjs','post-office/seed-lab/reader.mjs','post-office/seed-lab/seed-000.json'];
+const LETTER_PATHS=['post-office/','post-office/style.css','post-office/provider.mjs','post-office/subscribe.mjs','post-office/archive/','post-office/archive/000/','post-office/seed-lab/','post-office/seed-lab/style.css','post-office/seed-lab/seed.mjs','post-office/seed-lab/reader.mjs','post-office/seed-lab/seed-000.json','post-office/seed-lab/peer/','post-office/seed-lab/peer/peer.css','post-office/seed-lab/peer/peer.mjs','post-office/seed-lab/peer/peer-core.mjs'];
 const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js',...LETTER_PATHS.map(p=>p.endsWith('/')?p+'index.html':p)])].sort();
 const files=[];
 for(const path of paths){
