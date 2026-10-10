@@ -1,3 +1,4 @@
 // Public routing configuration only. No tokens, secrets, or subscriber addresses.
-// Empty until a provider-owned newsletter and a successful consent test exist.
-export const BUTTONDOWN_USERNAME = '';
+// Buttondown public newsletter https://buttondown.com/luv (verified 2026-10-10).
+// Integration remains a draft until consented end-to-end subscribe/unsubscribe testing.
+export const BUTTONDOWN_USERNAME = 'luv';
