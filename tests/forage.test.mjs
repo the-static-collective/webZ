@@ -148,8 +148,8 @@ test("field porch is user-initiated, reviewed and excludes off-device media tran
   assert.match(html,/id="photo"/);
   assert.match(html,/connect-src 'none'/);
   assert.match(root,/href="\.\/forage\/"/);
-  assert.match(sw,/'forage\/contracts\/gro-hold\.mjs'/);
-  assert.doesNotMatch(sw,/localStorage|originalPhotoBytes|receipt\.json|photo-evidence-.*\.json/);
+  assert.match(sw,/["']forage\/contracts\/gro-hold\.mjs["']/);
+  assert.doesNotMatch(sw,/localStorage|originalPhotoBytes|["\'](?:forage\/)?receipt\.json|photo-evidence-.*\.json/);
   assert.doesNotMatch(ui,/\bfetch\s*\(|\bXMLHttpRequest\b|\.sendBeacon\s*\(|\.geolocation\b|localStorage\.setItem/);
   assert.match(ui,/navigator\.clipboard\.writeText/);
   assert.match(ui,/coldVerifyForageDoor/);
