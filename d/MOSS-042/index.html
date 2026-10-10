@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17271d"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'none'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="description" content="A little room for things that survive difficult winters."><title>The Moss Room · A Pocket Door · Abundent</title><link rel="stylesheet" href="../style.css"><script type="module" src="../entry.mjs"></script></head>
+<body><header><a href="../../" class="brand">abundent.</a><nav><a href="../">All doors</a> · <a href="../../post-office/rootline/">ROOTLINE</a></nav></header>
+<main><p class="eyebrow">ABUNDENT × GrO × ROOTLINE · POCKET DOOR 006</p><h1 id="door-address">MOSS-042</h1><p class="intro" id="invitation">A little room for things that survive difficult winters.</p>
+<div class="grid"><section class="panel"><p class="tag">01 · A THRESHOLD, NOT A REQUIREMENT</p><h2 id="door-title">A closed little world</h2><p>Opening this door creates a verified <strong>actor-local GrO encounter</strong>. No visit is logged as a GrO world action. You may also close this page and leave no note.</p>
+<button id="enter" type="button">Open this little world</button>
+<p class="status" id="status" role="status">HOLD · NO ENCOUNTER YET</p><p class="small" id="field-status">HOLD · no encounter created</p>
+<p class="small" id="digest">No door has been accepted.</p>
+<label for="entrance">02 · Choose an entrance</label><select id="entrance"></select>
+<label for="detail">Detail dial · <output id="detail-label">10/10</output></label><input type="range" id="detail" min="0" max="10" step="1" value="10">
+<article class="scene"><h3 id="room-title">The closed threshold</h3><p id="room-text">Nothing has been opened.</p></article>
+</section>
+<section class="panel"><p class="tag">03 · AN ADDRESS YOU CAN TEXT YOURSELF</p><h2>Carry a door, not an obligation.</h2><p>Copy a short invitation, carry the original GrO JSON seed, or export a stand-alone HTML room. Nobody is subscribed or contacted by this page.</p>
+<div class="actions"><button type="button" id="carry-link" disabled>Copy a text invitation</button><button type="button" id="carry-json" disabled>Copy verifiable door</button><button type="button" id="save-door" disabled>Download door JSON</button><button type="button" id="carry-html" disabled>Grow offline room</button></div>
+<label for="manual-copy">Your manual copy area</label><textarea id="manual-copy" rows="4" readonly spellcheck="false"></textarea>
+<div class="rule"></div><p class="tag">04 · OPTIONAL ROOTLINE</p><h2>Leave a little encouragement.</h2><p>Only if you want to. Your words remain a separate ROOTLINE seed linked to this door, not a modification to its authored world. Add public words only; never include contact details or someone else's private story.</p>
+<label for="encouragement">A small public note (3–220 characters)</label><textarea id="encouragement" rows="3" maxlength="220" placeholder="I'm glad you arrived. You can keep this and stop here."></textarea>
+<label class="check"><input type="checkbox" id="share-consent">I wrote this note and choose to make it voluntarily shareable as public encouragement.</label>
+<button type="button" id="compose" disabled>Bind my encouragement locally</button>
+<p class="small" id="rootline-message">No ROOTLINE encouragement attached. No reply needed.</p><p class="small" id="bundle-hash">No separate encouragement is carried.</p>
+<div class="actions"><button type="button" id="carry-bundle" disabled>Copy bundled door + note</button><button type="button" id="save-bundle" disabled>Download bundled JSON</button><button type="button" id="save-rootline" disabled>Download ROOTLINE seed</button></div>
+</section></div>
+<section class="panel beneath"><p class="tag">05 · FOUND A BUNDLE? VERIFY IT BEFORE YOU ENTER</p><h2>Receive without obligation.</h2><p>Someone can hand you the full bound JSON by text or file. This browser checks the original curated GrO seed and the independent ROOTLINE hash chain. A hash does not authenticate the sender, and the message is never automatically published.</p>
+<label for="bundle-paste">Paste a complete door + ROOTLINE JSON bundle</label><textarea id="bundle-paste" maxlength="9500" rows="4" spellcheck="false"></textarea>
+<button type="button" id="import-paste">Verify pasted bundle</button>
+<label for="import-file">Or choose an existing JSON file</label><input type="file" id="import-file" accept=".json,application/json">
+<p><a href="../../post-office/rootline/">Open ROOTLINE</a> to receive or grow your voluntarily shared standalone ROOTLINE seed. Keeping is enough.</p>
+<button type="button" class="quiet" id="close">Close this door and clear this tab</button>
+<p class="small">No automated SMS, contacts, account, recipient tracking, P2P relay, localStorage, publisher signature or remote effects. The address refers only to this deployed site; the offline exported HTML can be opened without it.</p></section>
+</main><footer>DOOR ≠ CROSSING · ENCOUNTER ≠ ACTION · RECEIVE ≠ OBLIGATION · KEEPING IS ENOUGH</footer></body></html>
