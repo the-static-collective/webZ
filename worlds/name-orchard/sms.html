@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#13201b">
+<title>Name Orchard 002 · SMS Postcards</title>
+<link rel="stylesheet" href="./orchard.css"><link rel="stylesheet" href="./sms.css">
+<script type="module" src="./sms.mjs"></script></head>
+<body><main class="frame">
+<header><a href="./">← Name Orchard</a><span>SMS POSTCARDS / 002 / EXPERIMENT</span></header>
+<section class="intro"><div class="eyebrow">NO CARRIER ACCOUNT · NO SMS GATEWAY · NO TOKEN</div>
+<h1>Carry the name.<br><em>Even by text.</em></h1>
+<p>One ordinary phone message can carry an unsigned invitation. A series of short text messages can carry a complete cryptographically signed song claim, even without mobile internet at the time of delivery.</p></section>
+<section class="hero-grid">
+<article class="import"><div class="eyebrow">01 / SEND · HUMAN ACTION ONLY</div>
+<h2>Prepare the signed postcard</h2>
+<label class="choose" for="witness">Choose existing signed Name Orchard witness JSON<input id="witness" type="file" accept=".json,application/json"></label>
+<p>The first signed claim is extracted, checked, and divided into individually selectable SMS-sized pieces. Neither the MP3 nor the entire custody witness is transmitted.</p>
+<button id="postcard" type="button">Copy one-text invitation (unsigned)</button>
+<p id="send-status" role="status" aria-live="polite">No signed SMS segments prepared.</p>
+</article>
+<article class="song"><div class="eyebrow">02 / RECEIVE · OFFLINE VERIFICATION</div>
+<h2>Reassemble a signed claim</h2>
+<label for="inbox">Paste all received NO2 segments, one per line, in any order.</label>
+<textarea id="inbox" rows="7" spellcheck="false" placeholder="NO2-a1b2c3d4e5f6-01-08-..."></textarea>
+<div class="sms-actions"><button type="button" id="inspect">Verify received texts</button><button type="button" id="clear-inbox">Clear pasted texts</button></div>
+<p role="status" aria-live="polite" id="receive-status">No SMS segments reviewed.</p>
+<div id="received-claim" class="received"></div>
+</article>
+</section>
+<section class="panel"><div class="eyebrow">OUTGOING MESSAGE SEGMENTS</div><h2>Copy or share each part deliberately</h2>
+<p>Every line is at most 140 plain ASCII characters, designed to avoid ambiguous Unicode SMS encoding. Carriers may still apply their own segmentation, delays, charges or filtering. No automatic sending.</p>
+<div id="sms-frames" class="sms-frames"><p class="empty">Choose a signed witness to begin.</p></div>
+</section>
+<section class="panel"><div class="eyebrow">TRUST BOUNDARY</div>
+<h2>The phone number isn't the signer</h2>
+<p>A correctly verified signature proves that the embedded public key signed this specific claim. It does <strong>not</strong> prove the phone number, real creator, copyright, delivery, consent, local file availability, or a reLATTE receipt. Someone may replay a legitimate old postcard. SMS is neither encrypted nor reliably delivered.</p>
+<p>The receiving page can verify without contacting Abundent or Suno. The signed claim contains the source URL and submitted-file hash, not audio. Saving or forwarding anything remains a human decision.</p>
+</section>
+<footer><p>SMS CARRIER ≠ SECURITY · SIGNATURE ≠ IDENTITY · READ ≠ RECEIVE AUTHORITY · CLAIM ≠ FILE · TEXT DELIVERY ≠ RETRIEVABLE MEDIA.</p>
+<p><a href="../../docs/NAME-ORCHARD-002.md">Local protocol and test guide</a></p></footer>
+</main></body></html>
