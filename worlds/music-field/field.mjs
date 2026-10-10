@@ -1,4 +1,4 @@
-/* MUSIC FIELD 002: unified local metadata. No APIs, tokens, scraping or audio. */
+/* MUSIC FIELD 004: browser-local metadata; explicit external CLI lookup never runs here. */
 import {
  PLATFORMS,PORTABLE,MAX_BYTES,empty,validate,importText,merge,scope,counts,relations,
  fingerprint,freshView,validView,setView,descend,ascend,address,parseAddress,lanes
@@ -40,7 +40,7 @@ function drawGraph(box,records){
  if(!records.length){box.append(element('p','small muted','Your sources and tags will appear here.'));return}
  const stats=counts(records,view),W=500,H=255,max=Math.max(1,...Object.values(stats.platforms));
  const plotSvg=svg('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Counts by source and imported tags'});
- const ps=PLATFORMS.map((p,i)=>({name:p,count:stats.platforms[p],x:84+i*166,y:58}));
+ const ps=PLATFORMS.map((p,i)=>({name:p,count:stats.platforms[p],x:(i+1)*W/(PLATFORMS.length+1),y:58}));
  for(const p of ps){
   const c=svg('circle',{cx:p.x,cy:p.y,r:11+Math.sqrt(p.count/max)*18,fill:'#abedd0',stroke:'#2f6865','stroke-width':2});
   const tip=svg('title');tip.textContent=p.name+' · '+p.count; c.append(tip);plotSvg.append(c);
