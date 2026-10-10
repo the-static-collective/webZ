@@ -63,7 +63,8 @@ test('arbitrary third party URLs and parameter leakage refused',()=>{
  const bad={
   SUNO:['https://evil.com/song/abcde123456','https://suno.com/song/abcde123456?token=secret'],
   BANDCAMP:['https://artist.bandcamp.com.evil.com/track/test','https://artist.bandcamp.com/track/test?private=1'],
-  YOUTUBE:['https://youtu.be/abcDEF12345#private','http://youtube.com/watch?v=abcDEF12345']
+  YOUTUBE:['https://youtu.be/abcDEF12345#private','http://youtube.com/watch?v=abcDEF12345'],
+  AUDIUS:['https://audius.co.evil.com/artist/song','https://audius.co/artist/song?token=secret','http://audius.co/artist/song']
  };
  for(const p of PLATFORMS)for(const source_url of bad[p]){
   assert.throws(()=>importText(JSON.stringify([{title:'Bad URL',source_url}]),p,'json'));
@@ -127,7 +128,7 @@ test('malformed addresses and unknown view axes rejected',()=>{
 test('timeline, source histogram and metadata graph are measured',()=>{
  const c=combined(),stats=counts(c.records,freshView());
  assert.equal(stats.total,3);
- assert.deepEqual(stats.platforms,{SUNO:1,BANDCAMP:1,YOUTUBE:1});
+ assert.deepEqual(stats.platforms,{SUNO:1,BANDCAMP:1,YOUTUBE:1,AUDIUS:0});
  assert.equal(stats.bins.reduce((s,b)=>s+b.count,0),3);
 });
 test('horizontal granularity changes shown count without mutation',()=>{
