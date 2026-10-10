@@ -114,6 +114,14 @@ function dial(axis,x){move(setView(view,axis,bounds(x)))}
 function catalog(next,msg){
  library=validate(next);view=freshView();visible=30;url();paint();say(msg);
 }
+const firstCapsule={source_id:'G0cLbwecX7g0qFUB',title:'Let It Find Us',artist:'thestaticcollective',seconds:186,
+ tags:['garden','home','side by side'],source_url:'https://suno.com/s/G0cLbwecX7g0qFUB'};
+$('load-first-capsule').addEventListener('click',()=>{
+ try{
+  const candidate=importText(JSON.stringify([firstCapsule]),'SUNO','json','USER_SELECTED');
+  catalog(merge(library,candidate),'Admitted Let It Find Us as user-supplied Suno metadata. No audio imported, played or saved.');
+ }catch(e){say('HOLD: '+e.message+'. Existing library unchanged.')}
+});
 function demo(){
  const samples=[];
  for(let i=0;i<36;i++){
