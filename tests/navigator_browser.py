@@ -33,7 +33,9 @@ with sync_playwright() as p:
   context.add_init_script("window.cspWitness=[];document.addEventListener('securitypolicyviolation',e=>window.cspWitness.push(e.violatedDirective))")
   page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
   response=page.goto(base);assert response.status==200
-  page.get_by_role('link',name='Explore with 11×11',exact=True).tap()
+  # Garden Workbench now embeds its own dials; original full navigator remains a separate first-party route.
+  assert page.locator('#original').count()==1
+  response=page.goto(base+'field/navigate/');assert response.status==200
   page.locator('#instrument').wait_for(state='visible')
   page.wait_for_function("()=>document.querySelector('#notice').textContent.startsWith('Ready')")
   page.wait_for_function('()=>navigator.serviceWorker.controller !== null')
