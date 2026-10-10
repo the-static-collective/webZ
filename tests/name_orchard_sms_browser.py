@@ -25,7 +25,10 @@ try:
   page.goto(base+'worlds/name-orchard/sms.html')
   assert 'No signed SMS segments prepared' in page.locator('#send-status').inner_text()
   page.locator('#witness').set_input_files({'name':'witness.json','mimeType':'application/json','buffer':raw.encode()})
-  page.wait_for_function("()=>document.querySelector('#send-status').textContent.includes('individually copyable')")
+  page.wait_for_timeout(900)
+  current_status=page.locator('#send-status').inner_text()
+  assert 'individually copyable' in current_status, {'send_status':current_status,'page_errors':errors,
+    'script_loaded':page.evaluate("()=>performance.getEntriesByType('resource').some(x=>x.name.includes('sms.mjs'))")}
   parts=page.locator('.sms-part code').all_inner_texts()
   assert len(parts)>1 and len(parts)<=24
   assert all(len(segment)<=140 and segment.startswith('NO2-') for segment in parts)
