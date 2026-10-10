@@ -30,10 +30,11 @@ with sync_playwright() as p:
   context.on('request',lambda r:passive_requests.append(r.url))
   context.add_init_script("window.cspWitness=[];document.addEventListener('securitypolicyviolation',e=>window.cspWitness.push(e.violatedDirective))")
   page=context.new_page();page.on('pageerror',lambda e:all_errors.append(str(e)))
+  # Garden Workbench replaced the old porch homepage; the field remains its own route.
   page.goto(base)
-  page.get_by_role('heading',name='A porch for many worlds.',exact=True).wait_for()
+  assert page.locator('h1').inner_text().startswith('A little curiosity.')
   page.wait_for_function('()=>navigator.serviceWorker.controller !== null')
-  page.get_by_role('link',name='See what’s growing',exact=True).tap()
+  page.goto(base+'field/')
   page.get_by_role('heading',name='See what’s growing.',exact=True).wait_for()
   assert page.locator('.field-card').count()==11
   assert page.locator('.held-door a').count()==0
@@ -57,7 +58,10 @@ with sync_playwright() as p:
    page.set_viewport_size({'width':320,'height':780})
   for route in ['', 'field/', 'porch/', 'press/', 'proof/']:
    page.goto(base+route);page.reload();no_overflow(page)
-   assert 'OFFLINE READY' in page.locator('#offline-state').inner_text()
+   if route:
+    assert 'OFFLINE READY' in page.locator('#offline-state').inner_text()
+   else:
+    assert page.evaluate("document.documentElement.dataset.offlineReady==='true'")
    violations.extend(page.evaluate('window.cspWitness'))
   # An actual file operation emits no request and preserves source privacy.
   page.goto(base+'press/');page.get_by_label('Particular type').select_option('local-file')
@@ -77,7 +81,10 @@ with sync_playwright() as p:
    # Chromium's network emulation can leave navigator.onLine true after reload;
    # successful cached navigation is the offline witness, not that indicator.
    page.wait_for_function("()=>document.documentElement.dataset.offlineReady==='true'")
-   assert page.locator('#offline-state').inner_text() in ['OFFLINE','OFFLINE READY']
+   if route:
+    assert page.locator('#offline-state').inner_text() in ['OFFLINE','OFFLINE READY']
+   else:
+    assert page.evaluate("document.documentElement.dataset.offlineReady==='true'")
   page.goto(base+'field/');page.locator('#relatte-vm summary').tap();no_overflow(page)
   offline_manifest=page.evaluate("async()=>await (await fetch('../field/public-field.json')).json()")
   assert offline_manifest==json.loads((ROOT/'field/public-field.json').read_text())
