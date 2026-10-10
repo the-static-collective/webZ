@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#15261c"><meta name="referrer" content="no-referrer"><meta name="description" content="A letter that grows its own offline website. A public, local-first experiment in verifiable correspondence."><title>Seed Laboratory 002 · Abundent</title><link rel="stylesheet" href="./style.css"><script type="module" src="./reader.mjs"></script></head>
+<body><header><a class="brand" href="../../">abundent.</a><nav><a href="../">Post Office</a> · <a href="../archive/000/">Original letter</a></nav></header>
+<main><span class="eyebrow">THE ABUNDENT POST OFFICE / EXPERIMENT 002</span><h1>The letter<br>that plants a website.</h1>
+<p class="intro">One public letter. A small verifiable seed. Two independent readers. Turn the eleven-stop dials, then grow an HTML page you can open without a server. No subscriber information crosses into this laboratory.</p>
+<div class="grid"><section class="panel" aria-label="Seed controls"><span class="stamp" id="reader-id">READER A</span><h2>Seed bench</h2>
+<p>Bring a public seed JSON file. Nothing is uploaded. The reader checks its SHA-256 content digest before rendering.</p>
+<div class="actions"><button type="button" id="load-fixture">Load public letter 000</button><a class="button" href="?reader=b">Open reader B ↗</a></div>
+<label for="source-file">Or inspect a seed file on this device</label><input id="source-file" type="file" accept=".json,application/json">
+<p id="status" role="status">HOLD · CHOOSE A SEED TO BEGIN</p><p id="seed-card" class="proof">No verified seed loaded.</p>
+<label for="lens">01 / Field lens · <output id="lens-label">all</output></label><input id="lens" type="range" min="0" max="10" step="1" value="0">
+<label for="detail">02 / Detail · <output id="detail-label">10/10</output></label><input id="detail" type="range" min="0" max="10" step="1" value="10">
+<p>The 11 lenses filter authored source tags. Empty positions remain empty. Detail reveals source text and tags, never invents new claims.</p>
+<div class="actions"><button type="button" id="export-seed" disabled>Carry the seed .json</button><button type="button" id="export-view" disabled>Grow offline page .html</button></div><p id="source"></p>
+</section>
+<section class="panel" aria-label="Verified letter projection"><span class="eyebrow">THE LOCAL PROJECTION</span><div id="result" aria-live="polite"></div></section></div>
+<section class="panel" style="margin-top:22px"><h2>Two-reader experiment</h2><p>Download the seed from reader A. Open reader B in another browser profile or device and import that same file. Both readers independently recompute the hash and should reconstruct the same view for identical dial settings. Then export the one-file HTML page, disconnect from the network, and open it as a local file. This is file handoff, not yet network P2P.</p><p><strong>Boundary:</strong> SHA-256 checks content consistency, not who authored it. No signing key, P2P transport, email delivery, storage, or automated publishing is issued here. The generated HTML itself is an unsigned projection.</p></section>
+</main><footer>FILE ≠ UPLOAD · HASH ≠ AUTHORSHIP · VIEW ≠ PUBLICATION · NO AUTOMATIC TRANSFER</footer></body></html>

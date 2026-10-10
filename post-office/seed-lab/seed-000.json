@@ -1,0 +1,55 @@
+{
+  "schema": "abundent/letter-seed/v0",
+  "payload": {
+    "id": "post-office/000",
+    "title": "A letter before the letters",
+    "published": "2026-10-10",
+    "publisher": "Abundent / The Static Collective",
+    "source": "https://github.com/the-static-collective/webZ/pull/33",
+    "status": "PUBLIC_PREFACE_NOT_EMAILED",
+    "sections": [
+      {
+        "id": "made",
+        "title": "What we have made",
+        "facets": [
+          "music",
+          "field",
+          "workshop"
+        ],
+        "text": "We've made songs, built strange things, followed unlikely trails, and gathered more unfinished business than any reasonable workshop should contain."
+      },
+      {
+        "id": "correspondence",
+        "title": "Why we write",
+        "facets": [
+          "story",
+          "correspondence",
+          "questions"
+        ],
+        "text": "Now we want a way to write to one another without asking an algorithm for permission."
+      },
+      {
+        "id": "roots",
+        "title": "Where the letter grows",
+        "facets": [
+          "field",
+          "provenance",
+          "correspondence",
+          "archive"
+        ],
+        "text": "This Post Office belongs to Abundent. The Static Collective is the first voice through the door. The Daily Slice keeps the public record; these letters are invitations to return to it, listen, reply, and make something new."
+      },
+      {
+        "id": "arrival",
+        "title": "A small closing",
+        "facets": [
+          "music",
+          "story",
+          "workshop"
+        ],
+        "text": "We play where we arrive."
+      }
+    ]
+  },
+  "digest": "sha256:b335d30c4cf92e76b905e4a81a95c0d50fa7eca0ee5049ec979dbd2a3d40be66"
+}
