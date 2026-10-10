@@ -10,7 +10,8 @@
     "field:build": "node scripts/build-field.mjs",
     "field:verify": "node scripts/build-field.mjs --check",
     "test:field-browser": "python tests/field-browser.py",
-    "test:navigator-browser": "python tests/navigator_browser.py"
+    "test:navigator-browser": "python tests/navigator_browser.py",
+    "build": "node scripts/build-release.mjs"
   },
   "engines": {
     "node": ">=22"

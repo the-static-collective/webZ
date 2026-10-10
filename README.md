@@ -70,3 +70,9 @@ unsigned** limited invitation for manual WEBZ porch review. It does not
 transmit, collect or authenticate actual physical resources.
 
 See [GLEAN-001 guide](docs/GLEAN-001-REMAINDER-PORCH.md).
+
+## Public field launch and 11×11 navigator
+
+The [plain field](field/) retains eleven founding observations and twenty-four owner-labelled doors; the optional [11×11 navigator](field/navigate/) tunes scoped activities/states/owners and progressively reveals detail. Exact catalog-bound addresses support Enter/Rise/Root, keyboard/touch, browser history and cold replay. The instrument stores no visitor content.
+
+`npm run build` exports only committed first-party public assets to `dist/`, with an immutable commit/tree/file-hash `release.json`. Git auto-deploy is disabled; staged releases require byte/browser verification before explicit production promotion. See [launch sources, boundary, witnesses and rollback](docs/ABUNDENT-LAUNCH-001.md). Experimental labs and census admission are separate pending integrations.
