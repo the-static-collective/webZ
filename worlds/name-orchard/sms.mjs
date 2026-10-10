@@ -70,8 +70,8 @@ async function assemble(value){
  const raw=fromBase64url(encoded);
  assert(raw.length<=MAX_BYTES,'OVERSIZE');
  assert((await sha(raw)).slice(0,12)===tag,'FRAME_HASH_MISMATCH');
- const value=new TextDecoder('utf-8',{fatal:true}).decode(raw);
- let claim;try{claim=JSON.parse(value)}catch{throw Error('JSON_INVALID')}
+ const decodedText=new TextDecoder('utf-8',{fatal:true}).decode(raw);
+ let claim;try{claim=JSON.parse(decodedText)}catch{throw Error('JSON_INVALID')}
  await verified(claim);
  return {state:'VERIFIED',claim,total,tag};
 }
