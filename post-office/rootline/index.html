@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#182b20"><meta name="referrer" content="no-referrer"><meta name="description" content="ROOTLINE: a voluntary human-to-human underground encouragement chain. Keep is enough."><title>ROOTLINE · Abundent Post Office</title><link rel="stylesheet" href="./style.css"><script type="module" src="./rootline.mjs"></script></head>
+<body><header><a class="mark" href="../../">abundent.</a><nav><a href="../">Post Office</a> · <a href="../seed-lab/courier/">Wandering Letter</a></nav></header>
+<main><span class="eyebrow">THE ABUNDENT POST OFFICE / ROOTLINE EXPERIMENT 005</span>
+<h1>Something good<br>can travel <em>underground.</em></h1>
+<p class="intro">A small encouragement can cross between people without turning anybody into a follower, a subscriber, or an obligation. If it found you, keeping it is already enough.</p>
+<div class="stations" aria-label="Choose a station"><a href="?station=A">A · Plant</a><a href="?station=B">B · Receive</a><a href="?station=C">C · Receive later</a></div>
+<span id="station-id" class="stamp">ROOTLINE · STATION A</span>
+<div class="columns">
+<section class="panel" id="compose"><h2>Plant an encouragement</h2>
+<p>Write something you would be comfortable being passed to a stranger. Public text only; no names, contact information, personal stories about others, confidential details, or links. A copy can be forwarded beyond your control.</p>
+<label for="initial-note">The seed</label><textarea id="initial-note" rows="5" maxlength="220" placeholder="I'm glad you made it this far. You don't owe this message anything."></textarea>
+<label class="check"><input id="plant-consent" type="checkbox">I wrote this note and choose to make it publicly shareable. I understand it might travel beyond its first recipient.</label>
+<button type="button" id="plant">Plant this seed locally</button></section>
+<section class="panel" id="receive" hidden><h2>Receive without obligation</h2>
+<p>Paste the complete JSON seed from someone you chose to hear from, or import its file. Nothing is fetched from your messages, contacts, or other accounts.</p>
+<label for="inbox">Paste a ROOTLINE parcel</label><textarea id="inbox" rows="5" placeholder="Paste the ROOTLINE JSON here" spellcheck="false" maxlength="3800"></textarea>
+<button type="button" id="import-paste">Verify pasted seed</button>
+<label for="import-file">Or select a JSON file stored on your device</label><input id="import-file" type="file" accept=".json,application/json">
+</section>
+<section class="panel"><h2>The letter that found you</h2><p id="summary" class="fine">Nothing loaded. No one is waiting for an answer.</p>
+<div id="rendered" aria-live="polite"></div><p id="status" role="status">HOLD · THERE IS NO SEED TO CARRY</p>
+<div class="actions"><button type="button" id="keep" disabled>Keep it. That's enough.</button><button type="button" id="download" disabled>Carry full seed (.json)</button></div>
+<div class="actions"><button type="button" id="copy-text" disabled>Copy friendly text</button><button type="button" id="copy-json" disabled>Copy verifiable parcel</button></div>
+<p class="fine">You decide whether to put copied text into an ordinary message. Plain text preserves the human words, not their cryptographic chain. Copy the full JSON or download it if the next person should be able to verify those links. Ordinary SMS is not end-to-end encrypted and can reveal metadata to providers.</p>
+<label for="outbox">Manual copy area (nothing is sent)</label><textarea id="outbox" rows="4" readonly spellcheck="false"></textarea>
+</section>
+<section class="panel"><h2>Add a little of your own</h2><p id="grow-hint">A new note stays separate from the original; adding never overwrites earlier text.</p>
+<label for="grow-note">Optional note, in your own words</label><textarea id="grow-note" rows="3" maxlength="220" placeholder="I carried this a while. Passing along a little hope, too." disabled></textarea>
+<label class="check"><input type="checkbox" id="grow-consent" disabled>I wrote this addition and explicitly authorize sharing it as public text attached to the seed.</label>
+<button type="button" id="grow" disabled>Grow the chain locally</button>
+<p class="fine">This first experimental chain holds one origin and at most two voluntary additions. No popularity score, compulsory forwarding, hidden tracker, or public recipient graph.</p>
+<button type="button" id="clear" class="quiet">Clear this page's seed</button></section>
+</div>
+<section class="panel last"><h2>Underground, not intrusive</h2><p>There is no recipient registry, contact harvesting, automatic SMS, subscription, persistent local storage, or public directory in this experiment. A recipient can ignore it, keep it, add something independently, or pass it along after choosing a channel. Stopping is a successful outcome.</p>
+<p class="fine">SHA-256 links check that the text hasn't accidentally changed since the current parcel was created, but a malicious intermediary can replace the content and recompute unsigned hashes. This is not proof of authorship, informed consent by prior authors, anonymity, or secure delivery. Actual person-to-person field testing remains ahead.</p>
+<p><a href="../appropriation-atlas/">See the infrastructure experiments</a></p></section>
+</main><footer>ROOTLINE 005 · RECEIVE ≠ OBLIGATION · RELATION ≠ AUTHORITY · KINDNESS ≠ ENGAGEMENT METRIC</footer></body></html>
