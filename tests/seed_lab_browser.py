@@ -36,13 +36,13 @@ try:
   assert first.locator('#result').inner_text()==second.locator('#result').inner_text()
   assert first.locator('#result .seed-section').count()==4
   for p in [first,second]:
-   p.locator('#lens').fill('1')
-   p.locator('#detail').fill('10')
+   p.locator('#lens').evaluate("(el)=>{el.value='1';el.dispatchEvent(new Event('input',{bubbles:true}))}")
+   p.locator('#detail').evaluate("(el)=>{el.value='10';el.dispatchEvent(new Event('input',{bubbles:true}))}")
   assert first.locator('#result').inner_text()==second.locator('#result').inner_text()
   assert first.locator('#result .seed-section').count()==2
-  first.locator('#lens').fill('3')
+  first.locator('#lens').evaluate("(el)=>{el.value='3';el.dispatchEvent(new Event('input',{bubbles:true}))}")
   assert first.get_by_text('No authored material for this position.').count()==1
-  first.locator('#lens').fill('0')
+  first.locator('#lens').evaluate("(el)=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}))}")
   assert first.evaluate('document.documentElement.scrollWidth<=innerWidth')
   with first.expect_download() as dl:first.get_by_role('button',name='Grow offline page .html').click()
   generated=pathlib.Path(dl.value.path()).read_bytes()
