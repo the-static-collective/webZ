@@ -27,7 +27,7 @@ Operator supplied an MP3 and a Suno public-share address:
 
    The fixed HTTPS endpoint is `https://api.audius.co/v1/tracks/search` or `/tracks/{id}`. The command does a single explicit read-only request, without login, API key, followers, state-changing API, media download, proxy, redirect follow, telemetry or provider scraping. Network access and a working Audius public endpoint are required. External service terms, availability and rate limits apply.
 
-2. **Admit selected metadata locally.** On WebZ Music Field 004, choose **Audius** from the source dropdown and select the JSON file you chose to retain. Records enter only the active in-memory local source-qualified 11×11 graph. They are not saved until an additional explicit Save. Or choose **Suno** and import `examples/music-field-004-let-it-find-us.json` to add the user-provided song first. Both source branches coexist without implying identity or licensing connections.
+2. **Admit selected metadata locally.** On WebZ Music Field 004, choose **Audius** from the source dropdown and select the JSON file you chose to retain. Records enter only the active in-memory local source-qualified 11×11 graph. They are not saved until an additional explicit Save. Alternatively click **Load “Let It Find Us”** in the Music Field source gates for an intentional, in-memory admission of the first Suno song capsule (no file chooser needed), or choose **Suno** and manually import `examples/music-field-004-let-it-find-us.json`. Both source branches coexist without implying identity or licensing connections.
 
 ## What actually changes
 
