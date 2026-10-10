@@ -5,11 +5,12 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "serve": "node scripts/serve.mjs",
-    "test:browser": "python tests/browser.py && python tests/races.py && python tests/field-browser.py && python tests/forage_browser.py && python tests/glean_browser.py",
+    "test:browser": "python tests/browser.py && python tests/races.py && python tests/field-browser.py && python tests/forage_browser.py && python tests/glean_browser.py && python tests/navigator_browser.py",
     "replay": "node scripts/replay.mjs",
     "field:build": "node scripts/build-field.mjs",
     "field:verify": "node scripts/build-field.mjs --check",
-    "test:field-browser": "python tests/field-browser.py"
+    "test:field-browser": "python tests/field-browser.py",
+    "test:navigator-browser": "python tests/navigator_browser.py"
   },
   "engines": {
     "node": ">=22"

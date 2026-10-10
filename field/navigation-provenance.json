@@ -1,0 +1,10 @@
+{
+  "schema": "webz/navigation-provenance/v0",
+  "pr": 10,
+  "commit": "36a18117f31b7ade59148a3b82ac1fb9167b1d01",
+  "path": "worlds/wandering-lens/model.mjs",
+  "sourceSha256": "sha256:1c69a58cea70c7eca535c65fe6021486bdc6382b2af50cdc326aef36d0a8616f",
+  "extracted": "app/dial.mjs",
+  "extractedSha256": "sha256:2f9ffaa5944ce8fce5de2424581e4a21534b0ffb5e75e964b227ccbf9bfab650",
+  "adaptation": "WFN1 wraps exact MWF1 pairs with a SHA-256 founding catalog identity; UI labels translate 1\u201311 to 0\u201310. MF2 PR #23 informed scoped tag lanes and progressive detail only; no music identity or import code is incorporated."
+}

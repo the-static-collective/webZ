@@ -6,7 +6,7 @@ function worker(failed=false){
  const handlers={},requests=[],stored=new Map(),deleted=[];
  const prefix='webz-static:/nested/webZ/:';
  const names=new Set([prefix+'old','webz-offline-001:/nested/webZ/','webz-static:/other/:old','other-app']);
- const cache={put:async(u,r)=>stored.set(u,r),match:async r=>stored.get(r.url)};
+ const cache={put:async(u,r)=>stored.set(u,r),match:async r=>stored.get(typeof r==='string'?r:r.url)};
  const sandbox={URL,Request,Error,caches:{open:async n=>{names.add(n);return cache;},keys:async()=>[...names],delete:async n=>{deleted.push(n);names.delete(n);stored.clear();}},fetch:async r=>{requests.push(r);return {ok:!failed};},self:{location:{href:'https://example.org/nested/webZ/sw.js'},addEventListener:(k,h)=>handlers[k]=h,skipWaiting:async()=>{},clients:{claim:async()=>{}}}};
  vm.runInNewContext(renderWorker('current'),sandbox);
  const run=async kind=>{let task;handlers[kind]({waitUntil:p=>task=p});await task;};
@@ -33,4 +33,11 @@ test('asset version deterministically changes when field bytes or any shell byte
  assert.equal(assetVersion(assets),assetVersion(assets));
  assert.notEqual(assetVersion(assets),assetVersion([[assets[0][0],Buffer.from('b')],assets[1]]));
  assert.notEqual(assetVersion(assets),assetVersion([assets[0],[assets[1][0],Buffer.from('y')]]));
+});
+
+// Fragment canonicalization adapted from PR #25, 118eb60f4d8b1c244a0b40ea71f229946940669e.
+test('exact navigator fragment replay works offline and query-bearing inputs are not cached',async()=>{
+ const w=worker();await w.run('install');const before=w.requests.length;let task;
+ w.handlers.fetch({request:new Request('https://example.org/nested/webZ/field/navigate/#WFN1/catalog/t01g01'),respondWith:p=>task=p});assert.ok(task);await task;assert.equal(w.requests.length,before);
+ let handled=false;w.handlers.fetch({request:new Request('https://example.org/nested/webZ/field/navigate/?private=ignored#WFN1/catalog/t01g01'),respondWith:()=>handled=true});assert.equal(handled,false);
 });
