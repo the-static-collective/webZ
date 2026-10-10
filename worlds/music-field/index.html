@@ -1,22 +1,24 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101722">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
-<title>Music Field 003 · WebZ</title><link rel="stylesheet" href="./field.css"><script type="module" src="./field.mjs"></script></head>
+<title>Music Field 004 · WebZ</title><link rel="stylesheet" href="./field.css"><script type="module" src="./field.mjs"></script></head>
 <body><div class="frame">
-<header><a class="brand" href="../../">web<span>Z</span></a><nav><a href="../suno-atlas/">Suno Atlas 001</a><span> MUSIC FIELD / 003 </span></nav></header>
-<section class="hero"><div><div class="overline">MULTIWORLD DISCOGRAPHY / THE ELEVEN-DIAL INSTRUMENT</div><h1>One library.<br><em>Three doors.</em></h1><p>Explore Suno creations, Bandcamp releases and YouTube videos in one metadata constellation. Every source keeps its identity. Connections belong to their evidence—not a matching title.</p></div>
-<div class="orbit" aria-hidden="true"><span>S</span><span>B</span><span>Y</span><strong>11×11</strong></div></section>
+<header><a class="brand" href="../../">web<span>Z</span></a><nav><a href="../suno-atlas/">Suno Atlas 001</a><span> MUSIC FIELD / 004 </span></nav></header>
+<section class="hero"><div><div class="overline">MULTIWORLD DISCOGRAPHY / THE ELEVEN-DIAL INSTRUMENT</div><h1>One library.<br><em>Four doors.</em></h1><p>Explore Suno creations, Bandcamp releases, YouTube videos and Audius tracks in one metadata constellation. Every source keeps its identity. Connections belong to their evidence—not a matching title.</p></div>
+<div class="orbit" aria-hidden="true"><span>S</span><span>B</span><span>Y</span><span>A</span><strong>11×11</strong></div></section>
 <main>
 <section class="panel source-panel"><div class="headline"><div><div class="overline">01 / THE SOURCE GATES</div><h2>Bring the metadata you control.</h2></div><span class="chip">NO ACCOUNT PASSWORDS</span></div>
 <div class="sources">
 <article><div class="provider">S</div><h3>Suno</h3><p>User-selected CSV, JSON, or your existing Suno Atlas backup.</p><span>Account sync not connected</span></article>
 <article><div class="provider">B</div><h3>Bandcamp</h3><p>Release/track CSV or JSON. Private/artist API requires separate approval.</p><span>Metadata only</span></article>
 <article><div class="provider">Y</div><h3>YouTube</h3><p>Saved playlist/video metadata, including exported YouTube Data API JSON.</p><span>OAuth connector not connected</span></article>
+<article><div class="provider">A</div><h3>Audius</h3><p>Public metadata, exported after a deliberate read-only API lookup.</p><span>No account or token required for public reads</span></article>
 </div>
-<div class="import-controls"><label>Import source<select id="import-platform"><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option></select></label>
+<div class="import-controls"><label>Import source<select id="import-platform"><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option><option value="AUDIUS">Audius</option></select></label>
 <label class="filepick">Choose CSV / JSON files<input id="files" type="file" multiple accept=".csv,.json,text/csv,application/json"></label><button id="demo" class="secondary">Load fictional demo</button><button id="clear" class="secondary">Clear current index</button></div>
 <p class="small muted">Local imports only. No cookies, password fields, streaming keys, scraping, or automatic media playback. Imported music is not uploaded to WebZ.</p>
-<div class="metrics"><div><span>TOTAL RECORDS</span><strong id="count-all">0</strong></div><div><span>SUNO</span><strong id="count-suno">0</strong></div><div><span>BANDCAMP</span><strong id="count-bandcamp">0</strong></div><div><span>YOUTUBE</span><strong id="count-youtube">0</strong></div></div>
+<div class="metrics"><div><span>TOTAL RECORDS</span><strong id="count-all">0</strong></div><div><span>SUNO</span><strong id="count-suno">0</strong></div><div><span>BANDCAMP</span><strong id="count-bandcamp">0</strong></div><div><span>YOUTUBE</span><strong id="count-youtube">0</strong></div><div><span>AUDIUS</span><strong id="count-audius">0</strong></div></div>
 </section>
+<section class="panel" aria-labelledby="audius-title"><div class="overline">01A / AUDIUS PUBLIC CATALOG · EXPLICIT OPERATOR LOOKUP</div><h2 id="audius-title">Another independent listening territory.</h2><p class="small muted">On a Node.js 22+ desktop terminal, run <code>npm run music:audius -- search "artist or track"</code> or <code>npm run music:audius -- track D7KyD</code>. Redirect the resulting JSON to a local file, choose Audius above, then import that file. The external lookup is initiated only by you; no page fetch, background polling, account credentials, audio download or implied publishing rights.</p><p class="small muted">For our first real capsule, import the supplied <code>examples/music-field-004-let-it-find-us.json</code> as Suno. The audio file and its hash stay outside the public source repository.</p></section>
 <section class="panel youtube-connector" aria-labelledby="yt-title">
 <div class="overline">01B / OFFICIAL YOUTUBE CONNECTION · LOCAL DESKTOP ONLY</div>
 <div class="headline"><div><h2 id="yt-title">A read-only account door.</h2>
@@ -30,7 +32,7 @@
 <p class="small muted">No automatic playlist syncing, no background polling, no video streaming, no Bandcamp/Suno account harvesting. Playlist search is bounded to 100; chosen playlist imports are capped at 150 videos per selection. Imported records remain locally after disconnect unless you clear them.</p>
 </section>
 <section class="panel dial-panel"><div class="headline"><div><div class="overline">02 / THE NESTED RADIO FIELD</div><h2>Tune the discography.</h2></div><div class="capsule" id="current-family">EVERYTHING</div></div>
-<div class="filters"><label for="platform">Source world</label><select id="platform"><option value="ALL">All platforms</option><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option></select><span class="small muted">Choose a source, or tune the whole field</span></div>
+<div class="filters"><label for="platform">Source world</label><select id="platform"><option value="ALL">All platforms</option><option value="SUNO">Suno</option><option value="BANDCAMP">Bandcamp</option><option value="YOUTUBE">YouTube</option><option value="AUDIUS">Audius</option></select><span class="small muted">Choose a source, or tune the whole field</span></div>
 <div class="dials">
 <div class="dial"><div class="dial-head"><label for="tuning">↕ VERTICAL / MUSICAL FAMILY</label><strong id="t-label">01 / 11</strong></div><div class="range"><button id="t-minus" aria-label="Previous family">−</button><input id="tuning" type="range" min="1" max="11" value="1"><button id="t-plus" aria-label="Next family">+</button></div><div class="scale"><span>01 ALL</span><span>11 SPECIFIC</span></div></div>
 <div class="dial"><div class="dial-head"><label for="grain">↔ HORIZONTAL / GRANULARITY</label><strong id="g-label">06 / 11</strong></div><div class="range"><button id="g-minus" aria-label="Broader granularity">−</button><input id="grain" type="range" min="1" max="11" value="6"><button id="g-plus" aria-label="Finer granularity">+</button></div><div class="scale"><span>01 OVERVIEW</span><span>11 INDIVIDUAL</span></div></div></div>
@@ -46,5 +48,5 @@
 <div class="save-grid"><label>Snapshot name<input id="snapshot-name" maxlength="60" value="My Music Field"></label><button id="save">Save locally</button><button id="export">Export portable JSON</button></div>
 <div class="save-grid"><label>Saved snapshots<select id="snapshots"><option value="">No saved index chosen</option></select></label><button id="load">Load selected</button><button id="delete" class="danger">Delete selected</button></div>
 <p id="status" class="status" role="status" aria-live="polite">No metadata loaded and no account connected.</p></section>
-<footer>WEBZ / MUSIC FIELD 002 — SOURCE IDENTITY ≠ SONG IDENTITY · CHART ≠ CAUSALITY · TUNE ≠ PLAY</footer>
+<footer>WEBZ / MUSIC FIELD 004 — SOURCE IDENTITY ≠ SONG IDENTITY · CHART ≠ CAUSALITY · TUNE ≠ PLAY</footer>
 </main></div></body></html>
