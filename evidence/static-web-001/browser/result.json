@@ -34,12 +34,12 @@
   "real_sw_upgrade": "new hash and offline field; same-scope stale caches removed, neighbor preserved",
   "cold_offline_bootstrap": "unavailable, as required",
   "screenshots": {
-    "field-desktop.png": "sha256:26ba31411282d313f382f53f3940c84c211c18138e400f8c500268b395c5d11d",
-    "field-mobile-320-viewport.png": "sha256:9ab2b697edddb57f17fc83d6842fa1b71da4f5fb776a2a9a462d262361120322",
-    "field-mobile-320.png": "sha256:420cffc28bdec6007fcffcc4222451ab044602298c1ffefefc58aaa92871a6e0",
-    "fabrication-hold-desktop.png": "sha256:59de67353ca9d1065a123de75565b8336acbe2a661fda0d6d2e4e1e8f742b965",
-    "home-desktop.png": "sha256:5ab4bb4700f5025db1c9ce339fa8143da433be5e55b41d6ca3114ec64dcdc387",
-    "home-mobile-320.png": "sha256:ab36359c47e8de3e08c0c47228d24539668c83c14945223686e2dc3da867de16",
-    "field-desktop-viewport.png": "sha256:eae272d3f1bdfed20cf70ceb13e7dcb111a680010da7fc3061c03fad7fe4af38"
+    "field-mobile-320-viewport.png": "sha256:0c329c43509325ca51301255954f9b10401fd41b92e9172670cc556590286ce2",
+    "home-desktop.png": "sha256:d76039e1e56f474dcff94896da827dd47ab5d466cdef4e35e556ed0206309373",
+    "home-mobile-320.png": "sha256:122c8a057d7de25ea9e46f7ee9f0612b22756081e6cf8164bac510b0790931c7",
+    "field-desktop.png": "sha256:faa5235175745bbc57055f3a6061c80350e2c645323232d5d3c53741442bcbe3",
+    "field-mobile-320.png": "sha256:b58d569dc35225eb4dde9e682809436b52c3d07f661a3afff30e86e771a0b4de",
+    "fabrication-hold-desktop.png": "sha256:c32525817cf6a8e572f5c3a2260100b3734c42557a71f50c1659a3bbd9ce67ae",
+    "field-desktop-viewport.png": "sha256:a8c0dbe727e5c7904f8202c1183070ad8a24639c762aedda2cee8e4f7db63530"
   }
 }

@@ -75,4 +75,10 @@ Browser witnesses cover routes `/`, `/field/`, `/field/navigate/`, `/press/`, `/
 
 ## Smoke-test witness
 
-Release-specific commands, URLs, verified commit, TLS/redirect result, staged-production receipts and deviations are recorded here after the gates run. No pending witness is treated as success.
+Local gates passed on 2026-10-10: Node 24.19.0, **94/94 tests**, full `npm run test:browser` including three async race regressions, fresh-process voyage replay, field generated-file verification, **43 exported assets** verified against their manifest, two identical builds, and root/nested Chromium export witness. Chromium 151.0.7922.34 / Playwright 1.62.0 reports zero external requests, page errors and CSP violations. The founding hash remains unchanged. Screenshots were visually inspected at 320px and desktop.
+
+The first matrix witness mixed Playwright taps and a second CDP input controller on one mobile page. Independent input contexts fixed the harness conflict; every matrix button is actually tapped, and a separate real protocol touch swipe is verified. Offline fragment replay initially failed; the source-pinned worker fix and Node regression now pass both online and offline browser replay.
+
+Baseline TLS: curl reports SSL verification result 0 and HTTP/2, but the workspace uses a TLS-inspecting outbound proxy whose observed certificate issuer is OpenAI. Direct non-proxy network access is unavailable. Thus no direct origin leaf-certificate fingerprint is asserted. An independent TinyFish fetch also witnessed the baseline HTTPS homepage and www final redirect destination without errors. Final HTTPS witnesses repeat these checks on the promoted release. Physical Android installation, independent human usability review and a direct origin certificate-chain capture remain unwitnessed.
+
+Staged production and final release receipts are appended after their gates run. No pending witness is treated as success.
