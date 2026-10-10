@@ -41,9 +41,12 @@ async function disk(type,value){
  try{return await new Promise((resolve,reject)=>{
   const tx=db.transaction(STORE,type==='get'?'readonly':'readwrite'),store=tx.objectStore(STORE);
   const req=type==='get'?store.get(KEY):type==='put'?store.put(value,KEY):store.delete(KEY);
-  req.onsuccess=()=>resolve(req.result);
+  let result;
+  req.onsuccess=()=>{result=req.result};
   req.onerror=()=>reject(Error('LOCAL_HOLD_FAILED'));
   tx.onabort=()=>reject(Error('LOCAL_HOLD_ABORTED'));
+  tx.onerror=()=>reject(Error('LOCAL_HOLD_FAILED'));
+  tx.oncomplete=()=>resolve(result);
  })}finally{db.close()}
 }
 $('create-a').addEventListener('click',()=>work(async()=>{
