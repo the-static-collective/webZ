@@ -39,8 +39,8 @@ try:
         errors, requests = [], []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("request", lambda req: requests.append(req.url))
-        page.goto(base)
-        page.get_by_role("link", name="Field Porch · GrO").click()
+        # Garden Workbench has a distinct homepage; the first-party field porch route is stable.
+        page.goto(base + "forage/")
         page.get_by_role("heading", name="The world has a pantry. Not a free-for-all.").wait_for()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         assert page.get_by_text("LOCAL HOLD · NO DELIVERY · NO COLLECTION").is_visible()
