@@ -46,7 +46,7 @@ Absent capabilities: account access, server receivers, uploads, pressing deliver
 
 ## Reproducible release and checks
 
-`npm run field:verify` rejects generated HTML/cache drift. `npm run build` exports committed public bytes, rejects dirty public assets, and deterministically emits `dist/release.json` with exact commit, Git tree, catalog identities, upstream provenance and SHA-256/length for every exported asset. It uses no build timestamp or runtime dependency. Two builds of the same commit must be byte-identical. `node scripts/verify-release.mjs dist` and the equivalent HTTPS command verify every asset. The release manifest itself is not placed in the fixed offline cache, avoiding a hash cycle with the worker.
+`npm run field:verify` rejects generated HTML/cache drift. `npm run build` exports committed public bytes, rejects dirty public assets, and deterministically emits `dist/release.json` with exact commit, Git tree, catalog identities, upstream provenance and SHA-256/length for every exported asset. It uses no build timestamp or runtime dependency. Gitless hosting archives require the exact Vercel commit SHA and independently verify all exported bytes against that immutable public Git tree via two build-time GitHub API reads. Failed/missing source verification refuses a release. Two builds of the same commit must be byte-identical. `node scripts/verify-release.mjs dist` and the equivalent HTTPS command verify every asset. The release manifest itself is not placed in the fixed offline cache, avoiding a hash cycle with the worker.
 
 Required local commands:
 
