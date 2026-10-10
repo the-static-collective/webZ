@@ -81,4 +81,20 @@ The first matrix witness mixed Playwright taps and a second CDP input controller
 
 Baseline TLS: curl reports SSL verification result 0 and HTTP/2, but the workspace uses a TLS-inspecting outbound proxy whose observed certificate issuer is OpenAI. Direct non-proxy network access is unavailable. Thus no direct origin leaf-certificate fingerprint is asserted. An independent TinyFish fetch also witnessed the baseline HTTPS homepage and www final redirect destination without errors. Final HTTPS witnesses repeat these checks on the promoted release. Physical Android installation, independent human usability review and a direct origin certificate-chain capture remain unwitnessed.
 
-Staged production and final release receipts are appended after their gates run. No pending witness is treated as success.
+Published verified production on 2026-10-10:
+
+- Exact code commit: `7d68bfdc0f6347896c224f6f3fbcaa0243ed1159`; tree `3fa687ddab53536828f50704c5eff638b8601a3f`.
+- Deployment: `dpl_Exwp65kuQtLTGFQMhFKhAQMiRa6f`, READY production, [immutable release URL](https://webz-field-porch-disi9zo6k-theotherlucasv-1250s-projects.vercel.app).
+- [Public apex](https://abundent.org), [plain field](https://abundent.org/field/), [navigator](https://abundent.org/field/navigate/), [commit-bound release manifest](https://abundent.org/release.json).
+- Release manifest SHA-256: `73c8eeccdba0505e900fa5b1bfd477109e38fde6c4449936733473396f93b1d6`.
+- Both [push CI](https://github.com/the-static-collective/webZ/actions/runs/38019127305) and [PR CI](https://github.com/the-static-collective/webZ/actions/runs/38019178319) passed on the deployed commit. Local Node 24 and hosted Node 22 passed. No unresolved review threads were present at launch.
+- Before promotion apex still resolved to baseline `dpl_Gk7fjb5mXeeJ9br74XRCYg3eMoDh`. The baseline immutable URL independently returned HTTPS 200 and homepage bytes exactly matching main; rollback homepage SHA-256 `893fe900a31ac46ce4abb0a885835bd026a6a2728bc1dca02bf76bd243f62d4f`.
+- Staged and promoted deployments each passed every 43-asset hash check, full HTTPS navigator/browser witness and 22 HTTP/header observations, including absent labs, census, tests, docs and Git internals. Extensionless missing URLs receive Vercel's slash normalization before their genuine 404.
+- Final `www` checks at `/`, `/field/`, `/field/navigate/` each returned 308 with the exact equivalent apex `Location`. TLS verification was enabled and returned 0. HSTS, CSP, nosniff and no-referrer headers were present. Production Chromium reports zero external requests, page errors and CSP violations, eleven no-JS cards and twenty-four doors.
+- Independent TinyFish reads witnessed the new HTTPS homepage, www final apex URL and navigator title. This static fetch is not represented as a JavaScript functional check; Chromium supplies that witness.
+- Vercel reported no runtime error clusters over the final one-hour window. This static surface adds no telemetry or monitoring of visitors.
+- Project automatic custom-domain assignment was disabled before staging and again after explicit promotion; Git auto-deploy remains disabled in the branch config. No DNS mutation was performed.
+
+[Release/rollback receipt](../evidence/abundent-launch-001/release-receipt.json) · [staged HTTPS/browser/byte evidence](../evidence/abundent-launch-001/staged-production/) · [final production HTTPS/browser/byte evidence](../evidence/abundent-launch-001/production/).
+
+PR [#31](https://github.com/the-static-collective/webZ/pull/31) is a reviewable draft with `Closes #30`; main and the issue remain open for normal review/merge. Receipt-only follow-up commits append evidence without rebuilding or changing the verified production deployment. Physical Android installation and direct origin certificate capture remain the deviations named above.
