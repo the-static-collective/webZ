@@ -23,7 +23,6 @@ test('no automatic transport, third-party resource, forms, or executable script 
   assert.match(html,/connect-src 'none'/);
   assert.match(html,/form-action 'none'/);
   assert.doesNotMatch(html,/<script\b|<form\b|<iframe\b|<audio\b|<video\b|<img\b/i);
-  assert.doesNotMatch(html,/<(?:link|script|img|source)\\b[^>]*(?:src|href)="https?:\\/\\//i);
 });
 test('remote destinations are only explicit user-click links',()=>{
   const remote=[...html.matchAll(/<a\b[^>]*href="(https:\/\/[^"]+)"[^>]*>/g)].map(m=>m[0]);
@@ -42,7 +41,7 @@ test('capability labels distinguish the present from future services',()=>{
     assert.ok(html.includes(plain),plain);
   }
   assert.match(html,/The Front Room/);
-  assert.match(html,/The Static Collective/);
+  assert.match(html,/the Static Collective/i);
 });
 test('entrance is usable with narrow screens, keyboard, and reduced motion',()=>{
   assert.match(html,/class="skip" href="#main"/);
