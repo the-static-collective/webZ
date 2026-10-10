@@ -118,6 +118,6 @@ test("mobile offline path, consent, no secret storage or automatic publication",
  assert.match(html,/id="consent"/);
  assert.match(ui,/coldVerifyGleanInvitation/);
  assert.match(ui,/navigator\.clipboard\.writeText/);
- assert.match(sw,/'glean\/contracts\/glean-quest\.mjs'/);
+ assert.match(sw,/["']glean\/contracts\/glean-quest\.mjs["']/);
  assert.doesNotMatch(ui,/\bfetch\s*\(|XMLHttpRequest|localStorage\.setItem|\.sendBeacon\s*\(/);
 });

@@ -1,0 +1,45 @@
+{
+  "schema": "webz/public-field-browser-witness/v0",
+  "browser": "Chromium",
+  "browserVersion": "151.0.7922.34",
+  "playwrightVersion": "1.62.0",
+  "fieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "scopes": [
+    {
+      "scope": "/",
+      "offline_routes": 5,
+      "mobile_width": 320,
+      "no_horizontal_overflow": true,
+      "local_file_requests": 0,
+      "local_file_storage_entries": 0,
+      "first_party_cache_only": true
+    },
+    {
+      "scope": "/nested/webZ/",
+      "offline_routes": 5,
+      "mobile_width": 320,
+      "no_horizontal_overflow": true,
+      "local_file_requests": 0,
+      "local_file_storage_entries": 0,
+      "first_party_cache_only": true
+    }
+  ],
+  "external_requests": 0,
+  "page_errors": [],
+  "passive_csp_violations": [],
+  "keyboard_and_no_js": true,
+  "reduced_motion": true,
+  "zoom_400_percent_layout": true,
+  "explicit_external_click": "intercepted owner-site navigation; no availability or playback claimed",
+  "real_sw_upgrade": "new hash and offline field; same-scope stale caches removed, neighbor preserved",
+  "cold_offline_bootstrap": "unavailable, as required",
+  "screenshots": {
+    "field-mobile-320-viewport.png": "sha256:0c329c43509325ca51301255954f9b10401fd41b92e9172670cc556590286ce2",
+    "home-desktop.png": "sha256:d76039e1e56f474dcff94896da827dd47ab5d466cdef4e35e556ed0206309373",
+    "home-mobile-320.png": "sha256:122c8a057d7de25ea9e46f7ee9f0612b22756081e6cf8164bac510b0790931c7",
+    "field-desktop.png": "sha256:faa5235175745bbc57055f3a6061c80350e2c645323232d5d3c53741442bcbe3",
+    "field-mobile-320.png": "sha256:b58d569dc35225eb4dde9e682809436b52c3d07f661a3afff30e86e771a0b4de",
+    "fabrication-hold-desktop.png": "sha256:c32525817cf6a8e572f5c3a2260100b3734c42557a71f50c1659a3bbd9ce67ae",
+    "field-desktop-viewport.png": "sha256:a8c0dbe727e5c7904f8202c1183070ad8a24639c762aedda2cee8e4f7db63530"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "webz/launch-browser-witness/v0",
+  "scope": "Scripted Chromium Android-sized touch and desktop emulation; no physical Android installation claimed.",
+  "browserVersion": "151.0.7922.34",
+  "playwrightVersion": "1.62.0",
+  "fieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "scopes": [
+    {
+      "base": "https://abundent.org/",
+      "mobileWidth": 320,
+      "routes": 8,
+      "offlineRoutes": 6,
+      "coldReplayAddress": "WFN1/d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1/t02g01/t01g01",
+      "keyboard": true,
+      "touchSwipe": true,
+      "backForward": true,
+      "staleAddressHold": true,
+      "http404": 404
+    }
+  ],
+  "external_requests": 0,
+  "page_errors": [],
+  "csp_violations": [],
+  "no_js_worlds": 11,
+  "no_js_doors": 24,
+  "screenshots": {
+    "navigator-desktop.png": "sha256:d2a7314120ddf60c195af7decb6ebf795f8a062b5f1da88f520c551eb687a784",
+    "navigator-mobile-320.png": "sha256:8880769ee896726f5185d729b5029c0f079e66bbfb1c2ec80a7b070e647333e6",
+    "navigator-mobile-viewport.png": "sha256:15eae58d8838fc5e9fa3756bb62a8ad0c07fc453792319cffe167ce7a0b057ca"
+  }
+}

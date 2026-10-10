@@ -1,0 +1,235 @@
+{
+  "schema": "webz/immutable-release/v0",
+  "sourceCommit": "7d68bfdc0f6347896c224f6f3fbcaa0243ed1159",
+  "sourceTree": "3fa687ddab53536828f50704c5eff638b8601a3f",
+  "fieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "observationsHash": "sha256:3aa8ae883e46226e19a5c8d5a9f376c62de3a443df17866c1e8dd09799acf220",
+  "navigation": {
+    "schema": "webz/navigation-provenance/v0",
+    "pr": 10,
+    "commit": "36a18117f31b7ade59148a3b82ac1fb9167b1d01",
+    "path": "worlds/wandering-lens/model.mjs",
+    "sourceSha256": "sha256:1c69a58cea70c7eca535c65fe6021486bdc6382b2af50cdc326aef36d0a8616f",
+    "extracted": "app/dial.mjs",
+    "extractedSha256": "sha256:2f9ffaa5944ce8fce5de2424581e4a21534b0ffb5e75e964b227ccbf9bfab650",
+    "adaptation": "WFN1 wraps exact MWF1 pairs with a SHA-256 founding catalog identity; UI labels translate 1–11 to 0–10. MF2 PR #23 informed scoped tag lanes and progressive detail only; no music identity or import code is incorporated."
+  },
+  "boundary": "Public first-party static code and committed inspection catalog only. No remote effects, visitor inputs, census admission or experimental routes.",
+  "files": [
+    {
+      "path": "404.html",
+      "sha256": "sha256:20bf44224249f197416a5b8a8cabcbf70c8414e88cf375731086a5c9b81825a4",
+      "bytes": 623
+    },
+    {
+      "path": "app/dial.mjs",
+      "sha256": "sha256:2f9ffaa5944ce8fce5de2424581e4a21534b0ffb5e75e964b227ccbf9bfab650",
+      "bytes": 2722
+    },
+    {
+      "path": "app/field.mjs",
+      "sha256": "sha256:51df9f32fd27da5de758f86fb5fb81e078ddd0099c737cc821d1f6614bc9cf14",
+      "bytes": 8987
+    },
+    {
+      "path": "app/icon-192.png",
+      "sha256": "sha256:3c7198e4ac975ee481ad63cf222916a110ceb40ba082d26786091277eeb7a796",
+      "bytes": 938
+    },
+    {
+      "path": "app/icon-512.png",
+      "sha256": "sha256:470c392116c17daf791bb1027e45e993396b131d8747ae12dfae736b6b1f74fa",
+      "bytes": 2714
+    },
+    {
+      "path": "app/icon.svg",
+      "sha256": "sha256:f70bf6654efe61c5e404a2c79af32e9f890e3f27c3a50b32f6d77f1075f7193d",
+      "bytes": 277
+    },
+    {
+      "path": "app/model.mjs",
+      "sha256": "sha256:c418b7e66965ce971df8945063cbdc1409125167c82b8a4ac7385dc3458ceac3",
+      "bytes": 6950
+    },
+    {
+      "path": "app/navigator.mjs",
+      "sha256": "sha256:1215ed7185705969317f6c8a004d69b5334f59dfd775e62eb3836aa061a5d04b",
+      "bytes": 2159
+    },
+    {
+      "path": "app/press.mjs",
+      "sha256": "sha256:9a88898dba7b4ba8ccfa87da2939c7e58c7ed8fba7fc7ef132390482a21d3e9d",
+      "bytes": 6326
+    },
+    {
+      "path": "app/proof.mjs",
+      "sha256": "sha256:f79db8be1b344fe4eadd4101b6c28fb2013dd272290810bae649006f4d5d9f92",
+      "bytes": 11339
+    },
+    {
+      "path": "app/shell.mjs",
+      "sha256": "sha256:dd48bb48f23c98e86b01f3d5eb6372ab5d27462e7cbb869c9df3e7665d708b30",
+      "bytes": 859
+    },
+    {
+      "path": "app/style.css",
+      "sha256": "sha256:d10e64e77c876411c0d285fd7ae8ffbf45fdf348efc81757aef331b00c4b9a45",
+      "bytes": 11036
+    },
+    {
+      "path": "app/ui.mjs",
+      "sha256": "sha256:ead7a1bba1699bb5c3f5eba253870bd6288676f3e3787005505e6e6e8234da15",
+      "bytes": 10847
+    },
+    {
+      "path": "evidence/public-simulation.json",
+      "sha256": "sha256:073afcb179febe1a234c3eb42dde873b40c7892121560983bac8356b8a95b6fe",
+      "bytes": 29291
+    },
+    {
+      "path": "field/index.html",
+      "sha256": "sha256:7401bfdb6fa44feaabc69a1f4fc9daac4d12fb328b7581ac1ae9866e56e41877",
+      "bytes": 46934
+    },
+    {
+      "path": "field/navigate/index.html",
+      "sha256": "sha256:a8fb0c6f558c4aacdd21147ce64f32afdcda9a12a7262205b9023244c7cd89e5",
+      "bytes": 3716
+    },
+    {
+      "path": "field/navigate/navigator.css",
+      "sha256": "sha256:273d3732b6c29979cdc35652335a06446da0657618ac16204d3c8cb2d3376ac6",
+      "bytes": 2051
+    },
+    {
+      "path": "field/navigate/ui.mjs",
+      "sha256": "sha256:76e522bc2e534f698c139d960a571fef2f97cfe440970aec05f5373662a34266",
+      "bytes": 7109
+    },
+    {
+      "path": "field/navigation-provenance.json",
+      "sha256": "sha256:f4170a86aa4d5844b262cb00e1db5fe0618f360842ee5c13ff4a24754c96cf5d",
+      "bytes": 630
+    },
+    {
+      "path": "field/public-field-receipt.json",
+      "sha256": "sha256:6be38891c4bbc972bcc87f3a8526c17d1075ca3d8338c7691eb13382d1037290",
+      "bytes": 454
+    },
+    {
+      "path": "field/public-field.json",
+      "sha256": "sha256:be6a31a31fca23dd5ad21f6f8952251b7e9844caa9b5d3f1bb69089b18084157",
+      "bytes": 34353
+    },
+    {
+      "path": "field/public-field.schema.json",
+      "sha256": "sha256:9f3710ab3c23a9d400a3d891d91d848148fcc8ef8b5f51b65bc82ad9d3b3e59b",
+      "bytes": 13145
+    },
+    {
+      "path": "field/source-observations.json",
+      "sha256": "sha256:8abb877c58a3d9a49fa0e1a9c3c1e87ce5b0b5dc71f47577e50f73090e34f370",
+      "bytes": 15340
+    },
+    {
+      "path": "forage/bridge.mjs",
+      "sha256": "sha256:27d5c74119b89aab797b09ebd46706453f958c9b63d04143ac9580a0c13fe2f2",
+      "bytes": 3560
+    },
+    {
+      "path": "forage/contracts/gro-hold.mjs",
+      "sha256": "sha256:f7c9365e151bca6852a7fc7ef81ef502d12468d700e5d9bbe9e45df9bc098459",
+      "bytes": 5401
+    },
+    {
+      "path": "forage/contracts/scout-core.mjs",
+      "sha256": "sha256:b27d09635c1e9a5d7dc345323138ed503bd99fe489288e741e4fae5c2d317c31",
+      "bytes": 6863
+    },
+    {
+      "path": "forage/contracts/stable.mjs",
+      "sha256": "sha256:0c43a04b8c312ee782253afa45f2789973fad373355f118050c2276d3d1c86af",
+      "bytes": 364
+    },
+    {
+      "path": "forage/field.css",
+      "sha256": "sha256:0f23d8233976df9dd23f0cd649ed7324bcbe3edff7929def56c7f86abc5808f5",
+      "bytes": 3395
+    },
+    {
+      "path": "forage/index.html",
+      "sha256": "sha256:f34d63fa839fc203ad444845c412b062f202343498cf93377a868b657abc871d",
+      "bytes": 4449
+    },
+    {
+      "path": "forage/ui.mjs",
+      "sha256": "sha256:b66a6923ecc0797a0e8e421f2d9167449901e6098757f5e71b8089de2340b877",
+      "bytes": 3768
+    },
+    {
+      "path": "glean/bridge.mjs",
+      "sha256": "sha256:22bc30696cfa32446bfdf3cf3a9b4cc8f23b2f8eb62a9c0579c5c380daab03b0",
+      "bytes": 2557
+    },
+    {
+      "path": "glean/contracts/glean-quest.mjs",
+      "sha256": "sha256:64a0b65a8c321eedf696aab7abf46e90333c3185b6467ce9641a7b1dee3be6e2",
+      "bytes": 4995
+    },
+    {
+      "path": "glean/contracts/stable.mjs",
+      "sha256": "sha256:0c43a04b8c312ee782253afa45f2789973fad373355f118050c2276d3d1c86af",
+      "bytes": 364
+    },
+    {
+      "path": "glean/index.html",
+      "sha256": "sha256:f081e925774ab30708a567f44bed0ac8177d9d07618c8a9f672757b52ee7c8c4",
+      "bytes": 3526
+    },
+    {
+      "path": "glean/ui.mjs",
+      "sha256": "sha256:31f2a9890d63d8ed2dc75c8c420374d52007e2e8de3ba770acc5d5afc8f086d9",
+      "bytes": 2534
+    },
+    {
+      "path": "index.html",
+      "sha256": "sha256:d52db8e000a70ee5340935c5a8f9da56bb718776154d8da8c1d792a082dfcfaa",
+      "bytes": 3248
+    },
+    {
+      "path": "manifest.webmanifest",
+      "sha256": "sha256:2e600f7d6fd366390f1b6ddbf0a17aaefab2329ca3ee2a6277a7c29e5dfe679a",
+      "bytes": 557
+    },
+    {
+      "path": "porch/index.html",
+      "sha256": "sha256:c24a7288c6049512e7de3ac38eff61d1e6c283db923aa111a5bca277aa4decdd",
+      "bytes": 5232
+    },
+    {
+      "path": "press/index.html",
+      "sha256": "sha256:82524705d00c0494a505da074ec1c7432b42ec4e03766bf2624e7b5d713a6700",
+      "bytes": 4335
+    },
+    {
+      "path": "proof/index.html",
+      "sha256": "sha256:7b5046212c665a49514f2ad597f6d34f091d94f5881108b516262af3f709c326",
+      "bytes": 4130
+    },
+    {
+      "path": "sw.js",
+      "sha256": "sha256:28281564af8304677794ca52dfba16ffb47f74449c61369a4490bc89c04e1161",
+      "bytes": 2155
+    },
+    {
+      "path": "worlds/orchard/index.html",
+      "sha256": "sha256:d15300659e8c27616ee168f56ee68fa17132914e818905241252e242a84a8b4c",
+      "bytes": 3492
+    },
+    {
+      "path": "worlds/sanctuary/index.html",
+      "sha256": "sha256:9e4c04b1e5ec9c9ed4a03d41a61e7aac204b782ed84da925d18fed455ac6bc8b",
+      "bytes": 3437
+    }
+  ]
+}
