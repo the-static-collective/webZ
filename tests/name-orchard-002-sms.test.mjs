@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import {buildWitness} from '../scripts/name-orchard-001-core.mjs';
 import {packClaim,assembleTexts,postcard,parseSegment,CHUNK,MAX_PARTS,MAX_BYTES} from '../scripts/name-orchard-002-sms.mjs';
 
@@ -75,4 +77,5 @@ test('browser has no silent send, provider fetch, audio or off-device save',()=>
  assert.ok(!browser.includes('sendTextMessage'));
  assert.ok(!html.includes('<audio'));
  assert.ok(MAX_BYTES<=2048);
+ execFileSync(process.execPath,['--check',fileURLToPath(new URL('../worlds/name-orchard/sms.mjs',import.meta.url))],{stdio:'pipe'});
 });
