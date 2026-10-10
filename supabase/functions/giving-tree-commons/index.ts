@@ -1,6 +1,6 @@
 // Deploy ONLY into a separately reviewed Supabase project after migration and gateway configuration.
 // Runtime: Deno / Supabase Edge Functions, no third-party dependencies.
-import {makeCommons} from '../../../experiments/harmony-grove-001/commons/service.mjs';
+import {makeCommons} from '../_shared/giving-tree/service.mjs';
 const env=(key:string)=>Deno.env.get(key)||'';
 const api=env('SUPABASE_URL')+'/rest/v1/giving_tree_gifts';
 const key=env('SUPABASE_SERVICE_ROLE_KEY'); // never return to clients
