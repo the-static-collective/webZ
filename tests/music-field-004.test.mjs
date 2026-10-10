@@ -78,6 +78,8 @@ test('no player, browser API network request or repository MP3 introduced',()=>{
  const html=readFileSync(new URL('../worlds/music-field/index.html',import.meta.url),'utf8');
  const browser=readFileSync(new URL('../worlds/music-field/field.mjs',import.meta.url),'utf8');
  assert.ok(html.includes('id="count-audius"'));
+ assert.ok(html.includes('id="load-first-capsule"'));
+ assert.ok(browser.includes("$('load-first-capsule').addEventListener('click'"));
  assert.ok(html.includes('<option value="AUDIUS">Audius</option>'));
  assert.ok(html.includes("media-src 'none'"));
  assert.ok(!html.includes('<audio'));
