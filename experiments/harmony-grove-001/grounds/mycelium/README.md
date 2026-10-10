@@ -32,3 +32,15 @@
 From the assembled WebZ source: `node --test tests/*.test.mjs` (51/51 passing at first authoring). `node --check` the new ESM modules, and `node scripts/sync-giving-tree-shared.mjs --check` to preserve the Commons shared adapter. Static preview from a local web server at `/experiments/harmony-grove-001/grounds/mycelium/`.
 
 The new route remains excluded from WebZ `STATIC_PATHS`, immutable release export, fixed service worker cache, and Vercel production. Browser/device E2E, accessibility, privacy review, withdrawal/deletion semantics for any future public sync, WAF/rate limits, and the separate moderation gate **must** be independently witnessed before any public activation. Existing user-controlled production at abundent.org stays unchanged.
+
+## MYCELIUM-008 — circulation without suspension
+
+The original 007 receipt schema and identity remain, with additive event kinds `REVISIT` and `FORK`; existing notebooks remain readable. A revisited particular records a **new** occurrence without rewriting the first CONTACT. Every newly written reason for the same pair may have its own Free Graph-style `connects` proposal (same exact proposal cannot be repeated). Different ACTIVE interpretations coexist as records, but **only one projected navigable path per pair** contributes to local grounds geometry: repeated interpretations never count as votes and cannot accumulate gravitational weight.
+
+A `FORK` entry names the exact predecessor event hash, making a new observer-local continuation while preserving the original notebook and its past. The UI retains alternative histories in an ephemeral local branch shelf, with cycle/switch actions; nothing is persisted or synchronized automatically. Export individual branch notebooks deliberately before leaving the page. `RESURFACE` can be paired, at the visitor's explicit selection, with a distinct `ACTIVATION` receipt in one atomic UI action. New association proposals similarly offer a checkbox for opening the path immediately *in this local view*, not public publication. An observer may record a subsequent OPEN/HOLD/REFUSE stance; current navigability follows the observer's latest declared stance, not an immutable once-ever choice.
+
+The separate `demo/` route is fictional and read-only. It proposes a possible public preview slice, but is still excluded from the immutable release export and has NOT been deployed. Unlike the full experimental workbench it contains **no inputs, notebook export, user data, external scripts or API calls**. Browsing it does not write UNDERSTORY receipts. Browser and production checks remain an explicit release gate.
+
+Laws: `REVISIT != FIRST CONTACT` · `COEXISTING INTERPRETATIONS != EXTRA VOTES` · `BRANCH != OVERWRITE` · `RESURFACE != RETROACTIVE KNOWLEDGE` · `OBSERVATION != AUTHORITY` · `ONE FOOTPATH != ONE POSSIBLE MEANING`.
+
+New verification: `node --test tests/*.test.mjs` (60/60 local tests on assembled source), `node scripts/sync-giving-tree-shared.mjs --check`, `node --check` new modules. Browser visual/keyboard/mobile, public export/release bytes, and real moderation/backend behavior remain unverified.

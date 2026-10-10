@@ -9,7 +9,7 @@ export const CARRIER_SCHEMA='webz/grounds-mycelium-carrier/v0';
 export const MAX_EVENTS=96;
 export const MAX_BYTES=95000;
 const HASH=/^sha256:[a-f0-9]{64}$/;
-const TYPES=['CONTACT','ATTENTION','DECODER','STANCE','ASSOCIATION','ACTIVATION','REST','RESURFACE'];
+const TYPES=['CONTACT','ATTENTION','DECODER','STANCE','ASSOCIATION','ACTIVATION','REST','RESURFACE','REVISIT','FORK'];
 const STANCES=['OPEN','HOLD','REFUSE'];
 const isObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 const text=(v,max=180)=>String(v??'').trim().replace(/\s+/g,' ').slice(0,max);
@@ -27,13 +27,16 @@ function interpret(events){
  const contacts=new Map(),associations=new Map();
  for(const ev of events){
   const v=ev.type,subject=ev.subject;
-  if(['CONTACT','ATTENTION','DECODER','STANCE'].includes(v)){
+  if(['CONTACT','ATTENTION','DECODER','STANCE','REVISIT'].includes(v)){
    if(!HASH.test(subject||''))forbidden('SUBJECT_ADDRESS_REQUIRED');
-   const s=contacts.get(subject)||{contact:false,attended:false,decoder:null,stance:null};
+   const s=contacts.get(subject)||{contact:false,attended:false,decoder:null,stance:null,revisits:0};
    if(v==='CONTACT'){
     if(s.contact)forbidden('CONTACT_ALREADY_RECORDED');
     if(ev.note.length<12)forbidden('CONTACT_DECLARATION_REQUIRED');
     s.contact=true;
+   }else if(v==='REVISIT'){
+    if(!s.contact||ev.note.length<12)forbidden('CONTACT_BEFORE_REVISIT_REQUIRED');
+    s.revisits++;
    }else if(v==='ATTENTION'){
     if(!s.contact||s.attended||ev.note.length<12)forbidden('CONTACT_BEFORE_ATTENTION_REQUIRED');
     s.attended=true;
@@ -51,6 +54,9 @@ function interpret(events){
    if(associations.has(p.id))forbidden('ASSOCIATION_ALREADY_PRESENT');
    if(!contacts.get(p.a)?.attended||!contacts.get(p.b)?.attended||!contacts.get(p.a)?.stance||!contacts.get(p.b)?.stance)forbidden('TWO_ATTENDED_PARTICULARS_REQUIRED');
    associations.set(p.id,{path:p,active:false,rested:false,resurfaced:0,activationCount:0});
+  }else if(v==='FORK'){
+   // Forks cite the exact prior cut. They do not rewrite earlier residues or create routes.
+   if(subject!==null||!HASH.test(ev.target||'')||ev.target!==ev.previous||ev.note.length<12)forbidden('FORK_REQUIRES_PRIOR_CUT');
   }else {
    if(subject!==null||!HASH.test(ev.target||''))forbidden('ASSOCIATION_REFERENCE_REQUIRED');
    const a=associations.get(ev.target);
@@ -86,7 +92,7 @@ export async function inspectNotebook(book){
     (ev.decoder!==null&&(typeof ev.decoder!=='string'||ev.decoder.length>80))||
     (ev.stance!==null&&!STANCES.includes(ev.stance))||!HASH.test(ev.id||''))forbidden('INVALID_RESIDUE_EVENT');
   if(ev.type!=='ASSOCIATION'&&ev.footpath!==null)forbidden('INERT_FOOTPATH_REQUIRED');
-  if(['CONTACT','ATTENTION','DECODER','STANCE'].includes(ev.type)&&ev.target!==null)forbidden('INERT_TARGET_REQUIRED');
+  if(['CONTACT','ATTENTION','DECODER','STANCE','REVISIT'].includes(ev.type)&&ev.target!==null)forbidden('INERT_TARGET_REQUIRED');
   if(!['DECODER'].includes(ev.type)&&ev.decoder!==null)forbidden('INERT_DECODER_REQUIRED');
   if(ev.type!=='STANCE'&&ev.stance!==null)forbidden('INERT_STANCE_REQUIRED');
   if(ev.type==='ASSOCIATION')await inspectFootpath(ev.footpath);
@@ -103,12 +109,12 @@ export async function appendObservation(book,raw,graph){
  if(!isObj(raw)||!TYPES.includes(raw.type))forbidden('INVALID_EVENT_PROPOSAL');
  if(book.events.length>=MAX_EVENTS)forbidden('UNDERSTORY_FULL');
  const type=raw.type;
- const subject=['CONTACT','ATTENTION','DECODER','STANCE'].includes(type)?raw.subject:null;
+ const subject=['CONTACT','ATTENTION','DECODER','STANCE','REVISIT'].includes(type)?raw.subject:null;
  if(subject!==null&&(!HASH.test(subject||'')||!graph?.index?.has(subject)))forbidden('OBSERVED_GIFT_NOT_PRESENT');
  const footpath=type==='ASSOCIATION'?await proposeFootpath(graph,{a:raw.a,b:raw.b,kind:raw.kind,note:raw.note,keeper:book.observer}):null;
- if(footpath&&[...state.associations.values()].some(a=>[a.path.a,a.path.b].join('|')===[footpath.a,footpath.b].join('|')))forbidden('ONE_ASSOCIATION_PER_PAIR');
+ // Differing interpretations of the same pair remain separate evidence; never become votes.
  const body={schema:EVENT_SCHEMA,sequence:book.events.length,previous:book.events.at(-1)?.id||null,
-  type,subject,target:['ACTIVATION','REST','RESURFACE'].includes(type)?raw.target:null,
+  type,subject,target:type==='FORK'?(book.events.at(-1)?.id||null):['ACTIVATION','REST','RESURFACE'].includes(type)?raw.target:null,
   footpath,note:text(raw.note,180),decoder:type==='DECODER'?text(raw.decoder,80)||null:null,
   stance:type==='STANCE'?raw.stance:null,observer:book.observer};
  const ev={...body,id:await checksum(body)};
@@ -117,16 +123,27 @@ export async function appendObservation(book,raw,graph){
  return next;
 }
 
+export async function forkNotebook(book,reason='I want a different continuation of the same observed history.') {
+ await inspectNotebook(book);
+ if(!book.events.length)forbidden('NOTHING_TO_BRANCH_YET');
+ // appendObservation returns a new book; parent object and event bytes remain untouched.
+ return appendObservation(book,{type:'FORK',note:reason});
+}
+
 export async function projectMycelium(graph,book){
- const {state}=await inspectNotebook(book),active=[],dormant=[];
+ const {state}=await inspectNotebook(book),active=[],dormant=[],parallel=[];
+ const representedPairs=new Map();
  for(const [id,a] of state.associations){
   const enough=graph.index.has(a.path.a)&&graph.index.has(a.path.b);
   const open=state.contacts.get(a.path.a)?.stance==='OPEN'&&state.contacts.get(a.path.b)?.stance==='OPEN';
-  if(a.active&&enough&&open)active.push(a.path);
-  else dormant.push({id,reason:!enough?'MISSING_ORIGINAL_GIFT':!open?'OBSERVER_STANCE_NOT_OPEN':a.rested?'RESTING':'NOT_ACTIVATED',resurfaced:a.resurfaced,path:a.path});
+  if(a.active&&enough&&open){
+   const pair=[a.path.a,a.path.b].join('|');
+   if(representedPairs.has(pair))parallel.push({id,alongside:representedPairs.get(pair),path:a.path});
+   else {representedPairs.set(pair,id);active.push(a.path);}
+  }else dormant.push({id,reason:!enough?'MISSING_ORIGINAL_GIFT':!open?'OBSERVER_STANCE_NOT_OPEN':a.rested?'RESTING':'NOT_ACTIVATED',resurfaced:a.resurfaced,path:a.path});
  }
  const grounds=composeGrounds(graph,active);
- return {grounds,active,dormant,contacts:state.contacts.size,events:book.events.length,
+ return {grounds,active,dormant,parallel,contacts:state.contacts.size,events:book.events.length,
   law:'TRACE_NOT_MEMORY_AND_FOOTPATH_NOT_ADMISSION'};
 }
 export async function exportMycelium(book){

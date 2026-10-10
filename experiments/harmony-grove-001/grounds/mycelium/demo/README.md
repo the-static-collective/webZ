@@ -1,0 +1,5 @@
+# MYCELIUM-008 — a safe demonstration candidate
+
+This is a **read-only, fictional** example of one original four-work Grove and optional proposed routes between two works. It uses only locally bundled source modules, no network requests, account, upload, user files, storage, backend, automatic attention observation, or private notebooks. It is not an active public experience at abundent.org unless intentionally and separately released. Use the three controls to compare an untended map, one proposed route, and two interpretations of the same pair. The latter retains **one** navigable route; no engagement/popularity signal is created.
+
+Preview from the full webZ source served as static files at `experiments/harmony-grove-001/grounds/mycelium/demo/`. A safe public release would need verification of the complete dependency bundle, CSP, original works, keyboard/mobile experience, privacy and reproducible production export. It does **not** authorize the Commons 003 public receiving/moderation backend.
