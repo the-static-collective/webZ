@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#15261c"><meta name="referrer" content="no-referrer"><meta name="description" content="Experiment 003: manual WebRTC peer pairing, a bounded verified public letter seed, and no hosting-server file relay."><title>Peer Seed Crossing · Abundent</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./peer.css"><script type="module" src="./peer.mjs"></script></head>
+<body><header><a class="brand" href="../../../">abundent.</a><nav><a href="../">Seed lab</a> · <a href="../../">Post Office</a></nav></header>
+<main><span class="eyebrow">THE ABUNDENT POST OFFICE / EXPERIMENT 003</span><h1>Give a letter<br>another home.</h1>
+<p class="intro">Two devices, one public seed, one explicitly approved crossing. The computers exchange WebRTC pairing descriptions manually; if they establish a direct channel, they send only a bounded seed JSON. <strong>Abundent never relays the file.</strong></p>
+<div class="notice"><strong>Science boundary.</strong> This is experimental WebRTC, not Soulseek/IPFS discovery. Connecting may expose network addresses to the other peer. The optional STUN service can learn your public IP; it is used only if you select it and initiate pairing. There is no TURN relay and connectivity may fail behind some NATs. Pairing codes are manual checks, not authenticated identity or signed authority.</div>
+<section class="panel"><h2>1 · Choose roles and a public seed</h2>
+<div class="actions"><button id="load" type="button">Load public letter 000</button><label class="file-select">Choose local public seed .json <input id="seed-file" type="file" accept=".json,application/json"></label></div>
+<p class="proof" id="received-digest">No verified public seed loaded.</p>
+<label class="check"><input type="checkbox" id="stun">Opt into a public STUN lookup when initiating pairing (may reveal IP to STUN provider)</label>
+<p>Device A (sender) loads a verified seed and creates an offer. Device B (receiver) pastes that offer, explicitly approves receiving, then makes an answer. Send the answer back to A using any channel you choose. These copied descriptions may reveal connection metadata: share them only with the intended peer.</p>
+<div class="actions"><button id="offer" type="button">A · Create offer</button><button id="disconnect" type="button" class="quiet">Disconnect / clear pairing</button></div>
+</section>
+<section class="panel"><h2>2 · Copy and exchange pairing descriptions</h2>
+<label for="signal-out">My outgoing pairing description (copy and send out-of-band)</label><textarea id="signal-out" rows="5" readonly spellcheck="false"></textarea><button id="copy-out" type="button">Copy outgoing description</button>
+<label for="signal-in">Description received from the other device (paste here)</label><textarea id="signal-in" rows="5" maxlength="42000" spellcheck="false" placeholder="Paste JSON offer on B, or JSON answer on A"></textarea>
+<label class="check"><input id="receive-consent" type="checkbox">Device B: I agree to establish a connection to receive one public letter seed from this peer.</label>
+<div class="actions"><button id="answer" type="button">B · Create answer from offer</button><button id="complete" type="button">A · Apply answer</button></div>
+</section>
+<section class="panel"><h2>3 · Compare, approve, cross</h2><p>Compare the full twelve-character code aloud or over a separately trusted channel. Both devices must show the <strong>same</strong> code before sending. A matching code alone does not establish the person's identity.</p>
+<div class="paircode" id="pairing">—</div>
+<label class="check"><input id="compare" type="checkbox">I compared this code with the intended peer.</label>
+<label class="check"><input id="send-consent" type="checkbox">Device A: I authorize sending exactly one verified public seed to this peer.</label>
+<div class="actions"><button id="accept" type="button" disabled>B · Accept this seed</button><button id="send" type="button" disabled>A · Send verified seed</button></div>
+<p>WebRTC channel: <strong id="peer-state">NOT CONNECTED</strong></p>
+<p id="status" role="status">HOLD · CREATE AN OFFER OR PASTE AN OFFER</p>
+<div class="actions"><button id="download" type="button" disabled>Save verified seed .json</button><button id="receipt-download" type="button" disabled>Save local receipt .json</button></div>
+</section>
+<section class="panel"><h2>4 · Grow the website offline</h2><p>On device B, save the received verified seed. Open the <a href="../">Seed Laboratory 002</a>, import the JSON, turn the dials, and export a standalone HTML website. Then turn the network off and open that HTML file directly.</p>
+<p>The receipt is an <strong>unsigned, local peer observation</strong>. Content hash ≠ author authentication. A web page ≠ a sovereign admission. Neither peer uploads subscriber information.</p></section>
+</main><footer>PEER ≠ TRUSTED IDENTITY · TRANSFER ≠ PUBLICATION · NO AUTOMATIC RELAY OR FILE DISCOVERY</footer></body></html>
