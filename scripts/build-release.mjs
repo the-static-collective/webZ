@@ -22,7 +22,10 @@ catch{
  sourceEntries=new Map(listing.tree.filter(e=>e.type==='blob').map(e=>[e.path,e.sha]));
 }
 // Tracked shell drift cannot masquerade as an immutable committed release.
-const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js'])].sort();
+// The letterbox is deliberately ONLINE-ONLY: no subscriber data or provider flow in offline caches.
+// This is a reviewed public export allowlist, not an arbitrary directory copy.
+const LETTER_PATHS=['post-office/','post-office/style.css','post-office/provider.mjs','post-office/subscribe.mjs','post-office/archive/','post-office/archive/000/'];
+const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js',...LETTER_PATHS.map(p=>p.endsWith('/')?p+'index.html':p)])].sort();
 const files=[];
 for(const path of paths){
  const bytes=await readFile(new URL(path,root));
@@ -39,6 +42,6 @@ await rm(output,{recursive:true,force:true});await mkdir(output,{recursive:true}
 for(const file of files){const url=new URL(file.path,output);await mkdir(new URL('./',url),{recursive:true});await writeFile(url,await readFile(new URL(file.path,root)));}
 const receipt=JSON.parse(await readFile(new URL('field/public-field-receipt.json',root)));
 const provenance=JSON.parse(await readFile(new URL('field/navigation-provenance.json',root)));
-const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,navigation:provenance,boundary:'Public first-party static code and committed inspection catalog only. No remote effects, visitor inputs, census admission or experimental routes.',files};
+const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,navigation:provenance,boundary:'Immutable first-party static assets; the email form is inactive until configured and sends only on explicit visitor submission to the external provider. No local subscriber storage, passive contact collection, privileged delivery, or other remote effect.',files};
 await writeFile(new URL('release.json',output),JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify({commit,tree,files:files.length,releaseHash:sha(JSON.stringify(manifest,null,2)+'\n')},null,2));
