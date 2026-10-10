@@ -8,7 +8,9 @@
     "test:browser": "python tests/browser.py && python tests/races.py && python tests/forage_browser.py",
     "replay": "node scripts/replay.mjs",
     "music:live": "node scripts/music-field-003-server.mjs",
-    "music:audius": "node scripts/music-field-004-audius.mjs"
+    "music:audius": "node scripts/music-field-004-audius.mjs",
+    "name:demo": "node scripts/name-orchard-001.mjs demo",
+    "name:verify": "node scripts/name-orchard-001.mjs verify"
   },
   "engines": {
     "node": ">=22"
