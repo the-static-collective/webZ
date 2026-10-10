@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#15261c"><title>The Wandering Letter · Abundent Seed 004</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./courier.css"><script type="module" src="./courier.mjs"></script></head>
+<body><header><a class="brand" href="../../../">abundent.</a><nav><a href="../">Seed lab</a> · <a href="../peer/">Direct peers</a></nav></header>
+<main><span class="eyebrow">THE ABUNDENT POST OFFICE / EXPERIMENT 004</span><h1>The wandering<br>letter.</h1>
+<p class="intro">Store. Carry. Forward. A can disappear from the network. B keeps a verified, explicitly accepted seed. C receives it later and grows the same offline website. This first test uses user-chosen file handoffs—no background mesh or automatic route selection.</p>
+<nav class="stations" aria-label="Choose an experimental station"><a href="?station=A">A · Origin</a><a href="?station=B">B · Courier</a><a href="?station=C">C · Reader</a></nav>
+<p class="stamp" id="station">STATION A</p>
+<section class="panel" id="station-A"><h2>A · The writer</h2><p>Start with the one public preface Letter 000. A creates a content-verified parcel with a transit-chain origin note. Export a file, then switch A's browser off. There is no email address or recipient account in the parcel.</p>
+<button id="create-a" type="button">Prepare public Letter 000 parcel</button><button id="source-export" type="button" disabled>Export parcel A → B (.json)</button>
+</section>
+<section class="panel" id="station-B" hidden><h2>B · The traveling Post Office</h2><p>Import the seed from A, independently verify its contents and origin note, and explicitly save a local HOLD. The parcel is saved in this browser's IndexedDB only after you approve, and it can be reopened after a reload.</p>
+<label for="import-b">Import A's parcel (local JSON file)</label><input id="import-b" type="file" accept=".json,application/json">
+<label class="check"><input id="hold-consent" type="checkbox">I choose to keep this public parcel in this browser's local storage until I clear it.</label>
+<div class="actions"><button id="save-hold" type="button" disabled>Accept and store HOLD</button><button id="restore" type="button">Restore my saved HOLD</button></div>
+<label class="check"><input id="forward-consent" type="checkbox">I authorize exporting this held public parcel for recipient C.</label>
+<button id="forward-export" type="button" disabled>Prepare and export B → C (.json)</button>
+<label class="check"><input id="clear-consent" type="checkbox">Confirm clearing the local held seed from this browser.</label><button id="clear-hold" type="button">Clear saved HOLD</button>
+</section>
+<section class="panel" id="station-C" hidden><h2>C · The new reader</h2><p>Import a parcel carried by B. C checks the original content and each transit-chain link independently, even while A is offline. Nothing is accepted or rendered before consent.</p>
+<label for="import-c">Import B's forwarded parcel (local JSON file)</label><input id="import-c" type="file" accept=".json,application/json">
+<label class="check"><input id="receive-consent" type="checkbox">I authorize accepting one verified public seed into this page's memory.</label>
+<button id="accept-c" type="button" disabled>Verify and receive at C</button>
+<div class="actions"><button id="export-page" type="button" disabled>Grow offline website (.html)</button><button id="export-receipt" type="button" disabled>Export local receipt (.json)</button></div>
+</section>
+<section class="panel"><h2>Parcel evidence</h2><p class="subline">Source digest</p><p id="digest" class="proof">No seed selected</p><p class="subline">Recorded journey (unsigned)</p><p id="hops" class="proof">—</p><p class="subline">Journey identifier / final note</p><p id="journey" class="proof">—</p><p id="status" role="status">HOLD · WAITING FOR LOCAL ACTION</p></section>
+<section class="panel"><h2>What this does—and doesn't—prove</h2><p>Demonstrates separate A, B, and C browser stations, deliberate file handoffs, reproducible transit-note hashing, explicit local persistence, and offline file reconstruction. It does <strong>not</strong> yet provide trusted author signatures, independent node identity, optical QR transport, discovery, a real network relay, or live peer-to-peer availability.</p><p>Hashes detect mismatches but malicious parties can rewrite and rehash unsigned transit notes. Keep the original public seed and independently trusted publisher identity when that becomes available.</p><p><a href="https://github.com/the-static-collective/webZ">Read the public source</a> · <a href="../">Seed 002 renderer</a></p></section>
+</main><footer>CUSTODY ≠ OWNERSHIP · HASH ≠ SIGNATURE · FILE HANDOFF ≠ P2P DISCOVERY · A MAY GO OFFLINE</footer></body></html>
