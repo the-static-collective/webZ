@@ -32,7 +32,7 @@ with sync_playwright() as p:
   context.on('request',lambda r:requests.append(r.url))
   context.add_init_script("window.cspWitness=[];document.addEventListener('securitypolicyviolation',e=>window.cspWitness.push(e.violatedDirective))")
   page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
-  response=page.goto(base);assert response.status==200
+  response=page.goto(base+'welcome/');assert response.status==200
   page.get_by_role('link',name='Explore with 11×11',exact=True).tap()
   page.locator('#instrument').wait_for(state='visible')
   page.wait_for_function("()=>document.querySelector('#notice').textContent.startsWith('Ready')")
