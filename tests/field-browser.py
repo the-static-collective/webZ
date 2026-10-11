@@ -1,4 +1,4 @@
-"""Public-field Chromium witness: mobile, root/nested, CSP, offline and real SW update."""
+"""Public-field Chromium witness: legacy /welcome/ under Garden, nested, CSP, offline and SW update."""
 import hashlib, importlib.metadata, json, pathlib, shutil, subprocess, tempfile, threading, time
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
@@ -30,7 +30,7 @@ with sync_playwright() as p:
   context.on('request',lambda r:passive_requests.append(r.url))
   context.add_init_script("window.cspWitness=[];document.addEventListener('securitypolicyviolation',e=>window.cspWitness.push(e.violatedDirective))")
   page=context.new_page();page.on('pageerror',lambda e:all_errors.append(str(e)))
-  page.goto(base)
+  page.goto(base+'welcome/')
   page.get_by_role('heading',name='A porch for many worlds.',exact=True).wait_for()
   page.wait_for_function('()=>navigator.serviceWorker.controller !== null')
   page.get_by_role('link',name='See what’s growing',exact=True).tap()
@@ -49,13 +49,13 @@ with sync_playwright() as p:
    page.screenshot(path=str(OUT/'field-mobile-320.png'),full_page=True)
    page.evaluate('window.scrollTo(0,document.querySelector(".field-grid").getBoundingClientRect().top+scrollY-12)')
    page.screenshot(path=str(OUT/'field-mobile-320-viewport.png'))
-   page.goto(base);page.screenshot(path=str(OUT/'home-mobile-320.png'),full_page=True)
-   page.set_viewport_size({'width':1440,'height':1000});page.screenshot(path=str(OUT/'home-desktop.png'),full_page=True)
+   page.goto(base+'welcome/');page.screenshot(path=str(OUT/'welcome-mobile-320.png'),full_page=True)
+   page.set_viewport_size({'width':1440,'height':1000});page.screenshot(path=str(OUT/'welcome-desktop.png'),full_page=True)
    page.goto(base+'field/');page.screenshot(path=str(OUT/'field-desktop.png'),full_page=True)
    page.screenshot(path=str(OUT/'field-desktop-viewport.png'))
    page.locator('#fabrication').screenshot(path=str(OUT/'fabrication-hold-desktop.png'))
    page.set_viewport_size({'width':320,'height':780})
-  for route in ['', 'field/', 'porch/', 'press/', 'proof/']:
+  for route in ['welcome/', 'field/', 'porch/', 'press/', 'proof/']:
    page.goto(base+route);page.reload();no_overflow(page)
    assert 'OFFLINE READY' in page.locator('#offline-state').inner_text()
    violations.extend(page.evaluate('window.cspWitness'))
@@ -72,7 +72,7 @@ with sync_playwright() as p:
   assert page.evaluate('localStorage.length')==0
  # The fixed shell remains navigable while completely offline.
   context.set_offline(True)
-  for route in ['', 'field/', 'porch/', 'press/', 'proof/']:
+  for route in ['welcome/', 'field/', 'porch/', 'press/', 'proof/']:
    page.goto(base+route);page.reload();no_overflow(page)
    # Chromium's network emulation can leave navigator.onLine true after reload;
    # successful cached navigation is the offline witness, not that indicator.
@@ -133,7 +133,7 @@ with sync_playwright() as p:
  assert got==new_receipt and got['fieldHash']!=receipt['fieldHash'];context.close()
  # Cold offline visits cannot invent a successful bootstrap.
  cold=browser.new_context();cold.set_offline(True);cp=cold.new_page()
- try:cp.goto(origin+'/');raise AssertionError('Cold offline bootstrap unexpectedly succeeded')
+ try:cp.goto(origin+'/welcome/');raise AssertionError('Cold offline bootstrap unexpectedly succeeded')
  except Exception as error:assert 'ERR_INTERNET_DISCONNECTED' in str(error)
  cold.close()
  assert not all_errors,all_errors
