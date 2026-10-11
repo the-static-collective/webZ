@@ -29,7 +29,15 @@ try:
    page.wait_for_function("()=>document.querySelector('#mode').textContent.includes('SIGNED JOURNAL')")
    assert page.locator('#timeline li').count()==3
    assert page.locator('#lenses button').count()==11
-   page.get_by_role('button',name='Ancestry').click()
+   assert page.locator('#ancestry li').count()==5
+   with page.expect_download() as info:
+    page.locator('#goatExport').click()
+   packet=json.loads(pathlib.Path(info.value.path()).read_text())
+   assert packet['schema']=='webz.goatnote-receipt-handoff/v0'
+   assert packet['source']['json']==raw.decode()
+   assert packet['inspection']['mode']=='LOCAL_JOURNAL_VERIFIED'
+   assert packet['authority']=='NO_AUTHORITY_TRANSFER'
+   page.get_by_role('button',name='Ancestry',exact=True).click()
    assert 'two-event' in page.locator('#lens-detail').inner_text()
    altered=json.loads(raw);altered['events'][1]['receipt']['note']='forged'
    page.locator('#input-file').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':json.dumps(altered).encode()})

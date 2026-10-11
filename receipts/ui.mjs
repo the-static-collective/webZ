@@ -1,10 +1,12 @@
 import {inspectReceipt,lensNames} from './inspect.mjs';
+import {projectAncestry,makeGoatnoteHandoff} from './goatnote.mjs';
 const $=id=>document.getElementById(id);
 const title=s=>s.replace(/(^|[-_ ])([a-z])/g,(_,a,b)=>a+b.toUpperCase()).replace(/_/g,' ');
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
-let generation=0,report=null;
+let generation=0,report=null,currentRaw=null;
 function clearView(message='No evidence loaded.'){
- generation++;report=null;$('input-file').value='';
+ generation++;report=null;currentRaw=null;$('input-file').value='';
+ $('goatExport').disabled=true;$('ancestry').replaceChildren();
  $('status').textContent=message;$('mode').textContent='NOT INSPECTED';
  $('basis').textContent='No cryptographic checks have run.';
  $('inspection').hidden=true;$('timeline').replaceChildren();$('fields').replaceChildren();
@@ -14,8 +16,8 @@ function chooseLens(name){
  for(const button of $('lenses').querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.name===name));
  const detail=$('lens-detail');detail.replaceChildren(node('strong',title(name)),node('p',report.lenses[name]));
 }
-function show(r){
- report=r;$('inspection').hidden=false;
+function show(r,raw){
+ report=r;currentRaw=raw;$('inspection').hidden=false;
  const mode=r.mode;
  $('mode').textContent=mode==='LOCAL_JOURNAL_VERIFIED'?'VERIFIED · SIGNED JOURNAL':
   mode==='SIGNATURE_ONLY'?'VERIFIED · SIGNATURE ONLY':'UNVERIFIED · ARCHIVE CLAIMS';
@@ -33,11 +35,19 @@ function show(r){
   const btn=node('button',title(name));btn.type='button';btn.dataset.name=name;
   btn.setAttribute('aria-pressed','false');btn.addEventListener('click',()=>chooseLens(name));$('lenses').append(btn);
  }
+ const ancestry=projectAncestry(raw,r);
+ for(const point of ancestry.nodes){
+  const item=node('li');item.append(node('strong',point.label),node('span',point.id,'glass-id'),node('small',point.posture));$('ancestry').append(item);
+ }
+ for(const relation of ancestry.edges){
+  const item=node('li');item.append(node('strong',relation.relation),node('span',relation.from+' → '+relation.to,'glass-id'),node('small',relation.posture));$('ancestry').append(item);
+ }
+ $('goatExport').disabled=false;
  chooseLens('identity');
 }
 async function inspect(raw,g){
  try{
-  const result=await inspectReceipt(raw);if(g!==generation)return;show(result);
+  const result=await inspectReceipt(raw);if(g!==generation)return;show(result,raw);
  }catch(err){
   if(g!==generation)return;
   clearView('REFUSED · '+(err instanceof Error?err.message:'INVALID_IMPORT'));
@@ -59,4 +69,19 @@ $('example').addEventListener('click',async()=>{
   if(!res.ok)throw Error('EXAMPLE_UNAVAILABLE');
   const raw=await res.text();if(g===generation)await inspect(raw,g);
  }catch{if(g===generation)clearView('REFUSED · EXAMPLE_UNAVAILABLE');}
+});
+
+$('goatExport').addEventListener('click',async()=>{
+ if(!report||!currentRaw)return;
+ const g=generation;
+ $('status').textContent='Preparing source-bound GOATnote handoff…';
+ try{
+  const handoff=await makeGoatnoteHandoff(currentRaw,report);
+  if(g!==generation)return;
+  const blob=new Blob([JSON.stringify(handoff,null,2)+'\n'],{type:'application/json'});
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='WEBZ-GOATnote-receipt-'+handoff.source.sha256.slice(7,19)+'.json';
+  document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  $('status').textContent='Handoff exported. GOATnote must separately verify the packet shape and ask before adding a note; its import does not reverify P-256 signatures.';
+ }catch(error){if(g===generation)$('status').textContent='Handoff refused: '+String(error?.message||'invalid source');}
 });
