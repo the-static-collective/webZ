@@ -35,7 +35,7 @@ try:
             assert a.locator('#export').is_disabled()
             a.locator('#inspect').click()
             a.wait_for_function("()=>document.querySelector('#status').textContent.startsWith('VERIFIED')")
-            observed=json.loads(a.locator('#report').inner_text())
+            observed=json.loads(a.locator('#report').text_content())
             assert observed['authority']=='EXPERIMENT_KEY_ONLY'
             assert observed['owner_signature']=='NOT_PRESENT'
             assert observed['receipt']=='NOT_ISSUED'
