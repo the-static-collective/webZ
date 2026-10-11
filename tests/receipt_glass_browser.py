@@ -37,7 +37,7 @@ try:
    assert packet['source']['json']==raw.decode()
    assert packet['inspection']['mode']=='LOCAL_JOURNAL_VERIFIED'
    assert packet['authority']=='NO_AUTHORITY_TRANSFER'
-   page.get_by_role('button',name='Ancestry').click()
+   page.get_by_role('button',name='Ancestry',exact=True).click()
    assert 'two-event' in page.locator('#lens-detail').inner_text()
    altered=json.loads(raw);altered['events'][1]['receipt']['note']='forged'
    page.locator('#input-file').set_input_files({'name':'bad.json','mimeType':'application/json','buffer':json.dumps(altered).encode()})
