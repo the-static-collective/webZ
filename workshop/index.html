@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17251d"><meta name="description" content="Walk among the independently surviving software branches of the Static Collective.">
+<title>Branch Workshop · abundent.</title>
+<link rel="icon" href="../app/icon.svg">
+<style>
+:root{color-scheme:dark;--bg:#16231a;--panel:#223427;--raised:#2c4030;--line:#647357;--ink:#f0e6cc;--muted:#bdc5b0;--gold:#e0bb6f}
+*{box-sizing:border-box}html{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,sans-serif}
+body{margin:0;background:radial-gradient(circle at 80% 0,#354b2f 0,transparent 38%),var(--bg);min-height:100vh}
+a{color:var(--gold)}a:hover{text-decoration-thickness:2px}
+header,main,footer{max-width:1080px;margin:auto;padding:1.1rem 1.25rem}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:1rem}
+.brand{font-family:Georgia,serif;font-size:1.5rem;text-decoration:none;color:var(--ink)}
+.back{font-size:.92rem}main{padding-top:2.2rem}h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(2rem,6vw,4.4rem);line-height:1.08;margin:.45rem 0 1rem}
+h1 em{color:var(--gold);font-weight:400}.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:var(--gold);font-size:.74rem}
+.intro{max-width:710px;font-size:1.07rem;line-height:1.6;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;padding:1.15rem;margin:2rem 0 1.2rem;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+label{font-weight:600}select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:.65rem;min-width:165px}
+#count{margin-left:auto;color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:1rem}
+article{padding:1.5rem;background:linear-gradient(140deg,var(--raised),var(--panel));border:1px solid var(--line);border-radius:15px;min-height:325px}
+article h2{font:normal 1.55rem Georgia,serif;margin:.65rem 0}article p{line-height:1.55;color:var(--muted)}
+.meta{font-size:.75rem;color:var(--gold);letter-spacing:.07em;text-transform:uppercase}
+.links{display:flex;gap:.9rem;flex-wrap:wrap;margin:1.25rem 0}
+details{border-top:1px solid var(--line);padding-top:.85rem;color:var(--muted);font-size:.87rem}
+summary{cursor:pointer;color:var(--ink);font-weight:600}
+code{display:block;word-break:break-all;white-space:normal;font-size:.81rem;margin:.5rem 0}
+.gate{border-left:2px solid var(--gold);padding-left:.75rem}
+footer{color:var(--muted);font-size:.88rem;line-height:1.6;margin-top:2rem;border-top:1px solid var(--line);padding-bottom:3rem}
+:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+@media(max-width:600px){header{flex-wrap:wrap}.controls{align-items:stretch}.controls>*{width:100%}#count{margin-left:0}}
+</style></head><body>
+<header><a class="brand" href="../">abundent.</a><a class="back" href="../">← Return to the garden</a></header>
+<main>
+<div class="eyebrow">THE STATIC COLLECTIVE / OPEN WORKSHOP / EXPERIMENT 001</div>
+<h1>Branches are <em>living worlds.</em></h1>
+<p class="intro">Not a backlog. These are exact snapshots of actual code carried by independent branches. Explore source, tests and the remaining gates. Selection and running belong to their respective owners.</p>
+<div class="controls"><label for="field">Tune your field</label><select id="field"><option value="all">All fields</option><option value="Plans">Plans</option><option value="Selection">Selection</option><option value="Composition">Composition</option></select><span id="count" role="status">Loading dated catalog…</span></div>
+<section class="grid" id="cards" aria-label="Branch capabilities"></section>
+</main>
+<footer>
+<p><strong>Available ≠ authorized.</strong> The catalog is a dated, human-curated read-only projection. CI links document observed workflow runs, not permanent guarantees of a running service. No source, rights, runtime or equipment are granted by visiting this page.</p>
+<p id="origin">The branch itself remains the living carrier. The exact commit is the particular.</p>
+</footer>
+<script type="module" src="./workshop.mjs"></script></body></html>

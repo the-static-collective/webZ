@@ -1,0 +1,64 @@
+{
+  "schema": "abundent/branch-workshop-catalog/v0",
+  "snapshotDate": "2026-10-11",
+  "source": "https://github.com/the-static-collective/planZ/pull/11",
+  "verification": "HUMAN_CURATED_BRANCH_REFERENCES_AND_OBSERVED_CI; NOT_RUNTIME_VERIFICATION",
+  "capabilities": [
+    {
+      "id": "planz-sense-001",
+      "name": "SENSE-001",
+      "field": "Plans",
+      "summary": "Turn recorded plans into bounded sense frames and mutation candidates.",
+      "repo": "the-static-collective/planZ",
+      "commit": "e8111fdb64c5587b33aece0fed639ed3d03375ac",
+      "branch": "experiment/fatherhand-grant-chain-residue-001",
+      "path": "002/bin/sense-global.mjs",
+      "runtime": "Node 22+",
+      "ci": "https://github.com/the-static-collective/planZ/actions/runs/37479487787",
+      "state": "PINNED_BRANCH_CANDIDATE",
+      "gate": "Choose local inputs and separately authorize any consequence."
+    },
+    {
+      "id": "planz-arrow-001",
+      "name": "ARROW-001",
+      "field": "Plans",
+      "summary": "Track exact transitions and predecessor receipts between states.",
+      "repo": "the-static-collective/planZ",
+      "commit": "e8111fdb64c5587b33aece0fed639ed3d03375ac",
+      "branch": "experiment/fatherhand-grant-chain-residue-001",
+      "path": "003/bin/lul-arrow-chain.mjs",
+      "runtime": "Node 22+",
+      "ci": "https://github.com/the-static-collective/planZ/actions/runs/37479487913",
+      "state": "PINNED_BRANCH_CANDIDATE",
+      "gate": "Witnessed arrows are not permission or media regeneration."
+    },
+    {
+      "id": "cannon-canon-field-001",
+      "name": "CANON FIELD 001",
+      "field": "Selection",
+      "summary": "Verify signed, owner-scoped selections of exact Git commits without treating main as canon.",
+      "repo": "the-static-collective/CANNON",
+      "commit": "aabd276e4edb2ae4229ccf94eed8a7f561b17a0a",
+      "branch": "experiment/conversation-collider-work-003",
+      "path": "scripts/cannon.mjs",
+      "runtime": "Node 24+",
+      "ci": "https://github.com/the-static-collective/CANNON/actions/runs/37978331732",
+      "state": "PINNED_BRANCH_CANDIDATE",
+      "gate": "External owner trust pins and deliberate selection; no automatic execution."
+    },
+    {
+      "id": "cannon-collider-003",
+      "name": "Conversation Collider 003",
+      "field": "Composition",
+      "summary": "Read actual Git-pinned interface declarations and propose bounded cross-project work.",
+      "repo": "the-static-collective/CANNON",
+      "commit": "aabd276e4edb2ae4229ccf94eed8a7f561b17a0a",
+      "branch": "experiment/conversation-collider-work-003",
+      "path": "scripts/conversation-collider-work.mjs",
+      "runtime": "Node 24+",
+      "ci": "https://github.com/the-static-collective/CANNON/actions/runs/37978331923",
+      "state": "PINNED_BRANCH_CANDIDATE",
+      "gate": "Actual files, equipment presence, rights and receiver authority remain unchecked."
+    }
+  ]
+}
