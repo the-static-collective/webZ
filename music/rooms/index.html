@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#19271f"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Two listening rooms and an eleven-lens song magnifier. Open a song from a week together and discover its recorded contexts.">
+<meta property="og:title" content="The listening rooms · Abundent">
+<meta property="og:description" content="Open window cruise. cupsz. One song, eleven ways of looking.">
+<meta property="og:url" content="https://abundent.org/music/rooms/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>The listening rooms · The Static Collective</title>
+<link rel="icon" href="../../app/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css"><script type="module" src="./rooms.mjs"></script>
+</head><body><a class="skip" href="#main">Skip to the listening rooms</a>
+<header class="top"><a class="brand" href="/">abundent<span>.</span></a><nav aria-label="Music navigation"><a href="/week/">a week together</a><a href="/music/2day/">the four 2DAY records</a><a href="#instrument">Eleven lenses</a></nav></header>
+<main id="main">
+<section class="hero"><div><p class="eyebrow">THE STATIC COLLECTIVE / OCTOBER 2026</p>
+<h1>There is more<br><em>around the song.</em></h1>
+<p class="lead">Two rooms to wander through. A listening instrument that lets a single recording disclose its place in the week, the playlists, the neighboring takes, and the rest of the story we can actually document.</p>
+<div class="hero-actions"><a class="button bright" href="#records">Enter the rooms ↓</a><a class="button" href="#instrument">Look closer ↘</a></div>
+<p class="small-note">The music plays on Suno. These are Abundent presentations of Suno playlists, not Suno album objects. No account required here.</p></div>
+<div class="hero-cassette" aria-hidden="true"><div class="tape-label"><span>THE STATIC COLLECTIVE</span><strong>OPEN / TUNE / RETURN</strong><small>STEREO · SIDE ∞ · 11 × 11</small></div><div class="reels"><i></i><i></i></div><div class="handwritten">a world beside the world</div></div>
+</section>
+<section class="records shell" id="records"><div class="section-head"><p class="eyebrow">01 / THE LISTENING ROOMS</p><h2>Two more places<br><em>to arrive.</em></h2><p>Same underlying song can appear in different rooms. The playlist order and exact track IDs stay visible.</p></div>
+<div class="record-grid">
+<article class="record cruise" id="open-window-cruise"><div class="cover" aria-hidden="true"><span class="cover-no">01 / THE ROAD</span><div class="window"><i class="horizon"></i><i class="roadline"></i></div><strong>open window<br>cruise</strong><span class="cover-foot">NIGHT DRIVE · SIDE A</span></div>
+<div class="record-body"><p class="eyebrow">LISTENING ROOM / 01</p><h3>open window cruise</h3><p>The night drive becomes a place kept open for somebody else.</p><p class="micro">8 TRACKS · 24:48 · SOURCE PLAYLIST CREATED OCT 8</p>
+<div class="record-actions"><a href="https://suno.com/s/t8TfoQiVpGhe5PYi" target="_blank" rel="noopener noreferrer" class="button bright">Listen on Suno ↗</a><a href="#instrument" class="button">Examine the songs ↓</a></div>
+<details><summary>Open the observed 8-track sequence <span aria-hidden="true">＋</span></summary><ol id="cruise-tracks"><li>Loading source track identities…</li></ol></details></div></article>
+<article class="record cupsz" id="cupsz"><div class="cover" aria-hidden="true"><span class="cover-no">02 / THE SIGNAL</span><div class="rings"><i></i><i></i><i></i><i></i></div><strong>cupsz</strong><span class="cover-foot">FREQUENCIES · SIDE B</span></div>
+<div class="record-body"><p class="eyebrow">LISTENING ROOM / 02</p><h3>cupsz</h3><p>Six transmissions between weather, motion, music, and a way back home.</p><p class="micro">6 TRACKS · 17:28 · SOURCE PLAYLIST CREATED OCT 8</p>
+<div class="record-actions"><a href="https://suno.com/s/tqyLdu40b9ZUYvaR" target="_blank" rel="noopener noreferrer" class="button bright">Listen on Suno ↗</a><a href="#instrument" class="button">Examine the songs ↓</a></div>
+<details><summary>Open the observed 6-track sequence <span aria-hidden="true">＋</span></summary><ol id="cupsz-tracks"><li>Loading source track identities…</li></ol></details></div></article>
+</div></section>
+<section class="instrument shell" id="instrument" aria-labelledby="instrument-title"><div class="section-head"><p class="eyebrow">02 / THE SONG MAGNIFIER</p><h2 id="instrument-title">One particular.<br><em>Eleven windows.</em></h2><p>Choose a recording, turn one of eleven context lenses, then adjust how much source detail comes into focus. You are navigating evidence, not changing the song.</p></div>
+<div class="workbench">
+<div class="controls"><div class="song-picker"><label for="song-select">THE PARTICULAR / EXACT SUNO RECORDING</label><select id="song-select" aria-describedby="song-hint"><option>Loading songs…</option></select><p id="song-hint">Fourteen selections from a week together, plus the distinct recordings in these two rooms.</p></div>
+<div class="benchhead"><div><span class="micro">CONTEXT DIALS</span><h3>What are we looking at?</h3></div><output id="lens-value">01 / 11</output></div>
+<div id="lens-rack" class="lens-rack" role="group" aria-label="Eleven context lenses"><!-- Controls populated from the source-backed instrument. --></div>
+<div class="closer"><div class="closer-head"><label for="closer-dial">CLOSER / LEVEL OF DISCLOSURE</label><output id="closer-value" for="closer-dial">05 / 11</output></div>
+<input type="range" id="closer-dial" min="1" max="11" step="1" value="5" aria-label="Evidence detail from one to eleven">
+<div class="steps" aria-hidden="true"><span>01 · glance</span><span>06 · inspect</span><span>11 · full record</span></div></div>
+<div class="bench-actions"><button type="button" id="rise" class="button">Rise one lens</button><button type="button" id="root" class="button">Return to the week</button><button type="button" id="copy-address" class="button">Copy this position</button></div>
+<p id="copy-status" class="micro" role="status" aria-live="polite"></p></div>
+<article id="reading" class="reading" aria-live="polite"><p class="eyebrow">THE VIEWFINDER</p><h3>Preparing the index…</h3><p>Each source and relationship is anchored to a particular recording.</p></article>
+</div><p class="boundary">This is an 11-lens × 11-step observational instrument, not the remix-control rack. An observed placement is evidence of placement; it is not a claim of remix parentage, album admission, or every relationship the song might have.</p>
+</section>
+<section class="more shell"><div><p class="eyebrow">03 / THE DOOR BEHIND THE DOOR</p><h2>It came from<br><em>somewhere.</em></h2></div><div><p>Return to the fourteen-song week, or follow the four 2DAY source playlists that helped shape it. An identical song ID is a documented meeting; a matching title alone is not.</p>
+<div class="hero-actions"><a class="button bright" href="/week/">A week together →</a><a class="button" href="/music/2day/">The 2DAY album universe →</a></div></div></section>
+</main><footer><a href="/">abundent.</a><span>THE STATIC COLLECTIVE · PLAYLIST ≠ ALBUM · SELECTION ≠ ANCESTRY</span><a href="https://suno.com/@thestaticcollective" target="_blank" rel="noopener noreferrer">Original recordings ↗</a></footer></body></html>
