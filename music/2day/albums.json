@@ -1,0 +1,359 @@
+{
+  "schema": "abundent/album-playlist-bridge/v0",
+  "work": "2DAY CYCLE 001",
+  "observed_on": "2026-10-11",
+  "date_claim": {
+    "value": "2026-10-06",
+    "status": "creator-declared, not independently verified by Suno"
+  },
+  "ontology": {
+    "universe_album": "Curator-owned presentation of a source playlist within Abundent. Not a Suno album object.",
+    "suno_playlist": "External source playlist, order may change after observation.",
+    "selected_for_compilation": "Exact Suno track ID also occurs on a week together; not a claim of parentage, remix ancestry or publishing admission.",
+    "formal_admission": "LemonPRESS PR #29 / PR #32 are still proposals; this public presentation is not their formal admission."
+  },
+  "compilation": {
+    "title": "a week together",
+    "suno_album_url": "https://suno.com/album/7c2ca64a-32ed-4477-a7cb-e00d1a14c9bf",
+    "abundent_url": "https://abundent.org/week/",
+    "total_tracks": 14,
+    "selected_from_cycle": 9
+  },
+  "cycle": {
+    "order": [
+      "morning",
+      "afternoon",
+      "night",
+      "return",
+      "morning"
+    ],
+    "repeat_edge": "returns to first album, not a duplicated fifth album"
+  },
+  "albums": [
+    {
+      "id": "abundent:2day:morning",
+      "title": "2moreOhmorning!",
+      "subtitle": "Meet me where the gold breaks through.",
+      "sequence": 1,
+      "universe_kind": "album",
+      "external_provider": "suno",
+      "external_kind": "playlist",
+      "suno_playlist_url": "https://suno.com/playlist/de62b5a7-dea8-4342-9bec-1c6ef89888e7",
+      "observed_track_count": 11,
+      "tracks": [
+        {
+          "occurrence": 1,
+          "title": "Just in Time",
+          "suno_song_id": "45c84517-b5ff-4de6-947a-8701c1beac2d",
+          "suno_song_url": "https://suno.com/song/45c84517-b5ff-4de6-947a-8701c1beac2d",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 2,
+          "title": "We’re Still Here Somehow",
+          "suno_song_id": "08bd78ab-05b9-4478-84e2-d7c602960ca3",
+          "suno_song_url": "https://suno.com/song/08bd78ab-05b9-4478-84e2-d7c602960ca3",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 3,
+          "title": "Comfy Sweater (Psychedelic Country Daydream)",
+          "suno_song_id": "d4a7e58e-5930-4cbb-825f-9c6c8ed6da27",
+          "suno_song_url": "https://suno.com/song/d4a7e58e-5930-4cbb-825f-9c6c8ed6da27",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 4,
+          "title": "Crackside Bananas (Future Folk Bloom)",
+          "suno_song_id": "23a72f4c-97bd-430c-8850-136394775ad0",
+          "suno_song_url": "https://suno.com/song/23a72f4c-97bd-430c-8850-136394775ad0",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 5,
+          "title": "Where the Porch Boards Bend",
+          "suno_song_id": "66ce822e-be59-4511-887b-61feda608300",
+          "suno_song_url": "https://suno.com/song/66ce822e-be59-4511-887b-61feda608300",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 6,
+          "title": "Gold Breaks Through",
+          "suno_song_id": "1386cd50-acea-4c6e-a796-374f29d145c3",
+          "suno_song_url": "https://suno.com/song/1386cd50-acea-4c6e-a796-374f29d145c3",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 7,
+          "title": "Ash In My Teeth",
+          "suno_song_id": "93f4f2a6-82b1-4744-be7f-a976bf2bd8c1",
+          "suno_song_url": "https://suno.com/song/93f4f2a6-82b1-4744-be7f-a976bf2bd8c1",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 8,
+          "title": "Rosemary Bloom",
+          "suno_song_id": "70b1d32e-21b6-4340-990d-1a4ef67cfc42",
+          "suno_song_url": "https://suno.com/song/70b1d32e-21b6-4340-990d-1a4ef67cfc42",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 9,
+          "title": "Small Sure Things",
+          "suno_song_id": "80d353e4-d921-496c-86e9-2e0f8c44ef5e",
+          "suno_song_url": "https://suno.com/song/80d353e4-d921-496c-86e9-2e0f8c44ef5e",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 10,
+          "title": "Our Gentle Insurrection",
+          "suno_song_id": "acc1b93d-1e40-438d-8521-9f01d0d93e87",
+          "suno_song_url": "https://suno.com/song/acc1b93d-1e40-438d-8521-9f01d0d93e87",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 11,
+          "title": "Rosemary Violet Home",
+          "suno_song_id": "8ef928f4-24ac-437d-8bcc-a137c2b4bec5",
+          "suno_song_url": "https://suno.com/song/8ef928f4-24ac-437d-8bcc-a137c2b4bec5",
+          "selected_for_compilation": false
+        }
+      ]
+    },
+    {
+      "id": "abundent:2day:afternoon",
+      "title": "thenex2day",
+      "subtitle": "The room becomes an instrument.",
+      "sequence": 2,
+      "universe_kind": "album",
+      "external_provider": "suno",
+      "external_kind": "playlist",
+      "suno_playlist_url": "https://suno.com/playlist/7328f8b6-c7a0-4498-b6f6-5065121d17fa",
+      "observed_track_count": 7,
+      "tracks": [
+        {
+          "occurrence": 1,
+          "title": "Doorway Harmonics",
+          "suno_song_id": "869d34ea-47df-421c-b9b7-c61068c8c671",
+          "suno_song_url": "https://suno.com/song/869d34ea-47df-421c-b9b7-c61068c8c671",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 2,
+          "title": "Measured Pulse",
+          "suno_song_id": "8b9ecbc5-e4bf-41d2-aa1f-197a5d0dabed",
+          "suno_song_url": "https://suno.com/song/8b9ecbc5-e4bf-41d2-aa1f-197a5d0dabed",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 3,
+          "title": "Neon Fiddle Doorways",
+          "suno_song_id": "b800320b-2158-433a-8ad1-16a1e253c789",
+          "suno_song_url": "https://suno.com/song/b800320b-2158-433a-8ad1-16a1e253c789",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 4,
+          "title": "Neon Fiddle Bounce Drop",
+          "suno_song_id": "435eccb1-b40d-4601-9ee2-f7febbf32e06",
+          "suno_song_url": "https://suno.com/song/435eccb1-b40d-4601-9ee2-f7febbf32e06",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 5,
+          "title": "Neon Fiddle Bounce Drop",
+          "suno_song_id": "2ec9a56b-6916-4af7-a4dd-5031e42f0bea",
+          "suno_song_url": "https://suno.com/song/2ec9a56b-6916-4af7-a4dd-5031e42f0bea",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 6,
+          "title": "Neon Aria: Lo-Fi Soul Overture",
+          "suno_song_id": "2ba6fe93-9d4e-4098-acc5-7e53f9d4918b",
+          "suno_song_url": "https://suno.com/song/2ba6fe93-9d4e-4098-acc5-7e53f9d4918b",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 7,
+          "title": "Neon Aria: Lo-Fi Soul Overture",
+          "suno_song_id": "46152d61-3f79-457e-9a4c-b1ff25ac2325",
+          "suno_song_url": "https://suno.com/song/46152d61-3f79-457e-9a4c-b1ff25ac2325",
+          "selected_for_compilation": false
+        }
+      ]
+    },
+    {
+      "id": "abundent:2day:night",
+      "title": "2knite",
+      "subtitle": "Still here. Still standing on the hill.",
+      "sequence": 3,
+      "universe_kind": "album",
+      "external_provider": "suno",
+      "external_kind": "playlist",
+      "suno_playlist_url": "https://suno.com/playlist/3ad7e2de-601d-4d7c-a5b0-1c0fa1c99baa",
+      "observed_track_count": 12,
+      "tracks": [
+        {
+          "occurrence": 1,
+          "title": "Standing on the Hill (Psychedelic Phonk Pop Mix)",
+          "suno_song_id": "f180e7d1-8b2a-4f89-93f8-3c26544d4701",
+          "suno_song_url": "https://suno.com/song/f180e7d1-8b2a-4f89-93f8-3c26544d4701",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 2,
+          "title": "We Are Still Here (Hyper-Fusion Swing Mix)",
+          "suno_song_id": "43b09ac1-449e-4828-bf86-b7c3c4061981",
+          "suno_song_url": "https://suno.com/song/43b09ac1-449e-4828-bf86-b7c3c4061981",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 3,
+          "title": "Make a Morning",
+          "suno_song_id": "c864eb18-36b1-4d75-8f7c-dcc0e457efc9",
+          "suno_song_url": "https://suno.com/song/c864eb18-36b1-4d75-8f7c-dcc0e457efc9",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 4,
+          "title": "Psychedelic Punk Sanctuary",
+          "suno_song_id": "59dc377c-f344-4354-aacd-39faa0aa72da",
+          "suno_song_url": "https://suno.com/song/59dc377c-f344-4354-aacd-39faa0aa72da",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 5,
+          "title": "A Wider Table (Neo-Psyche Anime Punk Mix)",
+          "suno_song_id": "583d55c9-a05b-481e-b84a-9a93739dff66",
+          "suno_song_url": "https://suno.com/song/583d55c9-a05b-481e-b84a-9a93739dff66",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 6,
+          "title": "Good Ground",
+          "suno_song_id": "02af5b55-74b7-455e-9b9f-f7a840ccac3e",
+          "suno_song_url": "https://suno.com/song/02af5b55-74b7-455e-9b9f-f7a840ccac3e",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 7,
+          "title": "There's Room for You",
+          "suno_song_id": "6020cc9c-91f3-466b-8488-8049524fda9c",
+          "suno_song_url": "https://suno.com/song/6020cc9c-91f3-466b-8488-8049524fda9c",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 8,
+          "title": "Still Making Room",
+          "suno_song_id": "e9ac5a6d-372b-447a-aff0-ecb07bfce071",
+          "suno_song_url": "https://suno.com/song/e9ac5a6d-372b-447a-aff0-ecb07bfce071",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 9,
+          "title": "Let It Breathe",
+          "suno_song_id": "2caae912-364e-4ced-a2fa-d1a4e9b6bab1",
+          "suno_song_url": "https://suno.com/song/2caae912-364e-4ced-a2fa-d1a4e9b6bab1",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 10,
+          "title": "Make a Sunday out of gray",
+          "suno_song_id": "fc1e7734-aa34-408b-81b8-097e5f26d167",
+          "suno_song_url": "https://suno.com/song/fc1e7734-aa34-408b-81b8-097e5f26d167",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 11,
+          "title": "We Are Held, We Are Home (Experimental Lo-Fi Sanctuary Mix)",
+          "suno_song_id": "30f504c4-467c-4f7f-b6ff-d5f10f59ca88",
+          "suno_song_url": "https://suno.com/song/30f504c4-467c-4f7f-b6ff-d5f10f59ca88",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 12,
+          "title": "Untitled",
+          "suno_song_id": "92082b4a-1c6f-41f8-a1fe-87391d39badd",
+          "suno_song_url": "https://suno.com/song/92082b4a-1c6f-41f8-a1fe-87391d39badd",
+          "selected_for_compilation": false
+        }
+      ]
+    },
+    {
+      "id": "abundent:2day:return",
+      "title": "2day",
+      "subtitle": "There is room for one more chair.",
+      "sequence": 4,
+      "universe_kind": "album",
+      "external_provider": "suno",
+      "external_kind": "playlist",
+      "suno_playlist_url": "https://suno.com/playlist/f3125d63-33c7-4c77-acb1-257b70b5968d",
+      "observed_track_count": 9,
+      "tracks": [
+        {
+          "occurrence": 1,
+          "title": "The Room We Made",
+          "suno_song_id": "56580022-50c1-4e0b-8f05-1a62407253bb",
+          "suno_song_url": "https://suno.com/song/56580022-50c1-4e0b-8f05-1a62407253bb",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 2,
+          "title": "Bending the Time (Static Collective Mix)",
+          "suno_song_id": "a77cb6d7-f86d-4353-a2c3-4677a4d2eaf1",
+          "suno_song_url": "https://suno.com/song/a77cb6d7-f86d-4353-a2c3-4677a4d2eaf1",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 3,
+          "title": "Neon Faultline",
+          "suno_song_id": "51427721-2440-4c1e-a6a0-a7850a4f9171",
+          "suno_song_url": "https://suno.com/song/51427721-2440-4c1e-a6a0-a7850a4f9171",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 4,
+          "title": "Godfather Got My Back",
+          "suno_song_id": "a3cac8da-9c29-43d2-bf21-ba00a2b379bc",
+          "suno_song_url": "https://suno.com/song/a3cac8da-9c29-43d2-bf21-ba00a2b379bc",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 5,
+          "title": "One More Mile Home",
+          "suno_song_id": "186133f9-13e0-4812-9b02-72f56c919612",
+          "suno_song_url": "https://suno.com/song/186133f9-13e0-4812-9b02-72f56c919612",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 6,
+          "title": "Two Shoes One Road",
+          "suno_song_id": "a06002c3-7c2e-4fbc-be4b-f26e61fc1111",
+          "suno_song_url": "https://suno.com/song/a06002c3-7c2e-4fbc-be4b-f26e61fc1111",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 7,
+          "title": "Room at the Table",
+          "suno_song_id": "d6dfeebd-65e7-4c0e-ba84-c092f671e495",
+          "suno_song_url": "https://suno.com/song/d6dfeebd-65e7-4c0e-ba84-c092f671e495",
+          "selected_for_compilation": true
+        },
+        {
+          "occurrence": 8,
+          "title": "Quantum Code (Heartfelt Hybrid Mix)",
+          "suno_song_id": "010bc866-6eba-4b6b-8e2e-fdf64917d14c",
+          "suno_song_url": "https://suno.com/song/010bc866-6eba-4b6b-8e2e-fdf64917d14c",
+          "selected_for_compilation": false
+        },
+        {
+          "occurrence": 9,
+          "title": "Thirteenth Circle (Psycho Pop Mix)",
+          "suno_song_id": "d7f35469-4562-484e-bc5b-9515a1540ac4",
+          "suno_song_url": "https://suno.com/song/d7f35469-4562-484e-bc5b-9515a1540ac4",
+          "selected_for_compilation": false
+        }
+      ]
+    }
+  ]
+}

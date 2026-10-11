@@ -1,0 +1,20 @@
+name: 2DAY Album Universe
+on:
+  pull_request:
+    paths:
+      - 'music/2day/**'
+      - 'week/**'
+      - 'tests/album-universe.test.mjs'
+      - 'scripts/build-release.mjs'
+      - '.github/workflows/music-albums.yml'
+permissions:
+  contents: read
+jobs:
+  source-and-surface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate album source map and listening room
+        run: node --test tests/album-universe.test.mjs tests/week.test.mjs
