@@ -1,0 +1,52 @@
+{
+  "schema": "webz.tranchnode-lineage-source-index/v0",
+  "sources": [
+    {
+      "repository": "the-static-collective/tranchNode-v1",
+      "commit": "c1ab651e55f85d9f13551c89c1de39097d6b16a4",
+      "role": "legacy-application-structure",
+      "source_kind": "historical-source-code"
+    },
+    {
+      "repository": "the-static-collective/tranchnode",
+      "commit": "7fbb0c868befd5f6a7478bdd0447477a0e8e075e",
+      "role": "exact-byte-immutable-custody",
+      "source_kind": "independent-artifact-store"
+    },
+    {
+      "repository": "the-static-collective/project0",
+      "commit": "08f892eb379ef538cce5b3ca081ecf683b448a4b",
+      "role": "typed-continuity-without-authority",
+      "source_kind": "conformance-kernel"
+    }
+  ],
+  "concepts": [
+    "albums",
+    "branching_ideas",
+    "porch_nodes",
+    "songs",
+    "annotations",
+    "foreign_seeds"
+  ],
+  "annotationModes": [
+    "OBSERVED",
+    "DERIVED",
+    "METAPHOR",
+    "INTERPRETATION"
+  ],
+  "canonicalClaim": "none",
+  "sourceOwnerAuthenticated": false,
+  "personalArchiveAccess": false,
+  "privateBytesIncluded": false,
+  "privateContentHashesIncluded": false,
+  "uploadOrRemoteFetch": false,
+  "publicReleaseAuthorized": false,
+  "deploymentAuthorized": false,
+  "actualCollectionSize": "withheld",
+  "note": "A public directory of pinned source-code capabilities. It is not a published creative archive or permission to use its contents.",
+  "report_kind": "code-capability-index-only",
+  "held_payload_metadata": "withheld",
+  "local_private_import_disclosed": false,
+  "private_artifact_address": "withheld",
+  "private_artifact_byte_length": "withheld"
+}
