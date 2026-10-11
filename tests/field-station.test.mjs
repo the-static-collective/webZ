@@ -7,7 +7,7 @@ import {makeParcel,inspectParcel} from '../week/field/core.mjs';
 const index=readFileSync(new URL('../week/index.html',import.meta.url));
 
 test('seven letters and fourteen tracks remain tied to the exact source bytes',()=>{
- const blob=createHash('sha1').update('blob '+index.length+'\\0').update(index).digest('hex');
+ const blob=createHash('sha1').update('blob '+index.length+String.fromCharCode(0)).update(index).digest('hex');
  assert.equal(blob,catalog.source.gitBlobSha1,'Source changed: manually re-witness public placements');
  assert.equal(catalog.letters.length,7);
  assert.equal(allTracks.length,14);
@@ -45,7 +45,7 @@ test('tampering, false source, unknown track, bad kind and overflow refuse',asyn
 test('field station prevents network connections and saves only on deliberate file export',()=>{
  const ui=readFileSync(new URL('../week/field/ui.mjs',import.meta.url),'utf8');
  const html=readFileSync(new URL('../week/field/index.html',import.meta.url),'utf8');
- assert.doesNotMatch(ui,/\\bfetch\\s*\\(|localStorage|XMLHttpRequest|sendBeacon/);
+ assert.ok(!['fetch(', 'localStorage', 'XMLHttpRequest', 'sendBeacon'].some(s=>ui.includes(s)));
  assert.match(html,/connect-src 'none'/);
  assert.match(html,/HOLD/);
 });
