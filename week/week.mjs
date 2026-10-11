@@ -41,3 +41,14 @@ document.getElementById('native').addEventListener('click', async () => {
   } catch(e) { if(e?.name !== 'AbortError') status.textContent = 'Share unavailable. Try Text it or Email it.'; }
 });
 update();
+// Context doorways are derived from exact published song IDs, leaving Suno and postcards intact.
+for (const anchor of document.querySelectorAll('.day ol li > a[href^="https://suno.com/song/"]')) {
+  const id = anchor.href.split('/').at(-1);
+  if (!/^[a-f0-9-]{36}$/.test(id)) continue;
+  const door = document.createElement('a');
+  door.className = 'context-door';
+  door.href = '/music/rooms/?song=' + encodeURIComponent(id) + '&lens=2&close=8#instrument';
+  door.textContent = 'Look closer · 11 lenses ↗';
+  door.setAttribute('aria-label', 'Look closer at ' + anchor.textContent.replace('↗','').trim() + ' in the eleven-lens instrument');
+  anchor.parentElement.append(door);
+}
