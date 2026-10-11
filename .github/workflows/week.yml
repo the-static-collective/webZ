@@ -1,0 +1,27 @@
+name: A Week Together public page
+on:
+  pull_request:
+    paths:
+      - 'week/**'
+      - 'tests/week.test.mjs'
+      - '.github/workflows/week.yml'
+  push:
+    branches:
+      - feature/a-week-together-listening-room-001
+    paths:
+      - 'week/**'
+      - 'tests/week.test.mjs'
+      - '.github/workflows/week.yml'
+permissions:
+  contents: read
+jobs:
+  static-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify album listening room
+        run: node --test tests/week.test.mjs
+      - name: Syntax-check the postcard module
+        run: node --check week/week.mjs
