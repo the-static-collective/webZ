@@ -39,7 +39,7 @@ try:
         errors, requests = [], []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("request", lambda r: requests.append(r.url))
-        page.goto(base)
+        page.goto(base+'welcome/')
         page.get_by_role("link", name="GLEAN · The Remainder").click()
         page.locator("h1").wait_for()
         assert "Leave something" in page.locator("h1").inner_text()
