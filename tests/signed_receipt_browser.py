@@ -26,7 +26,7 @@ try:
    page=ctx.new_page()
    page.on('pageerror',lambda error:errors.append(str(error)))
    page.goto(host+prefix+'arrivals/receipts/')
-   assert page.locator('#result').inner_text()=='Nothing verified.'
+   assert page.locator('#result').text_content()=='Nothing verified.'
    page.locator('#journal').set_input_files({'name':'journal.json','mimeType':'application/json','buffer':raw})
    page.wait_for_function("()=>document.querySelector('#status').textContent.startsWith('VALID')")
    r=json.loads(page.locator('#result').text_content())
@@ -39,7 +39,7 @@ try:
    page.locator('#journal').set_input_files({'name':'tampered.json','mimeType':'application/json',
      'buffer':json.dumps(altered).encode()})
    page.wait_for_function("()=>document.querySelector('#status').textContent.startsWith('REJECTED')")
-   assert page.locator('#result').inner_text()=='No accepted receipt history.'
+   assert page.locator('#result').text_content()=='No accepted receipt history.'
    assert page.evaluate('localStorage.length+sessionStorage.length')==0
    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
    assert all(urlparse(req).netloc==urlparse(host).netloc for req in requests)
