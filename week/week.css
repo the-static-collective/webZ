@@ -31,3 +31,7 @@
 .before-grid>p{grid-column:1/-1;text-align:center;margin:5px 0;color:var(--muted)}
 @media(max-width:850px){.before{grid-template-columns:1fr}.before-heading>p:not(.eyebrow){max-width:none}}
 @media(max-width:450px){.before-grid{grid-template-columns:1fr}.before-grid a{min-height:130px}}
+
+/* The direct song link stays; the contextual door is a second option. */
+.day li a.context-door{display:inline-flex;align-items:center;min-height:33px;padding:3px 10px 10px 0;color:#bcd39f;text-decoration:underline;text-underline-offset:4px;font:650 11px/1.5 system-ui,sans-serif;letter-spacing:.02em}
+.day li a.context-door:before{content:none}.day li a.context-door:hover{color:var(--gold)}
