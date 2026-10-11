@@ -22,7 +22,7 @@ catch{
  sourceEntries=new Map(listing.tree.filter(e=>e.type==='blob').map(e=>[e.path,e.sha]));
 }
 // Tracked shell drift cannot masquerade as an immutable committed release.
-const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js','workshop/index.html','workshop/workshop.mjs','workshop/catalog.json','workshop/receipts/index.html','workshop/receipts/reader.mjs','workshop/receipts/branch-work-009.json','workshop/receipts/provenance.json'])].sort();
+const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js','workshop/index.html','workshop/workshop.mjs','workshop/catalog.json','workshop/receipts/index.html','workshop/receipts/style.css','workshop/receipts/reader.mjs','workshop/receipts/branch-work-009.json','workshop/receipts/provenance.json'])].sort();
 const files=[];
 for(const path of paths){
  const bytes=await readFile(new URL(path,root));
