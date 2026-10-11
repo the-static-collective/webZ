@@ -1,0 +1,31 @@
+{
+  "schema": "cannon.branch-work-receipt/v0",
+  "source_loadout_report": "sha256:aff070a75464ffbdcdb7154e4711a187b22c940b1a204622051f64ac27c3576f",
+  "source_count": 2,
+  "ghot_repository": "the-static-collective/GHoT",
+  "ghot_exact_sha": "e35dd470384d864b7b0b629a68dad570875a7df0",
+  "ghot_source_sha256": "sha256:897e69e874b830f5594ae9ddd3c2b4d25c8e02550f63a58415e6de262fc63da0",
+  "ghot_operation": "system.hash",
+  "ghot_result_sha256": "8a6b535962ac7b2d019cd4a13e739c0900aaf0b04329358054ea45776501ce17",
+  "ghot_receipt_sha256": "dcf79b7a20c4a31a6914bc0e593b9ca6564cd5ef7d54861490a8f5416e938820",
+  "relatte_repository": "the-static-collective/reLATTE",
+  "relatte_exact_sha": "dcc8cdca84c440aa4294134f020fb7095bf87f24",
+  "relatte_source_sha256": "sha256:7e5df83407212aad4f9cf58540a48b07e7c7f22b32f2c95d9c148850d4cd05e9",
+  "crossing_id": "relatte-crossing-v0:475087b44824817d4932b6d2a186e0558b69f9ed4aabd8a5666a13968859ad3c",
+  "receive_receipt_id": "relatte-receipt-v0:acde07a478d055641ee05789d623dcc63ce2857d9de55d2d52a3199850b2cdb0",
+  "disposition_receipt_id": "relatte-receipt-v0:3252771c63820598eec5c19e2c07e786e9114df7d4b7163a404c933d8f026077",
+  "disposition": "HOLD",
+  "source_verified_locally": true,
+  "actual_local_hash_executed": true,
+  "receipt_signatures_cold_verified": true,
+  "remote_effects": 0,
+  "external_owner_identity_authenticated": false,
+  "owner_operational_permission": false,
+  "public_service_deployed": false,
+  "nonClaims": [
+    "A sample CI executor is not the user machine",
+    "Source hash does not prove source rights",
+    "Receiver HOLD is not ADMIT",
+    "Payload reference is not transfer of original GHoT receipt bytes"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "abundent/branch-work-provenance/v0",
+  "observed_on": "2026-10-11",
+  "source_workflow": "https://github.com/the-static-collective/CANNON/actions/runs/38134430085",
+  "source_artifact_id": 11700880755,
+  "source_artifact_name": "branch-work-009-public-inspection",
+  "source_pr": "https://github.com/the-static-collective/CANNON/pull/16",
+  "source_branch": "experiment/branch-ghot-relatte-crossing-009",
+  "relationship": "archived exact public-inspection.json extracted from successful CANNON 009 CI artifact",
+  "nonClaims": "A static page cannot re-verify signatures or grant execution permission."
+}
