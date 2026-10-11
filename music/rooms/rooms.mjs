@@ -83,7 +83,7 @@ function navigate(update=true){
  const facts=node('div',undefined,'facts');const exposed=Math.min(v.facts.length,Math.max(1,Math.ceil(close/3)));
  for(const row of v.facts.slice(0,exposed)){
    const el=node('section',undefined,'fact');el.append(node('h4',row.heading),node('p',row.text));
-   if(row.href)el.append(node('p')).append(row.href.startsWith('#')||row.href.startsWith('/')?local(row.label,row.href):ext(row.label,row.href));
+   if(row.href){const linkWrap=node('p');linkWrap.append(row.href.startsWith('#')||row.href.startsWith('/')?local(row.label,row.href):ext(row.label,row.href));el.append(linkWrap);}
    facts.append(el);
  }
  reading.append(facts);
