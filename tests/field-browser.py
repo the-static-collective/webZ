@@ -30,7 +30,7 @@ with sync_playwright() as p:
   context.on('request',lambda r:passive_requests.append(r.url))
   context.add_init_script("window.cspWitness=[];document.addEventListener('securitypolicyviolation',e=>window.cspWitness.push(e.violatedDirective))")
   page=context.new_page();page.on('pageerror',lambda e:all_errors.append(str(e)))
-  page.goto(base)
+  page.goto(base+'welcome/')
   page.get_by_role('heading',name='A porch for many worlds.',exact=True).wait_for()
   page.wait_for_function('()=>navigator.serviceWorker.controller !== null')
   page.get_by_role('link',name='See what’s growing',exact=True).tap()
@@ -55,7 +55,7 @@ with sync_playwright() as p:
    page.screenshot(path=str(OUT/'field-desktop-viewport.png'))
    page.locator('#fabrication').screenshot(path=str(OUT/'fabrication-hold-desktop.png'))
    page.set_viewport_size({'width':320,'height':780})
-  for route in ['', 'field/', 'porch/', 'press/', 'proof/']:
+  for route in ['welcome/', 'field/', 'porch/', 'press/', 'proof/']:
    page.goto(base+route);page.reload();no_overflow(page)
    assert 'OFFLINE READY' in page.locator('#offline-state').inner_text()
    violations.extend(page.evaluate('window.cspWitness'))
@@ -72,7 +72,7 @@ with sync_playwright() as p:
   assert page.evaluate('localStorage.length')==0
  # The fixed shell remains navigable while completely offline.
   context.set_offline(True)
-  for route in ['', 'field/', 'porch/', 'press/', 'proof/']:
+  for route in ['welcome/', 'field/', 'porch/', 'press/', 'proof/']:
    page.goto(base+route);page.reload();no_overflow(page)
    # Chromium's network emulation can leave navigator.onLine true after reload;
    # successful cached navigation is the offline witness, not that indicator.
