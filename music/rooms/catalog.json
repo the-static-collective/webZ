@@ -1,0 +1,267 @@
+{
+  "schema": "abundent/music-rooms/v0",
+  "observed_on": "2026-10-11",
+  "source": "public Suno playlist pages and currently published /week/ song links",
+  "scope": "bounded public snapshot; not full Suno history or inferred take ancestry",
+  "week": {
+    "title": "a week together",
+    "url": "/week/",
+    "suno_album_url": "https://suno.com/album/7c2ca64a-32ed-4477-a7cb-e00d1a14c9bf",
+    "letters": [
+      {
+        "number": 1,
+        "title": "Begin again.",
+        "framing": "Sometimes beginning again looks like returning to the familiar door. The porch boards bend; the rosemary is still growing.",
+        "question": "What deserves another beginning?",
+        "songs": [
+          {
+            "id": "70b1d32e-21b6-4340-990d-1a4ef67cfc42",
+            "title": "Rosemary Bloom"
+          },
+          {
+            "id": "66ce822e-be59-4511-887b-61feda608300",
+            "title": "Where the Porch Boards Bend"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Warmth & motion.",
+        "framing": "Some healing arrives quietly, like a sweater. Some arrives making a glorious racket. There is room for both.",
+        "question": "What makes the hard things softer?",
+        "songs": [
+          {
+            "id": "d4a7e58e-5930-4cbb-825f-9c6c8ed6da27",
+            "title": "Comfy Sweater (Psychedelic Country Daydream)"
+          },
+          {
+            "id": "2ec9a56b-6916-4af7-a4dd-5031e42f0bea",
+            "title": "Neon Fiddle Bounce Drop"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Good ground.",
+        "framing": "A song can drift into neon and come back to the dirt. We bring our broken things and discover what might still grow.",
+        "question": "What are you planting this week?",
+        "songs": [
+          {
+            "id": "2ba6fe93-9d4e-4098-acc5-7e53f9d4918b",
+            "title": "Neon Aria: Lo-Fi Soul Overture"
+          },
+          {
+            "id": "02af5b55-74b7-455e-9b9f-f7a840ccac3e",
+            "title": "Good Ground"
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Make room.",
+        "framing": "We stand on the hill; we open the door; we move the chairs. The number at the table changes the table itself.",
+        "question": "Who could use one more chair?",
+        "songs": [
+          {
+            "id": "f180e7d1-8b2a-4f89-93f8-3c26544d4701",
+            "title": "Standing on the Hill (Psychedelic Phonk Pop Mix)"
+          },
+          {
+            "id": "d6dfeebd-65e7-4c0e-ba84-c092f671e495",
+            "title": "Room at the Table"
+          }
+        ]
+      },
+      {
+        "number": 5,
+        "title": "Faith & release.",
+        "framing": "Protection is one story; setting the armor down is another. Between them waits a valley and a table.",
+        "question": "What can you set down today?",
+        "songs": [
+          {
+            "id": "a3cac8da-9c29-43d2-bf21-ba00a2b379bc",
+            "title": "Godfather Got My Back"
+          },
+          {
+            "id": "c3a86308-bc04-4abc-911e-f55b03c4d5b2",
+            "title": "Meet Me in the Valley (Loaf-i Mix)"
+          }
+        ]
+      },
+      {
+        "number": 6,
+        "title": "Through the night.",
+        "framing": "Not every night offers an answer. Staying beside somebody while the music changes may be enough.",
+        "question": "Who would you like beside you at morning?",
+        "songs": [
+          {
+            "id": "5c5409ab-97c9-4035-bea0-d29e256e03fd",
+            "title": "Let It Find Us"
+          },
+          {
+            "id": "5195c966-d1da-4e87-a9d4-b48faacf0047",
+            "title": "Midnight Phonk Blues"
+          }
+        ]
+      },
+      {
+        "number": 7,
+        "title": "Come home.",
+        "framing": "We finish where we started: rosemary. But this is not quite the same beginning. The flowers have weathered something. So have we.",
+        "question": "What have you brought home?",
+        "songs": [
+          {
+            "id": "27efd551-733b-4192-be02-a90e3f574f53",
+            "title": "There by Two"
+          },
+          {
+            "id": "c737f489-2912-408e-a444-bb35cdf893cd",
+            "title": "Blue Rosemary"
+          }
+        ]
+      }
+    ]
+  },
+  "rooms": [
+    {
+      "id": "open-window-cruise",
+      "title": "open window cruise",
+      "subtitle": "A night drive becoming an invitation to come home.",
+      "suno_playlist_id": "7385d8f7-83d1-486e-ae42-f5ab6d0c2701",
+      "suno_url": "https://suno.com/playlist/7385d8f7-83d1-486e-ae42-f5ab6d0c2701?sh=t8TfoQiVpGhe5PYi",
+      "created_date": "2026-10-08",
+      "interpretation": "Editorial reading from titles and selected lyrics; not a verified musical analysis.",
+      "tracks": [
+        {
+          "title": "Midnight Phonk Blues",
+          "id": "5195c966-d1da-4e87-a9d4-b48faacf0047",
+          "duration_seconds": 147,
+          "style": "lo-fi blues",
+          "url": "https://suno.com/song/5195c966-d1da-4e87-a9d4-b48faacf0047",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Home with U (Cosmic Fusion Mix)",
+          "id": "fa660b53-bd9d-47da-871b-a421d4d1b392",
+          "duration_seconds": 130,
+          "style": "EDM",
+          "url": "https://suno.com/song/fa660b53-bd9d-47da-871b-a421d4d1b392",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "A Place Still Saved for You",
+          "id": "e5cbb360-53db-4616-8490-ff15c08a1a42",
+          "duration_seconds": 192,
+          "style": "indie folk",
+          "url": "https://suno.com/song/e5cbb360-53db-4616-8490-ff15c08a1a42",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "There's a Place for You",
+          "id": "93db656e-417e-4b40-bf91-06bfc2d0a9e7",
+          "duration_seconds": 206,
+          "style": "indie folk",
+          "url": "https://suno.com/song/93db656e-417e-4b40-bf91-06bfc2d0a9e7",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "The Table’s Set for You",
+          "id": "1774e8e2-72d1-402e-973e-d53474dac15a",
+          "duration_seconds": 218,
+          "style": "indie folk",
+          "url": "https://suno.com/song/1774e8e2-72d1-402e-973e-d53474dac15a",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "The Kettle's On",
+          "id": "cad9f048-b8ba-4af1-b9c2-b92b0e89aa19",
+          "duration_seconds": 183,
+          "style": "indie folk",
+          "url": "https://suno.com/song/cad9f048-b8ba-4af1-b9c2-b92b0e89aa19",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "We Saved a Place",
+          "id": "688c16e1-8805-4a76-bf4a-008abf8374df",
+          "duration_seconds": 158,
+          "style": "indie folk",
+          "url": "https://suno.com/song/688c16e1-8805-4a76-bf4a-008abf8374df",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Parking Lot Songs",
+          "id": "2470a07f-a311-44e1-98cc-9c134ec5318f",
+          "duration_seconds": 254,
+          "style": null,
+          "url": "https://suno.com/song/2470a07f-a311-44e1-98cc-9c134ec5318f",
+          "model": "V6-WILD"
+        }
+      ]
+    },
+    {
+      "id": "cupsz",
+      "title": "cupsz",
+      "subtitle": "Six transmissions about finding language for staying close.",
+      "suno_playlist_id": "e0853781-9aef-4dc8-b5ec-a78d97deeb51",
+      "suno_url": "https://suno.com/playlist/e0853781-9aef-4dc8-b5ec-a78d97deeb51?sh=tqyLdu40b9ZUYvaR",
+      "created_date": "2026-10-08",
+      "interpretation": "Editorial reading from titles and selected lyrics; not a verified musical analysis.",
+      "tracks": [
+        {
+          "title": "Let It Find Us",
+          "id": "5c5409ab-97c9-4035-bea0-d29e256e03fd",
+          "duration_seconds": 186,
+          "style": "indie pop-rock",
+          "url": "https://suno.com/song/5c5409ab-97c9-4035-bea0-d29e256e03fd",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Fractal Bounce Transmission",
+          "id": "7589ad4a-4718-41ed-9493-24a75257bf71",
+          "duration_seconds": 152,
+          "style": "math-rock",
+          "url": "https://suno.com/song/7589ad4a-4718-41ed-9493-24a75257bf71",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Fractal Nocturne Transmission",
+          "id": "552a0125-cf61-4fbb-b6fd-ad1f347fccd3",
+          "duration_seconds": 151,
+          "style": "modern classical",
+          "url": "https://suno.com/song/552a0125-cf61-4fbb-b6fd-ad1f347fccd3",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Better Words for Weather",
+          "id": "1a524885-2b11-48a5-8bc8-8f21273fa77a",
+          "duration_seconds": 157,
+          "style": "indie",
+          "url": "https://suno.com/song/1a524885-2b11-48a5-8bc8-8f21273fa77a",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "The Long Way Home",
+          "id": "f106912e-c80f-49b4-af80-186f69665900",
+          "duration_seconds": 263,
+          "style": "indie pop-rock",
+          "url": "https://suno.com/song/f106912e-c80f-49b4-af80-186f69665900",
+          "model": "V6-WILD"
+        },
+        {
+          "title": "Morning Frequencies",
+          "id": "13e9ab29-129a-4b15-a1ca-4256d2dfe099",
+          "duration_seconds": 139,
+          "style": "grunge",
+          "url": "https://suno.com/song/13e9ab29-129a-4b15-a1ca-4256d2dfe099",
+          "model": "V6-WILD"
+        }
+      ]
+    }
+  ],
+  "ontology": {
+    "song": "Particular Suno track ID, distinct from same-title alternative recordings",
+    "membership": "Track ID observed in a playlist or album, not proof of creation, remix or ancestry",
+    "universe_album": "Abundent editorial publication; Suno source stays a playlist",
+    "unknown": "An absent relation means not observed in this bounded manifest"
+  }
+}
