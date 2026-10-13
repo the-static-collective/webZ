@@ -41,7 +41,7 @@ with sync_playwright() as p:
   page.get_by_role('button',name='The field',exact=True).click()
   assert page.get_by_role('button',name='The field',exact=True).get_attribute('aria-pressed')=='true'
   assert 'way=field' in page.url
-  page.locator('#closer').fill('10')
+  page.locator('#closer').focus();page.keyboard.press('End')
   expect(page.locator('#closer-value')).to_have_text('10')
   assert page.locator('.object').count()>=8
   # Search must find a particular song by exact curated catalog, not matching guessed titles.
