@@ -1,0 +1,80 @@
+name: RELAY-001 fourth-organ native proof door
+
+on:
+  push:
+    branches: [experiment/relay001-relatte-evidence-door]
+  pull_request:
+    paths:
+      - 'app/relay-proof.mjs'
+      - 'relay/**'
+      - 'tests/relay-proof.test.mjs'
+      - '.github/workflows/relay001-fourth-organ.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  four-organs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout webZ
+        uses: actions/checkout@v4
+      - name: Checkout pinned proposed reLATTE native bridge
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/reLATTE
+          ref: 69ddd67eb84049eec7ff8e040c465de078d98def
+          path: .relay-deps/reLATTE
+          persist-credentials: false
+      - name: Checkout pinned GHoT bridge
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9aec1e00667994c7e0dc0e345c5d40d5012fdf8e
+          path: .relay-deps/GHoT
+          persist-credentials: false
+      - name: Checkout pinned LOADOUT
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/LOADOUT
+          ref: 1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee
+          path: .relay-deps/LOADOUT
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install native reLATTE and ffprobe
+        run: |
+          cd .relay-deps/reLATTE && npm install --no-audit --no-fund
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Generate synthetic WAV (no user song on GitHub)
+        run: |
+          python3 - <<'PY'
+          import math, struct, wave
+          with wave.open('relay001-fixture.wav','wb') as w:
+            w.setnchannels(1);w.setsampwidth(2);w.setframerate(16000)
+            w.writeframes(b''.join(struct.pack('<h',int(6400*math.sin(2*math.pi*330*i/16000))) for i in range(4000)))
+          PY
+      - name: Execute native LOADOUT and GHoT
+        run: |
+          SHA="$(sha256sum relay001-fixture.wav | cut -d ' ' -f 1)"
+          GHOT_HOME="$RUNNER_TEMP/ghot" python3 .relay-deps/GHoT/ghot/relay001_loadout_probe.py relay001-fixture.wav \
+            --sha256 "$SHA" --loadout-src .relay-deps/LOADOUT/src \
+            --ghot-root .relay-deps/GHoT --out "$RUNNER_TEMP/donor"
+      - name: Native reLATTE signed RECEIVE and HOLD
+        run: |
+          cd .relay-deps/reLATTE
+          node --experimental-strip-types scripts/relay001-ghot-hold.mjs "$RUNNER_TEMP/donor" \
+            "$RUNNER_TEMP/third" "$GITHUB_WORKSPACE/relay001-fixture.wav"
+      - name: Observe native crossing with webZ and hostile checks
+        run: |
+          RELAY_FIXTURE="$RUNNER_TEMP/third/public/roundtrip-result.json" node --test tests/relay-proof.test.mjs
+          npm test
+      - name: Upload synthetic-only public witness
+        uses: actions/upload-artifact@v4
+        with:
+          name: relay001-fourth-organ-public-synthetic
+          path: evidence-relay/
+          if-no-files-found: ignore
