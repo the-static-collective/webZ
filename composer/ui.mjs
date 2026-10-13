@@ -1,7 +1,7 @@
 import {buildGraph,compose,parseAddress,address,relations,find,MODES} from './model.mjs';
 const $=id=>document.getElementById(id);
 const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
-const marks={workbench:'✳',field:'❦',room:'♫',album:'◉',letter:'✉',song:'♪',porch:'⌂',world:'◇',instrument:'◎',witness:'✎'};
+const marks={workbench:'✳',field:'❦',gallery:'◉',room:'♫',album:'◉',letter:'✉',song:'♪',porch:'⌂',world:'◇',instrument:'◎',witness:'✎'};
 let graph=null,current={id:'garden',mode:'porch',closer:5},trail=[];
 function safeLink(url){
  const root=new URL('../',import.meta.url);
