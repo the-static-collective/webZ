@@ -108,6 +108,6 @@ export function invitation(score) {
   const seeds=unique.filter(n=>n.kind==="seed");
   if(seeds.length) lines.push("PARTICULARS MADE HERE",...seeds.map(n=>n.title+(n.phrase?" — "+n.phrase:"")),"");
   lines.push("The listening letters: "+SOURCE,"");
-  lines.push("A visitor's invitation, not a signed receipt or official Collective canon.");
+  lines.push("A visitor's unsigned invitation, not a signed receipt or official Collective canon.");
   return lines.join("\n");
 }
