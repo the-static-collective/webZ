@@ -40,7 +40,7 @@ export function neighbors(id,seeds=[]) {
 }
 export function relation(from,to,seeds=[]) {
   if (!getNode(to,seeds) || (from && !neighbors(from,seeds).includes(to))) return null;
-  if(!from) return "chosen-entry";
+  if(!from) return getNode(to,seeds).kind==="letter" ? "chosen-entry" : null;
   const a=getNode(from,seeds), b=getNode(to,seeds);
   if(a.kind==="seed" || b.kind==="seed") return "visitor-created-link";
   if(a.kind==="letter" && b.kind==="letter") return "suggested-letter-walk";
