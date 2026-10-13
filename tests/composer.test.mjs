@@ -15,6 +15,7 @@ test("seven published listening letters and fourteen real source song URLs",()=>
 test("one movement forms an editorial invitation, not invented ancestry",()=>{
   const first=LETTERS[0], second=LETTERS[1], song=first.children[0], pair=first.children[1];
   assert.equal(relation(null,first.id),"chosen-entry");
+  assert.equal(relation(null,song),null);
   assert.equal(relation(first.id,second.id),"suggested-letter-walk");
   assert.equal(relation(first.id,song),"published-letter-membership");
   assert.equal(relation(song,pair),"paired-in-published-letter");
