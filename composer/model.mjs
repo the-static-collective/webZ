@@ -46,7 +46,7 @@ export function buildGraph(field,music){
   if(!/^[a-z0-9-]{1,80}$/.test(w.id))throw Error('INVALID_WORLD_ID');
   const id='world:'+w.id;
   const surface=w.publicSurface?.target;
-  const url=typeof surface==='string'&&safeUrl('/'+surface.replace(/^\/+/,''))?'/'+surface.replace(/^\/+/, ''):'/field/#'+encodeURIComponent(w.id);
+  const url=w.publicSurface?.mode==='LOCAL_ROUTE'&&typeof surface==='string'&&safeUrl('/'+surface.replace(/^\/+/,''))?'/'+surface.replace(/^\/+/, ''):'/field/#'+encodeURIComponent(w.id);
   const src=w.source||{};
   add({id,label:asText(w.label),kind:'world',url,description:asText(w.shortDescription),owner:asText(w.ownerSystem),evidence:'Field observation · '+asText(field.observedOn),claim:asText(w.state)+' · '+asText(w.authoritySummary),source:asText(src.repository)+' @ '+asText(src.exactCommit)});
   join('field',id,'catalogs','observed field membership','field/public-field.json');
