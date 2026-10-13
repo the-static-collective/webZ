@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#16291f">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Follow a thread · Abundent</title>
+<meta name="description" content="An addressable navigation composer for the Static Collective: pick a particular, then watch its neighbors gather.">
+<link rel="stylesheet" href="./style.css">
+<link rel="icon" href="../app/icon.svg" type="image/svg+xml">
+<script type="module" src="./ui.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the composer</a>
+<header class="top">
+ <a class="brand" href="../">abundent<span>.</span></a>
+ <span class="topnote"><i aria-hidden="true"></i> THE DOOR COMPOSER <small>001</small></span>
+ <a href="../" class="return">Return to the garden ↗</a>
+</header>
+<main id="main">
+ <section class="intro">
+  <div><div class="eyebrow">THE STATIC COLLECTIVE / A LIVING NAVIGATION STUDY</div>
+   <h1>Follow a thread.<br><em>Let the room change.</em></h1>
+   <p>Start with a song, a machine, a little letter, or somebody else's door. Every time you choose a particular, the nearby world rearranges.</p></div>
+  <div class="stamp" aria-hidden="true"><b>✳</b><span>THE PATH IS<br>NOT THE PROOF</span></div>
+ </section>
+ <section class="controls" aria-label="Compose the navigation">
+  <div class="control mode-control"><div class="eyebrow">01 / HOW TO LOOK</div>
+   <div class="mode-buttons" role="group" aria-label="Navigation perspectives">
+    <button type="button" data-mode="porch" aria-pressed="true">The porch</button>
+    <button type="button" data-mode="field" aria-pressed="false">The field</button>
+    <button type="button" data-mode="trace" aria-pressed="false">The trace</button>
+   </div>
+  </div>
+  <div class="control dial"><label class="eyebrow" for="closer">02 / HOW MUCH TO SEE <output id="closer-value" for="closer">5</output> / 10</label>
+   <input type="range" min="0" max="10" value="5" id="closer" aria-describedby="closer-help">
+   <div id="closer-help">A few neighbors ← → a wider gathering</div>
+  </div>
+  <div class="control find-control"><label class="eyebrow" for="find">03 / OR FIND A PARTICULAR</label>
+   <input id="find" type="search" placeholder="Song, letter, world, machine…" autocomplete="off" aria-controls="matches">
+   <div id="matches" class="matches" aria-live="polite"></div>
+  </div>
+ </section>
+ <div id="status" class="status" role="status">Opening the public catalogs…</div>
+ <section class="workspace" aria-label="Living relationship composer">
+  <div class="board-area">
+   <div class="board-head"><div><span class="eyebrow">THE DISCOVERY TABLE</span><p>Not a tour. An invitation to notice.</p></div>
+    <div class="board-actions"><button type="button" id="back" disabled>← Previous</button><button type="button" id="root">⌂ Root</button><button type="button" id="surprise">Follow a neighbor ↗</button></div>
+   </div>
+   <div id="board" class="board" data-mode="porch" aria-label="A selected particular and its neighboring doors">
+    <svg id="threads" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div id="center" class="center"></div>
+    <div id="objects" class="objects"></div>
+    <span class="board-caption">THE OBJECTS MOVE · THE SOURCE DOES NOT</span>
+   </div>
+   <div class="board-foot"><span id="count">—</span><span>Recompose by choosing any nearby object.</span></div>
+  </div>
+  <aside class="inspector" aria-labelledby="inspector-title">
+   <span class="eyebrow" id="inspector-kind">SELECTED PARTICULAR</span>
+   <h2 id="inspector-title">The garden workbench</h2>
+   <p id="inspector-description">Pick a thing and its immediate neighborhood comes into view.</p>
+   <div class="open-zone"><a id="door-link" class="open-door" href="../">Enter this door ↗</a><button type="button" id="copy">Copy this view ⧉</button></div>
+   <section class="info"><h3>Things it touches</h3><div id="relations"></div></section>
+   <details class="provenance" open><summary>Roots / source boundary</summary>
+     <dl><dt>Owner</dt><dd id="owner"></dd><dt>Evidence</dt><dd id="evidence"></dd><dt>Source</dt><dd id="source"></dd><dt>What is not claimed</dt><dd id="claim"></dd></dl>
+   </details>
+  </aside>
+ </section>
+ <footer><span>❋ Keep the weird particulars. Build better apertures.</span><span>Navigation ≠ transfer · Membership ≠ ancestry · Observation ≠ authority</span></footer>
+</main>
+</body>
+</html>
