@@ -6,7 +6,7 @@ const anchors=[
  ['field','The public field','field','/field/','Eleven project observations, their owners, and open or held doors.','webZ','Committed field catalog'],
  ['navigator','The 11 × 11 navigator','instrument','/field/navigate/','Tune a bounded public field and choose a closer view.','webZ','Committed field navigator'],
  ['week','a week together','album','/week/','Fourteen recordings and seven listening letters.','The Static Collective','Published album presentation'],
- ['rooms','The listening rooms','room','/music/rooms/','Playlist rooms and exact recording identities.','The Static Collective','Observed playlist snapshot'],
+ ['rooms','The listening rooms','gallery','/music/rooms/','Playlist rooms and exact recording identities.','The Static Collective','Observed playlist snapshot'],
  ['twoday','Before the compilation','album','/music/2day/','Four playlist-albums arranged across a returning day.','The Static Collective','Published editorial presentation'],
  ['welcome','The webZ porch','porch','/welcome/','The web is a porch, not the house.','webZ','Public informational threshold'],
  ['forage','Field Porch · GrO','field','/forage/','Review a held material encounter before offering a limited invitation.','webZ × GrO','Local proposal only'],
@@ -99,8 +99,8 @@ export function compose(graph,id='garden',mode='porch',closer=5){
   for(const e of relations(graph,current))if(!reached.has(e.neighbor)){reached.set(e.neighbor,depth+1);queue.push(e.neighbor);}
  }
  const kindRank=(n)=>{
-  if(mode==='porch')return ['porch','workbench','room','album','letter','song','field','world','instrument','witness'].indexOf(n.kind);
-  if(mode==='field')return ['field','world','instrument','workbench','room','album','song','letter','porch','witness'].indexOf(n.kind);
+  if(mode==='porch')return ['porch','workbench','gallery','room','album','letter','song','field','world','instrument','witness'].indexOf(n.kind);
+  if(mode==='field')return ['field','world','instrument','workbench','gallery','room','album','song','letter','porch','witness'].indexOf(n.kind);
   return ['witness','world','song','letter','instrument','room','field','album','porch','workbench'].indexOf(n.kind);
  };
  const limit=3+closer;
