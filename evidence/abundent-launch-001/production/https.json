@@ -1,0 +1,353 @@
+{
+  "schema": "webz/public-https-witness/v0",
+  "at": "2026-10-10T03:06:02.803629+00:00",
+  "base": "https://abundent.org",
+  "sourceCommit": "7d68bfdc0f6347896c224f6f3fbcaa0243ed1159",
+  "tlsScope": "curl verified TLS through configured outbound trust/proxy; direct origin leaf certificate not captured",
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/field/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/field/navigate/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/press/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/forage/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/glean/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/worlds/sanctuary/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/worlds/orchard/",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/app/navigator.mjs",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "application/javascript; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/release.json",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "status": 200,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "application/manifest+json; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/unissued-release-route/",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/worlds/music-field/",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/worlds/suno-atlas/",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/worlds/wandering-lens/",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/census/static-web-002/inputs.json",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/tests/fixtures/glean-orchard-example.json",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/docs/ABUNDENT-LAUNCH-001.md",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/.git/config",
+      "status": 308,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/plain",
+        "strict-transport-security": "max-age=63072000",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "location": "/.git/config/"
+      }
+    },
+    {
+      "path": "/.git/config/",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "path": "/vercel.json",
+      "status": 404,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; worker-src 'self'; img-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "strict-transport-security": "max-age=63072000",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    }
+  ],
+  "wwwRedirects": [
+    {
+      "path": "/",
+      "status": 308,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/plain",
+        "strict-transport-security": "max-age=63072000",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "location": "https://abundent.org/"
+      }
+    },
+    {
+      "path": "/field/",
+      "status": 308,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/plain",
+        "strict-transport-security": "max-age=63072000",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "location": "https://abundent.org/field/"
+      }
+    },
+    {
+      "path": "/field/navigate/",
+      "status": 308,
+      "sslVerifyResult": 0,
+      "httpVersion": "2",
+      "headers": {
+        "content-type": "text/plain",
+        "strict-transport-security": "max-age=63072000",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "location": "https://abundent.org/field/navigate/"
+      }
+    }
+  ]
+}

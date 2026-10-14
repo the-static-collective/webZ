@@ -1,0 +1,10 @@
+{
+  "schema": "webz/public-field-receipt/v0",
+  "profile": "inspection-only-001",
+  "fieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1",
+  "observationsHash": "sha256:3aa8ae883e46226e19a5c8d5a9f376c62de3a443df17866c1e8dd09799acf220",
+  "worlds": 11,
+  "doors": 24,
+  "authority": "NONE",
+  "scope": "Deterministic committed-source inspection only; no deployment, admission, execution, adoption or effect authorized."
+}

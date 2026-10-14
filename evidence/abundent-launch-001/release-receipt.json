@@ -1,0 +1,45 @@
+{
+  "schema": "webz/launch-release-receipt/v0",
+  "at": "2026-10-10T03:07:24.284935+00:00",
+  "project": "prj_eMffWbYyflZmlCcVU0SvadSOh0eq",
+  "team": "team_A6mP6EYc1iOBxsd7jYsniIox",
+  "sourceCommit": "7d68bfdc0f6347896c224f6f3fbcaa0243ed1159",
+  "sourceTree": "3fa687ddab53536828f50704c5eff638b8601a3f",
+  "deploymentId": "dpl_Exwp65kuQtLTGFQMhFKhAQMiRa6f",
+  "releaseUrl": "https://webz-field-porch-disi9zo6k-theotherlucasv-1250s-projects.vercel.app",
+  "productionUrl": "https://abundent.org",
+  "target": "production",
+  "state": "READY",
+  "releaseManifestSha256": "sha256:73c8eeccdba0505e900fa5b1bfd477109e38fde6c4449936733473396f93b1d6",
+  "beforePromotionApexDeployment": "dpl_Gk7fjb5mXeeJ9br74XRCYg3eMoDh",
+  "rollback": {
+    "deploymentId": "dpl_Gk7fjb5mXeeJ9br74XRCYg3eMoDh",
+    "sourceCommit": "e1c56b019286922b04cef59922ef071034c32790",
+    "url": "https://webz-field-porch-d8xof4ea1-theotherlucasv-1250s-projects.vercel.app",
+    "witness": "HTTPS 200, TLS verification 0, homepage bytes match source",
+    "homepageSha256": "sha256:893fe900a31ac46ce4abb0a885835bd026a6a2728bc1dca02bf76bd243f62d4f"
+  },
+  "githubChecks": [
+    "https://github.com/the-static-collective/webZ/actions/runs/38019127305",
+    "https://github.com/the-static-collective/webZ/actions/runs/38019178319"
+  ],
+  "githubChecksConclusion": "success",
+  "gitlessArchiveMatchesGitBuild": true,
+  "repeatedBuildsByteIdentical": true,
+  "autoAssignCustomDomains": false,
+  "gitAutomaticDeployments": false,
+  "dnsChanges": 0,
+  "runtimeErrorClustersLastHour": 0,
+  "externalFetch": {
+    "tool": "TinyFish fetch_content",
+    "apexHeading": "A porch for many worlds.",
+    "wwwFinalUrl": "https://abundent.org/",
+    "navigatorTitle": "11\u00d711 field navigator \u00b7 webZ",
+    "scope": "Independent static HTTPS read; functional JavaScript witness is Chromium."
+  },
+  "limitations": [
+    "Physical Android installation not witnessed; 320px touch/desktop Chromium emulation passed.",
+    "Workspace TLS inspection proxy prevents a direct origin leaf-certificate fingerprint; curl TLS verification returned 0, plus independent external HTTPS page fetch.",
+    "PR remains a draft and main is unchanged; later receipt-only commits do not replace the deployed source SHA."
+  ]
+}

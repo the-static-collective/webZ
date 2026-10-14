@@ -1,0 +1,360 @@
+{
+  "schema": "webz/source-observations/v0",
+  "sources": [
+    {
+      "repository": "the-static-collective/CANNON",
+      "ref": "refs/pull/11/head",
+      "exactCommit": "8906a7b559565e844ed0a7791eced89ac5a549d4",
+      "experiment": "KINSHIP BRIDGE 007 \u2014 station-local finance inputs and Africa listening HOLD",
+      "pr": 11,
+      "url": "https://github.com/the-static-collective/CANNON/pull/11",
+      "reviewedFiles": [
+        {
+          "path": "docs/KINSHIP-BRIDGE-007.md",
+          "sha256": "sha256:69abea7c36cbf128bec47b2b8ce6dca33cdc32e492dee4e591fdc79d0de7d091"
+        }
+      ],
+      "patchSha256": "sha256:c38bb9949797de725467f8fffe17958d7b673c5691b0c4f3d25ad481d2a839ab",
+      "observedContract": "Offline aggregate finance counterfactual and unranked readiness worksheet; even passed gates mean no deployment.",
+      "notClaimed": [
+        "station endorsement",
+        "institutional authority",
+        "public launch"
+      ]
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "ref": "refs/pull/98/head",
+      "exactCommit": "db1c84c7a7116ca9a91d4baaca37fc0963a3dd00",
+      "experiment": "RADIO HOUSE 001 \u2014 Nigeria\u2194Minnesota sovereign media node, interruption-safe review spool",
+      "pr": 98,
+      "url": "https://github.com/the-static-collective/GHoT/pull/98",
+      "reviewedFiles": [
+        {
+          "path": "docs/RADIO-HOUSE-001.md",
+          "sha256": "sha256:14abebde25e69484f04bc421860af2f7828db8d28b35d9aa04e96da548eb9257"
+        }
+      ],
+      "patchSha256": "sha256:4b362d182b8dc1ed29f447e9e5e54fb5c0945645369e8c6da684aa1c49415ffc",
+      "observedContract": "Offline synthetic media spool with independent source and recipient selections; held, never aired.",
+      "notClaimed": [
+        "actual international transport",
+        "station adoption",
+        "broadcast"
+      ]
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "ref": "refs/pull/100/head",
+      "exactCommit": "88be4205b65e54d568b50564bfaa0a9fd381f8ed",
+      "experiment": "RADIO HOUSE 002 \u2014 local media first, opt-in GHoT spare compute with resumable checkpoints",
+      "pr": 100,
+      "url": "https://github.com/the-static-collective/GHoT/pull/100",
+      "reviewedFiles": [
+        {
+          "path": "docs/RADIO-HOUSE-002.md",
+          "sha256": "sha256:76034eecfbc2990ff2d35cbbd4c6ba67d214e0526be06fe0746550200bfbec8f"
+        }
+      ],
+      "patchSha256": "sha256:9e1bc7fcff958e85850af67118e2677c515f365fed41a8c9fab519dc3f51d993",
+      "observedContract": "Opt-in owner-local SQLite public-hash queue; media and power gates stop the next chunk.",
+      "notClaimed": [
+        "remote dispatch",
+        "instant preemption",
+        "OBS watchdog"
+      ]
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "ref": "refs/pull/102/head",
+      "exactCommit": "aefac61b8731de8a1f8c5cac1518a93879021b67",
+      "experiment": "PRINTER-ORGAN-001 \u2014 GHoT read-only 3D-printer field and held reLATTE proposals",
+      "pr": 102,
+      "url": "https://github.com/the-static-collective/GHoT/pull/102",
+      "reviewedFiles": [
+        {
+          "path": "docs/PRINTER-ORGAN-001.md",
+          "sha256": "sha256:d10b8c683ac796fef419e2304358e503e54bc129bbaf6bc6bbed1b925b52fec5"
+        }
+      ],
+      "patchSha256": "sha256:3f8508b3ab7e996cc93946e7ed76786075b338ec59675ec667974cc8ddb331ad",
+      "observedContract": "Owner-provisioned printer status and proposal adapter; proposal-only HOLD.",
+      "notClaimed": [
+        "native source authentication from detached JSON",
+        "printer start authority"
+      ]
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "ref": "refs/pull/103/head",
+      "exactCommit": "96bb7e39d8e558ab07f3bdbf39e54dd3cdcb3aec",
+      "experiment": "RADIO HOUSE 003 \u2014 reLATTE-signed public work into sovereign media-first GHoT node",
+      "pr": 103,
+      "url": "https://github.com/the-static-collective/GHoT/pull/103",
+      "reviewedFiles": [
+        {
+          "path": "docs/RADIO-HOUSE-003.md",
+          "sha256": "sha256:b35e04a27b55c90110142e4736782ddfee392e891b4acc622ac2803e1e69ea82"
+        }
+      ],
+      "patchSha256": "sha256:ccb671989ca2dc6de1c5ad6b4e3c926dfd7b5aa08802ca7831b607e95ba3ae18",
+      "observedContract": "Native signed manual-file courier, owner-local admission and bounded hash execution receipts.",
+      "notClaimed": [
+        "network delivery",
+        "two physical machines",
+        "station identity"
+      ]
+    },
+    {
+      "repository": "the-static-collective/GHoT",
+      "ref": "refs/pull/105/head",
+      "exactCommit": "bd05633274da9165d32a0e11392d618fd5340054",
+      "experiment": "SOVEREIGN-PRINT-SHOP-002 \u2014 native Static OS G-code \u00d7 GHoT printer organ \u00d7 signed reLATTE owners",
+      "pr": 105,
+      "url": "https://github.com/the-static-collective/GHoT/pull/105",
+      "reviewedFiles": [
+        {
+          "path": "docs/SOVEREIGN-PRINT-SHOP-002.md",
+          "sha256": "sha256:03999729fe2406168839a6ecebf1aaa7fdea1dd0801dbf9e2df0fc7b72168d10"
+        }
+      ],
+      "patchSha256": "sha256:8e34f8b64c6c99501c636ecceaab14c2317f26df1d679c9ad5002cbdda5bde45",
+      "observedContract": "Real CAD and slicer source composed with GHoT adapters and signed simulated owner worlds; physical start HOLD.",
+      "notClaimed": [
+        "authenticated real printer owner",
+        "physical print",
+        "remote printer admission"
+      ]
+    },
+    {
+      "repository": "the-static-collective/Jubilee-treasury",
+      "ref": "refs/pull/22/head",
+      "exactCommit": "f2a3989209f309c077dd5c7b595e1d3ba08f61a9",
+      "experiment": "PENNY-019 \u2014 playable Haunted Jubilee Arcade: two-box crank, ghost photo, MAIL/HOLD",
+      "pr": 22,
+      "url": "https://github.com/the-static-collective/Jubilee-treasury/pull/22",
+      "reviewedFiles": [
+        {
+          "path": "docs/HAUNTED-JUBILEE-ARCADE-019.md",
+          "sha256": "sha256:6a01db7b6e0521e67243bbac5192db04fa54633afb3e3e0b48fbfae0e93280f5"
+        }
+      ],
+      "patchSha256": "sha256:bd9d0313095794a05513021bcac43348d7b196a8c8406066392fa45229ee157c",
+      "observedContract": "Local synthetic arcade, image-bound metadata treatments and independent human choices; MAIL remains HOLD.",
+      "notClaimed": [
+        "commissioned arcade",
+        "physical paper proof",
+        "currency backing"
+      ]
+    },
+    {
+      "repository": "the-static-collective/Jubilee-treasury",
+      "ref": "refs/pull/23/head",
+      "exactCommit": "33fa9c4bddc35fca77834ece45cfeee50f482afc",
+      "experiment": "PENNY-020 \u2014 The Crank Remembers: durable turn and paper recovery",
+      "pr": 23,
+      "url": "https://github.com/the-static-collective/Jubilee-treasury/pull/23",
+      "reviewedFiles": [
+        {
+          "path": "docs/HAUNTED-JUBILEE-POWERLOSS-020.md",
+          "sha256": "sha256:cf3b68301227236685471547cdf1e55a11268c3658cdd09b905ab07544b47041"
+        }
+      ],
+      "patchSha256": "sha256:02997143a7026aafc41f787db4003fbcddca05ff30096e6dbd63e4bafcdc2e92",
+      "observedContract": "Durable consumed-edge claim and postcard spool; explicit local CUPS seam and read-only recovery without retry.",
+      "notClaimed": [
+        "hardware commissioning",
+        "physical paper proof",
+        "treasury issuance"
+      ]
+    },
+    {
+      "repository": "the-static-collective/lemonPRESS",
+      "ref": "refs/pull/49/head",
+      "exactCommit": "3ea755da14db9ecdd3b3b6e45dcbc56f9cbc58cd",
+      "experiment": "MATERIAL MEMORY 001 \u2014 preserve spatial provenance before rendering",
+      "pr": 49,
+      "url": "https://github.com/the-static-collective/lemonPRESS/pull/49",
+      "reviewedFiles": [
+        {
+          "path": "docs/MATERIAL-MEMORY-001.md",
+          "sha256": "sha256:72581eb4e178987c9b8f9c67cabe2664f70df51d488047694d7bef16755db331"
+        }
+      ],
+      "patchSha256": "sha256:1d7a81e5e5963c364e6c5d215464f4623627da519d249cd9623546010734d829",
+      "observedContract": "Material Memory visual laws and proposed ledger seam; documentation only, no runtime claimed.",
+      "notClaimed": [
+        "event ledger runtime",
+        "rendered edition",
+        "publication authority"
+      ]
+    },
+    {
+      "repository": "the-static-collective/reLATTE",
+      "ref": "refs/pull/89/head",
+      "exactCommit": "9d9638dc7cbfd9fcc33f806b7cc4316e950c96cd",
+      "experiment": "RELATTE-VM-001: self-describing nested VM with independent admission",
+      "pr": 89,
+      "url": "https://github.com/the-static-collective/reLATTE/pull/89",
+      "reviewedFiles": [
+        {
+          "path": "docs/RELATTE-VM-001.md",
+          "sha256": "sha256:59e7cb0a023e6ba397ec9eebfb588fb5bcbd9a6bdc85115b7f4942ba36399a3d"
+        }
+      ],
+      "patchSha256": "sha256:f836178abab4e2dbc51cc210808cb4fd35fb8839f44c252e779b829dc4767c4a",
+      "observedContract": "Self-describing bounded VM candidates require independent owner-local admission and fresh successor identity.",
+      "notClaimed": [
+        "hypervisor",
+        "general sandbox",
+        "inherited guest authority"
+      ]
+    },
+    {
+      "repository": "the-static-collective/reLATTE",
+      "ref": "refs/pull/90/head",
+      "exactCommit": "283bc4afe63eef1df44f39ef4d45ad899e62ed15",
+      "experiment": "RELATTE-VM-002: admitted WebAssembly execution in separate OS processes",
+      "pr": 90,
+      "url": "https://github.com/the-static-collective/reLATTE/pull/90",
+      "reviewedFiles": [
+        {
+          "path": "docs/RELATTE-VM-002.md",
+          "sha256": "sha256:02b24ba159d36817329e932d334de111666e1f6532d4db988d9752d159a20950"
+        }
+      ],
+      "patchSha256": "sha256:be5e90a32f5626a50c248a5c45472e381ec33b17fa119e7780520c7dd17e1a3c",
+      "observedContract": "Admitted constrained no-import WebAssembly execution in separate OS processes, with live receiver journal reopen.",
+      "notClaimed": [
+        "general sandbox",
+        "public compute service",
+        "physical host attestation"
+      ]
+    },
+    {
+      "repository": "the-static-collective/static-live",
+      "ref": "refs/pull/35/head",
+      "exactCommit": "eb0048fe56f7125ec2a2e10ffaf00569c959c702",
+      "experiment": "RADIO WORLD 001 \u2014 two independently owned source worlds, one clicky Static Live PWA",
+      "pr": 35,
+      "url": "https://github.com/the-static-collective/static-live/pull/35",
+      "reviewedFiles": [
+        {
+          "path": "docs/RADIO-WORLD-001.md",
+          "sha256": "sha256:515a632e4c56ca7505ee43007dd2bdd5ab6ae127f38933211b75c13d732bdf3f"
+        },
+        {
+          "path": "fixtures/radio-world-001/worlds.json",
+          "sha256": "sha256:9205aa7ac05116717e5099f4f7eca39368510bdf8921944f6ec996ca6156a361"
+        },
+        {
+          "path": "src/radio-world-001.js",
+          "sha256": "sha256:3842251b7bd4c773d71009ab055df6131c54b459437d71c1bf11030004e5990c"
+        }
+      ],
+      "patchSha256": "sha256:d150aa5fcc0d790044b307216fb66baa9b45f9a76c384ab22a5e17f9c2176996",
+      "observedContract": "Local Radio World PWA with two independent official-site handoffs; no in-app audio.",
+      "notClaimed": [
+        "Kinship or Rock Impact adoption",
+        "stream rights",
+        "public Radio World deployment"
+      ]
+    },
+    {
+      "repository": "the-static-collective/static-os",
+      "ref": "refs/pull/66/head",
+      "exactCommit": "7bc551610421bd60a8dbf624d93d7a6682ce3987",
+      "experiment": "FABRICATION-CROSSING-013 \u2014 real signed design to sovereign three-node reLATTE proposals",
+      "pr": 66,
+      "url": "https://github.com/the-static-collective/static-os/pull/66",
+      "reviewedFiles": [
+        {
+          "path": "docs/FABRICATION-CROSSING-013.md",
+          "sha256": "sha256:8637493f9119084900d1950cc375085955f1a1cd4651d6e20c9b6c804f5c4160"
+        }
+      ],
+      "patchSha256": "sha256:cd54281c89623bda463df98286e209420999d489138dbf88f16b534f7e86123a",
+      "observedContract": "Verified real CAD and real virtual-profile slicing yield three selected simulated printer-owner proposals, zero printing rights.",
+      "notClaimed": [
+        "physical machine authentication",
+        "physical printing",
+        "material stock"
+      ]
+    },
+    {
+      "repository": "the-static-collective/static-os",
+      "ref": "refs/pull/68/head",
+      "exactCommit": "a40d9ee1ee7d59c1d1dede6a0ba88ae7b99014c1",
+      "experiment": "ROBOT-GARDEN-001 \u2014 signed source \u2192 Jubilee-inspired synthetic inspection",
+      "pr": 68,
+      "url": "https://github.com/the-static-collective/static-os/pull/68",
+      "reviewedFiles": [
+        {
+          "path": "docs/robot-garden-001.md",
+          "sha256": "sha256:c7af85433fd3d81c505e177ffe0be077286e08ca0da0dd28967cfcd82a24c767"
+        }
+      ],
+      "patchSha256": "sha256:83dcdf8f92b9c16510213ea502710635f19757b9cd6d9f57cae588321b522785",
+      "observedContract": "Source-bound synthetic image inspection measures pixel geometry and cold-replays MATCH or MISMATCH.",
+      "notClaimed": [
+        "real sensor witness",
+        "physical QA",
+        "robot control"
+      ]
+    },
+    {
+      "repository": "the-static-collective/webZ",
+      "ref": "refs/pull/4/head",
+      "exactCommit": "8153c60393e4e206160b284082f7eb3161d3f379",
+      "experiment": "feat: begin FIRST-ENCOUNTER-002 invitation and signed-return preflight",
+      "pr": 4,
+      "url": "https://github.com/the-static-collective/webZ/pull/4",
+      "reviewedFiles": [
+        {
+          "path": "docs/FIRST-ENCOUNTER-002-VERIFICATION.md",
+          "sha256": "sha256:90adf6f1035bf545292b174a92aa2bf2f9d4d4e5acbfa5b980cbf98f75242248"
+        }
+      ],
+      "patchSha256": "sha256:f24b88732e9025012e84daeeb00ff88e39f9047c7c26f071e24bc40a2f898a5b",
+      "observedContract": "Signed invitation and native response preflight; no authenticated delivery edge.",
+      "notClaimed": [
+        "actual two-person encounter",
+        "authenticated public delivery"
+      ]
+    },
+    {
+      "repository": "the-static-collective/webZ",
+      "ref": "refs/heads/feat/static-pressing-001",
+      "exactCommit": "1ad3bfd5d2429ec36f843818ac6f5bbde401e177",
+      "observedContract": "Static local Sanctuary/Orchard navigation, invitation rehearsal, file hashing and proof inspection; no delivery.",
+      "experiment": "STATIC-PRESSING-001 / OFFLINE-001",
+      "notClaimed": [
+        "public deployment",
+        "file upload",
+        "delivered transformation",
+        "sovereign admission"
+      ],
+      "reviewedFiles": [
+        {
+          "path": "app/model.mjs",
+          "sha256": "sha256:c418b7e66965ce971df8945063cbdc1409125167c82b8a4ac7385dc3458ceac3"
+        },
+        {
+          "path": "app/press.mjs",
+          "sha256": "sha256:9c544b8f0af13bba28661a6689c0a7f9397b1148ddb7c1600c3b7c4b9d4b4c30"
+        },
+        {
+          "path": "app/proof.mjs",
+          "sha256": "sha256:f79db8be1b344fe4eadd4101b6c28fb2013dd272290810bae649006f4d5d9f92"
+        },
+        {
+          "path": "sw.js",
+          "sha256": "sha256:22ca0d49288026183af88e1ccd92700de19b7b187c0148a36f954db38974e04e"
+        }
+      ],
+      "pr": 5,
+      "url": "https://github.com/the-static-collective/webZ/pull/5",
+      "patchSha256": "sha256:e024c552cb95f4e1248a5b77d84348c523ae39fd344019dda8922570ea9bc465"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema": "webz/release-byte-witness/v0",
+  "target": "https://abundent.org",
+  "sourceCommit": "7d68bfdc0f6347896c224f6f3fbcaa0243ed1159",
+  "filesVerified": 43,
+  "fieldHash": "sha256:d3fa28fa3e1e2d2e370287422242fc8eab3c0362e27b61f54d0392430f8e21d1"
+}
