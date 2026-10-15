@@ -13,7 +13,7 @@ function action(fn){try{save(fn());say('Changed on this device only. No public w
 function render(){
  $('remember').checked=durable;const n=recommend(journal),candidate=$('candidate');candidate.replaceChildren();
  if(!n)candidate.append(el('p','Nothing open yet. Bring a need or load explicitly marked specimens.'));
- else candidate.append(el('h3',n.title),el('p',n.requirement),el('p',(n.origin==='demo'?'SPECIMEN / ':'DEVICE HOLD / ')+(n.offers.length?'A pledge exists for human selection.':'No pledge yet.')+' Scope: '+n.effort));
+ else candidate.append(el('h3',n.title),el('p',n.requirement),el('p',(n.origin==='demo'?'SPECIMEN / ':'DEVICE HOLD / ')+(n.report?'A self-report awaits review.':n.acceptedOfferId?'An accepted offer is underway.':n.offers.length?'A pledge awaits human selection.':'No pledge yet.')+' Scope: '+n.effort));
  const board=$('board'),returns=$('return-actions'),offers=$('offer-need'),slips=$('slip-need');
  board.replaceChildren();returns.replaceChildren();offers.replaceChildren();slips.replaceChildren();
  for(const item of journal.needs){
