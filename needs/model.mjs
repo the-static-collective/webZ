@@ -44,8 +44,9 @@ export function confirm(j,id){
 }
 export function stage(n){return n.confirmed?'local-confirmation':n.report?'unverified-report':n.acceptedOfferId?'accepted':n.offers.length?'pledge-available':'unmatched';}
 export function recommend(j){
- validate(j);const pending=j.needs.filter(n=>!n.confirmed&&!n.acceptedOfferId);
- pending.sort((a,b)=>Number(!!b.offers.length)-Number(!!a.offers.length)||['small','medium','large'].indexOf(a.effort)-['small','medium','large'].indexOf(b.effort)||a.createdAt.localeCompare(b.createdAt)||a.id.localeCompare(b.id));
+ validate(j);const pending=j.needs.filter(n=>!n.confirmed);
+ const readiness=n=>n.report?4:n.acceptedOfferId?3:n.offers.length?2:1;
+ pending.sort((a,b)=>Number(b.origin==='local')-Number(a.origin==='local')||readiness(b)-readiness(a)||['small','medium','large'].indexOf(a.effort)-['small','medium','large'].indexOf(b.effort)||a.createdAt.localeCompare(b.createdAt)||a.id.localeCompare(b.id));
  return pending[0]||null;
 }
 export function demo(j,at){
