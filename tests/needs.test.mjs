@@ -31,3 +31,12 @@ test('portable copy detects mutation and invalid shape',async()=>{
  const bad=structuredClone(f);bad.journal.needs[0].title='changed';await assert.rejects(()=>thaw(bad),/CHECKSUM_MISMATCH/);
  assert.throws(()=>validate({...j,needs:[...j.needs,j.needs[0]]}),/INVALID_NEED/);
 });
+
+test('real needs outrank demos, and accepted unfinished work remains in Today guide',()=>{
+ let j=demo(empty(),'2026-10-15T12:00:00Z');j=make(j,'need-real');
+ assert.equal(recommend(j).id,'need-real');
+ j=pledge(j,'need-real','offer-here123','Useful capacity');j=accept(j,'need-real','offer-here123');
+ assert.equal(recommend(j).id,'need-real');
+ j=report(j,'need-real','Local report');assert.equal(recommend(j).id,'need-real');
+ j=confirm(j,'need-real');assert.equal(recommend(j).origin,'demo');
+});
