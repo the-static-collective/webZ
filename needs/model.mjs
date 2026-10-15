@@ -10,7 +10,7 @@ export function validate(j){
  if(!j||j.schema!==SCHEMA||!Array.isArray(j.needs)||Object.keys(j).sort().join(',')!=='needs,schema'||j.needs.length>80)throw Error('INVALID_JOURNAL');
  const ids=new Set();
  for(const n of j.needs){
-  if(!n||Object.keys(n).sort().join(',')!=='acceptedOfferId,confirmed,createdAt,effort,id,offers,origin,report,requirement,title'||!idOK(n.id)||ids.has(n.id)||!str(n.title,100)||!str(n.requirement,600)||privateText(n.title)||privateText(n.requirement)||!['small','medium','large'].includes(n.effort)||!['local','demo'].includes(n.origin)||!Number.isFinite(Date.parse(n.createdAt))||!Array.isArray(n.offers)||n.offers.length>12||typeof n.confirmed!=='boolean')throw Error('INVALID_NEED');
+  if(!n||Object.keys(n).sort().join(',')!=='acceptedOfferId,confirmed,createdAt,effort,id,offers,origin,report,requirement,title'||!idOK(n.id)||ids.has(n.id)||!str(n.title,100)||!str(n.requirement,600)||privateText(n.title)||privateText(n.requirement)||!['small','medium','large'].includes(n.effort)||!['local','demo'].includes(n.origin)||!(typeof n.createdAt==='string'&&n.createdAt.length<=40&&Number.isFinite(Date.parse(n.createdAt)))||!Array.isArray(n.offers)||n.offers.length>12||typeof n.confirmed!=='boolean')throw Error('INVALID_NEED');
   ids.add(n.id);const seen=new Set();
   for(const o of n.offers){if(!o||Object.keys(o).sort().join(',')!=='id,text'||!idOK(o.id)||seen.has(o.id)||!str(o.text,320)||privateText(o.text))throw Error('INVALID_OFFER');seen.add(o.id);}
   if(n.acceptedOfferId!==null&&!seen.has(n.acceptedOfferId))throw Error('INVALID_SELECTION');
@@ -21,7 +21,7 @@ export function validate(j){
 }
 export function open(j,p){
  validate(j);if(p.consent!==true)throw Error('REVIEW_REQUIRED');
- if(!idOK(p.id)||!['small','medium','large'].includes(p.effort)||!Number.isFinite(Date.parse(p.createdAt))||j.needs.length>=80||j.needs.some(n=>n.id===p.id))throw Error('INVALID_OR_DUPLICATE_NEED');
+ if(!idOK(p.id)||!['small','medium','large'].includes(p.effort)||!(typeof p.createdAt==='string'&&p.createdAt.length<=40&&Number.isFinite(Date.parse(p.createdAt)))||j.needs.length>=80||j.needs.some(n=>n.id===p.id))throw Error('INVALID_OR_DUPLICATE_NEED');
  const n={id:p.id,title:safe(p.title,100),requirement:safe(p.requirement,600),effort:p.effort,createdAt:p.createdAt,origin:'local',offers:[],acceptedOfferId:null,report:null,confirmed:false};
  return validate({...j,needs:[...j.needs,n]});
 }
