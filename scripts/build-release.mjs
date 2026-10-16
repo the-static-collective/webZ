@@ -22,7 +22,7 @@ catch{
  sourceEntries=new Map(listing.tree.filter(e=>e.type==='blob').map(e=>[e.path,e.sha]));
 }
 // Tracked shell drift cannot masquerade as an immutable committed release.
-const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js','week/index.html','week/week.css','week/week.mjs','music/2day/index.html','music/2day/style.css','music/2day/albums.json','music/rooms/index.html','music/rooms/style.css','music/rooms/rooms.mjs','music/rooms/catalog.json','composer/index.html','composer/style.css','composer/model.mjs','composer/ui.mjs','needs/index.html','needs/style.css','needs/model.mjs','needs/ui.mjs'])].sort();
+const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'sw.js','week/index.html','week/week.css','week/week.mjs','music/2day/index.html','music/2day/style.css','music/2day/albums.json','music/rooms/index.html','music/rooms/style.css','music/rooms/rooms.mjs','music/rooms/catalog.json','composer/index.html','composer/style.css','composer/model.mjs','composer/ui.mjs','composer/reactor.mjs','composer/reactor-ui.mjs','composer/reactor.css','composer/reactor-catalog.json','needs/index.html','needs/style.css','needs/model.mjs','needs/ui.mjs'])].sort();
 const files=[];
 for(const path of paths){
  const bytes=await readFile(new URL(path,root));
