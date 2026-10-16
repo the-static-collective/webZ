@@ -52,6 +52,27 @@ with sync_playwright() as p:
   assert 'song%3A5195c966' in page.url
   assert page.locator('#relations').get_by_text('exact ID membership').count()>=2
   assert page.locator('#door-link').get_attribute('href').startswith('https://suno.com/song/')
+  # BANANAS-001: source-linked public selection only suggests a chamber.
+  expect(page.locator('#reactor-status')).to_contain_text('64 provisional leads')
+  expect(page.locator('#reactor-particular')).to_have_text('Midnight Phonk Blues')
+  assert page.locator('.reactor-card').count()==8
+  assert page.locator('.reactor-card').first.get_attribute('data-chamber')=='FOSSIL-JUKEBOX'
+  page.locator('.reactor-card').first.click()
+  expect(page.locator('#reactor-output')).to_contain_text('SMALLEST REAL PROOF')
+  expect(page.locator('#reactor-output')).to_contain_text('UNKNOWN / LOW')
+  assert page.locator('#reactor-export').is_enabled()
+  # Local typed sources never enter history, storage, logs or network.
+  old_url=page.url
+  page.locator('#reactor-free').fill('a small and private local question')
+  page.locator('#reactor-kind-select').select_option('question')
+  page.locator('#reactor-try').click()
+  expect(page.locator('#reactor-particular')).to_have_text('a small and private local question')
+  assert page.locator('.reactor-card').first.get_attribute('data-chamber')=='MISSION-FORGE'
+  assert page.url==old_url
+  assert 'a small and private local question' not in page.url
+  assert page.evaluate('localStorage.length + sessionStorage.length')==0
+  page.locator('#reactor-use-catalog').click()
+  expect(page.locator('#reactor-particular')).to_have_text('Midnight Phonk Blues')
   # Independent cold replay reconstructs exact address and selection.
   cold=browser.new_context(viewport={'width':width,'height':880},service_workers='block')
   cp=cold.new_page();assert cp.goto(page.url).status==200

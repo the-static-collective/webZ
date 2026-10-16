@@ -9,15 +9,17 @@
 <title>Follow a thread · Abundent</title>
 <meta name="description" content="An addressable navigation composer for the Static Collective: pick a particular, then watch its neighbors gather.">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./reactor.css">
 <link rel="icon" href="../app/icon.svg" type="image/svg+xml">
 <script type="module" src="./ui.mjs"></script>
+<script type="module" src="./reactor-ui.mjs"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the composer</a>
 <header class="top">
  <a class="brand" href="../">abundent<span>.</span></a>
  <span class="topnote"><i aria-hidden="true"></i> THE DOOR COMPOSER <small>001</small></span>
- <a href="../needs/" class="return">What can we do today? ↗</a><a href="../" class="return">Return to the garden ↗</a>
+ <a href="#reactor" class="return">Seed Reactor ↓</a><a href="../needs/" class="return">What can we do today? ↗</a><a href="../" class="return">Return to the garden ↗</a>
 </header>
 <main id="main">
  <section class="intro">
@@ -67,6 +69,41 @@
      <dl><dt>Owner</dt><dd id="owner"></dd><dt>Evidence</dt><dd id="evidence"></dd><dt>Source</dt><dd id="source"></dd><dt>What is not claimed</dt><dd id="claim"></dd></dl>
    </details>
   </aside>
+ </section>
+ <section id="reactor" class="reactor" aria-labelledby="reactor-title">
+  <div class="reactor-heading"><div>
+   <div class="eyebrow">04 / THE LIVING COMPOSITION INSTRUMENT · BANANAS-001</div>
+   <h2 id="reactor-title">One particular.<br><em>Eight possible futures.</em></h2>
+   <p>The selected object above becomes an invitation to examine how 64 recovered ideas might combine. No idea here has been verified as unfinished, built, approved, or ready to publish.</p>
+  </div><div class="reactor-seal" aria-hidden="true"><b>64</b><span>SEEDS<br>8 CHAMBERS</span></div></div>
+  <div class="reactor-inputs">
+   <div class="reactor-source-panel">
+    <div class="eyebrow">01 / YOUR PARTICULAR</div>
+    <h3 id="reactor-particular">Waiting for a public particular…</h3>
+    <p id="reactor-kind" class="reactor-muted"></p>
+    <p id="reactor-source" class="reactor-fine">The source remains with its owner.</p>
+    <button type="button" id="reactor-use-catalog" class="reactor-small" disabled>Use the chosen catalog particular ↗</button>
+   </div>
+   <form id="reactor-enter" class="reactor-typed" autocomplete="off">
+    <div class="eyebrow">02 / OR BRING ONE THING LOCALLY</div>
+    <label for="reactor-free">Your own song, story, need, question, machine, or object</label>
+    <input type="text" id="reactor-free" maxlength="160" placeholder="One particular; no account, upload, or transmission" aria-describedby="reactor-local-note">
+    <div class="reactor-entry-row"><label for="reactor-kind-select">Look as</label><select id="reactor-kind-select"></select><button type="submit" id="reactor-try">Set particular ↗</button></div>
+    <p id="reactor-local-note" class="reactor-fine">Your text stays in this page's memory. It is not part of the link or saved to storage. Avoid entering private details into proposals you plan to share.</p>
+   </form>
+  </div>
+  <div class="reactor-catalog-head"><div><div class="eyebrow">03 / TURN THE FIELD INTO POSSIBILITY</div><h3>Eight chambers. No compulsory crossing.</h3></div>
+   <span>Order is a medium suggestion, not an execution plan.</span></div>
+  <div id="reactor-status" class="reactor-status" role="status" aria-live="polite">Reading public-safe candidate recipes…</div>
+  <div class="reactor-layout">
+   <div id="reactor-chambers" class="reactor-chambers" role="group" aria-label="Eight suggested, unissued mission chambers"></div>
+   <aside class="reactor-result"><div class="reactor-result-top"><div class="eyebrow">04 / INSPECT A POSSIBILITY</div><span class="reactor-hold">PROPOSAL ONLY</span></div>
+    <div id="reactor-output" class="reactor-output" aria-live="polite"><p>A chamber is a possibility, not an instruction.</p></div>
+    <div class="reactor-tools"><button type="button" id="reactor-export" disabled>Copy unissued proposal ↗</button><button type="button" id="reactor-clear" disabled>Clear preview</button></div>
+   </aside>
+  </div>
+  <div class="reactor-foot"><span>Conversation ≠ proof · Selection ≠ approval · Proposal ≠ execution · Source authority stays local.</span>
+   <a id="reactor-provenance" href="https://github.com/the-static-collective/planZ/pull/19" target="_blank" rel="noopener noreferrer">Inspect source harvest &amp; eight-chamber experiment ↗</a></div>
  </section>
  <footer><span>❋ Keep the weird particulars. Build better apertures.</span><span>Navigation ≠ transfer · Membership ≠ ancestry · Observation ≠ authority</span></footer>
 </main>

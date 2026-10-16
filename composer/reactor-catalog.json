@@ -1,0 +1,936 @@
+{
+  "schema": "abundent/seed-reactor-catalog/v1",
+  "state": "PROPOSED_UNVERIFIED",
+  "edition": "BANANAS-001",
+  "provenance": {
+    "owner": "the-static-collective/planZ",
+    "sourceCommit": "7481da74c98b66ef34daf04a6d36458fedae7167",
+    "sourceBranch": "experiment/banana-reactor-64-001",
+    "harvestBlobSha": "7796c9f34e76bbeb9299c803b134a2ff086e90c8",
+    "recipeBlobSha": "c87151a618c0ae238ba2c87dd99688ab23d0026b",
+    "harvestPath": "registry/conversation-plan-records-2026-10-16.jsonl",
+    "recipePath": "reactor/recipes-v0.json",
+    "sourcePR": "https://github.com/the-static-collective/planZ/pull/19",
+    "scope": "Public-safe reconstructed conversation leads; primary transcripts not audited."
+  },
+  "coverage": {
+    "seeds": 64,
+    "chambers": 8,
+    "memberships": 98,
+    "multiChamberSeeds": 34
+  },
+  "seeds": [
+    {
+      "id": "N01",
+      "planId": "PLZ-CHAT-20261016-N01",
+      "title": "Growing Static Universe circle with doors",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Draft atlas charter with world-owned doors and refusal semantics."
+    },
+    {
+      "id": "N02",
+      "planId": "PLZ-CHAT-20261016-N02",
+      "title": "Story DNA character-setting-thread bank",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Test first owner-permitted encounter and distinct character identity registry."
+    },
+    {
+      "id": "N03",
+      "planId": "PLZ-CHAT-20261016-N03",
+      "title": "Orchid Compiler to Psychedelic Punk Sanctuary",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Obtain actual owner source, create one two-sided crossover specimen and mark it proposal-only."
+    },
+    {
+      "id": "N04",
+      "planId": "PLZ-CHAT-20261016-N04",
+      "title": "Wrecking Crew as narrative ancestor",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Index source texts and rights before one pilot manga page."
+    },
+    {
+      "id": "N05",
+      "planId": "PLZ-CHAT-20261016-N05",
+      "title": "STORYSHIP powered competing interpretations",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Test one replayable relationship interpretation and independent refusal."
+    },
+    {
+      "id": "N06",
+      "planId": "PLZ-CHAT-20261016-N06",
+      "title": "Narrative DNA from album ancestry",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Use one permitted SIA observation through Story DNA importer, check false ancestor."
+    },
+    {
+      "id": "N07",
+      "planId": "PLZ-CHAT-20261016-N07",
+      "title": "Panel Loom five-beat draft",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Verify one panel draft is editable and does not auto-publish."
+    },
+    {
+      "id": "N08",
+      "planId": "PLZ-CHAT-20261016-N08",
+      "title": "Renji unanswered futures detective",
+      "ownerCandidate": "the-static-collective/story-dna",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Create bounded story bible and distinguish Ending C preference from canon."
+    },
+    {
+      "id": "N09",
+      "planId": "PLZ-CHAT-20261016-N09",
+      "title": "Room Inside the Room crossing",
+      "ownerCandidate": null,
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Locate original seed bundle and build only its first executable slice."
+    },
+    {
+      "id": "N10",
+      "planId": "PLZ-CHAT-20261016-N10",
+      "title": "Renji material traveling across worlds",
+      "ownerCandidate": "the-static-collective/lemonPRESS",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Run exact-identity paper-to-screen pilot, preserve different histories."
+    },
+    {
+      "id": "N11",
+      "planId": "PLZ-CHAT-20261016-N11",
+      "title": "Storyship reality-memory-open berth",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Reconcile with current STORYSHIP owner contracts and identify missing organ."
+    },
+    {
+      "id": "N12",
+      "planId": "PLZ-CHAT-20261016-N12",
+      "title": "U-WE-eCODE trivariant story relation",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Test one three-way branch without inferring consent or family relationship."
+    },
+    {
+      "id": "M01",
+      "planId": "PLZ-CHAT-20261016-M01",
+      "title": "Suno oldest-first owner export",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Obtain real owner export, inspect fields, perform privacy-safe dry run."
+    },
+    {
+      "id": "M02",
+      "planId": "PLZ-CHAT-20261016-M02",
+      "title": "Album and track dual identity registry",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Import exact track identities and distinct membership edges from one specimen."
+    },
+    {
+      "id": "M03",
+      "planId": "PLZ-CHAT-20261016-M03",
+      "title": "Static Internet Archive for third-party presences",
+      "ownerCandidate": null,
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Define permission-respecting link and metadata snapshot v0; no automated copyrighted media scraping."
+    },
+    {
+      "id": "M04",
+      "planId": "PLZ-CHAT-20261016-M04",
+      "title": "The Fossil That Sings Back",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Run one cited two-song link test including a deliberately rejected relation."
+    },
+    {
+      "id": "M05",
+      "planId": "PLZ-CHAT-20261016-M05",
+      "title": "Conversational song bridge memory",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Annotate one real prompt-song pair with provenance and competing interpretations."
+    },
+    {
+      "id": "M06",
+      "planId": "PLZ-CHAT-20261016-M06",
+      "title": "Suno prompt and tempo distribution archive",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Collect controlled representative sample; test actual audio tempo separately from text tags."
+    },
+    {
+      "id": "M07",
+      "planId": "PLZ-CHAT-20261016-M07",
+      "title": "One universe with concept-discography, weekly and best-of doors",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Create one linked album/playlist/source-metadata audit."
+    },
+    {
+      "id": "M08",
+      "planId": "PLZ-CHAT-20261016-M08",
+      "title": "Sovereign first-listen and broadcast return",
+      "ownerCandidate": "the-static-collective/static-live",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Compare surviving Groove Rooms and Autodisco interfaces before resurrecting old Honeycomb Radio."
+    },
+    {
+      "id": "M09",
+      "planId": "PLZ-CHAT-20261016-M09",
+      "title": "Mutant Pop mutation without original erasure",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Pick one owner-permitted sound and verify a new branch without overwriting its source."
+    },
+    {
+      "id": "M10",
+      "planId": "PLZ-CHAT-20261016-M10",
+      "title": "Acoustic Loci and Ring as musical memory",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Check implemented owner kernels before proposing additional organs."
+    },
+    {
+      "id": "V01",
+      "planId": "PLZ-CHAT-20261016-V01",
+      "title": "RHYTHM CUTTER gesture editor",
+      "ownerCandidate": "the-static-collective/the-haunted-toaster",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Prototype local human rhythm performance and preserve latency/ghost performances."
+    },
+    {
+      "id": "V02",
+      "planId": "PLZ-CHAT-20261016-V02",
+      "title": "Material Memory ghost-hunting panels",
+      "ownerCandidate": "the-static-collective/lemonPRESS",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Resolve first material-memory test page and compare original event order."
+    },
+    {
+      "id": "V03",
+      "planId": "PLZ-CHAT-20261016-V03",
+      "title": "Manga style profiles as typed stacks",
+      "ownerCandidate": "the-static-collective/lemonPRESS",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Linter and renderer tests for one Renji relay candidate."
+    },
+    {
+      "id": "V04",
+      "planId": "PLZ-CHAT-20261016-V04",
+      "title": "Manga panel grammar extraction into film",
+      "ownerCandidate": "the-static-collective/the-haunted-blender",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Produce one source-permitted panel-to-shot proof; external refs stay grammar-only."
+    },
+    {
+      "id": "V05",
+      "planId": "PLZ-CHAT-20261016-V05",
+      "title": "Video-first Toaster drama sister",
+      "ownerCandidate": "the-static-collective/vidmage",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Create two scenes with one returning actor, demonstrate reversible edit."
+    },
+    {
+      "id": "V06",
+      "planId": "PLZ-CHAT-20261016-V06",
+      "title": "Mobile first media director",
+      "ownerCandidate": "the-static-collective/vidmage",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Choose permissioned render specimen and verify provider-specific input/output custody."
+    },
+    {
+      "id": "V07",
+      "planId": "PLZ-CHAT-20261016-V07",
+      "title": "Haunted Jubilee fortune-teller photobooth",
+      "ownerCandidate": null,
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Paper-first tabletop interaction and one explicit KEEP/REFUSE loop."
+    },
+    {
+      "id": "V08",
+      "planId": "PLZ-CHAT-20261016-V08",
+      "title": "Living Haunted Polaroid proof",
+      "ownerCandidate": "the-static-collective/the-haunted-pol-ish-roids",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Check existing frozen first-proof plan before any added scope."
+    },
+    {
+      "id": "V09",
+      "planId": "PLZ-CHAT-20261016-V09",
+      "title": "Static Workbench Manga Encounter",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Run one source-linked manga score on deployed branch and Android viewport."
+    },
+    {
+      "id": "W01",
+      "planId": "PLZ-CHAT-20261016-W01",
+      "title": "Abundent as browser for the nuinternet",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Prototype one two-way visit that keeps origin and return distinct."
+    },
+    {
+      "id": "W02",
+      "planId": "PLZ-CHAT-20261016-W02",
+      "title": "Navigation as composition and eleven dials",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Audit existing live /composer and test a visitor-authored score round trip."
+    },
+    {
+      "id": "W03",
+      "planId": "PLZ-CHAT-20261016-W03",
+      "title": "What Can We Do Today needs porch",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Verify existing browser-local /needs and design opt-in moderated multiuser seam without exposure."
+    },
+    {
+      "id": "W04",
+      "planId": "PLZ-CHAT-20261016-W04",
+      "title": "Abundent Post Office email-first commons",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Choose consent/audience model and implement a verified one-subscriber opt-in/out."
+    },
+    {
+      "id": "W05",
+      "planId": "PLZ-CHAT-20261016-W05",
+      "title": "A Week Together listening porch",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Verify present route and scope any real message delivery separately."
+    },
+    {
+      "id": "W06",
+      "planId": "PLZ-CHAT-20261016-W06",
+      "title": "Garden Workbench discovery six-up",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Check living implementation vs earlier draft and select one missing behavior."
+    },
+    {
+      "id": "W07",
+      "planId": "PLZ-CHAT-20261016-W07",
+      "title": "Branch-native Workshop without compulsory merge",
+      "ownerCandidate": "the-static-collective/CANNON",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "One real end-to-end portable feature proof with explicit receiver HOLD."
+    },
+    {
+      "id": "W08",
+      "planId": "PLZ-CHAT-20261016-W08",
+      "title": "Receipt Floor for local verification",
+      "ownerCandidate": "the-static-collective/static-workbench",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Complete portable receipt-verifier field test and user-facing redaction pass."
+    },
+    {
+      "id": "W09",
+      "planId": "PLZ-CHAT-20261016-W09",
+      "title": "Name Orchard portable sovereign rooms",
+      "ownerCandidate": "the-static-collective/webZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Build signed names and independent revocation fixture before domain integration."
+    },
+    {
+      "id": "W10",
+      "planId": "PLZ-CHAT-20261016-W10",
+      "title": "Return Room eleven-window questions",
+      "ownerCandidate": "the-static-collective/static-os",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Owner-controlled mobile cold-return test and separate signed custody proof."
+    },
+    {
+      "id": "P01",
+      "planId": "PLZ-CHAT-20261016-P01",
+      "title": "MasterServant Physical Internet",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Printed sigil and sonic cue resolve same artifact with separate observations."
+    },
+    {
+      "id": "P02",
+      "planId": "PLZ-CHAT-20261016-P02",
+      "title": "ROOMTONE sonic rendezvous",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Run two-browser opt-in session; physical sensors remain an independent later gate."
+    },
+    {
+      "id": "P03",
+      "planId": "PLZ-CHAT-20261016-P03",
+      "title": "GO.STATIC field computer and dual body",
+      "ownerCandidate": "the-static-collective/static-os",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Prove controlled transport to an independent receiver; physical circuit untested."
+    },
+    {
+      "id": "P04",
+      "planId": "PLZ-CHAT-20261016-P04",
+      "title": "Traveling Jubilee Giving Tree caravan",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Actual first host invitation and one local human-run event; simulated rehearsal is not field proof."
+    },
+    {
+      "id": "P05",
+      "planId": "PLZ-CHAT-20261016-P05",
+      "title": "STATIC Briars privacy-preserving mesh fork",
+      "ownerCandidate": "the-static-collective/static-briars",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Generate distributable build and verify two physical phones offline then rejoin."
+    },
+    {
+      "id": "P06",
+      "planId": "PLZ-CHAT-20261016-P06",
+      "title": "Useful-work VPN and exchange",
+      "ownerCandidate": null,
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Small threat model and consent/cost accounting for one useful-work service."
+    },
+    {
+      "id": "P07",
+      "planId": "PLZ-CHAT-20261016-P07",
+      "title": "Radio House two-node media relay",
+      "ownerCandidate": "the-static-collective/GHoT",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Two real independent machines and five-minute authorized file, no simulated receipt substitution."
+    },
+    {
+      "id": "P08",
+      "planId": "PLZ-CHAT-20261016-P08",
+      "title": "Jubilee Postal Corps offline custody",
+      "ownerCandidate": "the-static-collective/GHoT",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Two physical phones scan and replay one envelope, zero economic transfer."
+    },
+    {
+      "id": "P09",
+      "planId": "PLZ-CHAT-20261016-P09",
+      "title": "Fabrication crossing across printer families",
+      "ownerCandidate": "the-static-collective/static-os",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "One safe real print with measured dimensional receipt and owner approval."
+    },
+    {
+      "id": "P10",
+      "planId": "PLZ-CHAT-20261016-P10",
+      "title": "Field gleaner from old devices",
+      "ownerCandidate": "the-static-collective/static-os",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Inventory one test device and run read-only sensor proof, no autonomous collection."
+    },
+    {
+      "id": "P11",
+      "planId": "PLZ-CHAT-20261016-P11",
+      "title": "reLATTE-squared sovereign hosting",
+      "ownerCandidate": "the-static-collective/reLATTE",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Specify one static service with restart/revoke/custody and test independent recovery."
+    },
+    {
+      "id": "C01",
+      "planId": "PLZ-CHAT-20261016-C01",
+      "title": "Conversation to planZ census ingress",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Attach raw conversation export or explicit excerpts in a private source ledger before high-confidence adoption."
+    },
+    {
+      "id": "C02",
+      "planId": "PLZ-CHAT-20261016-C02",
+      "title": "Metadata as generative food",
+      "ownerCandidate": "the-static-collective/SIA",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "One exact source input through deterministic projection plus clearly labeled AI candidate."
+    },
+    {
+      "id": "C03",
+      "planId": "PLZ-CHAT-20261016-C03",
+      "title": "Free Graph seventh organ mission compiler",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "IMPLEMENTING",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Review planZ RELAY-001 draft and test real owner approval as a separate act."
+    },
+    {
+      "id": "C04",
+      "planId": "PLZ-CHAT-20261016-C04",
+      "title": "STACK squared reusable verifiable composition",
+      "ownerCandidate": "the-static-collective/CANNON",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "One portable operator-approved composition, actual execution and independent receiver."
+    },
+    {
+      "id": "C05",
+      "planId": "PLZ-CHAT-20261016-C05",
+      "title": "Seedbank ARK and mortal ELF succession",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Cold-boot successor with independent credentials and explicit receipt boundaries."
+    },
+    {
+      "id": "C06",
+      "planId": "PLZ-CHAT-20261016-C06",
+      "title": "Launch Capsules resumable local workflow",
+      "ownerCandidate": "the-static-collective/static-os",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Demonstrate cold replay on a second machine with verified inputs."
+    },
+    {
+      "id": "C07",
+      "planId": "PLZ-CHAT-20261016-C07",
+      "title": "Gestalt recursion and novelty counter-sweep",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Design adversarial before/after specimen proving a nontrivial new edge."
+    },
+    {
+      "id": "C08",
+      "planId": "PLZ-CHAT-20261016-C08",
+      "title": "Fractal seed stewardship network",
+      "ownerCandidate": null,
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "One consenting pilot partner with measurable locally owned outcome and independent accounting."
+    },
+    {
+      "id": "C09",
+      "planId": "PLZ-CHAT-20261016-C09",
+      "title": "Portable physical Giving Tree seed",
+      "ownerCandidate": "the-static-collective/BananaSpork",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Prepare one actual printable seed with donor/recipient consent and paper record."
+    },
+    {
+      "id": "C10",
+      "planId": "PLZ-CHAT-20261016-C10",
+      "title": "L to U to L creative instrument loop",
+      "ownerCandidate": "the-static-collective/planZ",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Compare already proven planZ witness and pick one fresh independent organ, not duplicate proof."
+    },
+    {
+      "id": "C11",
+      "planId": "PLZ-CHAT-20261016-C11",
+      "title": "The world persists after room failure",
+      "ownerCandidate": "the-static-collective/STORYSHIP",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Test cold reentry with one partial carrier and a deliberate wrong-source refusal."
+    },
+    {
+      "id": "C12",
+      "planId": "PLZ-CHAT-20261016-C12",
+      "title": "CANNON alternative canon field",
+      "ownerCandidate": "the-static-collective/CANNON",
+      "stage": "DESIGN",
+      "disposition": "UNKNOWN",
+      "confidence": "LOW",
+      "nextGate": "Verify a chosen commit under an independent receiver and record HOLD."
+    }
+  ],
+  "chambers": [
+    {
+      "id": "ORCHARD-CINEMA",
+      "name": "Orchard Cinema",
+      "door": "Tell it",
+      "question": "Can a single permitted motif become an editable manga panel and a reversible film candidate?",
+      "primary": [
+        "N02",
+        "N07",
+        "V03",
+        "V04",
+        "V09"
+      ],
+      "orbit": [
+        "N01",
+        "N03",
+        "N04",
+        "N05",
+        "N06",
+        "N08",
+        "N10",
+        "V02",
+        "V05",
+        "V06",
+        "M04",
+        "C02"
+      ],
+      "smallestProof": "One source-permitted Story DNA motif -> editable lemonPRESS panel -> reversible shot candidate; no publication.",
+      "proposedReturn": "An editable panel, a proposed shot and a separately reviewable source/choice receipt.",
+      "ownerCandidates": [
+        "story-dna",
+        "lemonPRESS",
+        "the-haunted-blender"
+      ],
+      "gates": [
+        "Obtain exact permitted source and rights.",
+        "Keep the source observation distinct from imagined connective narrative.",
+        "Human panel KEEP/REFUSE before any publishing."
+      ]
+    },
+    {
+      "id": "FOSSIL-JUKEBOX",
+      "name": "Fossil Jukebox",
+      "door": "Hear it",
+      "question": "Can one song become an inspectable ancestry tree with competing interpretations?",
+      "primary": [
+        "M01",
+        "M02",
+        "M04",
+        "M07",
+        "C10"
+      ],
+      "orbit": [
+        "M03",
+        "M05",
+        "M06",
+        "M08",
+        "M09",
+        "M10",
+        "W05"
+      ],
+      "smallestProof": "One owner-provided song identity, an alternate or album placement, and an explicitly refused false ancestry edge.",
+      "proposedReturn": "A replayable song genealogy card with a rejected link and a visitor-safe listening door.",
+      "ownerCandidates": [
+        "SIA",
+        "webZ"
+      ],
+      "gates": [
+        "Require exact owner-provided identity and permitted metadata.",
+        "Keep generations, songs, albums and editorial membership distinct.",
+        "No automatic mirroring of third-party audio or lyrics."
+      ]
+    },
+    {
+      "id": "NEEDFUL-PORCH",
+      "name": "Needful Porch",
+      "door": "Help with it",
+      "question": "Can a public visitor carry music, a need and an invitation without conflating consent?",
+      "primary": [
+        "W03",
+        "W04",
+        "W05",
+        "C08",
+        "C09"
+      ],
+      "orbit": [
+        "W01",
+        "W02",
+        "W06",
+        "W08",
+        "W09",
+        "W10",
+        "P04",
+        "C01"
+      ],
+      "smallestProof": "One non-sensitive local need/offer prototype with separate review and newsletter opt-in/out.",
+      "proposedReturn": "An independently reviewed help slip, optionally a private follow-up, and no automatic audience membership.",
+      "ownerCandidates": [
+        "webZ",
+        "BananaSpork"
+      ],
+      "gates": [
+        "No raw personal requests in a public seed feed.",
+        "Human moderation and recipient confirmation remain separate.",
+        "Email opt-in is never inferred from listening or requesting help."
+      ]
+    },
+    {
+      "id": "GHOST-POST",
+      "name": "Ghost Post",
+      "door": "Carry it",
+      "question": "Can one exact envelope travel through different carriers and return with distinct custody observations?",
+      "primary": [
+        "P01",
+        "P05",
+        "P08",
+        "P07",
+        "C11"
+      ],
+      "orbit": [
+        "P02",
+        "P03",
+        "P06",
+        "P10",
+        "P11",
+        "C06",
+        "M08"
+      ],
+      "smallestProof": "One owner-created harmless envelope across two manually controlled transports; compare receiver hashes and HOLD decisions.",
+      "proposedReturn": "Two non-identical transport receipts pointing to one exact source identity; no invented delivery.",
+      "ownerCandidates": [
+        "static-briars",
+        "GHoT",
+        "reLATTE"
+      ],
+      "gates": [
+        "Only authorized carriers and opt-in peers.",
+        "An emitted packet is not receipt, delivery or acceptance.",
+        "Field success requires independent physical receivers."
+      ]
+    },
+    {
+      "id": "TRAVELING-JUBILEE",
+      "name": "Traveling Jubilee",
+      "door": "Bring it",
+      "question": "Can a locally invited act of care travel with music and a printable artifact?",
+      "primary": [
+        "P04",
+        "W03",
+        "C09",
+        "V07",
+        "P09"
+      ],
+      "orbit": [
+        "P07",
+        "P08",
+        "C08",
+        "C04",
+        "N11"
+      ],
+      "smallestProof": "Paper-first host invitation plus a consented help/gift card; explicitly no claim that an event occurred.",
+      "proposedReturn": "A portable host packet with roles, invitation, refusal and optional verified outcome fields.",
+      "ownerCandidates": [
+        "BananaSpork",
+        "Jubilee-Engine-VM"
+      ],
+      "gates": [
+        "Host invitation must be actual and voluntary.",
+        "Recipient acceptance is independent of giver report.",
+        "Physical print and field attendance require their own witnesses."
+      ]
+    },
+    {
+      "id": "MISSION-FORGE",
+      "name": "Mission Forge",
+      "door": "Build it",
+      "question": "Can quarantined conversation ideas become bounded work offers without being falsely promoted?",
+      "primary": [
+        "C01",
+        "C03",
+        "C04",
+        "C12",
+        "W07",
+        "W08"
+      ],
+      "orbit": [
+        "C05",
+        "C06",
+        "C07",
+        "C11",
+        "W10"
+      ],
+      "smallestProof": "Compile one source-identified candidate into a bounded operator-review packet, then HOLD it without running anything.",
+      "proposedReturn": "A reproducible mission offer, candidate loadout and independent receiver HOLD/refusal receipt.",
+      "ownerCandidates": [
+        "planZ",
+        "CANNON",
+        "reLATTE"
+      ],
+      "gates": [
+        "A conversation summary is not primary provenance.",
+        "Proposal, branch selection, code execution and owner admission are independent.",
+        "No automatic PR merges or canonical seed rewrites."
+      ]
+    },
+    {
+      "id": "RHYTHM-MUTANT",
+      "name": "Rhythm Mutant",
+      "door": "Perform it",
+      "question": "Can an editable source scene produce multiple human-performed visual mutations without losing ancestry?",
+      "primary": [
+        "V01",
+        "V02",
+        "V05",
+        "V08",
+        "C10"
+      ],
+      "orbit": [
+        "V03",
+        "V04",
+        "V06",
+        "V07",
+        "V09",
+        "N09",
+        "N10",
+        "M09"
+      ],
+      "smallestProof": "One permitted panel or photo with human-recorded CUT/HOLD sequence and source-preserving alternate.",
+      "proposedReturn": "One original, two reversible candidate cuts and a human KEEP/COMPOST decision.",
+      "ownerCandidates": [
+        "the-haunted-toaster",
+        "vidmage",
+        "lemonPRESS"
+      ],
+      "gates": [
+        "Source media must be permitted and hash-pinned.",
+        "Timeline acts are user-performance events, not story facts.",
+        "Render and publication are separate human choices."
+      ]
+    },
+    {
+      "id": "ROOMSHIP",
+      "name": "Roomship",
+      "door": "Cross it",
+      "question": "Can a relationship cross between independently owned worlds without overwriting either world's continuity?",
+      "primary": [
+        "N09",
+        "N11",
+        "N12",
+        "N01",
+        "N05"
+      ],
+      "orbit": [
+        "P02",
+        "W09",
+        "C05",
+        "C02",
+        "C07"
+      ],
+      "smallestProof": "One two-world encounter card, both local interpretations and a valid one-sided REFUSE outcome.",
+      "proposedReturn": "An encounter specimen with distinct histories, no global canon and a replayable alternate reading.",
+      "ownerCandidates": [
+        "STORYSHIP",
+        "story-dna"
+      ],
+      "gates": [
+        "Two world owners must separately admit the encounter.",
+        "Relationship is not identity fusion or consent.",
+        "An interpretation remains a proposed descendant, not a source event."
+      ]
+    }
+  ]
+}

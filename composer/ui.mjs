@@ -49,6 +49,15 @@ function drawThreads(view,points){
 }
 function drawBoard(view){
  $('board').dataset.mode=current.mode;
+ const selected=graph.nodes.get(current.id);
+ const center=$('center');
+ center.dataset.particularId=selected.id;
+ center.dataset.particularKind=selected.kind;
+ center.dataset.particularLabel=selected.label;
+ center.dataset.particularOwner=selected.owner;
+ center.dataset.particularSource=selected.source;
+ center.dataset.particularUrl=selected.url;
+ document.dispatchEvent(new CustomEvent('abundent:particular-selected',{detail:{id:selected.id,kind:selected.kind,label:selected.label,owner:selected.owner,source:selected.source,url:selected.url}}));
  $('board').dataset.dense=String(view.visible.length>8);
  const c=$('center');c.replaceChildren();
  c.append(make('span','center-mark',marks[view.center.kind]||'✳'),
