@@ -65,3 +65,5 @@ The first real field-card return included a statement of an existing routine in 
 - Field 002 bumps the `/field/cards/` service-worker cache namespace; the public 11-world `/field/` and root garden SW remain independently scoped.
 
 Proof gates: extended Node contract checks and a mobile Playwright browser test including prior JSON import, human observation → question → exported crossing, and QR/print isolation; physical print and QR scan remain separate tests.
+
+Saved private observation + descendant JSON bundles can be re-imported locally, validated against both v0.1 schemas and resumed without publishing or embedding the source note into a QR. Ordinary standalone card JSON is still supported. Import explicitly reads a chosen local file only.

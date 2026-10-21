@@ -122,6 +122,21 @@ try:
         page.reload()
         assert "THE SHARED MILE" in page.locator("#active").inner_text()
         assert "A neighbor already takes" not in page.locator("body").inner_text()
+        # A privately saved crossing is also restorable as a *local* note,
+        # while its shareable card and QR still omit that note.
+        page.locator("#import-draft").set_input_files({
+            "name":"field-observation-crossing.json",
+            "mimeType":"application/json",
+            "buffer":json.dumps(bundle).encode()
+        })
+        expect(page.locator("#message")).to_contain_text("Reopened saved local card",timeout=5000)
+        assert page.locator("#obs-parent").input_value()==bundle["descendant"]["id"]
+        assert "A neighbor already takes" not in page.locator("#link-text").inner_text()
+        with page.expect_download() as repeat_download:
+            page.get_by_role("button",name="Save my observation + card JSON").click()
+        repeated=json.loads(pathlib.Path(repeat_download.value.path()).read_text())
+        assert repeated["observation"]["note"]==bundle["observation"]["note"]
+        assert repeated["descendant"]==bundle["descendant"]
         assert page.evaluate("localStorage.length")==0
 
         assert not errors, errors

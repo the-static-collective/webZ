@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync,existsSync} from "node:fs";
-import {SEEDS,seedById,makeDraft,validateDraft,seedLink,draftLink,readDraftHash,isProductionHost,makeReturn,makeObservationCrossing,OBSERVATION_CROSSING_SCHEMA,publicCard} from "../field/cards/core.mjs";
+import {SEEDS,seedById,makeDraft,validateDraft,seedLink,draftLink,readDraftHash,isProductionHost,makeReturn,makeObservationCrossing,validateObservationCrossing,OBSERVATION_CROSSING_SCHEMA,publicCard} from "../field/cards/core.mjs";
 const preview="http://localhost:8080/field/index.html";
 test("seed census has exact deck splits and unique bounded identities",()=>{
   assert.equal(SEEDS.length,34);
@@ -116,4 +116,19 @@ test("observation is not offered, admitted, confirmed or secretly public",()=>{
   assert.throws(()=>make({parentId:"unknown-card"}),/recognized seed or local draft/);
   assert.throws(()=>make({unauthorizedAcceptance:true}),/Unsupported fields/);
   assert.equal(make().observation.externalAdoption,"NOT_CLAIMED");
+});
+
+test("saved observation crossing can be reopened without changing trust or leaking private note",()=>{
+ const first=makeObservationCrossing({
+   parentId:"coalition-pm01",observation:"The grocery question started with a familiar routine.",
+   kind:"POSTYMON",title:"THE OBSERVED ROUTE",question:"What routes already exist?",acknowledged:true
+ },"local-roundtrip-42");
+ const reopened=validateObservationCrossing(JSON.parse(JSON.stringify(first)));
+ assert.deepEqual(reopened,first);
+ assert.deepEqual(readDraftHash(new URL(draftLink(reopened.descendant,"https://abundent.org/field/cards/")).hash),first.descendant);
+ assert.ok(!draftLink(reopened.descendant,"https://abundent.org/field/cards/").includes("routine"));
+ assert.throws(()=>validateObservationCrossing({...first,published:true}),/Not an unverified/);
+ assert.throws(()=>validateObservationCrossing({...first,observation:{...first.observation,status:"CONFIRMED"}}),/status or parent/);
+ assert.throws(()=>validateObservationCrossing({...first,observation:{...first.observation,cardRef:"somebody-else"}}),/status or parent/);
+ assert.throws(()=>validateObservationCrossing({...first,descendant:{...first.descendant,published:true}}),/Not a local draft/);
 });

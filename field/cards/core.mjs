@@ -79,7 +79,7 @@ export function validateObservationCrossing(value) {
   const draft=validateDraft(value.descendant);
   exactKeys(value.observation, ["schema","cardRef","kind","note","status","authority","externalAdoption"]);
   const observation=makeReturn(draft.parentId || draft.id,"OBSERVATION",value.observation.note);
-  if(JSON.stringify(value.observation)!==JSON.stringify(observation))
+  if(Object.keys(observation).some(k=>value.observation[k]!==observation[k]))
     throw new Error("Observation status or parent does not match the local draft.");
   return Object.freeze({schema:OBSERVATION_CROSSING_SCHEMA,observation:Object.freeze(observation),
     descendant:draft,status:"UNVERIFIED_LOCAL_CROSSING",published:false,authorization:"NONE",noteOnPublicCard:false});
