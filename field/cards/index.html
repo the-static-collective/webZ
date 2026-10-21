@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
-<meta name="theme-color" content="#113630"><title>FIELD 001 · Common Goods, Local Hands</title><link rel="stylesheet" href="./style.css">
+<meta name="theme-color" content="#113630"><title>FIELD 002 · Common Goods, Local Hands</title><link rel="stylesheet" href="./style.css">
 <script src="./vendor/qrcode.min.js" defer></script><script type="module" src="./app.mjs"></script></head>
 <body><header><div class="eyebrow">ABUNDENT FIELD / 001 · PAPER FIRST</div><h1>Common goods.<br>Local hands.</h1>
 <p>Discover a question. Carry it into the room. Return what you learned. A card is an invitation, not an assignment.</p>
@@ -14,6 +14,24 @@
 <section aria-labelledby="active-title"><h2 id="active-title">The card in your hands</h2><div id="active" class="field-card" aria-live="polite"></div><div id="qr-preview"></div><p class="small" id="link-text"></p>
 <div class="toolbar"><button id="print-one">Print this card</button><button id="print-sheet" class="secondary">Print filtered sheet</button><select id="layout" aria-label="Print sheet layout" style="width:auto"><option value="four">4 per page</option><option value="nine">9 per page</option></select></div>
 <p class="disclaimer" id="release-warning">Independent discussion prototype. No affiliation, permission, active service, or actual work is implied. Printing/scanning is not consent or evidence of an encounter.</p>
+<div class="notice-flow" aria-labelledby="notice-flow-title">
+<div class="eyebrow">FIELD BYTE / 002 · FROM WHAT ALREADY EXISTS</div>
+<h3 id="notice-flow-title">Notice something → ask something</h3>
+<p>First record what you noticed. Then write a <strong>separate question</strong> worth carrying. An observation is not an offer, an assignment, or a verified fact.</p>
+<form id="observation-form">
+<label for="obs-parent">Which card started this thought?</label><select id="obs-parent"><option value="">No origin card</option></select>
+<label for="obs-note">1 · What did you notice? (local personal note, max 220)</label>
+<textarea id="obs-note" maxlength="220" rows="2" required placeholder="An existing trip already happens most mornings."></textarea>
+<p class="small">This note stays on your device unless you deliberately export the private crossing JSON. It does <strong>not</strong> appear in the printed card or QR.</p>
+<label for="obs-kind">2 · What kind of card grows from it?</label><select id="obs-kind"><option value="POSTYMON">POSTYMON — notice a capacity</option><option value="REALITY.2">REALITY.2 — ask about a connection</option></select>
+<label for="obs-title">Card title (max 64)</label><input id="obs-title" maxlength="64" required placeholder="THE RETURNING TRUCK">
+<label for="obs-question">3 · What question should travel? (max 150)</label><textarea id="obs-question" maxlength="150" rows="3" required placeholder="Could existing approved trips help neighbors without creating new routes?"></textarea>
+<label class="check"><input id="obs-ack" type="checkbox" required>These words contain no private contacts or identifying details. This is a question, not permission or a promise.</label>
+<div class="toolbar"><button type="submit">Grow a card from this observation</button><button type="button" class="secondary" id="export-crossing" disabled>Save my observation + card JSON</button></div>
+</form>
+<p id="crossing-status" class="small" role="status">Nothing is uploaded. To keep the source note after closing this page, save the private crossing JSON.</p>
+</div>
+<details><summary>Continue from saved card or crossing JSON</summary><p class="small">You can reopen an earlier exported `local-….json` card or a saved observation + card JSON bundle. Both remain unverified and unpublished.</p><label for="import-draft">Choose a saved local card or crossing JSON</label><input id="import-draft" type="file" accept=".json,application/json"><p class="small">Import reads the file in your browser; it is not sent anywhere. Card data may be printed/shared only by your choice.</p></details>
 <details><summary>Make a descendant card (local draft)</summary>
 <p class="small">A new card lives only in this browser or its portable QR/JSON. It is not published and cannot claim another person's work or contact information.</p>
 <form id="draft-form"><label for="new-kind">Kind</label><select id="new-kind"><option value="POSTYMON">POSTYMON — a capacity</option><option value="REALITY.2">REALITY.2 — a possible connection</option></select>

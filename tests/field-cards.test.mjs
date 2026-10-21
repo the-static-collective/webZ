@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync,existsSync} from "node:fs";
-import {SEEDS,seedById,makeDraft,validateDraft,seedLink,draftLink,readDraftHash,isProductionHost,makeReturn,publicCard} from "../field/cards/core.mjs";
+import {SEEDS,seedById,makeDraft,validateDraft,seedLink,draftLink,readDraftHash,isProductionHost,makeReturn,makeObservationCrossing,validateObservationCrossing,OBSERVATION_CROSSING_SCHEMA,publicCard} from "../field/cards/core.mjs";
 const preview="http://localhost:8080/field/index.html";
 test("seed census has exact deck splits and unique bounded identities",()=>{
   assert.equal(SEEDS.length,34);
@@ -63,4 +63,72 @@ test("static browser bundle keeps privacy and printing boundaries explicit",()=>
   assert.match(app,/window\.print\(\)/);assert.match(app,/PREVIEW URL ONLY/);
   assert.match(css,/@media print/);
   assert.ok(existsSync(new URL("../field/cards/vendor/LICENSE.qrcodejs.txt",import.meta.url)));
+});
+
+test("observation crossing preserves an unverified note separately from the portable card",()=>{
+  const c=makeObservationCrossing({
+    parentId:"coalition-pm01",
+    observation:"A neighbor makes an ordinary morning trip.",
+    kind:"REALITY.2",title:"THE SHARED MILE",
+    question:"Could an existing trip help carry a question to the right hands?",
+    acknowledged:true
+  },"local-observed-001");
+  assert.equal(c.schema,OBSERVATION_CROSSING_SCHEMA);
+  assert.equal(c.observation.cardRef,"coalition-pm01");
+  assert.equal(c.observation.kind,"OBSERVATION");
+  assert.equal(c.observation.status,"UNVERIFIED_PERSONAL_NOTE");
+  assert.equal(c.descendant.parentId,"coalition-pm01");
+  assert.equal(c.descendant.state,"UNREVIEWED_DRAFT");
+  assert.equal(c.authorization,"NONE");
+  assert.equal(c.noteOnPublicCard,false);
+  assert.equal(c.published,false);
+  const url=draftLink(c.descendant,"https://abundent.org/field/cards/");
+  assert.ok(!url.includes("neighbor"));
+  assert.ok(!atob(url.split("#draft=")[1].replace(/-/g,"+").replace(/_/g,"/")).includes("neighbor"));
+  assert.ok(!JSON.stringify(c.descendant).includes(c.observation.note));
+  assert.deepEqual(readDraftHash(new URL(url).hash),c.descendant);
+});
+test("saved local draft can parent another card without becoming public",()=>{
+  const old=draft({parentId:"coalition-pm01"}, "local-89aa487c-c71");
+  assert.deepEqual(validateDraft(JSON.parse(JSON.stringify(old))),old);
+  const child=makeObservationCrossing({
+    parentId:old.id,observation:"A routine trip has capacity to explore.",
+    kind:"POSTYMON",title:"THE ROUTE QUESTION",
+    question:"What could an existing trip reveal?",
+    acknowledged:true
+  },"local-child-002");
+  assert.equal(child.descendant.parentId,old.id);
+  assert.equal(child.observation.cardRef,old.id);
+  assert.equal(publicCard(child.descendant),false);
+  assert.throws(()=>makeDraft({kind:"POSTYMON",title:"SELF",question:"Could this parent itself?",parentId:old.id,acknowledged:true},old.id),/cannot parent itself/);
+});
+test("observation is not offered, admitted, confirmed or secretly public",()=>{
+  const make=overrides=>makeObservationCrossing({
+    parentId:"waseca-p04",observation:"A normal trip exists.",
+    kind:"POSTYMON",title:"THE POSSIBLE ROUTE",
+    question:"Could a route be investigated?",
+    acknowledged:true,...overrides
+  },"local-route-002");
+  assert.throws(()=>make({observation:"Call 507-555-0149"}),/contact details/);
+  assert.throws(()=>make({observation:"Write jane@example.com"}),/contact details/);
+  assert.throws(()=>make({question:"A<unsafe>card"}),/markup/);
+  assert.throws(()=>make({acknowledged:false}),/Confirm/);
+  assert.throws(()=>make({parentId:"unknown-card"}),/recognized seed or local draft/);
+  assert.throws(()=>make({unauthorizedAcceptance:true}),/Unsupported fields/);
+  assert.equal(make().observation.externalAdoption,"NOT_CLAIMED");
+});
+
+test("saved observation crossing can be reopened without changing trust or leaking private note",()=>{
+ const first=makeObservationCrossing({
+   parentId:"coalition-pm01",observation:"The grocery question started with a familiar routine.",
+   kind:"POSTYMON",title:"THE OBSERVED ROUTE",question:"What routes already exist?",acknowledged:true
+ },"local-roundtrip-42");
+ const reopened=validateObservationCrossing(JSON.parse(JSON.stringify(first)));
+ assert.deepEqual(reopened,first);
+ assert.deepEqual(readDraftHash(new URL(draftLink(reopened.descendant,"https://abundent.org/field/cards/")).hash),first.descendant);
+ assert.ok(!draftLink(reopened.descendant,"https://abundent.org/field/cards/").includes("routine"));
+ assert.throws(()=>validateObservationCrossing({...first,published:true}),/Not an unverified/);
+ assert.throws(()=>validateObservationCrossing({...first,observation:{...first.observation,status:"CONFIRMED"}}),/status or parent/);
+ assert.throws(()=>validateObservationCrossing({...first,observation:{...first.observation,cardRef:"somebody-else"}}),/status or parent/);
+ assert.throws(()=>validateObservationCrossing({...first,descendant:{...first.descendant,published:true}}),/Not a local draft/);
 });

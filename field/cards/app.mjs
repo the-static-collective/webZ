@@ -1,8 +1,9 @@
-import { SEEDS, seedById, seedLink, draftLink, readDraftHash, makeDraft, makeReturn, isProductionHost } from "./core.mjs";
+import { SEEDS, seedById, seedLink, draftLink, readDraftHash, makeDraft, validateDraft, makeReturn, makeObservationCrossing, validateObservationCrossing, isProductionHost } from "./core.mjs";
 
 const $ = id => document.getElementById(id);
 let selected = seedById(new URL(location.href).searchParams.get("card")) || SEEDS[0];
 let localDraft = null;
+let localCrossing = null;
 const production = isProductionHost(location.href);
 const message = (text, error=false) => { $("message").textContent=text; $("message").className=error?"error":""; };
 function node(tag, className, content) {
@@ -52,12 +53,29 @@ function setSelected(card,updateAddress=false){
   selected=card;
   if(card.state==="UNREVIEWED_DRAFT")localDraft=card;
   if(updateAddress){try{history.replaceState(null,"",currentURL(card));}catch(e){message("Could not update the share URL: "+e.message,true);}}
-  renderCatalog();renderActive();
+  renderCatalog();renderActive();refreshObservationOrigin();
 }
 function renderParentList(){
   const select=$("new-parent");
   for(const c of SEEDS){const option=node("option","",c.title+" ("+c.sourceCode+", "+c.deck+")");option.value=c.id;select.append(option);}
 }
+// Every card may be a doorway to a new local observation. The private note is
+// intentionally kept out of the shareable card and its encoded fragment.
+function refreshObservationOrigin(){
+  const select = $("obs-parent");
+  select.replaceChildren(node("option","", "No origin card"));
+  select.options[0].value = "";
+  for(const card of SEEDS){
+    const option=node("option","",card.title+" · "+card.sourceCode+" ("+card.deck+")");
+    option.value=card.id;select.append(option);
+  }
+  if(selected.state==="UNREVIEWED_DRAFT"){
+    const option=node("option","",selected.title+" · LOCAL DRAFT (unpublished)");
+    option.value=selected.id;select.append(option);
+  }
+  select.value=selected.id;
+}
+
 function download(obj,basename){
   const json=JSON.stringify(obj,null,2)+"\n";
   const blob=new Blob([json],{type:"application/json"});
@@ -91,10 +109,59 @@ function startup(){
     try{const draft=readDraftHash(location.hash);if(draft){selected=draft;localDraft=draft;}}
     catch(e){message("Invalid portable draft link: "+e.message,true);}
   }
-  renderCatalog();renderActive();
+  renderCatalog();renderActive();refreshObservationOrigin();
   for(const id of ["query","deck","kind"])$(id).addEventListener("input",renderCatalog);
   $("print-one").addEventListener("click",()=>printCards([selected]));
   $("print-sheet").addEventListener("click",()=>printCards(filtered()));
+
+  $("observation-form").addEventListener("submit",e=>{
+    e.preventDefault();
+    try{
+      // The original observation is a separate unverified local note.
+      // Only the human-written title and question can appear in the QR.
+      const crossing=makeObservationCrossing({
+        parentId:$("obs-parent").value,
+        observation:$("obs-note").value,
+        kind:$("obs-kind").value,
+        title:$("obs-title").value,
+        question:$("obs-question").value,
+        acknowledged:$("obs-ack").checked
+      });
+      draftLink(crossing.descendant,location.href); // refuse an unscannable draft before changing selection
+      localCrossing=crossing;
+      $("obs-note").value=""; // reduce casual exposure of the original observation
+      $("obs-ack").checked=false;
+      $("export-crossing").disabled=false;
+      $("crossing-status").textContent="Unverified observation held locally for "+crossing.descendant.id+". Save the private JSON now if you want to keep the note after leaving; the QR contains only the new card.";
+      setSelected(crossing.descendant,true);
+      message("Observation and proposed question are separate. The portable card is an unpublished draft; no offer, publication, or contact was made.");
+    }catch(err){message(err.message,true);}
+  });
+  $("export-crossing").addEventListener("click",()=>{
+    if(!localCrossing){message("Make a crossing before saving one.",true);return;}
+    download(localCrossing,"field-observation-"+localCrossing.descendant.id);
+    message("Saved your observation + descendant card as a LOCAL JSON bundle. This file was not uploaded.");
+  });
+  $("import-draft").addEventListener("change",async e=>{
+    const file=e.target.files?.[0];
+    if(!file)return;
+    try{
+      if(file.size>8192)throw Error("Local card JSON exceeds the 8 KB import limit.");
+      const parsed=JSON.parse(await file.text());
+      const crossing=parsed.schema==="abundent.observation-crossing/v0.1" ? validateObservationCrossing(parsed) : null;
+      const draft=crossing ? crossing.descendant : validateDraft(parsed); // only known, unpublished local objects
+      draftLink(draft,location.href);
+      if(crossing){
+        localCrossing=crossing;
+        $("export-crossing").disabled=false;
+        $("crossing-status").textContent="Private observation reloaded from your own JSON for "+draft.id+". The note is not in the QR or card.";
+      }
+      setSelected(draft,true);
+      message("Reopened saved local card "+draft.id+". Nothing was uploaded or published. You can now use it as the origin of a new observation.");
+    }catch(err){message("Could not reopen local card: "+err.message,true);}
+    finally{e.target.value="";}
+  });
+
   $("draft-form").addEventListener("submit",e=>{
     e.preventDefault();
     try{

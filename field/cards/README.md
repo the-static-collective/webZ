@@ -1,6 +1,6 @@
 # ABUNDENT FIELD 001 — the first printable byte
 
-Independent, **unmerged and undeployed** `/field/cards/` sidecar for the October 24–26 Coalition of Care → Waseca community grocery field window.
+Independent, **deployed FIELD-001 with FIELD-002 held on review branch** `/field/cards/` sidecar for the October 24–26 Coalition of Care → Waseca community grocery field window.
 
 **Source:** [planZ Grand Shard 001 PR #24](https://github.com/the-static-collective/planZ/pull/24). Two user-provided PDF deck concepts inspired adapted seed cards (18 Coalition-style + 16 Waseca-style). This seed library is an *independent prototype*, not an authorized publication by the Coalition, the co-op, or Real Life Church.
 
@@ -52,3 +52,18 @@ B2+: only after consented steward review and organizational authority may a subm
 ## Reconciliation
 
 This folder is grafted onto exact deployed Abundent garden source commit `65539f065db609c97e5c3ca1ca0b2d0f90c7498a`, not webZ main. The pre-existing `/field/` is a source-pinned 11-world public catalog; it is preserved intact. The new cards are exclusively `/field/cards/`, with their own scoped offline cache. Other assets `/composer/`, `/needs/`, `/week/`, `/garden/`, `/music/` remain unchanged. Only the reviewed immutable release whitelist is expanded. The original two PDFs should be revisited for line-by-line exact seed transcription before publicly representing card content as deck-authored wording.
+
+## FIELD-002 — observation → question → descendant (review branch)
+
+The first real field-card return included a statement of an existing routine in the field named `question`, showing the need for distinct source observations and sharable proposed questions. That actual personal observation is **not** checked into this public repository; tests use synthetic notes only.
+
+- A prominent observation form keeps the local source note distinct from the candidate title/question. A human writes the candidate question. No automatic conversion of observations into promised labor, offers, or public claims.
+- `abundent.observation-crossing/v0.1` bundles a separate `abundent.field-return/v0.1` unverified observation and an `abundent.field-draft/v0.1` unreviewed card. Download the bundle if you want the source note later. The source note **never appears in the card, QR or share URL**; on reload it is not restored.
+- The `#draft=` URL continues to carry **only** the candidate card. Because the link fragment is readable by anyone with the link, title/question also must be suitable for sharing. No identifying information should be entered.
+- A previously downloaded standalone local draft JSON can be imported on-device and used as the origin of a new candidate card; local-to-local parent IDs are a relationship *reference*, not proof of its source or delivery.
+- Imported bundles are deliberately **not** silently treated as published or verified cards. No logging, no endpoint to upload, no accounts, no partner endorsement, no physical task assignment.
+- Field 002 bumps the `/field/cards/` service-worker cache namespace; the public 11-world `/field/` and root garden SW remain independently scoped.
+
+Proof gates: extended Node contract checks and a mobile Playwright browser test including prior JSON import, human observation → question → exported crossing, and QR/print isolation; physical print and QR scan remain separate tests.
+
+Saved private observation + descendant JSON bundles can be re-imported locally, validated against both v0.1 schemas and resumed without publishing or embedding the source note into a QR. Ordinary standalone card JSON is still supported. Import explicitly reads a chosen local file only.
