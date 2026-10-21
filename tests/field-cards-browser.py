@@ -20,7 +20,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 server=ThreadingHTTPServer(("127.0.0.1",0),Handler)
 threading.Thread(target=server.serve_forever,daemon=True).start()
-base=f"http://127.0.0.1:{server.server_port}/nested/webZ/field/"
+base=f"http://127.0.0.1:{server.server_port}/nested/webZ/field/cards/"
 try:
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True)
