@@ -93,7 +93,7 @@ try:
             "mimeType":"application/json",
             "buffer":json.dumps(draft).encode()
         })
-        assert "Reopened saved local card" in page.locator("#message").inner_text()
+        page.wait_for_function('document.getElementById("message").textContent.includes("Reopened saved local card")', timeout=5000)
         assert "THE RETURNING TRUCK" in page.locator("#active").inner_text()
         assert page.locator("#obs-parent").input_value()==draft["id"]
         page.locator("#obs-note").fill("A neighbor already takes an ordinary morning route.")
