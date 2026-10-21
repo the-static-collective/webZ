@@ -116,7 +116,7 @@ try:
         assert bundle["authorization"]=="NONE" and bundle["published"] is False
         assert bundle["noteOnPublicCard"] is False
         page.get_by_role("button",name="Print this card").click()
-        page.wait_for_function("window.__didPrint===true")
+        expect(page.locator("#sheet .print-card")).to_contain_text("THE SHARED MILE")
         assert "A neighbor already takes" not in page.locator("#sheet").inner_text()
         assert "THE SHARED MILE" in page.locator("#sheet").inner_text()
         page.reload()
