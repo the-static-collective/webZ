@@ -35,7 +35,7 @@ function renderActive(){
   $("export-draft").disabled=!draft;
   $("release-warning").textContent=draft ? "Unreviewed, portable DRAFT only. Its QR carries the text in the URL fragment; it is not stored by Abundent or approved by any person or organization." :
     production ? "Reviewed seed transcription only. A QR scan is not consent, a real encounter, or co-op/Coalition endorsement." :
-    "TEST LINK — this preview is not the public Abundent deployment. Do not distribute QR cards until the final /field/ URL is verified. No co-op/Coalition endorsement.";
+    "PREVIEW LINK — this preview is not the public Abundent deployment. Do not distribute QR cards until the final /field/ URL is verified. No co-op/Coalition endorsement.";
 }
 function filtered(){
   const q=$("query").value.trim().toLowerCase(), d=$("deck").value, k=$("kind").value;
