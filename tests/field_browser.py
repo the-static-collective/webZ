@@ -78,8 +78,10 @@ try:
         assert returned["cardRef"]==draft["id"]
         assert page.evaluate("localStorage.length")==0
 
+        page.get_by_text("Make a descendant card (local draft)").click()
         page.locator("#new-title").fill("CONTACT")
         page.locator("#new-question").fill("Email private-person@example.org")
+        page.locator("#ack").check()
         page.get_by_role("button",name="Create local card").click()
         assert "contact details" in page.locator("#message").inner_text()
 
