@@ -36,7 +36,7 @@ try:
         assert "PREVIEW" in page.locator("#release-warning").inner_text()
         assert page.locator("#qr-preview img, #qr-preview canvas").count()>=1
 
-        page.locator("#query").fill("GROWER")
+        page.locator("#query").fill("THE GROWER")
         assert page.locator("#count").inner_text()=="1 of 34 seed cards"
         page.locator("#cards button").first.click()
         assert "THE GROWER" in page.locator("#active").inner_text()
