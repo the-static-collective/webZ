@@ -85,6 +85,45 @@ try:
         page.get_by_role("button",name="Create local card").click()
         assert "contact details" in page.locator("#message").inner_text()
 
+
+        # A file returned from another device remains importable without
+        # creating a public account or pretending the source is verified.
+        page.locator("#import-draft").set_input_files({
+            "name":"local-prior-card.json",
+            "mimeType":"application/json",
+            "buffer":json.dumps(draft).encode()
+        })
+        assert "Reopened saved local card" in page.locator("#message").inner_text()
+        assert "THE RETURNING TRUCK" in page.locator("#active").inner_text()
+        assert page.locator("#obs-parent").input_value()==draft["id"]
+        page.locator("#obs-note").fill("A neighbor already takes an ordinary morning route.")
+        page.locator("#obs-title").fill("THE SHARED MILE")
+        page.locator("#obs-question").fill("Could an existing trip carry a question to the right hands?")
+        page.locator("#obs-kind").select_option("REALITY.2")
+        page.locator("#obs-ack").check()
+        page.get_by_role("button",name="Grow a card from this observation").click()
+        assert "THE SHARED MILE" in page.locator("#active").inner_text()
+        assert "A neighbor already takes" not in page.url
+        assert "A neighbor already takes" not in page.locator("#sheet").inner_text()
+        assert page.locator("#obs-note").input_value()==""
+        assert "observation" in page.locator("#crossing-status").inner_text()
+        with page.expect_download() as crossing_download:
+            page.get_by_role("button",name="Save my observation + card JSON").click()
+        bundle=json.loads(pathlib.Path(crossing_download.value.path()).read_text())
+        assert bundle["observation"]["note"]=="A neighbor already takes an ordinary morning route."
+        assert bundle["observation"]["status"]=="UNVERIFIED_PERSONAL_NOTE"
+        assert bundle["descendant"]["parentId"]==draft["id"]
+        assert bundle["authorization"]=="NONE" and bundle["published"] is False
+        assert bundle["noteOnPublicCard"] is False
+        page.get_by_role("button",name="Print this card").click()
+        page.wait_for_function("window.__didPrint===true")
+        assert "A neighbor already takes" not in page.locator("#sheet").inner_text()
+        assert "THE SHARED MILE" in page.locator("#sheet").inner_text()
+        page.reload()
+        assert "THE SHARED MILE" in page.locator("#active").inner_text()
+        assert "A neighbor already takes" not in page.locator("body").inner_text()
+        assert page.evaluate("localStorage.length")==0
+
         assert not errors, errors
         assert all(url.startswith(f"http://127.0.0.1:{server.server_port}/") for url in requests), requests
         context.close()
