@@ -67,6 +67,24 @@ export function makeObservationCrossing(raw, fixedId) {
   });
 }
 
+
+// Reading a local bundle does not admit the source, authenticate the author,
+// or grant authority to post/share the note. Only the validated descendant
+// may be copied into a QR; the observation remains in the local JSON file.
+export function validateObservationCrossing(value) {
+  exactKeys(value, ["schema","observation","descendant","status","published","authorization","noteOnPublicCard"]);
+  if(value.schema!==OBSERVATION_CROSSING_SCHEMA || value.status!=="UNVERIFIED_LOCAL_CROSSING"
+    || value.published!==false || value.authorization!=="NONE" || value.noteOnPublicCard!==false)
+    throw new Error("Not an unverified local observation crossing.");
+  const draft=validateDraft(value.descendant);
+  exactKeys(value.observation, ["schema","cardRef","kind","note","status","authority","externalAdoption"]);
+  const observation=makeReturn(draft.parentId || draft.id,"OBSERVATION",value.observation.note);
+  if(JSON.stringify(value.observation)!==JSON.stringify(observation))
+    throw new Error("Observation status or parent does not match the local draft.");
+  return Object.freeze({schema:OBSERVATION_CROSSING_SCHEMA,observation:Object.freeze(observation),
+    descendant:draft,status:"UNVERIFIED_LOCAL_CROSSING",published:false,authorization:"NONE",noteOnPublicCard:false});
+}
+
 function safeOrigin(href) {
   const u = new URL(href);
   if (!["https:","http:"].includes(u.protocol)) throw new Error("Use a hosted preview URL.");

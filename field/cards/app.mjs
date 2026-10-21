@@ -1,4 +1,4 @@
-import { SEEDS, seedById, seedLink, draftLink, readDraftHash, makeDraft, validateDraft, makeReturn, makeObservationCrossing, isProductionHost } from "./core.mjs";
+import { SEEDS, seedById, seedLink, draftLink, readDraftHash, makeDraft, validateDraft, makeReturn, makeObservationCrossing, validateObservationCrossing, isProductionHost } from "./core.mjs";
 
 const $ = id => document.getElementById(id);
 let selected = seedById(new URL(location.href).searchParams.get("card")) || SEEDS[0];
@@ -148,8 +148,14 @@ function startup(){
     try{
       if(file.size>8192)throw Error("Local card JSON exceeds the 8 KB import limit.");
       const parsed=JSON.parse(await file.text());
-      const draft=validateDraft(parsed); // strictly local, unpublished cards only
+      const crossing=parsed.schema==="abundent.observation-crossing/v0.1" ? validateObservationCrossing(parsed) : null;
+      const draft=crossing ? crossing.descendant : validateDraft(parsed); // only known, unpublished local objects
       draftLink(draft,location.href);
+      if(crossing){
+        localCrossing=crossing;
+        $("export-crossing").disabled=false;
+        $("crossing-status").textContent="Private observation reloaded from your own JSON for "+draft.id+". The note is not in the QR or card.";
+      }
       setSelected(draft,true);
       message("Reopened saved local card "+draft.id+". Nothing was uploaded or published. You can now use it as the origin of a new observation.");
     }catch(err){message("Could not reopen local card: "+err.message,true);}
