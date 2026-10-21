@@ -4,7 +4,7 @@ import pathlib
 import threading
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
@@ -93,7 +93,7 @@ try:
             "mimeType":"application/json",
             "buffer":json.dumps(draft).encode()
         })
-        page.wait_for_function('document.getElementById("message").textContent.includes("Reopened saved local card")', timeout=5000)
+        expect(page.locator("#message")).to_contain_text("Reopened saved local card",timeout=5000)
         assert "THE RETURNING TRUCK" in page.locator("#active").inner_text()
         assert page.locator("#obs-parent").input_value()==draft["id"]
         page.locator("#obs-note").fill("A neighbor already takes an ordinary morning route.")
