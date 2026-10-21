@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="theme-color" content="#113630"><title>FIELD 001 · Common Goods, Local Hands</title><link rel="stylesheet" href="./style.css">
+<script src="./vendor/qrcode.min.js" defer></script><script type="module" src="./app.mjs"></script></head>
+<body><header><div class="eyebrow">ABUNDENT FIELD / 001 · PAPER FIRST</div><h1>Common goods.<br>Local hands.</h1>
+<p>Discover a question. Carry it into the room. Return what you learned. A card is an invitation, not an assignment.</p>
+<p class="small"><a href="../../">Back to the garden</a> · A separate, independent card prototype alongside the existing public field</p></header>
+<main><section aria-labelledby="catalog-title"><h2 id="catalog-title">Explore the decks</h2><p class="small">Adapted discussion cards based on the Coalition and Waseca deck concepts; titles and questions have not yet been checked line-by-line against the original PDFs. Not a registry of people or commitments.</p>
+<label for="query">Search</label><input id="query" type="search" placeholder="Grower, kitchen, route, question…">
+<label for="deck">Source deck</label><select id="deck"><option value="all">Both source decks</option><option value="coalition">Coalition Room</option><option value="waseca">Waseca Right Hands</option></select>
+<label for="kind">Card type</label><select id="kind"><option value="all">Both kinds</option><option value="POSTYMON">POSTYMON — notice</option><option value="REALITY.2">REALITY.2 — connect</option></select>
+<p id="count" class="small" role="status"></p><ul class="cards" id="cards"></ul></section>
+<section aria-labelledby="active-title"><h2 id="active-title">The card in your hands</h2><div id="active" class="field-card" aria-live="polite"></div><div id="qr-preview"></div><p class="small" id="link-text"></p>
+<div class="toolbar"><button id="print-one">Print this card</button><button id="print-sheet" class="secondary">Print filtered sheet</button><select id="layout" aria-label="Print sheet layout" style="width:auto"><option value="four">4 per page</option><option value="nine">9 per page</option></select></div>
+<p class="disclaimer" id="release-warning">Independent discussion prototype. No affiliation, permission, active service, or actual work is implied. Printing/scanning is not consent or evidence of an encounter.</p>
+<details><summary>Make a descendant card (local draft)</summary>
+<p class="small">A new card lives only in this browser or its portable QR/JSON. It is not published and cannot claim another person's work or contact information.</p>
+<form id="draft-form"><label for="new-kind">Kind</label><select id="new-kind"><option value="POSTYMON">POSTYMON — a capacity</option><option value="REALITY.2">REALITY.2 — a possible connection</option></select>
+<label for="new-title">Title (64 characters)</label><input id="new-title" maxlength="64" required placeholder="THE RETURNING TRUCK">
+<label for="new-question">Question (150 characters)</label><textarea id="new-question" maxlength="150" rows="3" required placeholder="What existing route could support an approved delivery?"></textarea>
+<label for="new-parent">Origin card (optional)</label><select id="new-parent"><option value="">No parent</option></select>
+<label class="check"><input id="ack" type="checkbox" required>I used no private names/contact details and claim no organizational authority.</label>
+<div class="toolbar"><button type="submit">Create local card</button><button class="secondary" type="button" id="export-draft">Save draft JSON</button></div></form></details>
+<details><summary>Bring a question back (local return)</summary><p class="small">This makes a downloadable, unverified note for your own handoff. Nothing is submitted to Abundent or the meeting organizers.</p>
+<form id="return-form"><label for="return-kind">What is this?</label><select id="return-kind"><option value="QUESTION">A better question</option><option value="OBSERVATION">An observation</option><option value="PROPOSED_CONNECTION">A possible connection</option></select>
+<label for="return-note">What did you learn? (no names or contacts)</label><textarea id="return-note" maxlength="220" rows="3" required></textarea>
+<label class="check"><input id="return-ack" type="checkbox" required>I used no private details; this is my note, not a verified report or permission.</label><button type="submit">Save return JSON</button></form></details>
+<p id="message" role="status"></p></section></main><footer>No accounts · No tracking · No public submissions · No money · No implied co-op, church or Coalition sponsorship.<br>Physical cards can travel without reporting back.</footer><div id="sheet" class="sheet" aria-hidden="true"></div></body></html>

@@ -7,5 +7,5 @@ test('release allowlist contains existing porches and navigator with no draft or
  for(const path of STATIC_PATHS)assert.doesNotMatch(path,/(?:^|\/)(?:census|tests|docs|\.env|wandering-lens|suno-atlas|music-field)(?:\/|$)|TEST_FIXTURE|private/i);
  const config=JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url)));
  assert.equal(config.git.deploymentEnabled,false);assert.equal(config.outputDirectory,'dist');
- assert.equal(config.rewrites,undefined); // Missing routes remain genuine HTTP 404.
+ assert.match(readFileSync(new URL('../scripts/build-release.mjs',import.meta.url),'utf8'),/field\\/cards\\/index.html/);\n assert.equal(config.rewrites,undefined); // Missing routes remain genuine HTTP 404.
 });
