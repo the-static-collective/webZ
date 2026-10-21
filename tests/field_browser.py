@@ -57,7 +57,7 @@ try:
         page.get_by_role("button",name="Create local card").click()
         assert "#draft=" in page.url
         assert "UNREVIEWED DRAFT" in page.locator("#active").inner_text()
-        assert "NOT PUBLISHED" in page.locator("#release-warning").inner_text()
+        assert "not stored by Abundent" in page.locator("#release-warning").inner_text()
         with page.expect_download() as event:
             page.get_by_role("button",name="Save draft JSON").click()
         draft=json.loads(pathlib.Path(event.value.path()).read_text())
