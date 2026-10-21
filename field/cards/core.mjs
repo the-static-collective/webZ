@@ -26,7 +26,8 @@ export function makeDraft(raw, fixedId = "local-" + crypto.randomUUID().slice(0,
   const title = bounded(raw.title, "Title", 64);
   const question = bounded(raw.question, "Question", 150);
   const parentId = raw.parentId === "" || raw.parentId == null ? null : raw.parentId;
-  if (parentId !== null && !seedById(parentId)) throw new Error("Choose a recognized seed as parent.");
+  if (parentId !== null && !seedById(parentId) && !/^local-[a-z0-9-]{4,80}$/.test(parentId)) throw new Error("Choose a recognized seed or local draft as parent.");
+  if (parentId === fixedId) throw new Error("A card cannot parent itself.");
   if (!ID.test(fixedId)) throw new Error("Invalid local draft ID.");
   return Object.freeze({ schema:DRAFT_SCHEMA, id:fixedId, kind:raw.kind, title, question, parentId, state:"UNREVIEWED_DRAFT", authority:"NONE", published:false });
 }
@@ -41,6 +42,31 @@ export function makeReturn(cardId,kind,note) {
   if (!["QUESTION","OBSERVATION","PROPOSED_CONNECTION"].includes(kind)) throw new Error("Choose a return kind.");
   return {schema:RETURN_SCHEMA,cardRef:cardId,kind,note:bounded(note,"Return note",220),status:"UNVERIFIED_PERSONAL_NOTE",authority:"NONE",externalAdoption:"NOT_CLAIMED"};
 }
+
+// An observation is a private, unverified source note; it is never placed in
+// a printed card, URL fragment, QR, or public seed. Only the *human-authored*
+// candidate question travels in the descendant. Exporting this bundle is an
+// explicit, local file action, not a publish/offer/consent action.
+export const OBSERVATION_CROSSING_SCHEMA = "abundent.observation-crossing/v0.1";
+export function makeObservationCrossing(raw, fixedId) {
+  exactKeys(raw, ["parentId","observation","kind","title","question","acknowledged"]);
+  if (raw.acknowledged !== true) throw new Error("Confirm the content is safe to save and does not imply an offer.");
+  const draft = makeDraft({
+    kind:raw.kind,title:raw.title,question:raw.question,
+    parentId:raw.parentId,acknowledged:true
+  }, fixedId);
+  const observation=makeReturn(raw.parentId || draft.id,"OBSERVATION",raw.observation);
+  return Object.freeze({
+    schema:OBSERVATION_CROSSING_SCHEMA,
+    observation:Object.freeze(observation),
+    descendant:draft,
+    status:"UNVERIFIED_LOCAL_CROSSING",
+    published:false,
+    authorization:"NONE",
+    noteOnPublicCard:false
+  });
+}
+
 function safeOrigin(href) {
   const u = new URL(href);
   if (!["https:","http:"].includes(u.protocol)) throw new Error("Use a hosted preview URL.");
