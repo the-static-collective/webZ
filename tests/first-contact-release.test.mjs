@@ -46,10 +46,10 @@ test("manual production controls and scoped QR CSP remain unchanged",()=>{
  assert.ok(csp.includes("frame-ancestors 'none'"));
  assert.equal(vercel.headers.filter(x=>x.source==="/field/first-contact/(.*)").length,1);
 });
-test("source site and existing field deck link to independent optional participant door",()=>{
+test("the field cards link to the human door while cache-bound garden stays immutable",()=>{
  const home=read("index.html").toString("utf8");
  const cards=read("field/cards/index.html").toString("utf8");
- assert.ok(home.includes('./field/first-contact/'));
  assert.ok(cards.includes('../first-contact/'));
+ assert.ok(!home.includes('./field/first-contact/'),"do not change cache-bound shell without regenerated SW");
  assert.ok(home.includes('./circulation/'),"the prior #69 Circulation route must survive graft");
 });
