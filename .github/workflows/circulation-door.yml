@@ -17,9 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Read generated root worker version (diagnostic)
-        run: |
-          npm run field:build
-          grep -m1 "const root=" sw.js
+      - name: Assert generated assets match committed navigation
+        run: npm run field:verify
       - run: node --check circulation/app.js
       - run: node --test tests/circulation-door.test.mjs
