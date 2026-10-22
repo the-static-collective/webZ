@@ -1,0 +1,23 @@
+name: CIRCULATION-001 Abundent paper-first inspection
+on:
+  pull_request:
+    paths:
+      - 'circulation/**'
+      - 'tests/circulation-door.test.mjs'
+      - '.github/workflows/circulation-door.yml'
+      - 'index.html'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assert generated assets match committed navigation
+        run: npm run field:verify
+      - run: node --check circulation/app.js
+      - run: node --test tests/circulation-door.test.mjs
