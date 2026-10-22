@@ -1,0 +1,95 @@
+name: FIELD 028 Abundent First Contact preview candidate
+
+on:
+  push:
+    branches:
+      - feature/first-contact-028-abundent-preview
+    paths:
+      - 'field/first-contact/**'
+      - 'tests/first-contact-*'
+      - 'scripts/build-release.mjs'
+      - 'vercel.json'
+      - 'index.html'
+      - 'field/cards/index.html'
+      - 'docs/FIRST-CONTACT-028-ABUNDENT-PREVIEW.md'
+      - '.github/workflows/first-contact-028.yml'
+  pull_request:
+    paths:
+      - 'field/first-contact/**'
+      - 'tests/first-contact-*'
+      - 'scripts/build-release.mjs'
+      - 'vercel.json'
+      - 'index.html'
+      - 'field/cards/index.html'
+      - 'docs/FIRST-CONTACT-028-ABUNDENT-PREVIEW.md'
+      - '.github/workflows/first-contact-028.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: All webZ original tests and first contact source parity
+        run: npm test
+      - name: Verify generated garden sources unchanged
+        run: npm run field:verify
+      - name: Build immutable source-verified public release locally
+        run: npm run build
+      - name: Check every new original public asset is manifest-bound
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in \
+            field/first-contact/index.html \
+            field/first-contact/style.css \
+            field/first-contact/core.mjs \
+            field/first-contact/app.mjs \
+            field/first-contact/vendor/qrcode.min.js \
+            field/first-contact/vendor/LICENSE.qrcodejs.txt; do
+            test -s "dist/$file"
+            cmp "$file" "dist/$file"
+          done
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import assert from "node:assert/strict";
+            const release=JSON.parse(fs.readFileSync("dist/release.json","utf8"));
+            const original=[
+              "field/first-contact/index.html",
+              "field/first-contact/style.css",
+              "field/first-contact/core.mjs",
+              "field/first-contact/app.mjs",
+              "field/first-contact/vendor/qrcode.min.js",
+              "field/first-contact/vendor/LICENSE.qrcodejs.txt"
+            ];
+            for(const path of original){
+              const entry=release.files.find(f=>f.path===path);
+              assert.ok(entry&&entry.sha256.startsWith("sha256:"),"missing manifest: "+path);
+            }
+            assert.ok(!release.files.some(f=>f.path.includes("tests/first-contact")||f.path.includes("docs/FIRST-CONTACT")));
+            console.log("FIELD 028 immutable candidate: 6/6 original assets copied and source-bound");
+          '
+  mobile-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install real Chromium browser runner
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Rehearse local unsent choice, private QR gate and 9-up/4-up print layouts
+        run: python tests/first-contact-browser.py
