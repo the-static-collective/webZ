@@ -14,7 +14,7 @@ The ancestry is explicit:
 - [webZ #69](https://github.com/the-static-collective/webZ/pull/69): circulation evidence door, parent exact commit `07ebe108908b3aea93585cd4deb8002590f3ad7d`;
 - this separate field-first-contact candidate branch, preserving the existing garden, music, listening rooms, NEEDS, field cards and circulation page.
 
-The garden's public-only `scripts/build-release.mjs` explicitly includes the six field-first-contact web assets, each checked against their own original Git blob at the selected release commit. Existing release metadata and other site artifacts remain otherwise unchanged. Two human-readable site links open the new route from the garden and card browser. The new route has a narrowly scoped CSP allowing only local scripts/styles and the inline image data created by local QR generation, and disallowing network connections, forms and frames. **Vercel automated Git deployments remain disabled.**
+The garden's public-only `scripts/build-release.mjs` explicitly includes the six field-first-contact web assets, each checked against their own original Git blob at the selected release commit. Existing release metadata and other site artifacts remain otherwise unchanged. A human-readable link in the existing `/field/cards/` browser opens the new route. The root garden shell is left byte-identical to its parent because its hash is part of a fixed service-worker cache; this avoids an unreviewed root worker rebuild. The new route has a narrowly scoped CSP allowing only local scripts/styles and the inline image data created by local QR generation, and disallowing network connections, forms and frames. **Vercel automated Git deployments remain disabled.**
 
 ## The human-facing sequence
 
