@@ -39,7 +39,7 @@ function keys(v, required) {
 function question(q) {
   return typeof q === 'string' && q.trim() === q && q.length >= 14 && q.length <= 180 &&
     !control.test(q) && !forbidden.test(q) &&
-    !/\b(?:social security|date of birth|passport|street address|phone number)\b/i.test(q);
+    !/\b(?:ssn|social security|date of birth|passport|street address|phone number)\b/i.test(q);
 }
 /**
  * Explicit attestation is from the human operating THIS browser. No recipient
