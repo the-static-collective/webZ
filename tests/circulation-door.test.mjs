@@ -31,7 +31,7 @@ test("Distinct recipient states remain explicitly synthetic; no acceptance, righ
   assert.match(html, /fictional DECLINE/i);
   assert.match(js, /Fictional HOLD/);
   assert.match(js, /Fictional DECLINE/);
-  assert.match(html, /CONTENT DOES NOT ESTABLISH/gi.test(html) ? /CONTENT DOES NOT ESTABLISH/gi : /not signatures of people/);
+  assert.match(html, /not signatures of people/);
   assert.match(js, /No owner accepted a task/);
   assert.match(html, /no partnership is claimed/i);
   assert.match(html, /No QR, account, sign-up, app, or answer is required/);
@@ -43,4 +43,13 @@ test("Each interactive element has a visible document target", () => {
   }
   assert.match(css, /@media print/);
   assert.match(css, /@media\(max-width:750px\)/);
+});
+
+test("the protected immutable release includes all three actual route assets", () => {
+  const builder = readFileSync(new URL("../scripts/build-release.mjs", import.meta.url), "utf8");
+  for (const file of ["circulation/index.html", "circulation/style.css", "circulation/app.js"]) {
+    assert.ok(builder.includes("'" + file + "'"), "release manifest omits " + file);
+  }
+  const vercel = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
+  assert.equal(vercel.git.deploymentEnabled, false);
 });
