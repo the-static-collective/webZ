@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex,nofollow">
+  <title>A place to come back to — First Contact / independent prototype</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./vendor/qrcode.min.js" defer></script>
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to choices</a>
+  <header class="mast">
+    <div class="frame mast-grid">
+      <div>
+        <div class="brand">THE LIVING COMMONS <span class="divider">/</span> FIELD SPECIMEN 028</div>
+        <h1>A place to<br><em>come back to.</em></h1>
+        <p class="lead">One small question: could a paper card help neighbors continue a conversation, without turning anyone into a member, a task, or a number?</p>
+        <p class="mast-note">No account. No obligation. <strong>This is an independent prototype, not a live help service.</strong></p>
+      </div>
+      <div class="symbol" aria-hidden="true">
+        <div class="ring ring-outer"><div class="ring ring-inner"><div class="door-icon">↗</div></div></div>
+        <div class="symbol-caption">ONE CARD<br>FOUR OPEN DOORS</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="frame" id="main">
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="overline">01 / THE INVITATION</div>
+      <h2 id="intro-title">Where would you like to begin?</h2>
+      <p>Choose what feels useful. You can change your mind or leave without saving anything. Nothing you do here sends a message, posts a request, or signs you up.</p>
+      <div class="choices" id="choices">
+        <button type="button" data-door="help"><span class="number">01</span><span class="choice-title">I might be able to help</span><span class="choice-sub">Explore an offer without making a promise</span><span class="arrow" aria-hidden="true">↗</span></button>
+        <button type="button" data-door="question"><span class="number">02</span><span class="choice-title">I have a question</span><span class="choice-sub">Ask before anyone asks you to join</span><span class="arrow" aria-hidden="true">↗</span></button>
+        <button type="button" data-door="create"><span class="number">03</span><span class="choice-title">I have an idea or song</span><span class="choice-sub">Offer a creative possibility on your terms</span><span class="arrow" aria-hidden="true">↗</span></button>
+        <button type="button" data-door="browse"><span class="number">04</span><span class="choice-title">Just looking around</span><span class="choice-sub">Participation is never required</span><span class="arrow" aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="answer" aria-labelledby="answer-title" id="answer" hidden>
+      <div class="overline">02 / YOUR LOCAL DRAFT</div>
+      <h2 id="answer-title">Your choice</h2>
+      <p id="door-question" class="question"></p>
+      <p id="door-explanation" class="muted"></p>
+      <label for="note">A short thought, if you want <span class="optional">(optional; only on this device)</span></label>
+      <textarea id="note" rows="3" maxlength="180" placeholder="A question or idea, not personal contact details."></textarea>
+      <p class="safety">Please don't type names, addresses, phone numbers, private needs, or other people's stories. This is not a secure intake system.</p>
+      <label class="check"><input type="checkbox" id="understand"> I understand this stays on my device unless I deliberately export and hand it to someone.</label>
+      <div class="actions">
+        <button type="button" id="save">Make a private, unsent note</button>
+        <button type="button" class="secondary" id="clear">Start over</button>
+      </div>
+      <div class="receipt" id="receipt" hidden aria-live="polite">
+        <strong>HELD ON THIS DEVICE · NOT SENT</strong>
+        <p id="receipt-message">You have not submitted anything. You can talk to the person who gave you this card, or choose to export the note yourself.</p>
+        <button type="button" id="download" class="secondary">Download my note (JSON)</button>
+        <button type="button" id="erase" class="quiet">Erase this note</button>
+      </div>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="boundary" aria-labelledby="boundary-title">
+      <div class="overline">03 / THE HUMAN PART</div>
+      <h2 id="boundary-title">The people do the work.</h2>
+      <p>This page cannot accept requests, coordinate volunteers, verify a delivery, publish music, or contact organizers. A real project would need its own people, permissions, contact method, and independent review.</p>
+      <div class="boundary-grid">
+        <p><strong>If you want to connect</strong><br>Talk directly with the person who shared this card.</p>
+        <p><strong>If you'd rather not</strong><br>That's a complete answer too.</p>
+      </div>
+      <p class="footnote">The Static Collective experimental field specimen. No Coalition, grocery, church, artist, or radio organization is represented or endorsed here.</p>
+    </section>
+
+    <details class="print-tools" id="operator">
+      <summary>Field steward: prepare a paper proof</summary>
+      <p>These printing controls are for an independently supervised test. They are not an approved event, network intake, or final public address. Print a plain proof anytime; a QR is withheld unless you attest to testing the exact hosted URL on a separate device.</p>
+      <label for="print-url">Exact address where this same page is hosted</label>
+      <input id="print-url" type="url" spellcheck="false" autocomplete="off" placeholder="https://your-reviewed-host.example/this-directory/">
+      <p class="small">Use the very page you're viewing, hosted over HTTPS. A private LAN HTTP test is marked local-only. A file:// URL or localhost viewed on a different phone is not a portable QR address.</p>
+      <label class="check"><input type="checkbox" id="operator-tested"> I personally opened this exact page address on another phone, checked the full page and its choices, and understand my checkbox is not independent certification.</label>
+      <label for="layout">Letter-size print layout</label>
+      <select id="layout"><option value="9">9-up: card-sized cutouts</option><option value="4">4-up: larger invitations</option></select>
+      <div class="actions"><button type="button" id="print">Prepare and print a test sheet</button></div>
+      <p id="print-status" class="message" aria-live="polite"></p>
+    </details>
+  </main>
+
+  <div class="print-sheet" id="print-sheet" aria-hidden="true"></div>
+  <footer class="site-footer">LIVING COMMONS / FIELD-028 <span>·</span> PROPOSAL ≠ ADMISSION <span>·</span> NO ACCOUNT NECESSARY</footer>
+</body>
+</html>
