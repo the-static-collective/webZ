@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   immutable-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 16
     steps:
       - uses: actions/checkout@v4
@@ -78,7 +78,7 @@ jobs:
             console.log("FIELD 028 immutable candidate: 6/6 original assets copied and source-bound");
           '
   mobile-browser:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
