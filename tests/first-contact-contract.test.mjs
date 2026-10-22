@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import {
   DOORS,PROJECT,PROJECT_ID,RETURN_SCHEMA,doorById,createLocalReturn,
   validateLocalReturn,publicDoorLink,printGate,readPublicDoor,paperCards
-} from "./core.mjs";
+} from "../field/first-contact/core.mjs";
 
 test("four understandable options and deliberately fictional first-contact framing",()=>{
   assert.deepEqual(DOORS.map(x=>x.id),["help","question","create","browse"]);
@@ -112,11 +112,11 @@ test("the three printable seed doors never include a private return or participa
   }
 });
 test("the document has true mobile, printable and account-free surfaces",()=>{
-  const html=readFileSync(new URL("./index.html",import.meta.url),"utf8");
-  const css=readFileSync(new URL("./style.css",import.meta.url),"utf8");
-  const app=readFileSync(new URL("./app.mjs",import.meta.url),"utf8");
-  const qr=readFileSync(new URL("./vendor/qrcode.min.js",import.meta.url),"utf8");
-  const license=readFileSync(new URL("./vendor/LICENSE.qrcodejs.txt",import.meta.url),"utf8");
+  const html=readFileSync(new URL("../field/first-contact/index.html",import.meta.url),"utf8");
+  const css=readFileSync(new URL("../field/first-contact/style.css",import.meta.url),"utf8");
+  const app=readFileSync(new URL("../field/first-contact/app.mjs",import.meta.url),"utf8");
+  const qr=readFileSync(new URL("../field/first-contact/vendor/qrcode.min.js",import.meta.url),"utf8");
+  const license=readFileSync(new URL("../field/first-contact/vendor/LICENSE.qrcodejs.txt",import.meta.url),"utf8");
   assert.match(html,/<meta name="viewport"/);
   assert.match(html,/No account/);
   assert.match(html,/not a live help service/);
