@@ -98,7 +98,7 @@ try:
         page.wait_for_function("window.__printed===2")
         assert page.locator(".print-sheet .print-card").count()==4
         expect(page.locator("#print-status")).to_contain_text("operator has attested")
-        assert page.locator(".print-sheet .print-qr canvas, .print-sheet .print-qr img").count()==4
+        assert all(card.locator(".print-qr canvas, .print-qr img").count()>=1 for card in page.locator(".print-sheet .print-card").all())
         for url_text in page.locator(".print-sheet .print-link").all_inner_texts():
             assert url_text.startswith(base+"#project="),url_text
             assert "note=" not in url_text and "chairs" not in url_text
