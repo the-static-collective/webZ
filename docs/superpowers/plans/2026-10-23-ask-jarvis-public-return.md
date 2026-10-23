@@ -31,9 +31,9 @@
 
 **Interfaces:** `assemble(question, fetcher, {kind})` retains v0 fields and adds `encounter`, `return`, `workbenchRequest`, `evidence`; `verifyReturn(data)` recomputes the exact evidence and compares visible return fields. Registry entries expose fixed commit-pinned source addresses.
 
-- [ ] Add failing tests for four return kinds, ambiguity, failures, byte hashes, evidence tampering, pinned URLs and input limits.
-- [ ] Implement deterministic encounters, bounded document adapters, structured drafts, complete evidence and draft-only handoff.
-- [ ] Run `node --test ask-jarvis/test/*.test.mjs`; expect zero failures; commit.
+- [x] Add failing tests for four return kinds, ambiguity, failures, byte hashes, evidence tampering, pinned URLs and input limits.
+- [x] Implement deterministic encounters, bounded document adapters, structured drafts, complete evidence and draft-only handoff.
+- [x] Run `node --test ask-jarvis/test/*.test.mjs`; expect zero failures; commit.
 
 ### Task 2: Retro response interface and playable songs
 
@@ -41,9 +41,9 @@
 
 **Interfaces:** UI consumes Task 1's verified contracts. `songWav(song)` produces a bounded PCM WAV ArrayBuffer from a validated melody. Local development server serves the same Worker API without Wrangler.
 
-- [ ] Add failing song and browser checks for all outputs, explicit return choices, edited drafts, audio/download, mobile layout, stale requests and error recovery.
-- [ ] Implement the return selector and response panel, source status rendering, exports, explicit audio and cancellation.
-- [ ] Run all Node tests and `python ask-jarvis/test/browser.py`; expect zero failures; inspect desktop/mobile screenshots; commit.
+- [x] Add failing song and browser checks for all outputs, explicit return choices, edited drafts, audio/download, mobile layout, stale requests and error recovery.
+- [x] Implement the return selector and response panel, source status rendering, exports, explicit audio and cancellation.
+- [x] Run all Node tests and `python ask-jarvis/test/browser.py`; expect zero failures; inspect desktop/mobile screenshots; commit.
 
 ### Task 3: Reviewable release
 
@@ -51,7 +51,7 @@
 
 **Interfaces:** Existing Vercel and Cloudflare adapters use the same assembly path. Release notes identify actual verified behavior and remaining local Workbench bridge.
 
-- [ ] Run repository tests and package syntax checks; record actual counts.
-- [ ] Review the full branch with a fresh reviewer; resolve material findings and verify fixes.
-- [ ] Commit documentation, push the isolated feature branch and open a draft PR against the existing Ask JAR;VIS branch.
-- [ ] Prepare and smoke-test a separate preview if hosting access is available; record its actual URL. Do not promote production.
+- [x] Run repository tests and package syntax checks; record actual counts.
+- [x] Review the full branch with a fresh reviewer; resolve material findings and verify fixes.
+- [x] Commit documentation, push the isolated feature branch and open a draft PR against the existing Ask JAR;VIS branch.
+- [x] Prepare and smoke-test a separate preview if hosting access is available; record its actual URL. Do not promote production.
