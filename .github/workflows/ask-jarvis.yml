@@ -24,7 +24,9 @@ jobs:
           node --check ask-jarvis/src/worker.mjs
           node --check ask-jarvis/public/app.mjs
       - name: Verify actual Worker contract
-        run: node --test ask-jarvis/test/*.test.mjs
+        run: node --test ask-jarvis/test/worker.test.mjs
+      - name: Smoke hosted 1999 question-to-artifact proof
+        run: node ask-jarvis/test/smoke-preview.mjs
       - name: Assert no production cutover
         run: |
           node --input-type=module -e 'import fs from "node:fs"; const c=JSON.parse(fs.readFileSync("ask-jarvis/wrangler.jsonc","utf8"));if(c.routes||c.route)process.exit(1); if(c.assets?.directory!=="./public")process.exit(1);'
