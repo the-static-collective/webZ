@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="description" content="Read-only evidence and invitation table for Ask JAR;VIS returns.">
+<title>THE FEAST RETURNS — Ask JAR;VIS × TABLElogic</title>
+<link rel="stylesheet" href="/table/style.css"><script type="module" src="/table/app.mjs"></script></head>
+<body><main>
+<div class="top">ASK JAR;VIS! / THE STATIC COLLECTIVE <span class="hold">HOUSE-004 / HOLD</span></div>
+<header><div class="ornament">✳</div><div><div class="kicker">THE HOUSE TAKES ATTENDANCE</div><h1>The <em>Feast</em> Returns.</h1>
+<p class="lede">One question. One useful return. An optional look beneath the tablecloth. The native machinery remains independent, and the people still decide.</p></div></header>
+<section class="card"><h2>01 / Bring your public return</h2>
+<p>On <a href="/">Ask JAR;VIS</a>, ask a question and save its <strong>complete JSON receipt</strong> under “Look under the bonnet.” Open that file here to inspect the original source evidence, even if no native integration has run.</p>
+<label for="public-receipt">Original unsigned Ask JAR;VIS receipt (.json)</label><input type="file" id="public-receipt" accept=".json,application/json">
+<p id="public-status" class="muted" role="status">Nothing loaded. No file is uploaded or sent to any server.</p>
+<div id="public-output" hidden><h3 id="public-kind"></h3><pre id="public-body"></pre><div id="public-sources" class="small"></div></div></section>
+<section class="card"><h2>02 / Optional native inspection</h2>
+<p>If you've separately run the source-pinned TABLElogic HOUSE-004 ceremony, open its paired <strong>feast JSON</strong> here. The app checks the local digests and exact question relationship, but <strong>does not authenticate the producer or reverify native signatures.</strong></p>
+<label for="native-receipt">Optional HOUSE-004 original+native pairing (.json)</label><input type="file" id="native-receipt" accept=".json,application/json">
+<p id="native-status" class="muted" role="status">No original native HOUSE execution claimed.</p>
+<div id="native-output" hidden><h3>Distinct readings and possible review doors</h3>
+<p>These candidates are hypothetical review opportunities. Nobody has been invited, contacted, or authorized to act.</p>
+<div id="readings" class="small"></div><div id="invites" class="invites"></div></div></section>
+<section class="card"><h2>03 / Choose what to carry</h2>
+<p>A review choice stays in this browser and is exported only if you request it. It is <strong>not</strong> a permission grant, an email, a registration or a real invitation.</p>
+<div class="buttons"><button type="button" id="keep">Keep as a question</button><button type="button" id="inspect" disabled>Inspect selected possibility</button><button type="button" id="decline" disabled>Decline selected possibility</button></div>
+<p id="choice-status" class="muted" role="status">No local choice recorded.</p>
+<button type="button" id="export" disabled>↓ Save unsigned local note</button>
+</section>
+<section class="card example"><h2>Not running native code?</h2><p>That's fine. The public question cards, editable invitations, source-document doors and little songs already work independently. <a href="/">Return to the question machine</a>. TABLElogic is an optional transparent research layer, not a prerequisite for using Abundent.</p></section>
+<footer>ORIGINAL WORDS ≠ MACHINE INTERPRETATION · SOURCE ≠ RUNNING ORGAN · POSSIBILITY ≠ CONSENT · HOLD ≠ ADMIT<br>
+No accounts, background execution, media upload, API calls or browser storage in this page. Local digest verification does not prove authorship or validate CANNON/reLATTE signatures. <a href="https://github.com/the-static-collective/TABLElogic/pull/4">Source and research boundary</a>.</footer>
+</main></body></html>
