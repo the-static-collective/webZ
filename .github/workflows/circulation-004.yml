@@ -5,6 +5,7 @@ on:
       - 'circulation/004/**'
       - 'circulation/003/packet.mjs'
       - 'tests/circulation-004.test.mjs'
+      - 'tests/circulation-004-browser.py'
       - 'scripts/build-release.mjs'
       - '.github/workflows/circulation-004.yml'
   workflow_dispatch:
@@ -20,6 +21,15 @@ jobs:
           node-version: '22'
       - name: Source-owned Pando round trip and refusal checks
         run: node --test tests/circulation-004.test.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser test tooling
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Exercise the actual mobile browser round trip
+        run: python tests/circulation-004-browser.py
       - name: Existing static field regressions
         run: npm test
       - name: Verify field provenance
