@@ -7,6 +7,7 @@ const steps=document.querySelector("#steps");
 const reply=document.querySelector("#reply");
 const sources=document.querySelector("#sources");
 let last=null;
+let machineRun=0;
 function el(tag,cls,value){
   const item=document.createElement(tag);
   if(cls)item.className=cls;
@@ -32,7 +33,14 @@ function show(data){
   last=data;
   document.querySelector("#mode").textContent="LIVE READ-ONLY SOURCE CHECK";
   document.querySelector("#asked").textContent=data.question;
-  steps.replaceChildren(...data.steps.map(statusStep));
+  const thisRun=++machineRun;
+  steps.replaceChildren();
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  data.steps.forEach((step,index)=>setTimeout(()=>{
+    if(thisRun!==machineRun)return;
+    steps.append(statusStep(step));
+    if(index===data.steps.length-1)reply.hidden=false;
+  },reduced?0:index*115));
   document.querySelector("#answer").textContent=data.guidance;
   document.querySelector("#next-question").textContent=data.nextQuestion;
   document.querySelector("#hash").textContent="Return receipt: "+data.receiptHash;
@@ -46,7 +54,6 @@ function show(data){
     if(s.sha256)li.append(el("small","",s.sha256));
     sources.append(li);
   });
-  reply.hidden=false;
   document.querySelector("#download").disabled=false;
 }
 document.querySelector("#ask-next").addEventListener("click",()=>{
@@ -64,6 +71,7 @@ form.addEventListener("submit",async event=>{
   const question=input.value.trim();
   if(question.length<8||question.length>360){input.setCustomValidity("Please use 8–360 characters.");input.reportValidity();return;}
   input.setCustomValidity("");
+  ++machineRun;
   ask.disabled=true;ask.textContent="Tuning the machine…";
   results.hidden=false;reply.hidden=true;steps.replaceChildren(statusStep({name:"JAR;VIS",status:"DONE",detail:"Requesting a read-only source inspection…"}));
   document.querySelector("#mode").textContent="WORKING…";
