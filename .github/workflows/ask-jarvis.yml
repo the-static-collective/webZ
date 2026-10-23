@@ -1,7 +1,7 @@
 name: Ask JAR;VIS - public return contract
 on:
   push:
-    branches: [feature/ask-jarvis-1999, feature/ask-jarvis-public-return-002]
+    branches: [feature/ask-jarvis-1999, feature/ask-jarvis-public-return-002, feature/ask-jarvis-feast-004]
     paths:
       - 'ask-jarvis/**'
       - '.github/workflows/ask-jarvis.yml'
