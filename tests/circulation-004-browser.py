@@ -47,8 +47,9 @@ try:
         assert exported["receipt"]["recipientVerified"] is False
         assert exported["receipt"]["organizerAdopted"] is False
         assert exported["receipt"]["outcome"]=="NO_REAL_WORLD_OUTCOME_CLAIMED"
-        assert exported["exercise"]["invitations"][0]["witness"]=="LOCAL_SIMULATION_ONLY"
-        assert exported["exercise"]["invitations"][1]["status"]=="DECLINE"
+        by_lane={row["lane"]:row for row in exported["exercise"]["invitations"]}
+        assert by_lane["table"]["witness"]=="LOCAL_SIMULATION_ONLY"
+        assert by_lane["network"]["status"]=="DECLINE"
         assert page.evaluate("localStorage.length===0 && sessionStorage.length===0")
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
 
