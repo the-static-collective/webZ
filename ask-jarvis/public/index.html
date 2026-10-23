@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#dcebf6"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Ask JAR;VIS one question. Watch a small, honest machine inspect its public roots and return a useful next step.">
+<title>ask JAR;VIS! — The Question Machine (1999-ish)</title>
+<link rel="stylesheet" href="/style.css"><script type="module" src="/app.mjs"></script>
+</head>
+<body>
+<div class="ticker" aria-hidden="true"><span>◈ THE WORLD WIDE WEB OF WORLDS ◈ &nbsp;&nbsp; QUESTIONS WELCOME &nbsp;&nbsp; ◈ CONSTRUCTIVE CURIOSITY SINCE THE END OF TIME ◈</span></div>
+<main class="page">
+<div class="topline"><span>THE STATIC COLLECTIVE PRESENTS</span><span class="right">BEST VIEWED WITH CURIOSITY • GENESIS 001</span></div>
+<header class="mast">
+  <div class="mascot" aria-hidden="true"><div class="halo">✳</div><div class="head"><span class="eyes">◉ ◉</span><span class="mouth">└──┘</span></div><div class="tie">◆</div></div>
+  <div class="mastwords"><div class="stamp">YOUR FRIENDLY NEIGHBORHOOD QUESTION ENGINE</div>
+    <h1><span class="ask">ask</span> <span class="brand">JAR<span class="colon">;</span>VIS<span class="bang">!</span></span></h1>
+    <p class="tagline">The Internet is a very big place. <em>You only need one question.</em></p></div>
+</header>
+<div class="strip"><span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> READ-ONLY FIELD EXPERIMENT <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
+<section class="askbox" aria-label="Ask JAR;VIS">
+  <h2>What would you like to make possible?</h2>
+  <p>Go ahead. Ask something wonderfully specific, or ridiculously big.</p>
+  <form id="question-form">
+    <label class="visually-hidden" for="question">Your question</label>
+    <textarea id="question" name="question" rows="3" maxlength="360" minlength="8" required autofocus placeholder="How could we help neighbors share extra garden produce?"></textarea>
+    <div class="formend"><span class="small">8–360 characters. No personal contact details, please.</span>
+      <button id="ask" class="bigbutton" type="submit"><span aria-hidden="true">✳</span> Ask JAR;VIS! <span aria-hidden="true">➜</span></button></div>
+  </form>
+  <div class="samples"><span>Try one:</span>
+    <button type="button" data-example="How could neighbors share extra garden produce?">garden produce</button>
+    <button type="button" data-example="Can we make a printable invitation to an arts gathering?">arts gathering</button>
+    <button type="button" data-example="Where should I start exploring the Static Collective code?">explore the code</button></div>
+</section>
+<section id="results" class="results" hidden aria-live="polite">
+ <div class="result-title"><span>☞</span> THE QUESTION MACHINE <small id="mode"></small></div>
+ <div class="machine-intro">You asked: <strong id="asked"></strong></div>
+ <ol id="steps" class="steps"></ol>
+ <div id="reply" class="reply" hidden>
+   <div class="ribbon">A RESPONSE FROM THE MACHINE</div>
+   <h2>Here's what actually happened.</h2><p id="answer"></p>
+   <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
+   <div class="next"><span>THE NEXT QUESTION</span><p id="next-question"></p><button id="ask-next" type="button">Ask this next ➜</button></div>
+   <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>A printable question-card text artifact, with source links and a verifiable digest.</p><button type="button" id="download">↓ Save question card (.txt)</button><button type="button" id="print">Print this page</button></div></div>
+   <details class="receipt"><summary>View exact return receipt</summary><p id="hash"></p><p>SHA-256 identifies the response evidence. It does not prove real-world consent, authority, or outcomes.</p></details>
+ </div>
+</section>
+<section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ This is a real source-inspection machine, not yet a general-purpose autonomous agent. It reads selected public project documents, builds a bounded provenance trail, and drafts a question card. It does <strong>not</strong> run OpenManus, authorize CANNON actions, match people, or claim partnerships.</p></section>
+<footer><span>© 1999–2026 • THE STATIC COLLECTIVE • BUILT FOR THE QUESTION THAT HASN'T BEEN ASKED YET</span><br><a href="https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/">the old garden (preserved Vercel release)</a> · <a href="https://github.com/the-static-collective/webZ">the source</a> · <span>NO COOKIES • NO ACCOUNTS • NO QUESTION STORAGE</span></footer>
+</main>
+</body></html>
