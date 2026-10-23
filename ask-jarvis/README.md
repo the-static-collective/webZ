@@ -57,3 +57,7 @@ No auto-execution, real partner contact, real CANNON attestation, or OpenManus d
 GitHub source: https://github.com/the-static-collective/webZ/tree/feature/ask-jarvis-1999/ask-jarvis
 
 **AN OBSERVED SOURCE ≠ A RUNNING PROJECT. A HASH ≠ CONSENT. A PROPOSAL ≠ AUTHORITY.**
+
+## Interactive game doors: Tomorrow 001 → 002 (live)
+
+The original 1999 question machine remains the homepage. The **fully fictional, source-first game** at https://abundent.org/games/tomorrow/ is a paper-or-browser murder mystery in which no one was murdered. Solving the case opens a Question Key maker requiring three distinct clues; that local game key opens the **Town That Waits** at https://abundent.org/games/tomorrow/town/ . The town features a real, unmodified **Full Measure Alchematrix-001 experimental reducer**, pinned to donor source, with deterministic fictional crafting and a new explorable room projected from the actual in-game opening. It imports no external identities or canonical Full Measure authority. Details, provenance, and tests: [Tomorrow 002 README](public/games/tomorrow/README.md); active alias and rollback: [Release Ledger](RELEASE-2026-10-23.md).
