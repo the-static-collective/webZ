@@ -1,0 +1,38 @@
+name: CIRCULATION-004 Pando field-lab proof
+on:
+  pull_request:
+    paths:
+      - 'circulation/004/**'
+      - 'circulation/003/packet.mjs'
+      - 'tests/circulation-004.test.mjs'
+      - 'scripts/build-release.mjs'
+      - '.github/workflows/circulation-004.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pando-local-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Source-owned Pando round trip and refusal checks
+        run: node --test tests/circulation-004.test.mjs
+      - name: Existing static field regressions
+        run: npm test
+      - name: Verify field provenance
+        run: npm run field:verify
+      - name: Build immutable public release
+        run: npm run build
+      - name: Verify release hashes
+        run: node scripts/verify-release.mjs dist
+      - name: Check source-exact exported field lab
+        run: |
+          test -s dist/circulation/004/index.html
+          test -s dist/circulation/004/style.css
+          test -s dist/circulation/004/app.mjs
+          test -s dist/circulation/004/model.mjs
+          test -s dist/circulation/003/packet.mjs
+          git diff --exit-code -- sw.js
