@@ -1,7 +1,7 @@
-name: Ask JAR;VIS - deterministic source-first contract
+name: Ask JAR;VIS - public return contract
 on:
   push:
-    branches: [feature/ask-jarvis-1999]
+    branches: [feature/ask-jarvis-1999, feature/ask-jarvis-public-return-002]
     paths:
       - 'ask-jarvis/**'
       - '.github/workflows/ask-jarvis.yml'
@@ -18,15 +18,21 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
       - name: Verify bounded Worker and front-end syntax
         run: |
           node --version
           node --check ask-jarvis/src/worker.mjs
           node --check ask-jarvis/public/app.mjs
       - name: Verify actual Worker contract
-        run: node --test ask-jarvis/test/worker.test.mjs
-      - name: Smoke hosted 1999 question-to-artifact proof
-        run: node ask-jarvis/test/smoke-preview.mjs
+        run: node --test ask-jarvis/test/*.test.mjs
+      - name: Exercise desktop and mobile return flow with synthetic source fixtures
+        run: |
+          python -m pip install -r tests/requirements.txt
+          python -m playwright install --with-deps chromium
+          python ask-jarvis/test/browser.py
       - name: Assert no production cutover
         run: |
           node --input-type=module -e 'import fs from "node:fs"; const c=JSON.parse(fs.readFileSync("ask-jarvis/wrangler.jsonc","utf8"));if(c.routes||c.route)process.exit(1); if(c.assets?.directory!=="./public")process.exit(1);'

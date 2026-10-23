@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
-const host=process.env.ASK_JARVIS_TEST_HOST||"https://ask-jarvis-1999-preview.vercel.app";
+import {verifyReturn} from '../public/evidence.mjs';
+const host=process.env.ASK_JARVIS_TEST_HOST;
+if(!host)throw Error('Set ASK_JARVIS_TEST_HOST to the exact preview URL to verify.');
 const health=await fetch(new URL("/api/health",host),{signal:AbortSignal.timeout(12000)});
 assert.equal(health.status,200,"Hosted health route must respond");
 const h=await health.json();
 assert.equal(h.ok,true);
+assert.equal(h.release,'public-return-002');
 const answer=await fetch(new URL("/api/ask",host),{
   method:"POST",
   headers:{"content-type":"application/json"},
@@ -17,4 +20,7 @@ assert.equal(data.sources.length,3);
 assert.ok(data.steps.find(s=>s.name==="OpenManus / ELF"&&s.status==="NOT_RUN"));
 assert.ok(data.receiptHash.startsWith("sha256:"));
 assert.ok(data.artifact.includes("Question: How could neighbors share"));
+assert.equal(await verifyReturn(data),true);
+assert.equal(data.return.kind,'question');
+assert.equal(data.workbenchRequest.dispatch,'MANUAL_EXPORT_ONLY');
 console.log(JSON.stringify({host,schema:data.schema,sourceStates:data.sources.map(s=>({name:s.name,status:s.status})),receipt:data.receiptHash},null,2));

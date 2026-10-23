@@ -1,0 +1,21 @@
+{
+  "browser": "151.0.7922.34",
+  "sourceMode": "SYNTHETIC_TEST_FIXTURES",
+  "checks": [
+    "four returns",
+    "explicit selection",
+    "exports",
+    "edited draft separation",
+    "WAV playback and download",
+    "audio cleanup",
+    "injection",
+    "input recovery",
+    "network recovery",
+    "stale reply cancellation",
+    "tampered receipt refusal",
+    "protected preview authentication",
+    "320px layout",
+    "no storage or external browser requests"
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,75 @@
+{
+  "host": "ask-jarvis-1999-preview-92ki219rf-theotherlucasv-1250s-projects.vercel.app",
+  "mode": "ACTUAL_HOSTED_SOURCE_READS",
+  "returns": [
+    {
+      "kind": "question",
+      "sources": [
+        {
+          "name": "planZ",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "CANNON",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "GHoT",
+          "status": "INSPECTED"
+        }
+      ]
+    },
+    {
+      "kind": "invitation",
+      "sources": [
+        {
+          "name": "reLATTE",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "CANNON",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "GHoT",
+          "status": "INSPECTED"
+        }
+      ]
+    },
+    {
+      "kind": "door",
+      "sources": [
+        {
+          "name": "CANNON",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "GHoT",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "JAR;VIS",
+          "status": "INSPECTED"
+        }
+      ]
+    },
+    {
+      "kind": "song",
+      "sources": [
+        {
+          "name": "GHoT",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "planZ",
+          "status": "INSPECTED"
+        },
+        {
+          "name": "CANNON",
+          "status": "INSPECTED"
+        }
+      ]
+    }
+  ],
+  "pageErrors": []
+}

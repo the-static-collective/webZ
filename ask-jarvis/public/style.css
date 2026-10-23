@@ -28,3 +28,21 @@ footer{font:10px/2 "Courier New",monospace;text-align:center;color:#607592;paddi
 
 @keyframes domino-in{from{opacity:0;transform:translateY(-8px) rotate(-2deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
 @media(prefers-reduced-motion:no-preference){.steps li{animation:domino-in .25s ease-out both}}
+
+[hidden]{display:none!important}
+select{font:12px Georgia,serif;color:#1b2f52;background:#fff;border:2px inset #a0a9bd;padding:7px;max-width:100%}
+.return-choice{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font:12px Georgia,serif;color:#52698b}
+.return-card{border:3px double #d0b573;background:#fffdf1;margin:20px 0;padding:19px}
+.return-card h3{border:0;padding:0;font:bold 23px Georgia,serif;margin:10px 0;color:#1a4b47}
+#return-body{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.7 Georgia,serif}
+#invitation-tools{margin-top:20px;border-top:1px dashed #b6ad8c;padding-top:15px}
+#invitation-tools label{display:block;margin-bottom:8px;font:bold 13px Georgia,serif}
+#invitation-editor{font:14px/1.6 Georgia,serif;min-height:270px}
+#draft-status{font:11px/1.5 Verdana,sans-serif;color:#865d2c}
+.reply button{font:12px Georgia,serif;background:#f4f2db;border:2px outset #b7b29f;padding:8px 10px;margin:4px 6px 4px 0;color:#1d4471}
+#song-audio{display:block;width:100%;max-width:380px;margin:15px 0}
+.sources,.receipt{overflow-wrap:anywhere}.step-body{min-width:0}.status{flex-shrink:0}
+.receipt details{margin-top:15px}.receipt li{margin:9px 0;line-height:1.6}.receipt p{word-break:normal;overflow-wrap:anywhere}
+button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #c18417;outline-offset:3px}
+@media(max-width:650px){.return-choice{align-items:stretch;flex-direction:column}.return-card{padding:12px}.steps{padding:10px 8px}.steps li{gap:6px}.step-body b{font-size:11px}.status{font-size:9px}.artifact{display:block}.sheet-icon{display:none}}
+@media print{.return-choice,#song-tools,#invitation-tools,.receipt,.reply button{display:none!important}.return-card{break-inside:avoid}.reply{padding:0}.results{display:block!important}.reply{display:block!important}}

@@ -1,90 +1,132 @@
-// One box. An inspectable source-native return. No local or remote question persistence.
-const form=document.querySelector("#question-form");
-const input=document.querySelector("#question");
-const ask=document.querySelector("#ask");
-const results=document.querySelector("#results");
-const steps=document.querySelector("#steps");
-const reply=document.querySelector("#reply");
-const sources=document.querySelector("#sources");
-let last=null;
-let machineRun=0;
-function el(tag,cls,value){
-  const item=document.createElement(tag);
-  if(cls)item.className=cls;
-  if(value!==undefined)item.textContent=value;
-  return item;
+import {verifyReturn} from './evidence.mjs';
+import {songWav} from './song.mjs';
+
+const $ = selector=>document.querySelector(selector);
+const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
+const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
+let last=null, run=0, active=null, audioUrl=null, wav=null;
+
+function el(tag,cls,value) {
+  const node=document.createElement(tag);
+  if(cls)node.className=cls;
+  if(value!==undefined)node.textContent=value;
+  return node;
 }
-function statusStep(step){
-  const li=el("li");
-  const mark=el("span","step-mark",step.status==="DONE"?"◉":step.status==="READ"?"✓":step.status==="HOLD"?"◌":"·");
-  const body=el("div","step-body");
-  body.append(el("b","",step.name),el("small","",step.detail));
-  const state=el("span","status"+(step.status==="HOLD"||step.status==="NOT_RUN"?" hold":""),step.status);
-  li.append(mark,body,state);
+function statusStep(step) {
+  const li=el('li'),body=el('div','step-body');
+  body.append(el('b','',step.name),el('small','',step.detail));
+  li.append(el('span','step-mark',step.status==='DONE'?'◉':step.status==='READ'?'✓':'·'),body,
+    el('span','status'+(['HOLD','NOT_RUN','UNSIGNED','PREPARED'].includes(step.status)?' hold':''),step.status));
   return li;
 }
-function download(name,data,type){
-  const object=URL.createObjectURL(new Blob([data],{type}));
-  const a=document.createElement("a");a.href=object;a.download=name;
-  document.body.append(a);a.click();a.remove();
+function cleanAudio() {
+  audio.pause();audio.removeAttribute('src');audio.load();
+  if(audioUrl)URL.revokeObjectURL(audioUrl);
+  audioUrl=null;wav=null;
+}
+function clearReturn() {
+  last=null;reply.hidden=true;cleanAudio();
+  $('#invitation-editor').value='';$('#return-body').textContent='';
+  $('#return-doors').replaceChildren();$('#encounter-gaps').replaceChildren();
+}
+function invalidate() {
+  ++run;active?.abort();active=null;clearReturn();results.hidden=true;
+  ask.disabled=false;ask.textContent='✳ Ask JAR;VIS! ➜';
+}
+function download(name,body,type='text/plain;charset=utf-8') {
+  const object=URL.createObjectURL(new Blob([body],{type}));
+  const a=el('a');a.href=object;a.download=name;document.body.append(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(object),1000);
 }
-function show(data){
-  last=data;
-  document.querySelector("#mode").textContent="LIVE READ-ONLY SOURCE CHECK";
-  document.querySelector("#asked").textContent=data.question;
-  const thisRun=++machineRun;
-  steps.replaceChildren();
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  data.steps.forEach((step,index)=>setTimeout(()=>{
-    if(thisRun!==machineRun)return;
-    steps.append(statusStep(step));
-    if(index===data.steps.length-1)reply.hidden=false;
-  },reduced?0:index*115));
-  document.querySelector("#answer").textContent=data.guidance;
-  document.querySelector("#next-question").textContent=data.nextQuestion;
-  document.querySelector("#hash").textContent="Return receipt: "+data.receiptHash;
-  sources.replaceChildren();
-  data.sources.forEach(s=>{
-    const li=el("li"); const a=el("a","",s.name+" — "+s.status);
-    if(s.source.startsWith("https://raw.githubusercontent.com/the-static-collective/")){
-      a.href=s.source;a.target="_blank";a.rel="noopener noreferrer";
-    }else a.removeAttribute("href");
-    li.append(a,el("small","",s.role+" / "+s.title));
-    if(s.sha256)li.append(el("small","",s.sha256));
-    sources.append(li);
-  });
-  document.querySelector("#download").disabled=false;
+function sourceLink(label,url) {
+  const a=el('a','',label);
+  if(/^https:\/\/(?:raw\.githubusercontent\.com|github\.com)\/the-static-collective\/[A-Za-z0-9-]+\/(?:blob\/)?[a-f0-9]{40}\/[A-Za-z0-9./-]+$/.test(url)) {
+    a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
+  }
+  return a;
 }
-document.querySelector("#ask-next").addEventListener("click",()=>{
-  if(!last)return;input.value=last.nextQuestion;results.hidden=true;reply.hidden=true;input.focus();window.scrollTo({top:0,behavior:"smooth"});
+function show(data) {
+  if(!Array.isArray(data.sources)||!Array.isArray(data.steps)||!Array.isArray(data.encounter?.gaps)||!['question','invitation','door','song'].includes(data.return?.kind))throw Error('Unexpected return format.');
+  const returned=data.return;
+  $('#asked').textContent=data.question;
+  $('#mode').textContent='SOURCE CHECK + LOCAL DRAFT';
+  steps.replaceChildren(...data.steps.map(statusStep));
+  $('#answer').textContent=data.guidance;
+  $('#return-label').textContent={question:'A QUESTION CARD',invitation:'AN INVITATION DRAFT',door:'A POSSIBLE DOOR',song:'OR SIMPLY A SONG'}[returned.kind];
+  $('#return-title').textContent=returned.title;$('#return-body').textContent=returned.body;
+  $('#return-doors').replaceChildren(...returned.doors.map(d=>{
+    const li=el('li');li.append(sourceLink('Open '+d.name+' →',d.url));return li;
+  }));
+  $('#invitation-tools').hidden=returned.kind!=='invitation';
+  if(returned.kind==='invitation') {
+    $('#invitation-editor').value=returned.body;
+    $('#draft-status').textContent='Original unsigned draft · edit before sharing.';
+  }
+  $('#song-tools').hidden=returned.kind!=='song';
+  if(returned.kind==='song') {
+    wav=songWav(returned.song);audioUrl=URL.createObjectURL(new Blob([wav],{type:'audio/wav'}));audio.src=audioUrl;
+  }
+  sources.replaceChildren(...data.sources.map(s=>{
+    const li=el('li');
+    li.append(sourceLink(s.name+' — '+s.status,s.source),el('small','',s.role+' / '+s.title),el('small','',s.excerpt));
+    if(s.sha256)li.append(el('small','',s.sha256));
+    return li;
+  }));
+  $('#next-question').textContent=data.nextQuestion;
+  $('#hash').textContent='Return receipt: '+data.receiptHash;
+  $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
+  $('#encounter-gaps').replaceChildren(...data.encounter.gaps.map(g=>el('li','',g)));
+  last=data;reply.hidden=false;
+}
+
+input.addEventListener('input',()=>{input.setCustomValidity('');invalidate();});
+kind.addEventListener('change',invalidate);
+$('#invitation-editor').addEventListener('input',()=>{
+  $('#draft-status').textContent='Edited unsigned draft · saved separately from the original receipt.';
 });
-document.querySelector("#download").addEventListener("click",()=>{
-  if(last)download("ask-jarvis-question-card.txt",last.artifact,"text/plain;charset=utf-8");
+$('#download-edited').addEventListener('click',()=>{
+  if(last?.return.kind==='invitation')download('jarvis-my-invitation.txt','Edited unsigned draft — your local revision; no original receipt applies.\n\n'+$('#invitation-editor').value);
 });
-document.querySelector("#print").addEventListener("click",()=>window.print());
-document.querySelectorAll("[data-example]").forEach(btn=>btn.addEventListener("click",()=>{
-  input.value=btn.dataset.example;input.focus();
+$('#download-song').addEventListener('click',()=>{if(wav)download('jarvis-original-sketch.wav',wav,'audio/wav');});
+$('#download').addEventListener('click',()=>{if(last)download('ask-jarvis-'+last.return.kind+'.txt',last.artifact);});
+$('#download-receipt').addEventListener('click',()=>{if(last)download('jarvis-return-receipt.json',JSON.stringify(last,null,2),'application/json');});
+$('#download-handoff').addEventListener('click',()=>{if(last)download('jarvis-workbench-request.json',JSON.stringify(last.workbenchRequest,null,2),'application/json');});
+$('#print').addEventListener('click',()=>{if(last)window.print();});
+$('#ask-next').addEventListener('click',()=>{
+  if(!last)return;const next=last.nextQuestion;invalidate();input.value=next;kind.value='auto';input.setCustomValidity('');input.focus();window.scrollTo({top:0,behavior:'smooth'});
+});
+document.querySelectorAll('[data-example]').forEach(btn=>btn.addEventListener('click',()=>{
+  invalidate();input.value=btn.dataset.example;kind.value='auto';input.setCustomValidity('');input.focus();
 }));
-form.addEventListener("submit",async event=>{
+window.addEventListener('pagehide',()=>{invalidate();});
+
+form.addEventListener('submit',async event=>{
   event.preventDefault();
-  const question=input.value.trim();
-  if(question.length<8||question.length>360){input.setCustomValidity("Please use 8–360 characters.");input.reportValidity();return;}
-  input.setCustomValidity("");
-  ++machineRun;
-  ask.disabled=true;ask.textContent="Tuning the machine…";
-  results.hidden=false;reply.hidden=true;steps.replaceChildren(statusStep({name:"JAR;VIS",status:"DONE",detail:"Requesting a read-only source inspection…"}));
-  document.querySelector("#mode").textContent="WORKING…";
-  document.querySelector("#asked").textContent=question;
-  results.scrollIntoView({behavior:"smooth",block:"start"});
-  try{
-    const reply=await fetch("/api/ask",{method:"POST",headers:{"content-type":"application/json","accept":"application/json"},body:JSON.stringify({question}),cache:"no-store",credentials:"omit"});
-    let data;try{data=await reply.json();}catch{throw Error("The hosted question engine is not connected here yet. This is only the front-end shell.");}
-    if(!reply.ok)throw Error(data.error||"The machine declined this input.");
-    if(data.schema!=="ask-jarvis/return-v0"||!Array.isArray(data.steps))throw Error("Unexpected engine reply.");
+  const question=input.value, chosen=kind.value;
+  if(question.trim().length<8||question.length>360) {
+    input.setCustomValidity('Please use 8–360 characters.');input.reportValidity();return;
+  }
+  input.setCustomValidity('');invalidate();
+  const thisRun=run,controller=new AbortController();active=controller;
+  const timer=setTimeout(()=>controller.abort(),12000);
+  ask.disabled=true;ask.textContent='Tuning the machine…';results.hidden=false;
+  $('#mode').textContent='WORKING…';$('#asked').textContent=question;
+  steps.replaceChildren(statusStep({name:'JAR;VIS',status:'PREPARED',detail:'Checking fixed source documents and composing your return…'}));
+  results.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+  try {
+    const response=await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({question,kind:chosen}),cache:'no-store',credentials:'same-origin',signal:controller.signal});
+    let data;try{data=await response.json();}catch{throw Error('The question engine could not return a readable result. Please try again.');}
+    if(!response.ok)throw Error(data.error||'The machine declined this input.');
+    if(data.encounter?.signal!==question||!await verifyReturn(data))throw Error('The return receipt did not verify. No artifact is being claimed.');
+    if(thisRun!==run)return;
     show(data);
-  }catch(error){
-    steps.replaceChildren(statusStep({name:"HOLD",status:"HOLD",detail:error.message||"Cannot confirm a live machine response."}));
-    document.querySelector("#mode").textContent="NO RESULT CLAIMED";
-  }finally{ask.disabled=false;ask.textContent="✳ Ask JAR;VIS! ➜";}
+  } catch(error) {
+    if(thisRun!==run)return;
+    clearReturn();
+    steps.replaceChildren(statusStep({name:'HOLD',status:'HOLD',detail:controller.signal.aborted?'The machine took too long. Please try again.':error.message||'Cannot confirm a machine response.'}));
+    $('#mode').textContent='NO RESULT CLAIMED';
+  } finally {
+    clearTimeout(timer);
+    if(thisRun===run){active=null;ask.disabled=false;ask.textContent='✳ Ask JAR;VIS! ➜';}
+  }
 });
