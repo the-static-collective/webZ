@@ -1,0 +1,27 @@
+name: ASK JARVIS listening table 002 (source-only)
+on:
+  pull_request:
+  push:
+    branches:
+      - feature/ask-jarvis-listening-table-002
+permissions:
+  contents: read
+jobs:
+  source-only-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test original Ask JAR;VIS and new offline table
+        run: cd ask-jarvis && npm test
+      - name: Confirm no extra HTTP API or prod mutations
+        run: |
+          test -f ask-jarvis/public/table/index.html
+          test -f ask-jarvis/public/table/app.mjs
+          test -f ask-jarvis/public/table/style.css
+          grep -q 'experimental listening table' ask-jarvis/public/index.html
+          grep -q 'default-src' ask-jarvis/vercel.json
