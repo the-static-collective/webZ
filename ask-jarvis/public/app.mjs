@@ -102,8 +102,8 @@ window.addEventListener('pagehide',()=>{invalidate();});
 
 form.addEventListener('submit',async event=>{
   event.preventDefault();
-  const question=input.value.trim(), chosen=kind.value;
-  if(question.length<8||question.length>360) {
+  const question=input.value, chosen=kind.value;
+  if(question.trim().length<8||question.length>360) {
     input.setCustomValidity('Please use 8–360 characters.');input.reportValidity();return;
   }
   input.setCustomValidity('');invalidate();
@@ -114,10 +114,10 @@ form.addEventListener('submit',async event=>{
   steps.replaceChildren(statusStep({name:'JAR;VIS',status:'PREPARED',detail:'Checking fixed source documents and composing your return…'}));
   results.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   try {
-    const response=await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({question,kind:chosen}),cache:'no-store',credentials:'omit',signal:controller.signal});
+    const response=await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({question,kind:chosen}),cache:'no-store',credentials:'same-origin',signal:controller.signal});
     let data;try{data=await response.json();}catch{throw Error('The question engine could not return a readable result. Please try again.');}
     if(!response.ok)throw Error(data.error||'The machine declined this input.');
-    if(data.question!==question.replace(/\s+/g,' ')||!await verifyReturn(data))throw Error('The return receipt did not verify. No artifact is being claimed.');
+    if(data.encounter?.signal!==question||!await verifyReturn(data))throw Error('The return receipt did not verify. No artifact is being claimed.');
     if(thisRun!==run)return;
     show(data);
   } catch(error) {

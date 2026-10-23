@@ -10,15 +10,21 @@ export function formEncounter(question, requestedKind = 'auto') {
     ['compute', /\b(compute|processor|hardware|machine|worker|runtime)\b/]
   ].filter(([,pattern])=>pattern.test(q)).map(([topic])=>topic);
   const topic = matches.length === 1 ? matches[0] : 'open';
+  const possibleKinds = [
+    ['song',/\b(song|sing|melody|tune)\b/],
+    ['invitation',/\b(invite|invitation|gathering|party)\b/],
+    ['door',/\b(code|source|repo|repository|explore|door)\b/]
+  ].filter(([,pattern])=>pattern.test(q)).map(([value])=>value);
+  const negated = /\b(no|not|don't|stop|unwanted|avoid|cancel|prevent|without)\b/.test(q);
+  const unclearReturn = requestedKind==='auto'&&(possibleKinds.length>1||negated);
   const kind = requestedKind !== 'auto' ? requestedKind
-    : /\b(song|sing|melody|tune)\b/.test(q) ? 'song'
-    : /\b(invite|invitation|gathering|party)\b/.test(q) ? 'invitation'
-    : /\b(code|source|repo|repository|explore|door)\b/.test(q) ? 'door' : 'question';
+    : unclearReturn ? 'question' : possibleKinds[0] || 'question';
   return {
     schema:'ask-jarvis/encounter-v1', method:'DETERMINISTIC_RULES', signal:question,
-    topic, possibleTopics:matches, requestedKind, kind,
+    topic, possibleTopics:matches, possibleKinds, unclearReturn, requestedKind, kind,
     context:['One visitor question; no profile, location, organizer or participant consent supplied.'],
-    gaps:[...(matches.length>1 ? ['More than one topic fits; the machine has not chosen a single meaning.'] : []),
+    gaps:[...(unclearReturn ? ['The requested return is unclear or negated; choose a return format or clarify the question.'] : []),
+      ...(matches.length>1 ? ['More than one topic fits; the machine has not chosen a single meaning.'] : []),
       ...(topic==='open' ? ['The intended context needs clarification.'] : []),
       'Who would like to participate, and on what terms?',
       'What time, place and resources would the participants choose?'],
@@ -57,5 +63,6 @@ export function composeReturn(encounter, sources, seed) {
     title = 'A question worth taking with you';
     body = `QUESTION CARD — ${t.label}\n\nYour question:\n${encounter.signal}\n\nA small way to begin:\n${t.steps.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\nStill open:\n${encounter.gaps.join('\n')}\n\nTry next:\n${t.question}`;
   }
-  return {schema:'ask-jarvis/artifact-v1',kind,title,body,status:'LOCAL_UNSIGNED_DRAFT',nextQuestion:t.question,doors:kind==='door'?doors:[],...(song?{song}:{})};
+  const nextQuestion=encounter.unclearReturn ? 'What would you like to take away: a question card, an invitation draft, a source door or a song?' : t.question;
+  return {schema:'ask-jarvis/artifact-v1',kind,title,body,status:'LOCAL_UNSIGNED_DRAFT',nextQuestion,doors:kind==='door'?doors:[],...(song?{song}:{})};
 }

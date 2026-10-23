@@ -111,6 +111,17 @@ try:
         expect(page.locator('#mode')).to_have_text('NO RESULT CLAIMED')
         expect(page.locator('#reply')).to_be_hidden()
         page.unroute('**/api/ask')
+        # A protected preview needs its existing same-origin authentication cookie.
+        context.add_cookies([{'name':'preview-auth-fixture','value':'accepted','url':'http://127.0.0.1:8799'}])
+        def require_cookie(route):
+            if 'preview-auth-fixture=accepted' in route.request.headers.get('cookie',''):
+                route.continue_()
+            else:
+                route.fulfill(status=401,content_type='application/json',body='{"error":"Preview authentication required"}')
+        page.route('**/api/ask',require_cookie)
+        ask('A question inside an authenticated preview')
+        page.unroute('**/api/ask')
+        context.clear_cookies()
         page.set_viewport_size({'width':320,'height':740})
         ask('An invitation to a small garden table')
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
@@ -119,7 +130,7 @@ try:
         assert all(u.startswith(('http://127.0.0.1:8799/','blob:')) for u in requests),requests
         assert context.cookies()==[]
         assert page.evaluate('localStorage.length')==0
-        summary={'browser':browser.version,'sourceMode':'SYNTHETIC_TEST_FIXTURES','checks':['four returns','explicit selection','exports','edited draft separation','WAV playback and download','audio cleanup','injection','input recovery','network recovery','stale reply cancellation','tampered receipt refusal','320px layout','no storage or external browser requests'],'pageErrors':errors}
+        summary={'browser':browser.version,'sourceMode':'SYNTHETIC_TEST_FIXTURES','checks':['four returns','explicit selection','exports','edited draft separation','WAV playback and download','audio cleanup','injection','input recovery','network recovery','stale reply cancellation','tampered receipt refusal','protected preview authentication','320px layout','no storage or external browser requests'],'pageErrors':errors}
         (out/'result.json').write_text(json.dumps(summary,indent=2)+'\n')
         print(json.dumps(summary,indent=2))
         browser.close()

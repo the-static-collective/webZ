@@ -48,7 +48,7 @@ The existing `ask-jarvis/return-v0` fields remain available. Additions:
 
 | Field | Contract | Meaning |
 | --- | --- | --- |
-| `encounter` | `ask-jarvis/encounter-v1` | Literal normalized question, local classification and gaps |
+| `encounter` | `ask-jarvis/encounter-v1` | Exact submitted question (including spacing), local classification and gaps |
 | `return` | `ask-jarvis/artifact-v1` | Original draft body, kind, next question and optional score/source doors |
 | `evidence` | `ask-jarvis/evidence-v1` | Complete unsigned evidence body |
 | `receiptHash` | SHA-256 of `JSON.stringify(evidence)` UTF-8 bytes | Reproducible digest; property order is part of this encoding |

@@ -107,3 +107,32 @@ test('complete downloadable evidence independently verifies; tampering any visib
     assert.equal(await verifyReturn(changed),false);
   }
 });
+
+test('review: rejected status and declared oversized bodies are cancelled',async()=>{
+  for(const options of [{status:503},{headers:{'content-length':'90001'}}]) {
+    let cancelled=0;
+    const result=await assemble('Please inspect a public document for us',async()=>new Response(new ReadableStream({cancel(){cancelled++;}}),options));
+    assert.ok(result.sources.every(s=>s.status==='UNAVAILABLE'));
+    assert.equal(cancelled,3);
+  }
+});
+
+test('review: conflicting and negated auto intent falls back to clarification',async()=>{
+  for(const q of ['Should we make a song or an invitation?','How do I stop an unwanted party?','Please do not write a song about this garden.']) {
+    const result=await assemble(q,good);
+    assert.equal(result.return.kind,'question');
+    assert.ok(result.encounter.gaps.some(g=>g.includes('return')));
+  }
+  const result=await assemble('Should we make a song or an invitation?',good,{kind:'song'});
+  assert.equal(result.return.kind,'song');
+});
+
+test('review: encounter and handoff preserve literal submitted whitespace',async()=>{
+  const q='  What does "a  b"\nmean in source code?  ';
+  const result=await assemble(q,good,{kind:'question'});
+  assert.equal(result.encounter.signal,q);
+  assert.equal(result.workbenchRequest.task.question,q);
+  assert.ok(result.return.body.includes(q));
+  assert.ok(result.artifact.includes(q));
+  assert.equal(result.evidence.encounter.signal,q);
+});

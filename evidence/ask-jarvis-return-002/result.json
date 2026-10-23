@@ -13,6 +13,7 @@
     "network recovery",
     "stale reply cancellation",
     "tampered receipt refusal",
+    "protected preview authentication",
     "320px layout",
     "no storage or external browser requests"
   ],

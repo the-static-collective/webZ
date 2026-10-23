@@ -11,7 +11,10 @@ function response(data,status=200){return new Response(JSON.stringify(data),{sta
 
 // Read the complete body under one deadline. Never hash a truncated document.
 async function readBounded(res, limit, signal) {
-  if (Number(res.headers.get('content-length')) > limit) throw Error('BODY_TOO_LARGE');
+  if (Number(res.headers.get('content-length')) > limit) {
+    void res.body?.cancel().catch(()=>{});
+    throw Error('BODY_TOO_LARGE');
+  }
   const reader = res.body?.getReader();
   if (!reader) return new Uint8Array();
   const abort = () => { void reader.cancel().catch(()=>{}); };
@@ -50,8 +53,9 @@ async function inspect(c,fetcher) {
     document:`https://github.com/the-static-collective/${c.repo}/blob/${c.ref}/${c.path}`};
   const controller = new AbortController();
   const timer = setTimeout(()=>controller.abort(),2800);
+  let res;
   try {
-    const res = await fetcher(source,{signal:controller.signal,headers:{accept:'text/plain'},redirect:'error',cf:{cacheTtl:180,cacheEverything:true}});
+    res = await fetcher(source,{signal:controller.signal,headers:{accept:'text/plain'},redirect:'error',cf:{cacheTtl:180,cacheEverything:true}});
     if(!res.ok) throw Error('UPSTREAM');
     const bytes = await readBounded(res,SOURCE_LIMIT,controller.signal);
     if(!bytes.length) throw Error('EMPTY_SOURCE');
@@ -59,7 +63,11 @@ async function inspect(c,fetcher) {
     return {...base,status:'INSPECTED',sha256:await sha256(bytes),byteLength:bytes.byteLength,...summarize(body)};
   } catch {
     return {...base,status:'UNAVAILABLE',sha256:null,byteLength:null,title:'Not inspected',excerpt:'Read-only source lookup did not succeed. No result is inferred.'};
-  } finally {clearTimeout(timer);}
+  } finally {
+    controller.abort();
+    void res?.body?.cancel().catch(()=>{});
+    clearTimeout(timer);
+  }
 }
 
 export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
@@ -69,16 +77,16 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   const q=question.replace(/\s+/g,' ').trim();
   if(q.length<8||q.length>360) throw Error('QUESTION_LENGTH');
   if(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?1[- .]?)?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}/.test(q)) throw Error('PRIVATE_CONTACT');
-  const encounter = formEncounter(q,kind);
+  const encounter = formEncounter(question,kind);
   const targets = selectSources(q,encounter.kind);
   const sources = await Promise.all(targets.map(c=>inspect(c,fetcher)));
   const found = sources.filter(s=>s.status==='INSPECTED').length;
-  const returned = composeReturn(encounter,sources,await sha256(q));
+  const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
   const guidance = found ? `I inspected ${found} of ${sources.length} public source documents and composed this ${returned.kind==='question'?'question card':returned.kind+' draft'}. The draft uses local rules; the documents show possible tools, not commitments.`
     : 'I could not verify a source document on this run. The draft below is locally composed from your question; no project connection is being claimed.';
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
-    task:{operation:'PREPARE_DRAFT',kind:returned.kind,question:q},
+    task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
     requiredBeforeDispatch:['Operator-reviewed endpoint and authentication','Owner-approved capability and input scope','Receiver-issued outcome and reconciliation contract']};
   const steps = [
