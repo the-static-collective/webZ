@@ -1,0 +1,13 @@
+{
+  "name": "ask-jarvis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "wrangler dev",
+    "deploy:preview": "wrangler deploy"
+  },
+  "engines": {"node": ">=22"},
+  "devDependencies": {"wrangler": "4.45.0"}
+}
