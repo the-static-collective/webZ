@@ -25,3 +25,6 @@ footer{font:10px/2 "Courier New",monospace;text-align:center;color:#607592;paddi
 @media(max-width:650px){.mast{padding:22px 12px;gap:11px}.mascot{width:70px;height:100px;transform:scale(.63);transform-origin:0 0;margin-right:-25px}.topline{padding:10px 10px 0}.topline .right{display:none}h1{letter-spacing:-2px}.stamp{font-size:8px}.strip{font-size:9px}.strip .bullet{margin:0 4px}.askbox{margin:15px 12px;padding:23px 14px;box-shadow:3px 3px 0 #97aec7}.formend{flex-direction:column;align-items:stretch}.bigbutton{width:100%}.results,.under{margin:18px 12px}.under{gap:10px;align-items:flex-start}.under .sign{font-size:9px}.result-title small{float:none;display:block}.reply{padding:16px 12px}.artifact{gap:9px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 @media print{body{background:white}.ticker,.samples,.askbox,.topline,.mast,.strip,.under,footer,#ask-next,#download,#print{display:none!important}.page,.results{border:0;box-shadow:none;margin:0;max-width:none}.steps li{break-inside:avoid}}
+
+@keyframes domino-in{from{opacity:0;transform:translateY(-8px) rotate(-2deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+@media(prefers-reduced-motion:no-preference){.steps li{animation:domino-in .25s ease-out both}}
