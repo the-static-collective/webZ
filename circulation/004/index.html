@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0b2926">
+  <meta name="description" content="An independent Abundent online field laboratory: a question circulates through proposed independent capabilities and returns as a truthful local rehearsal. No account, partner claims, or live effects.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; media-src 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; base-uri 'self';">
+  <title>Pando Field Lab · Abundent</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the lab</a>
+<header class="nav">
+  <a class="logo" href="../../" aria-label="Abundent home">abundent<span>✳</span></a>
+  <span class="nav-center"><span class="status-dot"></span> LAB 004 / INDEPENDENT FIELD STUDY</span>
+  <div class="nav-end"><a href="../003/">03 · Paper cards</a><a href="#sources">Source doors ↗</a></div>
+</header>
+<main id="main">
+  <section class="hero">
+    <div class="eyebrow">CIRCULATION / 004 <span>·</span> FIELD EXPERIMENT FOR OCT 24–26</div>
+    <div class="hero-content">
+      <div>
+        <h1>Already<br>in the same<br><em>living field.</em></h1>
+        <p class="lead">What if a useful question could move between the worlds we already inhabit—and come back without anyone losing their freedom to say no?</p>
+        <div class="hero-actions"><a class="btn primary" href="#workbench">Try the round trip <span>↗</span></a><a class="btn ghost" href="#about">How the roots connect <span>↘</span></a></div>
+      </div>
+      <div class="pando-art" aria-hidden="true">
+        <svg viewBox="0 0 460 460" role="presentation" focusable="false">
+          <circle cx="230" cy="230" r="183" fill="none" stroke="#8fbdac" stroke-opacity=".17" stroke-width="1.5" stroke-dasharray="2 9"></circle>
+          <circle cx="230" cy="230" r="128" fill="none" stroke="#f1d98a" stroke-opacity=".13" stroke-width="1"></circle>
+          <path d="M87 161 Q170 172 230 230 T368 148 M230 230 Q133 245 130 349 M230 230 Q306 275 350 339 M230 230 Q226 106 223 72 M130 349 Q224 392 350 339 M87 161 Q132 82 223 72 M368 148 Q383 239 350 339" fill="none" stroke="#a3ceab" stroke-width="3" stroke-linecap="round" opacity=".75"></path>
+          <path d="M87 161 Q220 120 350 339 M130 349 Q104 210 368 148" fill="none" stroke="#c6a971" stroke-width="1" stroke-dasharray="5 7" opacity=".6"></path>
+          <g fill="#f3daa4"><circle cx="87" cy="161" r="8"></circle><circle cx="223" cy="72" r="7"></circle><circle cx="130" cy="349" r="8"></circle><circle cx="350" cy="339" r="8"></circle><circle cx="368" cy="148" r="8"></circle></g>
+          <circle cx="230" cy="230" r="35" fill="#e8e0b9" stroke="#ffffff" stroke-width="2"></circle>
+          <circle cx="230" cy="230" r="17" fill="#153b33"></circle>
+          <g fill="#cfddc7" font-family="sans-serif" font-weight="700" font-size="11" letter-spacing="2"><text x="50" y="143">CARE</text><text x="192" y="51">QUESTIONS</text><text x="369" y="139">CULTURE</text><text x="78" y="381">COMMONS</text><text x="345" y="371">RETURN</text></g>
+        </svg>
+        <div class="diagram-caption"><span>NOT A PLATFORM OWNING THE FOREST.</span><strong>A way to notice the roots.</strong></div>
+      </div>
+    </div>
+    <div class="truth"><strong>EXPERIMENT / NOT AN ORGANIZER PROGRAM.</strong> This public preview is an independent, fictional/local demonstration—not a Coalition of Care, makerspace, church or Waseca grocery partnership. No real recipients, accounts, submissions, payment, matching, or outcome confirmation.</div>
+  </section>
+
+  <section class="intro-grid" id="about" aria-label="Why this exists">
+    <article><small>THE STARTING POINT</small><h2>We already belong to overlapping worlds.</h2><p>People, artists, growers, organizations, congregations, workplaces, and neighbors share a region without becoming one institution. Their boundaries matter. So do the relationships beneath them.</p></article>
+    <article><small>THE TEST</small><h2>Does a question survive the crossing?</h2><p>Choose one public-safe question. Route it to independent <em>capability models</em>. Rehearse separate HOLD, DECLINE, or CONSIDER responses. Bring back a receipt that never claims an action happened.</p></article>
+    <article><small>THE RULE</small><h2>No assimilation. No invented consent.</h2><p>Source projects remain independent. Only a human owner can make a real commitment. Here, every response is a simulation and every export stays on your own device.</p></article>
+  </section>
+
+  <section class="workbench" id="workbench">
+    <div class="section-head">
+      <div><small class="step">01 / THE THREAD</small><h2>Choose a question worth carrying.</h2></div>
+      <p>Use a fictional example, or write your own generalized question. The lab does not contact anyone.</p>
+    </div>
+    <div class="work-layout">
+      <div class="question-pane">
+        <div class="label-row"><h3>Starting examples</h3><span>FICTIONAL · CLICK TO LOAD</span></div>
+        <div id="examples" class="example-list" role="group" aria-label="Fictional example questions"></div>
+        <form id="question-form" novalidate>
+          <div class="form-row">
+            <label for="kind">Opening</label><select id="kind"><option value="QUESTION">Question</option><option value="NEED">Possible need</option><option value="OFFER">Possible offer</option><option value="BUILD">Build together</option></select>
+          </div>
+          <label for="question" class="field-label">The public-safe question <span>14–180 characters</span></label>
+          <textarea id="question" minlength="14" maxlength="180" rows="4" placeholder="What useful work is already happening that could be easier if two groups found each other?"></textarea>
+          <label class="consent"><input type="checkbox" id="permission"><span>For my own question, I authored this wording or have permission to use this exact, non-identifying wording. This is only my statement, not verified consent.</span></label>
+          <p class="tiny">No private names, addresses, phone numbers, identifying stories, links, or requests on behalf of others. The form has no save or submit server. If a person declines, do not record their question.</p>
+          <div class="import-box">
+            <label for="import-003">Have a real CIRCULATION-003 draft?</label>
+            <p>Read a locally exported question packet and verify its source digest using the <em>actual</em> 003 validator. A valid hash does not verify anyone's permission.</p>
+            <input id="import-003" type="file" accept=".json,application/json">
+          </div>
+        </form>
+      </div>
+      <div class="routes-pane">
+        <div class="label-row"><h3>Choose possible doors</h3><span>SELECT 1–6 INDEPENDENT LANES</span></div>
+        <div id="capabilities" class="capabilities"></div>
+        <div class="run-strip">
+          <span>Nothing goes to a real organization. These are capability proposals, not current openings.</span>
+          <button class="btn primary" id="run" type="button">Open the round trip <b>→</b></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="loop" id="loop" aria-labelledby="loop-title">
+    <div class="section-head">
+      <div><small class="step">02 / THE CROSSING</small><h2 id="loop-title">The roots are independent.</h2></div>
+      <p>Each door can refuse. No reply on this screen is issued by the named project or an event attendee.</p>
+    </div>
+    <div id="empty-loop" class="empty-loop"><span>↝</span><h3>A question is waiting.</h3><p>Choose a starting example and some possible doors above, then open the round trip.</p></div>
+    <div id="active-loop" hidden>
+      <div class="origin-card"><small>ORIGIN / UNSENT</small><h3 id="origin-text"></h3><span id="origin-hash" class="hash"></span></div>
+      <div class="flow-arrow" aria-hidden="true">↓ <small>POSSIBLE CONNECTIONS ONLY</small></div>
+      <div id="response-cards" class="response-cards"></div>
+      <div class="flow-arrow" aria-hidden="true">↓ <small>RETURN TO THE ORIGINAL QUESTION</small></div>
+      <div class="receipt" id="receipt">
+        <div class="receipt-head"><div><small>03 / THE RETURN</small><h3>What actually happened <em>here?</em></h3></div><span class="stamp">LOCAL SIMULATION</span></div>
+        <div id="receipt-summary" class="receipt-summary" aria-live="polite"></div>
+        <div class="receipt-foot"><span class="hash" id="receipt-hash"></span><div class="receipt-actions"><button id="download" class="btn light" type="button">Export local receipt ↓</button><button id="print" class="btn outline" type="button">Print the witness ↗</button><button id="reset" class="btn outline" type="button">Start again ↺</button></div></div>
+        <p class="tiny">A hash checks the bytes of this local rehearsal; it is not a person's signature, a proof of consent, or confirmation of an outcome. This page never sends your question anywhere.</p>
+      </div>
+    </div>
+    <div id="notification" role="status" aria-live="polite" class="notification"></div>
+  </section>
+
+  <section id="sources" class="doors">
+    <div class="section-head"><div><small class="step">04 / THE ANCESTRY</small><h2>These are working sources,<br><em>not borrowed authority.</em></h2></div><p>Each root has its own owners, readiness, and future decisions. The runnable browser exercise above is a local model, not a remotely executed donor integration.</p></div>
+    <div id="source-grid" class="source-grid"></div>
+    <div class="next-grid"><div><small>OFFLINE FIELD DOORS</small><h3>Use paper before a platform.</h3><p>The previous field kit has an 8-up print sheet and a locally verified public-safe question packet.</p><a href="../003/">Open CIRCULATION-003 ↗</a></div><div><small>INTEROPERABILITY EVIDENCE</small><h3>Actual source-native integration exists.</h3><p>CANNON's synthetic tests run pinned Free Graph, planZ and BananaSpork source. This page shows a smaller, human-readable rehearsal of that pattern.</p><a href="https://github.com/the-static-collective/CANNON/pull/35" rel="noopener noreferrer" target="_blank">Inspect the source-native proof ↗</a></div></div>
+  </section>
+</main>
+<footer><strong>abundent✳</strong><span>ONE QUESTION · MANY POSSIBLE DOORS · ONE HONEST RETURN</span><span>Built for inquiry, not enrollment. <a href="../../">Return home ↗</a></span></footer>
+</body>
+</html>
