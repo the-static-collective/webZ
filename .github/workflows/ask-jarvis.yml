@@ -24,7 +24,7 @@ jobs:
           node --check ask-jarvis/src/worker.mjs
           node --check ask-jarvis/public/app.mjs
       - name: Verify actual Worker contract
-        run: node --test ask-jarvis/test/worker.test.mjs
+        run: node --test ask-jarvis/test/worker.test.mjs ask-jarvis/test/tomorrow.test.mjs
       - name: Smoke hosted 1999 question-to-artifact proof
         run: node ask-jarvis/test/smoke-preview.mjs
       - name: Assert no production cutover
