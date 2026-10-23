@@ -1,10 +1,12 @@
 {
   "name": "ask-jarvis",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test test/worker.test.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "python test/browser.py",
+    "serve": "node scripts/serve.mjs",
     "dev": "wrangler dev",
     "deploy:preview": "wrangler deploy"
   },

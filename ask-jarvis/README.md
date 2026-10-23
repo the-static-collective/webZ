@@ -1,59 +1,61 @@
-# ASK JAR;VIS — GENESIS 001
+# ASK JAR;VIS — Public return loop 002
 
-**One question. The whole house takes attendance.**
+**One question. A small thing you can take away.**
 
-A deliberately 1999-looking, single-box temporary front door for Abundent, deployable as a standalone **Cloudflare Worker with static assets**. Built on the exact webZ CIRCULATION-004 ancestry. **LIVE RELEASE (2026-10-23):** By owner's explicit instruction, the tested Ask JAR;VIS Vercel deployment was assigned the `abundent.org` alias. No DNS records were changed, and no real agents or external project actions execute. The original Garden Workbench remains preserved at its own Vercel URL. **Cloudflare Worker deployment is still planned**, not claimed.
+The 1999 Ask JAR;VIS front page now has a structured public return loop. The existing production page remains at [abundent.org](https://abundent.org); this branch prepares its next release. See [release 002](RELEASE-002.md) for actual verification and preview state, and [release 001](RELEASE-2026-10-23.md) for the original hostname cutover and Garden rollback.
 
-## What actually works
+## What works
 
-- GET / serves a responsive, keyboard-accessible retro HTML/CSS UI.
-- POST /api/ask accepts one bounded question without contact details and responds with an inspectable trace.
-- A deterministic LOADOUT selects 3 of 6 **hardcoded, source-owned** public project capability entries.
-- The Vercel preview/production adapter and the Cloudflare Worker implementation both read only those specific public source files from the Static Collective on GitHub and hash the returned bytes. No user text goes to GitHub.
-- JAR;VIS writes a truthful return with status per lane, an answer about the findings, a next question, a downloadable printable plain-text question card, and a content digest.
-- The interface **never reports a HOLD or NOT_RUN lane as executed**. A failed source fetch is UNAVAILABLE, not evidence.
-- No database, analytics, cookies, LLM token, GitHub write, community intake, contact information, persistence of visitors' questions, payments, or code execution.
-
-**Not yet implemented:** real model-led question decomposition; dynamic LOADOUT/registry ingestion; native CANNON or OpenManus/ELF execution; durable workflow orchestration; verified consent and real partner routing. The source inspection uses a deterministic keyword selector, **not an LLM**. Hashes prove observed bytes, not human truth or project endorsement.
+- One question returns a **question card**, **editable invitation draft**, **possible source door**, or **original song sketch**. An optional selector overrides deterministic intent rules.
+- The encounter preserves the question, possible topics, unresolved gaps and fact/idea/relation distinctions. Unknown or mixed contexts keep uncertainty visible. There is no hidden model.
+- Three relevant documents are read through fixed adapters for JAR;VIS, Workbench, TABLElogic, planZ, CANNON, GHoT and reLATTE. Each entry names an exact Git commit and a document owned by that project. Full bytes are hashed; unavailable, oversized or timed-out reads have no digest. A source pin is an address, not owner-selected canon.
+- All draft prose is locally composed from explicit templates and the question. Source inspections supply provenance and possible document doors; reading a README does not run that project or make its author a participant.
+- Invitation drafts leave time, place and organizer open. Edits stay in page memory and download separately as edited unsigned drafts.
+- Songs include original template lyrics and a new deterministic melody seeded from the question. Browser-local synthesis makes a playable/downloadable PCM WAV instrumental sketch. Nothing plays automatically and no recording service is contacted.
+- Text returns, complete JSON receipts and prepared Workbench requests can be downloaded explicitly. Printing prints the original return.
+- The browser independently recomputes the evidence digest before displaying the artifact. The receipt contains the complete evidence it hashes, including sources, encounter, original artifact, trace and handoff. It is **unsigned**; a digest cannot authenticate the author or prove a claim true.
 
 ## Run locally
 
-Requires Node 22+ and Wrangler. From this folder:
+Node 22+, with no runtime dependency installation:
 
-    node --test test/worker.test.mjs
-    npm install
-    npx wrangler dev
+```sh
+cd ask-jarvis
+npm test
+npm run serve
+# Open http://127.0.0.1:8799/
+```
 
-Visit the local URL from Wrangler and ask a public-safe question. To publish a standalone Cloudflare test Worker (requires your authenticated Cloudflare credentials):
+In a proxy-managed Node 24 environment, `node --use-env-proxy scripts/serve.mjs` honors the inherited proxy for public source reads. Normal local machines can use `npm run serve`.
 
-    npx wrangler deploy
+Real desktop/mobile browser checks (from the repository root):
 
-Wrangler config does **not** include a custom domain, production route, or secret. Cloudflare runtime cutover remains a separate operation. Current hostname release is Vercel alias routing, not a Cloudflare Worker deployment.
+```sh
+python -m pip install -r tests/requirements.txt
+python -m playwright install chromium
+python ask-jarvis/test/browser.py
+```
 
-## Live front door and original Garden shelf
+This browser test starts the loopback server with the explicit `--fixtures` flag. Its document reads are synthetic test fixtures; its Chromium interactions and WAV playback are real. The flag is confined to the development server, which is not part of the hosted API. Evidence lives in `evidence/ask-jarvis-return-002/`. Separate live-source/preview checks establish actual public reads.
 
-**Current homepage:** https://abundent.org/ is served by the standalone Ask JAR;VIS Vercel project through a reassigned Vercel alias.
+Cloudflare development remains available through `npm install` and `npm run dev`. The Worker and Vercel adapters share the same assembly implementation. No Cloudflare custom domain or Worker cutover is claimed.
 
-**Preserved Garden Workbench:** https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/ and the immutable older deployment https://webz-field-porch-eb7chh2s9-theotherlucasv-1250s-projects.vercel.app/ continue to serve the original garden and related routes. The older deployment is the rollback candidate.
+## Contracts and future Workbench bridge
 
-**Cloudflare:** Authoritative DNS remains at Cloudflare, but content is still hosted on Vercel. Worker cutover must preserve these aliases, including `www` redirect behavior, and must not disrupt `ph.abundent.org`.
+`POST /api/ask` accepts `{ "question": "8–360 characters", "kind": "auto" }`. Kinds are `auto`, `question`, `invitation`, `door`, and `song`. Requests are bounded to 1,800 UTF-8 bytes. Each source read has a 2.8-second deadline and a 90,000-byte budget, including its body. Questions are not placed in source URLs or transmitted to source repositories.
 
-See `RELEASE-2026-10-23.md` for current mappings, exact deployment identifiers, and rollback.
+The existing `ask-jarvis/return-v0` fields remain available. Additions:
 
-## Machine boundaries
+| Field | Contract | Meaning |
+| --- | --- | --- |
+| `encounter` | `ask-jarvis/encounter-v1` | Literal normalized question, local classification and gaps |
+| `return` | `ask-jarvis/artifact-v1` | Original draft body, kind, next question and optional score/source doors |
+| `evidence` | `ask-jarvis/evidence-v1` | Complete unsigned evidence body |
+| `receiptHash` | SHA-256 of `JSON.stringify(evidence)` UTF-8 bytes | Reproducible digest; property order is part of this encoding |
+| `workbenchRequest` | `ask-jarvis/workbench-request-v1` | Manual-only `PREPARE_DRAFT` handoff with `authority: NONE` |
 
-OBSERVE → SELECT → READ-ONLY SOURCE FETCH → HASH → LOCAL CARD → RETURN
+The Workbench handoff has no destination URL and no dispatcher. It is not yet an accepted native Workbench import format. Adding that bridge requires an operator-reviewed endpoint and authentication, a source-owner capability contract, receiver-issued outcomes and reconciliation. TABLElogic is a conceptual source whose distinctions inform this local adapter. Native CANNON validation, GHoT execution and signed reLATTE crossings remain separate integrations.
 
-No auto-execution, real partner contact, real CANNON attestation, or OpenManus dispatch. To extend the machine, make each native donor adapter pass an explicit capability contract, human authorization gate for effects, isolated runtime, idempotency, timeout, and content-addressed receipts. CANNON's validation is a separate source-owned step, not claimed by this version.
+No database, visitor question storage, analytics, cookies, external model calls, arbitrary URL fetching, external writes, partner messages or automatic project execution is added. Drafts leave the browser only when the visitor explicitly saves them or follows a document link; the initial question is sent to the same-origin API to compose its return.
 
-## Testing and release
-
-- Run node tests; verify rejection, unavailable upstreams, provenance, source allowlisting, and non-execution flags.
-- Check mobile, keyboard, desktop, printing, and browser network (only API POST to same origin; Worker source reads to GitHub).
-- Test the deployment GET /api/health and one ordinary /api/ask end-to-end.
-- Protect the public endpoint with Cloudflare WAF rate limits before broad promotion.
-- The owner's release authorization was given and the apex alias reassigned on 2026-10-23. Further releases and a Cloudflare origin migration require their own review.
-
-GitHub source: https://github.com/the-static-collective/webZ/tree/feature/ask-jarvis-1999/ask-jarvis
-
-**AN OBSERVED SOURCE ≠ A RUNNING PROJECT. A HASH ≠ CONSENT. A PROPOSAL ≠ AUTHORITY.**
+The original Garden remains preserved at https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/. No production alias or DNS change is included in this branch.

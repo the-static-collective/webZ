@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../src/worker.mjs';
 import handler from '../api/ask.js';
+import healthHandler from '../api/health.js';
+
+test('both health adapters identify the public return release and manual-only bridge',async()=>{
+  const expected=await (await worker.fetch(new Request('https://test/api/health'),{})).json();
+  let actual;
+  const res={setHeader(){},status(){return this;},json(value){actual=value;}};
+  await healthHandler({method:'GET'},res);
+  assert.equal(actual.release,'public-return-002');
+  assert.deepEqual(actual.returns,expected.returns);
+  assert.equal(actual.bridge,'manual-export-only');
+});
 
 test('Worker bounds chunked input, rejects invalid kinds and methods before source fetch', async()=>{
   const huge=new Request('https://test/api/ask',{method:'POST',body:JSON.stringify({question:'x'.repeat(2000)})});
