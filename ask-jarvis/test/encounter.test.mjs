@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+const file=p=>readFileSync(new URL(p,import.meta.url),'utf8');
+test('new HOUSE-003 door retains original 1999 root, strict CSP, and no client network calls',()=>{
+ const html=file('../public/table/encounter/index.html'),app=file('../public/table/encounter/app.mjs');
+ const css=file('../public/table/encounter/style.css'),older=file('../public/table/index.html');
+ assert.match(html,/The <em>Invitation<\/em> Table/);
+ assert.match(html,/<script type="module" src="\.\/app.mjs"><\/script>/);
+ assert.match(html,/Content-Security-Policy/);
+ assert.match(html,/connect-src 'none'/);
+ assert.doesNotMatch(html,/<script>(.|\n)*?<\/script>|<style>/i);
+ assert.match(older,/href="\/table\/encounter\/"/);
+ assert(css.length>500&&app.length>500);
+ assert.doesNotMatch(app,/\bfetch\s*\(|\bXMLHttpRequest\b|\bWebSocket\b|\bEventSource\b|sendBeacon|localStorage|sessionStorage/);
+ assert.match(app,/local_sha256/);
+ assert.match(app,/KEEP_AS_QUESTION/);
+ assert.match(app,/INVITE_LOCAL_REVIEW/);
+ assert.match(app,/DECLINE/);
+ assert.match(app,/false,delivered:false|delivered:false,receiver:'NONE'/);
+});
+test('original Ask JAR;VIS API remains independent, and copied JS parses',()=>{
+ const original=file('../src/worker.mjs');
+ assert.match(original,/export async function assemble/);
+ assert.doesNotMatch(original,/encounter-native|HOLD_HUMAN_REVIEW/);
+ const app=new URL('../public/table/encounter/app.mjs',import.meta.url);
+ const result=execFileSync(process.execPath,['--check',app.pathname],{encoding:'utf8'});
+ assert.equal(result,'');
+});
