@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE LISTENING TABLE — Ask JAR;VIS / TABLElogic</title>
+<link rel="stylesheet" href="/table/style.css">
+</head>
+<body>
+<main>
+<div class="kicker">TABLElogic · HOUSE 002 · 1999 underneath the stars · source-preview / no public intake</div>
+<h1>The <i>Listening</i> Table.</h1>
+<p class="lede">Bring a question. Leave room for the unfinished. Every suggestion remains an invitation; no person, program or organ receives permission merely by being present.</p>
+<section class="no-print" aria-label="Local question">
+<h2>01 / The question</h2>
+<p>Write a public-safe thought. This offline page does not send it anywhere. Its text box cannot run the original Workbench or JAR;VIS systems.</p>
+<textarea id="question" maxlength="260" placeholder="What could a neighborhood potluck make possible?"></textarea>
+<div><button id="export">Save a local question card</button><button id="clear">Clear</button></div>
+<p class="caption" role="status" id="notice">HOLD · No question has been sent. Contact information and private details do not belong here.</p>
+</section>
+<section class="no-print" aria-label="Bring real native evidence">
+<h2>02 / Bring an existing HOUSE-002 receipt</h2>
+<p>Load a local <code>tablelogic.listening-table/v0</code> JSON made by the source-pinned TABLElogic native rehearsal. This view cannot verify cryptographic signatures; it shows the evidence claims for human inspection.</p>
+<input id="file" type="file" accept="application/json,.json" aria-label="Local listening-table JSON">
+<button id="sample">Show a clearly fictional example</button>
+<p id="file-message" role="status" class="caption">No source loaded.</p>
+</section>
+<section aria-live="polite">
+<div class="kicker">03 / The organs assemble without owning the question</div>
+<div class="cards" id="cards">
+<article class="card"><strong>Workbench</strong><p>Signal / context / gap. No source loaded.</p></article>
+<article class="card"><strong>JAR;VIS</strong><p>Possibility without permission.</p></article>
+<article class="card"><strong>webZ</strong><p>A door, not a hidden executor.</p></article>
+<article class="card"><strong>GRAFT</strong><p>A nursery, not an incorporation order.</p></article>
+</div>
+<div class="ribbon" id="return-message">THE HOUSE TAKES ATTENDANCE · No source has been admitted. This preview does not call the live JAR;VIS API.</div>
+</section>
+<section class="no-print" aria-label="Human-only return">
+<h2>04 / Your turn</h2>
+<p>Choose a local interpretation of what you want to do next. These choices are only notes in this browser session.</p>
+<button data-decision="KEEP_AS_QUESTION">Keep as a question</button>
+<button data-decision="INSPECT_SOURCES">Inspect sources next</button>
+<button data-decision="DECLINE">Decline</button>
+<p class="caption" id="decision">No human decision recorded.</p>
+<button id="export-return">Export an unsigned local return</button>
+</section>
+<div class="ribbon">SOURCE ≠ TRUTH · POSSIBILITY ≠ PROPOSAL ≠ CONSENT · HOLD ≠ ADMIT · BRANCH ≠ LIVING CODE<br>This page has no network, accounts, backend, model inference, public upload, broadcast or external execution. The original systems run separately in a controlled native rehearsal.</div>
+</main>
+<script src="/table/app.mjs" defer></script>
+</body>
+</html>

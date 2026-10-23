@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {join} from 'node:path';
+const base=new URL('../public/table/',import.meta.url);
+const read=name=>readFileSync(new URL(name,base),'utf8');
+test('door is a static no-fetch local-only privacy-preserving page',()=>{
+ const html=read('index.html'),css=read('style.css'),js=read('app.mjs');
+ assert.match(html,/THE LISTENING TABLE/);
+ assert.match(html,/\/table\/app\.mjs/);
+ assert.match(html,/\/table\/style\.css/);
+ assert.doesNotMatch(html,/<script>(.|\n)*?<\/script>|<style>/i);
+ assert.doesNotMatch(html,/<meta http-equiv="Content-Security-Policy"/);
+ assert(css.length>900&&js.length>900);
+ assert.doesNotMatch(js,/\bfetch\s*\(|\bXMLHttpRequest\b|navigator\.sendBeacon|WebSocket|EventSource|localStorage|sessionStorage/);
+ assert.doesNotMatch(js,/https?:\/\//);
+ assert.match(js,/HOLD_HUMAN_REVIEW/);
+ assert.match(html,/data-decision="KEEP_AS_QUESTION"/);
+ assert.match(html,/data-decision="INSPECT_SOURCES"/);
+ assert.match(html,/data-decision="DECLINE"/);
+ assert.match(js,/source_verified_in_browser:false/);
+});
+test('vercel release keeps read-only CSP and source release does not change API',()=>{
+ const vercel=JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
+ const headers=vercel.headers.flatMap(x=>x.headers).find(h=>h.key==='Content-Security-Policy');
+ assert.match(headers.value,/connect-src 'self'/);
+ assert.match(headers.value,/script-src 'self'/);
+ assert.doesNotMatch(headers.value,/unsafe-inline/);
+ const index=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
+ assert.match(index,/<a href="\/table\/">experimental listening table \(read-only\)<\/a>/);
+});

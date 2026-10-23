@@ -1,0 +1,17 @@
+
+:root{color-scheme:dark;--gold:#e6bc75;--paper:#f7ebcf;--muted:#c2b49c;--green:#afd6b5}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at 50% -15%,#554226 0%,transparent 47%),#11100e;color:var(--paper);margin:0;font:14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}
+main{max-width:1060px;margin:0 auto;padding:38px 18px 90px}.kicker{color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font-size:12px}
+h1{font:normal clamp(42px,8vw,76px)/.99 Georgia,serif;letter-spacing:-.05em;margin:20px 0 16px}h1 i{color:var(--gold)}
+.lede{max-width:680px;color:#ddd1ba;font-size:16px;line-height:1.75}section{border:1px solid #665839;border-radius:22px;margin-top:25px;padding:clamp(17px,4vw,30px);background:#221c14dd}
+h2{font:normal 30px Georgia,serif;margin:2px 0 14px}h3{color:var(--gold);font-size:14px;margin-bottom:6px}
+button,textarea,input{font:inherit}button{padding:11px 16px;border-radius:8px;border:1px solid var(--gold);background:#4c3b25;color:var(--paper);cursor:pointer;margin:8px 10px 8px 0}
+button:hover{background:#76522d}button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--green)}
+textarea{width:100%;max-width:100%;padding:14px;background:#15130f;color:var(--paper);border:1px solid #766448;border-radius:10px;min-height:95px;resize:vertical}
+input{max-width:100%}.caption{color:var(--muted);font-size:12px}.status{color:var(--gold);border:1px solid #a6803f;border-radius:100px;padding:4px 11px;display:inline-block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:#302619;border:1px solid #58492f;border-radius:15px;padding:17px;min-height:145px}.card strong{font:normal 25px Georgia,serif}.card p{color:var(--muted);font-size:12px}
+.card code{color:var(--green);font-size:11px;overflow-wrap:anywhere}
+.ribbon{border-top:1px solid #665839;margin-top:22px;padding-top:18px;color:var(--muted);font-size:12px}
+@media print{body{background:white;color:black}.no-print{display:none}section{background:white;color:black;border:1px solid #888}.card{background:white;color:black}}
+
