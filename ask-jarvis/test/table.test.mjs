@@ -15,9 +15,9 @@ test('door is a static no-fetch local-only privacy-preserving page',()=>{
  assert.doesNotMatch(js,/\bfetch\s*\(|\bXMLHttpRequest\b|navigator\.sendBeacon|WebSocket|EventSource|localStorage|sessionStorage/);
  assert.doesNotMatch(js,/https?:\/\//);
  assert.match(js,/HOLD_HUMAN_REVIEW/);
- assert.match(js,/KEEP_AS_QUESTION/);
- assert.match(js,/INSPECT_SOURCES/);
- assert.match(js,/DECLINE/);
+ assert.match(html,/data-decision="KEEP_AS_QUESTION"/);
+ assert.match(html,/data-decision="INSPECT_SOURCES"/);
+ assert.match(html,/data-decision="DECLINE"/);
  assert.match(js,/source_verified_in_browser:false/);
 });
 test('vercel release keeps read-only CSP and source release does not change API',()=>{
