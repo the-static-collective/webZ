@@ -62,9 +62,10 @@ async function verifyPair(f){
    'NATIVE_INVITATION_PROJECTION_CHANGED');
  fail(f.crossing?.external_effects===0&&f.crossing?.permissions==='NONE'&&
    f.crossing?.public_workbench_dispatch==='MANUAL_EXPORT_ONLY'&&
-   f.public_draft_has_receiver!==true&&f.externally_published===false&&
+   f.crossing?.native_jarvis_actual_disposition==='HOLD'&&
+   f.crossing?.public_draft_has_receiver===false&&f.externally_published===false&&
    f.external_messages_sent===0&&f.independent_owner_admit===false&&
-   f.permissions_inferred===false,'FORGED_EFFECT_OR_PERMISSION');
+   f.permissions_inferred===false&&f.donor_programs_merged===false,'FORGED_EFFECT_OR_PERMISSION');
  // This is a consistency check only. An unsigned but self-consistent JSON file can be forged.
  return f;
 }
