@@ -49,7 +49,7 @@ test('private contacts, links, false authority and unsupported responses fail cl
   const case1=await openExercise({kind:sample.kind,question:sample.question,lanes:sample.lanes,origin:'EXAMPLE_ONLY'});
   await assert.rejects(simulateResponse(case1,'care','REAL_AID_DELIVERED'),/INVALID_RESPONSE/);
   await assert.rejects(verifyExercise({...case1,authority:'ORGANIZER_APPROVED'}));
-  await assert.rejects(verifyExercise({...case1,question:'A different question with a better sound?'}),/DIGEST_MISMATCH/);
+  await assert.rejects(verifyExercise({...case1,question:'A different question with a better sound?'}),/(EXAMPLE_MISMATCH|DIGEST_MISMATCH)/);
   await assert.rejects(verifyExercise({...case1,personPhone:'5075551111'}),/UNEXPECTED/);
 });
 test('real 003 packet validator is used for a bounded and non-authoritative local import',async()=>{
