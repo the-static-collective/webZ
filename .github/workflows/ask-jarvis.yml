@@ -23,10 +23,17 @@ jobs:
           node --version
           node --check ask-jarvis/src/worker.mjs
           node --check ask-jarvis/public/app.mjs
+          node --check ask-jarvis/public/games/tomorrow/key.mjs
+          node --check ask-jarvis/public/games/tomorrow/town/world.mjs
+          node --check ask-jarvis/public/games/tomorrow/town/app.mjs
+          node --check ask-jarvis/public/games/tomorrow/town/alchematrix-core.mjs
+      - name: Verify source-owned Full Measure Alchematrix donor is unmodified
+        run: |
+          test "$(git hash-object ask-jarvis/public/games/tomorrow/town/alchematrix-core.mjs)" = "4be97563e4cdd2ba16abd597f856dd091dddc4d4"
       - name: Verify actual Worker contract
-        run: node --test ask-jarvis/test/worker.test.mjs ask-jarvis/test/tomorrow.test.mjs
+        run: node --test ask-jarvis/test/worker.test.mjs ask-jarvis/test/tomorrow.test.mjs ask-jarvis/test/tomorrow-town.test.mjs
       - name: Smoke hosted 1999 question-to-artifact proof
         run: node ask-jarvis/test/smoke-preview.mjs
-      - name: Assert no production cutover
+      - name: Assert no Cloudflare Worker custom route
         run: |
           node --input-type=module -e 'import fs from "node:fs"; const c=JSON.parse(fs.readFileSync("ask-jarvis/wrangler.jsonc","utf8"));if(c.routes||c.route)process.exit(1); if(c.assets?.directory!=="./public")process.exit(1);'

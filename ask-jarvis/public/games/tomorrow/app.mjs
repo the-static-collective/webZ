@@ -1,8 +1,35 @@
 
 import {suspects,gates,postymon,reality,nextQuestion,verdict,blankCard} from "./case.mjs";
+import {CHOICES,composeQuestionKey,fragmentForKey} from "./key.mjs";
 const $=id=>document.getElementById(id);
 const show=id=>$(id).classList.remove("hidden");
 const focus=id=>$(id).scrollIntoView({behavior:"smooth",block:"start"});
+const evidenceBank=$("key-clues");
+CHOICES.forEach(choice=>{
+ const lab=document.createElement("label");lab.className="key-clue";
+ const box=document.createElement("input");box.type="checkbox";box.value=choice.id;
+ const desc=document.createElement("span");desc.textContent=choice.id+" — "+choice.label;
+ const hint=document.createElement("small");hint.textContent=choice.hint;
+ lab.append(box,desc,hint);evidenceBank.append(lab);
+});
+$("key-forge").addEventListener("click",()=>{
+ const ids=[...evidenceBank.querySelectorAll("input:checked")].map(x=>x.value);
+ const out=$("key-outcome");out.replaceChildren();
+ try{
+  const key=composeQuestionKey({
+   verdict:{death:"NO",mover:"SE",cause:"UNVERIFIED_CLOSURE"},evidence:ids
+  });
+  const note=document.createElement("p");
+  note.textContent="THE QUESTION KEY EXISTS. The announcement, the transfer, and the intact inventory became three independently specified ingredients. This fictional key has no real-world authority.";
+  const link=document.createElement("a");link.className="btn key-door";
+  link.href="/games/tomorrow/town/"+fragmentForKey(key);
+  link.textContent="OPEN THE TOWN THAT WAITS ➜";
+  const tiny=document.createElement("small");tiny.textContent="You may copy the link to return later. The key is a URL fragment (a local game token), not a login or a cryptographic credential.";
+  out.append(note,link,tiny);
+ }catch{
+  out.textContent="THE WORKBENCH HOLDS. Try three different clues: one about the declaration, one about where the item went, and one about what survived. An irrelevant precedent does not prove this case.";
+ }
+});
 const s=$("suspects");
 suspects.forEach(c=>{
  const box=document.createElement("article");box.className="suspect";
