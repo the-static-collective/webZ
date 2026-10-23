@@ -2,14 +2,14 @@
 
 **One question. The whole house takes attendance.**
 
-A deliberately 1999-looking, single-box temporary front door for Abundent, deployable as a standalone **Cloudflare Worker with static assets**. Built on the exact webZ CIRCULATION-004 ancestry. This branch is a staging candidate. It has **not** replaced the existing site, changed DNS, published person-related information, or executed real agents.
+A deliberately 1999-looking, single-box temporary front door for Abundent, deployable as a standalone **Cloudflare Worker with static assets**. Built on the exact webZ CIRCULATION-004 ancestry. **LIVE RELEASE (2026-10-23):** By owner's explicit instruction, the tested Ask JAR;VIS Vercel deployment was assigned the `abundent.org` alias. No DNS records were changed, and no real agents or external project actions execute. The original Garden Workbench remains preserved at its own Vercel URL. **Cloudflare Worker deployment is still planned**, not claimed.
 
 ## What actually works
 
 - GET / serves a responsive, keyboard-accessible retro HTML/CSS UI.
 - POST /api/ask accepts one bounded question without contact details and responds with an inspectable trace.
 - A deterministic LOADOUT selects 3 of 6 **hardcoded, source-owned** public project capability entries.
-- Cloudflare Worker reads only those specific public source files from the Static Collective on GitHub and hashes the returned bytes. No user text goes to GitHub.
+- The Vercel preview/production adapter and the Cloudflare Worker implementation both read only those specific public source files from the Static Collective on GitHub and hash the returned bytes. No user text goes to GitHub.
 - JAR;VIS writes a truthful return with status per lane, an answer about the findings, a next question, a downloadable printable plain-text question card, and a content digest.
 - The interface **never reports a HOLD or NOT_RUN lane as executed**. A failed source fetch is UNAVAILABLE, not evidence.
 - No database, analytics, cookies, LLM token, GitHub write, community intake, contact information, persistence of visitors' questions, payments, or code execution.
@@ -20,7 +20,7 @@ A deliberately 1999-looking, single-box temporary front door for Abundent, deplo
 
 Requires Node 22+ and Wrangler. From this folder:
 
-    node --test test/*.test.mjs
+    node --test test/worker.test.mjs
     npm install
     npx wrangler dev
 
@@ -28,11 +28,17 @@ Visit the local URL from Wrangler and ask a public-safe question. To publish a s
 
     npx wrangler deploy
 
-Wrangler config does **not** include a custom domain, production route, or secret. Do not bind abundent.org until source and UI tests, privacy checks, live source fetches, and human review are complete.
+Wrangler config does **not** include a custom domain, production route, or secret. Cloudflare runtime cutover remains a separate operation. Current hostname release is Vercel alias routing, not a Cloudflare Worker deployment.
 
-## Existing production stays on its shelf
+## Live front door and original Garden shelf
 
-The current Abundent production site remains deployed on Vercel. This Worker is a separate entrypoint. After validating on a Cloudflare workers.dev preview, a separate DNS/routing decision can move the **apex hostname** to Cloudflare and keep the old Garden Workbench reachable from an explicit archive address. Do not take over www, ph, or other subdomains as collateral damage.
+**Current homepage:** https://abundent.org/ is served by the standalone Ask JAR;VIS Vercel project through a reassigned Vercel alias.
+
+**Preserved Garden Workbench:** https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/ and the immutable older deployment https://webz-field-porch-eb7chh2s9-theotherlucasv-1250s-projects.vercel.app/ continue to serve the original garden and related routes. The older deployment is the rollback candidate.
+
+**Cloudflare:** Authoritative DNS remains at Cloudflare, but content is still hosted on Vercel. Worker cutover must preserve these aliases, including `www` redirect behavior, and must not disrupt `ph.abundent.org`.
+
+See `RELEASE-2026-10-23.md` for current mappings, exact deployment identifiers, and rollback.
 
 ## Machine boundaries
 
@@ -46,7 +52,7 @@ No auto-execution, real partner contact, real CANNON attestation, or OpenManus d
 - Check mobile, keyboard, desktop, printing, and browser network (only API POST to same origin; Worker source reads to GitHub).
 - Test the deployment GET /api/health and one ordinary /api/ask end-to-end.
 - Protect the public endpoint with Cloudflare WAF rate limits before broad promotion.
-- Only after an explicit release and rollback decision, assign the domain.
+- The owner's release authorization was given and the apex alias reassigned on 2026-10-23. Further releases and a Cloudflare origin migration require their own review.
 
 GitHub source: https://github.com/the-static-collective/webZ/tree/feature/ask-jarvis-1999/ask-jarvis
 
