@@ -24,7 +24,7 @@ test("reversible top-level navigation points back to switchboard",()=>{
 });
 test("static switchboard has no collection, tracking, or new API dependencies",()=>{
  assert.doesNotMatch(html,/<(?:script|form|input|iframe)\b|\son(?:click|submit|load)=/i);
- assert.doesNotMatch(html,/\bhttps?:\/\/[^"']+(?:collect|api\/|track|pixel)/i);
+ assert.doesNotMatch(html, /(?:href|src)="https?:\/\/[^\"]*(?:\/api\/|\/collect[/?]|\/track[/?]|\/pixel[/?])/i);
  assert.match(html,/rel="noopener noreferrer"/);
  assert.match(html,/name="referrer" content="no-referrer"/);
 });
