@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ecf2dc"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Stay in touch with the independent Abundent project. Leave one small, voluntary contact request.">
+<title>Stay in Touch — Abundent / The Static Collective</title>
+<link rel="stylesheet" href="/contact/contact.css">
+<script type="module" src="/contact/contact.mjs"></script>
+</head><body>
+<div class="ticker">✳ ABUNDENT • A DOOR YOU CAN LEAVE OPEN • NO ONE ENROLLED WITHOUT ASKING ✳</div>
+<main>
+  <header>
+    <a class="back" href="/">← ASK JAR;VIS / HOME</a>
+    <div class="eyebrow">THE STATIC COLLECTIVE · INDEPENDENT CONTACT DESK · EST. 1999(ish)</div>
+    <div class="envelope" aria-hidden="true">✉</div>
+    <h1>Stay in <em>touch.</em></h1>
+    <p class="lead">Good things tend to begin with an actual conversation.</p>
+    <p>We met at a table, found a question, or stumbled through the same digital doorway. If you'd like to hear from us, leave a small note.</p>
+  </header>
+  <section class="notice">
+    <strong>THIS IS ABUNDENT, NOT AN OFFICIAL ORGANIZER SIGNUP.</strong>
+    Your message goes privately to the independent Static Collective / Abundent project. It does not enroll you in the Coalition of Care, a grocery effort, a church, or an event. We won't introduce you to another person or group without asking first.
+  </section>
+  <section class="card" aria-labelledby="card-heading">
+    <span class="stamp">✳ ONE PERSON · ONE INTEREST · ONE POSSIBLE NEXT STEP</span>
+    <h2 id="card-heading">Leave a note for the porch.</h2>
+    <form id="contact-form" autocomplete="on">
+      <div class="fields">
+        <label>Your name <span class="optional">(optional)</span>
+          <input id="contact-name" name="name" autocomplete="name" maxlength="100" placeholder="Whatever you'd like us to call you">
+        </label>
+        <label>Email address <span class="required">*</span>
+          <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="you@example.com">
+        </label>
+      </div>
+      <label>What interests you most? <span class="required">*</span>
+        <select id="contact-interest" name="interest" required>
+          <option value="" selected disabled>Choose a doorway…</option>
+          <option value="grocery">Community grocery / The Garden</option>
+          <option value="potluck">Shared meals / hosting a table</option>
+          <option value="volunteer">Helping / volunteering</option>
+          <option value="arts">Music, worship, arts / Harmony Park ideas</option>
+          <option value="technology">Websites, tools / building things</option>
+          <option value="resources">Something I can offer / a resource</option>
+          <option value="general">Something else / just stay in touch</option>
+        </select>
+      </label>
+      <label>A few words, if you'd like <span class="optional">(optional)</span>
+        <textarea id="contact-note" name="note" rows="4" maxlength="1200" placeholder="What caught your attention? What could we make possible?"></textarea>
+      </label>
+      <div class="trap" aria-hidden="true"><label>Leave this field blank<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <label class="agreement"><input type="checkbox" id="contact-consent" required><span><strong>Yes, you may email me</strong> about this interest and closely related Abundent updates. I can ask you to stop at any time by replying. This is not permission to share my contact information with partner groups.</span></label>
+      <p class="privacy"><strong>Where it goes:</strong> your name (if given), email, chosen interest, note, and consent are saved privately for Abundent follow-up. No account, public participant list, or automatic forwarding. Don't include sensitive information about yourself or other people.</p>
+      <button class="submit" id="contact-submit" type="submit">✉ SEND MY NOTE →</button>
+      <p id="contact-status" class="status" role="status" aria-live="polite"></p>
+      <noscript><p class="status error">JavaScript is needed to send this form. Nothing has been sent.</p></noscript>
+    </form>
+  </section>
+  <section class="next"><span class="stamp">A QUESTION WORTH CARRYING</span>
+    <h2>What is one small thing we could actually do together?</h2>
+    <p>An offer isn't an obligation. A note isn't a commitment. We'll begin by listening.</p>
+    <a href="/gather/">EXPLORE THE NEXT TABLE ↗</a> <a href="/">ASK JAR;VIS ↗</a>
+  </section>
+  <footer>© 2026 THE STATIC COLLECTIVE · INDEPENDENT ABUNDENT CONTACT DESK · <a href="/">HOME</a><br>ONE CHAIR IS OPEN · NO ONE IS AUTOMATICALLY SIGNED UP FOR ANY PARTNER ORGANIZATION</footer>
+</main>
+</body></html>
