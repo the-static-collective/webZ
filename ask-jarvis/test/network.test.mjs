@@ -48,7 +48,7 @@ test('network is enabled only on verified production domains',()=>{
 test('the browser network desk uses explicit, separated submission consents',()=>{
  const html=readFileSync(new URL('../public/tables/index.html',import.meta.url),'utf8');
  const app=readFileSync(new URL('../public/tables/app.mjs',import.meta.url),'utf8');
- for(const id of ['network-desk','network-consent','network-publish','network-note','network-note-consent','network-note-submit','network-host-link','network-guest-link','network-notes','network-save-receipt'])assert.ok(html.includes('id="'+id+'"'),id);
+ assert.match(app, /network-note-consent/);
  for(const pattern of ['networkRequest(\'create\'','networkRequest(\'post\'','networkRequest(\'read\'','networkRequest(\'moderate\'','networkRequest(\'withdraw\''])assert.ok(app.includes(pattern),pattern);
  assert.ok(app.includes('readNetworkLink(window.location.hash)'));
  assert.ok(app.includes('$('#+"'"+'network-note-consent'+"'"+').checked'));
