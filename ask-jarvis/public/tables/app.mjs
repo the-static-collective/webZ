@@ -1,11 +1,13 @@
-import {makeInvite,readInvite,inviteLink,nextFields,suggestDay} from './model.mjs';
+import {makeInvite,readInvite,inviteLink,nextFields,suggestDay,dayAfter} from './model.mjs';
 import {readTableSeed,draftFromQuestion} from '../table-bridge.mjs';
-import {prepareNextTable,privateWitnessText,witnessFingerprint} from './afterglow.mjs';
+import {prepareNextTable,privateWitnessText,witnessFingerprint,publicRelay} from './afterglow.mjs';
+import {networkRequest,readNetworkLink,networkLink,publicCreatePayload,publicNotePayload,liveNetworkOrigin} from './network.mjs';
 
 const $ = selector => document.querySelector(selector);
 const keys=['title','purpose','date','time','venue','host'];
 const form=$('#open-form');
 let current=null, prior=null, witnessSavedSnapshot=null;
+let ownLocalInvite=false, network=null, networkBusy=false, lastWithdraw=null, pendingNetworkParent=null;
 const witnessSnapshot=()=>witnessFingerprint(current,$('#happened').value,$('#unfinished').value);
 const hasPrivateNotes=()=>Boolean($('#happened').value.trim()||$('#unfinished').value.trim());
 
@@ -31,6 +33,7 @@ function show(card) {
   lineage.textContent=trail?'This invitation follows these previous table labels: '+trail+' → '+card.id+'. Labels are not proof of attendance or agreement.':'';
   $('#share-link').value=inviteLink(card,window.location.href);
   $('#pass-table').disabled=false;
+  $('#network-publish').disabled=!ownLocalInvite||!liveNetworkOrigin(window.location.href);
   setText('#next-table-status','Table '+card.id+' is an invitation only. After a real gathering, keep your own notes below—or choose another table.');
   message('Your link is ready. Sharing it is your choice; no one has been contacted.');
 }
@@ -49,10 +52,16 @@ form.addEventListener('submit',event=>{
   let made;
   try{made=makeInvite(formFields(),prior);}
   catch(err){window.alert('Please add a table name, a purpose, and a valid date and time.');return;}
+  if(prior && network && network.table?.title===current?.title) pendingNetworkParent={id:network.id,token:network.token};
   const link=inviteLink(made,window.location.href);
   // Only the invitation card goes into the hash; nothing is submitted.
   window.history.replaceState(null,'',link);
   prior=null;
+  ownLocalInvite=true;
+  network=null;lastWithdraw=null;
+  $('#network-room').hidden=true;
+  $('#network-consent').checked=false;
+  setText('#network-publish-status','Your new invitation is local. Check the separate network consent box if you also want to submit these fields to Abundent. Nothing has been uploaded.');
   $('#form-heading').textContent='OPEN A TABLE.';
   $('#parent-note').hidden=true;
   // A newly created invite starts a distinct private record. No prior person's
@@ -163,4 +172,249 @@ try{
 }catch{
   const p=$('#empty-card').querySelector('p');
   p.textContent='This invitation link is damaged or unsupported. No information was accepted. Ask the sender for a fresh link, or open a new table.';
+}
+
+
+/* NETWORK DESK 003 — separate, permission-scoped persistent ledger.
+   The private afterglow is intentionally unreachable from this transport. */
+const $netStatus=(id,value)=>setText(id,value);
+const netError=(error)=>({
+ TOO_MANY_REQUESTS:'This table has reached a submission limit. Please try another day.',
+ RATE_LIMIT_UNAVAILABLE:'The network limit service is unavailable. Nothing was confirmed.',
+ INVITATION_NOT_FOUND:'This table or credential was not found. Ask for a fresh link.',
+ TABLE_IS_CLOSED:'The host has closed this table.',
+ COULD_NOT_CREATE_TABLE:'The network did not confirm creation; your local invitation is unchanged.',
+ COULD_NOT_POST_NOTE:'The network did not confirm this contribution.',
+ STORAGE_UNAVAILABLE:'The network is temporarily unavailable.'
+})[error?.message]||'The network could not confirm this action. Your private notes remain in this browser.';
+const localFile=(name,body)=>{
+ const object=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'}));
+ const a=document.createElement('a');a.href=object;a.download=name;document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(object),1000);
+};
+const withNetwork=async(task)=>{
+ if(networkBusy)return;
+ networkBusy=true;
+ try{await task();}finally{networkBusy=false;}
+};
+function renderNetwork() {
+ if(!network)return;
+ $('#network-room').hidden=false;
+ $('#network-table-title').textContent=network.table.title;
+ $('#network-table-purpose').textContent=network.table.purpose;
+ $('#network-table-details').textContent=
+   'Scheduled: '+network.table.date+(network.table.time?' · '+network.table.time:'')+
+   ' · Meeting instructions: '+(network.table.venue||'Ask the host')+
+   ' · This is an invitation, not proof the gathering occurred.';
+ const guestKey=network.role==='host'?network.guestKey:network.token;
+ $('#network-guest-link').value=guestKey?networkLink(network.id,guestKey):'';
+ const hostTools=$('#network-host-tools');
+ hostTools.hidden=network.role!=='host';
+ $('#network-host-link').value=network.role==='host'?networkLink(network.id,network.token):'';
+ $netStatus('#network-link-status',network.role==='host'
+   ? 'You hold the private host key. Save the host receipt separately before leaving. Guest links can be passed voluntarily.'
+   : 'Guest access: you can submit a note for human review. You cannot see private pending submissions or manage this table.');
+ const wrap=$('#network-notes');wrap.replaceChildren();
+ for(const note of network.notes||[]) {
+   const item=document.createElement('article');item.className='network-note';
+   const label=document.createElement('strong');
+   label.textContent=note.kind.toUpperCase()+' · '+note.status+(note.nickname?' · '+note.nickname:'');
+   const body=document.createElement('p');body.textContent=note.body;
+   const small=document.createElement('small');small.textContent='One submitted account, not verified attendance, authority or agreement.';
+   item.append(label,body,small);
+   if(network.role==='host'){
+     const actions=document.createElement('div');actions.className='network-note-actions';
+     for(const decision of ['VISIBLE','HIDDEN']){
+       const button=document.createElement('button');button.type='button';button.className='button soft';
+       button.textContent=decision==='VISIBLE'?'APPROVE / SHOW':'HIDE';
+       button.disabled=note.status===decision;
+       button.addEventListener('click',()=>void withNetwork(async()=>{
+         try{
+           await networkRequest('moderate',{id:network.id,token:network.token,noteId:note.id,decision});
+           await refreshNetwork();
+           $netStatus('#network-note-status','The contribution is now '+decision.toLowerCase()+'. Host moderation is not evidence that an event took place.');
+         }catch(error){$netStatus('#network-note-status',netError(error));}
+       }));
+       actions.append(button);
+     }
+     item.append(actions);
+   }
+   wrap.append(item);
+ }
+ if(!network.notes?.length){
+   const p=document.createElement('p');
+   p.textContent='No submissions visible to you yet. A link alone does not mean anybody attended.';
+   wrap.append(p);
+ }
+}
+async function refreshNetwork(){
+ if(!network)return;
+ const info=await networkRequest('read',{id:network.id,token:network.token});
+ network={...network,...info,id:network.id,token:network.token,guestKey:info.guestKey||network.guestKey};
+ renderNetwork();
+}
+$('#network-consent').addEventListener('change',()=>{
+ $netStatus('#network-publish-status',$('#network-consent').checked
+   ? 'Consent selected. Press OPEN THIS TABLE ON THE NETWORK to submit the invitation fields. No private notes are sent.'
+   : 'Not submitted. No network record will be created without your separate action.');
+});
+$('#network-publish').addEventListener('click',()=>void withNetwork(async()=>{
+ if(!ownLocalInvite||!current||!$('#network-consent').checked) {
+   $netStatus('#network-publish-status','Make your own local invitation and explicitly approve its submission first.');
+   return;
+ }
+ if(!liveNetworkOrigin(window.location.href)) {
+   $netStatus('#network-publish-status','Network posting is available on the live abundent.org domain, not this protected preview.');
+   return;
+ }
+ if(!window.confirm('Submit ONLY the invitation title, purpose, date, time, venue and host label to Abundent? Your private notes are NOT included. Anyone with the guest link can see the table details and propose notes.'))return;
+ try{
+   const parentFields=pendingNetworkParent?{parentId:pendingNetworkParent.id,parentToken:pendingNetworkParent.token}:{};
+   const created=await networkRequest('create',{...publicCreatePayload(current),...parentFields});
+   if(!created?.table?.id||!created.hostKey||!created.guestKey)throw Error('INCOMPLETE_CREATE');
+   network={id:created.table.id,token:created.hostKey,guestKey:created.guestKey,role:'host',table:created.table,notes:[]};
+   pendingNetworkParent=null;
+   $('#network-consent').checked=false;
+   $('#network-publish').disabled=true;
+   $netStatus('#network-publish-status','Network table created. Save your private HOST KEY RECEIPT below before leaving. This is not an RSVP or automatic public directory listing.');
+   renderNetwork();
+   $('#network-room').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(error){$netStatus('#network-publish-status',netError(error));}
+}));
+$('#network-pass').addEventListener('click',()=>{
+ if(!network)return;
+ const table=network.table;
+ let suggestion;
+ try {
+   suggestion={title:'The next table',purpose:'What should we carry forward from '+table.title+'?',
+     date:dayAfter(table.date,7),time:table.time||'',venue:'',host:''};
+ }catch{
+   $netStatus('#network-pass-status','This table date is not valid for a seven-day suggestion; open a fresh table instead.');
+   return;
+ }
+ if(hasPrivateNotes() && witnessSnapshot()!==witnessSavedSnapshot){
+   const go=window.confirm('You have private afterglow notes that were not downloaded since your last edit. They will stay in this tab until you create a new invitation, which will clear them. Continue drafting?');
+   if(!go)return;
+ }
+ pendingNetworkParent={id:network.id,token:network.token};
+ prior=null;
+ fill(suggestion);
+ setText('#form-heading','A NEW INDEPENDENT TABLE.');
+ const note=$('#parent-note');
+ note.hidden=false;
+ note.textContent='An OPTIONAL next gathering from network table '+network.id+'. When you later opt in to the network again, the new record may point back to this invitation as a reference. This does not prove either gathering occurred or carry any private notes.';
+ $netStatus('#network-pass-status','Editable next-table draft prepared. No invitation or network record was created. Review it, create your invitation, and separately opt in to the network if desired.');
+ $('#open').scrollIntoView({behavior:'smooth',block:'start'});
+ $('#title').focus({preventScroll:true});
+});
+$('#network-copy-guest').addEventListener('click',async()=>{
+ const field=$('#network-guest-link');
+ try{await navigator.clipboard.writeText(field.value);$netStatus('#network-link-status','Guest link copied. Share only with the people you choose.');}
+ catch{field.focus();field.select();$netStatus('#network-link-status','Select and copy the guest link manually.');}
+});
+$('#network-save-receipt').addEventListener('click',()=>{
+ if(network?.role!=='host')return;
+ localFile('abundent-my-private-table-host-key.txt',[
+  'ABUNDENT SEVENTH TABLE / PRIVATE HOST KEY RECEIPT',
+  'Do not share this file or host link. It grants moderation power.',
+  'Lost keys cannot be recovered here; download and keep this yourself.',
+  'Table ID: '+network.id,
+  'Host link: '+networkLink(network.id,network.token),
+  'Guest link: '+networkLink(network.id,network.guestKey),
+  '',
+  'No attendance or endorsement is established by this record.'
+ ].join('\n')+'\n');
+ $netStatus('#network-link-status','Private receipt download requested. Check the file before closing the page.');
+});
+for(const control of ['#network-kind','#network-nickname','#network-note']){
+ $(control).addEventListener(control==='#network-kind'?'change':'input',()=>{
+   $('#network-note-consent').checked=false;
+   $netStatus('#network-note-status','The submission changed. Review and approve the exact public contribution again.');
+ });
+}
+$('#network-prefill-question').addEventListener('click',()=>{
+ try {
+   const relay=publicRelay($('#relay-question').value,$('#relay-approved').checked);
+   if(!relay)throw Error('NO_APPROVED_PUBLIC_QUESTION');
+   $('#network-kind').value='question';
+   $('#network-note').value=relay;
+   $('#network-note-consent').checked=false;
+   $netStatus('#network-note-status','Your previously approved question was copied into this editor ONLY. Nothing has been submitted to the network. Review the words and give separate network consent.');
+   $('#network-note').focus();
+ }catch{$netStatus('#network-note-status','Enter and approve one safe public question in the closing circle first. Private notes cannot be imported.');}
+});
+$('#network-note-submit').addEventListener('click',()=>void withNetwork(async()=>{
+ if(!network||!$('#network-note-consent').checked){
+   $netStatus('#network-note-status','Please approve this exact public contribution separately from any invitation consent.');
+   return;
+ }
+ if(!liveNetworkOrigin(window.location.href)){
+   $netStatus('#network-note-status','Network posting is enabled only on live abundent.org.');
+   return;
+ }
+ try {
+   const entry=publicNotePayload($('#network-kind').value,$('#network-nickname').value,$('#network-note').value);
+   const result=await networkRequest('post',{id:network.id,token:network.token,...entry});
+   if(!result.note?.id||!result.withdrawKey)throw Error('UNCONFIRMED_NOTE');
+   lastWithdraw={id:network.id,token:network.token,noteId:result.note.id,withdrawKey:result.withdrawKey};
+   $('#network-withdraw-id').value=result.note.id;
+   $('#network-withdraw-key').value=result.withdrawKey;
+   $('#network-save-withdraw').hidden=false;
+   $('#network-note-consent').checked=false;
+   $('#network-note').value='';
+   $netStatus('#network-note-status',result.note.status==='PENDING'
+     ? 'Received. Your note is PENDING HOST REVIEW and is not visible to other guests. Download its withdrawal receipt below.'
+     : 'Received and visible to guests of this table. Download its withdrawal receipt below.');
+   $netStatus('#network-withdraw-status','SAVE THE ONE-TIME RECEIPT. The secret withdrawal code will not be displayed again by the server.');
+   await refreshNetwork();
+ }catch(error){$netStatus('#network-note-status',netError(error));}
+}));
+$('#network-save-withdraw').addEventListener('click',()=>{
+ if(!lastWithdraw)return;
+ localFile('abundent-my-note-withdrawal.txt',[
+  'ABUNDENT / PRIVATE NOTE WITHDRAWAL RECEIPT',
+  'Keep this private. It authorizes removal of one specific note.',
+  'Open your guest or host link, then enter the following in Withdraw My Contribution:',
+  'Table link: '+networkLink(lastWithdraw.id,lastWithdraw.token),
+  'Note ID: '+lastWithdraw.noteId,
+  'Withdrawal code: '+lastWithdraw.withdrawKey,
+  'Nothing has been withdrawn merely by saving this receipt.'
+ ].join('\n')+'\n');
+ $netStatus('#network-withdraw-status','Withdrawal receipt download requested. Check the file before leaving.');
+});
+$('#network-withdraw').addEventListener('click',()=>void withNetwork(async()=>{
+ if(!network)return;
+ const noteId=$('#network-withdraw-id').value.trim();
+ const withdrawKey=$('#network-withdraw-key').value.trim();
+ if(!/^[0-9a-f-]{36}$/i.test(noteId)||!/^[A-Za-z0-9_-]{43}$/.test(withdrawKey)) {
+   $netStatus('#network-withdraw-status','Enter both values from your private withdrawal receipt.');
+   return;
+ }
+ if(!window.confirm('Permanently remove this one contribution from the network table? This cannot be undone.'))return;
+ try {
+   await networkRequest('withdraw',{id:network.id,token:network.token,noteId,withdrawKey});
+   $('#network-withdraw-id').value='';$('#network-withdraw-key').value='';
+   $('#network-save-withdraw').hidden=true;lastWithdraw=null;
+   $netStatus('#network-withdraw-status','Contribution removed from this network table. Your other private notes were not touched.');
+   await refreshNetwork();
+ }catch(error){$netStatus('#network-withdraw-status',netError(error));}
+}));
+$('#network-refresh').addEventListener('click',()=>void withNetwork(async()=>{
+ try{await refreshNetwork();$netStatus('#network-link-status','Current visible notes refreshed.');}
+ catch(error){$netStatus('#network-link-status',netError(error));}
+}));
+const arrivalNet=readNetworkLink(window.location.hash);
+if(arrivalNet) {
+ if(!liveNetworkOrigin(window.location.href)) {
+   $netStatus('#network-publish-status','Network participation works on the live abundent.org origin. This preview cannot use its network service.');
+ }else {
+   void withNetwork(async()=>{
+     try {
+       const found=await networkRequest('read',{id:arrivalNet.id,token:arrivalNet.key});
+       network={...found,id:arrivalNet.id,token:arrivalNet.key};
+       renderNetwork();
+       $netStatus('#network-publish-status','You entered with a network link. It does not enroll you or notify anyone. You may contribute voluntarily below.');
+     }catch(error){$netStatus('#network-publish-status',netError(error));}
+   });
+ }
 }

@@ -18,7 +18,8 @@
  <h1>THE<br><em>SEVENTH</em><br>TABLE<span class="spark">✳</span></h1>
  <p class="lead">Invite people to a table. Gather in real life. Remember what happened. Then pass the table to somebody new.</p>
  <p class="sublead">The network isn't the website. The website helps us remember where to meet.</p>
- <a class="button primary" href="#open">✳ Open a table</a> <a class="button soft" href="#how">How the chairs move ↓</a>
+ <p class="sublead"><a class="button dark" href="/tables/live/">✳ THE LIVING CHAIR · LIVE ROOMS ↗</a> <small>Account-free persistent rooms, guest RSVPs, moderated question cards, host withdrawal and next-table chaining. This existing live path remains fully available.</small></p>
+ <a class="button primary" href="#open">✳ Open a table</a> <a class="button soft" href="#network-desk">✳ Optional network desk ↓</a> <a class="button soft" href="#how">How the chairs move ↓</a>
  </div>
  <div class="poster" aria-label="Seven day rhythm">
    <span class="poster-top">A VERY SOCIAL NETWORK</span>
@@ -64,6 +65,7 @@
   <label for="share-link">YOUR SHAREABLE INVITATION LINK</label><input id="share-link" readonly aria-label="Your shareable table invitation URL">
   <div class="actions"><button id="copy-link" class="button dark" type="button">COPY INVITATION LINK</button><button id="print-invite" class="button soft" type="button">PRINT THIS CARD</button></div>
   <p id="copy-status" class="muted" role="status">Only people you send the link to will receive it.</p>
+  <p class="muted"><a href="#network-desk">✳ Want a persistent question box? Optionally submit this table through the network →</a></p>
   </div>
  </div>
  </div>
@@ -102,7 +104,83 @@
  </div>
  <p class="fine"><strong>Right to end:</strong> You do not have to pass the table. A downloaded draft is not evidence that others attended or agreed. A carried question is not an endorsement, RSVP, or completed real-world act.</p>
 </section>
+<section class="network-desk" id="network-desk" aria-labelledby="network-heading">
+ <div class="network-kicker">✳ THE OPTIONAL NETWORK / HUMAN-SCALE LEDGER 003</div>
+ <h2 id="network-heading">PUT A CHAIR ON THE NETWORK.</h2>
+ <p class="network-lead">Sharing a link is enough for a small gathering. But when you want a persistent space for questions, offers, needs, and follow-up, you can deliberately add your table to Abundent's independent account-free network.</p>
+ <div class="network-choice">
+  <div class="network-half">
+   <h3>01 / SHARE AN INVITATION</h3>
+   <p>Use the printable and portable link above. Nothing is stored on our network. People pass it themselves.</p>
+   <strong>NO ACCOUNT · NO DATABASE SUBMISSION</strong>
+  </div>
+  <div class="network-half featured">
+   <h3>02 / OPEN A NETWORK TABLE</h3>
+   <p>With your permission, save a <em>separate</em> account-free copy of your table to Abundent. Visitors with the guest link may submit questions or offers for host review.</p>
+   <strong>OPT-IN · PRIVATE HOST KEY · HUMAN MODERATION</strong>
+  </div>
+ </div>
+ <div class="network-publish" id="network-publish-area">
+  <h3>YOUR DECISION: SUBMIT THIS TABLE?</h3>
+  <p>First make an invitation above. To open it on the network, we send <strong>only</strong> its title, purpose, date, time, meeting instructions and optional host label. Do not include private addresses, contact information or other people's identifying details. <strong>Personal afterglow notes and unapproved questions will never be included.</strong></p>
+  <label class="network-approve" for="network-consent"><input type="checkbox" id="network-consent"><span>Yes. I am opening an independent Abundent network table with these invitation fields. I can share its guest link by choice. I understand this is not a Coalition, church, grocery or partner enrollment.</span></label>
+  <button type="button" class="button primary" id="network-publish" disabled>✳ OPEN THIS TABLE ON THE NETWORK</button>
+  <p id="network-publish-status" role="status">Create your own local invitation to enable this optional network submission. No account required.</p>
+ </div>
+ <div class="network-room" id="network-room" hidden>
+  <div class="network-room-label">✳ ACCOUNT-FREE NETWORK TABLE · INVITATION, NOT ATTENDANCE PROOF</div>
+  <h3 id="network-table-title"></h3>
+  <p id="network-table-purpose"></p>
+  <p id="network-table-details"></p>
+  <div class="network-keycard">
+   <label for="network-guest-link">GUEST LINK · PASS THIS TO WILLING PEOPLE</label>
+   <input id="network-guest-link" readonly aria-label="Guest network table link">
+   <button id="network-copy-guest" type="button" class="button soft">COPY GUEST LINK</button>
+   <div id="network-host-tools" hidden>
+    <label for="network-host-link">HOST KEY LINK · PRIVATE, CONTROLS MODERATION</label>
+    <input id="network-host-link" readonly aria-label="Private host moderation link">
+    <button id="network-save-receipt" type="button" class="button dark">↓ DOWNLOAD PRIVATE HOST KEY RECEIPT</button>
+    <p class="fine">The host link is a bearer credential. Anybody with it can moderate or delete network contributions. Never send it as an invitation. Save the receipt yourself: this prototype does not recover lost keys or store them in your browser between visits.</p>
+   </div>
+   <p id="network-link-status" role="status">A guest link allows voluntary submissions; it is not a reservation or group membership.</p>
+  </div>
+  <div class="network-pass-row">
+   <button id="network-pass" type="button" class="button soft">⤳ DRAFT A NEXT TABLE FROM THIS NETWORK TABLE · +7 DAYS</button>
+   <p id="network-pass-status" role="status">Anyone with this link may propose an independent next gathering. A link between tables is not proof that either gathering happened or that anybody agreed.</p>
+  </div>
+  <div class="network-contributions">
+   <h3>THE OPEN QUESTION BOX.</h3>
+   <p>One contribution at a time. A guest's words stay <strong>pending host review</strong> until the holder of the private host key makes them visible. Hosts can post directly, and those contributions are visible to guests immediately.</p>
+   <label for="network-kind">WHAT KIND OF CONTRIBUTION?</label>
+   <select id="network-kind"><option value="question">A question</option><option value="offer">An offer</option><option value="need">A need</option><option value="witness">My observation (not verified)</option><option value="rsvp">My possible attendance (not confirmed)</option></select>
+   <label for="network-nickname">NICKNAME (OPTIONAL, SHOWN WITH YOUR NOTE)</label>
+   <input id="network-nickname" maxlength="36" placeholder="A neighbor">
+   <label for="network-note">ONE PUBLIC CONTRIBUTION · 2–420 CHARACTERS</label>
+   <textarea id="network-note" maxlength="420" rows="4" placeholder="Could we bring together a few volunteers to compare food access ideas?"></textarea>
+   <div class="network-relay"><button id="network-prefill-question" class="button soft" type="button">↗ COPY MY APPROVED QUESTION INTO THIS EDITOR</button><small>Prefill only. You must review and approve a separate submission.</small></div>
+   <label class="network-approve" for="network-note-consent"><input id="network-note-consent" type="checkbox"><span>I intentionally submit <strong>this exact public text</strong> to this Abundent network table. It contains no private information, other people's stories without permission, or unverified claim of group endorsement.</span></label>
+   <button id="network-note-submit" type="button" class="button primary">SUBMIT MY NOTE TO THIS TABLE →</button>
+   <p id="network-note-status" role="status">Nothing has been submitted.</p>
+  </div>
+  <div class="network-notes-block">
+   <h3>THE TABLE'S SUBMISSIONS</h3>
+   <p id="network-visibility-note">This network ledger records submissions, not proof of a real gathering. Guest entries require host review; a host can hide entries.</p>
+   <div id="network-notes" aria-live="polite"></div>
+   <button id="network-refresh" type="button" class="button soft">↻ REFRESH THIS TABLE</button>
+  </div>
+  <div class="network-withdraw">
+   <h3>WITHDRAW MY CONTRIBUTION.</h3>
+   <p>A successful submission gives you a <strong>one-time withdrawal receipt</strong>. Save it. Enter its note ID and secret code below if you want to remove your contribution from this table. The network doesn't store the code in plaintext.</p>
+   <label for="network-withdraw-id">NOTE ID FROM MY RECEIPT</label><input id="network-withdraw-id" placeholder="UUID of my note" autocomplete="off">
+   <label for="network-withdraw-key">PRIVATE WITHDRAWAL CODE</label><input id="network-withdraw-key" type="password" placeholder="Private 43-character code" autocomplete="off">
+   <button id="network-save-withdraw" type="button" class="button dark" hidden>↓ DOWNLOAD MY ONE-TIME WITHDRAWAL RECEIPT</button>
+   <button id="network-withdraw" type="button" class="button soft">REMOVE MY NOTE FROM THIS TABLE</button>
+   <p id="network-withdraw-status" role="status">Withdrawal requires the private code provided on submission. No account is required.</p>
+  </div>
+ </div>
+ <p class="network-footer">This is an independent Abundent ledger, not an official organizer network or a public directory. No automatic invitations, RSVPs, attendee verification, emails, or data sharing with partner organizations. You choose the circle, the words, and whether to submit anything at all.</p>
+</section>
 <section class="footer-note"><div><strong>7 DAYS IS A RHYTHM, NOT A REQUIREMENT.</strong><p>Move the date. Change the host. Branch into several circles. Or let a table end. Nobody becomes a member by receiving a link, and nobody owes the next meeting.</p></div><div class="stamp">THE HOUSE TAKES ATTENDANCE.<br>THE CHAIRS MOVE.</div></section>
-<footer><a href="/doors/">← CHOOSE A DOOR</a> · <a href="/">ASK JAR;VIS</a> · <a href="/gather/">THE NEXT TABLE × GARDEN COMMONS</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>Independent experiment. No official Coalition, Waseca grocery or church enrollment, organizer endorsement, delivery service, database or shared attendance record.</p></footer>
+<footer><a href="/doors/">← CHOOSE A DOOR</a> · <a href="/">ASK JAR;VIS</a> · <a href="/gather/">THE NEXT TABLE × GARDEN COMMONS</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>Independent experiment. No official Coalition, Waseca grocery or church enrollment, organizer endorsement, delivery service or verified attendance record. Optional network tables retain only explicitly submitted fields and separately approved notes.</p></footer>
 </main>
 </body></html>
