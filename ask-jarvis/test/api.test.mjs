@@ -9,9 +9,10 @@ test('both health adapters identify the public return release and manual-only br
   let actual;
   const res={setHeader(){},status(){return this;},json(value){actual=value;}};
   await healthHandler({method:'GET'},res);
-  assert.equal(actual.release,'public-return-002');
+  assert.equal(actual.release,'public-return-003');
   assert.deepEqual(actual.returns,expected.returns);
   assert.equal(actual.bridge,'manual-export-only');
+  assert.ok(actual.returns.includes('plan'));
 });
 
 test('Worker bounds chunked input, rejects invalid kinds and methods before source fetch', async()=>{
