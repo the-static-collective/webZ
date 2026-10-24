@@ -6,7 +6,7 @@ import {assemble} from '../src/worker.mjs';
 const root=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
 const client=readFileSync(new URL('../public/app.mjs',import.meta.url),'utf8');
 const privacy=readFileSync(new URL('../vercel.json',import.meta.url),'utf8');
-const fake=async()=>new Response('# Independent project source\nA public source to inspect, but not a venue booking or an owner's consent.\n',{status:200});
+const fake=async()=>new Response('# Independent project source\nA public source to inspect, but not a venue booking or any owner consent.\n',{status:200});
 test('public café has clear 3-stage interactive entry and keeps originals',()=>{
   for(const s of ['CAFÉ MODE','ONE QUESTION.','id="received-note"','data-kind="plan"','id="copy-question"','id="copy-next"','id="handoff-link"','href="/gather/"','href="/games/tomorrow/"'])assert.ok(root.includes(s),s);
   assert.ok(client.includes('readHandoff(window.location.hash)'));
