@@ -1,6 +1,7 @@
 import {verifyReturn} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
+import {makeTableSeedLink} from './table-bridge.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
@@ -28,6 +29,7 @@ function cleanAudio() {
 function clearReturn() {
   last=null;reply.hidden=true;cleanAudio();
   $('#handoff-link').value='';
+  $('#question-table-status').textContent='Nothing moves until you choose. Do not carry contact details or other people\'s private information.';
   $('#handoff-status').textContent='Do not include names, phone numbers or private details. The question appears in the shared URL.';
   $('#invitation-editor').value='';$('#return-body').textContent='';
   $('#return-doors').replaceChildren();$('#encounter-gaps').replaceChildren();
@@ -126,6 +128,16 @@ async function prepareHandoff(question,returnKind) {
 }
 $('#copy-question').addEventListener('click',()=>{if(last)void prepareHandoff(last.question,last.return.kind);});
 $('#copy-next').addEventListener('click',()=>{if(last)void prepareHandoff(last.nextQuestion,'auto');});
+$('#start-table-from-question').addEventListener('click',()=>{
+  if(!last)return;
+  try{
+    // This is a human-triggered, same-site transition carrying only one public-safe question.
+    const link=makeTableSeedLink(window.location.href,last.question);
+    window.location.assign(link);
+  }catch{
+    $('#question-table-status').textContent='That question cannot safely travel in a URL. Remove names or contact details and ask a revised question first.';
+  }
+});
 window.addEventListener('pagehide',()=>{invalidate();});
 
 form.addEventListener('submit',async event=>{

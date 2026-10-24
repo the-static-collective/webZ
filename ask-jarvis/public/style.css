@@ -100,3 +100,15 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .contact-door small{display:block;color:#576c61;font:11px/1.5 Verdana,sans-serif;margin-top:12px}
 @media(max-width:650px){.contact-door{margin:18px 12px;padding:15px}.contact-door-button{display:block;text-align:center}}
 @media print{.contact-door{display:none!important}}
+
+
+/* Question → Table is a deliberate human crossing, not an automatic invite. */
+.question-table-bridge{margin:23px 0 19px;padding:19px 21px;background:linear-gradient(132deg,#fff6d5,#e1f5e5);border:3px double #508776;box-shadow:4px 4px 0 #b5cbb7}
+.question-table-stamp{font:bold 11px/1.5 "Courier New",monospace;letter-spacing:1px;color:#9b502e}
+.question-table-bridge h3{font:bold 27px Georgia,serif;margin:8px 0!important;border:0!important;padding:0!important;color:#215548}
+.question-table-bridge p{font:14px/1.55 Georgia,serif;margin:10px 0}
+#start-table-from-question{background:#27594c;color:#fff5d9;border:3px outset #80a995;padding:12px 16px;font:bold 14px "Courier New",monospace;cursor:pointer;max-width:100%}
+#start-table-from-question:hover,#start-table-from-question:focus-visible{background:#954e2e;color:#fff}
+.question-table-status{font:11px/1.5 Verdana,sans-serif!important;color:#486958!important}
+@media(max-width:650px){.question-table-bridge{margin:16px 0;padding:16px 12px}.question-table-bridge h3{font-size:23px}#start-table-from-question{width:100%}}
+@media print{.question-table-bridge{display:none!important}}

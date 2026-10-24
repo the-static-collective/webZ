@@ -1,4 +1,5 @@
 import {makeInvite,readInvite,inviteLink,nextFields,suggestDay} from './model.mjs';
+import {readTableSeed,draftFromQuestion} from '../table-bridge.mjs';
 
 const $ = selector => document.querySelector(selector);
 const keys=['title','purpose','date','time','venue','host'];
@@ -100,6 +101,27 @@ try{
     show(arrival);
     setText('#form-heading','OPEN YOUR OWN TABLE.');
     message('You arrived by invitation. It is not an RSVP; the sender has not been notified.');
+  } else {
+    const question=readTableSeed(window.location.hash);
+    if(question) {
+      const draft=draftFromQuestion(question);
+      fill({title:draft.title,purpose:draft.purpose,date:$('#date').value});
+      const note=$('#jarvis-seed');
+      note.hidden=false;
+      setText('#seed-question',question);
+      setText('#seed-disclosure',draft.shortened
+        ? 'This original question is longer than the 270-character invitation purpose. The draft below is shortened and marked with an ellipsis. Please revise it before sharing.'
+        : 'The question has been prefilled as an editable purpose. Your original words are displayed above for comparison.');
+      setText('#form-heading','TURN A QUESTION INTO AN INVITATION.');
+      // Remove the transported question from the address bar. Nothing is stored remotely.
+      window.history.replaceState(null,'',window.location.pathname+window.location.search);
+    } else if(window.location.hash.startsWith('#from=jarvis')) {
+      const note=$('#jarvis-seed');
+      note.hidden=false;
+      setText('#seed-question','No question accepted.');
+      setText('#seed-disclosure','The handoff was damaged, duplicated, or contained contact information. Nothing was imported.');
+      window.history.replaceState(null,'',window.location.pathname+window.location.search);
+    }
   }
 }catch{
   const p=$('#empty-card').querySelector('p');
