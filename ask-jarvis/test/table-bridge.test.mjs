@@ -33,7 +33,7 @@ test('unsupported, duplicate, oversized and contact-bearing arrivals fail closed
   '#from=jarvis&q=Eight+character+question%3F&q=second',
   '#from=jarvis&q=Can+we+organize+a+table%3F&run=1',
   '#from=calendar&q=Can+we+organize+a+table%3F',
-  '#from=jarvis', '#'+ 'A'.repeat(2401)
+  '#from=jarvis', '#'+ 'A'.repeat(5001)
  ]) assert.equal(readTableSeed(hash),null,hash.slice(0,100));
 });
 test('long questions remain visible as originals and only a clearly marked shortened draft enters the invite editor',()=>{
@@ -56,7 +56,7 @@ test('UI offers only an explicit click from verified JAR;VIS result; arrival rem
  assert.match(tables,/id="seed-disclosure"/);
  assert.match(receiver,/readTableSeed\(window\.location\.hash\)/);
  assert.match(receiver,/window\.history\.replaceState/);
- assert.match(receiver,/fill\(\{title:draft\.title,purpose:draft\.purpose\}\)/);
+ assert.match(receiver,/fill\(\{title:draft\.title,purpose:draft\.purpose,date:/);
  assert.match(receiver,/if\(arrival\)/);
  assert.doesNotMatch(receiver,/\bfetch\(|localStorage|sessionStorage/);
 });
