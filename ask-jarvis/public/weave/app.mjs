@@ -1,8 +1,11 @@
 import {makeOpportunity,readOpportunity,opportunityLink} from './model.mjs';
+import {prepareHandoff,verifyHandoff} from './handoff.mjs';
 const $=id=>document.getElementById(id);
 let active=null;
 const display=card=>{
   active=card;
+  $('handoff-reviewed').checked=false;
+  $('handoff-status').textContent='This is a local draft for separate review. No other system receives it.';
   $('blank-card').hidden=true;$('public-card').hidden=false;
   for(const key of ['need','offer','try'])$('card-'+key).textContent=card[key];
   $('share-link').value=opportunityLink(card,window.location.href);
@@ -33,6 +36,25 @@ $('copy').addEventListener('click',async()=>{
   }
 });
 $('print').addEventListener('click',()=>window.print());
+function saveJSON(packet,name){
+ const url=URL.createObjectURL(new Blob([JSON.stringify(packet,null,2)+'\\n'],{type:'application/json'}));
+ const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);
+ a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$('download-handoff').addEventListener('click',async()=>{
+ const status=$('handoff-status');
+ if(!active){status.textContent='Open an opportunity card first.';return;}
+ if(!$('handoff-reviewed').checked){status.textContent='Please review the public wording and check the local-review box first.';return;}
+ try {
+   const packet=await prepareHandoff({opportunity:active,question:$('handoff-question').value,reviewed:true});
+   await verifyHandoff(packet);
+   saveJSON(packet,'abundent-weaving-handoff-002.json');
+   status.textContent='Downloaded one unsigned, unpublished draft. No project was contacted and no human permission was verified.';
+ }catch(error){
+   status.textContent='Could not prepare draft: use a 14–140 character question with no contact information, addresses or sensitive details.';
+ }
+});
+
 $('save').addEventListener('click',()=>{
   const status=$('outcome').selectedOptions[0].textContent;
   const lines=[
