@@ -9,27 +9,37 @@
 <body>
 <div class="ticker" aria-hidden="true"><span>◈ THE WORLD WIDE WEB OF WORLDS ◈ &nbsp;&nbsp; QUESTIONS WELCOME &nbsp;&nbsp; ◈ CONSTRUCTIVE CURIOSITY SINCE THE END OF TIME ◈</span></div>
 <main class="page">
-<div class="topline"><span>THE STATIC COLLECTIVE PRESENTS</span><span class="right">BEST VIEWED WITH CURIOSITY • GENESIS 001</span></div>
+<div class="topline"><span>THE STATIC COLLECTIVE PRESENTS</span><span class="right">BEST VIEWED WITH CURIOSITY • RETURN 002</span></div>
 <header class="mast">
   <div class="mascot" aria-hidden="true"><div class="halo">✳</div><div class="head"><span class="eyes">◉ ◉</span><span class="mouth">└──┘</span></div><div class="tie">◆</div></div>
   <div class="mastwords"><div class="stamp">YOUR FRIENDLY NEIGHBORHOOD QUESTION ENGINE</div>
     <h1><span class="ask">ask</span> <span class="brand">JAR<span class="colon">;</span>VIS<span class="bang">!</span></span></h1>
     <p class="tagline">The Internet is a very big place. <em>You only need one question.</em></p></div>
 </header>
-<div class="strip"><span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> READ-ONLY FIELD EXPERIMENT <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
+<div class="strip"><a class="strip-link" href="/contact/?via=coalition">✉ STAY IN TOUCH</a> <span class="bullet">✳</span> <span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> SMALL THINGS CAN BEGIN HERE <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
 <section class="askbox" aria-label="Ask JAR;VIS">
   <h2>What would you like to make possible?</h2>
   <p>Go ahead. Ask something wonderfully specific, or ridiculously big.</p>
   <form id="question-form">
     <label class="visually-hidden" for="question">Your question</label>
     <textarea id="question" name="question" rows="3" maxlength="360" minlength="8" required autofocus placeholder="How could we help neighbors share extra garden produce?"></textarea>
+    <div class="return-choice"><label for="return-kind">What would you like to take away?</label><select id="return-kind" name="kind"><option value="auto">Surprise me</option><option value="question">A question card</option><option value="invitation">An invitation draft</option><option value="door">A possible source door</option><option value="song">A little song</option><option value="plan">A small real-world field plan</option></select></div>
     <div class="formend"><span class="small">8–360 characters. No personal contact details, please.</span>
       <button id="ask" class="bigbutton" type="submit"><span aria-hidden="true">✳</span> Ask JAR;VIS! <span aria-hidden="true">➜</span></button></div>
   </form>
   <div class="samples"><span>Try one:</span>
     <button type="button" data-example="How could neighbors share extra garden produce?">garden produce</button>
     <button type="button" data-example="Can we make a printable invitation to an arts gathering?">arts gathering</button>
-    <button type="button" data-example="Where should I start exploring the Static Collective code?">explore the code</button></div>
+    <button type="button" data-example="Where should I start exploring the Static Collective code?">explore the code</button>
+    <button type="button" data-example="Could you make a little song about a garden?">a little song</button>
+    <button type="button" data-kind="plan" data-example="Could Harmony Park host a small voluntary community music and arts gathering?">Harmony Park event plan</button></div>
+</section>
+<section class="contact-door" aria-labelledby="contact-door-heading">
+  <span class="contact-door-stamp">✳ THE OCTOBER GATHERING DOESN'T HAVE TO END HERE</span>
+  <h2 id="contact-door-heading">Hey, let's stay in touch.</h2>
+  <p>Have an idea for a neighborhood table, grocery, music night, or something not yet named? Tell us what interests you. We can follow up with your permission.</p>
+  <a class="contact-door-button" href="/contact/?via=coalition">LEAVE A NOTE / KEEP A DOOR OPEN ↗</a>
+  <small>Optional. No account. Not an official Coalition, grocery, or church signup.</small>
 </section>
 <section id="results" class="results" hidden aria-live="polite">
  <div class="result-title"><span>☞</span> THE QUESTION MACHINE <small id="mode"></small></div>
@@ -38,10 +48,16 @@
  <div id="reply" class="reply" hidden>
    <div class="ribbon">A RESPONSE FROM THE MACHINE</div>
    <h2>Here's what actually happened.</h2><p id="answer"></p>
+   <section class="return-card" aria-labelledby="return-title">
+     <span id="return-label" class="ribbon"></span><h3 id="return-title"></h3>
+     <p id="return-body"></p><ul id="return-doors" class="sources"></ul>
+     <div id="invitation-tools" hidden><label for="invitation-editor">Make this invitation your own</label><textarea id="invitation-editor" rows="12" maxlength="6000"></textarea><p id="draft-status" role="status"></p><button type="button" id="download-edited">↓ Save my invitation (.txt)</button></div>
+     <div id="song-tools" hidden><audio id="song-audio" controls preload="none" aria-label="Original instrumental song sketch"></audio><button type="button" id="download-song">↓ Save instrumental sketch (.wav)</button></div>
+   </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
    <div class="next"><span>THE NEXT QUESTION</span><p id="next-question"></p><button id="ask-next" type="button">Ask this next ➜</button></div>
-   <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>A printable question-card text artifact, with source links and a verifiable digest.</p><button type="button" id="download">↓ Save question card (.txt)</button><button type="button" id="print">Print this page</button></div></div>
-   <details class="receipt"><summary>View exact return receipt</summary><p id="hash"></p><p>SHA-256 identifies the response evidence. It does not prove real-world consent, authority, or outcomes.</p></details>
+   <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
+   <details class="receipt"><summary>Look under the bonnet</summary><p id="receipt-state"></p><p id="hash"></p><p>The unsigned receipt binds this original return and its observed sources. It does not prove authorship, consent or project approval.</p><button type="button" id="download-receipt">↓ Save complete receipt (.json)</button><details><summary>Prepare a local Workbench handoff</summary><p>Save a draft-only request for an operator to inspect locally. Downloading it does not send it to a Workbench or run anything.</p><button type="button" id="download-handoff">↓ Save Workbench request (.json)</button></details><details><summary>What the question leaves open</summary><ul id="encounter-gaps"></ul></details></details>
  </div>
 </section>
 <section class="table-door" aria-labelledby="table-door-heading">
@@ -51,7 +67,7 @@
   <a class="table-door-button" href="/gather/">OPEN THE NEXT TABLE &amp; GARDEN COMMONS ↗</a>
   <small>No account required. No official signups, donations, or claims of partnership. Sharing a question is voluntary.</small>
 </section>
-<section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ This is a real source-inspection machine, not yet a general-purpose autonomous agent. It reads selected public project documents, builds a bounded provenance trail, and drafts a question card. It does <strong>not</strong> run OpenManus, authorize CANNON actions, match people, or claim partnerships.</p></section>
-<footer><span>© 1999–2026 • THE STATIC COLLECTIVE • BUILT FOR THE QUESTION THAT HASN'T BEEN ASKED YET</span><br><a href="https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/">the old garden (preserved Vercel release)</a> · <a href="https://github.com/the-static-collective/webZ">the source</a> · <a href="/games/tomorrow/">1999 mystery dinner club</a> · <a href="/gather/">the next table &amp; community commons</a> · <span>NO COOKIES • NO ACCOUNTS • NO QUESTION STORAGE</span></footer>
+<section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ One question can become a card, an invitation draft, a source door or an original little song. This machine uses local composition rules and reads fixed public project documents. You choose what to keep or share. A draft does not contact people, run project workers or claim anyone’s commitment.</p></section>
+<footer><span>© 1999–2026 • THE STATIC COLLECTIVE • BUILT FOR THE QUESTION THAT HASN'T BEEN ASKED YET</span><br><a href="https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/">the old garden (preserved Vercel release)</a> · <a href="https://github.com/the-static-collective/webZ">the source</a> · <a href="/games/tomorrow/">1999 mystery dinner club</a> · <a href="/gather/">the next table &amp; community commons</a> · <a href="/contact/">stay in touch</a> · <span>NO QUESTION STORAGE • CONTACT REQUESTS ARE OPT-IN</span></footer>
 </main>
 </body></html>
