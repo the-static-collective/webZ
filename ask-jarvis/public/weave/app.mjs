@@ -37,7 +37,7 @@ $('copy').addEventListener('click',async()=>{
 });
 $('print').addEventListener('click',()=>window.print());
 function saveJSON(packet,name){
- const url=URL.createObjectURL(new Blob([JSON.stringify(packet,null,2)+'\\n'],{type:'application/json'}));
+ const url=URL.createObjectURL(new Blob([JSON.stringify(packet,null,2)+'\n'],{type:'application/json'}));
  const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);
  a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
