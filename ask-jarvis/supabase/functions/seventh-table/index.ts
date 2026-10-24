@@ -26,6 +26,12 @@ function secret(){
   const bytes=new Uint8Array(32);crypto.getRandomValues(bytes);
   return btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 }
+async function guestFromHost(host){
+  const raw=Uint8Array.from(atob(host.replace(/-/g,'+').replace(/_/g,'/')+'='),ch=>ch.charCodeAt(0));
+  const hmac=await crypto.subtle.importKey('raw',raw,{name:'HMAC',hash:'SHA-256'},false,['sign']);
+  const signed=new Uint8Array(await crypto.subtle.sign('HMAC',hmac,new TextEncoder().encode('SEVENTH_TABLE_V2_GUEST')));
+  return btoa(String.fromCharCode(...signed)).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');
+}
 async function digest(input){
   const data=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input));
   return Array.from(new Uint8Array(data),n=>n.toString(16).padStart(2,'0')).join('');
@@ -92,7 +98,7 @@ async function create(body,req){
     parent_id=prev.table.id;
   }
   await limitRequest(req,'create');
-  const hostKey=secret(),guestKey=secret();
+  const hostKey=secret(),guestKey=await guestFromHost(hostKey);
   const {data,error}=await db.from(TABLES).insert({
     title,purpose,meeting_day,meeting_time,venue,host_label,parent_id,
     host_hash:await digest(hostKey),guest_hash:await digest(guestKey)
@@ -106,7 +112,7 @@ async function read(body){
   if(role!=='host')query=query.eq('status','VISIBLE');
   const {data,error}=await query.order('created_at',{ascending:false}).limit(100);
   if(error)throw new Failure('COULD_NOT_READ_TABLE',503);
-  return {table:compact(table),role,notes:(data||[]).map(safeNote).reverse()};
+  return {table:compact(table),role,guestKey:role==='host'?await guestFromHost(body.token):undefined,notes:(data||[]).map(safeNote).reverse()};
 }
 async function post(body,req){
   const {table,role}=await lookup(body.id,body.token);
