@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#efe9d8">
+<meta name="description" content="A living, account-free draft map of the CONNECT! gathering board. Explore possible neighbors and carry a question to the next table.">
+<title>CONNECT! · A living map of neighbors · Abundent</title>
+<link rel="stylesheet" href="/connections/style.css"><script type="module" src="/connections/app.mjs"></script>
+</head><body>
+<a class="skip" href="#explore">Skip to organizations</a>
+<div class="ticker" aria-hidden="true">✳ A NEIGHBOR IS NOT A DATA POINT ✳ THE WEB GOES FROM TABLE TO TABLE ✳ ASK BEFORE YOU CONNECT SOMEONE ✳</div>
+<header class="topbar"><a class="brand" href="/">abundent<span>.</span></a><nav aria-label="Other doors"><a href="/doors/">← Switchboard</a><a href="/tables/">Open a table</a><a href="/contact/">Stay in touch</a></nav></header>
+<main>
+<section class="hero"><div class="hero-text"><p class="eyebrow">FIELD NOTES / GREATER MANKATO / 24 OCTOBER 2026</p><h1>CON<span class="bend">NECT!</span></h1>
+<p class="lead">The map already exists. The question is what becomes possible when the people on it can see each other.</p>
+<p class="intro">A photographed wall full of organizations and lines becomes a <strong>searchable conversation starter</strong>. Find a neighbor, notice a possible overlap, invite a real conversation. No account needed.</p>
+<div class="hero-actions"><a class="pill primary" href="#explore">Explore the board ↓</a><a class="pill" href="/tables/">Pass the table ↗</a></div></div>
+<div class="hero-art" aria-hidden="true"><div class="sticky s1">FOOD + LAND<small>✳</small></div><div class="sticky s2">CULTURE + CARE<small>✳</small></div><div class="sticky s3">THE NEXT TABLE<small>↗</small></div><svg viewBox="0 0 400 330" preserveAspectRatio="none"><path d="M40 130 Q220 270 350 80 M50 270 Q210 10 375 245 M30 205 Q150 255 360 245" stroke="#25352c" stroke-width="2" fill="none" opacity=".22"/></svg></div></section>
+<aside class="notice"><b>PHOTO TRANSCRIPTION · NOT A VERIFIED NETWORK</b><span>Names below were read from one CONNECT! board photograph. Their spelling, identity, participation and affiliations may need correction. Topic colors are <em>our provisional browsing labels</em>. We have <strong>not</strong> digitized the drawn lines as confirmed relationships, and nothing here enrolls or speaks for an organization.</span></aside>
+<section class="section" id="explore"><div class="section-head"><div><p class="eyebrow">01 / FIND A NEIGHBOR</p><h2>The names on the wall.</h2><p>Search, filter, then choose <strong>two</strong> names to explore a possible bridge.</p></div><div class="tally"><strong id="count">—</strong><span>VISIBLE NOTES</span></div></div>
+<div class="tools"><label class="search"><span>Search the board</span><input id="search" type="search" autocomplete="off" placeholder="Try: garden, arts, faith, Mankato…"></label><div class="filters" id="filters" role="group" aria-label="Explore by topic"></div></div>
+<div class="columns"><div><div class="board" id="board" aria-label="Transcribed group labels"></div><p class="noresults" id="empty" hidden>No notes match. Clear the search or choose another topic.</p></div>
+<aside class="bridge" id="bridge"><p class="eyebrow">02 / POSSIBLE BRIDGE</p><h2>Two chairs,<br>one question.</h2><p class="hint">Pick any two cards. An overlap here means <strong>only that their provisional topic labels intersect</strong>—not that they've met, agreed, partnered or consented to contact.</p>
+<div class="chosen"><div><small>CHAIR ONE</small><strong id="first">Choose an organization</strong></div><div class="connector">×</div><div><small>CHAIR TWO</small><strong id="second">Choose another</strong></div></div>
+<div class="comparison" id="comparison" hidden><div class="stamp">QUESTION, NOT A CLAIM</div><p id="shared"></p><h3>What could we ask?</h3><blockquote id="question"></blockquote><div class="four"><span>What can you <b>offer?</b></span><span>What do you <b>need?</b></span><span>Who do you <b>connect?</b></span><span>Where do you <b>gather?</b></span></div>
+<label for="share">Share this possible pair (names only)</label><input id="share" type="text" readonly><div class="bridge-actions"><button type="button" id="copy-link">Copy pair link</button><button type="button" id="copy-card">Copy conversation card</button><button type="button" id="print-card">Print card</button></div>
+<p id="status" role="status" class="status"></p><a class="table-link" href="/tables/">↗ Turn a willing conversation into a Seventh Table invitation</a></div>
+<p id="unselected" class="unselected">There are no confirmed edges here yet. The first connection is a question one person can actually ask.</p>
+<button type="button" id="clear" class="clear">Clear selection</button>
+</aside></div></section>
+<section class="next"><p class="eyebrow">03 / GIVE THE MAP LEGS</p><h2>Not another directory.<br><em>Another table.</em></h2><div class="next-grid"><article><span>01</span><h3>Invite</h3><p>Ask whether two groups want an introduction. Nobody becomes a partner because we put names near each other.</p></article><article><span>02</span><h3>Gather</h3><p>Share a single need or offer, with explicit permission. Meet somewhere real.</p></article><article><span>03</span><h3>Return</h3><p>Record what <em>actually</em> happened, with consent. In about seven days, let the next table open.</p></article></div><div class="next-actions"><a href="/tables/">MAKE A SEVENTH TABLE INVITATION ↗</a><a href="/gather/">TRY THE GATHERING COMMONS ↗</a><a href="/contact/">SUGGEST A CORRECTION OR CONTACT ABUNDENT ↗</a></div></section>
+</main><footer><span>THE STATIC COLLECTIVE / INDEPENDENT PUBLIC EXPERIMENT</span><span>This is not an official Coalition directory or an authorized membership list. No tracking, accounts, automatic invitations or RSVPs on this page. <a href="https://github.com/the-static-collective/webZ" rel="noopener noreferrer">Source ↗</a></span></footer>
+<div id="print-sheet" aria-hidden="true"><h1>ONE POSSIBLE CONNECTION</h1><p id="print-pair"></p><p id="print-topic"></p><h2>THE QUESTION</h2><blockquote id="print-question"></blockquote><p>Offer? Need? Connect? Gather?</p><small>Unverified names and topic overlap from a 24 Oct 2026 photograph. No partnership or endorsement claimed. abundent.org/connections/</small></div>
+</body></html>
