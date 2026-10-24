@@ -57,3 +57,36 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .table-door small{display:block;color:#50635b;font:11px/1.5 "Courier New",monospace;margin:12px 0 0}
 @media(max-width:650px){.table-door{margin:18px 12px;padding:14px}.table-door h2{font-size:24px}.table-door-button{display:block;text-align:center;font-size:12px}}
 @media print{.table-door{display:none!important}}
+
+
+/* CAFÉ 004: colorful public front porch; no assets, third-party scripts or tracking. */
+.cafe-intro{margin:24px 31px 0;border:4px double #24665f;background:repeating-linear-gradient(135deg,#fff8db 0,#fff8db 14px,#fff5d4 14px,#fff5d4 28px);box-shadow:5px 5px 0 #8ca8a2;position:relative;overflow:hidden}
+.cafe-badge{background:#18584d;color:#fff6d8;font:bold 11px/1.5 "Courier New",monospace;letter-spacing:1.5px;text-align:center;padding:9px 12px}
+.cafe-hero{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 22px 20px}
+.cafe-kicker{color:#a3462b;font:bold 10px "Courier New",monospace;letter-spacing:1.2px;margin:0 0 7px}
+.cafe-hero h2{font:bold clamp(27px,4.5vw,43px)/1.06 Georgia,serif;letter-spacing:-1px;color:#194f49;margin:0}
+.cafe-hero h2 em{color:#ae4b2a;font-style:italic}
+.cafe-hero p:not(.cafe-kicker){font:13px/1.55 Georgia,serif;max-width:42ch;color:#435c57;margin:12px 0 0}
+.cafe-receipt{width:118px;min-width:118px;transform:rotate(5deg);border:2px dashed #5b8b7d;background:#fffef4;padding:12px 7px;text-align:center;color:#375d57;box-shadow:4px 4px #d7c9aa}
+.cafe-receipt b{display:block;font:bold 11px "Courier New",monospace}
+.cafe-receipt span{display:block;font:bold 53px/1.1 Georgia,serif;color:#ab512c}
+.cafe-receipt small{display:block;font:bold 9px/1.3 "Courier New",monospace}
+.cafe-stages{background:#f5e9b5;border-top:3px dotted #af8f4e;display:flex;justify-content:space-evenly;gap:10px;padding:11px;font:bold 11px "Courier New",monospace;color:#415449}
+.cafe-stages span{display:flex;align-items:center;gap:7px}
+.cafe-stages b{background:#b84e32;color:white;padding:4px 5px;font:bold 12px "Courier New",monospace}
+.cafe-intro+.askbox{margin-top:19px}
+.received-note{background:#d7f1e9;border:2px dashed #398073;color:#1c554d!important;padding:11px;font:12px/1.5 Verdana,sans-serif!important;margin:0 0 14px!important}
+.samples button.cafe-sample{font:bold 12px "Courier New",monospace;color:#1e564b;background:#e5f3e9;border:2px outset #a1c2ab;padding:6px 8px;margin:5px 3px}
+.samples button.cafe-sample:hover,.samples button.cafe-sample:focus{color:#fff;background:#236452}
+.handoff{margin:21px 0;border:3px double #438474;background:linear-gradient(#e7f7e9,#faf5d9);padding:16px 18px;box-shadow:3px 3px 0 #b2c6b2}
+.handoff .handoff-label{color:#357263;font:bold 11px "Courier New",monospace;letter-spacing:1px}
+.handoff h3{font:bold 25px Georgia,serif;margin:8px 0!important;padding:0!important;color:#1f5545;border:0!important}
+.handoff p{font:13px/1.6 Georgia,serif;margin:8px 0 12px}
+.handoff label{display:block;color:#355849;font:bold 11px/1.4 "Courier New",monospace;margin:11px 0 7px}
+.handoff-actions{display:flex;flex-wrap:wrap;gap:3px}
+.handoff-actions button{background:#fff0b5;border:2px outset #d0ab53;color:#245448;font-weight:bold}
+#handoff-link{display:block;width:100%;padding:10px;border:2px inset #98ac9e;background:#fff;color:#37526a;font:12px/1.4 "Courier New",monospace;overflow-wrap:anywhere}
+#handoff-link:focus{outline:3px solid #dda834}
+.handoff-status{font:11px/1.5 Verdana,sans-serif!important;color:#4c695f!important}
+@media(max-width:650px){.cafe-intro{margin:16px 12px 0}.cafe-badge{font-size:9px;letter-spacing:.5px}.cafe-hero{padding:18px 13px}.cafe-hero h2{font-size:clamp(23px,7vw,34px)}.cafe-receipt{min-width:75px;width:75px;padding:8px 3px}.cafe-receipt span{font-size:35px}.cafe-receipt b{font-size:8px}.cafe-receipt small{font-size:7px}.cafe-stages{font-size:9px;padding:9px 3px;gap:2px}.cafe-stages span{gap:3px}.cafe-stages b{font-size:10px}.handoff{padding:12px 9px}.handoff-actions button{width:100%;text-align:center}}
+@media print{.cafe-intro,.handoff{display:none!important}}
