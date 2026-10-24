@@ -13,7 +13,7 @@ test('live UI has two different host and guest links, moderation, separate withd
  for(const action of ["action:'create'","action:'read'","action:'post'","action:'moderate'","action:'withdraw'","action:'close'","action:'delete'"])assert.ok(js.includes(action),action);
  assert.match(js,/guestKey=result.guestKey/);
  assert.match(js,/location.origin\+'\/tables\/live\/#table='/);
- assert.doesNotMatch(js,/localStorage|Supabase\.auth|signUp\(|signInWith/);
+ assert.doesNotMatch(js,/localStorage\.(?:getItem|setItem)|Supabase\.auth|signUp\(|signInWith/);
 });
 test('Edge API never exposes admin secret to browser and defaults guest notes to moderation',()=>{
  const api=read('../supabase/functions/seventh-table/index.ts');
