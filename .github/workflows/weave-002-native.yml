@@ -1,0 +1,72 @@
+name: WEAVE-002 native cross-project circulation (fictional only)
+on:
+  pull_request:
+    paths:
+      - 'ask-jarvis/public/weave/**'
+      - 'ask-jarvis/weave-bridge/**'
+      - 'ask-jarvis/test/weave-bridge.test.mjs'
+      - '.github/workflows/weave-002-native.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-circulation-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/webZ
+          ref: d69d3ccc08ca2ffc5ce79b522e27ce5650ccb104
+          path: deps/webz-field
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/CANNON
+          ref: caa95fdf1b07a37824e72c1eb372f0460ad5e0ee
+          path: deps/cannon
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/free-graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: deps/free-graph
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/planZ
+          ref: 316000e071e0da5af4762f119f80dfc3add26d7c
+          path: deps/planz
+          persist-credentials: false
+      - name: Test local handoff boundaries
+        run: node --test ask-jarvis/test/weave-bridge.test.mjs
+      - name: Produce exactly one synthetic opportunity using original webZ CIRCULATION-003 source
+        run: node ask-jarvis/weave-bridge/rehearse.mjs --synthetic-only
+      - name: Independently validate and HOLD the source-owned historic field packet
+        run: |
+          python deps/cannon/labs/circulation-003/field_gate.py validate .weave-bridge/field.json
+          python deps/cannon/labs/circulation-003/field_gate.py hold .weave-bridge/field.json --output .weave-bridge/hold.json
+          python deps/cannon/labs/circulation-003/field_gate.py verify-hold .weave-bridge/field.json --output .weave-bridge/hold.json
+      - name: CANNON original seed to native Free Graph
+        run: |
+          python deps/cannon/labs/circulation-001/cannon_seed.py run --seed .weave-bridge/seed.json --free-graph-core deps/free-graph/scripts/fg_core.py --output .weave-bridge/source.json
+          python deps/free-graph/scripts/fg.py validate .weave-bridge/source.json
+          python deps/cannon/labs/circulation-001/cannon_seed.py verify --seed .weave-bridge/seed.json --free-graph-core deps/free-graph/scripts/fg_core.py --output .weave-bridge/source.json
+      - name: planZ independently returns two fictional choices
+        run: |
+          python deps/planz/scripts/circulation001_planz.py run --graph .weave-bridge/source.json --replies deps/cannon/labs/circulation-001/replies.json --free-graph-core deps/free-graph/scripts/fg_core.py --output .weave-bridge/planz.json
+          python deps/planz/scripts/circulation001_planz.py verify --graph .weave-bridge/source.json --replies deps/cannon/labs/circulation-001/replies.json --free-graph-core deps/free-graph/scripts/fg_core.py --output .weave-bridge/planz.json
+      - name: CANNON native return with original graph unchanged
+        run: |
+          python deps/cannon/labs/circulation-001/return_to_graph.py run --graph .weave-bridge/source.json --replies deps/cannon/labs/circulation-001/replies.json --plan-return .weave-bridge/planz.json --free-graph-core deps/free-graph/scripts/fg_core.py --planz-script deps/planz/scripts/circulation001_planz.py --output .weave-bridge/return.json
+          python deps/free-graph/scripts/fg.py validate .weave-bridge/return.json
+          python deps/cannon/labs/circulation-001/return_to_graph.py verify --graph .weave-bridge/source.json --replies deps/cannon/labs/circulation-001/replies.json --plan-return .weave-bridge/planz.json --free-graph-core deps/free-graph/scripts/fg_core.py --planz-script deps/planz/scripts/circulation001_planz.py --output .weave-bridge/return.json
+      - name: Independent complete crossing assertions and source read-only check
+        run: |
+          python ask-jarvis/weave-bridge/validate_return.py .weave-bridge
+          git -C deps/cannon diff --exit-code
+          git -C deps/planz diff --exit-code
+          git -C deps/free-graph diff --exit-code
+          git -C deps/webz-field diff --exit-code
