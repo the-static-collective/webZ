@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#e8e6cd">
+<meta name="description" content="Open a table, carry an invitation, witness what happened, and choose a next table seven days later. No account. No tracking.">
+<title>The Seventh Table · Abundent</title>
+<link rel="stylesheet" href="/tables/style.css"><script type="module" src="/tables/app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the table</a>
+<div class="ticker" aria-hidden="true">✳ THE CHAIRS MOVE ✳ EVERY SEVEN DAYS ✳ A GATHERING IS NOT A FOLLOWER COUNT ✳ THE CHAIRS MOVE ✳</div>
+<header class="top"><a class="brand" href="/">abundent<span>.</span></a><nav aria-label="Other doors"><a href="/">Ask JAR;VIS</a><a href="/gather/">The Next Table</a></nav></header>
+<main id="main">
+<section class="hero">
+ <div class="eyebrow">THE STATIC COLLECTIVE · FIELD PROTOTYPE 001 / EVERY SEVEN DAYS</div>
+ <div class="hero-layout"><div>
+ <h1>THE<br><em>SEVENTH</em><br>TABLE<span class="spark">✳</span></h1>
+ <p class="lead">Invite people to a table. Gather in real life. Remember what happened. Then pass the table to somebody new.</p>
+ <p class="sublead">The network isn't the website. The website helps us remember where to meet.</p>
+ <a class="button primary" href="#open">✳ Open a table</a> <a class="button soft" href="#how">How the chairs move ↓</a>
+ </div>
+ <div class="poster" aria-label="Seven day rhythm">
+   <span class="poster-top">A VERY SOCIAL NETWORK</span>
+   <div class="rings"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><span class="center">7</span></div>
+   <div class="poster-bottom">DAYS · THEN AGAIN<br><small>NOT A FEED. A PLACE TO MEET.</small></div>
+ </div></div>
+</section>
+<section class="steps" id="how" aria-label="The seven day rhythm">
+ <article><b>01 / INVITE</b><span>↗</span><p>Open a table and pass its link by choice.</p></article>
+ <article><b>02 / GATHER</b><span>◎</span><p>Meet in person. The phones can go away.</p></article>
+ <article><b>03 / WITNESS</b><span>✎</span><p>Keep a draft of what actually happened.</p></article>
+ <article><b>04 / PASS</b><span>⤳</span><p>Choose another table about seven days later.</p></article>
+</section>
+<section class="live" id="open">
+ <div class="section-kicker">THE INVITATION DESK · CHAIR 001</div>
+ <div class="workgrid">
+ <div class="paper">
+  <h2 id="form-heading">OPEN A TABLE.</h2><p class="muted">A dinner, a grocery conversation, a repair afternoon, a worship night, a neighborhood hello. Start small.</p>
+  <p id="parent-note" class="parent-note" hidden></p>
+  <form id="open-form">
+   <label for="title">WHAT SHALL WE CALL IT? <span>*</span></label><input id="title" name="title" maxlength="84" minlength="3" required placeholder="Soup, stories & the next good thing">
+   <label for="purpose">WHAT ARE WE GETTING TOGETHER FOR? <span>*</span></label><textarea id="purpose" name="purpose" rows="3" maxlength="270" minlength="5" required placeholder="Bring one question, something to share, or just yourself."></textarea>
+   <div class="pair"><div><label for="date">WHEN? <span>*</span></label><input id="date" name="date" type="date" required></div><div><label for="time">WHAT TIME?</label><input id="time" name="time" type="time"></div></div>
+   <label for="venue">PUBLIC PLACE OR MEETING INSTRUCTIONS</label><input id="venue" name="venue" maxlength="110" placeholder="A public venue, or 'ask the host for details'">
+   <label for="host">HOST NAME / NICKNAME (OPTIONAL)</label><input id="host" name="host" maxlength="48" placeholder="Who is opening the door?">
+   <p class="boundary">The link includes every field above. Anyone who has it can read and forward it. Do not put home addresses, contact details or private information in the invitation. Share sensitive meeting details separately and consensually.</p>
+   <button type="submit" class="button primary wide">MAKE MY INVITATION ↗</button>
+  </form>
+ </div>
+ <div class="paper invitation" id="invitation" aria-live="polite">
+  <span class="section-kicker">A CHAIR IS OPEN · INVITATION CARD</span>
+  <div id="empty-card"><div class="empty-mark" aria-hidden="true">✳</div><h2>THERE'S ROOM.</h2><p>Open a table to make a shareable invitation. Or follow an invitation link somebody gave you.</p></div>
+  <div id="card" hidden><div class="card-number">TABLE <span id="card-id"></span></div><h2 id="card-title"></h2><p id="card-purpose"></p><dl><div><dt>WHEN</dt><dd id="card-when"></dd></div><div><dt>WHERE</dt><dd id="card-where"></dd></div><div><dt>HOST</dt><dd id="card-host"></dd></div></dl>
+  <div id="lineage" class="lineage" hidden></div>
+  <p class="boundary">An invitation is an offer, not a reservation. This page does not send invitations, collect RSVPs, or confirm attendance.</p>
+  <label for="share-link">YOUR SHAREABLE INVITATION LINK</label><input id="share-link" readonly aria-label="Your shareable table invitation URL">
+  <div class="actions"><button id="copy-link" class="button dark" type="button">COPY INVITATION LINK</button><button id="print-invite" class="button soft" type="button">PRINT THIS CARD</button></div>
+  <p id="copy-status" class="muted" role="status">Only people you send the link to will receive it.</p>
+  </div>
+ </div>
+ </div>
+</section>
+<section class="witness" id="witness">
+ <div class="section-kicker">AFTER THE GATHERING · THE HUMAN RECORD</div>
+ <h2>SO... WHAT HAPPENED?</h2>
+ <p>Don't make a follower list. Write down a little of what happened—and what you might want to do together next. This is a private draft in this page until you explicitly download it. Nothing is sent to Abundent.</p>
+ <div class="witness-grid">
+ <div><label for="happened">WHAT DID WE DO OR DISCOVER?</label><textarea id="happened" rows="4" maxlength="1000" placeholder="One thing that actually happened..."></textarea></div>
+ <div><label for="unfinished">WHAT COULD WE CARRY FORWARD?</label><textarea id="unfinished" rows="4" maxlength="1000" placeholder="One unanswered question, need, offer or possibility..."></textarea></div>
+ </div>
+ <div class="actions"><button class="button dark" id="save-witness" type="button">↓ DOWNLOAD MY NOTES</button><button class="button soft" id="pass-table" type="button" disabled>⤳ PASS THE TABLE · +7 DAYS</button></div>
+ <p class="fine">No automatic sharing. Downloading notes does not attest to agreement by other participants. Ask before quoting or naming others.</p>
+</section>
+<section class="footer-note"><div><strong>7 DAYS IS A RHYTHM, NOT A REQUIREMENT.</strong><p>Move the date. Change the host. Branch into several circles. Or let a table end. Nobody becomes a member by receiving a link, and nobody owes the next meeting.</p></div><div class="stamp">THE HOUSE TAKES ATTENDANCE.<br>THE CHAIRS MOVE.</div></section>
+<footer><a href="/">← ASK JAR;VIS</a> · <a href="/gather/">THE NEXT TABLE × GARDEN COMMONS</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>Independent experiment. No official Coalition, Waseca grocery or church enrollment, organizer endorsement, delivery service, database or shared attendance record.</p></footer>
+</main>
+</body></html>
