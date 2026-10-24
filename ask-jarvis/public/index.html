@@ -77,6 +77,13 @@
       <input id="handoff-link" type="text" readonly aria-label="Optional question handoff link">
       <p id="handoff-status" role="status" class="handoff-status">Do not include names, phone numbers or private details. The question appears in the shared URL.</p>
     </section>
+    <section class="question-table-bridge" aria-labelledby="question-table-title">
+      <div class="question-table-stamp">✳ THE NEXT POSSIBLE MOVE / NO ACCOUNT</div>
+      <h3 id="question-table-title">Take this question to a table.</h3>
+      <p>Open an editable Seventh Table invitation draft with <strong>only the question you asked</strong>. Choose the place, date and people yourself. This does not send invitations, register guests, or commit anyone.</p>
+      <button type="button" id="start-table-from-question">✳ START A TABLE WITH THIS QUESTION →</button>
+      <p id="question-table-status" role="status" class="question-table-status">Nothing moves until you choose. Do not carry contact details or other people's private information.</p>
+    </section>
     <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
    <details class="receipt"><summary>Look under the bonnet</summary><p id="receipt-state"></p><p id="hash"></p><p>The unsigned receipt binds this original return and its observed sources. It does not prove authorship, consent or project approval.</p><button type="button" id="download-receipt">↓ Save complete receipt (.json)</button><details><summary>Prepare a local Workbench handoff</summary><p>Save a draft-only request for an operator to inspect locally. Downloading it does not send it to a Workbench or run anything.</p><button type="button" id="download-handoff">↓ Save Workbench request (.json)</button></details><details><summary>What the question leaves open</summary><ul id="encounter-gaps"></ul></details></details>
  </div>
