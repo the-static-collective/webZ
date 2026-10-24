@@ -2,7 +2,7 @@
 // same-origin URL fragment. No remote delivery, RSVP, storage or automatic invite.
 import {shareableQuestion} from './cafe.mjs';
 
-const MAX_HASH=2400;
+const MAX_HASH=5000; // 360 UTF-16 units can require >2400 URL-encoded bytes (e.g. CJK).
 const fields=new Set(['from','q']);
 
 export function makeTableSeedLink(currentUrl, question) {
