@@ -56,7 +56,7 @@ export function composeReturn(encounter, sources, seed) {
   } else if (kind === 'plan') {
     title = 'A possible next move — not a commitment';
     const firstApproach = encounter.topic === 'event'
-      ? 'Would a venue or willing host be open to a no-obligation conversation about a small, voluntary gathering? Venue permission, site rules, costs and capacity must be checked before any announcement.'
+      ? 'Would a venue or willing host be open to a no-obligation conversation about a small, voluntary gathering? Venue permission, site rules, costs and capacity must be checked before any announcement. No event is announced and no booking has been made.'
       : encounter.topic === 'grocery'
       ? 'Would a willing community organizer help choose one practical local food-access question to test together? A small pilot is not approval to open a grocery store.'
       : 'Would one willing participant help clarify the need and co-design a safe, bounded first experiment? This is an unsigned proposal, not a task accepted by anyone.';
