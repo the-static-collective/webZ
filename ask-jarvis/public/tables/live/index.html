@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#e7eedc"><meta name="description" content="Host, invite, RSVP, converse and pass a real gathering forward. No accounts: private host keys and shareable guest links."><title>The Living Chair · Seventh Table · Abundent</title><link rel="stylesheet" href="/tables/live/live.css"><script type="module" src="/tables/live/live.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to the gathering</a>
+<div class="ticker">✳ THE SEVENTH TABLE ✳ A GATHERING, NOT A FOLLOWER COUNT ✳ EVERY CHAIR HAS A CHOICE ✳</div>
+<header><a class="brand" href="/">abundent<span>.</span></a><nav><a href="/tables/">The Seventh Table</a><a href="/gather/">Garden Commons</a></nav></header>
+<main id="main">
+<section class="hero"><div class="stamp">THE LIVING CHAIR / FIELD RELEASE 002</div><h1>MEET.<br><em>REMEMBER.</em><br>MEET AGAIN.</h1><p>Open a gathering. Share its invitation. Have an actual conversation before and after. Choose the next table.</p><div class="tag">NO LOGIN · HUMAN INVITATIONS · SEPARATE HOST &amp; GUEST KEYS</div></section>
+<div id="service-error" role="alert" hidden></div>
+<section class="layout" id="start">
+<div class="paper" id="create-panel"><span class="eyebrow">01 / OPEN THE ROOM</span><h2>Make room for something.</h2><p>Nothing will be published until you press Open. Use public or non-sensitive meeting descriptions; send private location details separately.</p>
+<form id="new-table">
+<label for="title">NAME YOUR TABLE *</label><input id="title" name="title" minlength="3" maxlength="84" required placeholder="Seven-day soup club">
+<label for="purpose">WHAT BRINGS US TOGETHER? *</label><textarea id="purpose" name="purpose" minlength="5" maxlength="270" rows="3" required placeholder="One meal. One question. One small thing we can do together."></textarea>
+<div class="pair"><div><label for="date">DAY *</label><input type="date" id="date" name="date" required></div><div><label for="time">TIME (OPTIONAL)</label><input type="time" id="time" name="time"></div></div>
+<label for="venue">PUBLIC VENUE / MEETING INSTRUCTIONS (OPTIONAL)</label><input id="venue" name="venue" maxlength="110" placeholder="Public library or ask the host">
+<label for="host">HOST NICKNAME (OPTIONAL)</label><input id="host" name="host" maxlength="48" placeholder="A neighbor">
+<p id="parent-info" class="notice" hidden></p><p class="fine">Creating a table stores these fields on Abundent's database. Guest links can be forwarded. Do not include private addresses, contact information, or somebody else's details.</p>
+<button class="button primary" id="create" type="submit">OPEN A LIVE TABLE ↗</button></form>
+</div>
+<div class="paper aside" id="intro-card"><span class="eyebrow">02 / CARRY THE KEY</span><h2>No account. Just a door.</h2><div class="key-art" aria-hidden="true">✳<span>◎</span>✳</div><p>The host receives a private management link. Guests receive a different invitation link.</p><p>Anybody possessing either link can exercise its permissions. Keep the host link private. A guest link is an invitation—not proof of anyone's identity or attendance.</p><p>Guest notes stay hidden until the host approves them. Anyone can withdraw a contribution using its personal withdrawal key.</p><a class="plain" href="/tables/">See the paper-first version ↗</a></div>
+</section>
+<section id="room" hidden>
+<div class="room-head"><div><span class="eyebrow">YOU HAVE A CHAIR · <span id="role-label"></span></span><h2 id="room-title"></h2><p id="room-purpose"></p></div><div class="host-stamp" id="room-state">OPEN</div></div>
+<div class="room-grid"><section class="paper">
+<h3>THE INVITATION</h3><dl><div><dt>WHEN</dt><dd id="room-date"></dd></div><div><dt>WHERE</dt><dd id="room-venue"></dd></div><div><dt>HOST</dt><dd id="room-host"></dd></div><div id="parent-row" hidden><dt>PREVIOUS TABLE</dt><dd id="room-parent"></dd></div></dl>
+<div id="host-tools" hidden><div class="warning"><strong>YOUR PRIVATE HOST LINK</strong><p>You're holding the host key. Keep your address-bar link private: it can moderate, close, or delete this room.</p></div><button type="button" class="button soft" id="copy-host">COPY MY PRIVATE HOST LINK</button></div>
+<div class="share"><label for="guest-link">THE GUEST INVITATION LINK</label><input id="guest-link" type="text" readonly><button type="button" id="share" class="button primary">COPY GUEST INVITATION ↗</button><p id="share-status" role="status" class="fine">Only people you invite will receive a link. No automatic messages.</p></div>
+<div class="actions"><button type="button" id="pass" class="button soft">⤳ OPEN THE NEXT TABLE (+7 DAYS)</button><button type="button" id="refresh" class="button soft">↻ REFRESH THE ROOM</button></div>
+<div id="host-manage" hidden class="manage"><h4>HOST CONTROLS</h4><button type="button" id="close" class="button soft">CLOSE THE ROOM</button><button type="button" id="erase" class="button danger">PERMANENTLY ERASE ROOM &amp; NOTES</button></div>
+</section>
+<section class="paper dialogue"><h3>THE CONVERSATION</h3><p class="fine">Offers, needs, questions, RSVPs, and witness notes. Guest contributions are reviewed before appearing to other guests. Posts are not verified acts, identity or commitments.</p><form id="note-form">
+<div class="pair"><div><label for="kind">YOUR CARD</label><select id="kind" name="kind"><option value="question">QUESTION</option><option value="offer">OFFER</option><option value="need">NEED</option><option value="rsvp">RSVP / INTEREST</option><option value="witness">WITNESS / WHAT HAPPENED</option></select></div><div><label for="nickname">NICKNAME (OPTIONAL)</label><input id="nickname" maxlength="36" placeholder="One of the chairs"></div></div>
+<label for="body">YOUR WORDS</label><textarea id="body" rows="4" minlength="2" maxlength="420" placeholder="What can we make possible together?" required></textarea>
+<p class="fine">No contact details, private addresses or third-party information. Anyone with a guest link may submit. You can save a private withdrawal key after posting.</p>
+<button id="post" type="submit" class="button primary">PLACE MY CARD →</button></form>
+<div id="receipt" hidden class="receipt"><strong id="receipt-title">CARD RECEIVED</strong><p>Save the private withdrawal receipt below to erase your contribution later, including from another device. This code is shown only for this submission.</p><textarea id="receipt-text" readonly rows="3"></textarea><button id="save-receipt" type="button" class="button soft">↓ SAVE WITHDRAWAL RECEIPT</button></div>
+<div id="withdraw-panel"><details><summary>I have a withdrawal receipt</summary><label for="withdraw-id">CARD ID</label><input id="withdraw-id"><label for="withdraw-key">PRIVATE WITHDRAWAL KEY</label><input id="withdraw-key"><button id="withdraw" type="button" class="button soft">WITHDRAW MY CARD</button></details></div>
+<h4>TABLE CARDS <span id="note-count"></span></h4><p id="read-status" role="status" class="fine"></p><div id="notes" aria-live="polite"></div>
+</section></div></section>
+<div id="status" class="status" role="status"></div>
+<section class="principle"><strong>THE TABLE IS NOT AN INSTITUTION.</strong><p>A shared guest link is not an identity check. An RSVP is not guaranteed attendance. Hosts have final publication control, but aren't entitled to publish other people's private statements. The system is an independent Static Collective experiment, not an official Coalition, grocery, or church service.</p></section>
+<footer><a href="/tables/">← SEVENTH TABLE</a> · <a href="/contact/">STAY IN TOUCH (SEPARATE OPT-IN)</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>Bearers of valid links can access this room. No accounts, automated invitations, read receipts, or centralized personal follower graph.</p></footer>
+</main></body></html>
