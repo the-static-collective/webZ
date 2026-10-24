@@ -155,7 +155,7 @@ async function closeOrDelete(body,action){
 Deno.serve(async req=>{
   const origin=req.headers.get('origin')||'';
   if(origin&&!ORIGINS.has(origin))return reply({error:'ORIGIN_NOT_ALLOWED'},403);
-  if(req.method==='OPTIONS')return reply({},204,origin);
+  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:{'access-control-allow-origin':origin,'access-control-allow-methods':'POST,GET,OPTIONS','access-control-allow-headers':'Content-Type'}});
   if(req.method==='GET')return reply({ok:true,service:'seventh-table-002',storage:'account-free-ledger',identity:'not-verified'},200,origin);
   if(req.method!=='POST')return reply({error:'METHOD_NOT_ALLOWED'},405,origin);
   try{
