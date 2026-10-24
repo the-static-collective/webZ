@@ -61,7 +61,16 @@
    </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
    <div class="next"><span>THE NEXT QUESTION</span><p id="next-question"></p><button id="ask-next" type="button">Ask this next ➜</button></div>
-   <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
+   <section class="handoff" aria-labelledby="handoff-title">
+      <div class="handoff-label">✳ OPTIONAL, HUMAN-TO-HUMAN HANDOFF</div>
+      <h3 id="handoff-title">Pass it to the next chair.</h3>
+      <p>Make a link containing only this question, or the next question. No answer, personal details or secret keys are included. The other person chooses whether to explore it. <strong>Copying a link never contacts anyone.</strong></p>
+      <div class="handoff-actions"><button type="button" id="copy-question">↗ Make a link to this question</button><button type="button" id="copy-next">↗ Make a link to the next question</button></div>
+      <label for="handoff-link">Your optional handoff link (select and copy if needed)</label>
+      <input id="handoff-link" type="text" readonly aria-label="Optional question handoff link">
+      <p id="handoff-status" role="status" class="handoff-status">Do not include names, phone numbers or private details. The question appears in the shared URL.</p>
+    </section>
+    <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
    <details class="receipt"><summary>Look under the bonnet</summary><p id="receipt-state"></p><p id="hash"></p><p>The unsigned receipt binds this original return and its observed sources. It does not prove authorship, consent or project approval.</p><button type="button" id="download-receipt">↓ Save complete receipt (.json)</button><details><summary>Prepare a local Workbench handoff</summary><p>Save a draft-only request for an operator to inspect locally. Downloading it does not send it to a Workbench or run anything.</p><button type="button" id="download-handoff">↓ Save Workbench request (.json)</button></details><details><summary>What the question leaves open</summary><ul id="encounter-gaps"></ul></details></details>
  </div>
 </section>
