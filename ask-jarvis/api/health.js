@@ -1,4 +1,6 @@
-export default function handler(req,res){
+import worker from '../src/worker.mjs';
+export default async function handler(req,res){
   res.setHeader("Cache-Control","no-store");
-  return res.status(200).json({ok:true,name:"ask JAR;VIS",mode:"read-only-source-inspection",host:"vercel-temporary-preview"});
+  const response=await worker.fetch(new Request('https://local.invalid/api/health'),{});
+  return res.status(200).json({...await response.json(),host:'vercel-temporary-preview'});
 }
