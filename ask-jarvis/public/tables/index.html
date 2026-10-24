@@ -68,16 +68,39 @@
  </div>
  </div>
 </section>
-<section class="witness" id="witness">
- <div class="section-kicker">AFTER THE GATHERING · THE HUMAN RECORD</div>
- <h2>SO... WHAT HAPPENED?</h2>
- <p>Don't make a follower list. Write down a little of what happened—and what you might want to do together next. This is a private draft in this page until you explicitly download it. Nothing is sent to Abundent.</p>
- <div class="witness-grid">
- <div><label for="happened">WHAT DID WE DO OR DISCOVER?</label><textarea id="happened" rows="4" maxlength="1000" placeholder="One thing that actually happened..."></textarea></div>
- <div><label for="unfinished">WHAT COULD WE CARRY FORWARD?</label><textarea id="unfinished" rows="4" maxlength="1000" placeholder="One unanswered question, need, offer or possibility..."></textarea></div>
+<section class="witness" id="witness" aria-labelledby="afterglow-heading">
+ <div class="section-kicker">AFTER THE GATHERING · THE CLOSING CIRCLE</div>
+ <h2 id="afterglow-heading">SO... WHAT HAPPENED?</h2>
+ <p>A gathering can end here. Or somebody can carry one question to the next table. <strong>First, write down your own account—without speaking for everybody.</strong></p>
+ <div id="closing-circle" class="closing-circle">
+  <div class="circle-step"><span>01 / REMEMBER</span><strong>Keep your own notes</strong><small>Private to this tab unless you download them.</small></div>
+  <div class="circle-arrow" aria-hidden="true">➜</div>
+  <div class="circle-step"><span>02 / CHOOSE</span><strong>One public question, maybe</strong><small>A separate, voluntary, permission-checked draft.</small></div>
+  <div class="circle-arrow" aria-hidden="true">➜</div>
+  <div class="circle-step"><span>03 / PASS</span><strong>A new invitation</strong><small>Editable, unsent, suggested seven days later.</small></div>
  </div>
- <div class="actions"><button class="button dark" id="save-witness" type="button">↓ DOWNLOAD MY NOTES</button><button class="button soft" id="pass-table" type="button" disabled>⤳ PASS THE TABLE · +7 DAYS</button></div>
- <p class="fine">No automatic sharing. Downloading notes does not attest to agreement by other participants. Ask before quoting or naming others.</p>
+ <div class="witness-grid">
+ <div><label for="happened">MY PRIVATE NOTES · WHAT DID I OBSERVE?</label><textarea id="happened" rows="4" maxlength="1000" placeholder="What actually happened, as I remember it..."></textarea></div>
+ <div><label for="unfinished">MY PRIVATE NOTES · WHAT IS UNFINISHED?</label><textarea id="unfinished" rows="4" maxlength="1000" placeholder="Something I want to remember or ask later..."></textarea></div>
+ </div>
+ <div class="witness-actions">
+  <button class="button dark" id="save-witness" type="button">↓ DOWNLOAD MY PRIVATE AFTERGLOW</button>
+  <p id="witness-save-status" role="status">Nothing is uploaded, published, or saved between visits. Download your draft before leaving.</p>
+ </div>
+ <div class="public-relay" aria-labelledby="public-relay-heading">
+  <div class="section-kicker">OPTIONAL · A NEW PUBLIC QUESTION</div>
+  <h3 id="public-relay-heading">WHAT SHOULD MOVE? (IF ANYTHING.)</h3>
+  <p>Private notes never move automatically. Write <strong>a separate question you intentionally want in a new invitation</strong>, or leave this blank to use a general next-table question. Never include home addresses, contacts, personal stories or private discussion details.</p>
+  <label for="relay-question">ONE QUESTION FOR THE NEXT TABLE · OPTIONAL</label>
+  <textarea id="relay-question" rows="3" maxlength="270" placeholder="Could we meet again to explore what a neighborhood pantry would need?"></textarea>
+  <label class="relay-consent" for="relay-approved"><input id="relay-approved" type="checkbox"> <span>Yes, I intend to make <em>this exact question</em> public in an invitation. I have permission for any shared words and have left out private identifiers.</span></label>
+  <p id="relay-status" role="status">No question is approved for sharing yet. The next invitation is only a draft.</p>
+ </div>
+ <div class="closing-actions">
+  <button class="button soft" id="pass-table" type="button" disabled>⤳ DRAFT THE NEXT TABLE · +7 DAYS</button>
+  <p id="next-table-status" role="status">Open or receive a table invitation above to prepare a continuation. Nobody has agreed to host or attend.</p>
+ </div>
+ <p class="fine"><strong>Right to end:</strong> You do not have to pass the table. A downloaded draft is not evidence that others attended or agreed. A carried question is not an endorsement, RSVP, or completed real-world act.</p>
 </section>
 <section class="footer-note"><div><strong>7 DAYS IS A RHYTHM, NOT A REQUIREMENT.</strong><p>Move the date. Change the host. Branch into several circles. Or let a table end. Nobody becomes a member by receiving a link, and nobody owes the next meeting.</p></div><div class="stamp">THE HOUSE TAKES ATTENDANCE.<br>THE CHAIRS MOVE.</div></section>
 <footer><a href="/doors/">← CHOOSE A DOOR</a> · <a href="/">ASK JAR;VIS</a> · <a href="/gather/">THE NEXT TABLE × GARDEN COMMONS</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>Independent experiment. No official Coalition, Waseca grocery or church enrollment, organizer endorsement, delivery service, database or shared attendance record.</p></footer>
