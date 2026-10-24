@@ -30,7 +30,7 @@ async function guestFromHost(host){
   const raw=Uint8Array.from(atob(host.replace(/-/g,'+').replace(/_/g,'/')+'='),ch=>ch.charCodeAt(0));
   const hmac=await crypto.subtle.importKey('raw',raw,{name:'HMAC',hash:'SHA-256'},false,['sign']);
   const signed=new Uint8Array(await crypto.subtle.sign('HMAC',hmac,new TextEncoder().encode('SEVENTH_TABLE_V2_GUEST')));
-  return btoa(String.fromCharCode(...signed)).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');
+  return btoa(String.fromCharCode(...signed)).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
 }
 async function digest(input){
   const data=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input));
