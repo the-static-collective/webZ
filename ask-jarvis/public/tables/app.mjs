@@ -1,10 +1,13 @@
 import {makeInvite,readInvite,inviteLink,nextFields,suggestDay} from './model.mjs';
 import {readTableSeed,draftFromQuestion} from '../table-bridge.mjs';
+import {prepareNextTable,privateWitnessText,witnessFingerprint} from './afterglow.mjs';
 
 const $ = selector => document.querySelector(selector);
 const keys=['title','purpose','date','time','venue','host'];
 const form=$('#open-form');
-let current=null, prior=null;
+let current=null, prior=null, witnessSavedSnapshot=null;
+const witnessSnapshot=()=>witnessFingerprint(current,$('#happened').value,$('#unfinished').value);
+const hasPrivateNotes=()=>Boolean($('#happened').value.trim()||$('#unfinished').value.trim());
 
 const setText=(id,value)=>{$(id).textContent=value;};
 const formFields=()=>Object.fromEntries(keys.map(k=>[k,$('#'+k).value]));
@@ -28,12 +31,21 @@ function show(card) {
   lineage.textContent=trail?'This invitation follows these previous table labels: '+trail+' → '+card.id+'. Labels are not proof of attendance or agreement.':'';
   $('#share-link').value=inviteLink(card,window.location.href);
   $('#pass-table').disabled=false;
+  setText('#next-table-status','Table '+card.id+' is an invitation only. After a real gathering, keep your own notes below—or choose another table.');
   message('Your link is ready. Sharing it is your choice; no one has been contacted.');
 }
 
 form.addEventListener('submit',event=>{
   event.preventDefault();
   if(!form.reportValidity())return;
+  if(current && hasPrivateNotes() && witnessSnapshot()!==witnessSavedSnapshot) {
+    const discard=window.confirm('Your personal afterglow notes have not been downloaded since your latest edits. Creating a new invitation clears those local notes. Cancel to download first, or OK to discard your unsaved notes.');
+    if(!discard) {
+      setText('#next-table-status','Not created. Your private notes remain here; download them before continuing.');
+      $('#witness').scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
+  }
   let made;
   try{made=makeInvite(formFields(),prior);}
   catch(err){window.alert('Please add a table name, a purpose, and a valid date and time.');return;}
@@ -43,6 +55,15 @@ form.addEventListener('submit',event=>{
   prior=null;
   $('#form-heading').textContent='OPEN A TABLE.';
   $('#parent-note').hidden=true;
+  // A newly created invite starts a distinct private record. No prior person's
+  // notes or approval should silently remain attached to this new table.
+  $('#happened').value='';
+  $('#unfinished').value='';
+  $('#relay-question').value='';
+  $('#relay-approved').checked=false;
+  witnessSavedSnapshot=null;
+  setText('#witness-save-status','New invitation, new private record. Nothing has been uploaded.');
+  setText('#relay-status','No question is approved for sharing yet.');
   show(made);
   $('#invitation').scrollIntoView({behavior:'smooth',block:'start'});
 });
@@ -60,38 +81,54 @@ $('#copy-link').addEventListener('click',async()=>{
 });
 
 $('#print-invite').addEventListener('click',()=>window.print());
+$('#relay-question').addEventListener('input',()=>{
+  $('#relay-approved').checked=false;
+  setText('#relay-status','Text changed. If you want to carry this exact question into a public invitation, approve it again.');
+});
+$('#relay-approved').addEventListener('change',()=>{
+  setText('#relay-status',$('#relay-approved').checked
+    ? 'Approved for an invitation draft, not sent. You may still change your mind.'
+    : 'No public question is approved for sharing.');
+});
+for(const selector of ['#happened','#unfinished']) {
+  $(selector).addEventListener('input',()=>{
+    setText('#witness-save-status','Personal draft changed. Download your notes before closing the tab or starting another table.');
+  });
+}
 $('#pass-table').addEventListener('click',()=>{
   if(!current)return;
+  let next;
+  try {
+    next=prepareNextTable(current,$('#relay-question').value,$('#relay-approved').checked);
+  }catch(err) {
+    const detail={
+      CONFIRM_PUBLIC_SHARING:'The public question is not approved. Check the box to include it, or clear the question to pass with a general invitation.',
+      ENTER_PUBLIC_QUESTION:'Write the public question you wish to share, or uncheck the box and continue without one.',
+      PUBLIC_QUESTION_UNSAFE:'A public question must be 8–270 characters on one line, without phone numbers, email addresses or control characters. Private notes never belong here.'
+    };
+    setText('#relay-status',detail[err.message]||'The question was not carried. Edit it before continuing.');
+    $('#relay-question').focus();
+    return;
+  }
   prior=current;
-  fill(nextFields(current));
+  fill(next.fields);
   $('#form-heading').textContent='PASS THE TABLE.';
   const note=$('#parent-note');
   note.hidden=false;
-  note.textContent='A new gathering after table '+current.id+'. The next date is suggested seven days later, but you can change anything. This is a new invitation, not a confirmed continuation.';
-  $('#open').scrollIntoView({behavior:'smooth'});
+  note.textContent='PROPOSED NEXT TABLE after '+current.id+': '+(next.usedPublicQuestion?'Only your separately approved public question was copied.':'A general question was suggested; neither private note was copied.')+' The date is suggested seven days later, with host and venue blank. You can change anything. No invitation has been created or sent.';
+  setText('#next-table-status','Draft prepared. You still must review the next invitation and press MAKE MY INVITATION. Nothing has been delivered to anyone.');
+  setText('#relay-status',next.usedPublicQuestion?'Only your approved public question entered the editable invitation draft. The private notes stayed here.':'No private notes or public question were copied into the new invitation draft.');
+  $('#open').scrollIntoView({behavior:'smooth',block:'start'});
   $('#title').focus({preventScroll:true});
 });
 $('#save-witness').addEventListener('click',()=>{
-  const title=current?current.title:'An unlinked gathering';
-  const rows=[
-    'THE SEVENTH TABLE — PERSONAL DRAFT',
-    'Meeting: '+title,
-    'Date: '+(current?.date||'not recorded'),
-    'Table label: '+(current?.id||'none'),
-    '',
-    'WHAT ACTUALLY HAPPENED',
-    $('#happened').value.trim()||'(none recorded)',
-    '',
-    'WHAT MIGHT HAPPEN NEXT',
-    $('#unfinished').value.trim()||'(none recorded)',
-    '',
-    'Written by one participant. No other attendee has approved or verified this draft.',
-    'Private local text, explicitly exported. Not sent to Abundent.'
-  ];
-  const url=URL.createObjectURL(new Blob([rows.join('\n')+'\n'],{type:'text/plain;charset=utf-8'}));
+  const body=privateWitnessText(current,$('#happened').value,$('#unfinished').value);
+  const url=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'}));
   const link=document.createElement('a');
-  link.href=url;link.download='seventh-table-my-notes.txt';document.body.append(link);link.click();link.remove();
+  link.href=url;link.download='seventh-table-my-afterglow.txt';document.body.append(link);link.click();link.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
+  witnessSavedSnapshot=witnessSnapshot();
+  setText('#witness-save-status','Download requested. Check that your file is saved before closing this tab. No notes were sent to Abundent.');
 });
 $('#date').value=suggestDay();
 
