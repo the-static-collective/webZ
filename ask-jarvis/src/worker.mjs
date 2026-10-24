@@ -123,7 +123,7 @@ export function inputError(error) {
 export default {
   async fetch(request,env) {
     const url=new URL(request.url);
-    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-003',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-004',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;
