@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#264636">
+<title>Field Data Intake · Independent Local Laboratory</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#e6eadc;color:#173b2b;font:16px/1.55 system-ui,sans-serif}
+main{max-width:1000px;margin:auto;padding:22px}.eyebrow{font:bold 12px monospace;color:#8a623c;letter-spacing:1px}
+h1{font:900 clamp(40px,6vw,76px)/.95 Georgia,serif;letter-spacing:-1px;margin:14px 0}h1 em{color:#a4653a}
+h2{font:900 27px Georgia,serif}.intro{font:20px/1.5 Georgia,serif;max-width:730px}
+section{background:#fffbed;border:2px solid #51775b;margin:20px 0;padding:24px;box-shadow:5px 6px #b4c7aa}
+.warning{background:#fcdfb2;border-left:5px solid #aa6938;padding:14px;font-size:14px}
+input[type=file]{max-width:100%;padding:16px;border:2px dashed #41684e;background:white;display:block;width:100%;margin:12px 0}
+button,a.action{border:2px solid #204d35;background:#edc06d;color:#153529;padding:12px 18px;font:bold 13px monospace;cursor:pointer;display:inline-block;margin:9px 8px 5px 0}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #a04e32;outline-offset:3px}
+table{border-collapse:collapse;min-width:740px;width:100%;font:13px/1.5 system-ui}th,td{text-align:left;padding:9px;border-bottom:1px solid #abc1a4;overflow-wrap:anywhere}
+th{background:#dfe9d8} .scroll{overflow:auto}li{padding:5px 0}.small{font-size:13px}footer{font:12px/1.6 monospace;padding-bottom:30px}
+@media(max-width:480px){main{padding:12px}section{padding:15px}}
+</style><script type="module" src="./app.mjs"></script></head>
+<body><main><div class="eyebrow">THE STATIC COLLECTIVE / FIELD INTAKE LAB 001 / EXPERIMENT</div>
+<h1>THE FIELD DATA<br><em>CHECK-IN DESK.</em></h1>
+<p class="intro">Before connecting one environmental data system to another, find out what the incoming records actually contain.</p>
+<p class="warning"><strong>Independent, unsponsored experimental tool.</strong> No affiliation with the Blue Earth Project, its EcoMapper, Esri, any lab, or local organization is claimed. Do not use this to infer pollution safety. Do not select private, identifying, or restricted datasets without the source owner's permission.</p>
+<section><h2>Inspect a local file.</h2><p>CSV or a flat JSON array. Maximum 1 MB / 2,000 records. No login, server submission, background upload, map lookup, or persistent storage.</p>
+<label for="open"><strong>CHOOSE A FILE FROM YOUR DEVICE</strong></label><input type="file" id="open" accept=".csv,.json">
+<button id="sample" type="button">TRY FICTIONAL EXAMPLE</button><p id="status" role="status">No data selected. Nothing has left your device.</p></section>
+<section id="results" hidden><h2>Readiness report, not a certification.</h2><p id="summary" role="status"></p>
+<div class="scroll"><table><thead><tr><th>Field</th><th>Possible role</th><th>Filled</th><th>Empty</th><th>Format flags</th><th>Possible duplicate IDs</th><th>Privacy</th></tr></thead><tbody id="fields"></tbody></table></div>
+<h2>What needs a human look?</h2><ul id="findings"></ul>
+<button type="button" id="download">↓ SAVE AGGREGATE REPORT (.JSON)</button>
+<p class="small">The downloaded profile contains column names and aggregate counts, not individual values, locations, source records, or identifiers.</p></section>
+<section><h2>The next door belongs to the data owner.</h2><p>Ask which input format, fields, upload bottleneck, retention rules, location precision, and publication permissions are actually used. Then write an owner-approved adapter against the real source schema. Never reverse-engineer a private endpoint or bulk ingest data without permission.</p></section>
+<footer><a href="/">ABUNDENT HOME</a> · SOURCE-AGNOSTIC RESEARCH / NOT A PARTNERSHIP · FIELD OBSERVATION ≠ VERIFIED MEASUREMENT ≠ HEALTH CLAIM</footer>
+</main></body></html>
