@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "outputDirectory": "public",
-  "buildCommand": "npm test && echo 'Verified JARVIS 003 public returns and Commons'",
+  "buildCommand": "npm test && echo 'JARVIS Cafe 004: verified public question handoffs and distinct plans'",
   "installCommand": "echo 'No install required'",
   "headers": [
     {

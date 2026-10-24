@@ -1,5 +1,6 @@
 import {verifyReturn} from './evidence.mjs';
 import {songWav} from './song.mjs';
+import {makeHandoffLink,readHandoff} from './cafe.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
@@ -26,6 +27,8 @@ function cleanAudio() {
 }
 function clearReturn() {
   last=null;reply.hidden=true;cleanAudio();
+  $('#handoff-link').value='';
+  $('#handoff-status').textContent='Do not include names, phone numbers or private details. The question appears in the shared URL.';
   $('#invitation-editor').value='';$('#return-body').textContent='';
   $('#return-doors').replaceChildren();$('#encounter-gaps').replaceChildren();
 }
@@ -79,7 +82,7 @@ function show(data) {
   last=data;reply.hidden=false;
 }
 
-input.addEventListener('input',()=>{input.setCustomValidity('');invalidate();});
+input.addEventListener('input',()=>{input.setCustomValidity('');$('#received-note').hidden=true;invalidate();});
 kind.addEventListener('change',invalidate);
 $('#invitation-editor').addEventListener('input',()=>{
   $('#draft-status').textContent='Edited unsigned draft · saved separately from the original receipt.';
@@ -98,6 +101,31 @@ $('#ask-next').addEventListener('click',()=>{
 document.querySelectorAll('[data-example]').forEach(btn=>btn.addEventListener('click',()=>{
   invalidate();input.value=btn.dataset.example;kind.value=btn.dataset.kind||'auto';input.setCustomValidity('');input.focus();
 }));
+// Arrival through a voluntary question-only link does NOT submit anything.
+const passed = readHandoff(window.location.hash);
+if (passed) {
+  input.value=passed.question;kind.value=passed.kind;
+  $('#received-note').hidden=false;
+}
+async function prepareHandoff(question,returnKind) {
+  if(!last) return;
+  const status=$('#handoff-status'),field=$('#handoff-link');
+  try {
+    const url=makeHandoffLink(window.location.href,question,returnKind);
+    field.value=url;field.focus();field.select();
+    if(navigator.clipboard?.writeText) {
+      try {await navigator.clipboard.writeText(url);
+        status.textContent='Link copied. Give it to one willing person; no message was sent and no invitation was accepted.';
+        return;
+      } catch { /* visible manual link fallback */ }
+    }
+    status.textContent='Select and copy the link above. Only share with someone who wants it. No one has been contacted.';
+  } catch {
+    field.value='';status.textContent='This question is not suitable for a public link. Please remove contact details and try another question.';
+  }
+}
+$('#copy-question').addEventListener('click',()=>{if(last)void prepareHandoff(last.question,last.return.kind);});
+$('#copy-next').addEventListener('click',()=>{if(last)void prepareHandoff(last.nextQuestion,'auto');});
 window.addEventListener('pagehide',()=>{invalidate();});
 
 form.addEventListener('submit',async event=>{

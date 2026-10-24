@@ -9,7 +9,7 @@
 <body>
 <div class="ticker" aria-hidden="true"><span>◈ THE WORLD WIDE WEB OF WORLDS ◈ &nbsp;&nbsp; QUESTIONS WELCOME &nbsp;&nbsp; ◈ CONSTRUCTIVE CURIOSITY SINCE THE END OF TIME ◈</span></div>
 <main class="page">
-<div class="topline"><span>THE STATIC COLLECTIVE PRESENTS</span><span class="right">BEST VIEWED WITH CURIOSITY • RETURN 002</span></div>
+<div class="topline"><span>THE STATIC COLLECTIVE PRESENTS</span><span class="right">BEST VIEWED WITH CURIOSITY • CAFÉ 004</span></div>
 <header class="mast">
   <div class="mascot" aria-hidden="true"><div class="halo">✳</div><div class="head"><span class="eyes">◉ ◉</span><span class="mouth">└──┘</span></div><div class="tie">◆</div></div>
   <div class="mastwords"><div class="stamp">YOUR FRIENDLY NEIGHBORHOOD QUESTION ENGINE</div>
@@ -17,9 +17,18 @@
     <p class="tagline">The Internet is a very big place. <em>You only need one question.</em></p></div>
 </header>
 <div class="strip"><span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> SMALL THINGS CAN BEGIN HERE <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
+<section class="cafe-intro" aria-labelledby="cafe-title">
+ <div class="cafe-badge">✳ CAFÉ MODE · NOW OPEN · BRING A QUESTION, NOT A PASSWORD</div>
+ <div class="cafe-hero">
+  <div><p class="cafe-kicker">THE LITTLE NEIGHBORHOOD POSSIBILITY MACHINE</p><h2 id="cafe-title">ONE QUESTION.<br><em>ONE SMALL ACT.</em><br>ONE MORE TABLE.</h2>
+  <p>Pick a card, let JAR;VIS sketch a first step, then carry the question to someone willing. No signups. No automatic introductions. You get to decide what happens next.</p></div>
+  <div class="cafe-receipt" aria-hidden="true"><b>TAKE A NUMBER</b><span>001</span><small>EVERY CHAIR COUNTS<br>✳ ✳ ✳</small></div>
+ </div>
+ <div class="cafe-stages" aria-label="How this experiment works"><span><b>01</b> Ask</span><span><b>02</b> Explore</span><span><b>03</b> Pass it on (by choice)</span></div>
+</section>
 <section class="askbox" aria-label="Ask JAR;VIS">
   <h2>What would you like to make possible?</h2>
-  <p>Go ahead. Ask something wonderfully specific, or ridiculously big.</p>
+  <p>Go ahead. Ask something wonderfully specific, or ridiculously big.</p><p id="received-note" class="received-note" hidden role="status">✉ A question was handed to you. It has not been submitted. Edit it or press Ask when you choose.</p>
   <form id="question-form">
     <label class="visually-hidden" for="question">Your question</label>
     <textarea id="question" name="question" rows="3" maxlength="360" minlength="8" required autofocus placeholder="How could we help neighbors share extra garden produce?"></textarea>
@@ -28,6 +37,9 @@
       <button id="ask" class="bigbutton" type="submit"><span aria-hidden="true">✳</span> Ask JAR;VIS! <span aria-hidden="true">➜</span></button></div>
   </form>
   <div class="samples"><span>Try one:</span>
+    <button type="button" class="cafe-sample" data-kind="question" data-example="What useful thing could I offer a neighbor or a local community project this week?">OFFER ✳</button>
+    <button type="button" class="cafe-sample" data-kind="question" data-example="What is one unmet neighborhood need a willing group could explore together?">NEED ✳</button>
+    <button type="button" class="cafe-sample" data-kind="plan" data-example="How could we plan a small community grocery food-access pilot with willing neighbors?">BUILD ✳</button>
     <button type="button" data-example="How could neighbors share extra garden produce?">garden produce</button>
     <button type="button" data-example="Can we make a printable invitation to an arts gathering?">arts gathering</button>
     <button type="button" data-example="Where should I start exploring the Static Collective code?">explore the code</button>
@@ -49,7 +61,16 @@
    </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
    <div class="next"><span>THE NEXT QUESTION</span><p id="next-question"></p><button id="ask-next" type="button">Ask this next ➜</button></div>
-   <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
+   <section class="handoff" aria-labelledby="handoff-title">
+      <div class="handoff-label">✳ OPTIONAL, HUMAN-TO-HUMAN HANDOFF</div>
+      <h3 id="handoff-title">Pass it to the next chair.</h3>
+      <p>Make a link containing only this question, or the next question. No answer, personal details or secret keys are included. The other person chooses whether to explore it. <strong>Copying a link never contacts anyone.</strong></p>
+      <div class="handoff-actions"><button type="button" id="copy-question">↗ Make a link to this question</button><button type="button" id="copy-next">↗ Make a link to the next question</button></div>
+      <label for="handoff-link">Your optional handoff link (select and copy if needed)</label>
+      <input id="handoff-link" type="text" readonly aria-label="Optional question handoff link">
+      <p id="handoff-status" role="status" class="handoff-status">Do not include names, phone numbers or private details. The question appears in the shared URL.</p>
+    </section>
+    <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
    <details class="receipt"><summary>Look under the bonnet</summary><p id="receipt-state"></p><p id="hash"></p><p>The unsigned receipt binds this original return and its observed sources. It does not prove authorship, consent or project approval.</p><button type="button" id="download-receipt">↓ Save complete receipt (.json)</button><details><summary>Prepare a local Workbench handoff</summary><p>Save a draft-only request for an operator to inspect locally. Downloading it does not send it to a Workbench or run anything.</p><button type="button" id="download-handoff">↓ Save Workbench request (.json)</button></details><details><summary>What the question leaves open</summary><ul id="encounter-gaps"></ul></details></details>
  </div>
 </section>
@@ -60,7 +81,7 @@
   <a class="table-door-button" href="/gather/">OPEN THE NEXT TABLE &amp; GARDEN COMMONS ↗</a>
   <small>No account required. No official signups, donations, or claims of partnership. Sharing a question is voluntary.</small>
 </section>
-<section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ One question can become a card, an invitation draft, a source door or an original little song. This machine uses local composition rules and reads fixed public project documents. You choose what to keep or share. A draft does not contact people, run project workers or claim anyone’s commitment.</p></section>
+<section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ One question can become a card, an invitation draft, a small field plan, a source door or an original little song. This machine uses local composition rules and reads fixed public project documents. You choose what to keep or share. A draft does not contact people, run project workers or claim anyone’s commitment.</p></section>
 <footer><span>© 1999–2026 • THE STATIC COLLECTIVE • BUILT FOR THE QUESTION THAT HASN'T BEEN ASKED YET</span><br><a href="https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/">the old garden (preserved Vercel release)</a> · <a href="https://github.com/the-static-collective/webZ">the source</a> · <a href="/games/tomorrow/">1999 mystery dinner club</a> · <a href="/gather/">the next table &amp; community commons</a> · <span>NO COOKIES • NO ACCOUNTS • NO QUESTION STORAGE</span></footer>
 </main>
 </body></html>
