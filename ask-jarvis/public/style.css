@@ -90,3 +90,13 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .handoff-status{font:11px/1.5 Verdana,sans-serif!important;color:#4c695f!important}
 @media(max-width:650px){.cafe-intro{margin:16px 12px 0}.cafe-badge{font-size:9px;letter-spacing:.5px}.cafe-hero{padding:18px 13px}.cafe-hero h2{font-size:clamp(23px,7vw,34px)}.cafe-receipt{min-width:75px;width:75px;padding:8px 3px}.cafe-receipt span{font-size:35px}.cafe-receipt b{font-size:8px}.cafe-receipt small{font-size:7px}.cafe-stages{font-size:9px;padding:9px 3px;gap:2px}.cafe-stages span{gap:3px}.cafe-stages b{font-size:10px}.handoff{padding:12px 9px}.handoff-actions button{width:100%;text-align:center}}
 @media print{.cafe-intro,.handoff{display:none!important}}
+
+.strip-link{color:#113970!important;text-decoration:underline;font:bold 11px "Courier New",monospace;background:#fff6c5;padding:4px 8px}
+.contact-door{margin:22px 31px 26px;background:linear-gradient(135deg,#eaf7ed,#fff0c0);border:3px ridge #8eae91;box-shadow:4px 4px 0 #a5bb9c;padding:20px 23px}
+.contact-door-stamp{font:bold 10px "Courier New",monospace;letter-spacing:1.2px;color:#876025}
+.contact-door h2{font:bold 31px Georgia,serif;margin:8px 0;color:#245647}
+.contact-door p{font:14px/1.6 Georgia,serif;margin:0 0 16px}
+.contact-door-button{display:inline-block;background:#205644;color:#fff5bf!important;border:3px outset #89b69d;padding:11px 16px;font:bold 14px Georgia,serif;text-decoration:none}
+.contact-door small{display:block;color:#576c61;font:11px/1.5 Verdana,sans-serif;margin-top:12px}
+@media(max-width:650px){.contact-door{margin:18px 12px;padding:15px}.contact-door-button{display:block;text-align:center}}
+@media print{.contact-door{display:none!important}}
