@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#193e34">
+<meta name="description" content="Close a triangle, try one small cooperative act, and carry the learning forward. An account-free network weaving field kit.">
+<title>The Weaving Garden · Abundent</title>
+<link rel="stylesheet" href="/weave/style.css"><script type="module" src="/weave/app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the garden</a>
+<div class="ticker" aria-hidden="true">✳ THE CONNECTION IS THE GOOD PART ✳ NO FOLLOWER COUNTS ✳ NO CENTRAL COMMAND ✳</div>
+<header class="nav"><a class="logo" href="/">abundent<span>.</span></a><nav aria-label="Other rooms"><a href="/doors/">Switchboard</a><a href="/tables/">Seventh Table</a><a href="/contact/">Stay in touch</a></nav></header>
+<main id="main">
+<section class="hero">
+ <div class="kicker">FIELD KIT 001 / OPEN GARDEN / ACCOUNT-FREE</div>
+ <div class="hero-grid"><div><h1>THE<br><em>WEAVING</em><br>GARDEN<span>✳</span></h1>
+ <p class="lead">Know two people who could do something good together? Help them find each other. Then get out of the way.</p>
+ <p class="sub">One introduction. One small experiment. One honest return. The network is the relationship, not the website.</p>
+ <a class="button yellow" href="#make">CLOSE A TRIANGLE ↘</a> <a class="button light" href="#rhythm">HOW THIS WORKS ↓</a></div>
+ <div class="triangle" role="img" aria-label="A connector helps a person with a need and a person with an offer connect directly. The connector then steps back.">
+ <div class="node node-you">YOU<small>THE CONNECTOR</small></div>
+ <div class="line one"></div><div class="line two"></div><div class="line three"></div>
+ <div class="node node-need">A NEED<small>ONE CHAIR</small></div><div class="node node-offer">AN OFFER<small>ANOTHER CHAIR</small></div>
+ <div class="diagram-note">THE GOAL: THEY KNOW EACH OTHER WITHOUT NEEDING YOU IN THE MIDDLE.</div>
+ </div></div>
+</section>
+<section class="principles" id="rhythm" aria-label="The weaving practice">
+ <article><span>01 / LISTEN</span><h2>Notice what's already here.</h2><p>Ask about needs, interests and gifts. Look beyond your usual circle.</p></article>
+ <article><span>02 / ASK</span><h2>Connect by permission.</h2><p>Ask both parties independently before making a real introduction. A draft isn't consent.</p></article>
+ <article><span>03 / TRY</span><h2>Do one small thing.</h2><p>Offer a manageable first act with an owner, a time to revisit, and a real choice to decline.</p></article>
+ <article><span>04 / RETURN</span><h2>Carry learning, not control.</h2><p>Notice what happened, who is still missing, and who might host the next table.</p></article>
+</section>
+<section class="workbench" id="make">
+ <div class="sectionlabel">THE LITTLE TRIANGLE MACHINE / 001</div>
+ <h2>WHAT COULD THESE TWO CHAIRS DO?</h2>
+ <p class="intro">Describe <strong>roles or opportunities</strong>, not named people. This creates a portable proposal—not an introduction, a match, a signup, or an approved partnership.</p>
+ <div class="twocol">
+ <form class="sheet" id="weave-form">
+   <label for="need">A NEED OR INTEREST <span>*</span></label>
+   <textarea id="need" name="need" rows="2" minlength="4" maxlength="140" required placeholder="A neighborhood grocery pilot needs volunteer drivers."></textarea>
+   <label for="offer">AN OFFER OR CAPABILITY <span>*</span></label>
+   <textarea id="offer" name="offer" rows="2" minlength="4" maxlength="140" required placeholder="A local group has vehicles and volunteers for occasional deliveries."></textarea>
+   <label for="try">ONE SMALL THING TO TRY <span>*</span></label>
+   <textarea id="try" name="try" rows="3" minlength="4" maxlength="180" required placeholder="Ask both groups whether they want to plan one voluntary delivery trial."></textarea>
+   <div class="notice"><b>PUBLIC CARD RULE.</b> These three fields go into the link if you share it. Don't include names, phone numbers, email, home addresses, private circumstances or claims of anyone's agreement. Keep those conversations offline.</div>
+   <label class="check"><input type="checkbox" id="reviewed" required> <span>I've reviewed these public fields for private details. This card is a proposal, not evidence of permission.</span></label>
+   <button class="button yellow wide" type="submit">MAKE A PUBLIC OPPORTUNITY CARD ↗</button>
+   <p id="form-status" class="status" role="status">Nothing is sent when you type here.</p>
+ </form>
+ <section class="sheet preview" aria-live="polite" aria-labelledby="preview-heading">
+   <div class="ticket">✳ THE PUBLIC HANDOFF / OPTIONAL</div>
+   <div id="blank-card"><h3>THERE'S ROOM FOR ONE MORE CONNECTION.</h3><p>Write a possibility, then make a card. You decide who receives it.</p><div class="asterisk" aria-hidden="true">✳</div></div>
+   <div id="public-card" hidden>
+     <h3 id="preview-heading">A POSSIBLE TRIANGLE</h3>
+     <dl><div><dt>ONE NEED</dt><dd id="card-need"></dd></div><div><dt>ONE OFFER</dt><dd id="card-offer"></dd></div><div><dt>ONE SMALL TRY</dt><dd id="card-try"></dd></div></dl>
+     <p class="fine"><b>NOT YET:</b> A confirmed match, an introduction, attendance, permission, delivery, partnership or promise.</p>
+     <label for="share-link">OPTIONAL SELF-CONTAINED LINK</label>
+     <input id="share-link" readonly aria-label="Opportunity link; contains the three public fields">
+     <div class="actions"><button type="button" id="copy" class="button dark">COPY LINK</button><button type="button" id="print" class="button light">PRINT CARD</button></div>
+     <p id="copy-status" class="fine" role="status">No one is contacted by making this card. Sharing is a separate human choice.</p>
+   </div>
+ </section></div>
+</section>
+<section class="consent" aria-labelledby="consent-heading">
+ <div class="sectionlabel">THE PART THE COMPUTER CAN'T DO</div><h2 id="consent-heading">CLOSE THE TRIANGLE IN REAL LIFE.</h2>
+ <div class="checks"><p><b>ASK A.</b> May I introduce you to someone working on a related possibility?</p><p><b>ASK B.</b> May I introduce you to someone who has a related need or skill?</p><p><b>CONNECT.</b> If both say yes, arrange the introduction in their chosen way.</p><p><b>STEP BACK.</b> Invite them to continue directly. Neither needs to join Abundent.</p></div>
+ <p>One consent doesn't imply the other. If either declines, respect it. A connection is successful when it can continue without a permanent hub.</p>
+</section>
+<section class="notes" id="return">
+ <div class="sectionlabel">AFTER THE SMALL EXPERIMENT / PRIVATE NOTE</div>
+ <h2>WHAT ACTUALLY HAPPENED?</h2>
+ <p>Keep your own record of what you observed. This area is <strong>not included in any public link</strong> and is <strong>not uploaded</strong>. Downloading a note does not verify anybody else's account.</p>
+ <div class="notegrid"><div><label for="outcome">WHAT IS THE STATUS?</label><select id="outcome"><option value="not-yet">Not yet tried</option><option value="asked">Permission requested</option><option value="introduced">Introduction reported</option><option value="acted">Small act reported</option><option value="declined">Declined / stopped</option></select></div><div><label for="observed">WHAT DID YOU OBSERVE?</label><textarea id="observed" maxlength="800" rows="4" placeholder="One concrete thing, without private names or quotations…"></textarea></div><div><label for="next">WHAT WOULD BE A USEFUL NEXT STEP?</label><textarea id="next" maxlength="800" rows="4" placeholder="A follow-up question, another possible triangle, or a reason to stop."></textarea></div></div>
+ <div class="actions"><button class="button yellow" type="button" id="save">↓ DOWNLOAD MY PRIVATE NOTE</button><a class="button light" href="/tables/">⤳ INVITE THE NEXT TABLE / +7 DAYS</a></div>
+ <p class="fine">No automatic collection, social graph, verified outcomes, emails, RSVPs, or contact delivery. Any public URL fragment contains only the opportunity fields that a person deliberately puts into it.</p>
+</section>
+<section class="learn"><div><div class="sectionlabel">THE PRACTICE HAS A HISTORY</div><h2>LEARN FROM THE WEAVERS.</h2>
+ <p>Inspired by June Holley's network weaving work, especially <em>closing triangles</em>, self-organizing projects and building relationships that continue without the original connector. This is an independent Static Collective adaptation, not affiliated with or endorsed by June Holley or the Network Weaving Institute.</p>
+ <a href="https://networkweaver.com/resources/closing-triangles/" rel="noopener noreferrer">READ: CLOSING TRIANGLES ↗</a> · <a href="https://nwinstitute.org/product/network-weaver-handbook/" rel="noopener noreferrer">NETWORK WEAVER HANDBOOK ↗</a>
+ </div><div class="stamp">A GOOD NETWORK<br>DOESN'T NEED<br>A BOSS NODE.</div></section>
+<footer><a href="/">HOME</a> · <a href="/doors/">SWITCHBOARD</a> · <a href="/tables/">SEVENTH TABLE</a> · <a href="/contact/">CONTACT</a> · <a href="https://github.com/the-static-collective/webZ">SOURCE ↗</a><p>✳ NO ACCOUNT REQUIRED · NO PEOPLE DATABASE · NO PARTNER ENDORSEMENTS · NO INVITATIONS SENT</p></footer>
+</main>
+</body></html>
