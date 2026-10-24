@@ -28,3 +28,14 @@ footer{font:10px/2 "Courier New",monospace;text-align:center;color:#607592;paddi
 
 @keyframes domino-in{from{opacity:0;transform:translateY(-8px) rotate(-2deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
 @media(prefers-reduced-motion:no-preference){.steps li{animation:domino-in .25s ease-out both}}
+
+/* Public bridge: a second invitation, not an enrollment. */
+.table-door{margin:22px 31px 26px;background:linear-gradient(135deg,#fff1c2,#f1f8e9);border:3px ridge #b4a15d;box-shadow:4px 4px 0 #8cad93;padding:18px 22px;color:#203e3d}
+.table-door-stamp{font:bold 10px "Courier New",monospace;letter-spacing:1.4px;color:#6b5b2b}
+.table-door h2{font:bold 28px Georgia,serif;color:#234e47;margin:9px 0}
+.table-door p{font:14px/1.65 Georgia,serif;max-width:65ch;margin:0 0 17px}
+.table-door-button{display:inline-block;padding:11px 15px;color:#f7f3d7!important;background:#22584a;border:3px outset #76a28b;box-shadow:2px 2px 0 #2d4b4b;text-decoration:none;font:bold 13px Georgia,serif}
+.table-door-button:hover,.table-door-button:focus{background:#174034;outline:2px solid #ca8e33;outline-offset:3px}
+.table-door small{display:block;color:#50635b;font:11px/1.5 "Courier New",monospace;margin:12px 0 0}
+@media(max-width:650px){.table-door{margin:18px 12px;padding:14px}.table-door h2{font-size:24px}.table-door-button{display:block;text-align:center;font-size:12px}}
+@media print{.table-door{display:none!important}}
