@@ -1,0 +1,49 @@
+name: Watershed Quest native FM x GrO (fictional only)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'ask-jarvis/public/labs/living-watershed/**'
+      - 'ask-jarvis/living-watershed-bridge/**'
+      - 'ask-jarvis/living-watershed-source/**'
+      - '.github/workflows/watershed-quest-001-native.yml'
+permissions:
+  contents: read
+jobs:
+  native-held-circuit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out WebZ source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: source
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check out exact Full Measure candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/full-measure-world-layer
+          ref: c9206d5055ad574a23acb2eceb5f8785a4ad64fe
+          path: fm
+          persist-credentials: false
+      - name: Check out exact GrO candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/GrO
+          ref: d32009710645380adb852a119715b771bafd3684
+          path: gro
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install exact Full Measure test runtime
+        run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: fm
+      - name: Fictional web-world tests
+        run: node --test source/ask-jarvis/test/living-watershed-001.test.mjs
+      - name: Original Full Measure TS and GrO native encounter/HOLD
+        run: ./fm/node_modules/.bin/tsx source/ask-jarvis/living-watershed-bridge/rehearse.mjs
+      - name: Independently validate bounded fictional return
+        run: node source/ask-jarvis/living-watershed-bridge/verify.mjs
