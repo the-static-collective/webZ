@@ -32,7 +32,7 @@ async function refresh(){
   catch(error){say('Unable to open this room: '+error.message,true);}
 }
 function show(result){
-  const t=result.table;held={id:t.id,token:held.token,role:result.role,table:t};
+  const t=result.table;if(result.role==='host'&&result.guestKey)guestKey=result.guestKey;held={id:t.id,token:held.token,role:result.role,table:t};
   $('#start').hidden=true;$('#room').hidden=false;
   $('#room-title').textContent=t.title;$('#room-purpose').textContent=t.purpose;
   $('#role-label').textContent=result.role==='host'?'HOST KEY · PRIVATE':'GUEST INVITATION';
