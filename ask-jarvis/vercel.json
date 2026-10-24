@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "outputDirectory": "public",
-  "buildCommand": "echo 'No build: source-verified static preview'",
+  "buildCommand": "npm test && echo 'Source-verified static community doorway'",
   "installCommand": "echo 'No install required'",
   "headers": [
     {
