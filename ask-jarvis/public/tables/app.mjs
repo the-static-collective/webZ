@@ -1,4 +1,4 @@
-import {makeInvite,readInvite,inviteLink,nextFields,suggestDay} from './model.mjs';
+import {makeInvite,readInvite,inviteLink,nextFields,suggestDay,dayAfter} from './model.mjs';
 import {readTableSeed,draftFromQuestion} from '../table-bridge.mjs';
 import {prepareNextTable,privateWitnessText,witnessFingerprint,publicRelay} from './afterglow.mjs';
 import {networkRequest,readNetworkLink,networkLink,publicCreatePayload,publicNotePayload,liveNetworkOrigin} from './network.mjs';
@@ -7,7 +7,7 @@ const $ = selector => document.querySelector(selector);
 const keys=['title','purpose','date','time','venue','host'];
 const form=$('#open-form');
 let current=null, prior=null, witnessSavedSnapshot=null;
-let ownLocalInvite=false, network=null, networkBusy=false, lastWithdraw=null;
+let ownLocalInvite=false, network=null, networkBusy=false, lastWithdraw=null, pendingNetworkParent=null;
 const witnessSnapshot=()=>witnessFingerprint(current,$('#happened').value,$('#unfinished').value);
 const hasPrivateNotes=()=>Boolean($('#happened').value.trim()||$('#unfinished').value.trim());
 
@@ -52,6 +52,7 @@ form.addEventListener('submit',event=>{
   let made;
   try{made=makeInvite(formFields(),prior);}
   catch(err){window.alert('Please add a table name, a purpose, and a valid date and time.');return;}
+  if(prior && network && network.table?.title===current?.title) pendingNetworkParent={id:network.id,token:network.token};
   const link=inviteLink(made,window.location.href);
   // Only the invitation card goes into the hash; nothing is submitted.
   window.history.replaceState(null,'',link);
@@ -268,9 +269,11 @@ $('#network-publish').addEventListener('click',()=>void withNetwork(async()=>{
  }
  if(!window.confirm('Submit ONLY the invitation title, purpose, date, time, venue and host label to Abundent? Your private notes are NOT included. Anyone with the guest link can see the table details and propose notes.'))return;
  try{
-   const created=await networkRequest('create',publicCreatePayload(current));
+   const parentFields=pendingNetworkParent?{parentId:pendingNetworkParent.id,parentToken:pendingNetworkParent.token}:{};
+   const created=await networkRequest('create',{...publicCreatePayload(current),...parentFields});
    if(!created?.table?.id||!created.hostKey||!created.guestKey)throw Error('INCOMPLETE_CREATE');
    network={id:created.table.id,token:created.hostKey,guestKey:created.guestKey,role:'host',table:created.table,notes:[]};
+   pendingNetworkParent=null;
    $('#network-consent').checked=false;
    $('#network-publish').disabled=true;
    $netStatus('#network-publish-status','Network table created. Save your private HOST KEY RECEIPT below before leaving. This is not an RSVP or automatic public directory listing.');
@@ -278,6 +281,32 @@ $('#network-publish').addEventListener('click',()=>void withNetwork(async()=>{
    $('#network-room').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(error){$netStatus('#network-publish-status',netError(error));}
 }));
+$('#network-pass').addEventListener('click',()=>{
+ if(!network)return;
+ const table=network.table;
+ let suggestion;
+ try {
+   suggestion={title:'The next table',purpose:'What should we carry forward from '+table.title+'?',
+     date:dayAfter(table.date,7),time:table.time||'',venue:'',host:''};
+ }catch{
+   $netStatus('#network-pass-status','This table date is not valid for a seven-day suggestion; open a fresh table instead.');
+   return;
+ }
+ if(hasPrivateNotes() && witnessSnapshot()!==witnessSavedSnapshot){
+   const go=window.confirm('You have private afterglow notes that were not downloaded since your last edit. They will stay in this tab until you create a new invitation, which will clear them. Continue drafting?');
+   if(!go)return;
+ }
+ pendingNetworkParent={id:network.id,token:network.token};
+ prior=null;
+ fill(suggestion);
+ setText('#form-heading','A NEW INDEPENDENT TABLE.');
+ const note=$('#parent-note');
+ note.hidden=false;
+ note.textContent='An OPTIONAL next gathering from network table '+network.id+'. When you later opt in to the network again, the new record may point back to this invitation as a reference. This does not prove either gathering occurred or carry any private notes.';
+ $netStatus('#network-pass-status','Editable next-table draft prepared. No invitation or network record was created. Review it, create your invitation, and separately opt in to the network if desired.');
+ $('#open').scrollIntoView({behavior:'smooth',block:'start'});
+ $('#title').focus({preventScroll:true});
+});
 $('#network-copy-guest').addEventListener('click',async()=>{
  const field=$('#network-guest-link');
  try{await navigator.clipboard.writeText(field.value);$netStatus('#network-link-status','Guest link copied. Share only with the people you choose.');}
