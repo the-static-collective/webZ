@@ -37,7 +37,7 @@ test('network submission sends an explicit action, without credentials or storag
  assert.equal(call.options.cache,'no-store');
  assert.equal(JSON.parse(call.options.body).action,'post');
  assert.ok(!JSON.stringify(call.options.body).includes('happened'));
- assert.throws(()=>networkRequest('eraseAll',{},fake),/INVALID_NETWORK_ACTION/);
+ await assert.rejects(()=>networkRequest('eraseAll',{},fake),/INVALID_NETWORK_ACTION/);
 });
 test('network is enabled only on verified production domains',()=>{
  assert.equal(liveNetworkOrigin('https://abundent.org/tables/'),true);
