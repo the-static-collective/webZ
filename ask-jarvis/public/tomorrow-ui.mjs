@@ -9,6 +9,7 @@ const controls={
 };
 const selectedTags=new Set();
 const doneByMission=new Map();
+const outcomesByMission=new Map();
 let board=null,mission=null;
 const node=(tag,cls,content)=>{
  const element=document.createElement(tag);
@@ -118,6 +119,7 @@ function select(id,scroll=false){
  $('picked-invite').textContent=mission.invite;
  $('picked-safety').textContent=mission.caution;
  $('draft-preview').textContent=invitationText(board,mission);
+ $('outcome').value=outcomesByMission.get(mission.id)||'NOT_ATTEMPTED';
  drawTasks();appendPrintable();
  controls.actionStatus.textContent='';
  controls.detail.hidden=false;
@@ -131,7 +133,7 @@ function create(){
   controls.detail.hidden=true;board=null;mission=null;return;
  }
  board=buildBoard(config());
- mission=null;doneByMission.clear();
+ mission=null;doneByMission.clear();outcomesByMission.clear();
  controls.formStatus.textContent='3 draft missions made here in your browser. No network or model request.';
  controls.board.hidden=false;
  select(board.missions[0].id);
@@ -171,10 +173,14 @@ $('print').addEventListener('click',()=>{
  appendPrintable();controls.actionStatus.textContent='Opening your device’s print dialog.';
  window.print();
 });
+$('outcome').addEventListener('change',()=>{
+ if(mission)outcomesByMission.set(mission.id,$('outcome').value);
+ controls.actionStatus.textContent='Outcome noted on this device only. Nothing is verified or uploaded.';
+});
 $('receipt').addEventListener('click',()=>{
  if(!mission)return;
  const completed=[...(doneByMission.get(mission.id)||new Set())];
- const receipt=localReceipt(board,mission,completed);
+ const receipt=localReceipt(board,mission,completed,$('outcome').value);
  const blob=new Blob([JSON.stringify(receipt,null,2)],{type:'application/json;charset=utf-8'});
  const url=URL.createObjectURL(blob);
  const a=node('a');a.href=url;a.download='tomorrow-'+mission.id+'-local-receipt.json';
