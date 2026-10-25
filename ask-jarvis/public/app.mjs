@@ -7,7 +7,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind'),triadToggle=$('#triad-opt-in');
-let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null, nativeReceipt=null, nativeActive=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null, nativeReceipt=null, nativeActive=null, discoveryActive=null,discoveryReceipt=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -29,6 +29,11 @@ function cleanAudio() {
 }
 function clearReturn() {
   visActive?.abort();visActive=null;visProposal=null;
+  discoveryActive?.abort();discoveryActive=null;discoveryReceipt=null;
+  $('#discovery-tools').hidden=true;$('#discover-download').hidden=true;
+  $('#discover-nominate').hidden=true;$('#discover-run').disabled=false;
+  $('#discover-result').textContent='No external search requested. Nothing learned, saved, or submitted automatically.';
+  $('#discover-nominate-status').textContent='';
   nativeActive?.abort();nativeActive=null;nativeReceipt=null;
   $('#native-result').textContent='Not run. Unlike the source lens above, this calls real owner runtime code.';
   $('#native-download').hidden=true;$('#native-run').disabled=false;
@@ -115,7 +120,7 @@ function show(data) {
   $('#hash').textContent='Return receipt: '+data.receiptHash;
   $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
   $('#encounter-gaps').replaceChildren(...data.encounter.gaps.map(g=>el('li','',g)));
-  last=data;reply.hidden=false;
+  last=data;reply.hidden=false;$('#discovery-tools').hidden=false;
 }
 
 input.addEventListener('input',()=>{input.setCustomValidity('');$('#received-note').hidden=true;invalidate();});
@@ -275,6 +280,96 @@ async function runNative() {
 $('#native-run').addEventListener('click',()=>{void runNative();});
 $('#native-download').addEventListener('click',()=>{
   if(nativeReceipt)download('jarvis-native-owner-receipts-unsigned.json',JSON.stringify(nativeReceipt,null,2),'application/json');
+});
+const DISCOVERY_MEMORY='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/discovery-memory';
+async function runDiscovery(){
+ if(!last)return;
+ discoveryActive?.abort();
+ const controller=new AbortController();discoveryActive=controller;
+ const button=$('#discover-run'),target=$('#discover-result');
+ button.disabled=true;discoveryReceipt=null;$('#discover-download').hidden=true;
+ $('#discover-nominate').hidden=true;$('#discover-nominate-status').textContent='';
+ target.textContent='Orienting against the Abundent North Star and Free Graph, then checking one bounded external public search…';
+ const timer=setTimeout(()=>controller.abort(),13000);
+ try{
+  const res=await fetch('/api/discover',{method:'POST',cache:'no-store',credentials:'same-origin',
+   headers:{'content-type':'application/json'},body:JSON.stringify({question:last.question,search:true}),signal:controller.signal});
+  const d=await res.json();
+  if(discoveryActive!==controller)return;
+  if(!res.ok||d.schema!=='ask-jarvis/discovery-v1'){
+   target.textContent='HOLD · Discovery is unavailable. Your original question card is unchanged and no new fact was saved.';
+   return;
+  }
+  const {receiptHash,...body}=d;
+  if(await sha256(JSON.stringify(body))!==receiptHash||d.question!==last.question)throw Error('INVALID_DISCOVERY_RECEIPT');
+  const view=el('div','discovery-card');
+  view.append(el('h4','','ORIENT · ABUNDENT NORTH STAR'),el('p','',d.mission.goal));
+  const relevant=d.orientation.relatedWorkstreams||[];
+  view.append(el('p','',relevant.length
+   ?'Optional related efforts: '+relevant.map(x=>x.title).join(' · ')+'. These are directions, not partner commitments.'
+   :'Independent question: no Collective project connection is required.'));
+  view.append(el('h4','','REMEMBER · RELEVANT REVIEWED RESEARCH'));
+  if(d.reviewedContext?.length){
+    const ul=el('ul');
+    for(const m of d.reviewedContext){
+      const li=el('li');li.append(el('span','',m.title+' · source review at '+(m.reviewedAt||'unknown')+' · '));
+      try{const u=new URL(m.url);if(u.protocol==='https:'){const a=el('a','','Read original ↗');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';li.append(a);}}
+      catch{}
+      ul.append(li);
+    }view.append(ul);
+  }else view.append(el('p','','No previously reviewed research matches this question yet.'));
+  view.append(el('h4','','DISCOVER · EXTERNAL SOURCE CANDIDATES'));
+  view.append(el('p','',d.search.note));
+  if(d.externalSources.length){
+    const list=el('ol','discovery-sources');
+    for(const src of d.externalSources){
+      const li=el('li');
+      const a=el('a','',src.title+' ↗');a.href=src.url;a.target='_blank';a.rel='noopener noreferrer';
+      a.referrerPolicy='no-referrer';
+      li.append(a,el('p','',src.description),el('small','',src.provider+' · search snippet only · '+src.status));
+      list.append(li);
+    }view.append(list);
+  }else view.append(el('p','',d.status==='HOLD_LOCAL_LOOKUP_NOT_CONFIGURED'
+      ?'HOLD: Real-time local business search is not configured. Please use a local or official source directly; no business or open hours were invented.'
+      :'No usable external sources were returned. This is a valid unresolved result.'));
+  view.append(el('h4','','WEAVE · UNVERIFIED RELATIONS'));
+  const connections=el('ul');
+  for(const c of d.weave||[])connections.append(el('li','',c.hypothesis+' · proposed / no authority'));
+  if(!connections.childElementCount)connections.append(el('li','','No connection inferred from available evidence.'));
+  view.append(connections,el('p','',d.approval),
+    el('small','','Receipt: '+d.receiptHash+' · Unsigned · No service request, pledge or publication'));
+  target.replaceChildren(view);
+  discoveryReceipt=d;$('#discover-download').hidden=false;
+  $('#discover-nominate').hidden=!d.externalSources.length;
+ }catch{
+  if(discoveryActive===controller)target.textContent=controller.signal.aborted
+    ?'HOLD · Research timed out. No new community knowledge was saved.'
+    :'HOLD · Discovery receipt or external research could not be verified.';
+ }finally{
+  clearTimeout(timer);if(discoveryActive===controller){discoveryActive=null;button.disabled=false;}
+ }
+}
+$('#discover-run').addEventListener('click',()=>{void runDiscovery();});
+$('#discover-download').addEventListener('click',()=>{
+ if(discoveryReceipt)download('jarvis-discovery-unsigned-research-receipt.json',JSON.stringify(discoveryReceipt,null,2),'application/json');
+});
+$('#discover-nominate').addEventListener('click',async()=>{
+ const d=discoveryReceipt,src=d?.externalSources?.[0],status=$('#discover-nominate-status');
+ if(!src)return;
+ const button=$('#discover-nominate');button.disabled=true;
+ status.textContent='Sending one public SOURCE SNIPPET to a private review queue. Not publicly adopting it…';
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8500);
+ try{
+  const res=await fetch(DISCOVERY_MEMORY,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',
+   headers:{'content-type':'application/json'},signal:controller.signal,
+   body:JSON.stringify({title:src.title,description:src.description,url:src.url,provider:src.provider,
+     relatedSeed:d.orientation.relatedIdeas?.[0]?.id||''})});
+  const body=await res.json();
+  if(!res.ok||body.status!=='PENDING_PRIVATE_SOURCE_REVIEW')throw Error('QUEUE_HOLD');
+  status.textContent='Source candidate '+body.candidateId+' received privately. No person or project endorsed it; it will not appear in reviewed context until a person checks its actual source.';
+  button.hidden=true;
+ }catch{status.textContent='The private source-review queue did not confirm receipt. Download the research receipt instead; nothing was published.';}
+ finally{clearTimeout(timer);button.disabled=false;}
 });
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
 
