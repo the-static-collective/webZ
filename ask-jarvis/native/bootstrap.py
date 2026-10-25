@@ -47,7 +47,7 @@ def _extract(name: str, target: Path) -> None:
     for item in z.infolist():
         p=PurePosixPath(item.filename)
         if len(p.parts)<2:continue
-        if p.parts[0]!=repo+"-"+commit:raise RuntimeError("OWNER_ARCHIVE_WRONG_PIN")
+        if p.parts[0].casefold()!=(repo+"-"+commit).casefold():raise RuntimeError("OWNER_ARCHIVE_WRONG_PIN")
         rel=PurePosixPath(*p.parts[1:])
         if ".." in rel.parts or rel.is_absolute():raise RuntimeError("OWNER_ARCHIVE_PATH_REFUSED")
         if not _allowed(name,rel):continue
