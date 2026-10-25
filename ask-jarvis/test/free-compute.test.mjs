@@ -66,16 +66,19 @@ test('Groq request is allowlisted, bounded and credential only appears in header
 });
 test('Gemini request sends system instructions only to fixed generateContent endpoint',async()=>{
   const {call,reply}=await invoke('reason');
-  assert.equal(call.url,'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent');
+  assert.equal(call.url,'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent');
   assert.equal(call.opts.headers['x-goog-api-key'],env.GEMINI_API_KEY);
   assert.ok(!('authorization' in call.opts.headers));
   assert.equal(JSON.parse(call.opts.body).generationConfig.responseMimeType,'application/json');
+  assert.equal(JSON.parse(call.opts.body).generationConfig.thinkingConfig.thinkingLevel,'minimal');
   assert.equal(reply.choices[0].message.content,'{"summary":"example"}');
 });
 test('OpenRouter uses free-only router, never a paid fallback',async()=>{
   const {call}=await invoke('explore');
   assert.equal(call.url,'https://openrouter.ai/api/v1/chat/completions');
   assert.equal(JSON.parse(call.opts.body).model,'openrouter/free');
+  assert.deepEqual(JSON.parse(call.opts.body).response_format,{type:'json_object'});
+  assert.ok(JSON.parse(call.opts.body).max_tokens<=1400);
   assert.equal(JSON.parse(call.opts.body).stream,false);
 });
 test('Cloudflare uses only fixed Nemotron model and validated account id',async()=>{
@@ -107,4 +110,14 @@ test('Mixed-case Vercel Gemini_API_Key remains usable without decrypting or repl
   await chosen.provider({system:'safe',input:'synthetic question'});
   assert.equal(chosen.id,'gemini');
   assert.equal(observed.opts.headers['x-goog-api-key'],GEMINI_API_KEY);
+});
+
+test('model restriction 404 and failure codes are not interpreted as zero availability or a valid response',async()=>{
+  let upstreamCalls=0;
+  const gemini=selectRoute(env,'reason',async()=>{
+    upstreamCalls++;
+    return new Response('{"error":{"message":"private upstream details must never be displayed"}}',{status:404});
+  });
+  await assert.rejects(()=>gemini.provider({system:'safe',input:'synthetic public test'}),/FREE_PROVIDER_HTTP_404/);
+  assert.equal(upstreamCalls,1);
 });
