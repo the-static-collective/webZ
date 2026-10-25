@@ -4,6 +4,7 @@ import mission from '../context/mission-v1.json' with {type:'json'};
 import catalog from '../town/catalog.json' with {type:'json'};
 import {orientQuestion,searchExternal,weaveCandidates,validatePublicQuestion} from '../src/discovery.mjs';
 import {sha256} from '../public/evidence.mjs';
+import {admitRequest,applyAdmission} from '../src/usage-guard.mjs';
 
 const MEMORY_URL='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/discovery-memory';
 async function reviewedContext(q,fetcher=fetch){
@@ -42,6 +43,8 @@ export default async function handler(req,res){
   validatePublicQuestion(body.question);
   orientation=orientQuestion(body.question,mission,catalog);
  }catch(e){return res.status(422).json({error:e.message==='PRIVATE_INQUIRY_REFUSED'?'PRIVATE_INQUIRY_REFUSED':'INVALID_QUESTION'});}
+ const admission=await admitRequest(req,'search');
+ if(applyAdmission(res,admission))return;
  // Preview-only process-local cache is an optimization, NOT a shared quota
  // or persistent community memory. Expire at 10m and bound entry count.
  const key=await sha256(body.question.trim().toLowerCase());
