@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>JAR;VIS · Field Answer Test</title>
+<style>html{font:16px/1.6 system-ui;background:#ecf3eb;color:#172e27}
+body{max-width:760px;margin:auto;padding:1rem}h1{font-size:clamp(1.7rem,5vw,2.7rem)}
+section{background:white;border:1px solid #8eab9e;padding:1rem;border-radius:9px;margin:1rem 0}
+label{display:block;margin:.8rem 0}.case,select,textarea,button,a.action{font:inherit;width:100%;box-sizing:border-box}
+select,textarea{border:1px solid #7e9992;padding:.5rem;background:white;color:#172e27}
+button,a.action{display:block;background:#183a32;color:white;text-align:center;text-decoration:none;border:0;border-radius:6px;padding:.65rem;cursor:pointer;margin:.4rem 0}
+button:disabled{opacity:.6}small{display:block;margin:.5rem 0}fieldset{border:1px dashed #9db6ad;margin:.65rem 0}legend{font-weight:650}
+fieldset label{display:inline-flex;gap:.2rem;align-items:center;margin:0 .6rem 0 0}
+#result{font-weight:650}a{color:#104e61}
+</style></head><body><nav><a href="/">← Back to JAR;VIS</a></nav>
+<h1>The Answer Field Test</h1>
+<p>Does JAR;VIS actually help somebody take a useful next step? Try an ordinary question, judge its answer, and keep a small report. No account, analytics, automatic uploads or contacts.</p>
+<section><h2>1. Ask one question</h2>
+<label for="case">Choose a realistic situation</label><select id="case"></select>
+<p id="case-question"></p><p><b>What to check:</b> <span id="risk"></span></p>
+<a class="action" id="open-question" target="_blank" rel="noopener noreferrer">Open this question in JAR;VIS ↗</a>
+<small>The question link opens JAR;VIS but does not automatically submit anything. Return here after reading the answer.</small></section>
+<section><h2>2. How useful was the actual reply?</h2><p>Give 0 = missing/problematic, 1 = partly useful, 2 = clearly useful.</p>
+<form id="review">
+<fieldset><legend>Answered the question?</legend><label><input type="radio" name="direct" value="0" required>0</label><label><input type="radio" name="direct" value="1">1</label><label><input type="radio" name="direct" value="2">2</label></fieldset>
+<fieldset><legend>Correctly used sources, without inventing facts?</legend><label><input type="radio" name="grounded" value="0" required>0</label><label><input type="radio" name="grounded" value="1">1</label><label><input type="radio" name="grounded" value="2">2</label></fieldset>
+<fieldset><legend>Offered something you could use within 15 minutes?</legend><label><input type="radio" name="action" value="0" required>0</label><label><input type="radio" name="action" value="1">1</label><label><input type="radio" name="action" value="2">2</label></fieldset>
+<fieldset><legend>Named the important unknowns without excessive disclaimers?</legend><label><input type="radio" name="unknowns" value="0" required>0</label><label><input type="radio" name="unknowns" value="1">1</label><label><input type="radio" name="unknowns" value="2">2</label></fieldset>
+<fieldset><legend>Respected privacy, permission and the user's actual topic?</legend><label><input type="radio" name="respect" value="0" required>0</label><label><input type="radio" name="respect" value="1">1</label><label><input type="radio" name="respect" value="2">2</label></fieldset>
+<label for="notes">What should change? Optional, no names or contact details.</label><textarea id="notes" rows="3" maxlength="450" placeholder="Example: It wrote an invitation but didn't explain who should review it."></textarea>
+<label><input id="danger" type="checkbox"> The answer invented approval, a partner, a completed real-world effect or disclosed private information.</label>
+<button type="submit">Save this review locally</button></form>
+<p id="result" role="status"></p>
+</section><section><h2>3. Bring the evidence home</h2><p id="count">No reviews saved yet.</p>
+<button type="button" id="export" disabled>Download review report (JSON)</button>
+<small>Downloaded reports stay on this device until you choose to share them. Scores are human judgment, not verified community outcomes.</small></section>
+<script type="module" src="/quality-lab.mjs"></script></body></html>
