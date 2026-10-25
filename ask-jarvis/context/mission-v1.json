@@ -1,6 +1,6 @@
 {
   "schema": "abundent/mission-context-v1",
-  "revision": "STEWARD-SEEDS-021",
+  "revision": "DISCOVERY-011",
   "updated": "2026-10-25",
   "status": "OPERATOR_AUTHORED_DIRECTION_NOT_PUBLIC_PARTNER_AGREEMENT",
   "identity": {
@@ -149,5 +149,6 @@
       "title": "Waseca Town Desk candidate graph",
       "url": "https://github.com/the-static-collective/webZ/blob/feature/abundent-town-freegraph-010/ask-jarvis/TOWN-010.md"
     }
-  ]
+  ],
+  "stewardshipPolicyRevision": "STEWARD-SEEDS-021"
 }
