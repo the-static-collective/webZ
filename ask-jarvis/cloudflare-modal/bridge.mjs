@@ -69,7 +69,8 @@ export async function signedModalCall(url,secret,input,proxyKey,proxySecret,fetc
   const value=JSON.parse(raw);
   if(value?.schema!=='jarvis/modal-field-kit-v1'||value?.status!=='DRAFT_ONLY'
     ||!Array.isArray(value?.steps)||value.steps.length>6||typeof value?.printableHtml!=='string'
-    ||value.printableHtml.length>12000||!value.printableHtml.startsWith('<!DOCTYPE html>'))
+    ||value.printableHtml.length>12000||!value.printableHtml.startsWith('<!DOCTYPE html>')
+    ||/<\\s*(script|iframe|object|embed|form|link|meta[^>]*http-equiv)|\\bon(?:load|error|click)\\s*=|javascript:|@import/i.test(value.printableHtml))
    throw Error('MODAL_OUTPUT_INVALID');
   return value;
  }finally{clearTimeout(timer);control.abort()}
