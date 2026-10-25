@@ -12,7 +12,11 @@ export default async function handler(req,res){
     schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_NOT_ENABLED',
     message:'VIS model investigation is not enabled on this site. The original question machine still works.'
   });
-  const token=process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN;
+  // Vercel Functions may provide their OIDC assertion as a platform-injected
+  // request header. The AI Gateway independently validates its signature.
+  const oidcFromPlatform = req.headers?.['x-vercel-oidc-token'];
+  const token=process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
+    || (typeof oidcFromPlatform==='string' ? oidcFromPlatform : undefined);
   if(!token)return res.status(503).json({
     schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'NO_MODEL_CREDENTIAL',
     message:'VIS model credentials are not configured. No model was called.'
