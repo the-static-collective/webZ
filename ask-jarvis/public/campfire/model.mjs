@@ -173,3 +173,90 @@ export function makeTableQuestion(fire){
  if(!validPurpose(input))throw Error('TABLE_QUESTION_UNSAFE');
  return input;
 }
+
+// A bridge is an editorial proposal between two QUESTIONS, never a claim of
+// shared people, resources, partner approval, affiliation or a verified coalition.
+const BRIDGES=Object.freeze({
+ 'coalition+garden':{
+  title:'The Food-Access Listening Table',
+  useful:'A one-page question card can let neighbors and willing organizers identify a particular food-access barrier.',
+  artifact:'Draft an anonymous, hypothetical needs-and-offers card for two independent reviewers.',
+  gate:'Do not treat Coalition or grocery organizers as committed partners. Obtain separate permission for any event, data use or food handling.'
+ },
+ 'garden+music':{
+  title:'A Song and a Question',
+  useful:'A musician could help make an optional listening invitation more welcoming while food-access questions stay specific.',
+  artifact:'Draft one question card and one optional song-sharing invitation, without promising food or a venue.',
+  gate:'No church, musicians, landowner or grocery sponsor is assumed. Rights and safe food-handling are separately governed.'
+ },
+ 'garden+park':{
+  title:'Garden Meets Stewardship',
+  useful:'Food-growing curiosity and stewardship skills might overlap around land use, gleaning or outdoor public learning.',
+  artifact:'Write down one public land-use question and which land/food permissions would be necessary.',
+  gate:'Never harvest, plant or distribute food on property without its owners and qualified food-safety review.'
+ },
+ 'garden+repair':{
+  title:'Food Access, Meet Useful Tools',
+  useful:'One useful material barrier could be equipment, safe storage or access to affordable tools.',
+  artifact:'Draft a no-names inventory question about one obstacle, without accepting equipment or offering repairs.',
+  gate:'No food-cold-chain or electrical work before appropriate qualifications and authorization.'
+ },
+ 'coalition+music':{
+  title:'A Listening Table That Sings',
+  useful:'Creative participation could help interested people meet across otherwise separate community concerns.',
+  artifact:'Draft an invitation to one listening-and-story exchange and ask whether anyone wants to co-design it.',
+  gate:'No group, performer or venue is automatically represented; sharing stories needs explicit consent.'
+ },
+ 'coalition+park':{
+  title:'Care in the Open Air',
+  useful:'A small stewardship task could give a willing network a visible, useful first shared experiment.',
+  artifact:'Draft a 30-minute permission-first park-care question card, without announcing a cleanup.',
+  gate:'Only the actual land manager can approve work and disposal rules.'
+ },
+ 'coalition+repair':{
+  title:'One Tool, One Useful Need',
+  useful:'An open question about skills and useful objects can help prospective helpers discover an appropriate need.',
+  artifact:'Draft a no-identities tool-and-skill matching question and ask one volunteer to critique it.',
+  gate:'Do not promise repairs, collect private cases or assume skill qualifications.'
+ },
+ 'music+park':{
+  title:'The Listening Walk',
+  useful:'Environmental care and music might share a low-pressure conversation or artistic invitation.',
+  artifact:'Sketch a tiny acoustic listening-walk question, with no announced public gathering.',
+  gate:'Check public land event rules and artistic permissions before inviting participants.'
+ },
+ 'music+repair':{
+  title:'The Broken Radio Choir',
+  useful:'Audio curiosity may connect repair learners and local musicians around a benign demonstration.',
+  artifact:'Ask whether a paper-only sketch of a low-voltage audio device would interest anyone.',
+  gate:'No mains-electrical work, public event or implied repair liability.'
+ },
+ 'park+repair':{
+  title:'The Stewardship Toolkit',
+  useful:'Safe tools and clear site permission might help someone improve a small public-space care task.',
+  artifact:'Make a checklist of possible tools, hazards and the owner permission required.',
+  gate:'No hazardous-waste handling, unapproved site work or risky equipment.'
+ }
+});
+export function weaveFires(first,second){
+ if(!first||!second||first.id===second.id)throw Error('TWO_DISTINCT_FIRES_REQUIRED');
+ const a=chooseFire(first.id)||first, b=chooseFire(second.id)||second;
+ if(!a.role||!b.role||!getRole(a.role)||!getRole(b.role))throw Error('UNKNOWN_WEAVE_ROLE');
+ if(a.id==='custom'&&!validPurpose(a.focus))throw Error('UNSAFE_FIRE_A');
+ if(b.id==='custom'&&!validPurpose(b.focus))throw Error('UNSAFE_FIRE_B');
+ const id=[a.id,b.id].sort().join('+');
+ const suggestion=BRIDGES[id]||{
+  title:'Two Fires, One Shared Question',
+  useful:'These two interests might help one another. That is a hypothesis to test, not a connection established.',
+  artifact:'Draft one sentence explaining what each topic might contribute. Invite one person to revise the idea.',
+  gate:'No organizations or people are joined by this suggestion. Any real action requires the relevant owners’ consent.'
+ };
+ return {
+  schema:'abundent/campfire-bridge-v1',status:'UNVERIFIED_POSSIBLE_CONNECTION',
+  fires:[{id:a.id,focus:a.focus,openRole:a.role},{id:b.id,focus:b.focus,openRole:b.role}],
+  title:suggestion.title,why:suggestion.useful,
+  firstArtifact:suggestion.artifact,gate:suggestion.gate,
+  firstTest:'Offer the draft question for optional review. One useful response is enough to learn from.',
+  commitment:'NONE',authority:'NONE',sharedParticipants:0,verifiedPartners:0
+ };
+}
