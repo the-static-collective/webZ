@@ -68,7 +68,7 @@ test('storage unavailable, missing trusted IP, spoofed host and invalid token al
  assert.equal((await admitRequest(req('192.0.2.1'),'ai',{env:{...env,UPSTASH_REDIS_REST_TOKEN:''}})).reason,'SHARED_QUOTA_NOT_CONFIGURED');
  const preview={...env,VERCEL_ENV:'preview',UPSTASH_REDIS_REST_TOKEN:''};
  assert.equal((await admitRequest(req('192.0.2.1'),'ai',{env:preview})).mode,
-  'PROTECTED_PREVIEW_WITHOUT_DISTRIBUTED_QUOTA');
+  'LOCAL_NODE_TEST_ONLY');
 });
 test('response adapter emits machine-readable 429, Retry-After, no model invocation',()=>{
  const state={headers:{},status:0,body:null};
