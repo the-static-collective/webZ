@@ -22,5 +22,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/native.py": {
+      "maxDuration": 40
+    }
+  }
 }

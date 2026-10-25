@@ -1,4 +1,4 @@
-import {verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
+import {sha256,verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {buildRelayCapsule,makeRelayLink} from './relay.mjs';
@@ -7,7 +7,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind'),triadToggle=$('#triad-opt-in');
-let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null, nativeReceipt=null, nativeActive=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -29,6 +29,9 @@ function cleanAudio() {
 }
 function clearReturn() {
   visActive?.abort();visActive=null;visProposal=null;
+  nativeActive?.abort();nativeActive=null;nativeReceipt=null;
+  $('#native-result').textContent='Not run. Unlike the source lens above, this calls real owner runtime code.';
+  $('#native-download').hidden=true;$('#native-run').disabled=false;
   $('#vis-relay').hidden=true;$('#vis-relay-approved').checked=false;
   $('#share-vis-relay').disabled=true;$('#vis-relay-link').value='';
   $('#vis-relay-status').textContent='Nothing is shared automatically. This is an AI investigation draft, not a real-world completion record.';
@@ -216,6 +219,62 @@ $('#share-vis-relay').addEventListener('click',async()=>{
     field.value='';
     status.textContent='This AI proposal could not be made into a bounded, public-safe link. Download the complete model receipt instead, review it, and do not claim verified action.';
   }
+});
+async function runNative() {
+  if(!last?.triad)return;
+  nativeActive?.abort();
+  const controller=new AbortController();nativeActive=controller;
+  const button=$('#native-run'),target=$('#native-result');
+  nativeReceipt=null;$('#native-download').hidden=true;
+  target.textContent='Running exact-pinned native ALEX, 3rdi and LOADOUT owner code. No field action or model call…';
+  button.disabled=true;
+  const timer=setTimeout(()=>controller.abort(),38000);
+  try {
+    const response=await fetch('/api/native',{
+      method:'POST',credentials:'same-origin',cache:'no-store',
+      headers:{'content-type':'application/json',accept:'application/json'},
+      body:JSON.stringify({question:last.question,lens:'triad'}),signal:controller.signal
+    });
+    const output=await response.json();
+    if(nativeActive!==controller)return;
+    if(!response.ok||output.mode!=='REAL_OWNER_KERNEL_INVOCATION') {
+      target.textContent='HOLD · Native owner kernels were unavailable or refused. No native execution is claimed.';
+      return;
+    }
+    const {receiptHash,...body}=output;
+    if(await sha256(JSON.stringify(body))!==receiptHash||await sha256(last.question)!==output.questionDigest)
+      throw Error('NATIVE_RECEIPT_NOT_VERIFIED');
+    const expected=new Map(last.triad.alex.formation.map(x=>[x.id,x.commit]));
+    if(expected.get('alex')!==output.ownerCommits?.alex
+      ||expected.get('3rdi')!==output.ownerCommits?.rdi
+      ||expected.get('loadout')!==output.ownerCommits?.loadout)
+      throw Error('NATIVE_OWNER_PIN_MISMATCH');
+    const view=el('div','native-evidence');
+    view.append(
+      el('h4','','THREE NATIVE KERNEL RECEIPTS · LOCAL TEST'),
+      el('p','', 'ALEX: '+output.alex.disposition+' / '+output.alex.reasonCode+
+        ' · source supports a real local food-need claim? '+String(output.alex.sourceSupportsLocalClaim)),
+      el('p','', '3rdi: '+output.rdi.nativeSchema+' · '+output.rdi.cutId+
+        ' · only this synthetic question arrival was modeled; older source history remains UNKNOWN'),
+      el('p','', 'LOADOUT: '+output.loadout.nativeSchema+
+        ' · '+output.loadout.capabilities.map(x=>x.capability+'='+x.status).join(', ')),
+      el('p','', 'Real-world effects: NONE · human gate remains REQUIRED'),
+      el('small','', 'Full verified unsigned native receipt: '+receiptHash)
+    );
+    target.replaceChildren(view);
+    nativeReceipt=output;$('#native-download').hidden=false;
+  } catch {
+    if(nativeActive===controller)target.textContent=controller.signal.aborted
+      ? 'HOLD · Native kernel test timed out. No work or permission is claimed.'
+      : 'HOLD · Owner runtime reply or receipt could not be verified.';
+  } finally {
+    clearTimeout(timer);
+    if(nativeActive===controller){nativeActive=null;button.disabled=false;}
+  }
+}
+$('#native-run').addEventListener('click',()=>{void runNative();});
+$('#native-download').addEventListener('click',()=>{
+  if(nativeReceipt)download('jarvis-native-owner-receipts-unsigned.json',JSON.stringify(nativeReceipt,null,2),'application/json');
 });
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
 

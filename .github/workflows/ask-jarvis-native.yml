@@ -1,0 +1,85 @@
+name: Ask JAR;VIS — native owner kernel conformance
+on:
+  pull_request:
+    paths:
+      - 'ask-jarvis/native/**'
+      - 'ask-jarvis/api/native.py'
+      - 'ask-jarvis/public/app.mjs'
+      - '.github/workflows/ask-jarvis-native.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-owner-kernels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read JAR;VIS native adapter
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Read exact ALEX owner commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/ALEX.2
+          ref: 7d116b716df82ee2379b399d90936d2fc01b7b16
+          path: ask-jarvis/native/owners/alex
+          persist-credentials: false
+      - name: Read exact 3rdi owner commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/3rdi
+          ref: e631167a04c6bd1bf95c62cbe5a415994ebb8134
+          path: ask-jarvis/native/owners/rdi
+          persist-credentials: false
+      - name: Read exact LOADOUT owner commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: the-static-collective/Loadout
+          ref: 1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee
+          path: ask-jarvis/native/owners/loadout
+          persist-credentials: false
+      - name: Verify native owner identities and Python syntax
+        run: |
+          set -euo pipefail
+          test "$(git -C ask-jarvis/native/owners/alex rev-parse HEAD)" = "7d116b716df82ee2379b399d90936d2fc01b7b16"
+          test "$(git -C ask-jarvis/native/owners/rdi rev-parse HEAD)" = "e631167a04c6bd1bf95c62cbe5a415994ebb8134"
+          test "$(git -C ask-jarvis/native/owners/loadout rev-parse HEAD)" = "1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee"
+          python3 -m py_compile ask-jarvis/native/triad_kernel.py ask-jarvis/native/bootstrap.py ask-jarvis/api/native.py
+      - name: Execute actual three owner Python kernels on inert specimen
+        run: |
+          set -euo pipefail
+          printf '%s\n' '{"question":"Which one food-access need has a willing local steward and a feasible first experiment?","observedAt":"2026-10-25T12:00:00Z"}' |
+            python3 ask-jarvis/native/triad_kernel.py \
+              --alex ask-jarvis/native/owners/alex \
+              --rdi ask-jarvis/native/owners/rdi \
+              --loadout ask-jarvis/native/owners/loadout > /tmp/native-009-receipt.json
+          python3 - <<'PY'
+          import json,hashlib
+          p=json.load(open('/tmp/native-009-receipt.json'))
+          digest=p.pop('receiptHash')
+          assert digest == 'sha256:'+hashlib.sha256(json.dumps(p,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+          assert p['schema']=='ask-jarvis/native-owner-run/v1'
+          assert p['mode']=='REAL_OWNER_KERNEL_INVOCATION'
+          assert p['alex']['sourceSupportsLocalClaim'] is False
+          assert p['alex']['disposition']=='INSUFFICIENT_TO_TEST'
+          assert p['alex']['reasonCode']=='NO_ATTRIBUTABLE_SUPPORT_PATH'
+          assert p['rdi']['nativeSchema']=='3rdi.projection-receipt/v0'
+          assert p['loadout']['nativeSchema']=='loadout.compile/v0'
+          assert any(x['capability']=='steward.contact' and x['status']=='unavailable' for x in p['loadout']['capabilities'])
+          assert any(x['effect']=='external.contact' and x['status']=='refused' for x in p['loadout']['effects'])
+          assert not p['effectsExecuted'] and not p['loadout']['nativeAuthorityGranted']
+          print('NATIVE-009 PASS: ALEX refused unsupported claim; 3rdi compiled projection; LOADOUT denied external effect.')
+          PY
+      - name: Verify personal details do not pass into native kernel
+        run: |
+          set -euo pipefail
+          printf '%s\n' '{"question":"Contact me at a@b.com please.","observedAt":"2026-10-25T12:00:00Z"}' |
+            python3 ask-jarvis/native/triad_kernel.py \
+              --alex ask-jarvis/native/owners/alex \
+              --rdi ask-jarvis/native/owners/rdi \
+              --loadout ask-jarvis/native/owners/loadout >/tmp/native-refusal.json && exit 1 || :
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/native-refusal.json'))
+          assert r['status']=='HOLD' and r['reason']=='NATIVE_RUNTIME_UNAVAILABLE_OR_REFUSED'
+          PY
