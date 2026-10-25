@@ -33,3 +33,17 @@ test('external-time queries are not converted into confirmed live facts',async()
  const x=await assemble(scenarios.cases.find(x=>x.id==='LOCAL-TIME-SENSITIVE').question,mock);
  assert.ok(!/library closes at \d{1,2}/i.test(JSON.stringify(x.return)));
 });
+
+test('public quality-lab is account-free, local-only, and has independent question handoffs',()=>{
+ const html=readFileSync(new URL('../public/quality-lab.html',import.meta.url),'utf8');
+ const js=readFileSync(new URL('../public/quality-lab.mjs',import.meta.url),'utf8');
+ const homepage=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
+ assert.match(homepage,/quality-lab.html/);
+ assert.match(html,/How useful was the actual reply/);
+ assert.match(html,/No account, analytics, automatic uploads or contacts/);
+ assert.match(js,/makeHandoffLink/);
+ assert.match(js,/noExternalSubmission:true/);
+ assert.match(js,/new Blob/);
+ assert.doesNotMatch(js,/fetch\(/);
+ assert.doesNotMatch(js,/localStorage\.|sessionStorage\./);
+});
