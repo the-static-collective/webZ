@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#132b4c">
+<meta name="description" content="Make one small, useful thing in the next 24 hours. A printable field kit built on Abundent's public Free Graph editorial seeds.">
+<title>IGNITION · JAR;VIS · Abundent</title>
+<style>
+:root{font-family:Verdana,Arial,sans-serif;color:#192b40;background:#cadbe9}
+*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(90deg,#dae6ed,#dae6ed 9px,#e5eef1 10px)}
+a{color:#123b7a}.shell{max-width:850px;margin:auto;min-height:100vh;background:#fffdf2;border:4px ridge #9ab4c2;box-shadow:0 10px 40px #57718c55}
+header{padding:14px 25px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#142e60;color:#fff;font:bold 12px "Courier New",monospace}header a{color:#f9dc80}
+.banner{padding:27px 29px 18px;border-bottom:4px double #b68736;background:linear-gradient(135deg,#fff7cd,#f7eee1)}
+.kicker{font:bold 12px "Courier New",monospace;letter-spacing:2px;color:#935722}
+h1{font: bold clamp(40px,9vw,78px) Georgia,serif;color:#153f79;margin:5px 0;letter-spacing:-3px}
+h1 span{color:#bb5b34}.lead{font:22px/1.4 Georgia,serif;margin:8px 0}.notice{padding:12px 15px;background:#e1ecdc;border:1px solid #89a77e;font-size:12px;line-height:1.5}
+main{padding:20px 28px 35px}.card{border:3px ridge #a4b9c6;background:#fff;padding:20px;margin-bottom:18px;box-shadow:4px 4px #b9cbd1}
+h2{font: bold 25px Georgia,serif;color:#173f6a;margin:4px 0 12px}.card p{line-height:1.5}
+label{display:block;font:bold 12px "Courier New",monospace;color:#2c5170;margin:17px 0 7px}
+textarea,select{font:16px Georgia,serif;max-width:100%;width:100%;padding:12px;background:#fffefa;border:2px inset #859cac;border-radius:0}
+textarea{resize:vertical;min-height:94px}button,.button{font:bold 15px Georgia,serif;display:inline-block;border:3px outset #b68c3f;background:#f8d678;color:#123557;padding:11px 17px;cursor:pointer;text-decoration:none;margin:8px 8px 0 0}
+button:disabled{opacity:.5;cursor:default}.muted{font-size:12px;color:#536b7b}.stage{border-top:2px dashed #a7b6b9;margin:16px 0;padding-top:15px}
+.stage b{font: bold 12px "Courier New",monospace;color:#a55632}.stage p{font:18px/1.5 Georgia,serif;margin:7px 0}
+.paper{white-space:pre-wrap;background:#fffaeb;border:1px dashed #af985c;padding:16px;line-height:1.65;font:13px/1.65 "Courier New",monospace;max-height:480px;overflow:auto;overflow-wrap:anywhere}
+.badge{background:#ece6c4;color:#704f24;padding:5px 8px;font: bold 11px monospace}
+#output[hidden]{display:none}footer{padding:15px 25px;color:#516377;font-size:11px;border-top:3px double #91acc4}
+@media(max-width:590px){.banner,main{padding:17px}.card{padding:14px}h1{letter-spacing:-2px}}
+@media print{body,.shell{background:white;border:0;box-shadow:none}header,.banner,.form-card,.actions,footer,.notice{display:none!important}main{padding:0}.card{box-shadow:none;border:0;padding:0}.paper{max-height:none;border:0;background:white;overflow:visible;white-space:pre-wrap}#output{display:block!important}.stage{display:none}}
+</style><script type="module" src="/ignite/app.mjs"></script></head><body>
+<div class="shell"><header><a href="/">← ASK JAR;VIS</a><span>IGNITION-012 / TEST ONE SMALL THING</span><a href="/town/">TOWN DESK →</a></header>
+<section class="banner"><small class="kicker">CONSTRUCTIVE CURIOSITY → CONCRETE WORK</small><h1>THE <span>IGNITION</span> DESK</h1>
+<p class="lead">What useful thing can we make possible in the next 24 hours?</p>
+<p>A working field-kit generator. Choose a public-safe question and what you can contribute. Print an actual card, bring it to a willing person, and return with what really happened.</p>
+<div class="notice"><b>We make the draft. People decide the action.</b> This independent prototype does not contact organizers, enroll volunteers, book anything, promise services or establish partner consent. A printed invitation is not an accepted invitation.</div></section>
+<main>
+<section class="card form-card"><h2>01. Choose a particular.</h2>
+<p class="muted" id="graph-state" role="status">Reading the source-backed Free Graph town packet…</p>
+<form id="ignite-form">
+<label for="question">THE QUESTION (PUBLIC-SAFE; NO CONTACT DETAILS)</label>
+<textarea id="question" minlength="8" maxlength="360" required>What food-access question could we bring to one willing Waseca grocery organizer today?</textarea>
+<label for="seed">A POSSIBLE WORKSTREAM</label><select id="seed"><option value="auto">Let the question suggest one (never force an unrelated match)</option></select>
+<label for="capacity">THE CONTRIBUTION YOU COULD MAKE NOW</label><select id="capacity"></select>
+<button type="submit" id="make">✳ MAKE A 24-HOUR FIELD KIT →</button>
+</form></section>
+<section id="output" class="card" hidden aria-live="polite">
+<span id="status" class="badge">DRAFT</span><h2 id="title">Your next crossing</h2>
+<p id="summary" class="muted"></p>
+<div class="stage"><b>0–15 MINUTES · MAKE SOMETHING</b><p id="first"></p></div>
+<div class="stage"><b>15–90 MINUTES · MAKE IT USABLE</b><p id="second"></p></div>
+<div class="stage"><b>BEFORE 24 HOURS · INVITE A REAL RESPONSE</b><p id="third"></p></div>
+<div class="stage"><b>HUMAN GATE</b><p id="gate"></p></div>
+<div class="stage"><b>WHAT WOULD COUNT AS A WIN?</b><p id="evidence"></p></div>
+<h2>02. Carry this card.</h2><p class="muted">Print or save. Bring it yourself. Record only what actually happens.</p>
+<pre id="sheet" class="paper"></pre>
+<div class="actions"><button type="button" id="print">PRINT THE FIELD KIT</button><button type="button" id="save">↓ SAVE .TXT</button><button type="button" id="save-json">↓ SAVE UNSIGNED .JSON</button></div>
+<p class="muted">Local draft only. No signup, server write, model request or automatic invitation. A future witnessed return requires its own evidence and human approval.</p>
+</section>
+</main><footer>ABUNDENT / JAR;VIS · IGNITION-012 · an experiment in making one useful thing, not claiming somebody did it.</footer>
+</div></body></html>
