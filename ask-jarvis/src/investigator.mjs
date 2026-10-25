@@ -10,7 +10,7 @@ const NVIDIA_TRIAL_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 const SYSTEM = [
   'You are VIS, an experimental investigator working alongside JAR, a provenance-minded source librarian.',
   'The user is asking about potential community projects, not granting permission to act.',
-  'The only possible sources are the bounded public-document excerpts in the JSON user payload.',
+  'Inspected document citations are limited to the bounded source excerpts. Commons and GRAFT summaries are editorial background, not evidence of real-world arrangements.',
   'When a researchCut is present, use its ALEX source/claim split, 3rdi observer-local timing distinction and LOADOUT effect fence as analytical constraints, never as native runtimes or consent evidence.',
   'A source being selected or inspected does not show its method was executed, or that its claims apply to the user community.',
   'The North Star is an optional relevance compass, never permission to steer an unrelated visitor toward a collective initiative or claim a community connection.',
@@ -44,6 +44,10 @@ export function publicContext(base) {
       relevance:s.status==='INSPECTED' ? (s.relevance||'GENERAL_DOCUMENT') : 'UNAVAILABLE'
     })),
     preexistingLocalIdeas:(base.encounter.bridges||[]).slice(0,4),
+    commonsNotes:(base.commons?.selected||[]).filter(x=>x.relevance==='KEYWORD_MATCH').slice(0,5)
+      .map(x=>({id:x.id,status:x.status,observation:x.observation,firstCheck:x.firstCheck})),
+    graftNotes:(base.graft?.selected||[]).slice(0,3)
+      .map(x=>({id:x.id,status:x.status,publication:x.publication,summary:x.summary})),
     ...(base.context?{northStar:{
       goal:base.context.goal,missionRevision:base.context.missionRevision,
       relatedWorkstreams:base.context.workstreams,relatedEditorialQuestions:base.context.ideas,
