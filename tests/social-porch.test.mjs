@@ -14,7 +14,7 @@ test('social porch is read only and has source parity',()=>{
  assert.match(edge,/connect-src 'none'/);
  assert.match(edge,/frame-ancestors 'none'/);
  assert.doesNotMatch(edge,/SUPABASE_SERVICE_ROLE_KEY|Deno\.env\.get/);
- assert.match(calendar,/INDEPENDENT/);
+ assert.match(calendar,/Independent Waseca community grocery/);
 });
 test('six-week 12-post campaign is concrete but never scheduled',()=>{
  assert.equal(campaign.weeks.length,6);
