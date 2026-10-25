@@ -17,8 +17,28 @@ footer{padding:28px 0;background:#102b24;color:#e7f2dd;font-size:.83rem}footer a
 @media(max-width:780px){.weeks{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.agenda{grid-template-columns:1fr}}
 @media(max-width:520px){.grid,.weeks{grid-template-columns:1fr}h1{margin-top:34px;font-size:3.4rem}section{padding:30px 0}.post{padding:15px}}
 @media print{@page{size:letter;margin:.6in}body{font:9.5pt/1.35 Georgia,serif;background:white;color:#111}header{background:white;color:black;padding:0}nav,header .buttonbar,header .eyebrow,.alert,#reply,#posts,.post .actions,footer,.btn{display:none!important}h1{font-size:24pt;margin:0 0 8pt}h1 em{color:black}header .intro{font-size:11pt}section{padding:9px 0}.shade{background:white}.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.week,.tile,.agenda li{padding:7px;background:white;border:1px solid #777;break-inside:avoid}.week h3{font-size:11pt}.week p,.tile p,.agenda li p{font-size:8.5pt}.agenda{grid-template-columns:repeat(2,1fr);gap:6px}.post{break-inside:avoid}.kicker{color:black}h2{font-size:17pt}#metrics{page-break-before:always}}
+
+/* Stage Two: owner-of-next-step handoff without claiming delegated authority */
+.baton{border:2px solid var(--ink);background:#fffefa;padding:24px;margin:20px 0 10px}
+.baton .deck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.baton fieldset{border:1px solid var(--border);padding:15px;margin:12px 0}
+.baton legend{font-weight:900;padding:0 8px}
+.baton label{font-size:.9rem}
+.baton .reason{background:#f5e9ca;border-left:5px solid var(--rust);padding:13px;font-size:.92rem}
+.baton .choice{display:flex;align-items:start;gap:10px;font-weight:650;margin:8px 0}
+.baton input[type=checkbox]{width:20px;min-width:20px;height:20px;margin-top:3px}
+.baton .op{background:#f2f5ed;border:1px solid var(--border);padding:12px;margin:7px 0}
+.baton .op b{display:block}
+.baton .paper{padding:17px;border:1px solid var(--ink);background:#fcfcf8;white-space:pre-wrap;font:14px/1.5 ui-monospace,monospace}
+.baton .paper[hidden]{display:none}
+.baton .next{font-size:.92rem;color:var(--muted)}
+.baton .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.baton .mini>*{padding:13px;background:var(--aqua);min-width:0}
+.baton .next-status{padding:12px;background:#fff0cd;border-left:4px solid var(--rust)}
+@media(max-width:720px){.baton .deck,.baton .mini{grid-template-columns:1fr}}
+@media print{.baton .deck,.baton .actions,.baton .form-inputs,.baton .reason,.baton h3,.baton .next-status{display:none!important}.baton{padding:0;border:0}.baton .paper{padding:9px;border:1px solid black;font-size:10pt;display:block!important}}
 </style></head>
-<body><header><div class="wrap"><nav><a class="logo" href="https://garden.abundent.org/workbench/">THE GARDEN · SOCIAL PORCH</a><div class="right"><a href="#agenda">Meeting agenda</a><a href="#calendar">Six-week map</a><a href="#posts">Post drafts</a><a href="#reply">Reply desk</a></div></nav><h1>Don't just<br><em>get attention.</em><br>Connect it.</h1><p class="intro">Six weeks of social media can do more than grow a following. Every public question can help reveal a real community need, and every willing answer can become a small, permission-based next step.</p><p class="eyebrow">OCT 26 — DEC 6, 2026 · SIX-WEEK FIELD PROPOSAL</p><div class="buttonbar"><a href="#agenda" class="btn lemon">Take the meeting agenda ↓</a><a href="#posts" class="btn outline">Explore 12 draft posts ↓</a><a href="https://garden.abundent.org/workbench/" class="btn outline">Existing Garden ↗</a></div></div></header>
+<body><header><div class="wrap"><nav><a class="logo" href="https://garden.abundent.org/workbench/">THE GARDEN · SOCIAL PORCH</a><div class="right"><a href="#handoff">Stage Two handoff</a><a href="#agenda">Meeting agenda</a><a href="#calendar">Six-week map</a><a href="#posts">Post drafts</a><a href="#reply">Reply desk</a></div></nav><h1>Don't just<br><em>get attention.</em><br>Connect it.</h1><p class="intro">Six weeks of social media can do more than grow a following. Every public question can help reveal a real community need, and every willing answer can become a small, permission-based next step.</p><p class="eyebrow">OCT 26 — DEC 6, 2026 · SIX-WEEK FIELD PROPOSAL</p><div class="buttonbar"><a href="#handoff" class="btn lemon">Resolve the next owner ↓</a><a href="#agenda" class="btn outline">Meeting agenda ↓</a><a href="#posts" class="btn outline">Explore 12 draft posts ↓</a><a href="https://garden.abundent.org/workbench/" class="btn outline">Existing Garden ↗</a></div></div></header>
 <div class="wrap"><aside class="alert"><strong>Independent planning material — not an official cooperative account or campaign.</strong> Social copy is unsent, unscheduled, and unapproved. The Waseca Area Food Cooperative chooses what to adopt, who speaks for it, which accounts it uses, how it handles submissions, and what it publishes. This page does not connect to Facebook, Instagram, or a private contact list.</aside></div>
 <main><section id="agenda"><div class="wrap"><div class="kicker">A proposal for their next communications meeting</div><h2>One meeting. Seven decisions.</h2><p class="lede">Suggested 50-minute kickoff. End with an accountable pilot—not just a calendar of posts.</p><ol class="agenda">
 <li><small>00–05 MIN</small><b>What's social media actually for?</b><p>Pick one outcome: real questions, opt-in participants, clear answers, or approved next steps—not just impressions.</p></li>
@@ -32,6 +52,49 @@ footer{padding:28px 0;background:#102b24;color:#e7f2dd;font-size:.83rem}footer a
 <div class="buttonbar"><button class="btn lemon" id="copyAgenda" type="button">Copy full agenda</button><button class="btn" id="printKit" type="button">Print meeting kit</button><span id="agendaFeedback" class="quiet" aria-live="polite"></span></div>
 </div></section>
 <section class="shade" id="calendar"><div class="wrap"><div class="kicker">Six weeks / listen → learn → ask → return</div><h2>A calendar that earns its next post.</h2><p class="lede">Two proposed posts per week, each requiring an explicit publishing decision. The last week includes templates held until actual verified project facts exist.</p><div class="weeks" id="weeks"></div><p class="quiet">This plan assumes a proposed start Monday, October 26. It does not imply the cooperative adopted this cadence or authorized posting.</p></div></section>
+
+<section id="handoff" class="shade"><div class="wrap">
+<div class="kicker">Before the six-week campaign / Stage Two Launch Desk</div><h2>A rocket needs a next-stage crew.</h2>
+<p class="lede">When everybody refers you to somebody else, the useful question is no longer “who's in charge of everything?” It's <strong>who may make this one decision, and who volunteers to carry the next seven days?</strong> We can prepare the work now; the co-op itself keeps its own governance.</p>
+<div class="baton">
+<div class="reason"><strong>Proposal, not appointment:</strong> This desk cannot authorize the co-op, designate officers, promise access to its social accounts, publish on its behalf or infer that a person has volunteered. Names entered below stay on your device and are described as possible contacts until independently confirmed.</div>
+<div class="mini"><div><strong>ONE decision</strong><br>Permission to pilot two reviewed posts.</div><div><strong>ONE short runway</strong><br>Seven days; no permanent committee required.</div><div><strong>ONE return</strong><br>What was accepted, declined or left unresolved?</div></div>
+<div class="deck">
+<div class="form-inputs">
+<fieldset><legend>What do we actually have permission to do?</legend>
+<label for="stageLane">Authorization status</label><select id="stageLane">
+<option value="independent">Independent prototype only — official permission unknown</option>
+<option value="review-invited">An organizer invited review — publishing still unapproved</option>
+<option value="authorized">An authorized co-op decision-maker explicitly approved this limited pilot (self-reported; confirm independently)</option>
+<option value="hold">No authorized reviewer known — HOLD any official representation</option>
+</select>
+<label for="stageContact">Possible routing contact, if any (private, optional)</label>
+<input id="stageContact" type="text" maxlength="64" placeholder="Candidate contact, not an assigned owner" style="width:100%;padding:10px;border:1px solid var(--border)">
+<label for="stageWindow">Proposed check-in (local choice)</label><select id="stageWindow"><option value="2026-11-01">Sunday, Nov 1 — 7-day return</option><option value="2026-10-29">Thursday, Oct 29 — early review</option><option value="2026-11-08">Sunday, Nov 8 — following week</option></select>
+<label class="choice"><input type="checkbox" id="stageOffer" checked> We can prepare the first two drafts and a simple response guide without posting anything.</label>
+<label class="choice"><input type="checkbox" id="stageData"> We will keep personal messages and contact details out of public drafts and this worksheet.</label>
+</fieldset>
+<fieldset><legend>The voluntary five-function crew</legend>
+<p class="quiet">One person may handle several functions if they <em>choose</em> to. No name on this sheet means acceptance. Mark a function only after somebody has volunteered.</p>
+<label class="choice"><input type="checkbox" class="role-check" data-role="publisher"> Publisher — actual authorized account access and final posting decision</label>
+<label class="choice"><input type="checkbox" class="role-check" data-role="reviewer"> Facts reviewer — checks dates, prices, official status and partner claims</label>
+<label class="choice"><input type="checkbox" class="role-check" data-role="listener"> Listener — reads questions and replies respectfully</label>
+<label class="choice"><input type="checkbox" class="role-check" data-role="steward"> Steward — can approve one small real-world pilot or keep it on HOLD</label>
+<label class="choice"><input type="checkbox" class="role-check" data-role="keeper"> Return keeper — records decisions and unresolved questions after a week</label>
+</fieldset>
+<div class="actions"><button class="btn lemon" id="makeBaton" type="button">Generate seven-day handoff ↓</button><button class="btn" id="copyBaton" type="button">Copy decision card</button><button class="btn" id="printBaton" type="button">Print card</button></div>
+<p class="quiet" id="batonFeedback" role="status" aria-live="polite">Nothing is sent, scheduled, stored, or approved by this page.</p>
+</div>
+<div><h3>Break the referral loop</h3><p class="next">A person giving you another person's name is a useful lead, not proof that the next person can approve. After two referrals, stop expanding the loop. Invite the relevant people into one clear decision, only through an appropriate existing relationship or with permission.</p>
+<div class="op"><b>Offer</b>“I've prepared the first two draft social posts, a six-week listening calendar, and a way to handle responses. May I share a one-week pilot for review?”</div>
+<div class="op"><b>Decision</b>“Who has authority to approve the exact two posts, who has access to publish them, and who should receive public questions?”</div>
+<div class="op"><b>Boundary</b>“If nobody is ready to authorize the pilot, I'll keep it an independent draft. No official claims, no account access, no public commitments.”</div>
+<div class="op"><b>Return</b>“Can we check back in seven days and say what was approved, declined, completed, or remains unknown?”</div>
+<div class="next-status"><strong>Default when ownership is unresolved: HOLD official publishing.</strong> Continue with independent research and drafts. Silence is not approval. Referral is not assignment. A tentative name is not a volunteer.</div>
+</div>
+</div>
+<h3>Printable decision card</h3><div id="batonPaper" class="paper" hidden></div>
+</div></div></section>
 <section id="posts"><div class="wrap"><div class="kicker">Twelve draft posts / zero scheduled posts</div><h2>Ready-to-edit conversation starters.</h2><p class="lede">The first ten are independent discussion drafts; the last two are evidence-gated templates. Every caption needs the actual publisher's editorial review. When publishing independently, always disclose the affiliation clearly.</p><div class="buttonbar"><button id="downloadCSV" class="btn lemon" type="button">Download 12-post CSV</button><button id="copyAll" class="btn" type="button">Copy all 12 drafts</button><span id="postFeedback" class="quiet" role="status"></span></div><div class="cards" id="cards"></div></div></section>
 <section class="shade" id="reply"><div class="wrap"><div class="kicker">The real innovation / a comment can become a useful act</div><h2>A response desk, not a comment trap.</h2><p class="lede">Translate a *general, public-safe theme* into a respectful reply and a suggested human-reviewed next question. This tool does not scrape comments or store anything. Don't paste names, addresses, phone numbers, emails, personal difficulties, or private messages.</p>
 <div class="reply"><label for="kind">What kind of public question are we hearing?</label><select id="kind"><option value="question">A genuine question</option><option value="concern">A concern or criticism</option><option value="offer">An offer of help</option><option value="idea">A proposed idea</option><option value="unknown">Something we cannot verify yet</option></select>
@@ -102,5 +165,48 @@ $('copyReply').addEventListener('click',()=>{if(!responseText){$('replyFeedback'
 for(const m of DATA.metrics){const row=document.createElement('tr');row.append(el('td',m),el('td','Not measured / not set'));$('metricRows').append(row)}
 for(const g of DATA.governance){$('governance').append(el('p','□ '+g,'quiet'))}
 $('copyDecisions').addEventListener('click',()=>copy('SOCIAL PORCH 001 — PROPOSED DECISIONS\n'+DATA.governance.map(x=>'□ '+x).join('\n')+'\nEvidence gates: no claims of outcomes, membership, suppliers, photos, commitments or projects without owner approval.','decisionFeedback'));
+
+const stageRoles=['publisher','reviewer','listener','steward','keeper'];
+let batonText='';
+$('makeBaton').addEventListener('click',()=>{
+ const lane=$('stageLane').value,date=$('stageWindow').value;
+ const contact=$('stageContact').value.trim().replace(/\s+/g,' ');
+ if(contact.length>64||personal.test(contact)){$('batonFeedback').textContent='Please omit personal contact details, URLs and email addresses; the contact field is a private routing note only.';return}
+ const verified=stageRoles.filter(r=>document.querySelector('.role-check[data-role="'+r+'"]').checked);
+ const statuses={
+  independent:'INDEPENDENT PROPOSAL ONLY — no official publication rights',
+  'review-invited':'REVIEW INVITED, NOT AUTHORIZED TO PUBLISH',
+  authorized:'PARTICIPANT SELF-REPORTS LIMITED APPROVAL — requires independent check of reviewer and scope',
+  hold:'HOLD — no authorized reviewer identified'
+ };
+ const list=stageRoles.map(r=>(verified.includes(r)?'USER-MARKED VOLUNTEER: ':'UNFILLED: ')+r).join('\n');
+ batonText=[
+  'STAGE TWO 001 / SEVEN-DAY SOCIAL MEDIA HANDOFF',
+  'Prepared '+new Date().toISOString().slice(0,10)+' · not an official co-op decision',
+  'DECISION REQUEST: Who may approve two exact social posts, and who can publish?',
+  'AUTHORIZATION STATUS: '+statuses[lane],
+  'ROUTING LEAD: '+(contact||'[not recorded]')+' — no authority inferred',
+  'NEXT CHECK-IN PROPOSED: '+date+' (not booked)',
+  'PREP WORK OFFERED: '+($('stageOffer').checked?'two draft posts + response guide; no sending or scheduling':'no preparatory assignment accepted'),
+  'PUBLIC-PRIVACY BOUNDARY: '+($('stageData').checked?'acknowledged':'REQUIRES DISCUSSION'),
+  'VOLUNTARY FUNCTIONS (USER-MARKED, NOT INDEPENDENTLY VERIFIED):',
+  list,
+  'PILOT WORK IN NEXT SEVEN DAYS:',
+  'Day 1: human reviewer chooses which factual claims can be said publicly.',
+  'Day 2: review first two specific captions; capture written changes or HOLD.',
+  'Day 3: only an authorized publisher chooses whether/where to post. Otherwise draft only.',
+  'Days 4–6: human listener groups general questions; do not mine private details.',
+  'Day 7: public-safe return: what was asked/answered, declined, done, still unknown.',
+  'DECISION STATES: proposed / authorized / declined / HOLD / self-reported / independently confirmed.',
+  'NO-GO: no approval = no official posting; no real-world commitments; no donor lists.',
+  'THIS CARD IS AN INDEPENDENT WORKING DRAFT. NOT A DELEGATION OF CO-OP AUTHORITY.'
+ ].join('\n');
+ $('batonPaper').hidden=false;
+ $('batonPaper').textContent=batonText;
+ $('batonFeedback').textContent='Draft made locally. Unfilled roles stay unfilled; printed names are never proof of acceptance.';
+ $('batonPaper').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+$('copyBaton').addEventListener('click',()=>{if(!batonText){$('batonFeedback').textContent='Generate the decision card first.';return}copy(batonText,'batonFeedback')});
+$('printBaton').addEventListener('click',()=>{if(!batonText){$('batonFeedback').textContent='Generate the decision card first.';return}window.print()});
 })();
 </script></body></html>`;
