@@ -147,3 +147,16 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .native-runner button:disabled{opacity:.6}
 .native-evidence{background:#fff;padding:12px;border:1px solid #c4ad76;overflow-wrap:anywhere}
 .native-evidence p{margin:9px 0}
+
+/* DISCOVERY-011: external research never silently becomes project truth. */
+.discovery-tools{margin:20px 0;padding:18px;background:#f5f5e7;border:2px solid #748f83;box-shadow:3px 3px 0 #bfd0c0;overflow-wrap:anywhere}
+.discovery-tools h3{font:800 clamp(20px,4vw,28px) Georgia,serif;color:#254c40}
+.discovery-tools h4{font:800 13px 'Courier New',monospace;color:#416254;margin:15px 0 6px}
+.discovery-tools p,.discovery-tools li{font-size:13px;line-height:1.55}
+.discovery-tools button{margin:7px 10px 7px 0;padding:11px 14px;background:#e5cc83;color:#2c4639;font:bold 12px 'Courier New',monospace;border:2px outset #799681;cursor:pointer}
+.discovery-tools button:disabled{opacity:.6;cursor:default}
+.discovery-card{background:#fffef7;border:1px solid #b2bda9;margin-top:13px;padding:13px;overflow-wrap:anywhere}
+.discovery-sources{padding-left:20px}
+.discovery-sources li{padding-bottom:10px}
+.discovery-sources a{color:#235c50;font-weight:bold}
+.discovery-sources small{display:block;color:#74765f}
