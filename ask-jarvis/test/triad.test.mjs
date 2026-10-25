@@ -6,6 +6,7 @@ import {assemble} from '../src/worker.mjs';
 import {selectSources} from '../src/registry.mjs';
 import {verifyReturn} from '../public/evidence.mjs';
 import {publicContext,investigate} from '../src/investigator.mjs';
+import {buildRelayCapsule,makeRelayLink,readRelay} from '../public/relay.mjs';
 
 const q='Which food access project should ask a willing steward for permission before a small experiment?';
 const body='# Source project constitution\nAn inspected public document is not a local stewards agreement or proof that work was completed.\nA reversible community experiment requires explicit permission from a real organizer before field work.\n';
@@ -112,4 +113,25 @@ test('triad model HOLDs fabricated steward agreement instead of laundering a pro
  assert.equal(proposal.status,'HOLD');
  assert.equal(proposal.reason,'MODEL_UNAVAILABLE_OR_UNVERIFIED');
  assert.equal(proposal.model,null);
+});
+
+test('triad proposal can be relayed with exact pinned ALEX.2 sources but no consent or execution claim',async()=>{
+ const parent=await assemble(q,mock,{kind:'question',lens:'triad'});
+ const model=await investigate({question:q,kind:'question',lens:'triad',
+   assemble:(question,_,opts)=>assemble(question,mock,opts),
+   provider:async()=>({choices:[{message:{content:JSON.stringify({
+     summary:'A hypothetical permission-first neighbor research card can be reviewed by a potential steward.',
+     connections:[{idea:'Use the public source lineage as method only, then seek a real local witness.',sourceIds:[]}],
+     firstTest:'Draft one question and ask an as-yet-unidentified steward to review it.',
+     unknowns:['Local need and steward permission are not yet known.'],
+     consentCheck:'No person or partner has agreed to any experiment.'
+   })}}]})
+ });
+ assert.equal(model.status,'MODEL_PROPOSAL');
+ const capsule=await buildRelayCapsule(parent,model);
+ const url=makeRelayLink('https://abundent.org/',capsule);
+ const decoded=await readRelay(new URL(url).hash);
+ assert.equal(decoded.payload.sourceReferences[0].id,'alex');
+ assert.match(decoded.payload.sourceReferences[0].document,/ALEX\.2\/blob\//);
+ assert.equal(decoded.payload.stage,'MODEL_PROPOSAL');
 });
