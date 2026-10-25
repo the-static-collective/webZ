@@ -29,7 +29,7 @@ export function hasSupabaseQuota(env={}){
  let url;
  try{url=new URL(env.JARVIS_SUPABASE_QUOTA_URL||'')}catch{return false}
  return url.protocol==='https:'&&url.hostname==='kbhqacsdvjsstzyplqij.supabase.co'
-   &&url.pathname==='/functions/v1/jarvis-quota'
+   &&url.pathname==='/functions/v1/jarvis-quota'&&!url.search&&!url.hash
    &&keyOK(env.JARVIS_RATE_HASH_SECRET);
 }
 export function hasSharedQuota(env={}){
