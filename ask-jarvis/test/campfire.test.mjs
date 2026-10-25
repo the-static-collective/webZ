@@ -44,6 +44,7 @@ test('custom fires are public-topic-only and survive explicit fragment sharing',
  }
  assert.equal(validPurpose('tiny'),false);
  assert.equal(validPurpose('a'.repeat(221)),false);
+ assert.equal(validPurpose('Meet me at 123 Main Street please'),false);
  assert.throws(()=>makeFireLink('http://not-secure.example',fire));
 });
 test('a refusal or withdrawal is a useful local self-report, not a failure or ranking',()=>{
