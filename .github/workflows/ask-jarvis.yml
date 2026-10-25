@@ -33,6 +33,8 @@ jobs:
           node --check ask-jarvis/src/encounter.mjs
           node --check ask-jarvis/src/registry.mjs
           node --check ask-jarvis/public/app.mjs
+          node --check ask-jarvis/public/ignite/engine.mjs
+          node --check ask-jarvis/public/ignite/app.mjs
           node --check ask-jarvis/public/relay.mjs
           node --check ask-jarvis/public/relay/app.mjs
           node --check ask-jarvis/public/games/tomorrow/key.mjs
@@ -43,7 +45,7 @@ jobs:
         run: |
           test "$(git hash-object ask-jarvis/public/games/tomorrow/town/alchematrix-core.mjs)" = "4be97563e4cdd2ba16abd597f856dd091dddc4d4"
       - name: Verify actual Worker contract
-        run: node --test ask-jarvis/test/worker.test.mjs ask-jarvis/test/curiosity.test.mjs ask-jarvis/test/investigator.test.mjs ask-jarvis/test/nvidia-trial.test.mjs ask-jarvis/test/relay.test.mjs ask-jarvis/test/triad.test.mjs ask-jarvis/test/discovery.test.mjs ask-jarvis/test/return.test.mjs ask-jarvis/test/tomorrow.test.mjs ask-jarvis/test/tomorrow-town.test.mjs
+        run: node --test ask-jarvis/test/worker.test.mjs ask-jarvis/test/curiosity.test.mjs ask-jarvis/test/investigator.test.mjs ask-jarvis/test/nvidia-trial.test.mjs ask-jarvis/test/relay.test.mjs ask-jarvis/test/triad.test.mjs ask-jarvis/test/discovery.test.mjs ask-jarvis/test/return.test.mjs ask-jarvis/test/tomorrow.test.mjs ask-jarvis/test/tomorrow-town.test.mjs ask-jarvis/test/ignition.test.mjs
       - name: Smoke hosted 1999 question-to-artifact proof
         run: node ask-jarvis/test/smoke-preview.mjs
       - name: Assert no Cloudflare Worker custom route
