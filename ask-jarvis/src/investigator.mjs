@@ -3,8 +3,10 @@
 import {sha256} from '../public/evidence.mjs';
 
 const GATEWAY_URL = 'https://ai-gateway.vercel.sh/v1/chat/completions';
-export const GATEWAY_MODEL = 'openai/gpt-4.1-mini';
+export const GATEWAY_MODEL = 'nvidia/nemotron-3.5-lightning-free';
 export const WORKERS_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+export const NVIDIA_TRIAL_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b';
+const NVIDIA_TRIAL_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 const SYSTEM = [
   'You are VIS, an experimental investigator working alongside JAR, a provenance-minded source librarian.',
   'The user is asking about potential community projects, not granting permission to act.',
@@ -135,4 +137,37 @@ export function makeWorkersProvider(ai) {
     messages:[{role:'system',content:system},{role:'user',content:input}],
     max_tokens:900,temperature:0.3,stream:false
   },{rejectIfBusy:true});
+}
+
+/**
+ * NVIDIA Build free developer prototype: no Vercel AI Gateway billing route.
+ * The endpoint is for evaluation only, not production or sensitive prompts.
+ * The secret remains in Vercel server-side Preview environment variables.
+ */
+export function makeNvidiaTrialProvider({token,fetcher=fetch}={}) {
+  if(typeof token!=='string'||!token.startsWith('nvapi-')||token.length<20)
+    throw Error('NVIDIA_TRIAL_TOKEN_REQUIRED');
+  return async ({system,input})=>{
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),10000);
+    try {
+      const response=await fetcher(NVIDIA_TRIAL_URL,{
+        method:'POST',redirect:'error',signal:controller.signal,
+        headers:{authorization:'Bearer '+token,'content-type':'application/json',accept:'application/json'},
+        body:JSON.stringify({
+          model:NVIDIA_TRIAL_MODEL,
+          messages:[{role:'system',content:system},{role:'user',content:input}],
+          temperature:0.3,max_tokens:900,stream:false,
+          response_format:{type:'json_object'}
+        })
+      });
+      if(!response.ok)throw Error('NVIDIA_TRIAL_HTTP_'+response.status);
+      if(Number(response.headers.get('content-length'))>12000)throw Error('NVIDIA_TRIAL_RESPONSE_TOO_LARGE');
+      const raw=await response.text();
+      if(raw.length>12000)throw Error('NVIDIA_TRIAL_RESPONSE_TOO_LARGE');
+      return JSON.parse(raw);
+    } finally {
+      clearTimeout(timer);controller.abort();
+    }
+  };
 }

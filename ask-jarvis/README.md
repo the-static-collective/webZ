@@ -22,7 +22,7 @@ This branch improves the public deterministic attendant without adding accounts,
 
 This proposal builds on Curiosity-005. JAR remains the source-first deterministic librarian. VIS adds a real but **disabled-by-default** model invocation door for willing visitors: a bounded public question and at most three 235-character source excerpts are sent to an AI provider only after a separate click. The server validates the returned JSON, blocks fabricated source identifiers and returns a separately hashed, **unsigned** model proposal. No action, partner approval, or canon authority crosses with it.
 
-Vercel AI Gateway (`openai/gpt-4.1-mini`) and Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`) are supported by server-only adapters; neither is enabled on the live site from this branch. No model API key is supplied with the repository or existing Vercel project, and public activation requires external rate limiting, spending controls, source-injection tests and operator approval. See [VIS-006 protocol](VIS-006.md).
+Vercel AI Gateway (`nvidia/nemotron-3.5-lightning-free`, protected trials only) and Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`) are supported by server-only adapters; neither is enabled on the live site from this branch. No model API key is supplied with the repository or existing Vercel project, and public activation requires external rate limiting, spending controls, source-injection tests and operator approval. See [VIS-006 protocol](VIS-006.md).
 
 ## What actually works
 
