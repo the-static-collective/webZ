@@ -111,7 +111,7 @@ async function askVis() {
     const response=await fetch('/api/investigate',{
       method:'POST',cache:'no-store',credentials:'same-origin',
       headers:{'content-type':'application/json',accept:'application/json'},
-      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+      body:JSON.stringify({question:last.question,kind:last.return.kind,route:$('#vis-route').value}),signal:controller.signal
     });
     const data=await response.json();
     if(visActive!==controller)return;
@@ -122,7 +122,11 @@ async function askVis() {
     if(!response.ok||!await verifyInvestigation(data)||data.question!==last.question
       ||!matchesInvestigationSources(last,data))throw Error('Model proposal was not verifiable. No investigation is claimed.');
     const panel=el('div','vis-answer');
-    panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'),el('p','',data.investigation.summary));
+    panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'));
+    if(data.routing?.provider)panel.append(el('small','',
+      'Free-compute route: '+data.routing.route+' · '+data.routing.provider+
+      ' · '+data.routing.model+' · 1 model call · no paid fallback'));
+    panel.append(el('p','',data.investigation.summary));
     const list=el('ol','vis-connections');
     for(const c of data.investigation.connections) {
       const li=el('li');li.append(el('p','',c.idea));
