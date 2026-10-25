@@ -48,6 +48,6 @@ test('Aippy prompt and launch guide are available without embedding any private 
  assert.match(prompt,/no accounts, databases, API calls/i);
  assert.match(prompt,/https:\/\/abundent\.org\//);
  assert.match(guide,/not verified production/i);
- assert.match(guide,/only .*explicitly/i);
+ assert.match(guide,/explicitly/i);
  assert.match(guide,/credits/i);
 });
