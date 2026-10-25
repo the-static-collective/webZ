@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102e27">
+<meta name="description" content="MSyoU: an independent civic technology field kit for community needs, offers and accountable human handoffs.">
+<title>MSyoU · The Community Infrastructure Stack</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="ribbon">STATIC COLLECTIVE / FIELD EXPERIMENT 001 <span>INDEPENDENT · NOT AN MSU SERVICE</span></div>
+<header class="mast wrap">
+  <a href="#top" class="mark" aria-label="MSyoU home">MS<span>yo</span>U <i>↗</i></a>
+  <nav aria-label="Main navigation"><a href="#idea">The idea</a><a href="#try">Try a crossing</a><a href="#stack">Our instruments</a><a href="resources/index.html">Energy Commons</a><a href="#pilot">A pilot</a></nav>
+</header>
+<main id="main">
+<section id="top" class="hero">
+<div class="wrap hero-grid">
+<div>
+<p class="eyebrow">The next piece of local infrastructure might be a table.</p>
+<h1>The community <em>is already here.</em><br>Help the work <em>find its way.</em></h1>
+<p class="intro">A small, inspectable field kit for connecting needs, offers, questions, and people—without demanding another account, another silo, or a single authority over everyone.</p>
+<div class="buttons"><a class="button primary" href="#try">Try the handoff ↗</a><a class="button ghost" href="docs/MSU-TECH-UPDATE.md">Read the tech brief</a></div>
+</div>
+<div class="hero-card" aria-label="The proposal to handoff cycle">
+<div class="tiny">A PROPOSAL IS NOT A PROMISE</div>
+<div class="loop"><span>01</span><strong>Bring one thing</strong><small>need · offer · question · build</small></div>
+<div class="loop"><span>02</span><strong>Hold it visibly</strong><small>nothing leaves without a choice</small></div>
+<div class="loop"><span>03</span><strong>Prepare a handoff</strong><small>portable and inspectable</small></div>
+<div class="loop"><span>04</span><strong>Human reception</strong><small>belongs to the actual receiver</small></div>
+<p class="handwritten">The door opens. Nobody is compelled to enter.</p>
+</div>
+</div>
+</section>
+<div class="notice wrap"><strong>What is this?</strong> An independent prototype, dated October 24, 2026. Not an official MSU Mankato, Coalition, or grocery initiative service. The demo never sends or saves your entries on a server. Use fictional examples; don't enter sensitive information.</div>
+<section id="idea" class="section wrap">
+<p class="eyebrow ink">WHY THIS EXISTS</p>
+<h2>Organizations have projects.<br><em>Projects need crossings.</em></h2>
+<p class="measure">A neighborhood grocery, a community group, an environmental crew, and a university laboratory may each already hold part of the same solution. We are experimenting with a way to recognize an overlap, invite participation, and preserve the handoff without treating any participant as absorbed by the others.</p>
+<div class="three"><article><div class="num">01 / ENTER</div><h3>Anyone can arrive</h3><p>Lightweight participation and readable invitations. A card works on paper as well as on a screen.</p></article><article><div class="num">02 / CHOOSE</div><h3>Every receiver keeps authority</h3><p>Sending is not receiving. Receiving is not accepting. A proposed task is not completed work.</p></article><article><div class="num">03 / RETURN</div><h3>The useful trace survives</h3><p>Know what was proposed, what was actually acknowledged, and what still needs a human.</p></article></div>
+</section>
+<section id="try" class="section demo-band">
+<div class="wrap">
+<div class="section-heading"><div><p class="eyebrow">THE FIELD TABLE / LOCAL DEMO</p><h2>Bring one thing.</h2><p>This runnable slice does one small job. No sign-in. No database. No sharing until you explicitly download a packet—and downloading does <b>not</b> deliver it.</p></div><span class="stamp">HOLD<br>IS A<br>VALID<br>ANSWER</span></div>
+<div class="workspace">
+<form id="fieldForm" class="paper">
+<h3>01 / Make a field card</h3>
+<label for="kind">What kind of thing?</label>
+<select id="kind" name="kind"><option value="NEED">A need</option><option value="OFFER">An offer</option><option value="QUESTION">A question</option><option value="BUILD">Something we could build</option></select>
+<label for="title">In a few words</label><input id="title" name="title" maxlength="100" required placeholder="Example: surplus garden produce">
+<label for="detail">What would another person need to know?</label><textarea id="detail" name="detail" maxlength="800" rows="5" required placeholder="Fictional demo details, not contact information"></textarea>
+<div class="inline-actions"><button id="fiction" class="secondary" type="button">Load fictional example</button><button class="action" type="submit">Make draft →</button></div>
+</form>
+<section class="paper result" aria-label="Local handoff result">
+<h3>02 / Choose what happens</h3>
+<p class="label">CURRENT LOCAL STATE</p>
+<div class="status" id="stage">NOT STARTED</div>
+<div id="cardView" class="card-preview" aria-live="polite">Your card will appear here. Nothing has been sent.</div>
+<div class="action-grid"><button id="hold" type="button" disabled>Place in local HOLD</button><button id="prepare" type="button" disabled>Prepare handoff</button><button id="export" type="button" disabled>Download JSON packet ↓</button><button id="clear" class="secondary" type="button">Clear this session</button></div>
+<p class="small" id="feedback" role="status" aria-live="polite">No card created. A human receiver is required for anything beyond this demo.</p>
+</section>
+</div>
+<div class="fineprint"><b>Boundary:</b> This demo records only locally asserted stages: DRAFT → LOCAL_HOLD → HANDOFF_PREPARED. It never creates ACCEPTED, WITNESSED, COMPLETED, or PUBLISHED claims. Closing or reloading the tab discards the working card.</div>
+</div>
+</section>
+<section id="stack" class="section wrap">
+<p class="eyebrow ink">THE SOURCE-LINKED ECOLOGY</p>
+<h2>One table. <em>Many independent organs.</em></h2>
+<p class="measure">These are real source repositories with different maturity levels. We're putting interfaces between them—not pretending they are already one deployed product.</p>
+<div class="modules">
+<article><span>PUBLIC PORCH</span><h3>webZ / Abundent</h3><p>Account-light arrival, public doors and the Garden field atlas.</p><a href="https://github.com/the-static-collective/webZ/tree/field/garden-network-atlas-20261024">Inspect branch ↗</a></article>
+<article><span>HANDOFF / CUSTODY</span><h3>reLATTE</h3><p>Source, proposal, reception and admission remain distinguishable.</p><a href="https://github.com/the-static-collective/reLATTE/tree/feat/useful-work-kernel-006">Inspect branch ↗</a></article>
+<article><span>MEETING INTERFACE</span><h3>GHoT + CIRCULATION</h3><p>Reviewable cards, prepared print artifacts and a human table.</p><a href="https://github.com/the-static-collective/webZ/tree/feature/circulation-003-coalition-field-kit">Inspect branch ↗</a></article>
+<article><span>QUESTION / COMPOSITION</span><h3>TABLElogic + JAR;VIS</h3><p>Question-to-proposed-return experiments held for human choice.</p><a href="https://github.com/the-static-collective/tablelogic/tree/genesis/004-feast-returns">Inspect branch ↗</a></article>
+<article><span>CONTINUITY</span><h3>GRAFT</h3><p>Source-owned branches, preserved context and a browsable research lineage.</p><a href="https://github.com/the-static-collective/GRAFT">Inspect repo ↗</a></article>
+<article><span>STEWARD / FIELD</span><h3>Full Measure × GrO</h3><p>Real-world participation as invitations, with distinct human confirmation gates.</p><a href="https://github.com/the-static-collective/GrO/tree/experiment/field-quest-encounters-001">Inspect branch ↗</a></article>
+</div>
+<p class="small">See the <a href="docs/SOURCE-ATLAS.md">source atlas</a> for exact maturity claims, code ownership and remaining evidence gaps.</p>
+</section>
+<section id="energy" class="section wrap"><p class="eyebrow ink">GHoT / ENERGY-AWARE COMPUTE</p><h2>What if spare computers could <em>help?</em></h2><p class="measure">One source-owned, voluntary resource network: an opt-in hardware capability and energy planner with battery, temperature and budget checks. Explore a fictional routing simulation now; no devices or campus systems are connected.</p><p><a class="button primary" href="resources/index.html">Explore Energy Commons ↗</a> &nbsp; <a href="docs/GHOT-ENERGY-COMMONS.md">Technical protocol</a></p></section><section id="pilot" class="section pilot-band"><div class="wrap pilot-grid"><div><p class="eyebrow">A REAL-WORLD REHEARSAL</p><h2>What if we tested <em>one complete handoff?</em></h2><p>One community project. One real need. One willing steward. One explicit acknowledgment. One report of what changed. Paper is allowed; GitHub is not a prerequisite.</p><a class="button primary" href="docs/FIELD-PILOT.md">Read the two-week pilot contract ↗</a></div><div class="pilot-card"><p>What success might look like</p><ol><li>A participant knows how to offer or ask.</li><li>A steward chooses whether to receive it.</li><li>A next step has a named, consenting owner.</li><li>Anyone can see what is still unresolved—with privacy respected.</li><li>The team can decide whether to keep, change, or discard the tool.</li></ol><small>All real deployment, contact, identity and retention decisions remain unapproved until the relevant people agree.</small></div></div></section>
+</main>
+<footer class="wrap"><strong>MSyoU / Static Collective</strong><p>Build the crossing. Leave the door open. Keep the people sovereign.</p><p><a href="https://github.com/the-static-collective/MSyoU">Source</a> · <a href="docs/ARCHITECTURE.md">Protocol</a> · <a href="docs/MSU-TECH-UPDATE.md">Technology brief</a></p><small>Not affiliated with or endorsed by Minnesota State University, Mankato.</small></footer>
+</body></html>
