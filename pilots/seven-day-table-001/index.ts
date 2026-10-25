@@ -33,7 +33,7 @@ async function read(b:any){
  const all=seats||[];
  if(a.role==='host')return {ok:true,role:'host',room:ROOM(a.room),seats:all.map(s=>SEAT(s,true)),limits:{primary:8,referralsPerPrimary:2}};
  const s=a.seat,refs=all.filter(x=>x.parent_seat_id===s.id&&x.seat_type==='referral').length,amb=all.find(x=>x.parent_seat_id===s.id&&x.seat_type==='ambassador');
- return {ok:true,role:'seat',room:ROOM(a.room),seat:SEAT(s,true),referralsUsed:refs,ambassadorInvited:!!amb,shared:all.filter(x=>x.id!==s.id&&x.share_to_table&&x.response&&x.status==='participating').map(x=>({type:x.seat_type,response:x.response,availability:x.availability,respondedAt:x.responded_at})).slice(0,32)};
+ return {ok:true,role:'seat',room:ROOM(a.room),seat:SEAT(s,true),referralsUsed:refs,ambassadorInvited:!!amb,ambassadorStatus:amb?.status||null,shared:all.filter(x=>x.id!==s.id&&x.share_to_table&&x.response&&x.status==='participating').map(x=>({type:x.seat_type,response:x.response,availability:x.availability,respondedAt:x.responded_at})).slice(0,32)};
 }
 async function makeSeat(room:any,kind:string,parent:string|null,slot:number|null,lens:string){
  const guestKey=secret();
@@ -87,6 +87,19 @@ async function respond(b:any){
  const {error}=await db.from('seven_day_seats').update({status,availability,response:text,share_to_table:share,responded_at:new Date().toISOString()}).eq('id',a.seat.id).eq('room_id',a.room.id);
  if(error)throw new Fail('COULD_NOT_SAVE',503);return {ok:true,status,note:share?'Shared only within this private invited table.':'Private to table host; not published publicly.'};
 }
+async function reclaim(b:any){
+ const a=await authorize(b);open(a.room);
+ if(a.role!=='seat'||a.seat.seat_type!=='primary'||a.seat.status!=='delegated')throw new Fail('NO_DELEGATION_TO_RECLAIM',409);
+ const {data:amb,error:check}=await db.from('seven_day_seats').select('id,status').eq('room_id',a.room.id).eq('parent_seat_id',a.seat.id).eq('seat_type','ambassador').maybeSingle();
+ if(check)throw new Fail('STORAGE_UNAVAILABLE',503);
+ if(!amb||amb.status!=='invited')throw new Fail('AMBASSADOR_ALREADY_ENGAGED',409);
+ const {data:removed,error:del}=await db.from('seven_day_seats').delete().eq('id',amb.id).eq('status','invited').select('id').maybeSingle();
+ if(del||!removed)throw new Fail('DELEGATION_CANNOT_BE_REVOKED',409);
+ const next=a.seat.response?'participating':'invited';
+ const {error:up}=await db.from('seven_day_seats').update({status:next}).eq('id',a.seat.id).eq('status','delegated');
+ if(up)throw new Fail('SEAT_RESTORE_UNAVAILABLE',503);
+ return {ok:true,note:'Unused ambassador invitation revoked and original place restored.'};
+}
 async function close(b:any){const a=await authorize(b);if(a.role!=='host')throw new Fail('HOST_REQUIRED',403);
  const {error}=await db.from('seven_day_rooms').update({closed:true}).eq('id',a.room.id);if(error)throw new Fail('COULD_NOT_CLOSE',503);return {ok:true,closed:true};}
 Deno.serve(async req=>{
@@ -97,7 +110,7 @@ Deno.serve(async req=>{
  if(req.headers.get('origin')!==u.origin)return reply({error:'PAGE_ORIGIN_REQUIRED'},403);
  if(!(req.headers.get('content-type')||'').startsWith('application/json'))return reply({error:'JSON_REQUIRED'},415);
  try{const b=await bounded(req);let out;
-  switch(b.action){case'read':out=await read(b);break;case'seed':case'referral':case'ambassador':out=await createInvite(b);break;case'respond':out=await respond(b);break;case'close':out=await close(b);break;default:throw new Fail('UNKNOWN_ACTION');}
+  switch(b.action){case'read':out=await read(b);break;case'seed':case'referral':case'ambassador':out=await createInvite(b);break;case'respond':out=await respond(b);break;case'reclaim':out=await reclaim(b);break;case'close':out=await close(b);break;default:throw new Fail('UNKNOWN_ACTION');}
   return reply(out,b.action==='seed'||b.action==='referral'||b.action==='ambassador'?201:200);
  }catch(e){const x=e instanceof Fail?e:new Fail('SERVICE_UNAVAILABLE',503);return reply({error:x.message},x.status);}
 });
