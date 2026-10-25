@@ -76,6 +76,17 @@
      <div id="song-tools" hidden><audio id="song-audio" controls preload="none" aria-label="Original instrumental song sketch"></audio><button type="button" id="download-song">↓ Save instrumental sketch (.wav)</button></div>
    </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
+   <section id="discovery-tools" class="discovery-tools" aria-labelledby="discovery-title" hidden>
+     <div class="ribbon">DISCOVERY-011 · ORIENT → SEARCH → WEAVE</div>
+     <h3 id="discovery-title">Beyond what JAR;VIS already knows.</h3>
+     <p>The mission is a compass, not an advertisement. An unfamiliar question can remain independent of our projects. You may request one bounded external public-source search, then see proposed—not verified—Free Graph connections.</p>
+     <button type="button" id="discover-run">✳ DISCOVER PUBLIC SOURCES →</button>
+     <p><small>This sends your question to an external search service (Wikipedia, or Brave if configured). Don't include private information. Search is optional, protected-preview only, and does not contact local partners.</small></p>
+     <div id="discover-result" role="status" aria-live="polite">No external search requested. Nothing learned, saved, or submitted automatically.</div>
+     <button id="discover-download" type="button" hidden>↓ Save research candidate receipt (.json)</button>
+     <button id="discover-nominate" type="button" hidden>✳ NOMINATE ONE PUBLIC SOURCE FOR PRIVATE REVIEW →</button>
+     <p id="discover-nominate-status" role="status"></p>
+   </section>
    <section id="triad-result" class="triad-result" aria-labelledby="triad-result-title" hidden>
      <div class="ribbon">READ-ONLY RESEARCH CUT · TRIAD-008 · NO NATIVE TOOL EXECUTION</div>
      <h3 id="triad-result-title">ALEX × 3rdi × LOADOUT</h3>
