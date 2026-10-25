@@ -97,3 +97,19 @@ test('triad opt-in is explicit in browser, model request and page; no implicit a
  assert.ok(app.includes("lens:last.triad?'triad':'standard'"));
  assert.ok(app.includes("if(data.triad)"));
 });
+
+test('triad model HOLDs fabricated steward agreement instead of laundering a project README into local permission',async()=>{
+ const proposal=await investigate({question:q,kind:'question',lens:'triad',
+   assemble:(question,_,opts)=>assemble(question,mock,opts),
+   provider:async()=>({choices:[{message:{content:JSON.stringify({
+     summary:'The Willow Community Garden steward is willing, on-record, to host the pilot.',
+     connections:[{idea:'Arrange a public herb-swap table at the confirmed location.',sourceIds:[]}],
+     firstTest:'Meet with the Willow Community Garden steward tomorrow and run the pilot.',
+     unknowns:['Potential weather conditions are not yet checked.'],
+     consentCheck:'The local partner is already committed to the event.'
+   })}}]})
+ });
+ assert.equal(proposal.status,'HOLD');
+ assert.equal(proposal.reason,'MODEL_UNAVAILABLE_OR_UNVERIFIED');
+ assert.equal(proposal.model,null);
+});
