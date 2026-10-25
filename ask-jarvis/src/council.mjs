@@ -79,6 +79,7 @@ export function safeFailureCode(error) {
 }
 async function inspectConstitution(c,fetcher) {
   const url='https://raw.githubusercontent.com/the-static-collective/'+c.repo+'/'+c.commit+'/README.md';
+  const document='https://github.com/the-static-collective/'+c.repo+'/blob/'+c.commit+'/README.md';
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),3200);
   try{
     const res=await fetcher(url,{method:'GET',redirect:'error',signal:controller.signal,headers:{accept:'text/plain'}});
@@ -88,10 +89,10 @@ async function inspectConstitution(c,fetcher) {
     if(new TextEncoder().encode(body).byteLength>70000)throw Error('SOURCE_LIMIT');
     const mark=body.indexOf(c.anchor);
     const excerpt=mark>=0?body.slice(mark,mark+410):body.slice(0,410);
-    return {id:c.id,name:c.name,status:'INSPECTED',url:c.url,commit:c.commit,
+    return {id:c.id,name:c.name,status:'INSPECTED',url:document,commit:c.commit,
       sha256:await sha256(body),excerpt};
   }catch{
-    return {id:c.id,name:c.name,status:'UNAVAILABLE',url:c.url,commit:c.commit,sha256:null,excerpt:null};
+    return {id:c.id,name:c.name,status:'UNAVAILABLE',url:document,commit:c.commit,sha256:null,excerpt:null};
   }finally{clearTimeout(timer);controller.abort();}
 }
 export async function formCouncilBase({question,kind='auto',assemble,fetcher=fetch}) {
