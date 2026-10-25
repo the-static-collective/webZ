@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jarvis-compute-lab",
+  "main": "cloudflare-modal/worker.mjs",
+  "compatibility_date": "2026-10-25",
+  "workers_dev": true,
+  "preview_urls": true,
+  "vars": {
+    "JARVIS_MODAL_ENABLED": "0",
+    "JARVIS_SUPABASE_QUOTA_URL": "https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/jarvis-quota"
+  },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  }
+}
