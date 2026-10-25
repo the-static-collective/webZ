@@ -18,17 +18,23 @@ This branch improves the public deterministic attendant without adding accounts,
 
 **Deployment status:** branch/PR proposal only; the active Abundent alias is unchanged until a separately approved, tested release.
 
+## VIS-006 — opt-in model investigator (feature branch; not live)
+
+This proposal builds on Curiosity-005. JAR remains the source-first deterministic librarian. VIS adds a real but **disabled-by-default** model invocation door for willing visitors: a bounded public question and at most three 235-character source excerpts are sent to an AI provider only after a separate click. The server validates the returned JSON, blocks fabricated source identifiers and returns a separately hashed, **unsigned** model proposal. No action, partner approval, or canon authority crosses with it.
+
+Vercel AI Gateway (`openai/gpt-4.1-mini`) and Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`) are supported by server-only adapters; neither is enabled on the live site from this branch. No model API key is supplied with the repository or existing Vercel project, and public activation requires external rate limiting, spending controls, source-injection tests and operator approval. See [VIS-006 protocol](VIS-006.md).
+
 ## What actually works
 
 - GET / serves a responsive, keyboard-accessible retro HTML/CSS UI.
 - POST /api/ask accepts one bounded question without contact details and responds with an inspectable trace.
-- A deterministic LOADOUT selects 3 of 6 **hardcoded, source-owned** public project capability entries.
+- A deterministic LOADOUT selects 3 of 7 **hardcoded, source-owned** public project capability entries.
 - The Vercel preview/production adapter and the Cloudflare Worker implementation both read only those specific public source files from the Static Collective on GitHub and hash the returned bytes. No user text goes to GitHub.
 - JAR;VIS writes a truthful return with status per lane, an answer about the findings, a next question, a downloadable printable plain-text question card, and a content digest.
 - The interface **never reports a HOLD or NOT_RUN lane as executed**. A failed source fetch is UNAVAILABLE, not evidence.
 - No database, analytics, cookies, LLM token, GitHub write, community intake, contact information, persistence of visitors' questions, payments, or code execution.
 
-**Not yet implemented:** real model-led question decomposition; dynamic LOADOUT/registry ingestion; native CANNON or OpenManus/ELF execution; durable workflow orchestration; verified consent and real partner routing. The source inspection uses a deterministic keyword selector, **not an LLM**. Hashes prove observed bytes, not human truth or project endorsement.
+**Not yet implemented on the live site:** general-purpose model-led question decomposition; dynamic LOADOUT/registry ingestion; native CANNON or OpenManus/ELF execution; durable workflow orchestration; verified consent and real partner routing. The source inspection uses a deterministic keyword selector, **not an LLM**. Hashes prove observed bytes, not human truth or project endorsement.
 
 ## Run locally
 
