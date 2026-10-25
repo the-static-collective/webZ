@@ -1,0 +1,176 @@
+{
+  "schema": "abundent/aippy-sparkfork-seed-v1",
+  "release": "AIPPY-023",
+  "state": "LOCAL_EDITORIAL_TEMPLATE_NOT_PUBLISHED",
+  "title": "SPARKFORK: Pass the Fire",
+  "liveAppUrl": null,
+  "liveDeepLinkVerified": false,
+  "externalPlatform": "Aippy",
+  "owningProject": "The Static Collective / Abundent",
+  "privacy": {
+    "requiresAccountForGameplay": false,
+    "collectsIdentity": false,
+    "automaticSubmissions": false,
+    "rankedPeople": false,
+    "realWorldAuthority": "NONE"
+  },
+  "origin": "https://abundent.org/",
+  "campfireDraftBranch": "feature/jarvis-campfire-right-to-try-022",
+  "rings": [
+    {
+      "id": "curious",
+      "copy": "I want to understand",
+      "first": "Write one question"
+    },
+    {
+      "id": "helper",
+      "copy": "I can offer one small contribution",
+      "first": "Name one bounded offer"
+    },
+    {
+      "id": "starter",
+      "copy": "I would try something",
+      "first": "Make a small paper-only plan"
+    },
+    {
+      "id": "coordinator",
+      "copy": "I would help gather willing people",
+      "first": "Draft a voluntary invitation"
+    }
+  ],
+  "offerings": [
+    {
+      "id": "produce",
+      "icon": "🍅",
+      "name": "Extra food",
+      "verb": "draft a safe offer"
+    },
+    {
+      "id": "print",
+      "icon": "🖨️",
+      "name": "Printer",
+      "verb": "make a paper card"
+    },
+    {
+      "id": "time",
+      "icon": "⏱️",
+      "name": "Time",
+      "verb": "offer one bounded time window"
+    },
+    {
+      "id": "music",
+      "icon": "🎸",
+      "name": "Music",
+      "verb": "sketch a listening circle"
+    },
+    {
+      "id": "hands",
+      "icon": "🧤",
+      "name": "Willing hands",
+      "verb": "volunteer to investigate"
+    },
+    {
+      "id": "tools",
+      "icon": "🔧",
+      "name": "Tools",
+      "verb": "sketch a safe demonstration"
+    },
+    {
+      "id": "art",
+      "icon": "🎨",
+      "name": "Art",
+      "verb": "make an invitation creative"
+    },
+    {
+      "id": "space",
+      "icon": "🏡",
+      "name": "Possible space",
+      "verb": "ask a potential host"
+    },
+    {
+      "id": "computer",
+      "icon": "💻",
+      "name": "Computer",
+      "verb": "prototype a simple page"
+    },
+    {
+      "id": "transport",
+      "icon": "🚲",
+      "name": "Transport",
+      "verb": "sketch a route without accepting goods"
+    }
+  ],
+  "recipes": [
+    {
+      "keys": [
+        "produce",
+        "print"
+      ],
+      "title": "The Tomato Telegraph",
+      "first": "Make a one-page proposed surplus-offer card and invite a food-access reviewer to improve it.",
+      "gate": "Food handling and distribution need qualified review and real recipient consent."
+    },
+    {
+      "keys": [
+        "music",
+        "space"
+      ],
+      "title": "The Porchlight Chorus",
+      "first": "Write a 15-minute, zero-pressure song-sharing invitation; ask a willing musician for feedback.",
+      "gate": "No venue or performer has agreed. Check host permission and music rights."
+    },
+    {
+      "keys": [
+        "hands",
+        "time"
+      ],
+      "title": "The Tiny Trail Quest",
+      "first": "Draft a 30-minute cleanup question card and identify the actual land manager.",
+      "gate": "No cleanup until site authorization and safety/disposal rules are confirmed."
+    },
+    {
+      "keys": [
+        "computer",
+        "print"
+      ],
+      "title": "Paper Portal",
+      "first": "Draft one small invitation landing page and ten optional question cards.",
+      "gate": "No organization endorsement or confirmed invitees."
+    },
+    {
+      "keys": [
+        "tools",
+        "art"
+      ],
+      "title": "Repairing the Rainbow",
+      "first": "Sketch one nonhazardous skill-sharing or art-repair demo.",
+      "gate": "No mains power, hazardous tools or safety-critical equipment."
+    },
+    {
+      "keys": [
+        "produce",
+        "transport"
+      ],
+      "title": "The Unpromised Delivery",
+      "first": "Make a hypothetical route-and-questions card; ask whether a real safe need exists.",
+      "gate": "No food pickup or delivery until authorized food-safety and recipient procedures exist."
+    }
+  ],
+  "genericFallback": {
+    "title": "Two Little Sparks",
+    "first": "Combine two genuine offers into one paper-only voluntary question card. Ask one willing person what should change.",
+    "gate": "No real participants, events, transport, financial commitments or physical actions are implied."
+  },
+  "exportPolicy": {
+    "mode": "COPY_OR_NATIVE_SHARE_BY_EXPLICIT_USER_ACTION",
+    "deepLinks": false,
+    "attribution": "Platform remix credit when enabled; no guaranteed persistence beyond a remix",
+    "claim": "LOCAL_PROPOSAL_NOT_VERIFIED_RESULT"
+  },
+  "qualityTest": {
+    "timeBudgetSeconds": 75,
+    "forceTouchFallback": true,
+    "reducedMotion": true,
+    "noBackend": true
+  }
+}
