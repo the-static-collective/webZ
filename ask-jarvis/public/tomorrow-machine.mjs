@@ -124,6 +124,7 @@ export function buildBoard(raw={}){
   missions:winners.map((x,i)=>({
    id:x.t.id,rank:i+1,rankLabel:['BEST FIT','SIDE QUEST','WILD CARD'][i],
    title:x.t.title,eyebrow:x.t.eyebrow,why:x.t.why,invite:x.t.invite,
+    openRole:(()=>{const role=roleForMission(x.t.id);return {id:role.id,name:role.name,state:'OPEN_ROLE',intro:role.intro,starter:role.starter};})(),
    caution:x.t.caution,matchedResources:x.matched.map(k=>LABELS[k]||k),
    steps:[
     {id:'inventory',label:'Make one honest inventory',detail:x.t.action},
