@@ -67,6 +67,20 @@ export const COMMONS_ENTRIES=Object.freeze([
     tags:['field','witness','ask','return','receipt','consent','reLATTE','evidence','confirmation','steward']}
 ].map(x=>Object.freeze({...x,tags:Object.freeze(x.tags)})));
 
+// These are public implementation/method doors, not evidence that a
+// community partner authorized a real operation. Each is pinned to an exact
+// public GitHub README commit known to this branch.
+export const COMMONS_PUBLIC_METHOD_DOORS=Object.freeze([
+  {name:'TABLElogic · encounter grammar',repo:'TABLElogic',sha:'55d7772ebc17155193a610294883551fbc543434'},
+  {name:'planZ · plan histories',repo:'planZ',sha:'dad6593c3718c65fa4bb7a3650af8fc80d060ce6'},
+  {name:'GHoT · resource capabilities',repo:'GHoT',sha:'e35dd470384d864b7b0b629a68dad570875a7df0'},
+  {name:'reLATTE · handoffs and receipts',repo:'reLATTE',sha:'7016dadcafc335d7ad8dccc26f4d6e0769dcf28c'},
+  {name:'ALEX.2 · provenance',repo:'ALEX.2',sha:'7d116b716df82ee2379b399d90936d2fc01b7b16'},
+  {name:'3rdi · observer-local projections',repo:'3rdi',sha:'e631167a04c6bd1bf95c62cbe5a415994ebb8134'},
+  {name:'LOADOUT · least sufficient world',repo:'LOADOUT',sha:'1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee'}
+].map(x=>Object.freeze({...x,
+  url:'https://github.com/the-static-collective/'+x.repo+'/blob/'+x.sha+'/README.md'})));
+
 // Fixed stopwords keep the match trace readable and stable. No embeddings,
 // model calls, network requests, accounts or visitor behavior logs.
 const STOP=new Set(['the','and','or','with','for','from','into','about','that','this','what','which',
