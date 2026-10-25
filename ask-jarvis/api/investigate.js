@@ -19,7 +19,7 @@ export default async function handler(req,res){
   const oidcFromPlatform = req.headers?.['x-vercel-oidc-token'];
   const token=process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
     || (typeof oidcFromPlatform==='string' ? oidcFromPlatform : undefined);
-  if(!process.env.NVIDIA_API_KEY && !token)return res.status(503).json({
+  if(process.env.JARVIS_FREE_COMPUTE_ENABLED!=='1'&&!process.env.NVIDIA_API_KEY && !token)return res.status(503).json({
     schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'NO_MODEL_CREDENTIAL',
     message:'VIS model credentials are not configured. No model was called.'
   });
