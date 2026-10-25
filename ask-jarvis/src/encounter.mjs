@@ -1,3 +1,5 @@
+import {analyzeFacets, crossingIdeas, sourceNotes} from './inquiry.mjs';
+
 export const RETURN_KINDS = Object.freeze(['auto','question','invitation','door','song','plan']);
 
 export function formEncounter(question, requestedKind = 'auto') {
@@ -12,6 +14,8 @@ export function formEncounter(question, requestedKind = 'auto') {
   const eventSignal = /\b(venue|festival|concert|harmony park|campout|campground|event|live music|potluck|gathering)\b/.test(q);
   const grocerySignal = /\b(grocery|groceries|food pantry|food co-op|food access|food shelf|community store|food market)\b/.test(q);
   const topic = grocerySignal ? 'grocery' : eventSignal ? 'event' : matches.length === 1 ? matches[0] : 'open';
+  const facets = analyzeFacets(question);
+  const bridges = crossingIdeas(facets);
   const possibleKinds = [
     ['song',/\b(song|sing|melody|tune)\b/],
     ['plan',/\b(plan|pilot|organize|feasibility)\b/],
@@ -24,11 +28,12 @@ export function formEncounter(question, requestedKind = 'auto') {
     : unclearReturn ? 'question' : possibleKinds[0] || 'question';
   return {
     schema:'ask-jarvis/encounter-v1', method:'DETERMINISTIC_RULES', signal:question,
-    topic, possibleTopics:matches, possibleKinds, unclearReturn, requestedKind, kind,
+    topic, facets, bridges, possibleTopics:matches, possibleKinds, unclearReturn, requestedKind, kind,
     context:['One visitor question; no profile, location, organizer or participant consent supplied.'],
     gaps:[...(unclearReturn ? ['The requested return is unclear or negated; choose a return format or clarify the question.'] : []),
       ...(matches.length>1 ? ['More than one topic fits; the machine has not chosen a single meaning.'] : []),
       ...(topic==='open' ? ['The intended context needs clarification.'] : []),
+      ...(bridges.length ? ['Cross-topic ideas are hypotheses; no venue, partner or project has accepted a role.'] : []),
       'Who would like to participate, and on what terms?',
       'What time, place and resources would the participants choose?'],
     distinctions:{fact:['The visitor supplied this literal question.'], idea:['The return is a locally composed draft.'], relation:['Source documents are possible connections, not participating organizations.']}
@@ -80,6 +85,14 @@ export function composeReturn(encounter, sources, seed) {
     title = 'A question worth taking with you';
     body = `QUESTION CARD — ${t.label}\n\nYour question:\n${encounter.signal}\n\nA small way to begin:\n${t.steps.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\nStill open:\n${encounter.gaps.join('\n')}\n\nTry next:\n${t.question}`;
   }
-  const nextQuestion=encounter.unclearReturn ? 'What would you like to take away: a question card, an invitation draft, a field plan, a source door or a song?' : t.question;
+  if (kind === 'plan' || kind === 'question') {
+    if (encounter.bridges.length) {
+      body += '\n\nPOSSIBLE CONNECTIONS (unverified proposals; select one to test):\n'
+        + encounter.bridges.map((idea,i)=>`${i+1}. ${idea}`).join('\n');
+    }
+    body += '\n\n' + sourceNotes(sources);
+  }
+  const nextQuestion=encounter.unclearReturn ? 'What would you like to take away: a question card, an invitation draft, a field plan, a source door or a song?'
+    : encounter.bridges.length ? 'Which one proposed connection has a willing steward and a small, reversible first test?' : t.question;
   return {schema:'ask-jarvis/artifact-v1',kind,title,body,status:'LOCAL_UNSIGNED_DRAFT',nextQuestion,doors:kind==='door'?doors:[],...(song?{song}:{})};
 }
