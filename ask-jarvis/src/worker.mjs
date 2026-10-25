@@ -122,7 +122,7 @@ export default {
     if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-006',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
     if(url.pathname==='/api/investigate') {
       if(request.method!=='POST')return response({error:'METHOD_NOT_ALLOWED'},405);
-      if(env?.JARVIS_AI_ENABLED!=='1'||typeof env?.AI?.run!=='function')return response({
+      if(env?.JARVIS_AI_ENABLED!=='1'||(env?.JARVIS_FREE_COMPUTE_ENABLED!=='1'&&typeof env?.AI?.run!=='function'))return response({
         schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_NOT_ENABLED',
         message:'VIS model investigation is not enabled. The rules-only question machine still works.'
       },503);
