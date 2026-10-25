@@ -107,11 +107,11 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const nextQuestion=first?.firstCheck??returned.nextQuestion;
   const guidance=orientation.relation==='INDEPENDENT_QUESTION'
     ? 'This is an independent question, not a forced Collective project match. Here is an optional draft; verify external facts independently.'
-    :first
-      ? `A useful starting connection: ${first.observation} First check: ${first.firstCheck} I inspected ${found} public project source document(s), not a live service or partner commitment.`
-      :found
-        ? `I inspected ${found} public project documents. Here's a ${returned.kind} draft and a specific question to test next.`
-        : 'I could not verify the source documents this time. This draft uses local context only; no real-world result is claimed.';
+    :!found
+      ? `I could not verify the source documents this time. ${first?'One editorial possibility: '+first.observation+' First check: '+first.firstCheck:'Here is a draft from the question.'} No project service or partner commitment is claimed.`
+      :first
+        ? `A useful starting connection: ${first.observation} First check: ${first.firstCheck} I inspected ${found} public project source document(s), not a live service or partner commitment.`
+        : `I inspected ${found} public project documents. Here's a ${returned.kind} draft and a specific question to test next.`;
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
@@ -141,7 +141,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     `Observation: ${guidance}`,'',
     'Related public project notes (not commitments):',
     ...matches.slice(0,3).map(x=>'- '+x.id+': '+x.observation+' FIRST CHECK: '+x.firstCheck),
-    'GRAFT source notes:',
+    'GRAFT project-source feed (read-only; not evidence of adoption):',
     ...graftNotes.map(x=>'- '+x.id+' ['+x.publication+']: '+x.summary+' '+x.sourceUrl),
     '','Sources inspected (read-only):',
     ...sources.map(s=>`- ${s.name} — ${s.status} — ${s.source}${s.sha256?' ['+s.sha256+']':''}`),'',
