@@ -106,7 +106,7 @@ async function askVis() {
   const controller=new AbortController();visActive=controller;
   const button=$('#vis-investigate'),target=$('#vis-result');
   button.disabled=true;target.textContent='VIS is checking the bounded source notes (no project actions)…';
-  const timer=setTimeout(()=>controller.abort(),16000);
+  const timer=setTimeout(()=>controller.abort(),23000);
   try {
     const response=await fetch('/api/investigate',{
       method:'POST',cache:'no-store',credentials:'same-origin',
