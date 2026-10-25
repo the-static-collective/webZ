@@ -19,3 +19,9 @@ The public landing view never displays an invitation roster or contributions. In
 Invitation labels indicate perspectives, not names or actual attendees. The organizer sends links voluntarily. Guests self-report responses; neither accepting an invite nor delegating authorizes institutional representation or verified actions. A host can export a private status summary for conversation. The table closes to writes at the seven-day boundary; data retention/deletion beyond that requires separate steward action.
 
 An original invitee can reclaim their place by revoking an **unused** ambassador invitation; once the ambassador has contributed or declined, their answer is respected instead.
+
+## 24-hour ignition desk (pilot v4)
+
+Host sees aggregate time preferences of self-reported participants (not calendar availability/commitments) and can compose a private, copyable **First Yes / 24-hour work card** anchored in either an explicitly hypothetical scenario or a real self-reported contribution. Each card distinguishes what can be prepared now, the human permission required before effect, and what truthful evidence would look like tomorrow. Host can prefill editable starter questions about food-shelf milk sourcing (unverified), co-op membership, producers, or accessible volunteer intake. No direct outreach or public posting is automated. Invite copy is tailored to the chosen perspective. No contact details should be entered into source responses.
+
+**Testing limitation:** Static page and browser script syntax checked, HTTP landing page reached. Interactive invitation acceptance, delegation, and record write flow still require an authenticated browser test; don't treat deployed status as end-to-end verification.
