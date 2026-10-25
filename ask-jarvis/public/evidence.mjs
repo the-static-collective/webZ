@@ -22,3 +22,13 @@ export async function verifyReturn(data) {
     return encoded === JSON.stringify(data.evidence) && await sha256(encoded) === data.receiptHash;
   } catch { return false; }
 }
+
+export async function verifyInvestigation(value) {
+  try {
+    if (value.schema!=='ask-jarvis/investigation-v1'||value.status!=='MODEL_PROPOSAL'
+      ||!value.receiptHash||!Array.isArray(value.sourceReferences)
+      ||!Array.isArray(value.investigation?.connections)) return false;
+    const {receiptHash,...body}=value;
+    return await sha256(JSON.stringify(body))===receiptHash;
+  } catch {return false;}
+}
