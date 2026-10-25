@@ -1,0 +1,50 @@
+name: Abundent Town Desk — Free Graph owner contract
+on:
+  pull_request:
+    paths:
+      - 'ask-jarvis/town/**'
+      - 'ask-jarvis/scripts/build-town-graph.mjs'
+      - 'ask-jarvis/public/town/**'
+      - 'ask-jarvis/test/town.test.mjs'
+      - '.github/workflows/abundent-town-freegraph.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freegraph-town:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Abundent
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Check out actual Free Graph owner validator at fixed commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/Free-Graph
+          ref: ec0ad8743c5faac3f3675760bbafcbcb1df846c1
+          path: external/free-graph-owner
+          persist-credentials: false
+      - name: Build and test portable town graph without service accounts
+        run: |
+          set -euo pipefail
+          node --check ask-jarvis/public/town/app.mjs
+          node --check ask-jarvis/scripts/build-town-graph.mjs
+          node --test ask-jarvis/test/town.test.mjs
+          cd ask-jarvis
+          node scripts/build-town-graph.mjs
+          cd ../external/free-graph-owner
+          python3 scripts/fg.py validate ../../ask-jarvis/public/town/graph.json
+          python3 scripts/fg.py digest ../../ask-jarvis/public/town/graph.json
+          test "$(git rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
+      - name: Ensure graph source excludes visitor submissions and human promotion
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import {readFileSync} from 'node:fs';
+          const p=JSON.parse(readFileSync('ask-jarvis/public/town/graph.json','utf8'));
+          if (p.links.some(l=>l.authority!=='none'||l.verb==='constitutes'))process.exit(1);
+          if (p.nodes.some(n=>n.status==='locally-adopted'||n.status==='observed'))process.exit(1);
+          if (p.task_world_cut.status!=='unresolved')process.exit(1);
+          if (!p.non_imports.some(x=>x.toLowerCase().includes('flyer')))process.exit(1);
+          JS

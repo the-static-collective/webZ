@@ -1,0 +1,117 @@
+{
+  "schema": "abundent/town-options-v1",
+  "locale": "Waseca, Minnesota",
+  "status": "EDITORIAL_SEEDS_ONLY",
+  "disclaimer": "These are example questions and potential experiments, not verified community needs, confirmed partners, available resources, or events.",
+  "updated": "2026-10-25",
+  "ideas": [
+    {
+      "id": "food-access",
+      "category": "Food",
+      "title": "What would make groceries easier to reach?",
+      "question": "What is one specific food-access obstacle in Waseca that willing neighbors could safely investigate?",
+      "test": "Ask one willing organizer to review a draft needs question; do not claim there is an operating service.",
+      "status": "OPEN_QUESTION"
+    },
+    {
+      "id": "extra-produce",
+      "category": "Food",
+      "title": "Could extra garden produce reach neighbors?",
+      "question": "Could a willing grower and a food-safety lead explore one tiny surplus-produce experiment in Waseca?",
+      "test": "Ask a willing grower and food-safety lead whether a hypothetical small exchange is feasible.",
+      "status": "PROPOSAL"
+    },
+    {
+      "id": "shared-table",
+      "category": "Gather",
+      "title": "One neighborhood table",
+      "question": "Where could willing neighbors host a small permission-based gathering in Waseca?",
+      "test": "Ask a potential host to review a draft invitation and venue rules before publishing.",
+      "status": "PROPOSAL"
+    },
+    {
+      "id": "volunteer-time",
+      "category": "Help",
+      "title": "I have an hour to offer",
+      "question": "What small voluntary task could a willing Waseca group review with a neighbor who has one hour available?",
+      "test": "Ask one organizer what support is actually useful; don't assign work or enroll anyone.",
+      "status": "OPEN_QUESTION"
+    },
+    {
+      "id": "music-arts",
+      "category": "Create",
+      "title": "A place for artists to meet",
+      "question": "What kind of low-cost voluntary arts gathering might Waseca artists actually want?",
+      "test": "Invite one willing artist to review a hypothetical gathering idea; check venue consent first.",
+      "status": "PROPOSAL"
+    },
+    {
+      "id": "park-stewardship",
+      "category": "Care",
+      "title": "Care for shared spaces",
+      "question": "Could a permitted, safe, small community park stewardship experiment interest Waseca volunteers?",
+      "test": "Ask the appropriate site steward what tasks are permitted and how material would be handled.",
+      "status": "PROPOSAL"
+    },
+    {
+      "id": "tools-and-fixes",
+      "category": "Share",
+      "title": "Neighbors fixing things together",
+      "question": "Could willing people create a safe and voluntary Waseca tool-sharing or repair gathering?",
+      "test": "Ask one potential organizer to review safety, liability and boundaries before inviting anyone.",
+      "status": "OPEN_QUESTION"
+    },
+    {
+      "id": "ride-coordination",
+      "category": "Get there",
+      "title": "Getting to useful places",
+      "question": "What transportation barriers could Waseca residents discuss without collecting private travel details?",
+      "test": "Review a fictional needs card with a willing coordinator; no ride matching or personal data collected.",
+      "status": "OPEN_QUESTION"
+    }
+  ],
+  "paths": [
+    [
+      "food-access",
+      "extra-produce",
+      "connects",
+      "Possible food access approach"
+    ],
+    [
+      "food-access",
+      "ride-coordination",
+      "connects",
+      "Transport may matter to access"
+    ],
+    [
+      "food-access",
+      "shared-table",
+      "connects",
+      "A table may clarify a need"
+    ],
+    [
+      "shared-table",
+      "music-arts",
+      "connects",
+      "A gathering could include art"
+    ],
+    [
+      "shared-table",
+      "volunteer-time",
+      "connects",
+      "A small table might welcome offers"
+    ],
+    [
+      "park-stewardship",
+      "volunteer-time",
+      "connects",
+      "Voluntary tasks require an organizer"
+    ],
+    [
+      "tools-and-fixes",
+      "volunteer-time",
+      "connects",
+      "A time offer may help repair skills"
+    ]
+  ]
+}
