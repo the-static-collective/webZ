@@ -41,3 +41,9 @@ Default: three diverse questions. `--all`: twelve, at a paced cadence respecting
 ## Release recommendation
 
 **Current recommendation: HOLD PUBLIC AI.** The code/test path is ready for review; no durable Redis binding, browser-level model smoke, public WAF traffic evidence, or human-rated 12-question report has been established here. Leave production domains and partner-owned sources unchanged. Ship a small reversible beta only after the above independently verified gates pass. Preserve a one-switch rollback to the deterministic question card.
+
+## Phone-first field review
+
+Visit `/quality-lab.html` on the preview deployment and choose from eight non-identifying prompts. It opens the ordinary JAR question form without auto-submission. After viewing the answer, the reviewer rates the five criteria 0–2 each, flags invented effects/privacy problems, and can save several ratings to a **local JSON report**. Nothing is automatically submitted or tracked. The original set of twelve diverse acceptance scenarios remains in `quality/real-world-scenarios.json` for the full live/model/human evaluation. These are *test instruments*, not evidence that any volunteers completed a review.
+
+The Vercel project reports Preview SSO `enabled=true` with deploymentType `all_except_custom_domains`. **Custom domains are not necessarily SSO-protected**: never allow a hosted Preview model request without the shared store. The 017 security patch explicitly fails closed on all hosted preview API calls that lack shared counters; only local Node test fixtures bypass the store. Existing model keys and previous preview feature flags cannot override that guard.
