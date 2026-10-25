@@ -94,3 +94,46 @@ export function matchesCouncilSources(base,council) {
   }
   return true;
 }
+
+/** The model's content checksum is integrity only, not a signature or factual proof. */
+export async function verifyAdaptive(value){
+ try{
+   if(value?.schema!=='ask-jarvis/adaptive-v1'||value.status!=='MODEL_PROPOSAL'
+     ||value.authority!=='NONE'||value.modelCalls!==1||value.modelInvoked!==true
+     ||value.executedActions!==false||value.researchedExternally!==false
+     ||!['groq','gemini'].includes(value.providerId)
+     ||typeof value.question!=='string'||!Array.isArray(value.sourceReferences)
+     ||value.sourceReferences.length>3||!Array.isArray(value.proposal?.sourceIds)
+     ||value.proposal.sourceIds.length>3||!Array.isArray(value.editorialIds)
+     ||!Array.isArray(value.graftCut?.ids)||typeof value.receiptHash!=='string')return false;
+   const allowed=new Set(value.sourceReferences.map(x=>x.id));
+   if(allowed.size!==value.sourceReferences.length
+     ||value.proposal.sourceIds.some(id=>!allowed.has(id)))return false;
+   if(!['answer','firstMove','draft','unknown'].every(k=>
+     typeof value.proposal[k]==='string'&&value.proposal[k].length>=15))return false;
+   const {receiptHash,...body}=value;
+   return await sha256(JSON.stringify(body))===receiptHash;
+ }catch{return false;}
+}
+/** Reject a model answer from a different retrieval/Commons/GRAFT snapshot. */
+export function matchesAdaptiveSources(base,value) {
+ if(base?.schema!=='ask-jarvis/return-v0'||value?.schema!=='ask-jarvis/adaptive-v1'
+   ||base.question!==value.question||base.return?.kind!==value.kind
+   ||base.commons?.release!==value.commonsRelease)return false;
+ const inspected=(base.sources||[]).filter(x=>x.status==='INSPECTED');
+ if(inspected.length!==value.sourceReferences?.length)return false;
+ const actual=new Map(value.sourceReferences.map(x=>[x.id,x]));
+ if(inspected.some(x=>{
+   const y=actual.get(x.id);
+   return !y||y.status!=='INSPECTED'||y.commit!==x.commit||y.sha256!==x.sha256
+     ||y.document!==x.document;
+ }))return false;
+ const ids=base.context?.relation==='INDEPENDENT_QUESTION' ? []
+   :(base.synthesis?.related||[]).map(x=>x.id);
+ const graftIds=base.context?.relation==='INDEPENDENT_QUESTION' ? []
+   :(base.graft?.selected||[]).map(x=>x.id);
+ return JSON.stringify(ids)===JSON.stringify(value.editorialIds)
+   &&value.graftCut?.state===(base.graft?.state||'NOT_ENABLED')
+   &&value.graftCut?.sourceSha256===(base.graft?.sourceSha256||null)
+   &&JSON.stringify(graftIds)===JSON.stringify(value.graftCut?.ids);
+}

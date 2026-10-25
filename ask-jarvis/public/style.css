@@ -196,3 +196,18 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .garden-map-content .town-door,.garden-map-content .ignition-door,.garden-map-content .cafe-intro,.garden-map-content .table-door,.garden-map-content .under{margin-left:0;margin-right:0}
 @media(max-width:650px){.magic-tools{padding:13px}.magic-tools-cards{grid-template-columns:1fr}.garden-map{margin:18px 12px;padding:12px}.magic-tools h3{font-size:22px!important}}
 @media print{.magic-tools,.backstage,.machine-trace,.garden-map,.contact-door{display:none!important}}
+
+/* ADAPTIVE-016: make the user-facing answer a readable first-class reply. */
+.adaptive-notice{font-size:.78rem;line-height:1.45;opacity:.84;margin:.6rem 0}
+.adaptive-reply{background:#f3f8e9;border:2px solid #486e53;border-radius:9px;
+padding:clamp(1rem,3vw,1.5rem);margin:1.1rem 0;box-shadow:4px 4px 0 #dae6d0}
+.adaptive-reply h3{margin:.3rem 0 .7rem}
+.adaptive-reply h4{margin:.8rem 0 .3rem}
+.adaptive-answer{font-size:1.1rem;line-height:1.65;white-space:pre-wrap}
+.adaptive-progress{font-style:italic}
+.adaptive-draft{border-top:1px solid #9aae99;margin-top:.8rem;padding-top:.5rem}
+.adaptive-draft-text{box-sizing:border-box;width:100%;min-height:5rem;
+font:inherit;line-height:1.5;padding:.7rem;background:#fff;border:1px solid #5e775f}
+.adaptive-draft button{display:block;margin:.6rem 0 .3rem}
+.adaptive-evidence{margin-top:.8rem;padding-top:.4rem;border-top:1px dashed #668066}
+@media print{.adaptive-notice,.adaptive-draft button{display:none}}

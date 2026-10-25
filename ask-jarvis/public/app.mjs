@@ -6,6 +6,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 import {shareableQuestion} from './cafe.mjs';
 import {composeTools} from './magic-lego.mjs';
 import {presentUnified,clearUnified} from './unified.mjs';
+import {startAdaptive,clearAdaptive} from './adaptive-ui.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
@@ -45,7 +46,7 @@ function clearReturn() {
   $('#vis-relay-status').textContent='Nothing is shared automatically. This is an AI investigation draft, not a real-world completion record.';
   $('#vis-result').textContent='Model investigation is optional and may be unavailable. The original question card works without it.';
   $('#vis-investigate').disabled=false;
-  last=null;reply.hidden=true;cleanAudio();clearUnified();
+  last=null;reply.hidden=true;cleanAudio();clearUnified();clearAdaptive();
   $('#magic-tools').hidden=true;$('#magic-tools-cards').replaceChildren();
   $('#quick-share-link').hidden=true;$('#quick-share-link').value='';
   $('#quick-share-status').textContent='Nothing shared yet.';
@@ -140,6 +141,7 @@ function show(data) {
   last=data;reply.hidden=false;$('#discovery-tools').hidden=false;
   showMagicTools(data);
   presentUnified(data);
+  void startAdaptive(data);
 }
 
 
