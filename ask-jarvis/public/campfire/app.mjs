@@ -1,5 +1,5 @@
 import {FIRES,CIRCLES,OUTCOMES,validPurpose,makeFire,chooseFire,chooseCircle,
- readFireLink,makeFireLink,drawFirstMove,makeInvitation,makePersonalReceipt,makeTableQuestion} from './model.mjs';
+ readFireLink,makeFireLink,drawFirstMove,makeInvitation,makePersonalReceipt,makeTableQuestion,weaveFires} from './model.mjs';
 import {makeTableSeedLink} from '../table-bridge.mjs';
 // CAMPFIRE-022: choices are local. No service requests, tracking, hidden registration,
 // public roster, inferred consent or affiliation with another organization.
@@ -12,6 +12,7 @@ const el=(tag,cls,text)=>{
 let fire=readFireLink(location.hash)||makeFire({seed:'garden'});
 let circle=null;
 let move=null;
+let bridge=null;
 const checked=new Map(),reported=new Map();
 let chosenKey='';
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -90,6 +91,13 @@ function renderMove(){
  t.hash=new URLSearchParams({from:'campfire',q:fire.focus}).toString();
  $('tomorrow-door').href=t.toString();
  $('invite-preview').textContent=makeInvitation(fire,circle.id);
+ $('other-fire').replaceChildren();
+ for(const next of FIRES){
+  if(next.id===fire.id)continue;
+  const option=el('option','',next.name);option.value=next.id;
+  $('other-fire').append(option);
+ }
+ bridge=null;$('weave-result').hidden=true;
  $('outcome').value=reported.get(chosenKey)||'NOT_STARTED';
  $('kit-status').textContent='';
  drawTasks();
@@ -132,6 +140,38 @@ async function explicitShare(ambassador=false){
  }catch(error){$('kit-status').textContent=error?.name==='AbortError'
    ?'Canceled; no message was sent by the page.':'Sharing unavailable. Try Copy instead.';}
 }
+$('weave').addEventListener('click',()=>{
+ if(!fire||!circle)return;
+ const next=chooseFire($('other-fire').value);
+ if(!next){$('kit-status').textContent='Choose a different open fire first.';return;}
+ try{
+  bridge=weaveFires(fire,next);
+  $('weave-title').textContent=bridge.title;
+  $('weave-why').textContent=bridge.why;
+  $('weave-first').textContent='Make this first: '+bridge.firstArtifact;
+  $('weave-gate').textContent='Separate permissions: '+bridge.gate;
+  $('weave-result').hidden=false;
+  $('kit-status').textContent='A possible connection was drafted. No partner or participant was enrolled.';
+ }catch{
+  bridge=null;$('weave-result').hidden=true;
+  $('kit-status').textContent='The two fires could not be safely composed.';
+ }
+});
+$('weave-copy').addEventListener('click',async()=>{
+ if(!bridge)return;
+ const text=[
+  'TWO FIRES / AN OPEN EXPERIMENT',
+  bridge.title,'',bridge.why,'',
+  'First draft: '+bridge.firstArtifact,
+  'Would you like to review this question or suggest a better first step?',
+  'Participation is voluntary; a no or alternative idea is welcome.',
+  'Permissions to check: '+bridge.gate,
+  'No affiliation, confirmed partner, event, funding or operational permission is claimed.'
+ ].join('\n');
+ try{await copy(text);
+  $('kit-status').textContent='A two-fire invitation was copied. You decide whether to share it.';
+ }catch{$('kit-status').textContent='Copy unavailable. Please use the displayed draft.';}
+});
 $('invite').addEventListener('click',()=>explicitShare(false));
 $('ambassador').addEventListener('click',()=>explicitShare(true));
 $('copy').addEventListener('click',async()=>{
