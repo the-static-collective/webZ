@@ -3,6 +3,7 @@ import {verifyCouncil,matchesCouncilSources,sha256} from './evidence.mjs';
 import {normalizeFieldPack} from './field-witness.mjs';
 import {selectCommons} from './commons.mjs';
 import {graftFieldEntries} from './graft-context.mjs';
+import {getRole} from './role-seeds.mjs';
 let active=null;
 const $=s=>document.querySelector(s);
 const el=(tag,cls,text)=>{const x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x;};
@@ -31,6 +32,19 @@ export function presentUnified(data){
   }
   if(list.childNodes.length)p.append(list);
   p.append(el('p','', 'First useful check: '+s.firstMove));
+  // Open exploration roles grow from real interest. A role card is an
+  // invitation, not a claim of existing local leadership or permission.
+  const role=getRole(s.openStarterRole?.id);
+  if(role){
+    const card=el('section','steward-seed-card');
+    card.append(el('strong','','No steward yet? Help create the role.'),
+      el('p','',role.intro),
+      el('p','','One useful task today: '+role.starter));
+    const a=el('a','steward-seed-link','✳ I could help shape this role →');
+    a.href='/roles/#role='+role.id;card.append(a);
+    card.append(el('small','','Independent Abundent role exploration; no appointment or authority to operate.'));
+    p.append(card);
+  }
   if(data.graft?.selected?.length){
     const more=el('details');more.append(el('summary','','GRAFT source updates · '+data.graft.state));
     const ul=el('ul');

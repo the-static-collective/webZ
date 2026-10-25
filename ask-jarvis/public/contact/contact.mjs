@@ -1,3 +1,4 @@
+import {readRoleHash,intakePreview} from '../role-seeds.mjs';
 // Abundent permission-first intake. Public Supabase publishable key only; RLS denies reads/updates/deletes.
 const API = 'https://kbhqacsdvjsstzyplqij.supabase.co/rest/v1/abundent_interest';
 const PUBLISHABLE_KEY = 'sb_publishable_Bv9JuOctSQTmnE3O1dP8RA_MKRNSD-o';
@@ -5,6 +6,17 @@ const form = document.querySelector('#contact-form');
 const button = document.querySelector('#contact-submit');
 const status = document.querySelector('#contact-status');
 const source = new URLSearchParams(location.search).get('via') === 'coalition' ? 'coalition-oct-2026' : 'abundent-stay-in-touch';
+// Only a fixed, validated role ID travels in the fragment; personal details
+// stay in the private contact form until the visitor explicitly submits it.
+const role=readRoleHash(location.hash);
+if(role){
+ const draft=intakePreview(role);
+ form.elements.interest.value=draft.interest;
+ if(!form.elements.note.value)form.elements.note.value=draft.note.slice(0,1200);
+ const label=document.querySelector('#role-intent');
+ if(label){label.hidden=false;label.textContent='You opened an interest draft for '+role.name+
+  '. This does not appoint you, contact a partner, or submit anything. Edit the note, choose whether to give contact permission, and press Send only if you want private follow-up.';}
+}
 let sending = false;
 form.addEventListener('submit', async (event) => {
   event.preventDefault();

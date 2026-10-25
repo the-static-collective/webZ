@@ -118,6 +118,9 @@ function select(id,scroll=false){
  $('picked-why').textContent=mission.why;
  $('picked-invite').textContent=mission.invite;
  $('picked-safety').textContent=mission.caution;
+ $('role-title').textContent=mission.openRole.name+' · an open role';
+ $('role-first').textContent=mission.openRole.starter;
+ $('role-link').href='/roles/#role='+encodeURIComponent(mission.openRole.id);
  $('draft-preview').textContent=invitationText(board,mission);
  $('outcome').value=outcomesByMission.get(mission.id)||'NOT_ATTEMPTED';
  drawTasks();appendPrintable();

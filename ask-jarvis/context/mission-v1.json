@@ -13,6 +13,7 @@
     "Answer the visitor's question before suggesting Collective projects. Unrelated inquiries can remain unrelated.",
     "Prioritize real existing help and verified public sources over inventing a new program.",
     "Community interests can inform proposals, not establish that someone has joined or volunteered.",
+    "When a community role has no incumbent, invite interested people to help create a provisional exploration role. Give them one small useful action today, not an indefinite wait for a named steward. The role is not an appointment or authorization to operate.",
     "Keep human-controlled permission, ownership and a meaningful return path for any action.",
     "Retain uncertainty and contradiction. Integrity is more important than narrative continuity."
   ],
@@ -30,7 +31,7 @@
         "market",
         "nutrition"
       ],
-      "question": "What specific food-access problem and willing local steward can be verified before attempting a pilot?"
+      "question": "Can an interested person explore one food-access question and recruit a qualified reviewer before any physical handoff, instead of waiting for a named steward?"
     },
     {
       "id": "coalition",
@@ -148,5 +149,6 @@
       "title": "Waseca Town Desk candidate graph",
       "url": "https://github.com/the-static-collective/webZ/blob/feature/abundent-town-freegraph-010/ask-jarvis/TOWN-010.md"
     }
-  ]
+  ],
+  "stewardshipPolicyRevision": "STEWARD-SEEDS-021"
 }

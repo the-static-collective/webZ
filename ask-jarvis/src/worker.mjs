@@ -9,6 +9,7 @@ import {orientQuestion} from './discovery.mjs';
 import mission from '../context/mission-v1.json' with {type:'json'};
 import catalog from '../town/catalog.json' with {type:'json'};
 import {publicCommonsFor} from '../public/commons.mjs';
+import {roleForQuestion,firstStewardshipMove} from '../public/role-seeds.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -94,23 +95,28 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const graftNotes=orientation.relation==='INDEPENDENT_QUESTION' ? []
     :(graftSnapshot.selected||[]).slice(0,3);
   const first=matches[0];
+  const starterRole=orientation.relation==='INDEPENDENT_QUESTION'?null:roleForQuestion(q);
+  const starterStep=starterRole?firstStewardshipMove(starterRole):null;
   const synthesis={
     schema:'ask-jarvis/synthesis-v1',basis:'EDITORIAL_CANDIDATES_NOT_REAL_WORLD_EVIDENCE',
     related:matches.slice(0,3).map(x=>({id:x.id,status:x.status,observation:x.observation,
       firstCheck:x.firstCheck})),
     graft:graftNotes.map(x=>({id:x.id,publication:x.publication,summary:x.summary,
       sourceUrl:x.sourceUrl})),
-    firstMove:first?.firstCheck??returned.nextQuestion,
+    firstMove:starterStep??first?.firstCheck??returned.nextQuestion,
+    openStarterRole:starterRole?{id:starterRole.id,name:starterRole.name,
+      state:'OPEN_ROLE_NO_INCUMBENT_REQUIRED',firstTask:starterRole.starter,
+      interestDoor:'/roles/#role='+starterRole.id,appointment:false}:null,
     verifiedProjectReads:found,
-    humanGate:'Ask the responsible human steward before invitations, service, resource allocation or public claims.'
+    humanGate:'Interested people may begin exploring an open role immediately with drafts and listening. Real-world access, public affiliation, food handling, volunteer assignments, service delivery and publishing still require the responsible owner’s specific consent.'
   };
-  const nextQuestion=first?.firstCheck??returned.nextQuestion;
+  const nextQuestion=starterStep??first?.firstCheck??returned.nextQuestion;
   const guidance=orientation.relation==='INDEPENDENT_QUESTION'
     ? 'This is an independent question, not a forced Collective project match. Here is an optional draft; verify external facts independently.'
     :!found
-      ? `I could not verify the source documents this time. ${first?'One editorial possibility: '+first.observation+' First check: '+first.firstCheck:'Here is a draft from the question.'} No project service or partner commitment is claimed.`
+      ? `I could not verify the source documents this time. ${first?'One editorial possibility: '+first.observation:'Here is a draft from the question.'} ${starterStep||''} No project service or partner commitment is claimed.`
       :first
-        ? `A useful starting connection: ${first.observation} First check: ${first.firstCheck} I inspected ${found} public project source document(s), not a live service or partner commitment.`
+        ? `A useful starting connection: ${first.observation} ${starterStep} I inspected ${found} public project source document(s), not a live service or partner commitment.`
         : `I inspected ${found} public project documents. Here's a ${returned.kind} draft and a specific question to test next.`;
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
@@ -130,6 +136,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
       {name:'3rdi observer cut',status:'PREPARED',detail:'Locally recorded what was available at this request cut; source occurrence and causation remain UNKNOWN. Native 3rdi runtime NOT_RUN.'},
       {name:'LOADOUT effect fence',status:'PREPARED',detail:'Selected only three bounded public reads; project writes, partner contact and real-world effects remain FENCED. Native LOADOUT bind NOT_RUN.'}
     ]:[]),
+    ...(starterRole?[{name:'Open role invitation',status:'OPEN',detail:'Role '+starterRole.name+' is a voluntary possible responsibility, not an incumbent, enrollment or approved field operation. See /roles/#role='+starterRole.id}]:[]),
     {name:'CANNON boundary',status:'HOLD',detail:'No source-owner canon selection or native CANNON validation. Main is not inferred canon.'},
     {name:'GHoT / project execution',status:'NOT_RUN',detail:'Read-only adapters do not assign tasks or run project code.'},
     {name:'OpenManus / ELF',status:'NOT_RUN',detail:'Native agents are not launched by this public return loop.'},
@@ -141,6 +148,10 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     `Observation: ${guidance}`,'',
     'Related public project notes (not commitments):',
     ...matches.slice(0,3).map(x=>'- '+x.id+': '+x.observation+' FIRST CHECK: '+x.firstCheck),
+    'Role seeds (interest is not appointment):',
+    ...(starterRole?['- Open role: '+starterRole.name+' — /roles/#role='+starterRole.id,
+      '- First independent starter task: '+starterRole.starter,
+      '- Operating permission and organization authority are NOT granted.']:[]),
     'GRAFT project-source feed (read-only; not evidence of adoption):',
     ...graftNotes.map(x=>'- '+x.id+' ['+x.publication+']: '+x.summary+' '+x.sourceUrl),
     '','Sources inspected (read-only):',

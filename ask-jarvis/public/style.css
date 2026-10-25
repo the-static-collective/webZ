@@ -211,3 +211,11 @@ font:inherit;line-height:1.5;padding:.7rem;background:#fff;border:1px solid #5e7
 .adaptive-draft button{display:block;margin:.6rem 0 .3rem}
 .adaptive-evidence{margin-top:.8rem;padding-top:.4rem;border-top:1px dashed #668066}
 @media print{.adaptive-notice,.adaptive-draft button{display:none}}
+
+/* STEWARD-SEEDS-021 · a useful door right inside each JAR answer */
+.steward-seed-card{margin:1rem 0;padding:1rem;border:2px solid #29523d;border-radius:9px;
+ background:#edf8dc;box-shadow:3px 4px 0 #a5be95}
+.steward-seed-card strong{display:block;font-size:1.1rem}
+.steward-seed-card .steward-seed-link{display:inline-block;margin:.4rem 0;padding:.65rem .85rem;
+ background:#204e3d;color:#fff;border-radius:6px;font-weight:800;text-decoration:none}
+.steward-seed-card small{display:block;color:#435f51;margin-top:.35rem}
