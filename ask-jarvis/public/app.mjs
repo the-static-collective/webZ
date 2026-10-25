@@ -53,7 +53,7 @@ function download(name,body,type='text/plain;charset=utf-8') {
 }
 function sourceLink(label,url) {
   const a=el('a','',label);
-  if(/^https:\/\/(?:raw\.githubusercontent\.com|github\.com)\/the-static-collective\/[A-Za-z0-9-]+\/(?:blob\/)?[a-f0-9]{40}\/[A-Za-z0-9./-]+$/.test(url)) {
+  if(/^https:\/\/(?:raw\.githubusercontent\.com|github\.com)\/the-static-collective\/[A-Za-z0-9.-]+\/(?:blob\/)?[a-f0-9]{40}\/[A-Za-z0-9./-]+$/.test(url)) {
     a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
   }
   return a;
