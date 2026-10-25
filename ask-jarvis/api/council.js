@@ -6,7 +6,7 @@ import {council} from '../src/council.mjs';
 import {normalizeFieldPack} from '../public/field-witness.mjs';
 import {selectCommons} from '../public/commons.mjs';
 import {readGraftFeed,graftFieldEntries} from '../src/graft-feed.mjs';
-import {admitRequest,applyAdmission} from '../src/usage-guard.mjs';
+import {rejectPrivatePrompt,admitRequest,applyAdmission} from '../src/usage-guard.mjs';
 
 export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store');
@@ -25,6 +25,8 @@ export default async function handler(req,res) {
   if(typeof obj.question!=='string')return res.status(400).json({error:'QUESTION_REQUIRED'});
   if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>(obj.fieldPack?14500:REQUEST_LIMIT))
     return res.status(413).json({error:'QUESTION_TOO_LARGE'});
+  const privateReason=rejectPrivatePrompt(obj.question);
+  if(privateReason)return res.status(422).json({schema:'ask-jarvis/usage-guard-v1',status:'HOLD',reason:privateReason,message:'Do not send personal contact information or credentials to experimental AI.',modelInvoked:false});
   const admission=await admitRequest(req,'ai',{weight:2});
   if(applyAdmission(res,admission))return;
   try {
