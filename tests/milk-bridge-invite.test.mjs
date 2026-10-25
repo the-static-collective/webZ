@@ -74,5 +74,5 @@ test('successor handoff matches portable Seventh Table card schema without leaki
   assert.match(page,/id="caseRecipientConfirmed"/);
   assert.match(js,/casePublicApproval/);
   assert.match(js,/recipient.*confirm/i);
-  assert.match(js,/never.*transferred/i);
+  assert.match(page,/private notes, any attendee information, this table's private tokens/);
 });
