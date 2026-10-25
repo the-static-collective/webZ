@@ -3,6 +3,7 @@ import {assemble,inputError,REQUEST_LIMIT} from '../src/worker.mjs';
 import {investigate,makeGatewayProvider,makeNvidiaTrialProvider} from '../src/investigator.mjs';
 import {selectRoute,ROUTES} from '../src/free-compute.mjs';
 import {sha256} from '../public/evidence.mjs';
+import {admitRequest,applyAdmission} from '../src/usage-guard.mjs';
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
@@ -37,6 +38,8 @@ export default async function handler(req,res){
       schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'FREE_PROVIDER_NOT_CONFIGURED',
       message:'No allowed provider is configured for this route. The original question card still works.'
     });
+    const admission=await admitRequest(req,'ai');
+    if(applyAdmission(res,admission))return;
     const provider=freeMode?choice.provider:(process.env.NVIDIA_API_KEY
       ? makeNvidiaTrialProvider({token:process.env.NVIDIA_API_KEY})
       : makeGatewayProvider({token}));
