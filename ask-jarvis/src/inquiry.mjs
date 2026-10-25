@@ -36,16 +36,16 @@ export function summarizeForQuestion(markdown, question) {
   const title = markdown.split(/\r?\n/).find(line=>/^# /.test(line))?.slice(2).trim() || 'Public source';
   const terms = new Set((question.toLowerCase().match(/[a-z]{4,}/g)||[]).filter(word=>!STOPWORDS.has(word)));
   const lines = markdown.replace(/\r/g,'').split('\n')
-    .map(line=>line.trim().replace(/^[-*]\s+/,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1'))
-    .filter(line=>line.length>=30&&line.length<=380&&!/^(#|>|\||\x60|<|!|---)/.test(line));
-  const scored = lines.map((line,i)=>{
+    .map((line,index)=>({line:line.trim().replace(/^[-*]\s+/,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1'),sourceLine:index+1}))
+    .filter(item=>item.line.length>=30&&item.line.length<=380&&!/^(#|>|\||\x60|<|!|---)/.test(item.line));
+  const scored = lines.map(({line,sourceLine},i)=>{
     const words = new Set(line.toLowerCase().match(/[a-z]{4,}/g)||[]);
     const matched = [...terms].filter(term=>words.has(term)).length;
-    return {line,matched,i};
+    return {line,matched,i,sourceLine};
   }).sort((a,b)=>b.matched-a.matched||a.i-b.i);
   const best = scored[0];
   return {title:title.slice(0,140),excerpt:(best?.line||'Inspect the original document for details.').slice(0,235),
-    relevance:best?.matched?'QUESTION_WORD_MATCH':'GENERAL_DOCUMENT'};
+    relevance:best?.matched?'QUESTION_WORD_MATCH':'GENERAL_DOCUMENT',excerptLine:best?.sourceLine||null};
 }
 
 export function sourceNotes(sources) {

@@ -125,3 +125,16 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .vis-result .vis-connections li{margin:.7rem 0;}
 .vis-result .vis-citations{display:flex;gap:.5rem;flex-wrap:wrap;font-size:.85em;}
 .vis-result .vis-citations a{word-break:break-all;}
+
+/* TRIAD-008 / Three-owner, explicit read-only research lens */
+.triad-choice{margin:14px 0 12px;padding:12px 15px;background:#eaf0dc;border:2px dashed #718c60;font-size:12px;line-height:1.45;color:#274029}
+.triad-choice label{display:flex;align-items:center;gap:8px;font-weight:bold;cursor:pointer}
+.triad-choice input{width:17px;height:17px;accent-color:#2a7047}
+.triad-choice p{margin:9px 0 0}
+.triad-result{padding:15px;background:#f2f6ec;border:2px solid #78988b;margin:18px 0;overflow-wrap:anywhere}
+.triad-result>h3{margin:8px 0;color:#1b5b47;font:23px Georgia,serif}
+.triad-result>p,.triad-result>small{line-height:1.45;font-size:12px}
+.triad-slice{border-left:4px solid #567c6b;background:white;margin:11px 0;padding:10px 13px}
+.triad-slice h4{margin:0 0 7px;font:17px Georgia,serif;color:#23466b}
+.triad-slice p,.triad-slice li{font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+.triad-slice ul{padding-left:18px}

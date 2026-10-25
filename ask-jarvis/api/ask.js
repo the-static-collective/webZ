@@ -8,6 +8,6 @@ export default async function handler(req,res){
   const obj=req.body && typeof req.body==="object"?req.body:{};
   if(typeof obj.question!=="string")return res.status(400).json({error:"QUESTION_REQUIRED"});
   if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>REQUEST_LIMIT)return res.status(413).json({error:"QUESTION_TOO_LARGE"});
-  try{return res.status(200).json(await assemble(obj.question,fetch,{kind:obj.kind??'auto'}));}
+  try{return res.status(200).json(await assemble(obj.question,fetch,{kind:obj.kind??'auto',lens:obj.lens??'standard'}));}
   catch(error){return res.status(422).json({error:inputError(error)});}
 }

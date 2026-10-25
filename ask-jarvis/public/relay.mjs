@@ -6,7 +6,7 @@ import {shareableQuestion} from './cafe.mjs';
 
 const SCHEMA='ask-jarvis/relay-v1';
 const DIGEST=/^sha256:[0-9a-f]{64}$/;
-const DOCUMENT=/^https:\/\/github\.com\/the-static-collective\/[a-zA-Z0-9-]+\/blob\/[0-9a-f]{40}\/[a-zA-Z0-9._/-]+$/;
+const DOCUMENT=/^https:\/\/github\.com\/the-static-collective\/[a-zA-Z0-9.-]+\/blob\/[0-9a-f]{40}\/[a-zA-Z0-9._/-]+$/;
 const checkString=(s,min,max)=>typeof s==='string'&&s.trim().length>=min&&s.length<=max&&
   !/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(s);
 const textOnly=x=>typeof x==='string'&&x.length>0;

@@ -33,6 +33,8 @@
     <label class="visually-hidden" for="question">Your question</label>
     <textarea id="question" name="question" rows="3" maxlength="360" minlength="8" required autofocus placeholder="How could we help neighbors share extra garden produce?"></textarea>
     <div class="return-choice"><label for="return-kind">What would you like to take away?</label><select id="return-kind" name="kind"><option value="auto">Surprise me</option><option value="question">A question card</option><option value="invitation">An invitation draft</option><option value="door">A possible source door</option><option value="song">A little song</option><option value="plan">A small real-world field plan</option></select></div>
+    <div class="triad-choice"><label for="triad-opt-in"><input id="triad-opt-in" type="checkbox"> ✳ ALEX × 3rdi × LOADOUT — research lens (read-only)</label>
+      <p>Instead of JAR's usual three project sources, inspect three exact-commit owner documents. Trace <strong>source → observer cut → effect fence</strong> without running their native tools or contacting anybody. Use for deeper provenance questions; no authority is transferred.</p></div>
     <div class="formend"><span class="small">8–360 characters. No personal contact details, please.</span>
       <button id="ask" class="bigbutton" type="submit"><span aria-hidden="true">✳</span> Ask JAR;VIS! <span aria-hidden="true">➜</span></button></div>
   </form>
@@ -67,6 +69,13 @@
      <div id="song-tools" hidden><audio id="song-audio" controls preload="none" aria-label="Original instrumental song sketch"></audio><button type="button" id="download-song">↓ Save instrumental sketch (.wav)</button></div>
    </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
+   <section id="triad-result" class="triad-result" aria-labelledby="triad-result-title" hidden>
+     <div class="ribbon">READ-ONLY RESEARCH CUT · TRIAD-008 · NO NATIVE TOOL EXECUTION</div>
+     <h3 id="triad-result-title">ALEX × 3rdi × LOADOUT</h3>
+     <p>These three owners remain distinct. A pin is a document witness, not proof of project ability, local reality or permission.</p>
+     <div id="triad-content"></div>
+     <small>The cut and fence are local JAR projections, independently hashed in its unsigned receipt. Human stewards retain all authority.</small>
+   </section>
    <section class="vis-inquiry" aria-labelledby="vis-title">
      <div class="ribbon">✳ OPTIONAL · VIS-006 MODEL INVESTIGATION · EXPERIMENTAL</div>
      <h3 id="vis-title">Ask VIS to investigate the connections.</h3>

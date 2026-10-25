@@ -31,7 +31,7 @@ export default async function handler(req,res){
     const provider=process.env.NVIDIA_API_KEY
       ? makeNvidiaTrialProvider({token:process.env.NVIDIA_API_KEY})
       : makeGatewayProvider({token});
-    const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider});
+    const result=await investigate({question:obj.question,kind:obj.kind??'auto',lens:obj.lens??'standard',assemble,provider});
     return res.status(200).json(result);
   }catch(error) {
     // Never expose service credentials, model responses, stack traces or upstream details.
