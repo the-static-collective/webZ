@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {CIRCLES,FIRES,OUTCOMES,chooseFire,validPurpose,makeFire,
-makeFireLink,readFireLink,drawFirstMove,makeInvitation,makePersonalReceipt,makeTableQuestion}
+makeFireLink,readFireLink,drawFirstMove,makeInvitation,makePersonalReceipt,makeTableQuestion,weaveFires}
  from '../public/campfire/model.mjs';
 
 test('everyone chooses their place; nobody acquires official authority',()=>{
@@ -86,4 +86,31 @@ test('Campfire is a runnable client-only door integrated with JAR, roles and Tom
  assert.doesNotMatch(ui,/\binnerHTML\s*=/);
  assert.match(ui,/navigator\.share/);
  assert.match(ui,/makeTableSeedLink/);
+});
+
+test('two fires can identify a proposed coalition without manufacturing participants',()=>{
+ for(let i=0;i<FIRES.length;i++)for(let j=i+1;j<FIRES.length;j++){
+  const bridge=weaveFires(FIRES[i],FIRES[j]);
+  assert.equal(bridge.schema,'abundent/campfire-bridge-v1');
+  assert.equal(bridge.status,'UNVERIFIED_POSSIBLE_CONNECTION');
+  assert.equal(bridge.verifiedPartners,0);
+  assert.equal(bridge.sharedParticipants,0);
+  assert.equal(bridge.authority,'NONE');
+  assert.ok(bridge.firstArtifact.length>24);
+  assert.ok(bridge.gate.length>30);
+  const reverse=weaveFires(FIRES[j],FIRES[i]);
+  assert.equal(reverse.title,bridge.title);
+ }
+ assert.throws(()=>weaveFires(FIRES[0],FIRES[0]));
+ const user=makeFire({custom:true,purpose:'Could neighbors invent one welcome table for this new question?'});
+ assert.equal(weaveFires(user,FIRES[0]).status,'UNVERIFIED_POSSIBLE_CONNECTION');
+});
+test('two-fire UI is explicit and generates a separate copyable draft',()=>{
+ const html=readFileSync(new URL('../public/campfire/index.html',import.meta.url),'utf8');
+ const js=readFileSync(new URL('../public/campfire/app.mjs',import.meta.url),'utf8');
+ assert.match(html,/id="other-fire"/);
+ assert.match(html,/id="weave"/);
+ assert.match(html,/id="weave-copy"/);
+ assert.match(js,/weaveFires\(fire,next\)/);
+ assert.match(js,/No affiliation, confirmed partner/);
 });
