@@ -4,6 +4,7 @@ on:
     branches:
       - feature/jarvis-cloudflare-modal-canary-019
       - feature/jarvis-steward-seeds-021
+      - feature/jarvis-campfire-right-to-try-022
     paths:
       - 'ask-jarvis/**'
       - '.github/workflows/jarvis-edge-modal-canary.yml'
@@ -42,4 +43,7 @@ jobs:
           node --check cloudflare-modal/bridge.mjs
           node --check cloudflare-modal/worker.mjs
           node --check public/field-kit-lab.mjs
+          node --check public/campfire/model.mjs
+          node --check public/campfire/app.mjs
+          node --check public/tomorrow-ui.mjs
           node -e "const c=JSON.parse(require('node:fs').readFileSync('wrangler.edge-modal.jsonc','utf8'));if(c.vars.JARVIS_MODAL_ENABLED!=='0')process.exit(1)"
