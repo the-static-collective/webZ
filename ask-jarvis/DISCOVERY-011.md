@@ -4,7 +4,7 @@
 
 ## The three layers
 
-**North Star (operator-authored):** `context/mission-v1.json` expresses Abundent's purpose, workstreams, known experiments and constitutional gates. This is intentionally compact; it is **a compass, not an advertising script**. It has a version, change-controlled repository history, and public project source references. The goals do not grant ownership of any partner, volunteer or resource.
+**North Star (operator-authored, also used on every deterministic Ask):** `context/mission-v1.json` expresses Abundent's purpose, workstreams, known experiments and constitutional gates. This is intentionally compact; it is **a compass, not an advertising script**. It has a version, change-controlled repository history, and public project source references. The goals do not grant ownership of any partner, volunteer or resource.
 
 **Library (reviewed public source references):** The existing owner-pinned public project reads remain part of regular JAR. A separate source nursery has a private `town_research_candidates` table (Supabase `pantry-gate` project) storing public search **snippets only**, a source link, a categorical editorial relation and `PENDING` status. Questions and visitors' identity are not stored in the research table. A reviewer must check the original source and explicitly set `status='REVIEWED'`, `review_status='SOURCE_LINK_CHECKED'`, `source_reviewed_at`, and `expires_at` before it can enter the publicly readable reviewed-context response. Reviewed links are still dated snapshots, not live service availability or partner permission. No such record has been approved or assumed.
 
@@ -45,3 +45,9 @@ Inspect `town_research_candidates` via private Supabase Dashboard. Discard malic
 5. Public release demands global search quota/budget, local resource verification and explicit provider/license policies; Vercel Hobby's use restrictions still apply. `abundent.org` production is on a different Vercel project from this preview.
 
 **Native source contract:** This adds a bounded lookup layer beside JAR's verified source-first model; it does not claim ALEX/3rdi/LOADOUT or GRAFT native runtimes were invoked on a discovery request, and it does not modify their repositories.
+
+## JAR integration beyond the discovery button
+
+The normal `src/worker.mjs` assembly now reads the exact same versioned mission and town editorial seed catalog, computes a bounded `context` orientation and hashes it into the original deterministic `return-v0` evidence receipt. The browser shows either a relevant optional workstream cue or an explicit **independent question** notice. `publicContext()` also passes these bounded editorial facts to the optional VIS model under a guardrail prohibiting forced project alignment. These fields are editorial metadata **not externally verified source passages**.
+
+The external web lookup, reviewed source store and Free Graph candidate relation remain a **second explicit Discover button** rather than hidden web browsing on every original Ask. This prevents involuntary sharing of questions to outside search vendors and helps preserve predictable operation at town scale.
