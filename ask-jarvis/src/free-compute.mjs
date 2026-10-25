@@ -21,12 +21,15 @@ export const FREE_RESOURCE_CATALOG = Object.freeze([
   {id:'modal-compute',kind:'compute',model:null,mode:'PLANNED',credential:null,note:'Modal monthly compute credit is not a hosted inference API. Requires a separately deployed, reviewed service.'}
 ]);
 const validSecret=v=>typeof v==='string'&&v.trim().length>=12;
+// Accept an existing Vercel Sensitive variable that was created with mixed-case spelling.
+// Vercel cannot rename Sensitive variable keys without replacing their secret values.
+const geminiKey=env=>env.GEMINI_API_KEY || env.Gemini_API_Key;
 const isOn=v=>v==='1';
 export function availableProviders(env={},ai=null) {
   const names=[];
   if(validSecret(env.NVIDIA_API_KEY)&&env.NVIDIA_API_KEY.startsWith('nvapi-'))names.push('nvidia-trial');
   if(isOn(env.JARVIS_ALLOW_GROQ_FREE)&&validSecret(env.GROQ_API_KEY))names.push('groq');
-  if(isOn(env.JARVIS_ALLOW_GEMINI_FREE)&&validSecret(env.GEMINI_API_KEY))names.push('gemini');
+  if(isOn(env.JARVIS_ALLOW_GEMINI_FREE)&&validSecret(geminiKey(env)))names.push('gemini');
   if(isOn(env.JARVIS_ALLOW_OPENROUTER_FREE)&&validSecret(env.OPENROUTER_API_KEY))names.push('openrouter');
   if(isOn(env.JARVIS_ALLOW_CLOUDFLARE_FREE)&&validSecret(env.CLOUDFLARE_API_TOKEN)
     &&/^[a-f\d]{32}$/i.test(env.CLOUDFLARE_ACCOUNT_ID||''))names.push('cloudflare-nemotron');
@@ -98,7 +101,7 @@ export function makeFreeApiProvider(id,env={},fetcher=fetch) {
           'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent',
           null,{systemInstruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text:input}]}],
             generationConfig:{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:1100}},
-          fetcher,{'x-goog-api-key':env.GEMINI_API_KEY});
+          fetcher,{'x-goog-api-key':geminiKey(env)});
         const answer=raw?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('');
         if(!answer)throw Error('GEMINI_EMPTY_RESULT');
         return {choices:[{message:{content:answer}}]};
