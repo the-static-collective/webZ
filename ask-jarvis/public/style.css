@@ -112,3 +112,16 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .question-table-status{font:11px/1.5 Verdana,sans-serif!important;color:#486958!important}
 @media(max-width:650px){.question-table-bridge{margin:16px 0;padding:16px 12px}.question-table-bridge h3{font-size:23px}#start-table-from-question{width:100%}}
 @media print{.question-table-bridge{display:none!important}}
+
+/* VIS-006: optional source-bounded model investigator; 1999 visual family. */
+.vis-inquiry{margin:1.5rem 0;padding:1.1rem;background:#f6f6dc;border:3px ridge #7693a6;box-shadow:4px 4px 0 #bfd5e4;}
+.vis-inquiry h3{margin:.6rem 0;}
+.vis-inquiry p{line-height:1.5;}
+.vis-inquiry button{cursor:pointer;min-height:44px;font:inherit;font-weight:700;padding:.6rem 1rem;border:2px outset #718b8e;background:#dbefee;color:#163846;}
+.vis-inquiry button:disabled{opacity:.6;cursor:wait;}
+.vis-result{margin-top:.9rem;white-space:normal;overflow-wrap:anywhere;}
+.vis-result .vis-answer{background:#fff;border:1px solid #7a9690;padding:1rem;}
+.vis-result .vis-connections{padding-left:1.5rem;}
+.vis-result .vis-connections li{margin:.7rem 0;}
+.vis-result .vis-citations{display:flex;gap:.5rem;flex-wrap:wrap;font-size:.85em;}
+.vis-result .vis-citations a{word-break:break-all;}
