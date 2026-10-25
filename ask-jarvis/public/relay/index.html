@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Account-free relay desk for separately labeled questions and unsigned model proposals.">
+<title>The Relay Desk · JAR;VIS</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+.relay-page{padding:25px;max-width:750px;margin:auto}.relay-stamp{font:700 12px "Courier New",monospace;color:#a44527;letter-spacing:1px}
+.relay-card{padding:22px;background:white;border:3px ridge #7194a6;box-shadow:5px 5px 0 #a7b4a4;margin:20px 0;overflow-wrap:anywhere}
+.relay-card h1{font-size:clamp(28px,5vw,43px);letter-spacing:-1px;margin:12px 0;white-space:normal}
+.relay-card h2{font:bold 23px Georgia,serif;color:#173b79}
+.relay-card h3{font:bold 16px Georgia,serif;color:#193d47}
+.relay-card p,.relay-card li{line-height:1.6;font-size:15px}
+.relay-hold{padding:16px;border:2px solid #bd774b;background:#fff6db}
+.relay-received{background:#e8f4df;border:2px dashed #6c8c65;padding:14px;margin:12px 0;font-size:13px}
+.relay-unknown{color:#573e29}.relay-meta{font-size:11px;font-family:monospace;overflow-wrap:anywhere}
+.relay-actions a,.relay-actions button{display:inline-block;padding:11px 16px;border:2px outset #b7a4d3;margin:5px;background:#f2e7d5;color:#1c3970;font-weight:bold}
+.relay-actions button{font:inherit;font-weight:bold;cursor:pointer}.relay-actions button:focus-visible,.relay-actions a:focus-visible{outline:3px solid #c28a30}
+.relay-links li{margin:5px 0}.relay-links a{overflow-wrap:anywhere}
+@media(max-width:550px){.relay-page{padding:13px}.relay-card{padding:15px}}
+</style><script type="module" src="/relay/app.mjs"></script></head>
+<body>
+<div class="ticker" aria-hidden="true">✳ THE RELAY DESK ✳ A QUESTION IS NOT AN ANSWER ✳ AN ANSWER IS NOT AN ACT ✳</div>
+<main class="page relay-page" id="main">
+ <p class="relay-stamp">THE STATIC COLLECTIVE · JAR;VIS · RELAY-007</p>
+ <div class="relay-card">
+  <p><a href="/">← ASK JAR;VIS</a></p>
+  <h1>THE RELAY<br>DESK<span class="bang">✳</span></h1>
+  <p><strong>Two things can travel:</strong> a question for someone to explore, or an unsigned report of an AI investigation someone chose to share.</p>
+  <p>Neither one is an invitation, a real-world project endorsement, proof of a willing steward, nor evidence that an experiment happened.</p>
+  <div id="relay-status" class="relay-hold" role="status" aria-live="polite">Reading the local address fragment. Nothing has been sent or submitted.</div>
+  <article id="relay-card" hidden>
+   <div class="relay-received"><strong>STAGE 02 / MODEL PROPOSAL RECEIVED</strong><br>Checksum consistency confirmed locally. <strong>Origin and model execution are NOT authenticated.</strong> The sender may have created or edited this unsigned text. Source links are observations, not proof of permissions or field work.</div>
+   <h2>Question carried forward</h2><p id="relay-question"></p>
+   <h3>AI proposal summary</h3><p id="relay-summary"></p>
+   <h3>Suggested connections — not completed tasks</h3><ol id="relay-ideas"></ol>
+   <h3>Proposed first test</h3><p id="relay-first-test"></p>
+   <h3>Still unknown</h3><ul id="relay-unknowns" class="relay-unknown"></ul>
+   <h3>Inspected public source addresses</h3><ul id="relay-sources" class="relay-links"></ul>
+   <p class="relay-meta" id="relay-receipt"></p>
+   <p>No automatic partner contact, registration, consent, fieldwork, publication, or server-side storage occurred in this relay.</p>
+   <div class="relay-actions">
+     <a id="ask-received" href="/">ASK THIS QUESTION YOURSELF →</a>
+     <button id="save-relay" type="button">↓ SAVE RECEIVED UNSIGNED CAPSULE</button>
+     <button id="copy-question-only" type="button">↗ COPY QUESTION-ONLY LINK</button>
+   </div>
+   <p id="relay-action-status" role="status">Choose whether to do anything next. Nothing is automatically submitted.</p>
+  </article>
+ </div>
+ <p class="relay-stamp">ASKED ≠ INSPECTED ≠ MODEL PROPOSED ≠ HUMAN APPROVED ≠ FIELD VERIFIED</p>
+</main>
+</body></html>
