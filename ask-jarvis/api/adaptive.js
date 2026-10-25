@@ -19,7 +19,10 @@ export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store');
  res.setHeader('X-Content-Type-Options','nosniff');
  res.setHeader('Referrer-Policy','no-referrer');
- const which=candidate(process.env);
+ // Hosted Preview without durable counters cannot expose automatic inference,
+ // even on custom domains excluded from Vercel Preview SSO.
+ const which=(hasSharedQuota(process.env)||process.env.NODE_TEST_CONTEXT)
+   ?candidate(process.env):null;
  if(req.method==='GET')return res.status(200).json({
    schema:'ask-jarvis/adaptive-status-v1',enabled:Boolean(which),
    scope:process.env.VERCEL_ENV==='production'?'PUBLIC_GATED':'PROTECTED_PREVIEW',
