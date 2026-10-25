@@ -5,6 +5,7 @@ import {availableProviders,makeFreeApiProvider} from '../src/free-compute.mjs';
 import {council} from '../src/council.mjs';
 import {normalizeFieldPack} from '../public/field-witness.mjs';
 import {selectCommons} from '../public/commons.mjs';
+import {readGraftFeed,graftFieldEntries} from '../src/graft-feed.mjs';
 
 export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store');
@@ -26,9 +27,11 @@ export default async function handler(req,res) {
   try {
     // No visitor upload needed: use the versioned site-published Commons by default.
     // An explicit visitor-supplied pack remains an optional operator override.
+    const graft=obj.fieldPack?null:await readGraftFeed(obj.question,{env:process.env,fetcher:fetch});
     const fieldPack=obj.fieldPack?normalizeFieldPack(obj.fieldPack)
       :normalizeFieldPack({schema:'ask-jarvis/field-witness-v1',
-        entries:selectCommons(obj.question).map(({relevance,...entry})=>entry)});
+        entries:[...selectCommons(obj.question).map(({relevance,...entry})=>entry),
+          ...graftFieldEntries(graft)]});
     const fieldPackOrigin=obj.fieldPack?'OPERATOR_SELECTED_UNVERIFIED':'SITE_PUBLISHED_UNVERIFIED';
     const result=await council({question:obj.question,kind:obj.kind??'auto',assemble,fieldPack,fieldPackOrigin,
       scoutProvider:makeFreeApiProvider('groq',process.env),
