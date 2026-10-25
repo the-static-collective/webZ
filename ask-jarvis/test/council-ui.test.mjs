@@ -20,7 +20,7 @@ test('question-first UI offers Council only by an explicit click; never auto-dis
 
 test('public source links only accept exact-commit GitHub URLs',()=>{
  assert.match(app,/\[A-Za-z0-9\.\-\]\+/);
- assert.match(unified,/github\\\.com/);
+ assert.match(unified,/the-static-collective/);
  const url='https://github.com/the-static-collective/ALEX.2/blob/7d116b716df82ee2379b399d90936d2fc01b7b16/README.md';
  assert.match(url,/^https:\/\/github\.com\/the-static-collective\/[A-Za-z0-9.-]+\/blob\/[a-f0-9]{40}\/[A-Za-z0-9./-]+$/);
 });
