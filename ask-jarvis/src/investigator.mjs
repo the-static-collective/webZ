@@ -92,7 +92,15 @@ export async function investigate({question,kind='auto',lens='standard',assemble
   // External model gets only the question and short observed public excerpts, never full documents.
   let result;
   try {
-    const raw=await provider({system:SYSTEM,input:JSON.stringify(context)});
+    const scopedSystem=base.triad
+      ? SYSTEM+' TRIAD ANSWER FORMAT: always return valid JSON with the five exact keys, even when the real-world answer is unknown. '+
+        'Keep summary under 300 characters, exactly 1-2 connections each with idea under 200 characters and sourceIds array, '+
+        'exactly 2 unknowns, firstTest under 220 characters starting with Draft or Ask, consentCheck under 180 characters. '+
+        'Say explicitly that no local food-access need or willing steward is independently verified by these owner README excerpts. '+
+        'Do not name any local person, place, program, steward, garden or partner unless the question itself includes the name; '+
+        'even a name in the question does not establish approval. Give a reversible draft-review invitation, not an actual scheduled meeting.'
+      :SYSTEM;
+    const raw=await provider({system:scopedSystem,input:JSON.stringify(context)});
     result=parseInvestigation(raw,observed.map(s=>s.id));
     if(base.triad) {
       // The inspected owners supply *methods*, not evidence of a person's
