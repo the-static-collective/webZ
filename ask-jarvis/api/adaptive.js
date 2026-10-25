@@ -4,7 +4,7 @@ import {assemble,inputError,REQUEST_LIMIT} from '../src/worker.mjs';
 import {reasonQuestion} from '../src/adaptive.mjs';
 import {availableProviders,makeFreeApiProvider} from '../src/free-compute.mjs';
 import {readGraftFeed} from '../src/graft-feed.mjs';
-import {admitRequest,applyAdmission,hasSharedQuota} from '../src/usage-guard.mjs';
+import {rejectPrivatePrompt,admitRequest,applyAdmission,hasSharedQuota} from '../src/usage-guard.mjs';
 
 function candidate(env){
  if(!['preview','production'].includes(env.VERCEL_ENV)||env.JARVIS_ADAPTIVE_ENABLED!=='1'
@@ -34,6 +34,8 @@ export default async function handler(req,res){
  if(typeof obj.question!=='string')return res.status(400).json({error:'QUESTION_REQUIRED'});
  if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>REQUEST_LIMIT)
    return res.status(413).json({error:'QUESTION_TOO_LARGE'});
+ const privateReason=rejectPrivatePrompt(obj.question);
+ if(privateReason)return res.status(422).json({schema:'ask-jarvis/usage-guard-v1',status:'HOLD',reason:privateReason,message:'Do not send personal contact information or credentials to experimental AI.',modelInvoked:false});
  const admission=await admitRequest(req,'ai');
  if(applyAdmission(res,admission))return;
  try{
