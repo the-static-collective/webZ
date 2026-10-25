@@ -81,6 +81,45 @@ test('OpenRouter uses free-only router, never a paid fallback',async()=>{
   assert.ok(JSON.parse(call.opts.body).max_tokens<=1400);
   assert.equal(JSON.parse(call.opts.body).stream,false);
 });
+
+test('OpenRouter tolerates 30KB of auxiliary reasoning metadata but exposes only bounded answer',async()=>{
+  let calls=0;
+  const proposed=JSON.stringify({summary:'A steward-reviewed neighborhood test is feasible as a proposal.'});
+  const chosen=selectRoute(env,'explore',async (url,opts)=>{
+    calls++;
+    assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');
+    const envelope={id:'safe-demo-id',usage:{completion_tokens:1400},
+      choices:[{index:0,message:{role:'assistant',content:proposed,
+        reasoning:'r'.repeat(31000),reasoning_details:[{type:'opaque',data:'x'.repeat(12000)}]}}]};
+    return new Response(JSON.stringify(envelope),{status:200,headers:{'content-type':'application/json'}});
+  });
+  const result=await chosen.provider({system:'synthetic system',input:'synthetic question'});
+  assert.equal(calls,1);
+  assert.deepEqual(result,{choices:[{message:{content:proposed}}]});
+  assert.ok(!JSON.stringify(result).includes('reasoning'));
+});
+test('OpenRouter still HOLDs a visible output over 9000 bytes',async()=>{
+  const chosen=selectRoute(env,'explore',async()=>new Response(JSON.stringify({
+    choices:[{message:{content:'x'.repeat(9100)}}]
+  }),{status:200}));
+  await assert.rejects(()=>chosen.provider({system:'safe',input:'synthetic'}),/OPENROUTER_VISIBLE_TEXT_LIMIT/);
+});
+test('OpenRouter still HOLDs a huge raw envelope or reasoning-only result, never retries',async()=>{
+  let attempts=0;
+  const large=selectRoute(env,'explore',async()=>{
+    attempts++;
+    return new Response(JSON.stringify({choices:[{message:{content:'{"summary":"short"}',reasoning:'z'.repeat(101000)}}]}),{status:200});
+  });
+  await assert.rejects(()=>large.provider({system:'safe',input:'synthetic'}),/FREE_PROVIDER_RESPONSE_LIMIT/);
+  assert.equal(attempts,1);
+  const missing=selectRoute(env,'explore',async()=>{
+    attempts++;
+    return new Response(JSON.stringify({choices:[{message:{content:'',reasoning:'private reasoning'}}]}),{status:200});
+  });
+  await assert.rejects(()=>missing.provider({system:'safe',input:'synthetic'}),/OPENROUTER_NO_VISIBLE_TEXT/);
+  assert.equal(attempts,2);
+});
+
 test('Cloudflare uses only fixed Nemotron model and validated account id',async()=>{
   const {call,reply}=await invoke('nemotron');
   assert.equal(call.url,'https://api.cloudflare.com/client/v4/accounts/0123456789abcdef0123456789abcdef/ai/run/@cf/nvidia/nemotron-3-120b-a12b');
