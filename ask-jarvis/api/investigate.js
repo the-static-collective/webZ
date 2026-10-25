@@ -40,7 +40,8 @@ export default async function handler(req,res){
     const provider=freeMode?choice.provider:(process.env.NVIDIA_API_KEY
       ? makeNvidiaTrialProvider({token:process.env.NVIDIA_API_KEY})
       : makeGatewayProvider({token}));
-    const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider});
+    const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider,
+      providerId:choice?.id??'legacy'});
     if(result.status==='MODEL_PROPOSAL'&&choice) {
       result.routing={provider:choice.id,model:choice.model,mode:choice.mode,route:choice.route,
         modelCalls:1,automaticPaidFallback:false};
