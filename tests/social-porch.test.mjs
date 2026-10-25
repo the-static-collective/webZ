@@ -47,3 +47,23 @@ test('no actual posting or personal-data submission capability',()=>{
  assert.match(html,/not an official Waseca Area Food Cooperative announcement/);
  assert.match(html,/No comment was processed remotely/);
 });
+
+test('Stage Two keeps proposed governance distinct from adopted decisions',()=>{
+ for(const phrase of [
+ 'A rocket needs a next-stage crew.',
+ 'Default when ownership is unresolved: HOLD official publishing.',
+ 'Who may approve two exact social posts',
+ 'Stage Two Launch Desk',
+ 'USER-MARKED VOLUNTEER',
+ 'NOT A DELEGATION OF CO-OP AUTHORITY',
+ 'No authorized reviewer known',
+ 'Silence is not approval.'
+ ])assert.ok(html.toLowerCase().includes(phrase.toLowerCase()),phrase);
+ assert.match(html,/id="stageLane"/);
+ assert.match(html,/id="stageContact"/);
+ assert.match(html,/id="stageWindow"/);
+ assert.match(html,/const stageRoles=/);
+ assert.match(html,/batonPaper'\)\.textContent/);
+ assert.match(html,/personal\.test\(contact\)/);
+ assert.doesNotMatch(html,/localStorage|sessionStorage|navigator\.sendBeacon/);
+});
