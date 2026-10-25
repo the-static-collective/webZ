@@ -1,4 +1,5 @@
 import {CHIPS,EXAMPLES,validate,buildBoard,invitationText,localReceipt} from './tomorrow-machine.mjs';
+import {validPurpose} from './campfire/model.mjs';
 // All interaction remains on-device until a human explicitly uses Share, Copy or Print.
 const $=id=>document.getElementById(id);
 const controls={
@@ -193,3 +194,12 @@ $('receipt').addEventListener('click',()=>{
 });
 // Show a ready-to-use example immediately. User may edit any field and remake it.
 loadExample(EXAMPLES[0]);
+const handoff=new URLSearchParams(location.hash.startsWith('#')?location.hash.slice(1):'');
+if([...handoff.keys()].sort().join(',')==='from,q'
+  &&handoff.getAll('from').length===1&&handoff.get('from')==='campfire'
+  &&handoff.getAll('q').length===1&&validPurpose(handoff.get('q'))){
+ controls.offer.value='I can explore this question with a small, voluntary first step.';
+ controls.need.value=handoff.get('q');
+ selectedTags.clear();selectedTags.add('time');toggleState();create();
+ controls.formStatus.textContent='A public campfire question was loaded for your review. No mission has been assigned or shared.';
+}
