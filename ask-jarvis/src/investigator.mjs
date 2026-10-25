@@ -71,7 +71,7 @@ export function parseInvestigation(raw, inspectedIds) {
   return {summary,connections,firstTest,unknowns,consentCheck};
 }
 
-export async function investigate({question,kind='auto',assemble,provider}) {
+export async function investigate({question,kind='auto',assemble,provider,providerId=null}) {
   if(typeof assemble!=='function'||typeof provider!=='function')throw Error('INVESTIGATOR_NOT_CONFIGURED');
   const base=await assemble(question,undefined,{kind});
   const context=publicContext(base);
@@ -87,10 +87,12 @@ export async function investigate({question,kind='auto',assemble,provider}) {
   } catch (error) {
     // Only controlled internal codes reach logs: never prompt text or gateway credentials.
     const internalCode = typeof error?.message === 'string' && /^[A-Z0-9_]{4,50}$/.test(error.message)
-      ? error.message : 'MODEL_INTERNAL_FAILURE';
-    console.warn('[VIS-006] upstream/model HOLD:', internalCode);
+      ? error.message : error?.name==='AbortError' ? 'MODEL_TIMEOUT' : 'MODEL_INTERNAL_FAILURE';
+    const safeProvider = typeof providerId==='string' && /^[a-z0-9-]{3,36}$/.test(providerId) ? providerId : 'unidentified';
+    console.warn('[VIS-006] upstream/model HOLD:', safeProvider, internalCode);
     return {schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_UNAVAILABLE_OR_UNVERIFIED',modelInvoked:true,
-      message:'The model returned no valid reviewable investigation. No claims or actions are accepted. Use the rules-only question card.',
+      failureCode:internalCode,providerId:safeProvider,
+      message:'The selected provider did not return a valid reviewable investigation. Your source-first question card is unchanged. No other provider was called.',
       baseReceiptHash:base.receiptHash,sourceReferences:observed.map(s=>({id:s.id,document:s.document,sha256:s.sha256})),model:null};
   }
   const observation={
