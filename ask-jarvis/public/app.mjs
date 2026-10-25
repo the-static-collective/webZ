@@ -49,6 +49,7 @@ function clearReturn() {
   $('#invitation-editor').value='';$('#return-body').textContent='';
   $('#return-doors').replaceChildren();$('#encounter-gaps').replaceChildren();
   $('#triad-result').hidden=true;$('#triad-content').replaceChildren();
+  $('#northstar-panel').hidden=true;
 }
 function invalidate() {
   ++run;active?.abort();active=null;clearReturn();results.hidden=true;
@@ -73,6 +74,16 @@ function show(data) {
   $('#mode').textContent='SOURCE CHECK + LOCAL DRAFT';
   steps.replaceChildren(...data.steps.map(statusStep));
   $('#answer').textContent=data.guidance;
+  const context=data.context;
+  $('#northstar-panel').hidden=!context;
+  if(context){
+    const related=(context.workstreams||[]).map(x=>x.title).slice(0,3);
+    $('#northstar-summary').textContent=context.relation==='INDEPENDENT_QUESTION'
+      ?'The question is independent of our projects. JAR;VIS should answer it on its own terms, using appropriate sources.'
+      :'Potentially related workstreams: '+(related.join(' · ')||'None identified')+
+        '. This is editorial orientation, not evidence of an active service.';
+    $('#northstar-caution').textContent=context.caution+' · Mission revision: '+context.missionRevision;
+  }
   $('#return-label').textContent={question:'A QUESTION CARD',invitation:'AN INVITATION DRAFT',door:'A POSSIBLE DOOR',song:'OR SIMPLY A SONG',plan:'A POSSIBLE FIELD PLAN'}[returned.kind];
   $('#return-title').textContent=returned.title;$('#return-body').textContent=returned.body;
   $('#return-doors').replaceChildren(...returned.doors.map(d=>{
