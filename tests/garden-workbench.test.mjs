@@ -19,9 +19,9 @@ test('Workbench keeps local drafts separate from opt-in private submission',()=>
   assert.match(desk,/garden-ledger/);
   assert.match(desk,/reviewConsent/);
   assert.match(desk,/consentToReview:true/);
-  assert.match(desk,/status:'PENDING'/);
+  assert.match(desk,/as PENDING/);
   assert.match(desk,/withdrawKey/);
-  assert.match(desk,/graft\.entries/);
+  assert.match(desk,/g.entries/);
   assert.match(desk,/textContent/);
   assert.doesNotMatch(desk,/\blocalStorage\b/i);
 });
