@@ -14,7 +14,7 @@ const ORDER = Object.freeze({
 export const FREE_RESOURCE_CATALOG = Object.freeze([
   {id:'nvidia-trial',kind:'text',model:NVIDIA_TRIAL_MODEL,mode:'EVALUATION_ONLY',credential:'NVIDIA_API_KEY',note:'NVIDIA Build: private supervised development only; NOT public or commercial production.'},
   {id:'groq',kind:'text',model:'openai/gpt-oss-120b',mode:'FREE_PLAN_ONLY',credential:'GROQ_API_KEY',note:'Verify account remains on Groq Free; rates and daily limits can change.'},
-  {id:'gemini',kind:'text',model:'gemini-2.5-flash-lite',mode:'FREE_TIER_ONLY',credential:'GEMINI_API_KEY',note:'Free-tier prompts may be used to improve products; do not send private data.'},
+  {id:'gemini',kind:'text',model:'gemini-3.5-flash-lite',mode:'FREE_TIER_ONLY',credential:'GEMINI_API_KEY',note:'Free-tier prompts may be used to improve products; do not send private data.'},
   {id:'openrouter',kind:'text',model:'openrouter/free',mode:'FREE_MODELS_ONLY',credential:'OPENROUTER_API_KEY',note:'OpenRouter selects an available free model; prompts may go to different upstreams.'},
   {id:'cloudflare-nemotron',kind:'text',model:'@cf/nvidia/nemotron-3-120b-a12b',mode:'FREE_ALLOWANCE_METERED',credential:'CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID',note:'Workers AI consumption above free Neurons can be billable; check account hard caps.'},
   {id:'worker-ai',kind:'text',model:WORKERS_MODEL,mode:'WORKERS_BINDING',credential:'Cloudflare Worker AI binding',note:'Workers-native alternative; not deployed by this Vercel branch.'},
@@ -95,12 +95,13 @@ export function makeFreeApiProvider(id,env={},fetcher=fetch) {
         {model:'openai/gpt-oss-120b',messages,temperature:0.2,max_completion_tokens:1100,
           reasoning_effort:'low',response_format:{type:'json_object'},stream:false},fetcher);
       case 'openrouter':return boundedPost('https://openrouter.ai/api/v1/chat/completions',env.OPENROUTER_API_KEY,
-        {model:'openrouter/free',messages,max_tokens:1100,temperature:0.2,stream:false},fetcher);
+        {model:'openrouter/free',messages,max_tokens:1400,temperature:0.2,stream:false,
+          response_format:{type:'json_object'}},fetcher,{},14500);
       case 'gemini': {
         const raw=await boundedPost(
-          'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent',
+          'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent',
           null,{systemInstruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text:input}]}],
-            generationConfig:{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:1100}},
+            generationConfig:{responseMimeType:'application/json',temperature:0.2,maxOutputTokens:1400,thinkingConfig:{thinkingLevel:'minimal'}}},
           fetcher,{'x-goog-api-key':geminiKey(env)});
         const answer=raw?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('');
         if(!answer)throw Error('GEMINI_EMPTY_RESULT');
