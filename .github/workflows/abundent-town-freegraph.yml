@@ -9,6 +9,9 @@ on:
       - 'ask-jarvis/public/ignite/**'
       - 'ask-jarvis/test/field-return.test.mjs'
       - 'ask-jarvis/scripts/build-return-specimen.mjs'
+      - 'ask-jarvis/scripts/build-reviewed-return-graph.mjs'
+      - 'ask-jarvis/town/reviewed-returns/**'
+      - 'ask-jarvis/test/reviewed-returns.test.mjs'
       - '.github/workflows/abundent-town-freegraph.yml'
   workflow_dispatch:
 permissions:
@@ -36,6 +39,7 @@ jobs:
           node --test ask-jarvis/test/town.test.mjs
           node --check ask-jarvis/public/ignite/return.mjs
           node --test ask-jarvis/test/field-return.test.mjs
+          node --test ask-jarvis/test/reviewed-returns.test.mjs
           cd ask-jarvis
           node scripts/build-town-graph.mjs
           cd ../external/free-graph-owner
@@ -43,9 +47,12 @@ jobs:
           python3 scripts/fg.py digest ../../ask-jarvis/public/town/graph.json
           cd ../../ask-jarvis
           node scripts/build-return-specimen.mjs
+          node scripts/build-reviewed-return-graph.mjs
           cd ../external/free-graph-owner
           python3 scripts/fg.py validate /tmp/ignition-013-free-graph-candidate.json
           python3 scripts/fg.py digest /tmp/ignition-013-free-graph-candidate.json
+          python3 scripts/fg.py validate ../../ask-jarvis/public/town/returns-graph.json
+          python3 scripts/fg.py digest ../../ask-jarvis/public/town/returns-graph.json
           test "$(git rev-parse HEAD)" = "ec0ad8743c5faac3f3675760bbafcbcb1df846c1"
       - name: Ensure graph source excludes visitor submissions and human promotion
         run: |

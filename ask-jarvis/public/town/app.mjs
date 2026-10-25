@@ -176,3 +176,26 @@ $('withdraw-form').addEventListener('submit',event=>{
  event.preventDefault();void withdraw($('withdraw-id').value.trim(),$('withdraw-key').value.trim(),$('withdraw-status'));
 });
 void load();
+
+
+async function loadReviewedReturnIndex(){
+ const status=$('return-index-status'),list=$('return-index-list');
+ try{
+  const r=await fetch('/town/returns.json',{cache:'no-store',credentials:'omit'});
+  if(!r.ok)throw Error('RETURN_INDEX_UNAVAILABLE');
+  const d=await r.json();
+  if(d.schema!=='abundent/reviewed-returns-index-v1'||!Array.isArray(d.entries)||d.count!==d.entries.length)throw Error('RETURN_INDEX_INVALID');
+  list.replaceChildren();
+  if(d.count===0){status.textContent='No anonymous, human-reviewed field-return candidates have been published. We will not invent results.';return;}
+  status.textContent=d.count+' anonymously shared, editorially reviewed field-return candidates; none independently verified as completed work.';
+  for(const e of d.entries.slice(0,20)){
+   const li=node('li');
+   li.append(node('strong',e.optionTitle+' · '+e.reportedOutcome),node('p','PROPOSED NEXT QUESTION: '+e.proposedNextQuestion));
+   li.append(node('small','SELF-REPORTED / NOT VERIFIED / NOT A PARTNER COMMITMENT'));
+   list.append(li);
+  }
+ }catch{
+  status.textContent='Return index unavailable. No result is assumed or reconstructed from missing data.';
+ }
+}
+void loadReviewedReturnIndex();
