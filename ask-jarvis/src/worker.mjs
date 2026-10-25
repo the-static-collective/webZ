@@ -5,6 +5,7 @@ import {summarizeForQuestion} from './inquiry.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {investigate,makeWorkersProvider} from './investigator.mjs';
 import {selectRoute,ROUTES} from './free-compute.mjs';
+import {publicCommonsFor} from '../public/commons.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -79,8 +80,12 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   const found = sources.filter(s=>s.status==='INSPECTED').length;
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
+  const commons=publicCommonsFor(q);
+  const nextQuestion=commons.selected.some(x=>x.relevance==='KEYWORD_MATCH')
+    ? commons.selected[0].firstCheck : returned.nextQuestion;
   const guidance = found ? `I inspected ${found} of ${sources.length} public source documents and composed this ${returned.kind==='question'?'question card':returned.kind+' draft'}. The draft uses local rules; the documents show possible tools, not commitments.`
     : 'I could not verify a source document on this run. The draft below is locally composed from your question; no project connection is being claimed.';
+  const commonsDisclosure=' Public Commons: '+commons.selected.length+' indexed owner-curated project notes are included, but remain proposals or drafts, not evidence of participation or real-world needs.';
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
@@ -89,6 +94,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
     {name:'JAR;VIS',status:'DONE',detail:'Received one question; deterministic rules, no model or question storage.'},
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
     {name:'TABLElogic encounter',status:'DONE',detail:'Locally separated the question, draft ideas and possible relations; unresolved gaps remain open. No TABLElogic runtime invoked.'},
+    {name:'Public Commons',status:'READ',detail:'Selected '+commons.selected.length+' site-published public-safe editorial notes using local keyword matching; no AI/model call and no private Drive lookup.'},
     ...sources.map(s=>({name:s.name,status:s.status==='INSPECTED'?'READ':'HOLD',detail:s.status==='INSPECTED'?'Read the whole document at an exact source commit and hashed its bytes.':'Source unavailable; no substitute claims.'})),
     {name:'CANNON boundary',status:'HOLD',detail:'No source-owner canon selection or native CANNON validation. Main is not inferred canon.'},
     {name:'GHoT / project execution',status:'NOT_RUN',detail:'Read-only adapters do not assign tasks or run project code.'},
@@ -98,13 +104,15 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   ];
   const artifact = [
     '# ASK JAR;VIS / QUESTION CARD',`Question: ${q}`,'',returned.title,'',returned.body,'',
-    `Observation: ${guidance}`,'','Sources inspected (read-only):',
+    `Observation: ${guidance+commonsDisclosure}`,'','Public Commons proposals (not independent evidence):',
+    ...commons.selected.map(x=>'- '+x.id+' · '+x.status+' — '+x.observation+' Next check: '+x.firstCheck),'',
+    'Sources inspected (read-only):',
     ...sources.map(s=>`- ${s.name} — ${s.status} — ${s.source}${s.sha256?' ['+s.sha256+']':''}`),'',
-    `Next question: ${returned.nextQuestion}`,'',
+    `Next question: ${nextQuestion}`,'',
     'No organizer affiliation, verified human consent, remote execution, partner commitment, or fulfilled service is claimed.',
     `Generated: ${observedAt}`
   ].join('\n');
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion:returned.nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance:guidance+commonsDisclosure,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,commons};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;
