@@ -7,6 +7,7 @@ fetch. No code execution or arbitrary repositories in request input.
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 from datetime import datetime, timezone
@@ -59,7 +60,10 @@ class handler(BaseHTTPRequestHandler):
             if code!=0 or result.get("schema")!="ask-jarvis/native-owner-run/v1" or result.get("mode")!="REAL_OWNER_KERNEL_INVOCATION":
                 return self._send(503,{"schema":"ask-jarvis/native-owner-run/v1","status":"HOLD","reason":"NATIVE_KERNEL_REFUSED"})
             return self._send(200,result)
-        except Exception:
-            # Never leak private server file paths, credentials, host state
-            # or unreviewed native stderr through a public endpoint.
+        except Exception as error:
+            # Only a bounded error class or uppercase programmatic reason gets
+            # logged. No environment values, URLs, paths or native stderr.
+            detail=str(error)
+            reason=detail if re.fullmatch(r"[A-Z0-9_]{4,60}",detail) else "INTERNAL_EXCEPTION"
+            logging.warning("[NATIVE-009] HOLD: %s %s",type(error).__name__,reason)
             return self._send(503,{"schema":"ask-jarvis/native-owner-run/v1","status":"HOLD","reason":"NATIVE_RUNTIME_UNAVAILABLE"})
