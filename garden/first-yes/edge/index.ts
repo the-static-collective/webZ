@@ -30,7 +30,7 @@ function validSubmit(b){
 function validWithdraw(b){return b.action==='withdraw'&&typeof b.id==='string'&&UUID.test(b.id)&&typeof b.withdrawKey==='string'&&TOKEN.test(b.withdrawKey);}
 async function ledgerProxy(payload,req){
  const ip=(req.headers.get('cf-connecting-ip')||req.headers.get('x-real-ip')||req.headers.get('x-forwarded-for')?.split(',')[0]||'').trim().slice(0,64);
- const headers={'content-type':'application/json','origin':'https://garden.abundent.org'};
+ const headers: Record<string,string>={'content-type':'application/json','origin':'https://garden.abundent.org'};
  if(ip&&/^[0-9a-fA-F.:]{3,64}$/.test(ip))headers['x-real-ip']=ip;
  const res=await fetch(LEDGER,{method:'POST',headers,body:JSON.stringify(payload),signal:AbortSignal.timeout(6000),cache:'no-store'});
  const body=await res.text();if(body.length>3000)throw Error('UPSTREAM_RESPONSE_TOO_LARGE');
