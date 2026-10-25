@@ -24,6 +24,7 @@ test('direct NVIDIA trial uses only fixed endpoint and does not leak key in body
  const b=JSON.parse(requests[0].options.body);
  assert.equal(b.model,NVIDIA_TRIAL_MODEL);
  assert.equal(b.stream,false);
+ assert.deepEqual(b.chat_template_kwargs,{enable_thinking:false});
  assert.ok(b.max_tokens<=900);
  assert.ok(!JSON.stringify(b).includes('nvapi-'));
  assert.equal(requests[0].options.headers.authorization,'Bearer nvapi-mock-test-key-123456789');
