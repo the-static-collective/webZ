@@ -6,7 +6,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
-const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
+const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind'),triadToggle=$('#triad-opt-in');
 let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null;
 
 function el(tag,cls,value) {
@@ -40,6 +40,7 @@ function clearReturn() {
   $('#handoff-status').textContent='Do not include names, phone numbers or private details. The question appears in the shared URL.';
   $('#invitation-editor').value='';$('#return-body').textContent='';
   $('#return-doors').replaceChildren();$('#encounter-gaps').replaceChildren();
+  $('#triad-result').hidden=true;$('#triad-content').replaceChildren();
 }
 function invalidate() {
   ++run;active?.abort();active=null;clearReturn();results.hidden=true;
@@ -84,6 +85,29 @@ function show(data) {
     if(s.sha256)li.append(el('small','',s.sha256));
     return li;
   }));
+  if(data.triad) {
+    const t=data.triad,content=$('#triad-content');
+    const alex=el('section','triad-slice');
+    alex.append(el('h4','','ALEX · What can this source actually witness?'),
+      el('p','',t.alex.warning));
+    const aList=el('ul');
+    for(const f of t.alex.formation) aList.append(el('li','',f.id+' / '+f.status+' / '+(f.excerptLocus||'No verified excerpt locus')+' / '+(f.sha256||'NO BYTE WITNESS')));
+    alex.append(aList);
+    const rdi=el('section','triad-slice');
+    rdi.append(el('h4','','3rdi · What was visible at this cut?'),
+      el('p','',t.rdi.cut.observer+' · observed '+t.rdi.cut.observedAt+' · historical occurrence UNKNOWN'),
+      el('p','',t.rdi.warning));
+    const rList=el('ul');
+    for(const p of t.rdi.projections) rList.append(el('li','',p.id+' / '+p.availability+' / '+p.relation));
+    rdi.append(rList);
+    const load=el('section','triad-slice');
+    load.append(el('h4','','LOADOUT · What stayed asleep?'),
+      el('p','',t.loadout.stage+' · native binding NOT RUN'),
+      el('p','',t.loadout.warning),
+      el('p','', 'Permitted: '+t.loadout.permitted.join(' · ')),
+      el('p','', 'Fenced: '+t.loadout.fenced.join(' · ')));
+    content.replaceChildren(alex,rdi,load);$('#triad-result').hidden=false;
+  }
   $('#next-question').textContent=data.nextQuestion;
   $('#hash').textContent='Return receipt: '+data.receiptHash;
   $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
@@ -93,6 +117,7 @@ function show(data) {
 
 input.addEventListener('input',()=>{input.setCustomValidity('');$('#received-note').hidden=true;invalidate();});
 kind.addEventListener('change',invalidate);
+triadToggle.addEventListener('change',invalidate);
 $('#invitation-editor').addEventListener('input',()=>{
   $('#draft-status').textContent='Edited unsigned draft · saved separately from the original receipt.';
 });
@@ -117,7 +142,7 @@ async function askVis() {
     const response=await fetch('/api/investigate',{
       method:'POST',cache:'no-store',credentials:'same-origin',
       headers:{'content-type':'application/json',accept:'application/json'},
-      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+      body:JSON.stringify({question:last.question,kind:last.return.kind,lens:last.triad?'triad':'standard'}),signal:controller.signal
     });
     const data=await response.json();
     if(visActive!==controller)return;
@@ -239,7 +264,7 @@ window.addEventListener('pagehide',()=>{invalidate();});
 
 form.addEventListener('submit',async event=>{
   event.preventDefault();
-  const question=input.value, chosen=kind.value;
+  const question=input.value, chosen=kind.value, chosenLens=triadToggle.checked?'triad':'standard';
   if(question.trim().length<8||question.length>360) {
     input.setCustomValidity('Please use 8–360 characters.');input.reportValidity();return;
   }
@@ -251,7 +276,7 @@ form.addEventListener('submit',async event=>{
   steps.replaceChildren(statusStep({name:'JAR;VIS',status:'PREPARED',detail:'Checking fixed source documents and composing your return…'}));
   results.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   try {
-    const response=await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({question,kind:chosen}),cache:'no-store',credentials:'same-origin',signal:controller.signal});
+    const response=await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({question,kind:chosen,lens:chosenLens}),cache:'no-store',credentials:'same-origin',signal:controller.signal});
     let data;try{data=await response.json();}catch{throw Error('The question engine could not return a readable result. Please try again.');}
     if(!response.ok)throw Error(data.error||'The machine declined this input.');
     if(data.encounter?.signal!==question||!await verifyReturn(data))throw Error('The return receipt did not verify. No artifact is being claimed.');
