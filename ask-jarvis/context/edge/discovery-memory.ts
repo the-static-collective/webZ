@@ -38,7 +38,7 @@ async function submit(req){
  let b;try{b=JSON.parse(raw);}catch{fail('INVALID_JSON');}
  if(!b||typeof b!=='object'||Array.isArray(b)||
   Object.keys(b).sort().join('|')!=='description|provider|relatedSeed|title|url')fail('INVALID_SHAPE');
- if(!['WIKIPEDIA','BRAVE'].includes(b.provider)||!typeof b.relatedSeed==='string')fail('INVALID_PROVIDER');
+ if(!['WIKIPEDIA','BRAVE'].includes(b.provider)||typeof b.relatedSeed!=='string')fail('INVALID_PROVIDER');
  const title=clean(b.title,120),description=clean(b.description,350);
  if(personal.test(title+' '+description))fail('PRIVATE_DETAILS_REFUSED');
  const relatedSeed=typeof b.relatedSeed==='string'&&/^[a-z0-9-]{0,35}$/.test(b.relatedSeed)?b.relatedSeed:'';
