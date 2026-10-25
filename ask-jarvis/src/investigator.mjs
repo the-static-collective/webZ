@@ -79,7 +79,11 @@ export async function investigate({question,kind='auto',assemble,provider}) {
   try {
     const raw=await provider({system:SYSTEM,input:JSON.stringify(context)});
     result=parseInvestigation(raw,observed.map(s=>s.id));
-  } catch {
+  } catch (error) {
+    // Only controlled internal codes reach logs: never prompt text or gateway credentials.
+    const internalCode = typeof error?.message === 'string' && /^[A-Z0-9_]{4,50}$/.test(error.message)
+      ? error.message : 'MODEL_INTERNAL_FAILURE';
+    console.warn('[VIS-006] upstream/model HOLD:', internalCode);
     return {schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_UNAVAILABLE_OR_UNVERIFIED',modelInvoked:true,
       message:'The model returned no valid reviewable investigation. No claims or actions are accepted. Use the rules-only question card.',
       baseReceiptHash:base.receiptHash,sourceReferences:observed.map(s=>({id:s.id,document:s.document,sha256:s.sha256})),model:null};
@@ -108,7 +112,7 @@ export function makeGatewayProvider({token,fetcher=fetch,model=GATEWAY_MODEL}={}
         body:JSON.stringify({model,messages:[{role:'system',content:system},{role:'user',content:input}],
           response_format:{type:'json_object'},temperature:0.3,max_tokens:900,stream:false})
       });
-      if(!response.ok)throw Error('GATEWAY_REJECTED');
+      if(!response.ok)throw Error('GATEWAY_HTTP_'+response.status);
       const contentLength=Number(response.headers.get('content-length'));
       if(contentLength>12000)throw Error('GATEWAY_RESPONSE_TOO_LARGE');
       const raw=await response.text();
