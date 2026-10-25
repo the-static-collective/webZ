@@ -11,12 +11,12 @@ JAR (the provenance librarian) runs exactly as before. VIS adds an independently
 | auto | NVIDIA Build trial Nemotron | Cloudflare Nemotron, Groq, Gemini, OpenRouter, Workers binding |
 | nemotron | Cloudflare Workers AI REST Nemotron 3 Super | NVIDIA Build trial |
 | fast | Groq GPT-OSS-120B | Workers binding, Gemini, OpenRouter |
-| reason | Gemini 2.5 Flash-Lite | Cloudflare Nemotron, Groq, OpenRouter |
+| reason | Gemini 3.5 Flash-Lite | Cloudflare Nemotron, Groq, OpenRouter |
 | explore | OpenRouter openrouter/free | Gemini, Groq, Workers binding |
 
 **Only one model is selected per click.** The router never retries or switches provider after HTTP 429/500, a timeout or invalid model result. The separate, rules-only card stays available; the model result becomes HOLD. No automatic paid model, alternate endpoint, user-entered URL, tool call, remote action, or stored prompt is authorized.
 
-Current implementations: **NVIDIA Build developer trial**, **Groq Free GPT-OSS-120B**, **Google Gemini free-tier Flash-Lite**, **OpenRouter free-model router**, **Cloudflare Workers AI Nemotron via REST**, and the existing **Cloudflare Worker AI binding**. The free-resource manifest describes Modal's monthly free compute as **PLANNED**, not a running GPU service. Vercel AI Gateway remains in the original VIS-006 evaluation adapter, not silently part of the free router.
+Current implementations: **NVIDIA Build developer trial**, **Groq Free GPT-OSS-120B**, **Google Gemini free-tier 3.5 Flash-Lite**, **OpenRouter free-model router**, **Cloudflare Workers AI Nemotron via REST**, and the existing **Cloudflare Worker AI binding**. The free-resource manifest describes Modal's monthly free compute as **PLANNED**, not a running GPU service. Vercel AI Gateway remains in the original VIS-006 evaluation adapter, not silently part of the free router.
 
 These are tested source connectors, **not claims of authenticated real API calls or zero cost**. Per-provider quotas, availability, free-plan terms, retention policy and commercial use can change. A configured key is NOT proof that the connected account cannot be billed.
 
@@ -62,3 +62,15 @@ Use **ordinary JAR question cards on the public site**; no logins, secret keys, 
 **Completion gates:** run `npm test` in `ask-jarvis`, inspect preview build, run a protected browser smoke on a synthetic question for each configured provider, verify failed/429/offline requests HOLD with zero cross-provider retries, record the tested commit and budget counters, then decide separately about production-grade providers.
 
 **Integrity > Continuity. SOURCE ≠ CONSENT. MODEL PROPOSAL ≠ ACTION. FREE TIER ≠ ZERO-BILLING GUARANTEE.**
+
+## 2026-10-25 protected live-smoke findings and repair
+
+A human operator verified a real Groq GPT-OSS model-generated, source-referenced response on the protected preview. Their Gemini/OpenRouter attempts did not produce a proposal. Sanitized function logs from that preview showed two `FREE_PROVIDER_HTTP_404` failures and one `MODEL_INTERNAL_FAILURE`; those earlier log lines did **not** identify the failed provider, so do not assert which upstream produced which error.
+
+Repairs committed on this feature branch:
+- Replace `gemini-2.5-flash-lite` with `gemini-3.5-flash-lite`. Google's current model registry restricts 2.5 to previously active accounts. The 3.5 Flash-Lite tier is documented with free standard usage, but the particular API account still requires a live test.
+- Request structured JSON output for `openrouter/free` and allow a longer bounded single request. That router dynamically picks a free upstream and is not guaranteed to return on every run.
+- Attribute provider-specific, **sanitized** failure codes to HOLD responses and show them in the protected UI. Never expose upstream bodies, tokens, credential values, private messages or stack traces. Do not perform cross-provider retries.
+- Browser waits up to 23 seconds for a protected VIS invocation. A timeout is still HOLD.
+
+**Verification required:** independently run REASON and EXPLORE using synthetic public questions on this exact updated preview, record whether a proposal (and valid receipt) or an attributable HOLD occurred. Unit tests and READY deployment prove source/build health, **not** that external providers accepted the user's keys or quotas.
