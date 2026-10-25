@@ -134,6 +134,9 @@ async function refresh(){
   finally{byId('ledgerRefresh').disabled=false;}
 }
 byId('ledgerRefresh').addEventListener('click',refresh);
+// Shared record updates while a visitor keeps the workbench open, without tracking visitors.
+setInterval(()=>{if(document.visibilityState==='visible')refresh();},300000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});
 let privateReceipt=null;
 byId('submitLedger').addEventListener('click',async ()=>{
  const btn=byId('submitLedger'),out=byId('ledgerSubmitMessage');
