@@ -13,7 +13,10 @@ export function evidenceBody(data) {
     steps:data.steps, guidance:data.guidance, nextQuestion:data.nextQuestion,
     artifact:data.artifact, workbenchRequest:data.workbenchRequest,
     ...(data.context?{context:data.context}:{}),
-    ...(data.triad?{triad:data.triad}:{})
+    ...(data.triad?{triad:data.triad}:{}),
+    ...(data.commons?{commons:data.commons}:{}),
+    ...(data.graft?{graft:data.graft}:{}),
+    ...(data.synthesis?{synthesis:data.synthesis}:{})
   };
 }
 
@@ -47,4 +50,47 @@ export function matchesInvestigationSources(base,proposal) {
     return earlier&&earlier.sha256===s.sha256&&earlier.commit===s.commit
       &&earlier.document===s.document&&earlier.status==='INSPECTED';
   });
+}
+
+export async function verifyCouncil(value) {
+  try {
+    if(value?.schema!=='ask-jarvis/council-v1'||value.status!=='COUNCIL_PROPOSAL'
+      ||value.authority!=='NONE'||value.modelCalls!==2||value.missingIngredientStatus!=='UNVERIFIED_HYPOTHESIS'
+      ||!['HOLD','HUMAN_DRAFT_REVIEW_ONLY'].includes(value.pressureVerdict)
+      ||!value.scout?.missingIngredient||!value.critic?.verdict
+      ||!Array.isArray(value.sourceReferences)||!value.receiptHash)return false;
+    const ids=new Set(value.sourceReferences.map(s=>s.id));
+    if(ids.size!==value.sourceReferences.length
+      ||value.scout.sourceIds.some(id=>!ids.has(id))
+      ||value.critic.sourceIds.some(id=>!ids.has(id)))return false;
+    const {receiptHash,...body}=value;
+    return await sha256(JSON.stringify(body))===receiptHash;
+  }catch{return false;}
+}
+export function matchesCouncilSources(base,council) {
+  if(base?.schema!=='ask-jarvis/return-v0'||council?.schema!=='ask-jarvis/council-v1'
+    ||base.question!==council.question||!Array.isArray(base.sources)
+    ||!Array.isArray(council.sourceReferences))return false;
+  const inspected=new Map(base.sources.filter(s=>s.status==='INSPECTED').map(s=>[s.id,s]));
+  const declared=new Map(council.sourceReferences.map(s=>[s.id,s]));
+  const local=base.sources.filter(s=>s.status==='INSPECTED');
+  if(local.length===0)return false;
+  for(const item of local){
+    const actual=declared.get(item.id);
+    if(!actual||actual.sha256!==item.sha256||actual.commit!==item.commit
+      ||actual.document!==item.document)return false;
+  }
+  const extraPins={
+    alex:'7d116b716df82ee2379b399d90936d2fc01b7b16',
+    '3rdi':'e631167a04c6bd1bf95c62cbe5a415994ebb8134',
+    loadout:'1adcb3d82f736f3ca8329c3c1d0d9eba398d49ee'
+  };
+  for(const ref of council.sourceReferences){
+    if(inspected.has(ref.id))continue;
+    const commit=extraPins[ref.id];
+    if(!commit||ref.commit!==commit||!ref.sha256
+      ||ref.document!=='https://github.com/the-static-collective/'+
+      ({alex:'ALEX.2','3rdi':'3rdi',loadout:'LOADOUT'}[ref.id])+'/blob/'+commit+'/README.md')return false;
+  }
+  return true;
 }
