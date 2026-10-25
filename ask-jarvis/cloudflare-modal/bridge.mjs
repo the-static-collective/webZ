@@ -20,7 +20,7 @@ export function publicQuestion(input){
  return typeof input==='string'&&input.trim()===input&&input.length>=8&&input.length<=360
    &&!/[\u0000-\u001f\u007f]/.test(input)&&!publicData.test(input);
 }
-export async function quotaForWorker(req,env,kind,fetcher=fetch,now=Date.now()){
+export async function quotaForWorker(req,env,kind,fetcher=fetch,now=Date.now){
  if(!['source','ai'].includes(kind))return {ok:false,reason:'INVALID_LANE'};
  if(typeof env.JARVIS_RATE_HASH_SECRET!=='string'||env.JARVIS_RATE_HASH_SECRET.length<32)
   return {ok:false,reason:'QUOTA_SECRET_MISSING'};
