@@ -17,6 +17,9 @@ const SYSTEM = [
   'Never say an action was executed, promised, booked, sent, or accepted. Human owners must approve real-world changes.',
   'Produce ONLY a JSON object containing: summary (string), connections (array of 1 to 3 objects with idea string and sourceIds array), firstTest (string), unknowns (array of 1 to 5 strings), consentCheck (string).',
   'sourceIds MUST be drawn only from the provided observed source ids. Leave empty when a proposal is reasoning, not supported by a particular inspected source.',
+  'Never suggest that a park or public venue needs no permit without citing an authoritative source, and never invite participants before checking with the steward.',
+  'The firstTest MUST be a bounded draft review with one willing organizer or site steward, before inviting the public or doing fieldwork. Never prescribe hazardous waste handling, personal information collection, or unapproved service delivery.',
+  'Reference a sourceIds entry only if that specific inspected excerpt actually supports the idea, not because a document was inspected or its title seems relevant. Unsupported hypotheses must cite no source IDs.',
   'Make the first test possible with one willing steward and limited resources; be clear about unresolved facts.'
 ].join(' ');
 
