@@ -28,6 +28,10 @@ Vercel AI Gateway (`nvidia/nemotron-3.5-lightning-free`, protected trials only) 
 
 An explicit VIS provider route selector can choose one verified, configured **server-side** free-tier/evaluation connector per click: NVIDIA Build Nemotron, Groq GPT-OSS, Gemini Flash-Lite, OpenRouter free router, Cloudflare Workers AI Nemotron REST, or the Cloudflare Workers binding. **No automatic retry, billable model fallback, customer data, or model-driven execution.** Credentials and provider allow flags are required, and the new switchboard remains completely disabled outside protected Vercel Preview. Modal cloud compute is in the capability catalog as planned, not running. Exact release boundaries and test requirements: [FREE-COMPUTE-007](FREE-COMPUTE-007.md).
 
+## FIELD-WITNESS-009 — operator-selected ecosystem context
+
+Optional local-only JSON import for the real grocery / mutual aid / Coalition / church-music / Road / festival **planning corpus**. The operator retains a private Google Drive source register of fifteen selected document observations. No Drive URLs or private source text are in this repo. JAR's protected council sees selected, explicitly unverified document summaries only after a second informed click; a hash lets the client verify which local pack was supplied. Not continuous Drive sync or weight training. See [FIELD-WITNESS-009](FIELD-WITNESS-009.md).
+
 ## COUNCIL-008 — find the missing ingredient (protected preview only)
 
 A separately opt-in, two-model council receives a bounded question and inspected public source excerpts. Groq identifies the smallest missing ingredient, Gemini pressure-tests its evidence and consent boundaries, and JAR preserves disagreements, source identities and unsigned receipts. READMEs from ALEX.2, 3rdi and LOADOUT are read at fixed exact commits but **the three native tools are not executed**. Nothing can be dispatched or contacted; max two free-plan model calls by explicit click. See [COUNCIL-008](COUNCIL-008.md). Production is unaffected.
