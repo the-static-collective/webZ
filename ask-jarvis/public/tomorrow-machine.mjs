@@ -51,7 +51,7 @@ const TRACKS=[
  {id:'produce',title:'The Tomato Relay',eyebrow:'FOOD × PEOPLE × PAPER',tags:['produce','print','hands','transport'],bonus:15,
   why:'Check whether one small, safe produce handoff is actually wanted.',
   action:'Write down what is available, when it must be used, and what you cannot safely offer.',
-  check:'Offer an open Food Bridge Starter role: you or another interested person can draft the first question. Ask a qualified, authorized food-safety reviewer before any physical handoff.',
+  check:'Offer an open Food Bridge Starter steward role: you or another interested person can draft the first question. Ask a qualified, authorized food-safety reviewer before any physical handoff.',
   return:'One person agrees to review or declines; neither answer is a commitment to distribute food.',
   invite:'I have a little time and possibly useful produce. Would you review one tiny food-sharing idea? No commitment is assumed.',
   caution:'Food safety, storage, liability, transport and recipient privacy must be reviewed by qualified and authorized people. Exploring a role does not authorize distribution.'},
