@@ -8,7 +8,9 @@ export const SITE = String.raw`<!doctype html><html lang="en"><head><meta charse
 <header><div class="wrap"><nav><strong>THE GARDEN · SEVEN-DAY TABLE</strong><div><a href="https://garden.abundent.org/">Garden atlas ↗</a> &nbsp; <a href="https://garden.abundent.org/signal">The Garden Signal ↗</a></div></nav>
 <div class="eyebrow" style="padding-top:40px">Waseca × Greater Mankato · an independent invitation</div><h1>One table.<br><em>Seven days.</em><br>Many hands.</h1>
 <p class="hero">You don't have to be free for the same meeting to help make something happen. Bring one useful question or contribution, invite up to two other voices, or send an ambassador in your place.</p>
-<p class="hero"><strong>One week to turn existing goodwill into one concrete next step.</strong></p><p class="print">garden.abundent.org/seven</p>
+<p class="hero"><strong>One week to turn existing goodwill into one concrete next step.</strong></p>
+<div class="buttons"><a class="btn gold" id="playCase" href="?case=milk">Play the Vanishing Carton mystery</a><a class="btn outline" href="#circle">See the real-world question</a></div>
+<p class="small" style="color:#dce9d9">A silly fictional mystery, then an optional invitation to test a real sourcing question. No game response is shared or submitted.</p><p class="print">garden.abundent.org/seven</p>
 </div></header>
 <div class="wrap"><aside class="guard"><strong>Independent working experiment, not an official committee.</strong> This invitation is organized through Static Collective / Abundent. It does not imply participation, endorsement, or representation by the Waseca food co-op, Coalition of Care, SMIF, MSU Mankato, any food shelf, producer, or other organization. Each person and institution decides for itself.</aside></div>
 <main><section class="section" id="vision"><div class="wrap"><div class="tag">An invitation that respects people's time</div><h2>There is no single hour to miss.</h2><p class="lead">The working table remains open asynchronously for seven days. People contribute when they can. A live conversation can be arranged if a shared window emerges, but missing a call doesn't remove anyone's voice.</p>
@@ -28,7 +30,7 @@ We're trying to turn existing goodwill into one small practical result. This is 
 Your private invitation link will go here.</div>
 <div class="buttons"><button id="copySample" class="btn">Copy invitation wording</button><button id="printPage" class="btn">Print overview</button></div><p class="small">Invitation links are private bearer passes. Share only with the intended recipient, never post the complete pass publicly. This page never sends email or messages for you.</p></div></section>
 <section id="hostUI" class="section soft hide" hidden><div class="wrap"><div class="tag">Host desk · private link</div><h2>Set the places. Keep the table open.</h2><p id="hostMeta" class="lead"></p>
-<div class="split"><div><div class="panel"><h3>Prepare a personal invitation</h3><label class="label" for="lens">What perspective are you hoping they bring?</label><select id="lens"><option>Community ownership and regional investment</option><option>Cooperative economics and membership</option><option>Coalition connections and local coordination</option><option>Facilitation and collaborative practice</option><option>Campus technology and volunteering</option><option>Food systems, producers, and environmental stewardship</option><option>Community economics and practical research</option><option>Another community perspective</option></select>
+<div class="split"><div><div class="panel"><h3>Prepare a personal invitation</h3><p class="small">Optional CASE 002 path: invitations can start with the fictional Vanishing Carton mystery and return here carrying only an editable, public-safe Milk Bridge question. Use the game-specific copy button after creating an invitation.</p><label class="label" for="lens">What perspective are you hoping they bring?</label><select id="lens"><option>Community ownership and regional investment</option><option>Cooperative economics and membership</option><option>Coalition connections and local coordination</option><option>Facilitation and collaborative practice</option><option>Campus technology and volunteering</option><option>Food systems, producers, and environmental stewardship</option><option>Community economics and practical research</option><option>Another community perspective</option></select>
 <p class="small">Up to eight original places. This lens is a topic, not a declaration that a particular person or organization has joined.</p><button class="btn gold" id="addSeed">Create one personal invitation</button><div class="status" id="hostStatus" role="status"></div>
 <div id="hostFresh"></div></div></div>
 <aside><div class="panel"><h3>The seven-day pulse</h3><p id="counts">Reading the private table...</p><p class="small" id="timeWeave">Any shared time preferences will appear here. An asynchronous contribution always counts.</p><button class="btn" id="reloadHost">Refresh</button><button class="btn outline" id="copySummary">Copy host summary</button><button class="btn outline" id="closeTable">Close table early</button></div></aside></div>
@@ -66,6 +68,8 @@ const p=new URLSearchParams(location.hash.slice(1)),roomId=p.get('r'),hostKey=p.
 const base=()=>({roomId,key:asHost?hostKey:seatKey,...(!asHost?{seatId}:{})});
 const inviteLink=(s,k)=>'https://garden.abundent.org/seven#r='+encodeURIComponent(roomId)+'&s='+encodeURIComponent(s)+'&k='+encodeURIComponent(k);
 const makeText=(link)=>$('sample').textContent.replace('Your private invitation link will go here.',link);
+const caseURL=link=>{const u=new URL(link);u.searchParams.set('case','milk');return u.toString();};
+$('playCase').href=caseURL(location.href);
 let room=null,all=[],self=null,last=null,cardText='';
 async function api(action,data={}){const response=await fetch(location.pathname,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...base(),action,...data})});let v;try{v=await response.json();}catch{throw Error('Unexpected server response');}if(!response.ok)throw Error(v.error||'Unable to complete');return v;}
 async function copy(t,target){try{await navigator.clipboard.writeText(t);$(target).textContent='Copied to clipboard.';}catch{$(target).textContent='Clipboard unavailable. Select and copy the text manually.';}}
@@ -74,6 +78,8 @@ $('printPage').onclick=()=>window.print();
 function newly(r,target){const url=inviteLink(r.seat.id,r.inviteKey);
 const box=document.createElement('div');box.className='invite';const link=document.createElement('code');link.textContent=url;box.append(link);
 const b=document.createElement('button');b.className='btn gold';b.textContent='Copy invitation with this private link';b.onclick=()=>copy(makeText(url)+(r.seat.lens&&r.seat.type==='primary'?'\n\nA perspective I especially hope you could bring: '+r.seat.lens+'.':''),target);box.append(b);
+const gameButton=document.createElement('button');gameButton.className='btn';gameButton.textContent='Copy mystery-first invitation';gameButton.onclick=()=>copy("Want to solve a ridiculous missing-carton mystery before asking one genuinely useful Waseca food-sourcing question? The fictional game is optional. The seven-day working table is independently organized and no institution is claimed as a participant. You may respond, pass, invite two more people if your seat permits, or nominate a willing ambassador. Nothing is sent automatically.\n\nYour private invitation to the case:\n"+caseURL(url),target);
+box.append(gameButton);
 const s=document.createElement('p');s.className='small';s.textContent='Copy now. The private pass is shown only when created; the database stores only its hash. Sending the link is your choice.';box.append(s);$(target==='hostStatus'?'hostFresh':'seatFresh').prepend(box);
 }
 function date(t){try{return new Intl.DateTimeFormat('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Chicago'}).format(new Date(t))+' CT';}catch{return t;}}
@@ -85,6 +91,7 @@ const windows=['morning','afternoon','evening','weekend'].map(w=>({w,count:avail
 const asynchronous=available.filter(x=>x.availability==='async'||x.availability==='unavailable').length;
 $('timeWeave').textContent=windows.length?'Time preferences (not calendar commitments): '+windows.map(x=>x.w+': '+x.count).join(' · ')+'. '+asynchronous+' prefer written/asynchronous participation. Invitees need not overlap in person.':'No shared live time preferences yet. '+asynchronous+' contributors prefer written/asynchronous participation. No common meeting hour is required.';
 renderSourceChoices();
+if(p.get('focus')==='milk-bridge'&&!$('artifact').value.trim()){ $('actionSource').value='hyp-milk'; $('loadStarter').click(); $('cardStatus').textContent='Milk Bridge starter loaded as an editable private draft. Nothing has been sent, approved or assigned.'; }
 $('addSeed').disabled=room.closed||ps.length>=8;$('hostSeats').innerHTML=all.length?all.map((x,i)=>'<div class="roles"><span class="pill">'+esc(x.type.toUpperCase())+'</span> <strong>Seat '+(i+1)+' · '+esc(x.lens)+'</strong><p class="small">State: '+esc(x.status)+' · '+(x.availability?'Availability: '+esc(x.availability):'No window shared')+' · '+(x.share?'Opted in to invited-circle sharing':'Not shared to other guests')+'</p><p>'+esc(x.response||'No contribution recorded yet.')+'</p></div>').join(''):'<p>No invitations have been created yet.</p>';
 }
 function renderSourceChoices(){
@@ -120,7 +127,8 @@ $('cardOutput').textContent=cardText;$('cardOutput').hidden=false;$('cardStatus'
 $('makeCard').onclick=buildCard;
 $('copyCard').onclick=()=>cardText?copy(cardText,'cardStatus'):($('cardStatus').textContent='Compose a card first.');
 function seatUI(v){self=v.seat;room=v.room;$('seatMeta').textContent='Invitation: '+self.lens+'. Table open until '+date(room.closesAt)+'. Seat status: '+self.status+'. Participation is optional.';
-$('response').value=self.response||'';$('availability').value=self.availability||'async';$('shared').checked=!!self.share;
+$('response').value=self.response||'';
+if(!self.response&&p.get('focus')==='milk-bridge'){$('response').value='Would an authorized food-shelf purchaser welcome a one-page comparison of the current milk supply arrangement and one eligible alternative, with program and price unknowns explicit?';$('seatStatus').textContent='Case 002 question prepared as an editable draft. Review it, then choose separately whether to save your contribution.';}$('availability').value=self.availability||'async';$('shared').checked=!!self.share;
 $('refCount').textContent=(v.referralsUsed||0)+' of 2 additional invitations prepared.';
 const primary=self.type==='primary',active=!room.closed&&self.status!=='delegated'&&self.status!=='declined';
 $('addReferral').disabled=!primary||!active||v.referralsUsed>=2;$('addAmbassador').disabled=!primary||!active||v.ambassadorInvited;$('reclaim').hidden=!(primary&&self.status==='delegated'&&v.ambassadorStatus==='invited');
