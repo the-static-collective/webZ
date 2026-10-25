@@ -3,6 +3,7 @@ import {CAPABILITIES, selectSources, sourceUrl} from './registry.mjs';
 import {formEncounter, composeReturn} from './encounter.mjs';
 import {summarizeForQuestion} from './inquiry.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
+import {investigate,makeWorkersProvider} from './investigator.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -117,7 +118,20 @@ export function inputError(error) {
 export default {
   async fetch(request,env) {
     const url=new URL(request.url);
-    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-005',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-006',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/investigate') {
+      if(request.method!=='POST')return response({error:'METHOD_NOT_ALLOWED'},405);
+      if(env?.JARVIS_AI_ENABLED!=='1'||typeof env?.AI?.run!=='function')return response({
+        schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_NOT_ENABLED',
+        message:'VIS model investigation is not enabled. The rules-only question machine still works.'
+      },503);
+      let obj;
+      try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
+      catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
+      if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
+      try{return response(await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider:makeWorkersProvider(env.AI)}));}
+      catch(e){return response({error:inputError(e)},422);}
+    }
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;
