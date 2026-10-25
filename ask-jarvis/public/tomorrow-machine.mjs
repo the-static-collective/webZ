@@ -158,11 +158,13 @@ export function printableHtml(board,mission){
  '<h2>Return path</h2><p>What actually happened? _____________________________________</p>'+
  '<p>Next check-in (only if agreed): ____________________________________</p><footer>Created locally in a browser. No event, real-world action, contact, approval or verified service has occurred. People decide what happens next.</footer></body></html>';
 }
-export function localReceipt(board,mission,completed=[]){
+export function localReceipt(board,mission,completed=[],outcome='NOT_ATTEMPTED'){
+ const state=['NOT_ATTEMPTED','ASKED_WAITING','DECLINED','REVIEWED','PERMITTED','TESTED_WITH_PERMISSION'].includes(outcome)?outcome:'NOT_ATTEMPTED';
  return {schema:'jarvis/local-mission-receipt-v1',savedAt:new Date().toISOString(),
   status:'SELF_REPORTED_NOT_VERIFIED',storage:'DOWNLOAD_ONLY',
   mission:{id:mission.id,title:mission.title},offer:board.offer,need:board.need,
   completed:mission.steps.filter(s=>completed.includes(s.id)).map(s=>s.id),
+  selfReportedOutcome:state,
   humanGate:'No effect or partner claim without permission.',
   notEvidenceOf:['contact','consent','event','delivery','verified_outcome']};
 }
