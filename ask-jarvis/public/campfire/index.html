@@ -58,6 +58,8 @@ footer{margin-top:2rem;border-top:2px solid #557064;padding-top:1.2rem;color:#c4
 @media(max-width:810px){.intro{grid-template-columns:1fr}.scene{width:220px}.fire-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.fire-grid,.choices,.links,.toolrow{grid-template-columns:1fr}.choice{min-height:auto}.fire{min-height:150px}main{padding:.8rem .85rem 3rem}h1{font-size:clamp(3rem,13vw,5rem)}header.top span{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.print-only{display:none}
+@media print{.top,.intro,.truth,.panel,main footer{display:none!important}.print-only{display:block!important;color:black!important;background:white!important}body{background:white!important}}
 </style></head>
 <body><header class="top"><a href="/">← ASK JAR;VIS</a><span>THE STATIC COLLECTIVE PRESENTS</span><a href="/tomorrow.html">THE TOMORROW MACHINE ↗</a></header>
 <main><section class="intro" aria-labelledby="hero-heading"><div><span class="kicker">CAMPFIRE-022 · AN EXPERIMENT IN EMERGENT LEADERSHIP</span>
