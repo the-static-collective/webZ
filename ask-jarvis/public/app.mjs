@@ -1,4 +1,4 @@
-import {verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
+import {verifyReturn,verifyInvestigation,matchesInvestigationSources,verifyCouncil,matchesCouncilSources} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
@@ -6,7 +6,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
-let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, councilActive=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -28,6 +28,9 @@ function cleanAudio() {
 }
 function clearReturn() {
   visActive?.abort();visActive=null;
+  councilActive?.abort();councilActive=null;
+  $('#council-result').textContent='The source-first question card works independently. Council is disabled on production.';
+  $('#council-investigate').disabled=false;
   $('#vis-result').textContent='Model investigation is optional and may be unavailable. The original question card works without it.';
   $('#vis-investigate').disabled=false;
   last=null;reply.hidden=true;cleanAudio();
@@ -48,7 +51,7 @@ function download(name,body,type='text/plain;charset=utf-8') {
 }
 function sourceLink(label,url) {
   const a=el('a','',label);
-  if(/^https:\/\/(?:raw\.githubusercontent\.com|github\.com)\/the-static-collective\/[A-Za-z0-9-]+\/(?:blob\/)?[a-f0-9]{40}\/[A-Za-z0-9./-]+$/.test(url)) {
+  if(/^https:\/\/(?:raw\.githubusercontent\.com|github\.com)\/the-static-collective\/[A-Za-z0-9.-]+\/(?:blob\/)?[a-f0-9]{40}\/[A-Za-z0-9./-]+$/.test(url)) {
     a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
   }
   return a;
@@ -177,6 +180,70 @@ async function refreshVisProviders() {
   }
 }
 void refreshVisProviders();
+
+async function askCouncil() {
+  if(!last)return;
+  councilActive?.abort();
+  const controller=new AbortController();
+  councilActive=controller;
+  const button=$('#council-investigate'),target=$('#council-result');
+  button.disabled=true;
+  target.textContent='JAR is checking pinned ALEX / 3rdi / LOADOUT source doors. Groq will scout, then Gemini will challenge its proposal. No project actions…';
+  const timer=setTimeout(()=>controller.abort(),47000);
+  try{
+    const response=await fetch('/api/council',{
+      method:'POST',cache:'no-store',credentials:'same-origin',
+      headers:{'content-type':'application/json',accept:'application/json'},
+      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+    });
+    const value=await response.json();
+    if(councilActive!==controller)return;
+    if(value.status==='HOLD'||value.status==='PARTIAL_HOLD'){
+      target.textContent='HOLD · '+(value.reason||'REVIEW_INCOMPLETE')+'. '+(value.message||'No accepted result.')+
+        ' No automatic retry or paid fallback.';
+      return;
+    }
+    if(!response.ok||!await verifyCouncil(value)||!matchesCouncilSources(last,value))
+      throw Error('Council receipt or inspected sources did not verify.');
+    const panel=el('div','vis-answer');
+    panel.append(el('h4','','TWO-MODEL SOURCE-FIRST REASONING · GROQ → GEMINI'));
+    panel.append(el('small','','2 API calls · 3 fixed source constitutions inspected separately · no execution · unsigned'));
+    panel.append(el('h4','','GROQ · THE MISSING INGREDIENT'),el('p','',value.scout.missingIngredient));
+    panel.append(el('p','',value.scout.hypothesis),el('p','',value.scout.whyThisOne));
+    function sourceRow(sourceIds,heading){
+      if(!sourceIds.length)return el('small','','Hypothesis · no particular source supports this claim.');
+      const container=el('div','vis-citations');
+      container.append(el('small','',heading+' '));
+      for(const id of sourceIds) {
+        const src=value.sourceReferences.find(ref=>ref.id===id);
+        if(src)container.append(sourceLink(src.name+' ↗',src.document));
+      }
+      return container;
+    }
+    panel.append(sourceRow(value.scout.sourceIds,'Scout source anchors:'));
+    panel.append(el('h4','','GEMINI · INDEPENDENT PRESSURE TEST'));
+    panel.append(el('p','','Verdict: '+value.critic.verdict+' · '+value.critic.pressure));
+    panel.append(el('p','','Evidence gap: '+value.critic.evidenceGap));
+    panel.append(el('p','','Disagreement / remaining doubt: '+value.critic.disagreement));
+    panel.append(sourceRow(value.critic.sourceIds,'Critic source anchors:'));
+    panel.append(el('h4','','THE SMALLEST ACTUAL CHECK'));
+    panel.append(el('p','',value.critic.smallestCheck));
+    panel.append(el('h4','','ONE QUESTION FOR A WILLING STEWARD'),el('p','',value.scout.firstQuestion));
+    panel.append(el('h4','','PERMISSION & UNKNOWN FACTS'),el('p','',value.scout.consentCheck));
+    const unknowns=el('ul');for(const v of value.scout.unknowns)unknowns.append(el('li','',v));
+    panel.append(unknowns,el('small','','STATUS: '+value.pressureVerdict+
+      ' · Proposed ingredient unverified · evidence receipt verified · no action authorized.'));
+    target.replaceChildren(panel);
+  }catch {
+    if(councilActive===controller)target.textContent=controller.signal.aborted
+      ? 'HOLD: the two-model council timed out; no agreement or action is claimed.'
+      : 'HOLD: council receipt/sources or response could not be verified. The ordinary card is unchanged.';
+  }finally{
+    clearTimeout(timer);
+    if(councilActive===controller){councilActive=null;button.disabled=false;}
+  }
+}
+$('#council-investigate').addEventListener('click',()=>{void askCouncil();});
 
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
 
