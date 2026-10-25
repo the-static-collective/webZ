@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {assemble} from '../src/worker.mjs';
 import {investigate,makeGatewayProvider,makeWorkersProvider,parseInvestigation,publicContext,GATEWAY_MODEL} from '../src/investigator.mjs';
-import {verifyInvestigation} from '../public/evidence.mjs';
+import {verifyInvestigation,matchesInvestigationSources} from '../public/evidence.mjs';
 
 const q='Could a garden potluck invite musicians and volunteer park cleanup crews?';
 const source=async()=>new Response('# Source notes\nGarden volunteers can propose an outdoor public cleanup after speaking with the place steward.\n');
@@ -92,4 +92,20 @@ test('public context has no private keys, user identity, or execution grant',asy
   const ctx=publicContext(base);
   assert.deepEqual(Object.keys(ctx).sort(),['facets','preexistingLocalIdeas','question','selectedReturn','sourceObservations']);
   assert.ok(ctx.sourceObservations.every(s=>!('body' in s)&&!('url' in s)));
+});
+
+test('browser source reconciliation works across independently timestamped JAR returns',async()=>{
+  const parent=await assemble(q,source,{kind:'plan'});
+  const proposal=await investigate({question:q,kind:'plan',
+    assemble:(question,_,opts)=>assemble(question,source,opts),
+    provider:async()=>({choices:[{message:{content:sample}}]})
+  });
+  assert.equal(proposal.status,'MODEL_PROPOSAL');
+  assert.equal(await verifyInvestigation(proposal),true);
+  assert.equal(matchesInvestigationSources(parent,proposal),true);
+  const tampered=structuredClone(proposal);
+  tampered.sourceReferences[0].sha256='sha256:wrong';
+  assert.equal(matchesInvestigationSources(parent,tampered),false);
+  const other=structuredClone(proposal);other.question='A different question';
+  assert.equal(matchesInvestigationSources(parent,other),false);
 });
