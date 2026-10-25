@@ -158,6 +158,7 @@ export function makeNvidiaTrialProvider({token,fetcher=fetch}={}) {
           model:NVIDIA_TRIAL_MODEL,
           messages:[{role:'system',content:system},{role:'user',content:input}],
           temperature:0.3,max_tokens:900,stream:false,
+          chat_template_kwargs:{enable_thinking:false},
           response_format:{type:'json_object'}
         })
       });
