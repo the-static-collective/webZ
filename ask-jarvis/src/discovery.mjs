@@ -77,12 +77,18 @@ export async function searchExternal(question,{fetcher=fetch,braveToken,now=()=>
 export function weaveCandidates(orientation,results,catalog){
  if(!Array.isArray(results))throw Error('INVALID_RESULTS');
  const possible=orientation.ideas.map(i=>i.id);
+ const first=possible[0]||null;
+ const neighbor=first?catalog.paths.find(([from,to,verb])=>verb==='connects'&&(from===first||to===first)):null;
+ const neighborId=neighbor?(neighbor[0]===first?neighbor[1]:neighbor[0]):null;
+ const neighborTitle=catalog.ideas.find(x=>x.id===neighborId)?.title||null;
  return results.slice(0,4).map(r=>({
   relation:'connects',status:'proposed',authority:'none',
   source:r.url,sourceTitle:r.title,from:'public-source-candidate',
-  to:possible[0]||null,
-  hypothesis:possible.length
-   ?'This external search result may inform the existing '+(catalog.ideas.find(x=>x.id===possible[0])?.category||'')+' question. No relationship or local capability has been verified.'
+  to:first,existingGraphNeighbor:neighborTitle?{id:neighborId,title:neighborTitle,status:'proposed',authority:'none'}:null,
+  hypothesis:first
+   ?'This external result may inform the existing '+(catalog.ideas.find(x=>x.id===first)?.category||'')+
+    ' question.'+(neighborTitle?' That editorial option has another proposed Free Graph connection: '+neighborTitle+'.':'')+
+    ' Neither connection verifies an available capability or consenting person.'
    :'Independent research result. No Collective project connection is implied.',
   admission:'PENDING_HUMAN_REVIEW'
  }));
