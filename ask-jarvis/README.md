@@ -4,6 +4,20 @@
 
 A deliberately 1999-looking, single-box temporary front door for Abundent, deployable as a standalone **Cloudflare Worker with static assets**. Built on the exact webZ CIRCULATION-004 ancestry. **LIVE RELEASE (2026-10-23):** By owner's explicit instruction, the tested Ask JAR;VIS Vercel deployment was assigned the `abundent.org` alias. No DNS records were changed, and no real agents or external project actions execute. The original Garden Workbench remains preserved at its own Vercel URL. **Cloudflare Worker deployment is still planned**, not claimed.
 
+## Curiosity 005 — review-only enhancement
+
+This branch improves the public deterministic attendant without adding accounts, model APIs, data retention, or project execution:
+
+- Detect multiple question subjects (food, gatherings, art, stewardship, hardware, broadcast, software) instead of collapsing every question into one generic category.
+- Offer at most four explicit *hypotheses for a small reversible crossing* when more than one subject is present. These are invitations to ask, not evidence that partners agreed.
+- Rank the existing seven pinned, source-owned public documents by question relevance; remove the previous default bias toward CANNON.
+- Choose a relevant line from each inspected public source when question words actually overlap. Otherwise label it only a general document; an unavailable source is not evidence.
+- Include cross-topic ideas and conditional source notes in question cards and field plans, with the existing unsigned evidence receipt. Invitation drafts and songs remain distinct outputs.
+
+**Not a model upgrade:** This is still a transparent rules engine; it does not reason across full repositories, query private records, run agents, or promise to execute a proposed plan. An opt-in, server-side language-model adapter with an explicitly bounded public context would be a separate reviewed phase. Do not send private contact details to this public endpoint.
+
+**Deployment status:** branch/PR proposal only; the active Abundent alias is unchanged until a separately approved, tested release.
+
 ## What actually works
 
 - GET / serves a responsive, keyboard-accessible retro HTML/CSS UI.
