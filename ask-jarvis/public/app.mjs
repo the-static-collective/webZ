@@ -1,12 +1,13 @@
 import {verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
+import {buildRelayCapsule,makeRelayLink} from './relay.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
-let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, visProposal=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -27,7 +28,10 @@ function cleanAudio() {
   audioUrl=null;wav=null;
 }
 function clearReturn() {
-  visActive?.abort();visActive=null;
+  visActive?.abort();visActive=null;visProposal=null;
+  $('#vis-relay').hidden=true;$('#vis-relay-approved').checked=false;
+  $('#share-vis-relay').disabled=true;$('#vis-relay-link').value='';
+  $('#vis-relay-status').textContent='Nothing is shared automatically. This is an AI investigation draft, not a real-world completion record.';
   $('#vis-result').textContent='Model investigation is optional and may be unavailable. The original question card works without it.';
   $('#vis-investigate').disabled=false;
   last=null;reply.hidden=true;cleanAudio();
@@ -105,6 +109,8 @@ async function askVis() {
   visActive?.abort();
   const controller=new AbortController();visActive=controller;
   const button=$('#vis-investigate'),target=$('#vis-result');
+  visProposal=null;$('#vis-relay').hidden=true;$('#vis-relay-approved').checked=false;
+  $('#share-vis-relay').disabled=true;$('#vis-relay-link').value='';
   button.disabled=true;target.textContent='VIS is checking the bounded source notes (no project actions)…';
   const timer=setTimeout(()=>controller.abort(),16000);
   try {
@@ -144,6 +150,7 @@ async function askVis() {
     panel.append(unknown,el('h4','', 'HUMAN PERMISSION GATE'),el('p','',data.investigation.consentCheck),
       el('small','',data.disclaimer));
     target.replaceChildren(panel);
+    visProposal=data;$('#vis-relay').hidden=false;
   } catch(error) {
     if(visActive===controller)target.textContent=controller.signal.aborted
       ? 'HOLD: the investigation timed out. The original question card is unchanged.'
@@ -153,6 +160,38 @@ async function askVis() {
     if(visActive===controller){visActive=null;button.disabled=false;}
   }
 }
+$('#vis-relay-approved').addEventListener('change',()=>{
+  $('#share-vis-relay').disabled=!$('#vis-relay-approved').checked||!visProposal;
+  if(!$('#vis-relay-approved').checked) {
+    $('#vis-relay-link').value='';
+    $('#vis-relay-status').textContent='Sharing withdrawn locally. Any link you already gave someone cannot be recalled.';
+  }
+});
+$('#download-vis-receipt').addEventListener('click',()=>{
+  if(!visProposal)return;
+  download('jarvis-vis-model-proposal-unsigned.json',JSON.stringify(visProposal,null,2),'application/json');
+});
+$('#share-vis-relay').addEventListener('click',async()=>{
+  if(!last||!visProposal||!$('#vis-relay-approved').checked)return;
+  const status=$('#vis-relay-status'),field=$('#vis-relay-link');
+  try {
+    if(!await verifyInvestigation(visProposal)||!matchesInvestigationSources(last,visProposal))
+      throw Error('RELAY_NOT_VERIFIED');
+    const capsule=await buildRelayCapsule(last,visProposal);
+    const link=makeRelayLink(window.location.href,capsule);
+    field.value=link;field.focus();field.select();
+    if(navigator.clipboard?.writeText){
+      try {await navigator.clipboard.writeText(link);
+        status.textContent='Unsigned proposal link copied. It contains the question and AI summary. No message was sent or field work confirmed.';
+        return;
+      } catch {/* use the select-and-copy fallback below */}
+    }
+    status.textContent='Select and copy the link above. The text is public to anyone who receives it. No one has been contacted.';
+  } catch {
+    field.value='';
+    status.textContent='This AI proposal could not be made into a bounded, public-safe link. Download the complete model receipt instead, review it, and do not claim verified action.';
+  }
+});
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
 
 $('#ask-next').addEventListener('click',()=>{
