@@ -1,4 +1,5 @@
 import {ROLES,getRole,readRoleHash,makeRoleLink,draftRoleInvite} from '../role-seeds.mjs';
+import {makeFire,makeFireLink} from '../campfire/model.mjs';
 const $=id=>document.getElementById(id);
 const roles=$('roles'),desk=$('desk'),status=$('status');
 let selected=null;
@@ -12,6 +13,23 @@ function openRole(role,scroll=true){
  $('trial').textContent=role.trial;
  $('boundary').textContent=role.boundary;
  $('interest').href=makeRoleLink(location.href,role.id,'/contact/');
+ let campfire=$('campfire-crossing');
+ if(!campfire){
+  campfire=node('a','yes','◎ Gather around this question at the Campfire');
+  campfire.id='campfire-crossing';
+  campfire.style.display='flex';campfire.style.justifyContent='center';
+  campfire.style.alignItems='center';campfire.style.textAlign='center';
+  campfire.style.textDecoration='none';campfire.style.border='2px solid #1c362c';
+  campfire.style.borderRadius='6px';campfire.style.padding='.7rem';
+  desk.querySelector('.ctas').append(campfire);
+ }
+ const roleSeed={ 'food-bridge':'garden','question-listener':'coalition',
+  'invitation-weaver':'coalition','song-circle':'music','park-quest':'park',
+  'repair-table':'repair'};
+ const chosen=roleSeed[role.id]
+  ?makeFire({seed:roleSeed[role.id]})
+  :makeFire({custom:true,purpose:'Could interested people shape a '+role.name+' experiment together?'});
+ campfire.href=makeFireLink(location.href,chosen);
  desk.hidden=false;status.textContent='';
  if(location.hash!=='#role='+role.id)history.replaceState(null,'','#role='+role.id);
  if(scroll)desk.scrollIntoView({behavior:'smooth',block:'start'});
