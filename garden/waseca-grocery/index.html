@@ -23,7 +23,7 @@ footer{background:#102b21;color:#e8f3df;padding:27px 0;font-size:.85rem}footer a
 <p class="eyebrow">WASECA, MINNESOTA · AN OPEN COMMUNITY INVITATION</p>
 <h1>What if<br>our next grocery<br><em>belonged to us?</em></h1>
 <p>Waseca residents are exploring a community-owned grocery store. We don't have to wait for a building to start imagining—and helping shape—what could make it useful. Bring one idea. Invite one neighbor. Help turn interest into something real.</p>
-<div class="buttons"><a class="btn gold" href="#choose">Tell us what matters ↓</a><a class="btn line" href="#share">Invite a neighbor ↗</a></div>
+<div class="buttons"><a class="btn gold" href="#choose">Tell us what matters ↓</a><a class="btn line" href="#share">Invite a neighbor ↗</a><a class="btn line" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/lemon-grocery" target="_blank" rel="noopener noreferrer">Read + print lemonPRESS ↗</a></div>
 </div></header>
 <div class="wrap"><aside class="statement"><strong>Neighbors talking about the grocery, independently.</strong> This page is created by The Static Collective / Abundent, not by the Waseca Area Food Cooperative. It does not sign anyone up as a co-op member, take payments, promise a store, represent organizers, or count members. We support constructive public discussion and will clearly distinguish interest from official enrollment.</aside></div>
 <main>
