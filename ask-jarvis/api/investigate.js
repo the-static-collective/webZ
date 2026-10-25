@@ -1,6 +1,8 @@
 // Optional VIS model investigator. Intentionally disabled by default on public Vercel.
 import {assemble,inputError,REQUEST_LIMIT} from '../src/worker.mjs';
 import {investigate,makeGatewayProvider,makeNvidiaTrialProvider} from '../src/investigator.mjs';
+import {selectRoute,ROUTES} from '../src/free-compute.mjs';
+import {sha256} from '../public/evidence.mjs';
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
@@ -17,7 +19,7 @@ export default async function handler(req,res){
   const oidcFromPlatform = req.headers?.['x-vercel-oidc-token'];
   const token=process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
     || (typeof oidcFromPlatform==='string' ? oidcFromPlatform : undefined);
-  if(!process.env.NVIDIA_API_KEY && !token)return res.status(503).json({
+  if(process.env.JARVIS_FREE_COMPUTE_ENABLED!=='1'&&!process.env.NVIDIA_API_KEY && !token)return res.status(503).json({
     schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'NO_MODEL_CREDENTIAL',
     message:'VIS model credentials are not configured. No model was called.'
   });
@@ -25,13 +27,27 @@ export default async function handler(req,res){
   if(typeof obj.question!=='string')return res.status(400).json({error:'QUESTION_REQUIRED'});
   if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>REQUEST_LIMIT)return res.status(413).json({error:'QUESTION_TOO_LARGE'});
   try{
-    // Prefer directly hosted NVIDIA's free *developer-trial* endpoint.
-    // Only use AI Gateway if a direct NVIDIA trial key has not been set.
-    // Do not automatically retry with a different provider after an error.
-    const provider=process.env.NVIDIA_API_KEY
+    const route=obj.route??'auto';
+    if(!ROUTES.includes(route))return res.status(422).json({error:'ROUTE_NOT_ALLOWED'});
+    const freeMode=process.env.JARVIS_FREE_COMPUTE_ENABLED==='1';
+    // Exactly one allowlisted model call, never paid-model escalation or cross-provider retry.
+    // Existing NVIDIA/Gateway trial behavior remains available when the router flag is off.
+    const choice=freeMode?selectRoute(process.env,route):null;
+    if(freeMode&&!choice)return res.status(503).json({
+      schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'FREE_PROVIDER_NOT_CONFIGURED',
+      message:'No allowed provider is configured for this route. The original question card still works.'
+    });
+    const provider=freeMode?choice.provider:(process.env.NVIDIA_API_KEY
       ? makeNvidiaTrialProvider({token:process.env.NVIDIA_API_KEY})
-      : makeGatewayProvider({token});
-    const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider});
+      : makeGatewayProvider({token}));
+    const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider,
+      providerId:choice?.id??'legacy'});
+    if(result.status==='MODEL_PROPOSAL'&&choice) {
+      result.routing={provider:choice.id,model:choice.model,mode:choice.mode,route:choice.route,
+        modelCalls:1,automaticPaidFallback:false};
+      delete result.receiptHash;
+      result.receiptHash=await sha256(JSON.stringify(result));
+    }
     return res.status(200).json(result);
   }catch(error) {
     // Never expose service credentials, model responses, stack traces or upstream details.

@@ -106,23 +106,30 @@ async function askVis() {
   const controller=new AbortController();visActive=controller;
   const button=$('#vis-investigate'),target=$('#vis-result');
   button.disabled=true;target.textContent='VIS is checking the bounded source notes (no project actions)…';
-  const timer=setTimeout(()=>controller.abort(),16000);
+  const timer=setTimeout(()=>controller.abort(),23000);
   try {
     const response=await fetch('/api/investigate',{
       method:'POST',cache:'no-store',credentials:'same-origin',
       headers:{'content-type':'application/json',accept:'application/json'},
-      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+      body:JSON.stringify({question:last.question,kind:last.return.kind,route:$('#vis-route').value}),signal:controller.signal
     });
     const data=await response.json();
     if(visActive!==controller)return;
     if(data.status==='HOLD') {
-      target.textContent=data.message||'HOLD: the model is not available. Your original source-first question card is unchanged.';
+      const detail=data.failureCode&&data.providerId
+        ? 'HOLD · '+data.providerId+' · '+data.failureCode+'. '
+        : 'HOLD. ';
+      target.textContent=detail+(data.message||'The model is unavailable. The original source-first question card is unchanged.');
       return;
     }
     if(!response.ok||!await verifyInvestigation(data)||data.question!==last.question
       ||!matchesInvestigationSources(last,data))throw Error('Model proposal was not verifiable. No investigation is claimed.');
     const panel=el('div','vis-answer');
-    panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'),el('p','',data.investigation.summary));
+    panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'));
+    if(data.routing?.provider)panel.append(el('small','',
+      'Free-compute route: '+data.routing.route+' · '+data.routing.provider+
+      ' · '+data.routing.model+' · 1 model call · no paid fallback'));
+    panel.append(el('p','',data.investigation.summary));
     const list=el('ol','vis-connections');
     for(const c of data.investigation.connections) {
       const li=el('li');li.append(el('p','',c.idea));
@@ -153,6 +160,24 @@ async function askVis() {
     if(visActive===controller){visActive=null;button.disabled=false;}
   }
 }
+// Preview registry reports only key presence and explicit flags; not proof of key validity or free quota.
+async function refreshVisProviders() {
+  const target=$('#vis-providers');
+  if(!target)return;
+  try {
+    const response=await fetch('/api/free-resources',{method:'GET',cache:'no-store',credentials:'same-origin'});
+    if(!response.ok)throw Error('NOT_AVAILABLE');
+    const state=await response.json();
+    const ready=(state.providers||[]).filter(x=>x.kind==='text'&&x.ready).map(x=>x.id);
+    target.textContent=state.routerEnabled
+      ? 'Configured on this protected preview (credentials not live-tested): '+(ready.join(', ')||'none')+'.'
+      : 'Free compute is not enabled on this deployment.';
+  } catch {
+    target.textContent='Provider readiness is available only on protected JAR;VIS previews.';
+  }
+}
+void refreshVisProviders();
+
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
 
 $('#ask-next').addEventListener('click',()=>{

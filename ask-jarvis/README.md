@@ -24,6 +24,10 @@ This proposal builds on Curiosity-005. JAR remains the source-first deterministi
 
 Vercel AI Gateway (`nvidia/nemotron-3.5-lightning-free`, protected trials only) and Cloudflare Workers AI (`@cf/meta/llama-3.1-8b-instruct`) are supported by server-only adapters; neither is enabled on the live site from this branch. No model API key is supplied with the repository or existing Vercel project, and public activation requires external rate limiting, spending controls, source-injection tests and operator approval. See [VIS-006 protocol](VIS-006.md).
 
+## FREE-COMPUTE-007 — protected multi-provider inference experiment
+
+An explicit VIS provider route selector can choose one verified, configured **server-side** free-tier/evaluation connector per click: NVIDIA Build Nemotron, Groq GPT-OSS, Gemini Flash-Lite, OpenRouter free router, Cloudflare Workers AI Nemotron REST, or the Cloudflare Workers binding. **No automatic retry, billable model fallback, customer data, or model-driven execution.** Credentials and provider allow flags are required, and the new switchboard remains completely disabled outside protected Vercel Preview. Modal cloud compute is in the capability catalog as planned, not running. Exact release boundaries and test requirements: [FREE-COMPUTE-007](FREE-COMPUTE-007.md).
+
 ## What actually works
 
 - GET / serves a responsive, keyboard-accessible retro HTML/CSS UI.

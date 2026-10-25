@@ -109,3 +109,25 @@ test('browser source reconciliation works across independently timestamped JAR r
   const other=structuredClone(proposal);other.question='A different question';
   assert.equal(matchesInvestigationSources(parent,other),false);
 });
+
+test('preview HOLD attributes a safe provider and HTTP class without exposing upstream messages',async()=>{
+  const info=await investigate({
+    question:q,kind:'plan',providerId:'gemini',
+    assemble:(q,_,opts)=>assemble(q,source,opts),
+    provider:async()=>{throw Error('FREE_PROVIDER_HTTP_404');}
+  });
+  assert.equal(info.status,'HOLD');
+  assert.equal(info.providerId,'gemini');
+  assert.equal(info.failureCode,'FREE_PROVIDER_HTTP_404');
+  assert.equal(info.modelInvoked,true);
+  assert.equal(info.investigation,undefined);
+  assert.ok(!JSON.stringify(info).includes('apikey'));
+  const malformed=await investigate({
+    question:q,kind:'plan',providerId:'not-a valid domain',
+    assemble:(q,_,opts)=>assemble(q,source,opts),
+    provider:async()=>{throw Error('Full URL with private details https://internal.example?secret=123');}
+  });
+  assert.equal(malformed.providerId,'unidentified');
+  assert.equal(malformed.failureCode,'MODEL_INTERNAL_FAILURE');
+  assert.ok(!JSON.stringify(malformed).includes('internal.example'));
+});

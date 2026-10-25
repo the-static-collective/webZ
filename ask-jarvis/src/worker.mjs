@@ -4,6 +4,7 @@ import {formEncounter, composeReturn} from './encounter.mjs';
 import {summarizeForQuestion} from './inquiry.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {investigate,makeWorkersProvider} from './investigator.mjs';
+import {selectRoute,ROUTES} from './free-compute.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -121,7 +122,7 @@ export default {
     if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-006',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
     if(url.pathname==='/api/investigate') {
       if(request.method!=='POST')return response({error:'METHOD_NOT_ALLOWED'},405);
-      if(env?.JARVIS_AI_ENABLED!=='1'||typeof env?.AI?.run!=='function')return response({
+      if(env?.JARVIS_AI_ENABLED!=='1'||(env?.JARVIS_FREE_COMPUTE_ENABLED!=='1'&&typeof env?.AI?.run!=='function'))return response({
         schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_NOT_ENABLED',
         message:'VIS model investigation is not enabled. The rules-only question machine still works.'
       },503);
@@ -129,8 +130,24 @@ export default {
       try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
       catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
       if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
-      try{return response(await investigate({question:obj.question,kind:obj.kind??'auto',assemble,provider:makeWorkersProvider(env.AI)}));}
-      catch(e){return response({error:inputError(e)},422);}
+      try {
+        const route=obj.route??'auto';
+        if(!ROUTES.includes(route))return response({error:'ROUTE_NOT_ALLOWED'},422);
+        const enabled=env.JARVIS_FREE_COMPUTE_ENABLED==='1';
+        const choice=enabled?selectRoute(env,route,fetch,env.AI):null;
+        if(enabled&&!choice)return response({schema:'ask-jarvis/investigation-v1',
+          status:'HOLD',reason:'FREE_PROVIDER_NOT_CONFIGURED',
+          message:'No allowed model provider is configured for this route. The rules-only card still works.'},503);
+        const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,
+          provider:choice?.provider||makeWorkersProvider(env.AI),providerId:choice?.id??'worker-ai'});
+        if(result.status==='MODEL_PROPOSAL'&&choice) {
+          result.routing={provider:choice.id,model:choice.model,mode:choice.mode,route:choice.route,
+            modelCalls:1,automaticPaidFallback:false};
+          delete result.receiptHash;
+          result.receiptHash=await sha256(JSON.stringify(result));
+        }
+        return response(result);
+      } catch(e){return response({error:inputError(e)},422);}
     }
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
