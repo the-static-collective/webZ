@@ -33,7 +33,7 @@ form.addEventListener('submit', async (event) => {
   const publicNote=form.elements.note.value.trim();
   const privateNote=[chosenPlace?'CAMPFIRE STARTING PREFERENCE: '+chosenPlace+
    '. This is an interest, not an appointment.':'',publicNote]
-   .filter(Boolean).join('\\n\\n').slice(0,1200);
+   .filter(Boolean).join('\n\n').slice(0,1200);
   const payload = {
     name: form.elements.name.value.trim().slice(0, 100),
     email: form.elements.email.value.trim().toLowerCase().slice(0, 254),
