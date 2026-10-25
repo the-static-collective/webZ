@@ -42,7 +42,7 @@ Your private invitation link will go here.</div>
 <textarea id="gate" maxlength="240" placeholder="Example: Ask a willing food-shelf coordinator whether a producer listening session would be useful."></textarea>
 <label class="label" for="proof">What would be a truthful 24-hour result?</label>
 <textarea id="proof" maxlength="200" placeholder="Example: Draft prepared; response pending. Or: volunteer agrees to one short call."></textarea>
-<div class="buttons"><button class="btn gold" id="makeCard" type="button">Compose one 24-hour field card</button><button class="btn" id="copyCard" type="button">Copy card</button><a class="btn" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/first-yes?mission=food">Open First Yes field kit</a></div>
+<div class="buttons"><button class="btn" id="loadStarter" type="button">Load a grounded starter</button><button class="btn gold" id="makeCard" type="button">Compose one 24-hour field card</button><button class="btn" id="copyCard" type="button">Copy card</button><a class="btn" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/first-yes?mission=food">Open First Yes field kit</a></div>
 <p id="cardStatus" class="status"></p><div id="cardOutput" class="actionCard" hidden></div>
 <p class="small">This is a private, unsent, editable draft. No assignments, financial commitments, institutional decisions, or claims of completed work. Copy the card if you want to preserve it.</p>
 </div></div></section>
@@ -90,6 +90,7 @@ $('addSeed').disabled=room.closed||ps.length>=8;$('hostSeats').innerHTML=all.len
 function renderSourceChoices(){
 const select=$('actionSource'),current=select.value;
 const choices=[
+ {id:'hyp-milk',label:'Verify a possible food-shelf milk purchasing gap (unconfirmed lead)'},
  {id:'hyp-food',label:'Explore food shelf procurement (hypothesis, not a verified partner request)'},
  {id:'hyp-coop',label:'Clarify co-op membership questions (independent draft, not official terms)'},
  {id:'hyp-producer',label:'Prepare a producer listening guide (no supplier enrolled)'},
@@ -98,6 +99,16 @@ const choices=[
 all.forEach((x,i)=>{if(x.status==='participating'&&x.response)choices.push({id:'seat:'+x.id,label:'Contribution '+(i+1)+' / '+x.lens+' (self-report, not verified)'})});
 select.replaceChildren();for(const c of choices){const opt=document.createElement('option');opt.value=c.id;opt.textContent=c.label;select.append(opt)}if(choices.some(x=>x.id===current))select.value=current;
 }
+const STARTERS={
+ 'hyp-milk':['Draft a one-page, source-check worksheet: current supplier, grant end date, weekly volume, price, cold-chain limits and willing contact—leave every unknown blank.','Ask the food-shelf director whether the reported temporary milk support is ending and whether they want a private sourcing conversation. Do not involve suppliers until invited.','Worksheet drafted, unknowns identified, permission requested/declined/not yet obtained. No milk secured or grant claim stated as verified.'],
+ 'hyp-food':['Make a one-page, permission-based needs checklist for one food-access steward.','Ask a willing food shelf representative which single sourcing obstacle could use an introduction, without presuming urgency.','Checklist prepared; one yes/no/unknown to an introductory call recorded.'],
+ 'hyp-coop':['Prepare an accessible one-page explainer separating general co-op ownership from Waseca-specific terms requiring verification.','Ask an actual co-op organizer which ownership details they would authorize us to quote.','Draft prepared and status marked: pending review, correction requested, or approved by an authorized source.'],
+ 'hyp-producer':['Make a four-question listening guide for a willing local producer to explain available volume, seasonality, pickup, and constraints.','Ask one producer whether they would like to review the questions; no implied sales commitment.','A draft exists; producer consent remains yes/no/unknown; no partnership claimed.'],
+ 'hyp-tech':['Create an accessible mockup of a one-question volunteer interest intake and print-friendly alternative.','Ask the relevant steward whether this helps their actual follow-up work, before using the mockup to collect information.','Mockup produced; mobile/print checks noted; no volunteer enrollment claimed.']
+};
+$('loadStarter').onclick=()=>{const key=$('actionSource').value;const starter=STARTERS[key]||['Prepare a one-page neutral summary of the submitted idea, noting that the participant self-reported it and no outside claims are verified.','Ask a willing steward whether they want this proposal routed further; obtain the contributor\'s explicit consent first.','Draft produced and answer recorded as yes, no, or not yet. No unapproved attribution or commitments.'];
+$('artifact').value=starter[0];$('gate').value=starter[1];$('proof').value=starter[2];$('cardStatus').textContent='Editable starter loaded. Review every claim and permission boundary before sharing.';
+};
 function buildCard(){
 const choice=$('actionSource'),source=choice.options[choice.selectedIndex]?.textContent||'Unspecified starting point';
 const artifact=$('artifact').value.trim(),gate=$('gate').value.trim(),proof=$('proof').value.trim();
