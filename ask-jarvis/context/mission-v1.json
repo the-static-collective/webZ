@@ -1,0 +1,152 @@
+{
+  "schema": "abundent/mission-context-v1",
+  "revision": "DISCOVERY-011",
+  "updated": "2026-10-25",
+  "status": "OPERATOR_AUTHORED_DIRECTION_NOT_PUBLIC_PARTNER_AGREEMENT",
+  "identity": {
+    "name": "Abundent / Static Collective",
+    "locale": "Waseca, Minnesota",
+    "independent": true,
+    "purpose": "Help neighbors recognize particular needs, offers and possible connections, voluntarily coordinate small useful experiments, and preserve honest provenance and outcomes."
+  },
+  "northStar": [
+    "Answer the visitor's question before suggesting Collective projects. Unrelated inquiries can remain unrelated.",
+    "Prioritize real existing help and verified public sources over inventing a new program.",
+    "Community interests can inform proposals, not establish that someone has joined or volunteered.",
+    "Keep human-controlled permission, ownership and a meaningful return path for any action.",
+    "Retain uncertainty and contradiction. Integrity is more important than narrative continuity."
+  ],
+  "workstreams": [
+    {
+      "id": "grocery",
+      "title": "Community grocery and practical food access",
+      "state": "EXPLORING",
+      "keywords": [
+        "grocery",
+        "food",
+        "produce",
+        "pantry",
+        "meal",
+        "market",
+        "nutrition"
+      ],
+      "question": "What specific food-access problem and willing local steward can be verified before attempting a pilot?"
+    },
+    {
+      "id": "coalition",
+      "title": "Community gathering and volunteer tables",
+      "state": "EXPLORING",
+      "keywords": [
+        "volunteer",
+        "coalition",
+        "gather",
+        "organize",
+        "meeting",
+        "neighbors",
+        "event"
+      ],
+      "question": "What small cooperation could willing people review together?"
+    },
+    {
+      "id": "music",
+      "title": "Arts, music and accessible creative gatherings",
+      "state": "EXPLORING",
+      "keywords": [
+        "music",
+        "song",
+        "art",
+        "festival",
+        "church",
+        "worship",
+        "concert"
+      ],
+      "question": "Which gathering would actual interested artists and hosts choose?"
+    },
+    {
+      "id": "stewardship",
+      "title": "Parks, conservation and community care",
+      "state": "EXPLORING",
+      "keywords": [
+        "park",
+        "cleanup",
+        "environment",
+        "repair",
+        "steward",
+        "conservation"
+      ],
+      "question": "What is permitted, safe and steward-approved in the real place?"
+    },
+    {
+      "id": "infrastructure",
+      "title": "Local tools, radio, computation and accessible civic interfaces",
+      "state": "EXPERIMENTAL",
+      "keywords": [
+        "technology",
+        "software",
+        "computer",
+        "radio",
+        "website",
+        "ai",
+        "internet",
+        "phone"
+      ],
+      "question": "What capability is genuinely available and authorized for this use?"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "jarvis",
+      "role": "Source-first attendant for questions, not a human authority"
+    },
+    {
+      "id": "freegraph",
+      "role": "Provenance-preserving relationships, including proposed and unresolved edges; no silent promotion"
+    },
+    {
+      "id": "alex",
+      "role": "Source, claim and derivation distinctions"
+    },
+    {
+      "id": "3rdi",
+      "role": "Observer-local information cut and temporal distinctions"
+    },
+    {
+      "id": "loadout",
+      "role": "Minimum approved capabilities and effect fences"
+    },
+    {
+      "id": "graft",
+      "role": "Source-pinned cross-repository context without surrendering origin"
+    }
+  ],
+  "gates": {
+    "observationNotConsent": true,
+    "proposalNotAdmission": true,
+    "selectionNotEvidence": true,
+    "noAutomaticPartnerContact": true,
+    "noUnsignedReceiptAsProof": true,
+    "publicSiteDoesNotImplyOfficialAffiliation": true,
+    "noAutomaticPromotionFromCandidateToCommunityFact": true
+  },
+  "retrieval": {
+    "sourcePolicy": "Public or expressly consented and minimal",
+    "privateIntake": "Never send private inquiry inbox text to model or public search",
+    "externalSearch": "Bounded operator-chosen research; user query may be sent to an external provider only after the user elects Discover",
+    "externalCredentials": "Server-side only",
+    "history": "Persist only reviewed public-source observations across visitors"
+  },
+  "provenance": [
+    {
+      "title": "JAR;VIS constitutional laws",
+      "url": "https://github.com/the-static-collective/JAR-VIS/blob/main/docs/CONSTITUTION.md"
+    },
+    {
+      "title": "Free Graph packet contract",
+      "url": "https://github.com/the-static-collective/Free-Graph/blob/main/docs/contract-v0.md"
+    },
+    {
+      "title": "Waseca Town Desk candidate graph",
+      "url": "https://github.com/the-static-collective/webZ/blob/feature/abundent-town-freegraph-010/ask-jarvis/TOWN-010.md"
+    }
+  ]
+}
