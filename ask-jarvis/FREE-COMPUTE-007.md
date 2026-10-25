@@ -74,3 +74,11 @@ Repairs committed on this feature branch:
 - Browser waits up to 23 seconds for a protected VIS invocation. A timeout is still HOLD.
 
 **Verification required:** independently run REASON and EXPLORE using synthetic public questions on this exact updated preview, record whether a proposal (and valid receipt) or an attributable HOLD occurred. Unit tests and READY deployment prove source/build health, **not** that external providers accepted the user's keys or quotas.
+
+## 2026-10-25 operator live-model comparison
+
+- **Groq GPT-OSS 120B / FAST:** operator confirmed a source-cited, separately receipt-verified response.
+- **Gemini 3.5 Flash-Lite / REASON:** operator confirmed a distinct, source-cited response. Actual inference verified.
+- **OpenRouter / EXPLORE:** returned `HOLD · openrouter · FREE_PROVIDER_RESPONSE_LIMIT` instead of a result. The request may have succeeded upstream, but VIS rejected an excessively large HTTP response envelope. Do not count that as successful model inference.
+- **Repair:** allow up to 96KiB of the OpenRouter-only **raw envelope** (not the model answer), strip reasoning/provider/usage metadata immediately on the server, and accept only a visible answer of at most 9000 UTF-8 bytes. Keep JSON schema validation, sanitized HOLD, one-call budget, no paid fallback, trial-only Preview, and a separate human review. Tests simulate 43KB auxiliary metadata, >96KiB envelopes, answer overrun and missing visible text.
+- **Follow-up:** try EXPLORE once on the updated protected preview. A test should not make new contacts or change any real resource commitments.
