@@ -4,6 +4,9 @@ import {readFileSync} from 'node:fs';
 import mission from '../context/mission-v1.json' with {type:'json'};
 import catalog from '../town/catalog.json' with {type:'json'};
 import {validatePublicQuestion,orientQuestion,normalizeExternalResults,searchExternal,weaveCandidates} from '../src/discovery.mjs';
+import {assemble} from '../src/worker.mjs';
+import {verifyReturn} from '../public/evidence.mjs';
+import {publicContext} from '../src/investigator.mjs';
 
 test('North Star is a compass, never an irrelevant promotional hook',()=>{
  const x=orientQuestion('Where can I find bicycle repair around here?',mission,catalog);
@@ -95,4 +98,24 @@ test('browser search requires a deliberate action and public snippet nomination 
  assert.ok(endpoint.includes("process.env.JARVIS_DISCOVERY_ENABLED!=='1'"));
  assert.ok(endpoint.includes('reviewedContext'));
  assert.ok(!client.includes('localStorage'));
+});
+
+test('every deterministic JAR return includes a receipt-bound North Star without inventing alignment',async()=>{
+ const mock=async()=>new Response('# Public source\nAn owner-controlled document is not a local field observation or a consenting community steward.');
+ const related=await assemble('How can neighbors begin a food grocery experiment?',mock,{kind:'question'});
+ assert.equal(related.context.missionRevision,'DISCOVERY-011');
+ assert.equal(related.context.relation,'OPTIONAL_CONTEXT');
+ assert.ok(related.context.workstreams.some(x=>x.id==='grocery'));
+ assert.equal(related.context.grounding,'EDITORIAL_DIRECTION_NOT_LOCAL_EVIDENCE');
+ assert.equal(await verifyReturn(related),true);
+ const ctx=publicContext(related);
+ assert.equal(ctx.northStar.missionRevision,'DISCOVERY-011');
+ assert.equal(ctx.northStar.relatedWorkstreams[0].id,'grocery');
+ const corrupted=structuredClone(related);
+ corrupted.context.workstreams[0].title='Falsely confirmed local steward';
+ assert.equal(await verifyReturn(corrupted),false);
+ const independent=await assemble('Why did ancient astronomers study comets?',mock,{kind:'question'});
+ assert.equal(independent.context.relation,'INDEPENDENT_QUESTION');
+ assert.equal(independent.context.workstreams.length,0);
+ assert.equal(await verifyReturn(independent),true);
 });
