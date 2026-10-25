@@ -1,6 +1,7 @@
 // Public draft composer and fixed read-only source adapters. No project dispatcher.
 import {CAPABILITIES, selectSources, sourceUrl} from './registry.mjs';
 import {formEncounter, composeReturn} from './encounter.mjs';
+import {summarizeForQuestion} from './inquiry.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
 export {CAPABILITIES};
 
@@ -40,14 +41,7 @@ async function readBounded(res, limit, signal) {
   }
 }
 
-function summarize(body) {
-  const lines = body.replace(/\r/g,'').split('\n');
-  const title = lines.find(s=>/^# /.test(s))?.slice(2).trim() || 'Public source';
-  const excerpt = lines.map(s=>s.trim()).find(s=>s.length>28&&!/^(#|>|<|[-*]|\[|!)/.test(s)) || 'Inspect the original document for details.';
-  return {title:title.slice(0,140),excerpt:excerpt.slice(0,235)};
-}
-
-async function inspect(c,fetcher) {
+async function inspect(c,fetcher,question) {
   const source=sourceUrl(c);
   const base={id:c.id,name:c.name,role:c.role,source,repo:c.repo,commit:c.ref,
     document:`https://github.com/the-static-collective/${c.repo}/blob/${c.ref}/${c.path}`};
@@ -60,7 +54,7 @@ async function inspect(c,fetcher) {
     const bytes = await readBounded(res,SOURCE_LIMIT,controller.signal);
     if(!bytes.length) throw Error('EMPTY_SOURCE');
     const body = new TextDecoder('utf-8',{fatal:true}).decode(bytes);
-    return {...base,status:'INSPECTED',sha256:await sha256(bytes),byteLength:bytes.byteLength,...summarize(body)};
+    return {...base,status:'INSPECTED',sha256:await sha256(bytes),byteLength:bytes.byteLength,...summarizeForQuestion(body,question)};
   } catch {
     return {...base,status:'UNAVAILABLE',sha256:null,byteLength:null,title:'Not inspected',excerpt:'Read-only source lookup did not succeed. No result is inferred.'};
   } finally {
@@ -78,8 +72,8 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   if(q.length<8||q.length>360) throw Error('QUESTION_LENGTH');
   if(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?1[- .]?)?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}/.test(q)) throw Error('PRIVATE_CONTACT');
   const encounter = formEncounter(question,kind);
-  const targets = selectSources(q,encounter.kind);
-  const sources = await Promise.all(targets.map(c=>inspect(c,fetcher)));
+  const targets = selectSources(q,encounter.kind,encounter.facets);
+  const sources = await Promise.all(targets.map(c=>inspect(c,fetcher,q)));
   const found = sources.filter(s=>s.status==='INSPECTED').length;
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
@@ -123,7 +117,7 @@ export function inputError(error) {
 export default {
   async fetch(request,env) {
     const url=new URL(request.url);
-    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-004',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-005',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;
