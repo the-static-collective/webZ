@@ -1,0 +1,23 @@
+Create a playful, mobile-first 60-second microgame called **SPARKFORK: Pass the Fire**.
+
+VISUAL: cozy nighttime arcade toy, dark pine greens and indigo, hand-drawn textures, a charming luminous fire, chunky touch-friendly buttons, bouncy objects, little drifting sparks. It should feel like a playable meme, not a civic dashboard. Work well on an inexpensive Android phone.
+
+GAMEPLAY:
+1. Tap a large "GIVE IT A SPARK" button to light an adorable fire. Small line: "A fire needs a question, not a committee."
+2. Drag or tap ANY TWO offerings into the fire: 🍅 extra food, 🖨 printer, ⏱ time, 🎸 music, 🧤 willing hands, 🔧 tools, 🎨 art, 🏡 potential space, 💻 computer, 🚲 transportation. Tapping must work if dragging fails.
+3. Choose one of FOUR EQUALLY WELCOME concentric fire circles: "Curious: I want to understand"; "Helper: I could contribute"; "Starter: I'd try something"; "Gatherer: I'd help willing people coordinate." People may change their choice. No scores or ranks.
+4. Ember explosion → one playful one-page SPARK CARD. It combines the two offerings and selected circle into a real, reversible seven-day experiment PROPOSAL: funny short title, first thing to draft or investigate TODAY, one voluntary question to invite another person, and one real safety/permission boundary. Examples:
+• tomatoes + printer = "Tomato Telegraph": draft a surplus-offer QUESTION card; ask a qualified food-access person to review. No food handling promised.
+• guitar + porch = "Porchlight Chorus": draft a 15-minute listening invitation. No event/venue booked.
+• hands + time = "Tiny Trail Quest": draft a park-cleanup proposal and ask the property steward before physical work.
+• laptop + printer = "Paper Portal": draft a simple invitation page and ask one person for feedback.
+• wrench + art = "Repairing the Rainbow": sketch a harmless demo; no mains electricity or unsafe work.
+Other combinations should produce reasonable new bounded draft missions using templates, without calling an AI model at runtime.
+
+End with an irresistible little ember-creature asking "Who might carry this next?" Buttons: "PLAY AGAIN", "COPY INVITATION", "SHARE THE GAME", and optional "EXPLORE ABUNDENT" linking only to https://abundent.org/. Use native system Share if available, otherwise text-copy fallback. Do not fake Aippy native Remix features; the actual creator will enable remix in Aippy when publishing.
+
+CRITICAL: Build without backend, keys, accounts, profile data, location, external APIs, analytics, or automatic messages. No people or organizations are automatically recruited. The cards are suggestions, NOT verified needs, permissions, completed acts, events, or partner commitments. Real-world action needs a willing person and the proper authority. All steps are optional, including leaving.
+
+Make it deliberately easy to REMIX on Aippy. Keep OFFERINGS, 4 CIRCLES, MISSION RECIPES, WORLD THEME, and COLOR PALETTE as distinct editable sections so strangers can make cosmic, mystery, church-music, garden, park or weird banana variations. Add small non-obligatory "a spark from Abundent" origin credit; Aippy's native creator attribution takes precedence. Make the first minute so engaging someone wants to play a second combination immediately.
+
+Prioritize: working taps, delightful feel, excellent cards, replay, share and easy native-platform remix. This is an independent original Aippy game proposal; do not claim it has been posted or integrated with any live backend.
