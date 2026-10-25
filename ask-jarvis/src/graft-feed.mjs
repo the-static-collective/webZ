@@ -90,12 +90,4 @@ export async function readGraftFeed(question,{env=process.env,fetcher=fetch,now=
       ? 'GRAFT candidate summaries from a public staging branch; review pending, not admitted for public distribution or CANNON canon.'
       : 'Explicitly approved public GRAFT editorial summaries only. Public source does not prove deployment, partner agreement or real-world outcomes.'};
 }
-export function graftFieldEntries(graft) {
-  if(graft?.status!=='READ'||!Array.isArray(graft.selected))return [];
-  const label=graft.state==='STAGED_FOR_REVIEW'?'GRAFT STAGED PUBLIC NOTE (REVIEW PENDING): '
-    :'GRAFT APPROVED PUBLIC EDITORIAL SUMMARY: ';
-  return graft.selected.map(({id,lane,status,summary,firstCheck})=>({
-    id:'FW-'+id,lane,status,observation:(label+summary).slice(0,600),
-    firstCheck,sourceId:'S10'
-  }));
-}
+export {graftFieldEntries} from '../public/graft-context.mjs';
