@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {hasSharedQuota,clientDigest,makeReservation,admitRequest,applyAdmission,QUOTAS} from '../src/usage-guard.mjs';
+import {hasSharedQuota,clientDigest,makeReservation,admitRequest,applyAdmission,rejectPrivatePrompt,QUOTAS} from '../src/usage-guard.mjs';
 import adaptiveHandler from '../api/adaptive.js';
 import askHandler from '../api/ask.js';
 
@@ -111,4 +111,11 @@ test('public source query refuses external work when shared store is absent',asy
   assert.equal(state.body.reason,'SHARED_QUOTA_NOT_CONFIGURED');
   assert.equal(external,0);
  }finally{globalThis.fetch=old;for(const [k,v] of Object.entries(saved)){if(v===undefined)delete process.env[k];else process.env[k]=v}}
+});
+
+test('model privacy screen refuses direct email, phone and credential data',()=>{
+ assert.equal(rejectPrivatePrompt('Can we contact someone at neighbor@example.com?'),'PRIVATE_INPUT_NOT_FOR_AI');
+ assert.equal(rejectPrivatePrompt('Please phone 507-555-1234 about this offer.'),'PRIVATE_INPUT_NOT_FOR_AI');
+ assert.equal(rejectPrivatePrompt('Set API key: real-example-secret-12'),'PRIVATE_INPUT_NOT_FOR_AI');
+ assert.equal(rejectPrivatePrompt('What is a good food cooperative?'),null);
 });
