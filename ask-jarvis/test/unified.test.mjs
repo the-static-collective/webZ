@@ -37,7 +37,7 @@ test('triad remains available after adding public context',async()=>{
 });
 
 test('independent question does not inherit an unsupported community match',async()=>{
- const v=await assemble('Why do rainbows produce several different colors?',inspected,{graft:staged});
+ const v=await assemble('Why did ancient astronomers study comets?',inspected,{graft:staged});
  assert.equal(v.context.relation,'INDEPENDENT_QUESTION');
  assert.deepEqual(v.synthesis.related,[]);
  assert.deepEqual(v.synthesis.graft,[]);
