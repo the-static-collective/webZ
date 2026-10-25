@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#163c2d">
+<title>Waseca, what should our grocery look like? · An independent community invitation</title>
+<meta name="description" content="Waseca's community-owned grocery idea deserves a town-sized conversation. Tell us one thing you want, and invite one neighbor. Independent initiative by The Static Collective / Abundent.">
+<meta property="og:type" content="website"><meta property="og:title" content="Waseca, what should our grocery look like?"><meta property="og:description" content="A community-owned grocery is being explored in Waseca. What would make it worth building? Bring one idea. Invite one neighbor."><meta property="og:url" content="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/waseca-grocery">
+<style>
+:root{--pine:#163c2d;--leaf:#245c3f;--cream:#f8f3e5;--ink:#21362a;--line:#c7d5c4;--gold:#f2d481;--rust:#a75130;--mint:#d9e8d4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}a{color:inherit}button,input,textarea{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--rust);outline-offset:4px}.wrap{width:min(1080px,calc(100% - 32px));margin:auto}
+.hero{background:var(--pine);color:#fff;position:relative;overflow:hidden;padding:24px 0 80px}.hero:after{content:"";position:absolute;right:-160px;top:-170px;width:720px;height:720px;border:2px solid #ffffff25;border-radius:50%;box-shadow:0 0 0 35px #ffffff0b,0 0 0 91px #ffffff0a,0 0 0 149px #ffffff08;pointer-events:none}
+nav{position:relative;z-index:2;display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;align-items:center;font-size:.83rem}nav .brand{font-weight:900;text-transform:uppercase;letter-spacing:.1em;text-decoration:none}nav .right{display:flex;flex-wrap:wrap;gap:12px;color:#f0e6c5}
+.eyebrow{display:inline-block;color:var(--gold);font-size:.79rem;letter-spacing:.13em;font-weight:900;text-transform:uppercase;position:relative;z-index:1}
+.hero h1{font:clamp(3.6rem,10vw,8.5rem)/.91 Georgia,serif;max-width:1000px;margin:54px 0 22px;letter-spacing:-.066em;position:relative;z-index:1}.hero h1 em{font-style:normal;color:var(--gold)}.hero p{max-width:790px;font-size:clamp(1.08rem,2.2vw,1.38rem);position:relative;z-index:1}.hero .buttons{position:relative;z-index:2}.btn{background:var(--leaf);color:#fff;border:1px solid var(--leaf);padding:12px 18px;min-height:47px;border-radius:5px;text-decoration:none;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:9px}.btn.gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}.btn.line{background:transparent;border-color:currentColor;color:inherit}.buttons{display:flex;flex-wrap:wrap;gap:11px;margin:24px 0}.statement{background:#fff0c9;border-left:6px solid var(--rust);padding:14px 18px;position:relative;z-index:3;transform:translateY(-25px);font-size:.9rem;box-shadow:0 4px 15px #132a161b}
+section{padding:40px 0}.kicker{text-transform:uppercase;font-size:.76rem;color:var(--rust);font-weight:900;letter-spacing:.13em}h2{font:clamp(2.25rem,4vw,3.8rem)/1.09 Georgia,serif;letter-spacing:-.05em;margin:7px 0 13px}h3{font:1.55rem Georgia,serif;letter-spacing:-.025em;margin:7px 0 12px}.lede{font-size:1.06rem;color:#4c6756;max-width:800px}.shade{background:#e2ecd9;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:23px;background:white;border:1px solid var(--line)}.card.gold{background:#fff6d8}.card p{font-size:.92rem;color:#4d6152}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:25px 0}.choice{border:2px solid var(--line);padding:20px;background:white;text-align:left;color:var(--ink);border-radius:7px}.choice:hover{border-color:var(--leaf)}.choice[aria-pressed=true]{background:#e0ecda;border-color:var(--leaf);box-shadow:inset 0 0 0 2px var(--leaf)}.choice strong{font:1.4rem Georgia,serif;display:block}.choice small{display:block;font-size:.83rem;margin-top:5px;color:#466551}
+label{display:block;font-weight:850;margin:16px 0 7px}textarea{width:100%;max-width:800px;border:1px solid #9db5a0;border-radius:5px;resize:vertical;padding:13px;min-height:96px}input[type=checkbox]{width:20px;height:20px;min-width:20px;accent-color:var(--leaf)}.check{display:flex;align-items:flex-start;gap:10px;max-width:780px;font-size:.9rem;font-weight:600;margin:17px 0}.small{font-size:.83rem;color:#54705d}.status{font-size:.89rem;min-height:24px;color:#5e4e2f;font-weight:800}.receipt{border-left:5px solid var(--leaf);padding:18px;background:#eff8ea;max-width:800px;margin-top:14px}.receipt[hidden]{display:none}.receipt code{font:13px/1.6 ui-monospace,monospace;word-break:break-all;display:block}.chip{display:inline-block;font-size:.73rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#315742;background:#d6e4d5;padding:5px 9px}.sharetext{background:#f7f8f1;border-left:4px solid var(--leaf);padding:17px;white-space:pre-wrap;font:1rem/1.62 Georgia,serif;margin:20px 0}.share{display:grid;grid-template-columns:1fr 1fr;gap:21px}.poster{background:#143728;color:white;border:10px solid #edcb73;aspect-ratio:1/1;padding:7%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:8px 8px 0 #a4b6a0}.poster .over{color:#f4d483;font-weight:900;letter-spacing:.1em;font-size:clamp(.7rem,1.4vw,.96rem)}.poster .big{font:clamp(2.5rem,6vw,5.2rem)/.96 Georgia,serif;letter-spacing:-.058em}.poster .big em{font-style:normal;color:#f4d483}.poster .foot{font-size:clamp(.74rem,1.4vw,1rem);font-weight:800}.shelf{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.shelf button{border:1px solid #8dad99;border-radius:99px;background:white;padding:9px 12px;font-weight:850}.shelf button[aria-pressed=true]{background:var(--leaf);color:white;border-color:var(--leaf)}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:22px 0}.step{border-top:6px solid var(--leaf);background:#fff;padding:20px}.step strong{font:1.4rem Georgia,serif}.step p{font-size:.89rem}.disclaimer{font-size:.86rem;color:#556753}
+footer{background:#102b21;color:#e8f3df;padding:27px 0;font-size:.85rem}footer a{color:var(--gold)}
+@media(max-width:720px){.share,.timeline{grid-template-columns:1fr}.hero{padding-bottom:55px}.hero h1{margin-top:40px}.choices{grid-template-columns:1fr}.poster{max-width:500px;margin:auto}}
+@media print{@page{size:letter;margin:.6in}body{background:white;color:black}nav,.hero,.statement,section:not(#share),footer,.buttons{display:none!important}#share{padding:0}.share{grid-template-columns:1fr}.share>div:first-child{display:none}.poster{width:6in;height:6in;max-width:none;box-shadow:none;margin:0;background:#163c2d;color:white;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style></head>
+<body>
+<header class="hero"><div class="wrap"><nav><a href="https://abundent.org/" class="brand">THE STATIC COLLECTIVE / ABUNDENT</a><div class="right"><a href="#choose">Have a say</a><a href="#share">Spread the word</a><a href="#membership">Membership facts</a></div></nav>
+<p class="eyebrow">WASECA, MINNESOTA · AN OPEN COMMUNITY INVITATION</p>
+<h1>What if<br>our next grocery<br><em>belonged to us?</em></h1>
+<p>Waseca residents are exploring a community-owned grocery store. We don't have to wait for a building to start imagining—and helping shape—what could make it useful. Bring one idea. Invite one neighbor. Help turn interest into something real.</p>
+<div class="buttons"><a class="btn gold" href="#choose">Tell us what matters ↓</a><a class="btn line" href="#share">Invite a neighbor ↗</a><a class="btn line" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/lemon-grocery" target="_blank" rel="noopener noreferrer">Read + print lemonPRESS ↗</a><a href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/lemon-open-page" target="_blank" rel="noopener noreferrer" class="btn line">Issue 001 · Open Calls ↗</a></div>
+</div></header>
+<div class="wrap"><aside class="statement"><strong>Neighbors talking about the grocery, independently.</strong> This page is created by The Static Collective / Abundent, not by the Waseca Area Food Cooperative. It does not sign anyone up as a co-op member, take payments, promise a store, represent organizers, or count members. We support constructive public discussion and will clearly distinguish interest from official enrollment.</aside></div>
+<main>
+<section id="choose"><div class="wrap"><div class="kicker">The first question</div><h2>If Waseca builds it,<br>what should matter most?</h2><p class="lede">Pick a priority. It takes one tap. Your choice stays in this browser until you decide whether to share it publicly or send an optional private suggestion for human review.</p>
+<div id="choices" class="choices">
+<button type="button" class="choice" aria-pressed="true" data-key="affordable"><strong>Everyday affordable groceries</strong><small>Reliable basics, fair prices, an ordinary shopping trip that makes sense.</small></button>
+<button type="button" class="choice" aria-pressed="false" data-key="local"><strong>More from local growers</strong><small>Products from nearby farms and makers, with workable arrangements for sellers.</small></button>
+<button type="button" class="choice" aria-pressed="false" data-key="access"><strong>A store that works for everyone</strong><small>Transportation, access, hours, and different households' needs.</small></button>
+<button type="button" class="choice" aria-pressed="false" data-key="community"><strong>A place to meet and belong</strong><small>Community ownership, shared work, and real neighbor-to-neighbor connections.</small></button>
+</div>
+<label for="thought">One other thing worth considering? (optional; no names or contact details)</label>
+<textarea id="thought" maxlength="175" placeholder="Example: It would be useful to know whether a weekly pickup option could work for people without cars."></textarea>
+<p class="small">We do not collect your identity here. Avoid personal stories, addresses, phone numbers, emails, links, or other people's information.</p>
+<div class="buttons"><button id="make" type="button" class="btn gold">Make my neighbor invitation</button><button id="sendChoice" type="button" class="btn">Send this as a private suggestion</button></div>
+<label class="check"><input type="checkbox" id="consent"><span>Only if I submit: I choose to send this exact suggestion to The Static Collective / Abundent for private human review. It may be edited or declined, and it is not an application for cooperative membership.</span></label>
+<p class="status" id="submitStatus" aria-live="polite"></p>
+<div id="receipt" class="receipt" hidden><strong>Private suggestion received for review</strong><p class="small">Keep this withdrawal key privately. We don't store it in your browser after you leave, and it cannot be recovered.</p><small>Submission ID</small><code id="rid"></code><small>Withdrawal key</small><code id="rkey"></code><div class="buttons"><button class="btn" type="button" id="copyReceipt">Copy private receipt</button><button class="btn line" style="color:var(--ink)" type="button" id="withdraw">Withdraw suggestion</button></div><p class="status" id="receiptStatus"></p></div>
+</div></section>
+<section id="share" class="shade"><div class="wrap"><div class="kicker">The next neighbor</div><h2>Don't just like it.<br>Pass it along.</h2><p class="lede">An actual conversation is worth more than an inflated follower count. Share an honest invitation in your own voice. No chain tracking, referral scores, follower scraping, or official claims.</p>
+<div class="share">
+<div><span class="chip">A post ready to share</span><div id="shareText" class="sharetext">Waseca is exploring a community-owned grocery store. What would make it worth building for you—affordable basics, local growers, better access, or a place to connect? Bring one idea and invite a neighbor.
+
+Independent community conversation by The Static Collective / Abundent. Not an official co-op membership signup.
+
+https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/waseca-grocery</div>
+<div class="buttons"><button type="button" class="btn gold" id="nativeShare">Share with my phone</button><button type="button" class="btn" id="copyPost">Copy this post</button><a id="facebook" class="btn line" style="color:var(--ink)" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fkbhqacsdvjsstzyplqij.supabase.co%2Ffunctions%2Fv1%2Fwaseca-grocery" target="_blank" rel="noopener noreferrer">Share link on Facebook ↗</a><button type="button" class="btn" id="copyURL">Copy link</button></div><p class="status" id="shareStatus" aria-live="polite"></p>
+<div class="shelf" aria-label="Quick invitation themes"><button type="button" data-post="question" aria-pressed="true">Ask a question</button><button type="button" data-post="neighbor" aria-pressed="false">Invite a neighbor</button><button type="button" data-post="do" aria-pressed="false">Help make it real</button></div>
+</div>
+<div><div class="poster" id="poster"><div class="over">WASECA · OUR NEXT CHAPTER</div><div class="big">A grocery<br>we can<br><em>grow together.</em></div><div class="foot">ONE QUESTION. ONE NEIGHBOR. ONE USEFUL STEP.<br>THE STATIC COLLECTIVE · ABUNDENT</div></div>
+<div class="buttons"><button type="button" class="btn gold" id="savePoster">Save square share graphic</button><button type="button" class="btn" id="printPoster">Print poster</button></div><p class="small">Public square graphic generated locally on your phone. No participant photos or organization logos needed.</p><p class="status" id="posterStatus" aria-live="polite"></p></div></div>
+</div></section>
+<section id="membership"><div class="wrap"><div class="kicker">Important distinction</div><h2>Interested is not enrolled.</h2><div class="grid"><article class="card gold"><h3>Want to become an actual co-op member?</h3><p>The cooperative has discussed opportunities to become a member, but I could not verify a current public online enrollment link, membership price, or official member count. Those details must come from the Waseca Area Food Cooperative itself. This independent site does not take dues or register owners.</p><a class="btn" href="https://wasecacountypioneer.com/news/community-invited-learn-about-grocery-co-op" target="_blank" rel="noopener noreferrer">Read the reported co-op plans ↗</a></article><article class="card"><h3>Want to keep helping in the meantime?</h3><p>You can optionally stay in touch with <strong>Abundent</strong> about grocery-related community ideas. That's separate from becoming a member of the cooperative. No account required to read or share this page.</p><a class="btn" href="https://abundent.org/contact/?via=grocery" target="_blank" rel="noopener noreferrer">Stay in touch with Abundent ↗</a></article></div></div></section>
+<section class="shade"><div class="wrap"><div class="kicker">We're not waiting for a marketing department</div><h2>One person. One invitation. One useful return.</h2><div class="timeline"><article class="step"><strong>1. Ask.</strong><p>What would make a community-owned grocery valuable? A real answer beats a hundred assumptions.</p></article><article class="step"><strong>2. Invite.</strong><p>Share with somebody who lives, works, grows, shops, or cares about Waseca. No one gets signed up by being tagged.</p></article><article class="step"><strong>3. Build.</strong><p>Interested neighbors can voluntarily explore one manageable question through our independent Garden and First Yes experiments.</p></article></div><div class="buttons"><a class="btn gold" href="https://garden.abundent.org/workbench/" target="_blank" rel="noopener noreferrer">Find a useful next step ↗</a><a class="btn" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/first-yes?mission=food" target="_blank" rel="noopener noreferrer">Make a First Yes field kit ↗</a></div><p class="disclaimer">No membership tally, private submissions, or presumed partner relationships are shown. Proposals are proposals; completed work requires independent evidence. Source context: Waseca County Pioneer, October 22, 2026.</p></div></section>
+</main>
+<footer><div class="wrap"><strong>INDEPENDENT WASECA GROCERY CONVERSATION</strong><br>The Static Collective / Abundent · Made for actual neighbors, not a fake grassroots crowd.<br><a href="https://abundent.org/">Abundent ↗</a> · <a href="https://garden.abundent.org/">The Garden ↗</a> · <a href="https://wasecacountypioneer.com/news/community-invited-learn-about-grocery-co-op" target="_blank" rel="noopener noreferrer">Independent news source ↗</a></div></footer>
+<script>
+(()=>{'use strict';
+const PAGE='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/waseca-grocery', $=id=>document.getElementById(id);
+const data={
+affordable:{word:'Affordable everyday groceries',question:'What basics would make a new grocery genuinely useful for your household?'},
+local:{word:'Local farms and makers',question:'What would make buying from local growers practical and affordable?'},
+access:{word:'Accessibility and convenience',question:'What hours, routes, pickup options or accessibility features should we ask about?'},
+community:{word:'A shared community place',question:'What kind of gathering, ownership, or community connection would you value?'}
+};
+let selected='affordable',format='question',receipt=null,caption='';
+const privatePattern=/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?1[ .-]?)?\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}|https?:\/\/|www\./i;
+const clean=s=>String(s||'').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim();
+function set(id,t){$(id).textContent=t;}
+function compose(){
+ const custom=clean($('thought').value);
+ if(privatePattern.test(custom)){set('submitStatus','Remove names, URLs, phone numbers, and email addresses first.');return null;}
+ const focus=data[selected];
+ const first=format==='neighbor'
+ ?'Waseca neighbors: a community-owned grocery is being explored. What would you love to see on its shelves, and what would make it worth visiting? I’m inviting one neighbor to think about it too.'
+ :format==='do'
+ ?'It takes more than a building to create a community grocery. One good question, one useful idea, one willing neighbor. What small contribution could help Waseca explore a community-owned store?'
+ :'Waseca is exploring a community-owned grocery store. I care about '+focus.word.toLowerCase()+'. '+focus.question;
+ caption=first+(custom?'\n\nOne thing I’d like considered: '+custom:'')+'\n\nIndependent community conversation by The Static Collective / Abundent. NOT the co-op’s official member signup.\n\n'+PAGE;
+ set('shareText',caption);
+ return caption;
+}
+document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+ selected=b.dataset.key;document.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed',String(b===x)));
+ set('submitStatus','Selected: '+data[selected].word+'. Not submitted.');compose();
+}));
+document.querySelectorAll('[data-post]').forEach(b=>b.addEventListener('click',()=>{
+ format=b.dataset.post;document.querySelectorAll('[data-post]').forEach(x=>x.setAttribute('aria-pressed',String(b===x)));compose();
+}));
+$('make').addEventListener('click',()=>{if(compose()){$('share').scrollIntoView({behavior:'smooth'});set('submitStatus','Your invitation is ready to share. Nothing was submitted.')}});
+async function copy(value,output){try{await navigator.clipboard.writeText(value);set(output,'Copied. You choose where to share.');}catch{set(output,'Clipboard not available. Select and copy the text manually.');}}
+$('copyPost').addEventListener('click',()=>{if(compose())copy(caption,'shareStatus')});
+$('copyURL').addEventListener('click',()=>copy(PAGE,'shareStatus'));
+$('nativeShare').addEventListener('click',async()=>{
+ if(!compose())return;
+ if(navigator.share){try{await navigator.share({title:'Waseca: what should our grocery look like?',text:caption,url:PAGE});set('shareStatus','Share sheet opened; sharing is your decision.');}catch(e){set('shareStatus','Share cancelled or unavailable. Use Copy this post instead.');}}
+ else copy(caption,'shareStatus');
+});
+$('sendChoice').addEventListener('click',async()=>{
+ if(!$('consent').checked){set('submitStatus','To send a private suggestion, check the explicit consent box first.');return;}
+ const other=clean($('thought').value);if(other.length>175||privatePattern.test(other)){set('submitStatus','Keep the optional comment under 175 characters, with no contact details or links.');return;}
+ const body='INDEPENDENT GROCERY PRIORITY: '+data[selected].word+'. '+(other||data[selected].question);
+ if(body.length>300){set('submitStatus','Please shorten the optional comment.');return;}
+ const btn=$('sendChoice');btn.disabled=true;set('submitStatus','Submitting privately for human review…');
+ try{
+  const res=await fetch(location.pathname,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'submit',kind:'question',lane:'commerce',body,nextStep:'Public conversation theme, not a co-op member enrollment or partner commitment.',consentToReview:true})});
+  const j=await res.json();if(!res.ok)throw Error(j.error||'Could not submit.');
+  receipt={id:j.submission.id,withdrawKey:j.withdrawKey};set('rid',receipt.id);set('rkey',receipt.withdrawKey);
+  $('receipt').hidden=false;$('consent').checked=false;
+  set('submitStatus','Saved privately as PENDING. No member enrollment occurred. Keep your withdrawal key.');
+  $('receipt').scrollIntoView({behavior:'smooth',block:'center'});
+ }catch(e){set('submitStatus','Not saved: '+String(e.message||e));}
+ finally{btn.disabled=false;}
+});
+$('copyReceipt').addEventListener('click',()=>{if(receipt)copy('GARDEN PRIVATE WITHDRAWAL\nID: '+receipt.id+'\nKEY: '+receipt.withdrawKey,'receiptStatus')});
+$('withdraw').addEventListener('click',async()=>{
+ if(!receipt||!confirm('Permanently delete this private suggestion?'))return;
+ try{const r=await fetch(location.pathname,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'withdraw',...receipt})});const j=await r.json();if(!r.ok)throw Error(j.error||'Could not withdraw');
+  receipt=null;set('rkey','');set('rid','');set('receiptStatus','Suggestion deleted.');}
+ catch(e){set('receiptStatus','Withdrawal not confirmed: '+e.message);}
+});
+$('printPoster').addEventListener('click',()=>window.print());
+$('savePoster').addEventListener('click',()=>{
+ try{
+ const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1080;const c=canvas.getContext('2d');
+ if(!c)throw Error('Canvas unavailable');
+ c.fillStyle='#eecf77';c.fillRect(0,0,1080,1080);c.fillStyle='#163c2d';c.fillRect(24,24,1032,1032);
+ c.fillStyle='#f3d784';c.font='bold 33px Arial';c.fillText('WASECA  /  OUR NEXT CHAPTER',90,130);
+ c.fillStyle='#ffffff';c.font='101px Georgia';c.fillText('A grocery',83,380);c.fillText('we can',83,505);
+ c.fillStyle='#f3d784';c.fillText('grow together.',83,630);
+ c.strokeStyle='#b8d1bc';c.lineWidth=3;c.beginPath();c.moveTo(90,744);c.lineTo(990,744);c.stroke();
+ c.fillStyle='#ffffff';c.font='bold 30px Arial';c.fillText('ONE QUESTION. ONE NEIGHBOR.',90,825);c.fillText('ONE USEFUL STEP.',90,873);
+ c.fillStyle='#d9e9d9';c.font='27px Arial';c.fillText('The Static Collective / Abundent — independent invitation',90,974);
+ const a=document.createElement('a');a.download='waseca-grocery-neighbor-invitation.png';a.href=canvas.toDataURL('image/png');a.click();
+ set('posterStatus','Square graphic saved. Sharing it remains your choice.');
+ }catch(e){set('posterStatus','Could not save the image on this device. You can still copy the caption.');}
+});
+compose();
+})();
+</script></body></html>
