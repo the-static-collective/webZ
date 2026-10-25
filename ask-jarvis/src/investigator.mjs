@@ -112,7 +112,15 @@ export function makeGatewayProvider({token,fetcher=fetch,model=GATEWAY_MODEL}={}
         body:JSON.stringify({model,messages:[{role:'system',content:system},{role:'user',content:input}],
           response_format:{type:'json_object'},temperature:0.3,max_tokens:900,stream:false})
       });
-      if(!response.ok)throw Error('GATEWAY_HTTP_'+response.status);
+      if(!response.ok) {
+        let reason='UNKNOWN';
+        try {
+          const errBody=await response.json();
+          const raw=errBody?.error?.type;
+          if(typeof raw==='string' && /^[a-z_]{3,48}$/.test(raw)) reason=raw.toUpperCase();
+        } catch { /* Do not log or transmit upstream response bodies. */ }
+        throw Error('GATEWAY_HTTP_'+response.status+'_'+reason);
+      }
       const contentLength=Number(response.headers.get('content-length'));
       if(contentLength>12000)throw Error('GATEWAY_RESPONSE_TOO_LARGE');
       const raw=await response.text();
