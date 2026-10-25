@@ -85,3 +85,13 @@ The original 1999 question machine remains the homepage. The **fully fictional, 
 ## TRIAD-008 + NATIVE-009 protected research engine
 
 Selecting **ALEX × 3rdi × LOADOUT** inspects three pinned public owner documents and displays a source/observer/effect-fence research cut. A separate, explicit **Run Three Owner Kernels** button then calls the actual owner Python code through `api/native.py` when the protected Vercel preview enables it. ALEX evaluates an unsupported source-to-local-need claim, 3rdi compiles an observer-local question-arrival projection and LOADOUT refuses unapproved contact. Each returns a locally verifiable unsigned native receipt, not a warrant of real-world approval or action. The independent model-investigation and question/AI-proposal handoffs still work as before. See [NATIVE-009.md](NATIVE-009.md) and [TRIAD-008.md](TRIAD-008.md). Production/native auto-execution is **disabled**.
+
+## MAGIC LEGO 014 — context-shaped front room (proposal)
+
+The existing retro visual identity remains. The initial page shows JAR;VIS, one question box, a contact invitation and a collapsed whole-garden sitemap. The earlier town, ignition, café and table doors still exist inside that voluntary map, rather than occupying the first screen.
+
+After a question is answered, a small **contextual instrument rack** suggests up to three real routes selected from a transparent local catalog. Relevant visits to the existing Seventh Table and Ignite doors carry the question in a URL fragment only when the person clicks; unrelated questions get a browsing route. This is client-side presentation, not automatic agent execution, automatic service routing, a partner match, or model reasoning.
+
+Native share sheets (with clipboard/manual fallbacks) now share a question link or an edited invitation in one tap. The original evidence receipt and downloads stay under the optional technical shelf. **No server-side receipt ledger or account-free synchronized persistence is introduced:** a copied link is a voluntary handoff, not an exported receipt or an RSVP. Native share is not evidence of delivery. The private contact form remains separate and consent-based. The original pinned sources, reviewer gates, and human permission boundaries remain.
+
+Validation: node --test includes magic-lego.test.mjs. Preview/release requires confirming mobile behavior, correct source statuses and browser sharing on actual devices. This change does not change the production alias by itself.

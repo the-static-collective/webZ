@@ -3,6 +3,8 @@ import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {buildRelayCapsule,makeRelayLink} from './relay.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
+import {shareableQuestion} from './cafe.mjs';
+import {composeTools} from './magic-lego.mjs';
 
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
@@ -43,6 +45,9 @@ function clearReturn() {
   $('#vis-result').textContent='Model investigation is optional and may be unavailable. The original question card works without it.';
   $('#vis-investigate').disabled=false;
   last=null;reply.hidden=true;cleanAudio();
+  $('#magic-tools').hidden=true;$('#magic-tools-cards').replaceChildren();
+  $('#quick-share-link').hidden=true;$('#quick-share-link').value='';
+  $('#quick-share-status').textContent='Nothing shared yet.';
   $('#handoff-link').value='';
   $('#question-table-status').textContent='Nothing moves until you choose. Do not carry contact details or other people\'s private information.';
   $('#handoff-status').textContent='Do not include names, phone numbers or private details. The question appears in the shared URL.';
@@ -132,7 +137,68 @@ function show(data) {
   $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
   $('#encounter-gaps').replaceChildren(...data.encounter.gaps.map(g=>el('li','',g)));
   last=data;reply.hidden=false;$('#discovery-tools').hidden=false;
+  showMagicTools(data);
 }
+
+
+function showMagicTools(data){
+  const cards=$('#magic-tools-cards');
+  const tools=composeTools(data.question,data.return.kind);
+  cards.replaceChildren(...tools.map(tool=>{
+    const card=el('article','magic-tool-card');
+    const a=el('a','magic-tool-link',tool.name+' ↗');
+    a.href=tool.href;
+    if(shareableQuestion(data.question)&&tool.id==='ignite') {
+      // A clicked same-origin link carries a public-safe question in a fragment.
+      a.href='/ignite/#'+new URLSearchParams({q:data.question}).toString();
+    }
+    if(shareableQuestion(data.question)&&tool.id==='tables'){
+      try{a.href=makeTableSeedLink(window.location.href,data.question);}catch{}
+    }
+    card.append(a,el('p','',tool.hint));return card;
+  }));
+  $('#magic-tools').hidden=false;
+}
+async function shareQuestionNow(){
+ if(!last)return;
+ const status=$('#quick-share-status'),field=$('#quick-share-link');
+ try{
+   const link=makeHandoffLink(window.location.href,last.question,last.return.kind);
+   field.value=link;field.hidden=false;
+   if(typeof navigator.share==='function'){
+     try{
+       await navigator.share({title:'A question for JAR;VIS',url:link});
+       status.textContent='Share sheet opened. Nobody was contacted by this site.';return;
+     }catch(error){if(error?.name==='AbortError'){status.textContent='Sharing cancelled.';return;}}
+   }
+   if(navigator.clipboard?.writeText){
+     try{await navigator.clipboard.writeText(link);status.textContent='Question link copied. Paste it wherever you choose.';return;}catch{}
+   }
+   field.focus();field.select();
+   status.textContent='Select and copy this link. It contains the exact question, so share it only when you mean to.';
+ }catch{field.hidden=true;status.textContent='This question cannot go in a public link. Remove contact details first.';}
+}
+async function shareInvitationNow(copyOnly=false){
+ if(last?.return.kind!=='invitation')return;
+ const editor=$('#invitation-editor'),status=$('#draft-status');
+ const text=editor.value.trim();
+ if(!text){status.textContent='Write your invitation first.';return;}
+ if(!copyOnly&&typeof navigator.share==='function'){
+   try{await navigator.share({title:'An invitation',text});
+     status.textContent='Share sheet opened. You choose who receives it.';return;
+   }catch(error){if(error?.name==='AbortError'){status.textContent='Sharing cancelled.';return;}}
+ }
+ if(navigator.clipboard?.writeText){
+   try{await navigator.clipboard.writeText(text);status.textContent='Invitation copied. Paste it into a message or email.';return;}catch{}
+ }
+ editor.focus();editor.select();status.textContent='Your invitation is selected. Copy it and send it yourself.';
+}
+$('#share-question').addEventListener('click',()=>{void shareQuestionNow();});
+$('#share-invitation').addEventListener('click',()=>{void shareInvitationNow();});
+$('#copy-invitation').addEventListener('click',()=>{void shareInvitationNow(true);});
+$('#open-garden-map').addEventListener('click',()=>{
+ const map=$('#garden-map');map.open=true;map.scrollIntoView({block:'start',behavior:'smooth'});
+});
 
 input.addEventListener('input',()=>{input.setCustomValidity('');$('#received-note').hidden=true;invalidate();});
 kind.addEventListener('change',invalidate);
