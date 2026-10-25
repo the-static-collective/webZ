@@ -8,6 +8,7 @@ import {investigate,makeWorkersProvider} from './investigator.mjs';
 import {orientQuestion} from './discovery.mjs';
 import mission from '../context/mission-v1.json' with {type:'json'};
 import catalog from '../town/catalog.json' with {type:'json'};
+import {publicCommonsFor} from '../public/commons.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -69,7 +70,7 @@ async function inspect(c,fetcher,question) {
   }
 }
 
-export async function assemble(question,fetcher=fetch,{kind='auto',lens='standard'}={}) {
+export async function assemble(question,fetcher=fetch,{kind='auto',lens='standard',graft=null}={}) {
   if(!RESEARCH_LENSES.includes(lens))throw Error('RESEARCH_LENS');
   if(typeof question!=='string') throw Error('QUESTION_REQUIRED');
   if(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(question)) throw Error('QUESTION_CONTROL');
@@ -85,8 +86,32 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
   const triad=lens==='triad'?composeTriad({question:q,kind:encounter.kind,sources,observedAt}):null;
-  const guidance = found ? `I found ${found} public project notes that might help. Here's ${returned.kind==='question'?'a question card':'a '+returned.kind+' draft'} to get started. Nothing has been sent or approved.`
-    : 'I could not verify the project notes this time. Here\'s a draft to start from, but I haven\'t checked whether any partner can help.';
+  const commons=publicCommonsFor(q);
+  const matches=orientation.relation==='INDEPENDENT_QUESTION' ? []
+    :commons.selected.filter(x=>x.relevance==='KEYWORD_MATCH');
+  const graftSnapshot=graft??{schema:'jarvis/graft-feed-v1',status:'NOT_REQUESTED',
+    state:'NOT_ENABLED',selected:[]};
+  const graftNotes=orientation.relation==='INDEPENDENT_QUESTION' ? []
+    :(graftSnapshot.selected||[]).slice(0,3);
+  const first=matches[0];
+  const synthesis={
+    schema:'ask-jarvis/synthesis-v1',basis:'EDITORIAL_CANDIDATES_NOT_REAL_WORLD_EVIDENCE',
+    related:matches.slice(0,3).map(x=>({id:x.id,status:x.status,observation:x.observation,
+      firstCheck:x.firstCheck})),
+    graft:graftNotes.map(x=>({id:x.id,publication:x.publication,summary:x.summary,
+      sourceUrl:x.sourceUrl})),
+    firstMove:first?.firstCheck??returned.nextQuestion,
+    verifiedProjectReads:found,
+    humanGate:'Ask the responsible human steward before invitations, service, resource allocation or public claims.'
+  };
+  const nextQuestion=first?.firstCheck??returned.nextQuestion;
+  const guidance=orientation.relation==='INDEPENDENT_QUESTION'
+    ? 'This is an independent question, not a forced Collective project match. Here is an optional draft; verify external facts independently.'
+    :first
+      ? `A useful starting connection: ${first.observation} First check: ${first.firstCheck} I inspected ${found} public project source document(s), not a live service or partner commitment.`
+      :found
+        ? `I inspected ${found} public project documents. Here's a ${returned.kind} draft and a specific question to test next.`
+        : 'Source inspection did not succeed. This draft uses local context only; no real-world result is claimed.';
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
@@ -97,6 +122,8 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     {name:'JAR;VIS',status:'DONE',detail:'Received one question; deterministic rules, no model or question storage.'},
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
     {name:'TABLElogic encounter',status:'DONE',detail:'Locally separated the question, draft ideas and possible relations; unresolved gaps remain open. No TABLElogic runtime invoked.'},
+    {name:'Public Commons',status:'READ',detail:'Selected '+matches.length+' question-relevant curated notes. These are proposals, not partner evidence.'},
+    {name:'GRAFT publication bridge',status:graftSnapshot.status==='READ'?'READ':'HOLD',detail:graftSnapshot.status==='READ'?'Read '+graftNotes.length+' source-pinned GRAFT summaries ('+graftSnapshot.state+'). No donor code executed.':'No additional GRAFT source note verified.'},
     ...sources.map(s=>({name:s.name,status:s.status==='INSPECTED'?'READ':'HOLD',detail:s.status==='INSPECTED'?'Read the whole document at an exact source commit and hashed its bytes.':'Source unavailable; no substitute claims.'})),
     ...(triad?[
       {name:'ALEX provenance floor',status:found?'READ':'HOLD',detail:'Read pinned public owner sources with exact excerpt line loci; claim formation and native ALEX runtime NOT_RUN.'},
@@ -111,9 +138,14 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   ];
   const artifact = [
     '# ASK JAR;VIS / QUESTION CARD',`Question: ${q}`,'',returned.title,'',returned.body,'',
-    `Observation: ${guidance}`,'','Sources inspected (read-only):',
+    `Observation: ${guidance}`,'',
+    'Related public project notes (not commitments):',
+    ...matches.slice(0,3).map(x=>'- '+x.id+': '+x.observation+' FIRST CHECK: '+x.firstCheck),
+    'GRAFT source notes:',
+    ...graftNotes.map(x=>'- '+x.id+' ['+x.publication+']: '+x.summary+' '+x.sourceUrl),
+    '','Sources inspected (read-only):',
     ...sources.map(s=>`- ${s.name} — ${s.status} — ${s.source}${s.sha256?' ['+s.sha256+']':''}`),'',
-    `Next question: ${returned.nextQuestion}`,'',
+    `Next question: ${nextQuestion}`,'',
     'No organizer affiliation, verified human consent, remote execution, partner commitment, or fulfilled service is claimed.',
     `Generated: ${observedAt}`
   ].join('\n');
@@ -121,7 +153,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     goal:orientation.goal,relation:orientation.relation,
     workstreams:orientation.workstreams,ideas:orientation.ideas,
     caution:orientation.advice,grounding:'EDITORIAL_DIRECTION_NOT_LOCAL_EVIDENCE'};
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion:returned.nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,context,...(triad?{triad}: {})};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,context,commons,graft:graftSnapshot,synthesis,...(triad?{triad}: {})};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;
