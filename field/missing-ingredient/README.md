@@ -4,6 +4,12 @@ An **executable, fictional community-food circular**. A recipe finds a specific 
 
 **Status:** reviewable working prototype, NOT a grocery, resource registry, donation platform, broadcaster, hosted contact system, or actual donor-project integration. This independent Static Collective work is not authorized by the Waseca grocery organizers, Coalition of Care, Real Life Covenant Church, Kinship, or any other institution.
 
+## Live independent demo
+
+https://missing-ingredient-field-001.vercel.app/
+
+The Vercel project is separate from Abundent's public domain and other production applications. The deployed source is the four static application files (index.html, style.css, app.mjs, engine.mjs); pushing this draft PR does not automatically update that independent deployed copy. It was verified READY and publicly fetchable on October 24, 2026. This is an experimental public page, not a partner service.
+
 ## Run
 The project is 100% static and dependency-free.
 
