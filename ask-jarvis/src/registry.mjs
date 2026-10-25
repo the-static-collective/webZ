@@ -110,10 +110,24 @@ export const CAPABILITIES = Object.freeze([
   }
 ].map(entry => Object.freeze({...entry, tags:Object.freeze(entry.tags)})));
 
-export function selectSources(question, kind) {
+// The score is a transparent heuristic. It ranks a fixed catalog; it does not
+// discover new capabilities or imply that these projects agreed to participate.
+const AFFINITY = {
+  food:{planz:7,tablelogic:6,relatte:2},
+  gathering:{tablelogic:7,relatte:4,planz:3},
+  arts:{ghot:7,tablelogic:2},
+  stewardship:{planz:5,tablelogic:3,relatte:2},
+  compute:{ghot:8,workbench:7},
+  broadcast:{relatte:6,jarvis:4},
+  software:{workbench:6,cannon:5,jarvis:2}
+};
+export function selectSources(question, kind, facets = []) {
   const words = new Set(question.toLowerCase().match(/[a-z0-9]+/g) || []);
-  const score = c => c.tags.reduce((n,t) => n + (words.has(t) ? 3 : 0),0)
-    + (c.id === 'cannon' ? 2 : 0) + (kind === 'song' && c.id === 'ghot' ? 4 : 0);
+  const score = c => c.tags.reduce((n,t) => n + (words.has(t) ? 4 : 0),0)
+    + facets.reduce((n,f)=>n+(AFFINITY[f]?.[c.id]||0),0)
+    + (kind==='song' && c.id==='ghot' ? 5 : 0)
+    + (kind==='door' && c.id==='cannon' ? 2 : 0)
+    + (c.id==='jarvis'||c.id==='tablelogic' ? 1 : 0);
   return [...CAPABILITIES].sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id)).slice(0,3);
 }
 
