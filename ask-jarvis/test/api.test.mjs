@@ -9,7 +9,7 @@ test('both health adapters identify the public return release and manual-only br
   let actual;
   const res={setHeader(){},status(){return this;},json(value){actual=value;}};
   await healthHandler({method:'GET'},res);
-  assert.equal(actual.release,'public-return-006');
+  assert.equal(actual.release,'public-return-008');
   assert.deepEqual(actual.returns,expected.returns);
   assert.equal(actual.bridge,'manual-export-only');
   assert.ok(actual.returns.includes('plan'));
