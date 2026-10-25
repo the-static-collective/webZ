@@ -3,7 +3,7 @@
 import {sha256} from '../public/evidence.mjs';
 
 const GATEWAY_URL = 'https://ai-gateway.vercel.sh/v1/chat/completions';
-export const GATEWAY_MODEL = 'openai/gpt-4.1-mini';
+export const GATEWAY_MODEL = 'nvidia/nemotron-3.5-lightning-free';
 export const WORKERS_MODEL = '@cf/meta/llama-3.1-8b-instruct';
 const SYSTEM = [
   'You are VIS, an experimental investigator working alongside JAR, a provenance-minded source librarian.',
