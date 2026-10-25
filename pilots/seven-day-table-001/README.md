@@ -17,3 +17,5 @@ The public landing view never displays an invitation roster or contributions. In
 ## Human/authority controls
 
 Invitation labels indicate perspectives, not names or actual attendees. The organizer sends links voluntarily. Guests self-report responses; neither accepting an invite nor delegating authorizes institutional representation or verified actions. A host can export a private status summary for conversation. The table closes to writes at the seven-day boundary; data retention/deletion beyond that requires separate steward action.
+
+An original invitee can reclaim their place by revoking an **unused** ambassador invitation; once the ambassador has contributed or declined, their answer is respected instead.
