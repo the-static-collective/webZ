@@ -6,7 +6,7 @@ const api=Deno.env.get("SUPABASE_URL")||"";
 const secretKey=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")||"";
 if(!api||!secretKey)throw Error("SERVER_NOT_CONFIGURED");
 const db=createClient(api,secretKey,{auth:{persistSession:false,autoRefreshToken:false}});
-const townOrigin=/^https:\/\/(?:www\.)?abundent\.org$/;
+const townOrigin=/^https:\/\/(?:(?:www|connections|town)\.)?abundent\.org$/;
 const previewOrigin=/^https:\/\/ask-jarvis-1999-preview-[a-z0-9]+-theotherlucasv-1250s-projects\.vercel\.app$/;
 const safeOrigin=o=>townOrigin.test(o)||previewOrigin.test(o);
 const JSON_HEADERS={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
