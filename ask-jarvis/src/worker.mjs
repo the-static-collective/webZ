@@ -85,8 +85,8 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
   const triad=lens==='triad'?composeTriad({question:q,kind:encounter.kind,sources,observedAt}):null;
-  const guidance = found ? `I inspected ${found} of ${sources.length} public source documents and composed this ${returned.kind==='question'?'question card':returned.kind+' draft'}. The draft uses local rules; the documents show possible tools, not commitments.`
-    : 'I could not verify a source document on this run. The draft below is locally composed from your question; no project connection is being claimed.';
+  const guidance = found ? `I found ${found} public project notes that might help. Here's ${returned.kind==='question'?'a question card':'a '+returned.kind+' draft'} to get started. Nothing has been sent or approved.`
+    : 'I could not verify the project notes this time. Here\'s a draft to start from, but I haven\'t checked whether any partner can help.';
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),

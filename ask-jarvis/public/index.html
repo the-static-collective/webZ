@@ -16,39 +16,17 @@
     <h1><span class="ask">ask</span> <span class="brand">JAR<span class="colon">;</span>VIS<span class="bang">!</span></span></h1>
     <p class="tagline">The Internet is a very big place. <em>You only need one question.</em></p></div>
 </header>
-<div class="strip"><a class="strip-link" href="/doors/">✳ CHOOSE A DOOR</a> <a class="strip-link" href="/contact/?via=coalition">✉ STAY IN TOUCH</a> <span class="bullet">✳</span> <span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> SMALL THINGS CAN BEGIN HERE <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
-<section class="town-door" aria-label="The Waseca Town Desk" style="padding:19px 23px;margin:20px 0;border:3px double #50775e;background:#ebefdc;box-shadow:4px 4px 0 #aec4af;">
-  <span style="font:700 12px monospace;color:#895039">✳ OPEN FRONT PORCH · TOWN-010 · NO ACCOUNT</span>
-  <h2 style="font:700 clamp(26px,5vw,40px) Georgia,serif;color:#1d513d;margin:8px 0">Live around Waseca?<br>Bring one useful question.</h2>
-  <p>Browse possible neighborhood needs, offers, and tiny experiments. Follow connections in the Free Graph. Leave one general idea for <strong>private human review</strong>—never automatic public posting or AI inference.</p>
-  <a href="/town/" style="display:inline-block;background:#edd07c;border:2px solid #31543d;color:#183d31;padding:13px 18px;font-weight:800;text-decoration:none">✳ VISIT THE TOWN DESK →</a>
-  <p><small>These are ideas to investigate—not verified local services, a government page, or a partner signup. No AI required to browse.</small></p>
-</section>
-<section class="ignition-door" aria-label="Twenty-four hour field kit" style="padding:17px 23px;margin:20px 0;border:3px double #9b7433;background:#fff3cf;box-shadow:4px 4px 0 #bdad87;">
-  <span style="font:700 12px monospace;color:#8a4e28">✳ IGNITION-012 · BUILD THE FIRST USEFUL THING</span>
-  <h2 style="font:700 clamp(25px,4vw,38px) Georgia,serif;color:#2b4774;margin:8px 0">From question to a 24-hour field kit.</h2>
-  <p>Pick a public-safe problem and what you can contribute. Get a printable question, a specific invitation, a permission gate, and a blank witnessed-return sheet. No accounts, no imaginary signups, no automatic outreach.</p>
-  <a href="/ignite/" style="display:inline-block;background:#f1ca69;border:2px solid #6e5936;color:#173d68;padding:12px 16px;font-weight:800;text-decoration:none">✳ MAKE ONE SMALL THING →</a>
-  <p><small>Editorial proposals only. Printing a card is not proof that a partner accepted or fieldwork occurred.</small></p>
-</section>
-<section class="cafe-intro" aria-labelledby="cafe-title">
- <div class="cafe-badge">✳ CAFÉ MODE · NOW OPEN · BRING A QUESTION, NOT A PASSWORD</div>
- <div class="cafe-hero">
-  <div><p class="cafe-kicker">THE LITTLE NEIGHBORHOOD POSSIBILITY MACHINE</p><h2 id="cafe-title">ONE QUESTION.<br><em>ONE SMALL ACT.</em><br>ONE MORE TABLE.</h2>
-  <p>Pick a card, let JAR;VIS sketch a first step, then carry the question to someone willing. No signups. No automatic introductions. You get to decide what happens next.</p></div>
-  <div class="cafe-receipt" aria-hidden="true"><b>TAKE A NUMBER</b><span>001</span><small>EVERY CHAIR COUNTS<br>✳ ✳ ✳</small></div>
- </div>
- <div class="cafe-stages" aria-label="How this experiment works"><span><b>01</b> Ask</span><span><b>02</b> Explore</span><span><b>03</b> Pass it on (by choice)</span></div>
-</section>
+<div class="strip"><a class="strip-link" href="/contact/?via=coalition">✉ STAY IN TOUCH</a> <button id="open-garden-map" class="strip-link" type="button">✳ THE WHOLE GARDEN / SITEMAP</button> <span class="bullet">✳</span> ◉ OPEN FOR QUESTIONS <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
 <section class="askbox" aria-label="Ask JAR;VIS">
+  <div class="front-porch-stamp">✳ ONE QUESTION · THE RIGHT TOOLS WILL SHOW UP</div>
   <h2>What would you like to make possible?</h2>
-  <p>Go ahead. Ask something wonderfully specific, or ridiculously big.</p><p id="received-note" class="received-note" hidden role="status">✉ A question was handed to you. It has not been submitted. Edit it or press Ask when you choose.</p>
+  <p>Tell us what you need, what you can offer, or what you want to make happen.</p><p id="received-note" class="received-note" hidden role="status">✉ A question was handed to you. It has not been submitted. Edit it or press Ask when you choose.</p>
   <form id="question-form">
     <label class="visually-hidden" for="question">Your question</label>
     <textarea id="question" name="question" rows="3" maxlength="360" minlength="8" required autofocus placeholder="How could we help neighbors share extra garden produce?"></textarea>
-    <div class="return-choice"><label for="return-kind">What would you like to take away?</label><select id="return-kind" name="kind"><option value="auto">Surprise me</option><option value="question">A question card</option><option value="invitation">An invitation draft</option><option value="door">A possible source door</option><option value="song">A little song</option><option value="plan">A small real-world field plan</option></select></div>
+    <details class="advanced-prompt"><summary>Choose a different kind of answer (optional)</summary><div class="return-choice"><label for="return-kind">What would you like to take away?</label><select id="return-kind" name="kind"><option value="auto">Surprise me</option><option value="question">A question card</option><option value="invitation">An invitation draft</option><option value="door">A possible source door</option><option value="song">A little song</option><option value="plan">A small real-world field plan</option></select></div>
     <div class="triad-choice"><label for="triad-opt-in"><input id="triad-opt-in" type="checkbox"> ✳ ALEX × 3rdi × LOADOUT — research lens (read-only)</label>
-      <p>Instead of JAR's usual three project sources, inspect three exact-commit owner documents. Trace <strong>source → observer cut → effect fence</strong> without running their native tools or contacting anybody. Use for deeper provenance questions; no authority is transferred.</p></div>
+      <p>Instead of JAR's usual three project sources, inspect three exact-commit owner documents. Trace <strong>source → observer cut → effect fence</strong> without running their native tools or contacting anybody. Use for deeper provenance questions; no authority is transferred.</p></div></details>
     <div class="formend"><span class="small">8–360 characters. No personal contact details, please.</span>
       <button id="ask" class="bigbutton" type="submit"><span aria-hidden="true">✳</span> Ask JAR;VIS! <span aria-hidden="true">➜</span></button></div>
   </form>
@@ -65,17 +43,17 @@
 <section class="contact-door" aria-labelledby="contact-door-heading">
   <span class="contact-door-stamp">✳ THE OCTOBER GATHERING DOESN'T HAVE TO END HERE</span>
   <h2 id="contact-door-heading">Hey, let's stay in touch.</h2>
-  <p>Have an idea for a neighborhood table, grocery, music night, or something not yet named? Tell us what interests you. We can follow up with your permission.</p>
+  <p>Have an idea, an offer, or a question worth continuing? Leave a note. We can get back to you with your permission.</p>
   <a class="contact-door-button" href="/contact/?via=coalition">LEAVE A NOTE / KEEP A DOOR OPEN ↗</a>
   <small>Optional. No account. Not an official Coalition, grocery, or church signup.</small>
 </section>
 <section id="results" class="results" hidden aria-live="polite">
  <div class="result-title"><span>☞</span> THE QUESTION MACHINE <small id="mode"></small></div>
  <div class="machine-intro">You asked: <strong id="asked"></strong></div>
- <ol id="steps" class="steps"></ol>
+ <details class="machine-trace"><summary>See what JAR;VIS checked</summary><ol id="steps" class="steps"></ol></details>
  <div id="reply" class="reply" hidden>
    <div class="ribbon">A RESPONSE FROM THE MACHINE</div>
-   <h2>Here's what actually happened.</h2><p id="answer"></p>
+   <h2>Here's what I found.</h2><p id="answer"></p>
    <aside id="northstar-panel" class="northstar-panel" hidden>
       <b>THE ABUNDENT COMPASS · VERSIONED EDITORIAL CONTEXT</b>
       <p id="northstar-summary"></p>
@@ -84,9 +62,19 @@
    <section class="return-card" aria-labelledby="return-title">
      <span id="return-label" class="ribbon"></span><h3 id="return-title"></h3>
      <p id="return-body"></p><ul id="return-doors" class="sources"></ul>
-     <div id="invitation-tools" hidden><label for="invitation-editor">Make this invitation your own</label><textarea id="invitation-editor" rows="12" maxlength="6000"></textarea><p id="draft-status" role="status"></p><button type="button" id="download-edited">↓ Save my invitation (.txt)</button></div>
+     <div id="invitation-tools" hidden><label for="invitation-editor">Make this invitation your own</label><textarea id="invitation-editor" rows="12" maxlength="6000"></textarea><p id="draft-status" role="status"></p><div class="share-buttons"><button type="button" id="share-invitation">↗ Share invitation</button><button type="button" id="copy-invitation">Copy invitation</button><button type="button" id="download-edited">Save text (optional)</button></div></div>
      <div id="song-tools" hidden><audio id="song-audio" controls preload="none" aria-label="Original instrumental song sketch"></audio><button type="button" id="download-song">↓ Save instrumental sketch (.wav)</button></div>
    </section>
+   <section id="magic-tools" class="magic-tools" aria-labelledby="magic-tools-title" hidden>
+      <div class="front-porch-stamp">✳ MAGIC LEGO / PICK YOUR NEXT MOVE</div>
+      <h3 id="magic-tools-title">A few things we could try next.</h3>
+      <p id="magic-tools-note">These are starting points. Choose what looks useful.</p>
+      <div id="magic-tools-cards" class="magic-tools-cards"></div>
+      <div class="quick-share"><button type="button" id="share-question">↗ Share this question</button>
+        <p id="quick-share-status" role="status">Sharing is your choice. Your question stays on this device until you tap Share.</p>
+        <input id="quick-share-link" aria-label="Question link to copy" type="text" readonly hidden></div>
+   </section>
+   <details class="backstage"><summary>More tools, sources, and the technical record</summary>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
    <section id="discovery-tools" class="discovery-tools" aria-labelledby="discovery-title" hidden>
      <div class="ribbon">DISCOVERY-011 · ORIENT → SEARCH → WEAVE</div>
@@ -148,7 +136,38 @@
     </section>
     <div class="artifact"><span class="sheet-icon">▤</span><div><b>A SMALL THING YOU CAN TAKE WITH YOU</b><p>Your original return, with source links and a verifiable receipt.</p><button type="button" id="download">↓ Save original return (.txt)</button><button type="button" id="print">Print original return</button></div></div>
    <details class="receipt"><summary>Look under the bonnet</summary><p id="receipt-state"></p><p id="hash"></p><p>The unsigned receipt binds this original return and its observed sources. It does not prove authorship, consent or project approval.</p><button type="button" id="download-receipt">↓ Save complete receipt (.json)</button><details><summary>Prepare a local Workbench handoff</summary><p>Save a draft-only request for an operator to inspect locally. Downloading it does not send it to a Workbench or run anything.</p><button type="button" id="download-handoff">↓ Save Workbench request (.json)</button></details><details><summary>What the question leaves open</summary><ul id="encounter-gaps"></ul></details></details>
+   </details>
  </div>
+</section>
+<details class="garden-map" id="garden-map">
+ <summary>✳ Explore the whole garden / complete sitemap</summary>
+ <p class="map-intro">Prefer to wander? All our original rooms are still here. None has been removed.</p>
+ <nav class="garden-sitemap" aria-label="All JAR;VIS rooms">
+  <a href="/town/">Town desk</a><a href="/weave/">Weaving garden</a><a href="/ignite/">24-hour field kit</a><a href="/tables/">Seventh Table</a><a href="/gather/">Gathering room</a><a href="/real-worldz/">River gate</a><a href="/contact/">Contact</a><a href="/doors/">All doors</a><a href="/games/tomorrow/">The game</a>
+ </nav>
+ <div class="garden-map-content">
+ <section class="town-door" aria-label="The Waseca Town Desk" style="padding:19px 23px;margin:20px 0;border:3px double #50775e;background:#ebefdc;box-shadow:4px 4px 0 #aec4af;">
+  <span style="font:700 12px monospace;color:#895039">✳ OPEN FRONT PORCH · TOWN-010 · NO ACCOUNT</span>
+  <h2 style="font:700 clamp(26px,5vw,40px) Georgia,serif;color:#1d513d;margin:8px 0">Live around Waseca?<br>Bring one useful question.</h2>
+  <p>Browse possible neighborhood needs, offers, and tiny experiments. Follow connections in the Free Graph. Leave one general idea for <strong>private human review</strong>—never automatic public posting or AI inference.</p>
+  <a href="/town/" style="display:inline-block;background:#edd07c;border:2px solid #31543d;color:#183d31;padding:13px 18px;font-weight:800;text-decoration:none">✳ VISIT THE TOWN DESK →</a>
+  <p><small>These are ideas to investigate—not verified local services, a government page, or a partner signup. No AI required to browse.</small></p>
+</section>
+<section class="ignition-door" aria-label="Twenty-four hour field kit" style="padding:17px 23px;margin:20px 0;border:3px double #9b7433;background:#fff3cf;box-shadow:4px 4px 0 #bdad87;">
+  <span style="font:700 12px monospace;color:#8a4e28">✳ IGNITION-012 · BUILD THE FIRST USEFUL THING</span>
+  <h2 style="font:700 clamp(25px,4vw,38px) Georgia,serif;color:#2b4774;margin:8px 0">From question to a 24-hour field kit.</h2>
+  <p>Pick a public-safe problem and what you can contribute. Get a printable question, a specific invitation, a permission gate, and a blank witnessed-return sheet. No accounts, no imaginary signups, no automatic outreach.</p>
+  <a href="/ignite/" style="display:inline-block;background:#f1ca69;border:2px solid #6e5936;color:#173d68;padding:12px 16px;font-weight:800;text-decoration:none">✳ MAKE ONE SMALL THING →</a>
+  <p><small>Editorial proposals only. Printing a card is not proof that a partner accepted or fieldwork occurred.</small></p>
+</section>
+<section class="cafe-intro" aria-labelledby="cafe-title">
+ <div class="cafe-badge">✳ CAFÉ MODE · NOW OPEN · BRING A QUESTION, NOT A PASSWORD</div>
+ <div class="cafe-hero">
+  <div><p class="cafe-kicker">THE LITTLE NEIGHBORHOOD POSSIBILITY MACHINE</p><h2 id="cafe-title">ONE QUESTION.<br><em>ONE SMALL ACT.</em><br>ONE MORE TABLE.</h2>
+  <p>Pick a card, let JAR;VIS sketch a first step, then carry the question to someone willing. No signups. No automatic introductions. You get to decide what happens next.</p></div>
+  <div class="cafe-receipt" aria-hidden="true"><b>TAKE A NUMBER</b><span>001</span><small>EVERY CHAIR COUNTS<br>✳ ✳ ✳</small></div>
+ </div>
+ <div class="cafe-stages" aria-label="How this experiment works"><span><b>01</b> Ask</span><span><b>02</b> Explore</span><span><b>03</b> Pass it on (by choice)</span></div>
 </section>
 <section class="table-door" aria-labelledby="table-door-heading">
   <div class="table-door-stamp">✳ A SECOND DOOR INTO THE SAME NEIGHBORHOOD · FIELD EXPERIMENT 001</div>
@@ -164,6 +183,9 @@
   <small>No account required. No official signups, donations, or claims of partnership. Sharing a question is voluntary.</small>
 </section>
 <section class="under"><span class="sign">UNDER CONSTRUCTION<br><b>BY EVERYBODY</b></span><p>✳ One question can become a card, an invitation draft, a small field plan, a source door or an original little song. This machine uses local composition rules and reads fixed public project documents. You choose what to keep or share. A draft does not contact people, run project workers or claim anyone’s commitment.</p></section>
+
+ </div>
+</details>
 <footer><span>© 1999–2026 • THE STATIC COLLECTIVE • BUILT FOR THE QUESTION THAT HASN'T BEEN ASKED YET</span><br><a href="https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/">the old garden (preserved Vercel release)</a> · <a href="https://github.com/the-static-collective/webZ">the source</a> · <a href="/games/tomorrow/">1999 mystery dinner club</a> · <a href="/gather/">the next table &amp; community commons</a> · <a href="/tables/">the seventh table · every seven days</a> · <a href="/weave/">the weaving garden</a> · <a href="/contact/">stay in touch</a> · <a href="/doors/">switchboard</a> · <span>NO AUTOMATIC QUESTION STORAGE • TOWN IDEAS ARE PRIVATE OPT-IN SUBMISSIONS</span></footer>
 </main>
 </body></html>
