@@ -71,7 +71,7 @@ export async function makeFieldReturn({ignition,graph,outcome,privateNote='',obs
     coordinate:'private-record-held-by-the-person-who-wrote-it',revision:privateReceipt.id,
     resolution:'private local file; no server copy and no independent authentication'},
   observed_at:observedAt,acquisition:'explicit visitor-authored offline return, not independent field verification',
-  digest:await hash(privateReceipt),access:'private',export:'pointer-only',authority:'none',
+  digest:await hash(privateReceipt),access:'private',export:'pointer-only',authority:'source-local',
   redaction:'All raw field notes and any human identifiers are withheld. Only the selected outcome classification is represented.',
   extensions:{trust:'SELF_REPORTED_UNVERIFIED',humanAgreement:'UNKNOWN',completedAct:'NOT_ESTABLISHED'}
  });
