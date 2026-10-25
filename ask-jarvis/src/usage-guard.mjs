@@ -84,9 +84,13 @@ export async function admitRequest(req,kind,{env=process.env,fetcher=fetch,now=D
  if(!QUOTAS[kind])throw Error('UNKNOWN_QUOTA_KIND');
  const production=env.VERCEL_ENV==='production';
  if(!hasSharedQuota(env)){
-  return production?hold('SHARED_QUOTA_NOT_CONFIGURED',503,
-     'This service is temporarily unavailable. The shared usage guard is not configured.',60)
-   :{allowed:true,mode:'PROTECTED_PREVIEW_WITHOUT_DISTRIBUTED_QUOTA'};
+  // Only Node's built-in test runner can exercise preview adapters without a
+  // real Redis service. An actual hosted Preview URL, including custom-domain
+  // aliases that may bypass SSO, ALWAYS fails closed without shared quotas.
+  return production||!process.env.NODE_TEST_CONTEXT
+   ?hold('SHARED_QUOTA_NOT_CONFIGURED',503,
+      'This service is temporarily unavailable. The shared usage guard is not configured.',60)
+   :{allowed:true,mode:'LOCAL_NODE_TEST_ONLY'};
  }
  const digest=clientDigest(req,env);
  if(!digest)return hold('TRUSTED_CLIENT_ADDRESS_UNAVAILABLE',503,
