@@ -44,3 +44,22 @@ test('Vercel and Worker compose the same explicit return contract', async()=>{
     assert.equal(status,413,'Vercel body budget counts UTF-8 bytes');
   } finally {globalThis.fetch=originalFetch;}
 });
+
+test('Vercel /api/ask and Worker both honor the exact same explicit triad source cut',async()=>{
+  const oldFetch=globalThis.fetch;
+  globalThis.fetch=async()=>new Response('# Owner public source\nAn inspected project reference is not a locally confirmed food need or willing host.');
+  try {
+    const body={question:'Could a grocery planning group review a public source with a steward?',kind:'question',lens:'triad'};
+    let value,status;
+    const res={setHeader(){},status(n){status=n;return this;},json(v){value=v;return this;}};
+    await handler({method:'POST',body},res);
+    assert.equal(status,200);
+    assert.deepEqual(value.sources.map(s=>s.id),['alex','3rdi','loadout']);
+    assert.equal(value.triad.loadout.nativeBind,false);
+    const workerResponse=await worker.fetch(new Request('https://test/api/ask',{method:'POST',body:JSON.stringify(body)}),{});
+    const candidate=await workerResponse.json();
+    assert.equal(workerResponse.status,200);
+    assert.deepEqual(candidate.sources.map(s=>s.id),value.sources.map(s=>s.id));
+    assert.deepEqual(candidate.triad.loadout.fenced,value.triad.loadout.fenced);
+  } finally {globalThis.fetch=oldFetch;}
+});
