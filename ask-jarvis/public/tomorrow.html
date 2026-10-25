@@ -80,6 +80,8 @@ select{width:100%;background:white;color:var(--ink);padding:.66rem .8rem;border:
 <div class="scope"><strong>A draft invitation you can actually use:</strong><p id="picked-invite"></p></div>
 <h3>Three honest checkpoints</h3><ul id="tasks" class="todo"></ul>
 <p class="safety"><strong>Before anything real happens:</strong> <span id="picked-safety"></span></p>
+<label for="outcome">What actually came back? <small>(optional, your own note)</small></label><select id="outcome" aria-label="Self-reported outcome"><option value="NOT_ATTEMPTED">Not attempted yet</option><option value="ASKED_WAITING">Asked someone; awaiting reply</option><option value="DECLINED">A person declined</option><option value="REVIEWED">Received feedback</option><option value="PERMITTED">Received specific permission to try</option><option value="TESTED_WITH_PERMISSION">Tried one permitted experiment</option></select>
+<p class="hint">A refusal counts. Nothing here verifies what happened; it just helps you remember the real result.</p>
 <div class="buttons">
 <button type="button" id="copy">✂ Copy invitation</button>
 <button type="button" id="share">↗ Share with someone</button>
