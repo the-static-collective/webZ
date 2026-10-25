@@ -1,6 +1,7 @@
 // ONE TABLE / SEVEN DAYS · independent invitation circle, hashed bearer tokens.
 import {createClient} from 'npm:@supabase/supabase-js@2.78.0';
 import {SITE} from './site.ts';
+import {MILK_CASE} from './milk-case.ts';
 const url=Deno.env.get('SUPABASE_URL')||'',key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';
 if(!url||!key)throw Error('SERVER_NOT_CONFIGURED');
 const db=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
@@ -104,7 +105,7 @@ async function close(b:any){const a=await authorize(b);if(a.role!=='host')throw 
  const {error}=await db.from('seven_day_rooms').update({closed:true}).eq('id',a.room.id);if(error)throw new Fail('COULD_NOT_CLOSE',503);return {ok:true,closed:true};}
 Deno.serve(async req=>{
  const u=new URL(req.url);
- if(req.method==='GET'||req.method==='HEAD')return new Response(req.method==='HEAD'?null:SITE,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'public,max-age=120','x-content-type-options':'nosniff','referrer-policy':'no-referrer','content-security-policy':CSP}});
+ if(req.method==='GET'||req.method==='HEAD')return new Response(req.method==='HEAD'?null:(u.searchParams.get('case')==='milk'?MILK_CASE:SITE),{headers:{'content-type':'text/html; charset=utf-8','cache-control':'public,max-age=120','x-content-type-options':'nosniff','referrer-policy':'no-referrer','content-security-policy':CSP}});
  if(req.method!=='POST')return reply({error:'METHOD_NOT_ALLOWED'},405);
  // Origin check limits drive-by browser calls; cryptographic invitation tokens remain the actual authority.
  if(req.headers.get('origin')!==u.origin)return reply({error:'PAGE_ORIGIN_REQUIRED'},403);
