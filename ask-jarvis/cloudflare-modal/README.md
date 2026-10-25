@@ -18,7 +18,13 @@ From `ask-jarvis/` run:
 
 `modal deploy cloudflare-modal/modal_field_kit.py`
 
-The resulting `https://<workspace>--jarvis-field-kit-app.modal.run`-style function URL is entered as Cloudflare Worker secret `MODAL_FIELD_KIT_URL` (not a URL chosen by a visitor). Store the exact same random token as Worker secret `MODAL_BRIDGE_SECRET`. If preferred, use Modal dashboard secrets; no token belongs in source control.
+Create a Modal **proxy token** so requests without credentials are rejected before a billable container starts:
+
+`modal workspace proxy-tokens create --name jarvis-cloudflare-canary`
+
+Save the returned `wk-...` key and `ws-...` secret securely. The Modal ASGI endpoint declares `requires_proxy_auth=True`. Its secondary timestamped HMAC is defense in depth, not a substitute for Modal proxy authorization.
+
+The resulting `https://<workspace>--jarvis-field-kit-app.modal.run`-style function URL is entered as Cloudflare Worker secret `MODAL_FIELD_KIT_URL` (not a URL chosen by a visitor). Store the exact same random token as Worker secret `MODAL_BRIDGE_SECRET`. Also put the Modal proxy credentials into the Worker **secrets** `MODAL_PROXY_KEY` and `MODAL_PROXY_SECRET` respectively. If preferred, use Modal dashboard secrets; no token belongs in source control.
 
 ## Cloudflare operator action
 
@@ -30,7 +36,11 @@ Value: copy the existing shared Supabase `jarvis_guard.settings.v1_hmac` from se
 
 `npx wrangler secret put MODAL_BRIDGE_SECRET --config wrangler.edge-modal.jsonc`
 
-`npx wrangler secret put MODAL_FIELD_KIT_URL --config wrangler.edge-modal.jsonc`
+ `npx wrangler secret put MODAL_FIELD_KIT_URL --config wrangler.edge-modal.jsonc`
+
+`npx wrangler secret put MODAL_PROXY_KEY --config wrangler.edge-modal.jsonc`
+
+`npx wrangler secret put MODAL_PROXY_SECRET --config wrangler.edge-modal.jsonc`
 
 Deploy initially with `JARVIS_MODAL_ENABLED=0`, confirm `GET /api/health` and bounded `POST /api/ask`, and inspect Supabase quota increments and 429 behavior. Then set `JARVIS_MODAL_ENABLED=1` in the Wrangler config and deploy again, verify one real compute call and an 8/10 human-quality score. `JARVIS_MODAL_ENABLED` is the immediate kill switch for new Modal calls.
 
