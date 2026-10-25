@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#24493e">
+<meta name="description" content="A town-sized door into Abundent. Browse possible community needs and offers, ask one question, and voluntarily send an idea for private review. No account.">
+<title>THE TOWN DESK ✳ Abundent Waseca</title>
+<link rel="stylesheet" href="/town/style.css"><script type="module" src="/town/app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to town ideas</a>
+<div class="ribbon-top">✳ ABUNDENT.ORG ✳ ONE NEIGHBORHOOD AT A TIME ✳ FREE TO LOOK AROUND ✳</div>
+<header class="nav"><a class="wordmark" href="/">abundent<span>✳</span></a><nav aria-label="Site navigation"><a href="/">JAR;VIS</a><a href="/weave/">WEAVING GARDEN</a><a href="/tables/">NEXT TABLE</a><a href="/contact/">CONTACT</a></nav></header>
+<main id="main">
+<section class="hero">
+ <div class="eyebrow">WELCOME TO THE EXPERIMENT / WASECA, MINNESOTA / TOWN-010</div>
+ <h1>THE <em>TOWN</em><br>DESK<span>✳</span></h1>
+ <div class="hero-grid">
+  <div><p class="lead">What if one useful thing could start with one question?</p>
+  <p>No accounts. No need to understand the whole internet. Bring an idea, offer a little help, explore a question, or take something home to think about.</p>
+  <a class="button yellow" href="#options">LOOK AROUND ↓</a> <a class="button pale" href="#contribute">LEAVE AN IDEA ↓</a></div>
+  <div class="postcard"><small>THE LITTLE TOWN MACHINE</small><b>NOTICE →<br>ASK →<br>CONNECT →<br>TRY →<br>RETURN.</b><span>NO ONE GETS ENROLLED<br>WITHOUT SAYING YES.</span></div>
+ </div>
+</section>
+<section class="floor" aria-labelledby="floor-title"><h2 id="floor-title">FIRST, A VERY IMPORTANT DISTINCTION.</h2>
+<p><strong>These are possibilities—not available services.</strong> No grocery delivery, ride, tool lending, volunteer placement, meeting, or partnership is promised here. The public cards are editorial starting questions. Nothing becomes an official local need, a willing steward, or completed work without separate human verification.</p></section>
+<section class="options" id="options">
+ <div class="section-heading"><span class="flag">01 / OPEN QUESTIONS</span><h2>What could we begin with?</h2>
+ <p>This is an actual <strong>Free Graph</strong> neighborhood of proposed ideas and relationships. You can follow the connections, without pretending that a proposal is a promise.</p>
+ <div class="filters"><label for="category">SHOW ME</label><select id="category"><option value="all">All possibilities</option></select><span id="graph-status" role="status">Reading the public seed packet…</span></div></div>
+ <div class="grid"><div id="option-list" class="option-list" aria-label="Available editorial option cards"></div>
+ <article id="option-detail" class="detail" aria-live="polite"><h3>Choose a question.</h3><p>The related possibilities and proposed first test appear here.</p></article></div>
+ <div class="graph-foot"><p id="packet-count">Free Graph packet loading.</p><button type="button" class="button dark" id="download-graph">↓ EXPORT SOURCE-PINNED FREE GRAPH PACKET</button><span>Portable questions and relations; no private visitor submissions.</span></div>
+</section>
+<section class="contribute" id="contribute" aria-labelledby="contribute-title">
+ <div class="section-heading"><span class="flag">02 / ADD YOUR PARTICULAR</span><h2 id="contribute-title">What are we missing?</h2>
+ <p>One useful observation often reveals an entire path. Share a <strong>general, public-safe</strong> need, offer, question, or possibility. Your words go into a <strong>private moderation inbox</strong> first—not directly onto this map, not to a model, and not to a partner organization.</p></div>
+ <div class="contribute-grid">
+ <form id="town-form" class="paper">
+  <label for="kind">I'M BRINGING</label>
+  <select id="kind" required><option value="question">A question</option><option value="need">A possible need</option><option value="offer">Something I could offer</option><option value="idea">An idea worth exploring</option></select>
+  <label for="entry-category">ABOUT</label><select id="entry-category" required><option>Food</option><option>Gather</option><option>Help</option><option>Create</option><option>Care</option><option>Share</option><option>Get there</option><option>Other</option></select>
+  <label for="entry">IN ONE OR TWO SENTENCES <small>(12–260 characters)</small></label>
+  <textarea id="entry" minlength="12" maxlength="260" rows="4" required placeholder="Could one willing organizer help identify a small food-access gap to investigate?"></textarea>
+  <label class="review"><input id="review" type="checkbox" required> I understand this goes privately to Abundent for human review. I have removed names, phone numbers, emails, street addresses, sensitive details, and claims that other people agreed.</label>
+  <label class="trap" aria-hidden="true">Leave this empty<input id="extra-website" autocomplete="off" tabindex="-1"></label>
+  <div class="actions"><button id="send" type="submit" class="button yellow">✳ SEND FOR PRIVATE REVIEW →</button><button type="button" id="save-draft" class="button pale">↓ SAVE A LOCAL DRAFT</button></div>
+  <p class="note" id="send-status" role="status">Nothing is sent until you choose Send. This is not an emergency or direct-help service.</p>
+ </form>
+ <aside class="side">
+  <h3>WHAT HAPPENS NEXT?</h3>
+  <div class="stage"><strong>01. RECEIVED</strong><span>One proposed question, not a verified report.</span></div>
+  <div class="stage"><strong>02. PRIVATE REVIEW</strong><span>A person can check for identifying details, duplicates, and whether this is appropriate for the public map.</span></div>
+  <div class="stage"><strong>03. FREE GRAPH</strong><span>A reviewed, attributable, non-identifying option may enter a future editorial snapshot. Existing claims are never silently promoted.</span></div>
+  <div class="stage"><strong>04. FIRST TEST</strong><span>Only after someone actually agrees, and permissions and safety are checked.</span></div>
+  <p><strong>Want an actual reply?</strong> Use our separate, opt-in <a href="/contact/?via=town">Stay in Touch desk</a>. The anonymous proposal form does not collect your email or promise follow-up.</p>
+ </aside>
+ </div>
+ <section id="submission-receipt" class="receipt" hidden aria-labelledby="receipt-title">
+  <h3 id="receipt-title">RECEIVED FOR PRIVATE REVIEW. NOT PUBLISHED.</h3>
+  <p>Your private receipt is shown below. Keep the withdrawal key if you want to request deletion later. The key is not published in the graph and is not emailed to you.</p>
+  <label for="receipt-json">YOUR RECEIPT (TREAT AS PRIVATE)</label><textarea id="receipt-json" rows="7" readonly></textarea>
+  <div class="actions"><button type="button" class="button dark" id="receipt-download">↓ DOWNLOAD RECEIPT</button><button type="button" class="button pale" id="receipt-withdraw">WITHDRAW THIS SUBMISSION</button></div>
+  <p class="note" id="receipt-status" role="status"></p>
+ </section>
+ <details class="withdraw"><summary>Have a receipt from an earlier visit? Withdraw it.</summary>
+   <p>Withdrawal requires the original receipt ID and private 43-character withdrawal key. Without them, use the <a href="/contact/">contact desk</a> to request assistance. This does not remove any already-shared independent copy.</p>
+   <form id="withdraw-form"><label for="withdraw-id">Receipt ID</label><input id="withdraw-id" maxlength="36" autocomplete="off" required>
+   <label for="withdraw-key">Withdrawal key</label><input id="withdraw-key" maxlength="43" autocomplete="off" required>
+   <button class="button dark" type="submit">REQUEST PRIVATE RECORD DELETION</button><p id="withdraw-status" role="status"></p></form>
+ </details>
+</section>
+<section class="last-call"><div class="eyebrow">03 / EVEN IF NOBODY IS ONLINE TODAY</div><h2>A town doesn't have to answer all at once.</h2><p>Explore the starter map, take a question to somebody willing, and come back after something real happens. If the inquiry inbox is unavailable, the public questions and local draft download still work.</p>
+ <a class="button yellow" href="/#question-form">ASK JAR;VIS ONE QUESTION ↗</a> <a class="button pale" href="/tables/">INVITE A TABLE ↗</a></section>
+</main>
+<footer>INDEPENDENT ABUNDENT / THE STATIC COLLECTIVE EXPERIMENT · NO OFFICIAL WASECA CITY, GROCERY, COALITION, CHURCH OR VENUE AFFILIATION CLAIMED · <a href="/">JAR;VIS</a> · <a href="/contact/">CONTACT</a> · <a href="https://github.com/the-static-collective/Free-Graph" rel="noopener noreferrer">FREE GRAPH SOURCE</a><p>Account-free to browse. No automatic AI call, tracking pixel, public name list or urgent-service routing. Questions and proposals are different from permissions and completed work.</p></footer>
+</body></html>
