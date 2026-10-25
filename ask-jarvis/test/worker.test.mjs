@@ -33,6 +33,6 @@ test('source and consent boundaries remain explicit',async()=>{
  const health=await worker.fetch(new Request('https://local.test/api/health'),{});
  assert.equal(health.status,200);
  const data=await health.json();
- assert.equal(data.release,'public-return-005');
+ assert.equal(data.release,'public-return-006');
  assert.ok(data.returns.includes('plan'));
 });

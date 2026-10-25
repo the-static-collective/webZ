@@ -1,4 +1,4 @@
-import {verifyReturn} from './evidence.mjs';
+import {verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
@@ -6,7 +6,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
-let last=null, run=0, active=null, audioUrl=null, wav=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -27,6 +27,9 @@ function cleanAudio() {
   audioUrl=null;wav=null;
 }
 function clearReturn() {
+  visActive?.abort();visActive=null;
+  $('#vis-result').textContent='Model investigation is optional and may be unavailable. The original question card works without it.';
+  $('#vis-investigate').disabled=false;
   last=null;reply.hidden=true;cleanAudio();
   $('#handoff-link').value='';
   $('#question-table-status').textContent='Nothing moves until you choose. Do not carry contact details or other people\'s private information.';
@@ -97,6 +100,61 @@ $('#download').addEventListener('click',()=>{if(last)download('ask-jarvis-'+last
 $('#download-receipt').addEventListener('click',()=>{if(last)download('jarvis-return-receipt.json',JSON.stringify(last,null,2),'application/json');});
 $('#download-handoff').addEventListener('click',()=>{if(last)download('jarvis-workbench-request.json',JSON.stringify(last.workbenchRequest,null,2),'application/json');});
 $('#print').addEventListener('click',()=>{if(last)window.print();});
+async function askVis() {
+  if(!last)return;
+  visActive?.abort();
+  const controller=new AbortController();visActive=controller;
+  const button=$('#vis-investigate'),target=$('#vis-result');
+  button.disabled=true;target.textContent='VIS is checking the bounded source notes (no project actions)…';
+  const timer=setTimeout(()=>controller.abort(),16000);
+  try {
+    const response=await fetch('/api/investigate',{
+      method:'POST',cache:'no-store',credentials:'same-origin',
+      headers:{'content-type':'application/json',accept:'application/json'},
+      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+    });
+    const data=await response.json();
+    if(visActive!==controller)return;
+    if(data.status==='HOLD') {
+      target.textContent=data.message||'HOLD: the model is not available. Your original source-first question card is unchanged.';
+      return;
+    }
+    if(!response.ok||!await verifyInvestigation(data)||data.question!==last.question
+      ||!matchesInvestigationSources(last,data))throw Error('Model proposal was not verifiable. No investigation is claimed.');
+    const panel=el('div','vis-answer');
+    panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'),el('p','',data.investigation.summary));
+    const list=el('ol','vis-connections');
+    for(const c of data.investigation.connections) {
+      const li=el('li');li.append(el('p','',c.idea));
+      if(c.sourceIds.length) {
+        const links=el('div','vis-citations');
+        links.append(el('small','', 'Inspected source doors: '));
+        for(const id of c.sourceIds) {
+          const src=data.sourceReferences.find(x=>x.id===id);
+          if(!src)continue;
+          links.append(sourceLink(src.name+' ↗',src.document));
+        }
+        li.append(links);
+      } else li.append(el('small','', 'New proposal · no specific source passage cited'));
+      list.append(li);
+    }
+    panel.append(list,el('h4','', 'SMALLEST REVERSIBLE TEST'),el('p','',data.investigation.firstTest));
+    panel.append(el('h4','', 'STILL UNKNOWN'));
+    const unknown=el('ul');for(const v of data.investigation.unknowns)unknown.append(el('li','',v));
+    panel.append(unknown,el('h4','', 'HUMAN PERMISSION GATE'),el('p','',data.investigation.consentCheck),
+      el('small','',data.disclaimer));
+    target.replaceChildren(panel);
+  } catch(error) {
+    if(visActive===controller)target.textContent=controller.signal.aborted
+      ? 'HOLD: the investigation timed out. The original question card is unchanged.'
+      : 'HOLD: the model reply could not be verified. No model result is claimed.';
+  } finally {
+    clearTimeout(timer);
+    if(visActive===controller){visActive=null;button.disabled=false;}
+  }
+}
+$('#vis-investigate').addEventListener('click',()=>{void askVis();});
+
 $('#ask-next').addEventListener('click',()=>{
   if(!last)return;const next=last.nextQuestion;invalidate();input.value=next;kind.value='auto';input.setCustomValidity('');input.focus();window.scrollTo({top:0,behavior:'smooth'});
 });
