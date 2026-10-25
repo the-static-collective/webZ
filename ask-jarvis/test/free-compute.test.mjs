@@ -94,3 +94,17 @@ test('overlong model body is refused, not accepted as evidence',async()=>{
   const chosen=selectRoute(env,'fast',async()=>new Response('x'.repeat(15000),{status:200}));
   await assert.rejects(()=>chosen.provider({system:'safe',input:'synthetic public'}),/FREE_PROVIDER_RESPONSE_LIMIT/);
 });
+
+test('Mixed-case Vercel Gemini_API_Key remains usable without decrypting or replacing sensitive secret',async()=>{
+  const {GEMINI_API_KEY,...remainder}=env;
+  const actual={...remainder,Gemini_API_Key:GEMINI_API_KEY};
+  assert.ok(availableProviders(actual).includes('gemini'));
+  let observed;
+  const chosen=selectRoute(actual,'reason',async (url,opts)=>{
+    observed={url,opts};
+    return new Response(JSON.stringify({candidates:[{content:{parts:[{text:'{"summary":"safe"}'}]}}]}));
+  });
+  await chosen.provider({system:'safe',input:'synthetic question'});
+  assert.equal(chosen.id,'gemini');
+  assert.equal(observed.opts.headers['x-goog-api-key'],GEMINI_API_KEY);
+});
