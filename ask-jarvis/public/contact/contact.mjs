@@ -23,11 +23,22 @@ form.addEventListener('submit', async (event) => {
   if (sending || !form.reportValidity()) return;
   // A bot trap; discard without submitting anything.
   if (form.elements.website.value.trim()) { status.textContent = 'Your note could not be confirmed. Please try again.'; return; }
+  const places={
+    curious:'Curious / listening',helper:'Available for one small contribution',
+    starter:'Interested in a small experiment',coordinator:'Willing to explore helping coordinate'
+  };
+  const chosenPlace=places[form.elements.standing.value]||'';
+  // The visitor explicitly selected this preference. It is stored privately
+  // inside their editable-interest note, never as formal membership or authority.
+  const publicNote=form.elements.note.value.trim();
+  const privateNote=[chosenPlace?'CAMPFIRE STARTING PREFERENCE: '+chosenPlace+
+   '. This is an interest, not an appointment.':'',publicNote]
+   .filter(Boolean).join('\n\n').slice(0,1200);
   const payload = {
     name: form.elements.name.value.trim().slice(0, 100),
     email: form.elements.email.value.trim().toLowerCase().slice(0, 254),
     interest: form.elements.interest.value,
-    note: form.elements.note.value.trim().slice(0, 1200),
+    note: privateNote,
     source,
     contact_consent: form.querySelector('#contact-consent').checked,
     notice_version: '2026-10-24'

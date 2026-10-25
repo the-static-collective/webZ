@@ -43,6 +43,8 @@ export function presentUnified(data){
     const a=el('a','steward-seed-link','✳ I could help shape this role →');
     a.href='/roles/#role='+role.id;card.append(a);
     card.append(el('small','','Independent Abundent role exploration; no appointment or authority to operate.'));
+    const campfire=el('a','steward-seed-link','◎ Choose your place at the Campfire →');
+    campfire.href='/campfire/';card.append(campfire);
     p.append(card);
   }
   if(data.graft?.selected?.length){
