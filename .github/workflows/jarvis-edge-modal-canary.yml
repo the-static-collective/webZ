@@ -37,4 +37,4 @@ jobs:
           node --check cloudflare-modal/bridge.mjs
           node --check cloudflare-modal/worker.mjs
           node --check public/field-kit-lab.mjs
-          node -e "const c=require('./wrangler.edge-modal.jsonc');if(c.vars.JARVIS_MODAL_ENABLED!=='0')process.exit(1)"
+          node -e "const c=JSON.parse(require('node:fs').readFileSync('wrangler.edge-modal.jsonc','utf8'));if(c.vars.JARVIS_MODAL_ENABLED!=='0')process.exit(1)"
