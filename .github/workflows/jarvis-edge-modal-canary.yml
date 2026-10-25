@@ -1,0 +1,40 @@
+name: JAR;VIS edge-modal canary verification
+on:
+  push:
+    branches:
+      - feature/jarvis-cloudflare-modal-canary-019
+    paths:
+      - 'ask-jarvis/**'
+      - '.github/workflows/jarvis-edge-modal-canary.yml'
+  pull_request:
+    paths:
+      - 'ask-jarvis/cloudflare-modal/**'
+      - 'ask-jarvis/test/cloudflare-modal.test.mjs'
+      - 'ask-jarvis/wrangler.edge-modal.jsonc'
+      - '.github/workflows/jarvis-edge-modal-canary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-edge-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact branch commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Validate Python syntax (no Modal credentials or deployment)
+        run: python3 -m py_compile ask-jarvis/cloudflare-modal/modal_field_kit.py
+      - name: Verify all Ask JAR tests with zero credentials
+        working-directory: ask-jarvis
+        run: npm test
+      - name: Verify isolated Worker canary syntax
+        working-directory: ask-jarvis
+        run: |
+          node --check cloudflare-modal/bridge.mjs
+          node --check cloudflare-modal/worker.mjs
+          node --check public/field-kit-lab.mjs
+          node -e "const c=JSON.parse(require('node:fs').readFileSync('wrangler.edge-modal.jsonc','utf8'));if(c.vars.JARVIS_MODAL_ENABLED!=='0')process.exit(1)"

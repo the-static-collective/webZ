@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4efdc"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Tell the Tomorrow Machine what you have. Get three permission-first neighborhood experiments and a printable invitation. No account. No backend.">
+<title>✳ Tomorrow Machine · Abundent</title>
+<style>
+:root{--ink:#20372d;--forest:#194a3a;--cream:#f4efdc;--paper:#fffdf5;--orange:#fb8e45;--lime:#d9f390;--line:#91aa91;--muted:#456256;font:16px/1.52 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--cream);color-scheme:light}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(circle at 15% 6%,#f4e6ac 0,transparent 33%),radial-gradient(circle at 97% 55%,#d2e6b7 0,transparent 37%),var(--cream)}
+button,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:4px solid var(--orange);outline-offset:3px}
+a{color:var(--forest)}[hidden]{display:none!important}
+.top{background:var(--forest);color:#fffbed;border-bottom:5px solid var(--orange);padding:.65rem max(16px,calc((100vw - 1050px)/2));display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.top a{color:#fffbed}.top small{font-size:.75rem;letter-spacing:.14em;text-align:right}
+.wrap{max-width:1050px;margin:auto;padding:1.1rem 1rem 4rem}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.8fr);gap:1.5rem;align-items:center;margin:1.8rem 0 1.4rem}
+.stamp{display:inline-block;font-weight:900;font-size:.77rem;letter-spacing:.16em;text-transform:uppercase;background:var(--lime);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:.25rem .6rem;transform:rotate(-2deg)}
+h1{font-weight:950;letter-spacing:-.07em;font-size:clamp(2.7rem,8vw,6.4rem);line-height:.94;margin:.8rem 0 .6rem}
+h1 em{display:block;font-style:normal;color:var(--forest);letter-spacing:-.075em}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);max-width:590px}
+.device{border:5px solid var(--ink);border-radius:22px 20px 50px 18px;background:var(--orange);box-shadow:12px 13px 0 #234538;min-height:265px;position:relative;padding:20px;transform:rotate(2deg);display:flex;flex-direction:column;gap:10px}
+.device .screen{border:5px inset #2f6a54;background:var(--forest);color:#e4faad;font:900 2.1rem/1.16 ui-monospace,SFMono-Regular,monospace;letter-spacing:-.06em;border-radius:12px;padding:23px 14px;box-shadow:inset 0 0 30px #15382b;flex:1}
+.device .screen span{display:block;font-size:.65rem;letter-spacing:.06em;color:#b9d3af;margin-bottom:.5rem}
+.dialrow{display:flex;justify-content:space-around;align-items:center}.dial{height:30px;width:30px;border:5px solid var(--ink);border-radius:50%;background:var(--lime);box-shadow:3px 4px 0 #994c22}.device small{font-weight:900;text-align:center;letter-spacing:.18em}
+.machine{background:var(--paper);border:3px solid var(--ink);border-radius:10px;box-shadow:8px 9px 0 var(--ink);padding:1.35rem;margin:1.5rem 0 2rem}
+.paneltop{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}.serial{font:800 .72rem ui-monospace,monospace;color:var(--muted)}h2{font-size:clamp(1.35rem,3vw,2rem);letter-spacing:-.05em;line-height:1.15;margin:.6rem 0 .45rem}h3{margin:.4rem 0;letter-spacing:-.035em;font-size:1.5rem}
+label{display:block;font-weight:800;margin:.95rem 0 .3rem}.hint{font-size:.86rem;color:var(--muted);margin:.25rem 0 .5rem}
+textarea{width:100%;background:#fffffa;border:2px solid #729382;border-radius:8px;padding:.8rem;resize:vertical;min-height:75px;display:block}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}.chip{border:2px solid #9cb59f;border-radius:3rem;padding:.45rem .75rem;background:#ebf1e5;color:var(--ink);font-size:.84rem;font-weight:750;min-height:40px}.chip[aria-pressed=true]{background:var(--lime);border-color:var(--ink);box-shadow:2px 3px 0 var(--ink)}
+.gridform{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+select{width:100%;background:white;color:var(--ink);padding:.66rem .8rem;border:2px solid #729382;border-radius:8px}
+.samples{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.9rem 0}.samples b{font-size:.83rem;margin-right:.3rem}.sample{border:0;border-bottom:2px dotted var(--forest);background:transparent;padding:.3rem .4rem;color:#225e47;text-decoration:none;font-weight:750;font-size:.85rem}
+.action{border:2px solid var(--ink);background:var(--lime);color:var(--ink);border-radius:6px;padding:.85rem 1rem;font-size:1.1rem;font-weight:950;box-shadow:4px 5px 0 var(--ink);transition:transform .12s}.action:hover{transform:translateY(-2px)}.action:active{transform:translate(3px,3px);box-shadow:1px 2px 0 var(--ink)}.action:disabled{opacity:.6}.action.main{background:var(--orange);width:100%;margin-top:1rem;font-size:1.15rem}
+.honesty{margin-top:.8rem;font-size:.78rem;color:#425e52}.status{margin:.7rem 0;color:#965020;font-weight:800}
+.board-header{margin-bottom:1rem;border-bottom:2px dashed #75987f;padding-bottom:.5rem}
+.ticket-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.ticket{background:var(--paper);border:2.5px solid var(--ink);box-shadow:5px 6px 0 #56745f;border-radius:8px;padding:1rem;display:flex;flex-direction:column;min-height:360px;position:relative}
+.ticket:after{content:"";border-top:2px dashed #9cb79f;position:absolute;left:12px;right:12px;bottom:66px}
+.ticket h3{font-size:1.65rem}.ticket p{font-size:.91rem}.ticket .micro{font:900 .66rem ui-monospace,monospace;letter-spacing:.12em;color:#596e60}.ticket .tag{display:inline-block;background:#ddecbe;padding:.2rem .5rem;font-weight:900;font-size:.68rem;letter-spacing:.13em;align-self:start;border:1px solid var(--ink);transform:rotate(-1deg)}.ticket .matched{font-size:.81rem;margin:auto 0 1rem}.ticket button{border:2px solid var(--ink);background:var(--forest);color:white;padding:.65rem;font-weight:900;margin-top:1rem;border-radius:4px}
+.ticket.selected{outline:4px solid var(--orange);outline-offset:3px}
+.detail{margin-top:2rem;background:var(--paper);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--forest);padding:1.25rem;border-radius:10px}
+.detail .scope{background:#e0ebd8;border-left:5px solid var(--forest);padding:.85rem;margin:.9rem 0}
+.todo{list-style:none;padding:0}.todo li{padding:.8rem .4rem;border-bottom:1px dashed #9cb09d}.todo label{display:flex;gap:.7rem;align-items:flex-start;margin:0;font-weight:750}.todo input{width:22px;height:22px;accent-color:var(--forest);flex-shrink:0;margin-top:3px}.todo small{display:block;font-weight:400;color:var(--muted)}
+.safety{border:2px solid #c69b68;background:#fff3e3;padding:.85rem;margin:.9rem 0;border-radius:6px}
+.buttons{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:1rem 0}.buttons button{border:2px solid var(--forest);padding:.7rem;border-radius:5px;background:#e4f0e4;color:var(--forest);font-weight:900}.buttons button.primary{background:var(--lime)}.buttons button:disabled{opacity:.5}
+.handwritten{font-family:ui-monospace,SFMono-Regular,monospace;border:2px dashed #8daa93;background:#fbfaf2;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.84rem}
+.endnote{border-top:2px solid #acc3b0;margin-top:3rem;padding-top:1rem;max-width:690px;font-size:.92rem;color:var(--muted)}
+.print-card{display:none}
+@media print{body{background:white}.top,.hero,.machine,#board,.detail,.endnote{display:none!important}.print-card{display:block;font:17px/1.5 Georgia,serif;color:#1c3329;padding:0;margin:0}.print-card h1{font:900 2.5rem system-ui;letter-spacing:-.07em}.print-card .print-note{border:2px solid #4b8062;padding:14px}.print-card li{margin:1rem 0}.print-card footer{font-size:.85rem;border-top:1px solid;padding-top:1rem;margin-top:2rem}}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.device{min-height:150px;max-width:360px;margin:0 auto 1rem;width:90%;transform:rotate(-1deg)}.device .screen{font-size:1.6rem;padding:12px}.device .dialrow{display:none}.ticket-grid{grid-template-columns:1fr}.ticket{min-height:275px}.gridform,.buttons{grid-template-columns:1fr}.top small{display:none}}
+@media(prefers-reduced-motion:reduce){.action{transition:none}}
+</style></head>
+<body>
+<div class="top"><a href="/" aria-label="Return to JAR;VIS">← ask JAR;VIS</a><strong>THE STATIC COLLECTIVE × ABUNDENT</strong><small>NO ACCOUNT · NO COMMITTEES REQUIRED</small></div>
+<div class="wrap">
+<header class="hero"><div><span class="stamp">✳ ONE SMALL THING THAT ACTUALLY HAPPENS</span>
+<h1>The <em>Tomorrow</em> Machine.</h1>
+<p>Got tomatoes? A printer? An hour? A weird talent? Put whatever you've got in the machine. Get three little neighborhood experiments you could <strong>actually start</strong>.</p>
+<p class="hint">The machine suggests. People decide. Nothing is sent, posted, booked or promised.</p></div>
+<div class="device" role="img" aria-label="A bright orange, homemade question machine with a garden-green screen"><div class="screen"><span>READY FOR YOUR POCKET INVENTORY</span>WHAT CAN WE MAKE HAPPEN?</div><div class="dialrow"><div class="dial"></div><div class="dial"></div><div class="dial"></div></div><small>V 0.20 · NO PLUG REQUIRED</small></div></header>
+<section class="machine" aria-label="Give the machine what you have">
+<div class="paneltop"><span class="stamp">STEP 01 · THE LOADOUT</span><span class="serial">INPUT ≠ PROMISE</span></div>
+<form id="loadout">
+<label for="offer">What have you got?</label><p class="hint">Actual supplies, skills, time, interests. No names or contact information.</p>
+<textarea id="offer" maxlength="360" rows="3" required minlength="8" placeholder="Extra tomatoes, a printer and two hours tomorrow…">I have extra tomatoes, a printer and two free hours tomorrow.</textarea>
+<label>Tap the pieces you have</label><div id="chips" class="chips" aria-label="Choose resources"></div>
+<div class="gridform"><div><label for="need">Who or what might this help? <small>(optional)</small></label>
+<textarea id="need" maxlength="360" rows="3" placeholder="An idea, a question, not a confirmed need.">Could a little extra produce be useful to someone?</textarea></div>
+<div><label for="time">How much time could you spare?</label>
+<select id="time"><option value="30">Half an hour</option><option value="120" selected>Two hours</option><option value="480">One day</option><option value="10080">Seven days</option></select>
+<p class="hint">We'll aim for a reversible next step, not a year-long committee.</p>
+<div class="samples"><b>Load an idea:</b><div id="examples"></div></div></div></div>
+<button class="action main" type="submit">✳ SMASH THE LEGO → MAKE THREE MISSIONS</button>
+<p id="form-status" class="status" role="status" aria-live="polite"></p>
+<p class="honesty">This version runs completely in your browser. No AI model, database, tracking, signup or backend request. These are editorial proposals, not verified needs, available services or partner agreements.</p>
+</form></section>
+<section id="board" hidden aria-live="polite"><div class="board-header"><span class="stamp">STEP 02 · THREE WAYS FORWARD</span><h2>Pick a tiny useful thing.</h2>
+<p>Different tools, different doors. No heroic promises. A useful refusal counts as information.</p></div>
+<div class="ticket-grid" id="tickets"></div></section>
+<section id="detail" class="detail" hidden><div class="paneltop"><span class="stamp">STEP 03 · TAKE ONE INTO THE WORLD</span><span class="serial" id="picked-id"></span></div>
+<h2 id="picked-title"></h2><p id="picked-why"></p>
+<div class="scope"><strong>A draft invitation you can actually use:</strong><p id="picked-invite"></p></div>
+<h3>Three honest checkpoints</h3><ul id="tasks" class="todo"></ul>
+<p class="safety"><strong>Before anything real happens:</strong> <span id="picked-safety"></span></p>
+<label for="outcome">What actually came back? <small>(optional, your own note)</small></label><select id="outcome" aria-label="Self-reported outcome"><option value="NOT_ATTEMPTED">Not attempted yet</option><option value="ASKED_WAITING">Asked someone; awaiting reply</option><option value="DECLINED">A person declined</option><option value="REVIEWED">Received feedback</option><option value="PERMITTED">Received specific permission to try</option><option value="TESTED_WITH_PERMISSION">Tried one permitted experiment</option></select>
+<p class="hint">A refusal counts. Nothing here verifies what happened; it just helps you remember the real result.</p>
+<div class="buttons">
+<button type="button" id="copy">✂ Copy invitation</button>
+<button type="button" id="share">↗ Share with someone</button>
+<button type="button" class="primary" id="print">▤ Print one-page card</button>
+<button type="button" id="receipt">⬇ Save my local progress</button>
+</div>
+<p id="action-status" class="status" role="status" aria-live="polite"></p>
+<details><summary>See the exact draft before sharing</summary><pre id="draft-preview" class="handwritten"></pre></details>
+<p class="honesty">Checking a box is your own note, not proof anyone gave permission. Receipts are downloaded to your device only; nothing is uploaded.</p></section>
+<section id="print-card" class="print-card" aria-label="Printable mission invitation"></section>
+<footer class="endnote"><strong>Built to help people help people.</strong> An unconfirmed idea stays unconfirmed until a responsible person agrees. We don't collect names, promise services, assign volunteers or announce events from a generated card. <a href="/">Ask JAR;VIS another question →</a></footer>
+</div>
+<script type="module" src="/tomorrow-ui.mjs"></script></body></html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>JAR;VIS · Compute Lab</title>
+<style>
+:root{font:16px/1.55 system-ui;color:#182e2a;background:#eef3ec}
+body{max-width:760px;margin:auto;padding:1.2rem}
+main,section{padding:1.1rem;background:white;border:1px solid #aac0b0;border-radius:12px}
+h1{font-size:clamp(1.8rem,5vw,2.8rem)}h2{font-size:1.3rem}
+textarea,button{font:inherit;box-sizing:border-box;width:100%;padding:.8rem;border-radius:7px}
+textarea{resize:vertical;border:1px solid #799588}
+button{background:#234c3e;color:white;border:0;margin:.8rem 0;cursor:pointer}
+button:disabled{opacity:.6}
+#download{display:block;background:#d9e7dc;border:1px solid #718e7e;padding:.7rem;text-align:center}
+.note{border-left:4px solid #678f7d;padding-left:1rem}li{margin:.5rem 0}small{color:#486758}
+</style></head><body><nav><a href="/">← Ask JAR;VIS</a></nav>
+<main><h1>Compute Lab</h1>
+<p>A question travels through public source inspection, a shared usage guard, and a small Modal Python job that generates a printable invitation. This is an experiment; nothing gets sent or booked.</p>
+<form id="form"><label for="question">One public-safe question (no contacts or secrets)</label>
+<textarea id="question" rows="4" maxlength="360" required minlength="8">Could neighbors test a voluntary garden-produce handoff without promising that a grocery store is open?</textarea>
+<button type="submit" id="run">Generate a reviewable field kit</button></form>
+<p id="status" role="status" aria-live="polite">No computation has been requested.</p>
+<section id="result" hidden><h2 id="title"></h2><p class="note">Draft only · no approval, enrollment or real-world effect.</p><ol id="steps"></ol><p id="evidence"></p>
+<a id="download" hidden download="jarvis-field-kit.html">Download printable field kit</a>
+<p><small>Printing and sharing are entirely your choice. No account, analytics or automatic submission.</small></p>
+</section></main><script type="module" src="/field-kit-lab.mjs"></script></body></html>
