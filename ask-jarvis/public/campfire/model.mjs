@@ -44,9 +44,10 @@ const EMAIL=/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i;
 const PHONE=/(?:\+?1[- .]?)?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}/;
 const PRIVATE=/\b(?:password|api[_ -]?key|access[_ -]?token|social security|ssn|private key|my address)\s*[:=]?\s*\S+/i;
 const CONTROL=/[\u0000-\u001f\u007f]/;
+const ADDRESS=/\b\d{1,5}\s+(?:[A-Za-z]+\s+){0,4}(?:street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln)\b/i;
 export function validPurpose(input){
  return typeof input==='string'&&input.trim()===input&&input.length>=8&&input.length<=220
-  &&!CONTROL.test(input)&&!EMAIL.test(input)&&!PHONE.test(input)&&!PRIVATE.test(input);
+  &&!CONTROL.test(input)&&!EMAIL.test(input)&&!PHONE.test(input)&&!PRIVATE.test(input)&&!ADDRESS.test(input);
 }
 export function chooseCircle(id){return CIRCLE_BY_ID.get(id)||null;}
 export function chooseFire(id){return FIRE_BY_ID.get(id)||null;}
