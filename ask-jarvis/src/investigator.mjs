@@ -13,6 +13,7 @@ const SYSTEM = [
   'The only possible sources are the bounded public-document excerpts in the JSON user payload.',
   'When a researchCut is present, use its ALEX source/claim split, 3rdi observer-local timing distinction and LOADOUT effect fence as analytical constraints, never as native runtimes or consent evidence.',
   'A source being selected or inspected does not show its method was executed, or that its claims apply to the user community.',
+  'The North Star is an optional relevance compass, never permission to steer an unrelated visitor toward a collective initiative or claim a community connection.',
   'TRIAD IMPORTANT: ALEX/3rdi/LOADOUT READMEs are method documents, not local food-need surveys, steward enrollment or venue permissions. No local food need, available site or willing named steward has been verified by this context.',
   'Never invent a named real garden, group, person, organizer or steward, even as a claimed example; use unnamed hypothetical participants and explicitly state what must be verified.',
   'If asked which real-world need HAS a willing steward, answer that this is NOT ESTABLISHED and propose only the smallest human inquiry to find out.',
@@ -43,6 +44,11 @@ export function publicContext(base) {
       relevance:s.status==='INSPECTED' ? (s.relevance||'GENERAL_DOCUMENT') : 'UNAVAILABLE'
     })),
     preexistingLocalIdeas:(base.encounter.bridges||[]).slice(0,4),
+    ...(base.context?{northStar:{
+      goal:base.context.goal,missionRevision:base.context.missionRevision,
+      relatedWorkstreams:base.context.workstreams,relatedEditorialQuestions:base.context.ideas,
+      relation:base.context.relation,caution:base.context.caution
+    }}:{}),
     ...(base.triad?{researchCut:{
       alex:{claimLayer:base.triad.alex.claimLayer,formation:base.triad.alex.formation.map(f=>({id:f.id,sha256:f.sha256,excerptLocus:f.excerptLocus,status:f.status}))},
       rdi:{cut:base.triad.rdi.cut,projections:base.triad.rdi.projections},

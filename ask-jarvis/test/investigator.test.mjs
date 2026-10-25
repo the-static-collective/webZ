@@ -90,7 +90,7 @@ test('Workers AI binding uses a single fixed model and returns a structured resp
 test('public context has no private keys, user identity, or execution grant',async()=>{
   const base=await assemble(q,source,{kind:'plan'});
   const ctx=publicContext(base);
-  assert.deepEqual(Object.keys(ctx).sort(),['facets','preexistingLocalIdeas','question','selectedReturn','sourceObservations']);
+  assert.deepEqual(Object.keys(ctx).sort(),['facets','northStar','preexistingLocalIdeas','question','selectedReturn','sourceObservations']);
   assert.ok(ctx.sourceObservations.every(s=>!('body' in s)&&!('url' in s)));
 });
 
