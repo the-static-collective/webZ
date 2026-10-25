@@ -92,7 +92,10 @@ export async function readGraftFeed(question,{env=process.env,fetcher=fetch,now=
 }
 export function graftFieldEntries(graft) {
   if(graft?.status!=='READ'||!Array.isArray(graft.selected))return [];
+  const label=graft.state==='STAGED_FOR_REVIEW'?'GRAFT STAGED PUBLIC NOTE (REVIEW PENDING): '
+    :'GRAFT APPROVED PUBLIC EDITORIAL SUMMARY: ';
   return graft.selected.map(({id,lane,status,summary,firstCheck})=>({
-    id:'FW-'+id,lane,status,observation:summary,firstCheck,sourceId:'S10'
+    id:'FW-'+id,lane,status,observation:(label+summary).slice(0,600),
+    firstCheck,sourceId:'S10'
   }));
 }
