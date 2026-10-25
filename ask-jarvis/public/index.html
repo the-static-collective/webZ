@@ -71,6 +71,15 @@
      <div class="ribbon">✳ OPTIONAL · VIS-006 MODEL INVESTIGATION · EXPERIMENTAL</div>
      <h3 id="vis-title">Ask VIS to investigate the connections.</h3>
      <p>JAR has gathered a small set of public-source excerpts. If a model is enabled on this host, VIS can explore possible combinations and suggest one reversible first test. This sends <strong>your question and those short public excerpts</strong> to an external AI provider. No contacts or private information, please. The model can be wrong and does not perform actions.</p>
+     <label for="vis-route">Free compute route (protected experiment)</label>
+     <select id="vis-route" aria-label="Free compute route">
+       <option value="auto">AUTO · first configured free/evaluation provider</option>
+       <option value="nemotron">NEMOTRON · Cloudflare or NVIDIA trial</option>
+       <option value="fast">FAST · Groq or Worker</option>
+       <option value="reason">REASON · Gemini or Nemotron</option>
+       <option value="explore">EXPLORE · OpenRouter free models</option>
+     </select>
+     <p><small>One model call per click, no paid fallback. Provider quotas and prompt-retention terms differ. Trial models are for protected demonstrations, not public service.</small></p>
      <button id="vis-investigate" type="button">✳ INVESTIGATE WITH VIS →</button>
      <div id="vis-result" class="vis-result" role="status" aria-live="polite">Model investigation is optional and may be unavailable. The original question card works without it.</div>
    </section>
