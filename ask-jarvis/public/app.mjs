@@ -116,7 +116,10 @@ async function askVis() {
     const data=await response.json();
     if(visActive!==controller)return;
     if(data.status==='HOLD') {
-      target.textContent=data.message||'HOLD: the model is not available. Your original source-first question card is unchanged.';
+      const detail=data.failureCode&&data.providerId
+        ? 'HOLD · '+data.providerId+' · '+data.failureCode+'. '
+        : 'HOLD. ';
+      target.textContent=detail+(data.message||'The model is unavailable. The original source-first question card is unchanged.');
       return;
     }
     if(!response.ok||!await verifyInvestigation(data)||data.question!==last.question
