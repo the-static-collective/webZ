@@ -109,3 +109,10 @@ export function applyAdmission(res,result){
  });
  return true;
 }
+
+/** Avoid knowingly sending direct contact details or secrets to third-party free models. */
+export function rejectPrivatePrompt(question) {
+ if(typeof question!=='string'||question.length<8||question.length>360)return 'INVALID_QUESTION';
+ const privateData=/(?:[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b|\b(?:password|api[_ -]?key|access[_ -]?token|secret)\s*[:=]\s*\S+)/i;
+ return privateData.test(question)?'PRIVATE_INPUT_NOT_FOR_AI':null;
+}
