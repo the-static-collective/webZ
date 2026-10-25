@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#161e22">
+<meta name="description" content="Gather around an open question. Choose how you want to participate, start something small, and carry the fire forward.">
+<title>The Campfire — The Right to Try · Abundent</title>
+<style>
+:root{font:16px/1.52 system-ui,-apple-system,"Segoe UI",sans-serif;color:#e8efe5;background:#131d21;--ink:#e8efe5;--gold:#ffd389;--ember:#ff8249;--mist:#98bbad;--panel:#202c30;--edge:#48665d;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 7%,#283c39 0,transparent 44%),#131d21;min-height:100vh}
+a{color:var(--gold)}button,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5}button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}input[type=checkbox]{accent-color:var(--gold)}
+[hidden]{display:none!important}
+header.top{border-bottom:2px solid #b2734e;background:#152522;display:flex;justify-content:space-between;gap:1rem;padding:.7rem max(1rem,calc((100vw - 1050px)/2));font-weight:800;font-size:.85rem}
+header.top a{color:#f5ebd5}
+main{max-width:1080px;margin:0 auto;padding:1rem 1.2rem 5rem}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.19em;font:800 .74rem ui-monospace,SFMono-Regular,monospace}
+h1{font-size:clamp(3.2rem,9vw,7rem);letter-spacing:-.085em;line-height:.94;margin:.4rem 0 1rem;font-weight:950}
+h1 em{font-style:normal;color:var(--ember)}
+h2{font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.12;letter-spacing:-.045em;margin:.5rem 0 1rem}
+h3{font-size:1.2rem;margin:.4rem 0}
+.lead{font-size:1.18rem;max-width:680px;line-height:1.55;color:#dfecd9}
+.note,small{color:var(--mist)}.note{font-size:.86rem}.truth{padding:.8rem 1rem;border-left:4px solid var(--gold);background:#26332b;color:#e3edde;font-size:.91rem;margin:1.2rem 0}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:1rem;align-items:center;padding:1.4rem 0}
+.scene{aspect-ratio:1;position:relative;display:grid;place-items:center;margin:auto;width:260px;isolation:isolate}
+.ring{border-radius:50%;border:2px dashed rgba(248,214,163,.32);position:absolute;inset:0;z-index:-1}
+.ring.r1{inset:14%}.ring.r2{inset:30%}.ring.r3{inset:40%;border-style:solid;border-color:rgba(255,150,85,.4)}
+.glow{width:150px;height:150px;background:radial-gradient(circle,rgba(247,118,55,.35),rgba(245,125,56,.12) 45%,transparent 76%);border-radius:50%;position:absolute}
+.flame{position:relative;width:78px;height:120px;background:linear-gradient(20deg,#fa6237 15%,#ff9b47 50%,#ffdf83 85%);border-radius:50% 50% 50% 4%;transform:rotate(-30deg);filter:drop-shadow(0 0 22px #ed8848);margin-top:10px}
+.flame::after{content:"";position:absolute;left:32%;top:34%;width:35px;height:55px;background:#ffeb99;border-radius:60% 40% 50% 0;transform:rotate(8deg)}
+.scene .logs{position:absolute;bottom:40px;font-size:45px;letter-spacing:-.5em;color:#c08f58;transform:rotate(-8deg);margin-left:-18px}
+.hero-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}.pill{border:1px solid #ceab7c;color:#f2dab4;border-radius:99px;padding:.32rem .75rem;font:700 .8rem ui-monospace,monospace}
+.panel{background:var(--panel);border:2px solid var(--edge);border-radius:13px;padding:1.2rem;margin:1.5rem 0;box-shadow:6px 8px 0 #0a1315}
+.fire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1rem 0}
+.fire{background:#253932;border:2px solid #4b7765;border-radius:10px;color:var(--ink);padding:1rem;text-align:left;min-height:185px;display:flex;flex-direction:column}
+.fire[aria-pressed=true]{background:#354b39;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,211,137,.2)}
+.fire .symbol{font-size:2rem;color:var(--gold)}.fire .name{font-weight:850;letter-spacing:-.035em;font-size:1.12rem;margin:.3rem 0}
+.fire .desc{font-size:.83rem;color:#c5d9c7;line-height:1.4}.fire .status{font:700 .65rem ui-monospace,monospace;color:#ecc994;letter-spacing:.13em;margin-top:auto;padding-top:.8rem}
+.custom{border-top:1px dashed #749083;margin-top:1.1rem;padding-top:1rem}
+label{font-weight:800;display:block;margin:.7rem 0 .3rem}
+textarea{display:block;width:100%;background:#11221e;border:2px solid #648b79;color:var(--ink);border-radius:8px;padding:.75rem;resize:vertical;min-height:80px}
+.action{background:var(--gold);color:#162c24;border:2px solid var(--gold);padding:.7rem 1rem;font-weight:900;border-radius:7px}
+.action.secondary{background:transparent;color:var(--gold)}
+.status{margin:.65rem 0;min-height:1.4rem;color:#ffe0a2;font-weight:800}
+.choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}
+.choice{background:#162f2c;border:2px solid #56776a;color:var(--ink);text-align:left;border-radius:9px;padding:.9rem;min-height:170px;display:flex;flex-direction:column;gap:.4rem}
+.choice[aria-pressed=true]{background:#3c4734;border-color:#ffca83;box-shadow:inset 0 0 0 2px #9d6d3b}
+.choice .symbol{font-size:2rem;color:#ffd389}.choice b{font-size:1.05rem;line-height:1.2}.choice small{font-size:.8rem;line-height:1.35}
+.pledge{background:#2b392d;border-left:4px solid var(--ember);padding:.9rem;margin-top:1rem}
+.kit{background:#223933;border:2px solid #6a957e;border-radius:12px;padding:1.1rem;margin-top:1rem}
+.kit strong{color:#ffe0a2}.kit .first{background:#3b492f;padding:1rem;border-left:4px solid var(--gold);margin:1rem 0}
+.steps{list-style:none;padding:0}.steps li{border-bottom:1px dashed #56786d;padding:.9rem 0}
+.steps label{display:flex;gap:.75rem;align-items:flex-start;margin:0;cursor:pointer}.steps label span{font-weight:650}.steps small{display:block;font-weight:400;margin-top:.25rem}
+.steps input{margin-top:.18rem;width:20px;height:20px;flex-shrink:0}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.9rem 0}
+.links button,.links a{border:2px solid #bbba94;border-radius:7px;padding:.8rem;background:#e6d4a9;color:#192e25;min-height:54px;display:flex;justify-content:center;align-items:center;text-align:center;text-decoration:none;font-weight:900}
+.links .dark{background:#173a30;color:#f7edd7}
+.safeguard{padding:.9rem;background:#40342b;border-left:4px solid #ecab5a;color:#fff1dc;font-size:.88rem;margin:.9rem 0}
+.toolrow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}.toolrow select{padding:.65rem;border-radius:7px;border:2px solid #7c9f8e;background:#132921;color:white;width:100%}
+pre{font:.84rem/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#102421;padding:1rem;border:1px solid #5d7c70;border-radius:8px}
+footer{margin-top:2rem;border-top:2px solid #557064;padding-top:1.2rem;color:#c4d7c7}
+@media(max-width:810px){.intro{grid-template-columns:1fr}.scene{width:220px}.fire-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.fire-grid,.choices,.links,.toolrow{grid-template-columns:1fr}.choice{min-height:auto}.fire{min-height:150px}main{padding:.8rem .85rem 3rem}h1{font-size:clamp(3rem,13vw,5rem)}header.top span{display:none}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head>
+<body><header class="top"><a href="/">← ASK JAR;VIS</a><span>THE STATIC COLLECTIVE PRESENTS</span><a href="/tomorrow.html">THE TOMORROW MACHINE ↗</a></header>
+<main><section class="intro" aria-labelledby="hero-heading"><div><span class="kicker">CAMPFIRE-022 · AN EXPERIMENT IN EMERGENT LEADERSHIP</span>
+<h1 id="hero-heading">The <em>Campfire.</em></h1>
+<p class="lead">Nobody has to be appointed before they can care. Pick a question, decide where you'd like to stand, and take one useful, reversible step. Then invite somebody else to help shape what comes next.</p>
+<div class="hero-buttons"><span class="pill">THE RIGHT TO TRY</span><span class="pill">THE RIGHT TO DECLINE</span><span class="pill">THE RIGHT TO RETURN</span></div>
+</div><div class="scene" role="img" aria-label="A glowing campfire inside three open circles; an invitation to choose your own place"><div class="ring"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="glow"></div><div class="flame"></div><div class="logs">━━</div></div></section>
+<div class="truth"><strong>Inspired by a real community campfire exercise, but independent of the Coalition.</strong> This website doesn't enroll you in the Greater Mankato Coalition of Care, the grocery co-op, a church or any other organization. Being closest to a question is not authority over other people. No one is tracked, counted, enrolled or contacted by visiting this page.</div>
+<section class="panel" id="find-fire"><span class="kicker">01 / WHICH FIRE CALLS TO YOU?</span><h2>Choose the work worth gathering around.</h2>
+<p class="note">Every fire is an open Abundent proposal. A theme is not an official program or a claim that anyone is running it.</p>
+<div id="fires" class="fire-grid" role="group" aria-label="Possible community questions"></div>
+<div class="custom"><h3>Or light a new one.</h3><label for="new-fire">One particular question you care about</label>
+<textarea id="new-fire" maxlength="220" rows="2" placeholder="What could we make possible if two willing people tried a small idea?"></textarea>
+<button id="light" class="action secondary" type="button">✦ LIGHT A NEW FIRE</button><p id="custom-status" class="status" role="status"></p>
+</div></section>
+<section class="panel" id="choose-circle"><span class="kicker">02 / WHERE WOULD YOU STAND?</span><h2>Your commitment. Your choice.</h2>
+<p>Stand near the edge to listen, or move closer to try something. You can change positions or walk away at any point. This is about the <em>amount of responsibility you'd like to explore</em>, not rank or formal membership.</p>
+<div class="choices" id="circles" role="group" aria-label="Your level of interest in this question"></div>
+<div class="pledge"><strong id="standing-label">Choose your place by the fire.</strong><p id="standing-note">All four places are welcome.</p></div>
+</section>
+<section id="kit" class="panel" hidden><span class="kicker">03 / THE RIGHT TO TRY</span>
+<h2 id="kit-title">Your first useful move.</h2><p id="kit-intro"></p>
+<div class="kit"><span class="kicker" id="kit-role"></span><p id="kit-first" class="first"></p>
+<strong>A seven-day experiment, not a permanent office:</strong>
+<ul id="kit-steps" class="steps"></ul>
+<div class="safeguard" id="kit-safety"></div></div>
+<h3>Pass the fire, not an assignment.</h3><p class="note">Invite one or two people to contribute, or ask someone to carry the invitation as an ambassador. Their own choice is the only yes that counts.</p>
+<div class="links">
+<button type="button" id="invite">↗ Invite someone to this fire</button>
+<button type="button" id="ambassador">⤳ Pass to an ambassador</button>
+<button type="button" id="copy">✂ Copy the open invitation</button>
+<button type="button" id="link">⤴ Copy a public question link</button>
+<a id="role-door" href="/roles/" class="dark">✳ Explore an open starter role ↗</a>
+<a id="table-door" href="/tables/" class="dark">◎ Carry this question to a Seventh Table ↗</a>
+<a id="tomorrow-door" href="/tomorrow.html" class="dark">✦ Make three Tomorrow missions ↗</a>
+<a href="/tables/live/" class="dark">◌ Explore voluntary live rooms ↗</a>
+</div>
+<p class="status" id="kit-status" role="status" aria-live="polite"></p>
+<h3>04 / What actually happened?</h3>
+<p class="note">A refusal is information, not failure. This note is yours and stays on your device unless you choose to save or share it.</p>
+<div class="toolrow"><div><label for="outcome">My own report</label><select id="outcome">
+<option value="NOT_STARTED">Not started</option><option value="DRAFTED">I made a draft</option>
+<option value="SHARED">I chose to invite someone</option><option value="QUESTIONED">Someone raised a question</option>
+<option value="DECLINED">Someone declined</option><option value="REVIEWED">Received feedback</option>
+<option value="SAFE_TRIAL">I tried an appropriately permitted small experiment</option>
+<option value="PAUSED">I stepped back / paused</option>
+</select></div><div><label for="position">Want to move to another circle?</label>
+<button type="button" class="action secondary" id="move-back">◌ Reconsider where I stand</button></div></div>
+<div class="links"><button type="button" id="receipt">↓ Save a private progress receipt</button>
+<button type="button" id="print">▤ Print the invitation / first move</button></div>
+<details><summary>Preview exactly what the invitation says</summary><pre id="invite-preview"></pre></details>
+<p class="note">Self-reports are not independent proof. People may join, leave, change roles or refuse without a penalty, permanent ranking or forced continuity.</p>
+</section>
+<footer><strong>A community is allowed to grow around useful work.</strong> This open-source prototype is a conversation and invitation mechanism, not a public participant registry. <a href="/roles/">Open roles</a> · <a href="/tables/">Seventh Table</a> · <a href="/gather/">The Garden Commons</a> · <a href="/">Ask JAR;VIS</a></footer>
+</main><script type="module" src="/campfire/app.mjs"></script></body></html>
