@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#ecf4de">
+<title>Open Roles — Help Invent the Stewardship · Abundent</title>
+<style>
+:root{font:16px/1.55 system-ui,"Segoe UI",sans-serif;background:#ecf4de;color:#1c362c;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}a{color:#145c40}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #d87837;outline-offset:3px}
+.top{background:#143b2e;color:#fff;display:flex;justify-content:space-between;gap:1rem;padding:.7rem max(1rem,calc((100vw - 1100px)/2));border-bottom:4px solid #e6a353}
+.top a{color:#fff}main{max-width:1100px;margin:auto;padding:1rem 1.1rem 4rem}h1{font-size:clamp(2.4rem,7vw,5.2rem);letter-spacing:-.065em;line-height:1;margin:.5rem 0 1rem}h2{font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.045em}
+.lead{font-size:1.2rem;max-width:760px}.stamp{display:inline-block;padding:.25rem .6rem;background:#d9f393;border:2px solid #1c362c;font:800 .75rem/1.3 ui-monospace,monospace;letter-spacing:.08em}
+.truth{border-left:6px solid #b87f47;background:#fff3da;padding:1rem;margin:1.2rem 0;max-width:860px}
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.role{background:#fffdf2;border:2px solid #1c362c;border-radius:9px;padding:1rem;display:flex;flex-direction:column;box-shadow:4px 5px 0 #91ac90}
+.role h3{font-size:1.4rem;margin:.55rem 0;letter-spacing:-.035em}.role p{margin:.4rem 0}.role .meta{font:800 .74rem ui-monospace,monospace;letter-spacing:.08em;color:#426350}
+.role button,.big{border:2px solid #1c362c;border-radius:6px;padding:.7rem;background:#e9ac6b;color:#1c362c;font-weight:900;margin-top:auto}
+.role[aria-current=true]{outline:5px solid #f08f4b;outline-offset:3px}
+.desk{margin-top:2rem;background:#fffdf7;border:3px solid #1c362c;box-shadow:7px 7px 0 #1c362c;padding:1.2rem;border-radius:10px}
+.desk[hidden]{display:none}.scope{background:#e3f0dd;border-left:5px solid #50806a;padding:.9rem}.safety{border:2px solid #cd9d69;background:#fff4e0;padding:.8rem;margin:1rem 0}
+.ctas{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+.ctas button,.ctas a{display:flex;justify-content:center;align-items:center;text-align:center;min-height:54px;text-decoration:none;background:#e5f0de;border:2px solid #1c362c;border-radius:6px;padding:.7rem;font-weight:850}
+.ctas .yes{background:#d9f393}.ctas .peer{background:#efc18f}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin:1rem 0 2rem}
+.step{border:2px solid #97ac97;background:#fafff6;border-radius:7px;padding:.8rem}.step b{display:block;font-size:.8rem;letter-spacing:.06em}
+#status{font-weight:800;color:#876138;min-height:1.2rem;overflow-wrap:anywhere}
+.note{font-size:.85rem;color:#4d6b5d}
+footer{margin-top:3rem;border-top:2px dashed #79967e;padding-top:1rem;color:#446451}
+@media(max-width:760px){.roles,.steps,.ctas{grid-template-columns:1fr}.top{font-size:.86rem;flex-wrap:wrap}main{padding:.8rem 1rem 4rem}}
+</style>
+<script type="module" src="/roles/app.mjs"></script>
+</head><body><div class="top"><a href="/">← Ask JAR;VIS</a><a href="/tomorrow.html">✳ Tomorrow Machine</a><span>THE STATIC COLLECTIVE / ABUNDENT</span></div>
+<main><header><span class="stamp">STEWARD SEEDS · EXPERIMENT 021</span><h1>You don't have to find the steward.<br>You can help <em>become one.</em></h1>
+<p class="lead">A role doesn't need an incumbent to begin. It needs somebody curious enough to take one small responsibility, figure out what matters, and invite the next willing person to help.</p>
+<p>Experience optional. Titles unnecessary. Authority not implied. A small, reversible experiment first.</p></header>
+<aside class="truth"><strong>THESE ARE OPEN STARTER ROLES, NOT VACANCIES IN AN EXISTING ORGANIZATION.</strong>
+Abundent is independently inviting people to help explore them. Interest is not an appointment, credential, verified volunteer registration or agreement with the grocery cooperative, a church, the Coalition, a park, or another institution. You control whether any contact is sent. Actual permissions, stewardship of a physical place, and commitments must be confirmed by their rightful owners.</aside>
+<section aria-label="How a starter role grows"><h2>How an interest becomes useful work</h2>
+<div class="steps"><div class="step"><b>01 · INTEREST</b>Someone chooses to explore. No qualifications assumed.</div>
+<div class="step"><b>02 · FIRST STEP</b>Make a draft, question or simple inventory without authority.</div>
+<div class="step"><b>03 · TWO-WAY REVIEW</b>A person responds, changes it, or declines. Listen and record honestly.</div>
+<div class="step"><b>04 · SCOPED TRIAL</b>Only after the relevant people grant specific permission, try one safe action.</div></div></section>
+<section aria-label="Open role invitations"><span class="stamp">NO INCUMBENT REQUIRED</span><h2>What would you help invent?</h2><p class="note">These are starting directions, not a roster of people who already signed up.</p><div class="roles" id="roles"></div></section>
+<section class="desk" id="desk" hidden aria-live="polite">
+<span class="stamp">ONE OPEN CHAIR</span><h2 id="role-title"></h2>
+<p id="role-intro"></p><div class="scope"><strong>One thing you could do without waiting for a committee:</strong><p id="first"></p>
+<strong>First seven-day learning experiment:</strong><p id="trial"></p></div>
+<div class="safety"><b>Where real permission still matters:</b> <span id="boundary"></span></div>
+<div class="ctas"><a id="interest" class="yes" href="/contact/">✳ I'm interested. Let's talk.</a>
+<button type="button" id="invite" class="peer">↗ Invite a willing co-starter</button>
+<button type="button" id="ambassador">⤳ Pass this role to an ambassador</button>
+<button type="button" id="copy">✂ Copy an open-role invitation</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+<p class="note">The private interest form is an existing Abundent contact desk. It asks for your contact details and explicit permission to email you; we do not auto-submit it. Sharing an invitation does not sign another person up. You can invite one or two people, or someone can pass it along voluntarily. Nothing counts as a confirmed participant without their own yes.</p>
+</section><footer>The first useful outcome may be a new question, a corrected plan or a refusal. That's how real steward roles grow—without pretending somebody already holds them.</footer></main></body></html>
