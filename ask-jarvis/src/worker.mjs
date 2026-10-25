@@ -67,7 +67,7 @@ async function inspect(c,fetcher,question) {
   }
 }
 
-export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
+export async function assemble(question,fetcher=fetch,{kind='auto',graft=null}={}) {
   if(typeof question!=='string') throw Error('QUESTION_REQUIRED');
   if(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(question)) throw Error('QUESTION_CONTROL');
   if(question.length>360) throw Error('QUESTION_LENGTH');
@@ -81,6 +81,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
   const commons=publicCommonsFor(q);
+  const graftSnapshot=graft??{schema:'jarvis/graft-feed-v1',status:'NOT_REQUESTED',state:'NOT_ENABLED',selected:[]};
   const nextQuestion=commons.selected.some(x=>x.relevance==='KEYWORD_MATCH')
     ? commons.selected[0].firstCheck : returned.nextQuestion;
   const guidance = found ? `I inspected ${found} of ${sources.length} public source documents and composed this ${returned.kind==='question'?'question card':returned.kind+' draft'}. The draft uses local rules; the documents show possible tools, not commitments.`
@@ -95,6 +96,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
     {name:'TABLElogic encounter',status:'DONE',detail:'Locally separated the question, draft ideas and possible relations; unresolved gaps remain open. No TABLElogic runtime invoked.'},
     {name:'Public Commons',status:'READ',detail:'Selected '+commons.selected.length+' site-published public-safe editorial notes using local keyword matching; no AI/model call and no private Drive lookup.'},
+    {name:'GRAFT publication feed',status:graftSnapshot.status==='READ'?'READ':'HOLD',detail:graftSnapshot.status==='READ'?'Read '+graftSnapshot.selected.length+' source-pinned public GRAFT summaries; '+graftSnapshot.state+'. No donor code executed.':'No additional GRAFT publication entries verified on this request.'},
     ...sources.map(s=>({name:s.name,status:s.status==='INSPECTED'?'READ':'HOLD',detail:s.status==='INSPECTED'?'Read the whole document at an exact source commit and hashed its bytes.':'Source unavailable; no substitute claims.'})),
     {name:'CANNON boundary',status:'HOLD',detail:'No source-owner canon selection or native CANNON validation. Main is not inferred canon.'},
     {name:'GHoT / project execution',status:'NOT_RUN',detail:'Read-only adapters do not assign tasks or run project code.'},
@@ -106,13 +108,15 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
     '# ASK JAR;VIS / QUESTION CARD',`Question: ${q}`,'',returned.title,'',returned.body,'',
     `Observation: ${guidance+commonsDisclosure}`,'','Public Commons proposals (not independent evidence):',
     ...commons.selected.map(x=>'- '+x.id+' · '+x.status+' — '+x.observation+' Next check: '+x.firstCheck),'',
+    'GRAFT project-source feed (read-only; preview candidates never canon):',
+    ...(graftSnapshot.selected||[]).map(x=>'- '+x.id+' · '+x.status+' · '+x.publication+' — '+x.summary+' Source: '+x.sourceUrl),'',
     'Sources inspected (read-only):',
     ...sources.map(s=>`- ${s.name} — ${s.status} — ${s.source}${s.sha256?' ['+s.sha256+']':''}`),'',
     `Next question: ${nextQuestion}`,'',
     'No organizer affiliation, verified human consent, remote execution, partner commitment, or fulfilled service is claimed.',
     `Generated: ${observedAt}`
   ].join('\n');
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance:guidance+commonsDisclosure,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,commons};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance:guidance+commonsDisclosure,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,commons,graft:graftSnapshot};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;

@@ -1,5 +1,6 @@
 import {verifyReturn,verifyInvestigation,matchesInvestigationSources,verifyCouncil,matchesCouncilSources,sha256} from './evidence.mjs';
 import {normalizeFieldPack} from './field-witness.mjs';
+import {graftFieldEntries} from './graft-context.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
@@ -95,6 +96,20 @@ function show(data) {
         ' (owner-held source register; not a public citation)'));
     return li;
   }));
+  const graft=data.graft;
+  $('#graft-disclosure').textContent=graft?.disclosure||
+    'No newly published GRAFT source summaries were inspected for this question. The other Commons records remain available.';
+  $('#graft-notes').replaceChildren(...(graft?.selected||[]).map(x=>{
+    const li=el('li');
+    li.append(el('b','',x.title+' · '+x.status+' · '+x.publication),
+      el('p','',x.summary),
+      el('small','','SMALLEST CHECK · '+x.firstCheck),
+      el('small','','SOURCE DOCUMENT · '+x.sourceCommit.slice(0,12)+' · '));
+    li.append(sourceLink('Read exact-commit GRAFT source ↗',x.sourceUrl));
+    return li;
+  }));
+  if(graft?.status==='HOLD')$('#graft-notes').append(el('li','',
+    'HOLD · GRAFT feed unavailable or not approved. No fresh evidence inferred.'));
   $('#next-question').textContent=data.nextQuestion;
   $('#hash').textContent='Return receipt: '+data.receiptHash;
   $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
@@ -220,7 +235,8 @@ async function askCouncil() {
     // knowledge travels automatically; operator imports are a separate override.
     const expectedPack=fieldPack||normalizeFieldPack({
       schema:'ask-jarvis/field-witness-v1',
-      entries:(last.commons?.selected||[]).map(({relevance,...entry})=>entry)
+      entries:[...(last.commons?.selected||[]).map(({relevance,...entry})=>entry),
+        ...graftFieldEntries(last.graft)]
     });
     const expectedOrigin=fieldPack?'OPERATOR_SELECTED_UNVERIFIED':'SITE_PUBLISHED_UNVERIFIED';
     if(!response.ok||!await verifyCouncil(value)||!matchesCouncilSources(last,value)

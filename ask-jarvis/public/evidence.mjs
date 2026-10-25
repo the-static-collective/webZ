@@ -12,7 +12,7 @@ export function evidenceBody(data) {
     encounter:data.encounter, return:data.return, sources:data.sources,
     steps:data.steps, guidance:data.guidance, nextQuestion:data.nextQuestion,
     artifact:data.artifact, workbenchRequest:data.workbenchRequest,
-    commons:data.commons
+    commons:data.commons,graft:data.graft
   };
 }
 
