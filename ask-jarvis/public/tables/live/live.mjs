@@ -102,6 +102,7 @@ $('#new-table').addEventListener('submit',async ev=>{
 $('#share').addEventListener('click',()=>{if($('#guest-link').value)copy($('#guest-link').value,'#share-status');});
 $('#copy-host').addEventListener('click',async()=>{if(held?.role==='host'){try{await navigator.clipboard.writeText(link(held.id,held.token));say('Private host link copied. Do not send this to guests.');}catch{say('Copy blocked: use the browser address bar to privately save the host URL.',true);}}});
 $('#refresh').addEventListener('click',refresh);
+$('#heartbeat').addEventListener('click',()=>{if(!held)return;const target=new URL('/heartbeat/',location.origin);target.hash='table='+held.id+'.'+held.token;location.assign(target.href);});
 $('#pass').addEventListener('click',()=>{
   if(!held)return;
   const t=held.table;
