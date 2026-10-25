@@ -111,7 +111,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
       ? `A useful starting connection: ${first.observation} First check: ${first.firstCheck} I inspected ${found} public project source document(s), not a live service or partner commitment.`
       :found
         ? `I inspected ${found} public project documents. Here's a ${returned.kind} draft and a specific question to test next.`
-        : 'Source inspection did not succeed. This draft uses local context only; no real-world result is claimed.';
+        : 'I could not verify the source documents this time. This draft uses local context only; no real-world result is claimed.';
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
