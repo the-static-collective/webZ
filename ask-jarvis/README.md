@@ -95,3 +95,27 @@ After a question is answered, a small **contextual instrument rack** suggests up
 Native share sheets (with clipboard/manual fallbacks) now share a question link or an edited invitation in one tap. The original evidence receipt and downloads stay under the optional technical shelf. **No server-side receipt ledger or account-free synchronized persistence is introduced:** a copied link is a voluntary handoff, not an exported receipt or an RSVP. Native share is not evidence of delivery. The private contact form remains separate and consent-based. The original pinned sources, reviewer gates, and human permission boundaries remain.
 
 Validation: node --test includes magic-lego.test.mjs. Preview/release requires confirming mobile behavior, correct source statuses and browser sharing on actual devices. This change does not change the production alias by itself.
+
+## UNIFIED-015 — a connected intelligence candidate
+
+The integration review branch `feature/jarvis-unified-intelligence-015` joins two **previously divergent** development lines without claiming either is released to the production Abundent homepage.
+
+- **Question-first workbench (MAGIC LEGO 014):** question/contact front door, optional contextual tools, Town Desk, DISCOVERY, printable IGNITION, Free Graph return candidates, manual sharing, preserved native research lens and receipt.
+- **Source-informed reasoning (GRAFT-BRIDGE-011):** 15 public editorial Commons notes, source-pinned GRAFT feed, reviewed-only production publication gate, optional free-provider investigator and explicit two-model Groq/Gemini Council.
+- **Combined request path:** `/api/ask` carries North Star orientation, source observations, relevant Commons notes, GRAFT snapshot, and an actual `synthesis` with a question-dependent first move. A new contextual panel opens inside the original question-first page. Citations and extra tooling remain optional.
+- **Independent questions:** unrelated queries are not reclassified as Collective tasks; absence of external expertise or a real local steward is not concealed.
+- **Trust:** a GRAFT candidate on protected preview is marked review-pending; the production feed permits only source-owner-approved public summaries. A SHA receipt is an unsigned content witness, not an attestation of reality. No user account/upload is required to browse public context, and no external outreach/dispatch is automated.
+
+The initial plain answer is **more context-aware but still deterministic**, not a generally intelligent conversational agent. Language-model-supported hypothesis formation occurs only after an explicit preview-only request. Public model calls, durable conversation, independent live research, approved source promotion, and verified real-world actions remain separate future release gates.
+
+### Integration checks
+
+Run from `ask-jarvis/` on Node 22+:
+
+```sh
+npm test
+node scripts/build-town-graph.mjs
+node scripts/build-reviewed-return-graph.mjs
+```
+
+Review `test/unified.test.mjs` for cross-lineage, independent-question and triad regressions. A Vercel Preview build must use **root directory `ask-jarvis`**; a successful build of webZ's repository root is NOT sufficient to prove the Ask JAR;VIS package or its tests passed. Validate mobile sharing and the optional Council on protected preview, then separately authorize any public production release. No release is implied by the integration branch itself.
