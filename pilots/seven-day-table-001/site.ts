@@ -4,7 +4,7 @@ export const SITE = String.raw`<!doctype html><html lang="en"><head><meta charse
 <style>
 :root{--forest:#163d32;--ink:#1c332b;--paper:#fbf7ed;--white:#fffefa;--gold:#f1da99;--sage:#dce9d9;--muted:#526c5e;--line:#b9ccb9;--rust:#995235}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,sans-serif}a{color:inherit}button,input,textarea,select{font:inherit}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--rust);outline-offset:3px}.wrap{width:min(1030px,calc(100% - 32px));margin:auto}header{background:var(--forest);color:white;padding-bottom:60px}nav{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:17px 0;border-bottom:1px solid #ffffff45;font-size:.84rem}nav strong{letter-spacing:.14em}nav a{color:var(--gold)}h1,h2,h3{font-family:Georgia,serif;letter-spacing:-.035em}h1{font-size:clamp(3.2rem,9vw,6.7rem);line-height:.97;margin:42px 0 19px}h1 em{font-style:normal;color:var(--gold)}h2{font-size:clamp(2rem,4vw,3rem);margin:0 0 15px;line-height:1.07}h3{font-size:1.45rem;margin:6px 0 10px}.eyebrow,.tag{text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:.13em;color:var(--rust)}header .eyebrow{color:var(--gold)}.hero{font-size:1.14rem;max-width:735px}.btn{border:1px solid var(--forest);display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--forest);color:white;padding:11px 15px;min-height:43px;cursor:pointer;text-decoration:none;border-radius:6px;font-weight:800}.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}.btn.outline{background:transparent;color:inherit;border-color:currentColor}.btn:disabled{opacity:.65;cursor:default}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.guard{background:#fff1ce;padding:16px 21px;border-left:5px solid var(--rust);margin-top:-20px;position:relative;font-size:.89rem}.section{padding:42px 0}.soft{background:var(--sage);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.lead{font-size:1.07rem;color:var(--muted);max-width:850px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tile{background:white;border:1px solid var(--line);padding:20px;min-width:0}.tile p{font-size:.92rem}.card{border:1px solid var(--line);padding:22px;background:#fff;margin:17px 0}.panel{max-width:860px;background:var(--white);padding:23px;border:2px solid var(--forest);margin:18px 0}.panel p{max-width:720px}.label{display:block;font-weight:800;margin:14px 0 6px}input[type=text],textarea,select{width:100%;padding:11px;border:1px solid #91a99b;color:var(--ink);background:#fff;border-radius:5px;max-width:700px}textarea{min-height:105px;resize:vertical}input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--forest)}.check{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:.87rem}.small{font-size:.84rem;color:var(--muted)}.message{white-space:pre-wrap;background:#f3f7ef;padding:16px;border-left:5px solid var(--forest);overflow-wrap:anywhere;line-height:1.5}.status{font-size:.9rem;color:#3f6047;font-weight:700;min-height:20px;margin-top:12px}.invite{background:#eff3e9;padding:14px;border:1px solid var(--line);margin:10px 0}.invite code{display:block;font:12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.flow>div{background:white;padding:16px;border-top:5px solid var(--forest)}.flow strong{display:block}.hide[hidden]{display:none!important}.roles{border-bottom:1px solid var(--line);padding:12px 0}.roles p{margin:5px 0}.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.pill{background:#e9efd9;color:#264733;padding:5px 8px;font-weight:750;font-size:.76rem;border-radius:12px}.split{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}.footer{background:#102c22;color:#edf2e6;padding:29px 0;font-size:.82rem}.footer a{color:var(--gold)}.alert{border-left:5px solid var(--rust);padding:12px 16px;background:#fff1d1}.summary{white-space:pre-wrap;line-height:1.65}.actionCard{white-space:pre-wrap;background:#e6eee0;border:1px solid var(--line);padding:17px;font-size:.92rem;line-height:1.62;overflow-wrap:anywhere}.actionCard[hidden]{display:none}.never{font-weight:800;color:#7b4330}.disclose{background:#e3efdf;padding:13px;border:1px solid var(--line)}@media(max-width:760px){.grid,.split{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}}@media(max-width:450px){.flow{grid-template-columns:1fr}.section{padding:28px 0}.panel{padding:15px}h1{font-size:3.3rem}}@media print{@page{size:letter;margin:.55in}header{background:#fff;color:#111;padding-bottom:4px}body{font:11pt/1.4 Georgia,serif;background:#fff}.guard,.buttons,#hostUI,#seatUI,.footer,nav{display:none!important}.section{padding:6px}.tile{break-inside:avoid}.print{display:block!important}}.print{display:none}
-</style></head><body>
+.caseBox{background:#fffcf2;border:2px solid var(--forest);padding:23px;margin:18px 0}.caseBox .fine{background:#eff3e6;border-left:4px solid var(--forest);padding:12px;margin:15px 0}.caseBox .caseLine{margin:8px 0}.caseBox input[type=date],.caseBox input[type=text]{width:min(100%,680px);padding:11px;border:1px solid #91a99b;border-radius:5px;background:#fff;color:var(--ink)}.caseBox .caseLink{display:block;overflow-wrap:anywhere;margin:10px 0}.caseBox .check{max-width:770px}</style></head><body>
 <header><div class="wrap"><nav><strong>THE GARDEN · SEVEN-DAY TABLE</strong><div><a href="https://garden.abundent.org/">Garden atlas ↗</a> &nbsp; <a href="https://garden.abundent.org/signal">The Garden Signal ↗</a></div></nav>
 <div class="eyebrow" style="padding-top:40px">Waseca × Greater Mankato · an independent invitation</div><h1>One table.<br><em>Seven days.</em><br>Many hands.</h1>
 <p class="hero">You don't have to be free for the same meeting to help make something happen. Bring one useful question or contribution, invite up to two other voices, or send an ambassador in your place.</p>
@@ -47,7 +47,26 @@ Your private invitation link will go here.</div>
 <div class="buttons"><button class="btn" id="loadStarter" type="button">Load a grounded starter</button><button class="btn gold" id="makeCard" type="button">Compose one 24-hour field card</button><button class="btn" id="copyCard" type="button">Copy card</button><a class="btn" href="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/first-yes?mission=food">Open First Yes field kit</a></div>
 <p id="cardStatus" class="status"></p><div id="cardOutput" class="actionCard" hidden></div>
 <p class="small">This is a private, unsent, editable draft. No assignments, financial commitments, institutional decisions, or claims of completed work. Copy the card if you want to preserve it.</p>
-</div></div></section>
+</div><section class="caseBox" id="nextCaseDesk" aria-labelledby="nextCaseTitle">
+ <div class="tag">CASE 002 · CLOSING CIRCLE → THE SEVENTH TABLE</div>
+ <h2 id="nextCaseTitle">What happened? Who carries the next table?</h2>
+ <p>Keep a private, honest return from this week's Milk Bridge question. Then, <strong>only if you choose</strong>, open an editable, portable invitation on Abundent's existing Seventh Table. The next host independently decides whether to use it. This creates no contact, supplier commitment, or network record.</p>
+ <label class="label" for="caseOutcome">What is the present status of the experiment?</label>
+ <select id="caseOutcome"><option value="unresolved">Unresolved / still researching</option><option value="declined">Paused or declined by the rightful decision-maker</option><option value="reported">A participant reports a useful act</option><option value="confirmed">A recipient independently confirmed a completed act (as reported by the host)</option></select>
+ <label class="label" for="caseObservation">Private observation / correction (not sent to the next table)</label>
+ <textarea id="caseObservation" maxlength="900" placeholder="What happened, what didn't, and which evidence remains missing? Avoid clients' names, addresses, contact details and sensitive purchase terms."></textarea>
+ <label class="check"><input type="checkbox" id="caseRecipientConfirmed"><span>I have actually received direct confirmation from the recipient of the reported act. This is my statement, not platform verification. Required only to mark “confirmed.”</span></label>
+ <div class="buttons"><button type="button" class="btn outline" id="caseDownload">Download private return receipt</button></div>
+ <div class="fine"><strong>Next table, independent invitation.</strong> Only the title, public question, and proposed date below go into the new portable card; your private notes, any attendee information, this table's private tokens, and the claimed outcome do not travel.</div>
+ <label class="label" for="caseNextTitle">New table title (editable, 3–84 characters)</label><input id="caseNextTitle" type="text" minlength="3" maxlength="84" value="The Next Table · Food Sourcing">
+ <label class="label" for="caseNextQuestion">One public-safe question (editable, 5–270 characters)</label><textarea id="caseNextQuestion" minlength="5" maxlength="270">What useful food-access question could neighbors investigate next, with permission from the people responsible?</textarea>
+ <label class="label" for="caseNextDate">Suggested date (seven days after this table closes; editable)</label><input id="caseNextDate" type="date">
+ <label class="check"><input type="checkbox" id="casePublicApproval"><span>I reviewed the exact title and question above and choose to put them into an independently shareable invitation link. This does not publish the private return or claim an official project.</span></label>
+ <div class="buttons"><button type="button" class="btn gold" id="caseCreateNext">Prepare Seventh Table invitation</button><button type="button" class="btn outline" id="caseCopyNext" disabled>Copy the new invitation link</button></div>
+ <p id="caseNextStatus" role="status" aria-live="polite" class="status">No successor has been prepared or published.</p>
+ <a id="caseNextLink" class="caseLink" href="https://abundent.org/tables/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" hidden>Open this portable invitation at the existing Seventh Table ↗</a>
+ <p class="small">This is a portable <em>first</em> Seventh Table card. After the next willing host creates a table there, that system can produce its own successor lineage. The original Seven-Day Table and the Seventh Table use distinct records, so we do not invent a linked database parent or a verified meeting.</p>
+ </section></div></section>
 <section id="seatUI" class="section soft hide" hidden><div class="wrap"><div class="tag">Your invitation · not a public RSVP</div><h2>You have a place at the table.</h2><p id="seatMeta" class="lead"></p>
 <div class="split"><div><div class="panel"><h3>Bring one useful thing</h3><label class="label" for="availability">When could you connect, if at all?</label><select id="availability"><option value="async">Asynchronously anytime this week</option><option value="morning">Mornings</option><option value="afternoon">Afternoons</option><option value="evening">Evenings</option><option value="weekend">Weekend</option><option value="unavailable">No live time works; written contribution only</option></select>
 <label class="label" for="response">Your question, possibility, resource, or proposed small action</label><textarea id="response" maxlength="500" placeholder="One thing we could usefully test is..."></textarea>
@@ -83,7 +102,11 @@ box.append(gameButton);
 const s=document.createElement('p');s.className='small';s.textContent='Copy now. The private pass is shown only when created; the database stores only its hash. Sending the link is your choice.';box.append(s);$(target==='hostStatus'?'hostFresh':'seatFresh').prepend(box);
 }
 function date(t){try{return new Intl.DateTimeFormat('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Chicago'}).format(new Date(t))+' CT';}catch{return t;}}
-function hostUI(v){all=v.seats||[];room=v.room;$('hostMeta').textContent='Open until '+date(room.closesAt)+'. Private invitations: only you can distribute them. This dashboard is not public.';
+function seventhDate(iso){
+ const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(iso)).filter(x=>['year','month','day'].includes(x.type)).map(x=>[x.type,x.value]));
+ return new Date(Date.UTC(Number(parts.year),Number(parts.month)-1,Number(parts.day)+7)).toISOString().slice(0,10);
+}
+function hostUI(v){all=v.seats||[];room=v.room;if(!$('caseNextDate').value){$('caseNextDate').value=seventhDate(room.closesAt);}$('hostMeta').textContent='Open until '+date(room.closesAt)+'. Private invitations: only you can distribute them. This dashboard is not public.';
 const ps=all.filter(x=>x.type==='primary'),rs=all.filter(x=>x.type==='referral'),amb=all.filter(x=>x.type==='ambassador');
 $('counts').textContent=ps.length+' of 8 original places · '+rs.length+' additional voices · '+amb.length+' ambassador passes · '+all.filter(x=>x.status==='participating').length+' contributions · '+all.filter(x=>x.status==='declined').length+' declines.';
 const available=all.filter(x=>x.status==='participating');
@@ -126,6 +149,55 @@ cardText.push('','PREPARE NOW · '+artifact,'','ASK BEFORE ACTING · '+gate,'','
 $('cardOutput').textContent=cardText;$('cardOutput').hidden=false;$('cardStatus').textContent='Work card composed from the selected source. Copy it to keep or share deliberately.';}
 $('makeCard').onclick=buildCard;
 $('copyCard').onclick=()=>cardText?copy(cardText,'cardStatus'):($('cardStatus').textContent='Compose a card first.');
+let nextTableURL='';
+function privateCaseReturn(){
+ const outcome=$('caseOutcome').value, detail=$('caseObservation').value.trim();
+ if(outcome==='confirmed'&&(!$('caseRecipientConfirmed').checked||detail.length<12))throw Error('For a confirmed act, enter your private account and check that its recipient actually confirmed it.');
+ if(outcome==='reported'&&detail.length<12)throw Error('Enter a private account of the self-reported act.');
+ return ['MILK BRIDGE / CASE 002 · PRIVATE RETURN','STATUS: HOST SELF-REPORT · NOT AUTHENTICATED BY THIS SOFTWARE',
+ 'Case: The Vanishing Carton','Invitation room (private label only): '+(room?.title||'unknown'),
+ 'Outcome: '+outcome,'Recipient confirmation reported: '+(outcome==='confirmed'?'YES, user attests':'NOT ESTABLISHED'),
+ '', 'PRIVATE OBSERVATION:',detail||'(none supplied)','',
+ 'No beneficiary data is requested. No purchasing, institutional approval, delivery or donor funding is authenticated.',
+ 'No private observation will be carried to the Seventh Table invitation.'].join('\n');
+}
+function blockedContact(text){
+ return /[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?1[ .-]?)?\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}|(?:https?:\/\/|www\.)/i.test(text);
+}
+function portableTableCard(title,purpose,date){
+ const clean=s=>s.replace(/\s+/g,' ').trim();
+ title=clean(title);purpose=clean(purpose);
+ if(title.length<3||title.length>84||purpose.length<5||purpose.length>270||/[\u0000-\u001f\u007f]/.test(title+purpose)||blockedContact(title+' '+purpose))throw Error('Use a short public-safe title and question with no email, phone, URL or private details.');
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(Date.parse(date+'T12:00:00Z'))||new Date(date+'T12:00:00Z').toISOString().slice(0,10)!==date)throw Error('Choose a real calendar date.');
+ const label=Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(36).padStart(2,'0')).join('').slice(0,10).toUpperCase();
+ return {v:1,id:label,title,purpose,date,time:'',venue:'',host:'',parent:'',chain:[]};
+}
+function portableTableURL(card){
+ const bytes=new TextEncoder().encode(JSON.stringify(card));
+ const token=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+ if(token.length>5000)throw Error('Portable invitation too large.');
+ return 'https://abundent.org/tables/#invite='+token;
+}
+$('caseDownload').onclick=()=>{
+ try{
+  const receipt=privateCaseReturn();
+  const url=URL.createObjectURL(new Blob([receipt+'\n'],{type:'text/plain;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download='case-002-private-return.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  $('caseNextStatus').textContent='Private return download requested. Check your saved file; nothing was submitted.';
+ }catch(error){$('caseNextStatus').textContent=error.message;}
+};
+for(const id of ['caseNextTitle','caseNextQuestion','caseNextDate'])$(id).addEventListener('input',()=>{nextTableURL='';$('caseNextLink').hidden=true;$('caseCopyNext').disabled=true;$('casePublicApproval').checked=false;$('caseNextStatus').textContent='Draft changed: review and reapprove the invitation before creating a link.';});
+$('casePublicApproval').addEventListener('change',()=>{if(!$('casePublicApproval').checked){nextTableURL='';$('caseNextLink').hidden=true;$('caseCopyNext').disabled=true;}});
+$('caseCreateNext').onclick=()=>{
+ try{
+  privateCaseReturn();
+  if(!$('casePublicApproval').checked)throw Error('Review the public title/question and explicitly approve their sharing first.');
+  nextTableURL=portableTableURL(portableTableCard($('caseNextTitle').value,$('caseNextQuestion').value,$('caseNextDate').value));
+  $('caseNextLink').href=nextTableURL;$('caseNextLink').hidden=false;$('caseCopyNext').disabled=false;
+  $('caseNextStatus').textContent='Portable Seventh Table invitation prepared locally. Open or copy it voluntarily. No one was contacted and no online table was created.';
+ }catch(error){$('caseNextStatus').textContent=error.message;}
+};
+$('caseCopyNext').onclick=()=>nextTableURL?copy(nextTableURL,'caseNextStatus'):($('caseNextStatus').textContent='Prepare the invitation first.');
 function seatUI(v){self=v.seat;room=v.room;$('seatMeta').textContent='Invitation: '+self.lens+'. Table open until '+date(room.closesAt)+'. Seat status: '+self.status+'. Participation is optional.';
 $('response').value=self.response||'';
 if(!self.response&&p.get('focus')==='milk-bridge'){$('response').value='Would an authorized food-shelf purchaser welcome a one-page comparison of the current milk supply arrangement and one eligible alternative, with program and price unknowns explicit?';$('seatStatus').textContent='Case 002 question prepared as an editable draft. Review it, then choose separately whether to save your contribution.';}$('availability').value=self.availability||'async';$('shared').checked=!!self.share;
