@@ -49,9 +49,12 @@ export async function quotaForWorker(req,env,kind,fetcher=fetch,now=Date.now()){
  }catch{return {ok:false,reason:'QUOTA_UNAVAILABLE'};}
  finally{clearTimeout(timer);control.abort();}
 }
-export async function signedModalCall(url,secret,input,fetcher=fetch){
+export async function signedModalCall(url,secret,input,proxyKey,proxySecret,fetcher=fetch){
  const endpoint=safeModalUrl(url);
- if(!endpoint||typeof secret!=='string'||secret.length<32)throw Error('MODAL_NOT_CONFIGURED');
+ if(!endpoint||typeof secret!=='string'||secret.length<32
+   ||typeof proxyKey!=='string'||!/^wk-[A-Za-z0-9_-]{8,}$/.test(proxyKey)
+   ||typeof proxySecret!=='string'||!/^ws-[A-Za-z0-9_-]{8,}$/.test(proxySecret))
+  throw Error('MODAL_NOT_CONFIGURED');
  const body=JSON.stringify(input);
  if(te.encode(body).length>4500)throw Error('MODAL_PAYLOAD_TOO_LARGE');
  const stamp=String(Date.now());
@@ -60,7 +63,7 @@ export async function signedModalCall(url,secret,input,fetcher=fetch){
  try{
   const res=await fetcher(endpoint,{method:'POST',redirect:'error',signal:control.signal,
    headers:{'Content-Type':'application/json','Accept':'application/json','X-Jarvis-Timestamp':stamp,
-    'X-Jarvis-Signature':signature},body});
+    'X-Jarvis-Signature':signature,'Modal-Key':proxyKey,'Modal-Secret':proxySecret},body});
   if(!res.ok||Number(res.headers.get('content-length'))>18000)throw Error('MODAL_FAILURE');
   const raw=await res.text();if(raw.length>18000)throw Error('MODAL_OUTPUT_TOO_LARGE');
   const value=JSON.parse(raw);
