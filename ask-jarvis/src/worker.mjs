@@ -139,7 +139,7 @@ export default {
           status:'HOLD',reason:'FREE_PROVIDER_NOT_CONFIGURED',
           message:'No allowed model provider is configured for this route. The rules-only card still works.'},503);
         const result=await investigate({question:obj.question,kind:obj.kind??'auto',assemble,
-          provider:choice?.provider||makeWorkersProvider(env.AI)});
+          provider:choice?.provider||makeWorkersProvider(env.AI),providerId:choice?.id??'worker-ai'});
         if(result.status==='MODEL_PROPOSAL'&&choice) {
           result.routing={provider:choice.id,model:choice.model,mode:choice.mode,route:choice.route,
             modelCalls:1,automaticPaidFallback:false};
