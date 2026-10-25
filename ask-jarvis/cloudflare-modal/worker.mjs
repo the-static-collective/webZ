@@ -37,7 +37,8 @@ export default {
       &&env.JARVIS_SUPABASE_QUOTA_URL==='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/jarvis-quota',
     modalEnabled:env.JARVIS_MODAL_ENABLED==='1'
       &&typeof env.MODAL_BRIDGE_SECRET==='string'&&env.MODAL_BRIDGE_SECRET.length>=32
-      &&typeof env.MODAL_FIELD_KIT_URL==='string',
+      &&typeof env.MODAL_FIELD_KIT_URL==='string'
+      &&typeof env.MODAL_PROXY_KEY==='string'&&typeof env.MODAL_PROXY_SECRET==='string',
     note:'Status is configuration, not proof that downstream calls succeeded.'});
   if(['/api/ask','/api/field-kit'].includes(url.pathname)){
    if(req.method!=='POST')return hold('METHOD_NOT_ALLOWED',405);
@@ -64,7 +65,7 @@ export default {
        editorialFirstMove:base.context?.relation==='INDEPENDENT_QUESTION'?''
          :String(base.synthesis?.firstMove||'').slice(0,250)},
      sourcePins:pins,sourceStatus:'INSPECTED_DOCUMENT_NOT_FIELD_OUTCOME'
-    });
+    },env.MODAL_PROXY_KEY,env.MODAL_PROXY_SECRET);
     return reply({schema:'jarvis/edge-compute-v1',status:'COMPUTE_DRAFT',
      question:base.question,provider:'modal',sourcePins:pins,
      sourceDigest:base.receiptHash,modelInvoked:false,executedActions:false,
