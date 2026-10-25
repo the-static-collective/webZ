@@ -5,6 +5,9 @@ import {summarizeForQuestion} from './inquiry.mjs';
 import {researchTargets,composeTriad,RESEARCH_LENSES} from './triad.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {investigate,makeWorkersProvider} from './investigator.mjs';
+import {orientQuestion} from './discovery.mjs';
+import mission from '../context/mission-v1.json' with {type:'json'};
+import catalog from '../town/catalog.json' with {type:'json'};
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -74,6 +77,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const q=question.replace(/\s+/g,' ').trim();
   if(q.length<8||q.length>360) throw Error('QUESTION_LENGTH');
   if(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?1[- .]?)?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}/.test(q)) throw Error('PRIVATE_CONTACT');
+  const orientation=orientQuestion(q,mission,catalog);
   const encounter = formEncounter(question,kind);
   const targets = researchTargets(lens)||selectSources(q,encounter.kind,encounter.facets);
   const sources = await Promise.all(targets.map(c=>inspect(c,fetcher,q)));
@@ -89,6 +93,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     requiredBeforeDispatch:['Operator-reviewed endpoint and authentication','Owner-approved capability and input scope','Receiver-issued outcome and reconciliation contract'],
     ...(triad?{researchCut:triad.schema,capabilityFence:triad.loadout.fenced}: {})};
   const steps = [
+    {name:'Abundent North Star',status:'DONE',detail:orientation.relation==='INDEPENDENT_QUESTION'?'Read the mission and respected an independent question without forcing a project connection.':'Read the mission and identified optional related workstreams; no existing local commitment inferred.'},
     {name:'JAR;VIS',status:'DONE',detail:'Received one question; deterministic rules, no model or question storage.'},
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
     {name:'TABLElogic encounter',status:'DONE',detail:'Locally separated the question, draft ideas and possible relations; unresolved gaps remain open. No TABLElogic runtime invoked.'},
@@ -112,7 +117,11 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     'No organizer affiliation, verified human consent, remote execution, partner commitment, or fulfilled service is claimed.',
     `Generated: ${observedAt}`
   ].join('\n');
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion:returned.nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,...(triad?{triad}: {})};
+  const context={schema:'ask-jarvis/context-orientation-v1',missionRevision:orientation.missionRevision,
+    goal:orientation.goal,relation:orientation.relation,
+    workstreams:orientation.workstreams,ideas:orientation.ideas,
+    caution:orientation.advice,grounding:'EDITORIAL_DIRECTION_NOT_LOCAL_EVIDENCE'};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion:returned.nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,context,...(triad?{triad}: {})};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;
