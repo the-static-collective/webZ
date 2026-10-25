@@ -115,18 +115,20 @@ export async function formCouncilBase({question,kind='auto',assemble,fetcher=fet
     payload:{question:base.question,facets:baseCtx.facets,kind:base.return.kind,
       notes:refs.map(s=>({id:s.id,name:s.name,excerpt:s.excerpt})),unavailable}};
 }
-export async function council({question,kind='auto',assemble,fetcher=fetch,scoutProvider,criticProvider,fieldPack=null}) {
+export async function council({question,kind='auto',assemble,fetcher=fetch,scoutProvider,criticProvider,fieldPack=null,
+  fieldPackOrigin='OPERATOR_SELECTED_UNVERIFIED'}) {
   if(typeof scoutProvider!=='function'||typeof criticProvider!=='function')throw Error('COUNCIL_PROVIDERS_REQUIRED');
   const ctx=await formCouncilBase({question,kind,assemble,fetcher});
   const selected=fieldPack?normalizeFieldPack(fieldPack):null;
-  if(selected)ctx.payload.fieldPack={status:'OPERATOR_SELECTED_UNVERIFIED',entries:selected.entries};
+  if(!['OPERATOR_SELECTED_UNVERIFIED','SITE_PUBLISHED_UNVERIFIED'].includes(fieldPackOrigin))throw Error('FIELD_ORIGIN_INVALID');
+  if(selected)ctx.payload.fieldPack={status:fieldPackOrigin,entries:selected.entries};
   const parent=ctx.base,refs=ctx.refs;
   const common={schema:'ask-jarvis/council-v1',question:parent.question,
     baseReceiptHash:parent.receiptHash,authority:'NONE',modelCalls:0,
     providers:['groq','gemini'],sourceReferences:refs.map(({excerpt,...meta})=>meta),
     unavailable:ctx.unavailable,disclaimer:'Two independent model passes, NOT evidence of consent or work. Sources are inspected README excerpts. Only a person can approve a real pilot.',
     observedAt:new Date().toISOString(),
-    fieldWitness:selected?{status:'OPERATOR_SELECTED_UNVERIFIED',count:selected.entries.length,
+    fieldWitness:selected?{status:fieldPackOrigin,count:selected.entries.length,
       ids:selected.entries.map(e=>e.id),packHash:await sha256(JSON.stringify(selected))}:null};
   if(refs.length===0)return {...common,status:'HOLD',reason:'NO_INSPECTED_SOURCES',message:'No actual source could be inspected; no models called.'};
   const allowed=refs.map(x=>x.id);
@@ -140,7 +142,7 @@ export async function council({question,kind='auto',assemble,fetcher=fetch,scout
     critic=parseCritic(await criticProvider({system:SECOND_SYSTEM,
       input:JSON.stringify({question:parent.question,
         sources:ctx.payload.notes,unavailable:ctx.unavailable,
-        fieldPack:selected?{status:'OPERATOR_SELECTED_UNVERIFIED',entries:selected.entries}:null,scout})}),allowed);
+        fieldPack:selected?{status:fieldPackOrigin,entries:selected.entries}:null,scout})}),allowed);
   }catch(error){
     return {...common,status:'PARTIAL_HOLD',reason:safeFailureCode(error),modelCalls:2,
       scout,critic:null,message:'Scout proposed an ingredient, but independent pressure test failed. Nothing was accepted.'};

@@ -16,7 +16,7 @@
     <h1><span class="ask">ask</span> <span class="brand">JAR<span class="colon">;</span>VIS<span class="bang">!</span></span></h1>
     <p class="tagline">The Internet is a very big place. <em>You only need one question.</em></p></div>
 </header>
-<div class="strip"><a class="strip-link" href="/doors/">✳ CHOOSE A DOOR</a> <a class="strip-link" href="/contact/?via=coalition">✉ STAY IN TOUCH</a> <span class="bullet">✳</span> <span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> SMALL THINGS CAN BEGIN HERE <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
+<div class="strip"><a class="strip-link" href="/doors/">✳ CHOOSE A DOOR</a> <a class="strip-link" href="/commons.html">✳ EXPLORE OUR COMMONS</a> <a class="strip-link" href="/contact/?via=coalition">✉ STAY IN TOUCH</a> <span class="bullet">✳</span> <span>◉</span> OPEN FOR QUESTIONS <span class="bullet">✳</span> SMALL THINGS CAN BEGIN HERE <span class="bullet">✳</span> NO LOGIN REQUIRED</div>
 <section class="cafe-intro" aria-labelledby="cafe-title">
  <div class="cafe-badge">✳ CAFÉ MODE · NOW OPEN · BRING A QUESTION, NOT A PASSWORD</div>
  <div class="cafe-hero">
@@ -66,6 +66,13 @@
      <div id="invitation-tools" hidden><label for="invitation-editor">Make this invitation your own</label><textarea id="invitation-editor" rows="12" maxlength="6000"></textarea><p id="draft-status" role="status"></p><button type="button" id="download-edited">↓ Save my invitation (.txt)</button></div>
      <div id="song-tools" hidden><audio id="song-audio" controls preload="none" aria-label="Original instrumental song sketch"></audio><button type="button" id="download-song">↓ Save instrumental sketch (.wav)</button></div>
    </section>
+   <section class="return-card" aria-labelledby="commons-heading">
+     <div class="ribbon">PUBLIC COMMONS · SHARED SOURCE MAP · NO UPLOAD OR MODEL REQUIRED</div>
+     <h3 id="commons-heading">Relevant work already on the table</h3>
+     <p id="commons-disclosure">JAR retrieves a few proposals and prototypes from the site's published knowledge commons. These are editorial summaries, not verified partner agreements or demonstrated local needs.</p>
+     <ul id="commons-notes" class="sources"></ul>
+     <p><a href="/commons.html">Explore all project notes →</a> · The public Commons is reusable by anybody and requires no account.</p>
+   </section>
    <h3>Possible source doors</h3><ul id="sources" class="sources"></ul>
    <section class="vis-inquiry" aria-labelledby="vis-title">
      <div class="ribbon">✳ OPTIONAL · VIS-006 MODEL INVESTIGATION · EXPERIMENTAL</div>
@@ -90,10 +97,10 @@
      <p><strong>JAR gathers evidence.</strong> ALEX keeps source and claim separate; 3rdi marks what is visible at this cut; LOADOUT fences capability and effects. A Groq scout proposes the smallest missing ingredient; Gemini reads that proposal and pressure-tests it.</p>
      <p>One explicit click requests <strong>up to two separate free-tier API calls</strong> on the current public-safe question and short, pinned public-source excerpts. The second provider also sees the first model's bounded hypothesis. Provider quotas and retention policies still apply. Nothing is booked, contacted, executed or authorized.</p>
      <div class="field-import">
-       <label for="field-witness-file"><strong>FIELD WITNESS 001 — bring your reviewed ecosystem evidence</strong></label>
-       <p>Optionally import a local JSON field pack describing your grocery, music, church, Coalition and Road proposals. Import remains on this device, in memory, until you deliberately click Council. The two AI providers then receive the selected non-identifying summaries. They do NOT receive or crawl your Google Drive files. Never import confidential contacts, church records or personal needs.</p>
+       <label for="field-witness-file"><strong>FIELD WITNESS — OPTIONAL ADVANCED OVERRIDE</strong></label>
+       <p><strong>No upload is required.</strong> JAR automatically uses the site-published public project Commons for every visitor. Optionally import a separately reviewed JSON snapshot to override the public selection for this device only. The two external AI providers receive the relevant short summaries only if you deliberately run Council. They do NOT crawl your Drive. Never import private contacts or records.</p>
        <input id="field-witness-file" type="file" accept=".json,application/json" aria-label="Import local field witness JSON pack">
-       <p id="field-witness-state" role="status"><small>No field pack imported. The council may still run on its original pinned public README sources.</small></p>
+       <p id="field-witness-state" role="status"><small>Public Commons selected automatically. No import required. Personal operator imports are optional.</small></p>
        <button id="field-witness-clear" type="button">CLEAR IMPORTED FIELD NOTES</button>
      </div>
      <button id="council-investigate" type="button">✳ FIND THE MISSING INGREDIENT · GROQ × GEMINI →</button>
