@@ -138,3 +138,12 @@ button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{
 .triad-slice h4{margin:0 0 7px;font:17px Georgia,serif;color:#23466b}
 .triad-slice p,.triad-slice li{font-size:12px;line-height:1.55;overflow-wrap:anywhere}
 .triad-slice ul{padding-left:18px}
+
+/* NATIVE-009 / optional native owner-runtime test, not a source-reading illusion */
+.native-runner{margin:16px 0 4px;padding:13px;background:#fff4d9;border:2px dashed #956e2a}
+.native-runner h4{font:19px Georgia,serif;color:#68411a;margin:0 0 8px}
+.native-runner p{font-size:12px;line-height:1.55}
+.native-runner button{padding:9px 12px;margin:5px 0;border:2px outset #b7a16e;background:#fff9ef;font-weight:700}
+.native-runner button:disabled{opacity:.6}
+.native-evidence{background:#fff;padding:12px;border:1px solid #c4ad76;overflow-wrap:anywhere}
+.native-evidence p{margin:9px 0}
