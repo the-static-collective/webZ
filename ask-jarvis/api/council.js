@@ -3,6 +3,7 @@
 import {assemble,inputError,REQUEST_LIMIT} from '../src/worker.mjs';
 import {availableProviders,makeFreeApiProvider} from '../src/free-compute.mjs';
 import {council} from '../src/council.mjs';
+import {normalizeFieldPack} from '../public/field-witness.mjs';
 
 export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store');
@@ -19,10 +20,11 @@ export default async function handler(req,res) {
       message:'Both Groq and Gemini free-tier providers are required. No model was called.'});
   const obj=req.body && typeof req.body==='object'&&!Array.isArray(req.body)?req.body:{};
   if(typeof obj.question!=='string')return res.status(400).json({error:'QUESTION_REQUIRED'});
-  if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>REQUEST_LIMIT)
+  if(new TextEncoder().encode(JSON.stringify(obj)).byteLength>(obj.fieldPack?14500:REQUEST_LIMIT))
     return res.status(413).json({error:'QUESTION_TOO_LARGE'});
   try {
-    const result=await council({question:obj.question,kind:obj.kind??'auto',assemble,
+    const fieldPack=obj.fieldPack?normalizeFieldPack(obj.fieldPack):null;
+    const result=await council({question:obj.question,kind:obj.kind??'auto',assemble,fieldPack,
       scoutProvider:makeFreeApiProvider('groq',process.env),
       criticProvider:makeFreeApiProvider('gemini',process.env)});
     return res.status(200).json(result);

@@ -1,4 +1,5 @@
-import {verifyReturn,verifyInvestigation,matchesInvestigationSources,verifyCouncil,matchesCouncilSources} from './evidence.mjs';
+import {verifyReturn,verifyInvestigation,matchesInvestigationSources,verifyCouncil,matchesCouncilSources,sha256} from './evidence.mjs';
+import {normalizeFieldPack} from './field-witness.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
@@ -6,7 +7,7 @@ import {makeTableSeedLink} from './table-bridge.mjs';
 const $ = selector=>document.querySelector(selector);
 const form=$('#question-form'), input=$('#question'), ask=$('#ask'), results=$('#results'), reply=$('#reply');
 const steps=$('#steps'), sources=$('#sources'), audio=$('#song-audio'), kind=$('#return-kind');
-let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, councilActive=null;
+let last=null, run=0, active=null, audioUrl=null, wav=null, visActive=null, councilActive=null, fieldPack=null;
 
 function el(tag,cls,value) {
   const node=document.createElement(tag);
@@ -194,7 +195,8 @@ async function askCouncil() {
     const response=await fetch('/api/council',{
       method:'POST',cache:'no-store',credentials:'same-origin',
       headers:{'content-type':'application/json',accept:'application/json'},
-      body:JSON.stringify({question:last.question,kind:last.return.kind}),signal:controller.signal
+      body:JSON.stringify({question:last.question,kind:last.return.kind,
+        ...(fieldPack?{fieldPack}:{} )}),signal:controller.signal
     });
     const value=await response.json();
     if(councilActive!==controller)return;
@@ -203,11 +205,15 @@ async function askCouncil() {
         ' No automatic retry or paid fallback.';
       return;
     }
-    if(!response.ok||!await verifyCouncil(value)||!matchesCouncilSources(last,value))
+    if(!response.ok||!await verifyCouncil(value)||!matchesCouncilSources(last,value)
+      ||(fieldPack ? value.fieldWitness?.packHash!==await sha256(JSON.stringify(fieldPack))
+        : value.fieldWitness!==null))
       throw Error('Council receipt or inspected sources did not verify.');
     const panel=el('div','vis-answer');
     panel.append(el('h4','','TWO-MODEL SOURCE-FIRST REASONING · GROQ → GEMINI'));
     panel.append(el('small','','2 API calls · 3 fixed source constitutions inspected separately · no execution · unsigned'));
+    if(value.fieldWitness?.count) panel.append(el('p','',
+      'FIELD WITNESS: '+value.fieldWitness.count+' operator-selected document summaries inspected by both models. These are NOT independent proof of actual community agreement. The pack was not stored on the server.'));
     panel.append(el('h4','','GROQ · THE MISSING INGREDIENT'),el('p','',value.scout.missingIngredient));
     panel.append(el('p','',value.scout.hypothesis),el('p','',value.scout.whyThisOne));
     function sourceRow(sourceIds,heading){
@@ -243,6 +249,29 @@ async function askCouncil() {
     if(councilActive===controller){councilActive=null;button.disabled=false;}
   }
 }
+const fieldInput=$('#field-witness-file'),fieldState=$('#field-witness-state');
+fieldInput.addEventListener('change',async()=>{
+  const file=fieldInput.files?.[0];if(!file)return;
+  fieldPack=null;
+  if(file.size>14000){fieldState.textContent='HOLD: file exceeds the 14 KB local review limit.';fieldInput.value='';return;}
+  try {
+    const candidate=normalizeFieldPack(JSON.parse(await file.text()));
+    fieldPack=candidate;
+    const lanes=[...new Set(candidate.entries.map(e=>e.lane))];
+    fieldState.textContent='READY: '+candidate.entries.length+' operator-selected notes in '+
+      lanes.length+' project lanes ('+lanes.join(', ')+
+      '). Local memory only. The two model providers see these notes ONLY after you press Council.';
+  } catch {
+    fieldState.textContent='HOLD: JSON is invalid, includes unsupported fields or may contain contact details. No data was sent.';
+  } finally {fieldInput.value='';}
+});
+$('#field-witness-clear').addEventListener('click',()=>{
+  councilActive?.abort();councilActive=null;
+  fieldPack=null;fieldInput.value='';
+  fieldState.textContent='CLEARED: imported notes dropped from page memory. No information was sent by this action.';
+  $('#council-investigate').disabled=false;
+});
+
 $('#council-investigate').addEventListener('click',()=>{void askCouncil();});
 
 $('#vis-investigate').addEventListener('click',()=>{void askVis();});
