@@ -1,4 +1,4 @@
-import {verifyReturn,verifyInvestigation} from './evidence.mjs';
+import {verifyReturn,verifyInvestigation,matchesInvestigationSources} from './evidence.mjs';
 import {songWav} from './song.mjs';
 import {makeHandoffLink,readHandoff} from './cafe.mjs';
 import {makeTableSeedLink} from './table-bridge.mjs';
@@ -120,7 +120,7 @@ async function askVis() {
       return;
     }
     if(!response.ok||!await verifyInvestigation(data)||data.question!==last.question
-      ||data.baseReceiptHash!==last.receiptHash)throw Error('Model proposal was not verifiable. No investigation is claimed.');
+      ||!matchesInvestigationSources(last,data))throw Error('Model proposal was not verifiable. No investigation is claimed.');
     const panel=el('div','vis-answer');
     panel.append(el('h4','', 'VIS · MODEL-GENERATED HYPOTHESES'),el('p','',data.investigation.summary));
     const list=el('ol','vis-connections');
