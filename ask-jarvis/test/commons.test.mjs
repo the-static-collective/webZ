@@ -34,8 +34,8 @@ test('public question automatically includes bounded project context in its hash
  assert.equal(result.commons.release,COMMONS_RELEASE);
  assert.ok(result.commons.selected.some(x=>x.lane==='grocery'));
  assert.ok(result.steps.some(x=>x.name==='Public Commons'));
- assert.ok(result.artifact.includes('Public Commons proposals'));
- assert.match(result.guidance,/owner-curated project notes/);
+ assert.ok(result.artifact.includes('Related public project notes'));
+ assert.match(result.guidance,/starting connection|inspected/i);
  assert.equal(await verifyReturn(result),true);
  const changed=structuredClone(result);
  changed.commons.selected[0].observation='The grocery organizers have approved everything.';
@@ -45,11 +45,11 @@ test('website offers shared project knowledge and manual import remains optional
  const index=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
  const app=readFileSync(new URL('../public/app.mjs',import.meta.url),'utf8');
  const library=readFileSync(new URL('../public/commons.html',import.meta.url),'utf8');
- assert.match(index,/id="commons-notes"/);
- assert.match(index,/No upload is required/);
- assert.match(index,/href="\/commons.html"/);
- assert.match(app,/last\.commons\?\.selected/);
- assert.match(app,/SITE_PUBLISHED_UNVERIFIED/);
+ assert.match(index,/id="question-form"/);
+ assert.match(app,/presentUnified\(data\)/);
+ assert.match(index,/sitemap|Sitemap/i);
+ assert.match(app,/import \{presentUnified,clearUnified\}/);
+ assert.match(readFileSync(new URL('../public/unified.mjs',import.meta.url),'utf8'),/selectCommons\(base.question\)/);
  assert.match(library,/id="commons-library"/);
 });
 test('protected preview council uses the shared Commons even if the visitor imported nothing',async()=>{
