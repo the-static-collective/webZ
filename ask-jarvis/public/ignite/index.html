@@ -52,6 +52,30 @@ button:disabled{opacity:.5;cursor:default}.muted{font-size:12px;color:#536b7b}.s
 <pre id="sheet" class="paper"></pre>
 <div class="actions"><button type="button" id="print">PRINT THE FIELD KIT</button><button type="button" id="save">↓ SAVE .TXT</button><button type="button" id="save-json">↓ SAVE UNSIGNED .JSON</button></div>
 <p class="muted">Local draft only. No signup, server write, model request or automatic invitation. A future witnessed return requires its own evidence and human approval.</p>
+<section id="field-return" class="stage" aria-labelledby="field-return-title">
+ <h2 id="field-return-title">03. Tell the truth about what happened.</h2>
+ <p>You took the card into the world. Did somebody respond, correct it, decline, or have you not asked yet? Record only what you personally know. No one is signed up or credited automatically.</p>
+ <form id="return-form">
+ <label for="return-outcome">WHAT ACTUALLY HAPPENED? (YOUR REPORT, NOT INDEPENDENT PROOF)</label>
+ <select id="return-outcome"><option value="NO_CONTACT">I made the draft, but did not ask anyone yet</option><option value="DECLINED">Someone declined</option><option value="REVIEWED">Someone reviewed the draft</option><option value="CORRECTED">Someone suggested a correction</option><option value="DONE_SELF_REPORTED">I report a small action occurred (not verified)</option></select>
+ <label for="return-note">PRIVATE FIELD NOTE (NO NAMES, CONTACTS OR ADDRESSES)</label>
+ <textarea id="return-note" maxlength="260" rows="3" placeholder="One useful correction or concrete observation. Leave blank if nobody was contacted."></textarea>
+ <p class="muted">Private notes remain inside this browser until you save them. A graph candidate contains only their digest, the selected outcome and an unresolved question. A self-report is not an independently witnessed result.</p>
+ <button type="submit" id="record-return">✳ MAKE AN HONEST RETURN →</button>
+ </form>
+ <div id="return-result" hidden role="status" aria-live="polite">
+  <span id="return-status" class="badge">UNVERIFIED SELF-REPORT</span>
+  <p id="return-summary"></p>
+  <h2>04. Another door opens.</h2>
+  <p id="return-next-question" class="lead"></p>
+  <div class="actions">
+   <button type="button" id="return-save-private">↓ SAVE PRIVATE ORIGINAL</button>
+   <button type="button" id="return-save-graph">↓ EXPORT FREE GRAPH CANDIDATE</button>
+   <button type="button" id="return-next">✳ MAKE A FOLLOW-UP KIT →</button>
+  </div>
+  <p class="muted">Not published. For any wider sharing, a human must independently review evidence, consent and what is appropriate to release. An unsigned checksum proves internal consistency only.</p>
+ </div>
+</section>
 </section>
 </main><footer>ABUNDENT / JAR;VIS · IGNITION-012 · an experiment in making one useful thing, not claiming somebody did it.</footer>
 </div></body></html>

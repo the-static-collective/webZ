@@ -1,7 +1,8 @@
 import {capacities,optionsFromGraph,makeIgnition} from './engine.mjs';
+import {makeFieldReturn,validateCandidate} from './return.mjs';
 const $=id=>document.getElementById(id);
 const status=$('graph-state'),submit=$('make');
-let graph=null,last=null;
+let graph=null,last=null,lastFieldReturn=null;
 function option(value,label){const o=document.createElement('option');o.value=value;o.textContent=label;return o;}
 function save(name,value,mime){
  const url=URL.createObjectURL(new Blob([value],{type:mime}));
@@ -9,6 +10,9 @@ function save(name,value,mime){
  setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
 function draw(r){
+ lastFieldReturn=null;
+ $('return-result').hidden=true;
+ $('return-note').value='';
  const out=$('output');out.hidden=false;
  if(r.status!=='DRAFT_READY_NOT_EXECUTED'){
   $('status').textContent='HOLD · NO RELEVANT PUBLIC SEED';
@@ -70,4 +74,40 @@ $('ignite-form').addEventListener('submit',e=>{
 $('print').addEventListener('click',()=>{if(last)window.print();});
 $('save').addEventListener('click',()=>{if(last)save('jarvis-24-hour-field-kit.txt',last.fieldSheet+'\n','text/plain;charset=utf-8');});
 $('save-json').addEventListener('click',()=>{if(last)save('jarvis-ignition-unsigned.json',JSON.stringify(last,null,2)+'\n','application/json');});
+$('return-form').addEventListener('submit',async event=>{
+ event.preventDefault();
+ if(!last||!graph)return;
+ const btn=$('record-return');btn.disabled=true;
+ try{
+  const outcome=$('return-outcome').value;
+  const privateNote=$('return-note').value;
+  const rec=await makeFieldReturn({ignition:last,graph,outcome,privateNote});
+  if(!await validateCandidate(rec.candidateGraph))throw Error('CANDIDATE_HASH_INVALID');
+  lastFieldReturn=rec;
+  $('return-result').hidden=false;
+  $('return-status').textContent='SELF-REPORTED · NOT VERIFIED · NOT PUBLISHED';
+  $('return-summary').textContent=rec.interpretation+' · '+rec.summary;
+  $('return-next-question').textContent=rec.nextQuestion;
+ }catch(err){
+  lastFieldReturn=null;
+  $('return-result').hidden=false;
+  $('return-status').textContent='HOLD · CHECK YOUR PRIVATE FIELD NOTE';
+  $('return-summary').textContent='No return created. Use 12–260 characters for an actual response, without names, addresses, contact information, secrets or links. An empty note is allowed if nobody was asked.';
+  $('return-next-question').textContent='';
+ }
+ finally{btn.disabled=false;}
+});
+$('return-save-private').addEventListener('click',()=>{
+ if(lastFieldReturn)save('jarvis-private-field-return.json',JSON.stringify(lastFieldReturn.privateReceipt,null,2)+'\n','application/json');
+});
+$('return-save-graph').addEventListener('click',()=>{
+ if(lastFieldReturn)save('jarvis-free-graph-candidate-unverified.json',JSON.stringify(lastFieldReturn.candidateGraph,null,2)+'\n','application/json');
+});
+$('return-next').addEventListener('click',()=>{
+ if(!lastFieldReturn||!graph)return;
+ $('question').value=lastFieldReturn.nextQuestion;
+ $('seed').value=lastFieldReturn.nextSeedId;
+ const follow=makeIgnition({question:lastFieldReturn.nextQuestion,graph,optionId:lastFieldReturn.nextSeedId,capacity:$('capacity').value});
+ draw(follow);
+});
 void load();
