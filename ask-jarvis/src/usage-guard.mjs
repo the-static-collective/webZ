@@ -23,12 +23,21 @@ return {1,0,0}
 `;
 
 const keyOK=s=>typeof s==='string'&&s.length>=24;
+// The Supabase bridge is a portable HTTPS quota authority. A separate
+// production release switch still gates the AI route.
+export function hasSupabaseQuota(env={}){
+ let url;
+ try{url=new URL(env.JARVIS_SUPABASE_QUOTA_URL||'')}catch{return false}
+ return url.protocol==='https:'&&url.hostname==='kbhqacsdvjsstzyplqij.supabase.co'
+   &&url.pathname==='/functions/v1/jarvis-quota'&&!url.search&&!url.hash
+   &&keyOK(env.JARVIS_RATE_HASH_SECRET);
+}
 export function hasSharedQuota(env={}){
   let url;
-  try{url=new URL(env.UPSTASH_REDIS_REST_URL||'')}catch{return false}
+  try{url=new URL(env.UPSTASH_REDIS_REST_URL||'')}catch{return hasSupabaseQuota(env)}
   return url.protocol==='https:'&&/^[a-z0-9-]+\.upstash\.io$/.test(url.hostname)
     &&url.pathname==='/'&&keyOK(env.UPSTASH_REDIS_REST_TOKEN)
-    &&keyOK(env.JARVIS_RATE_HASH_SECRET);
+    &&keyOK(env.JARVIS_RATE_HASH_SECRET)||hasSupabaseQuota(env);
 }
 function trustedVisitor(req,env) {
   // Vercel overwrites x-forwarded-for; NEVER use visitor-provided cookie,
@@ -78,6 +87,31 @@ async function reserve(command,env,fetcher){
   return {ok:Number(v[0])===1,window:Number(v[1])||0};
  }finally{clearTimeout(timer);controller.abort()}
 }
+
+export function makeSupabaseReservation(kind,hash,at=Date.now(),weight=1,secret){
+ if(!QUOTAS[kind]||!/^[0-9a-f]{32}$/.test(hash)||!Number.isInteger(weight)
+   ||weight<1||weight>2||!keyOK(secret))throw Error('BAD_QUOTA_REQUEST');
+ const payload=JSON.stringify({kind,hash,weight,stamp:at});
+ return {payload,signature:createHmac('sha256',secret).update(payload).digest('hex')};
+}
+async function reserveSupabase(kind,hash,at,weight,env,fetcher){
+ const body=makeSupabaseReservation(kind,hash,at,weight,env.JARVIS_RATE_HASH_SECRET);
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),2400);
+ try{
+  const res=await fetcher(env.JARVIS_SUPABASE_QUOTA_URL,{
+   method:'POST',redirect:'error',signal:controller.signal,
+   headers:{'content-type':'application/json',accept:'application/json'},
+   body:JSON.stringify(body)
+  });
+  if(Number(res.headers.get('content-length'))>1000)throw Error('QUOTA_RESPONSE_TOO_LARGE');
+  const value=await res.json();
+  if(res.status===429&&value?.reason==='RATE_LIMITED')
+   return {ok:false,window:Number(value.window)||0};
+  if(!res.ok||value?.ok!==true||value.window!==0)throw Error('QUOTA_STORE_ERROR');
+  return {ok:true,window:0};
+ }finally{clearTimeout(timer);controller.abort();}
+}
+
 const hold=(reason,httpStatus,message,retryAfter=60)=>({allowed:false,reason,httpStatus,message,retryAfter});
 export async function admitRequest(req,kind,{env=process.env,fetcher=fetch,now=Date.now,
   weight=1}={}){
@@ -96,7 +130,9 @@ export async function admitRequest(req,kind,{env=process.env,fetcher=fetch,now=D
  if(!digest)return hold('TRUSTED_CLIENT_ADDRESS_UNAVAILABLE',503,
    'A verified request address was not available for the usage guard.',60);
  try{
-  const result=await reserve(makeReservation(kind,digest,now(),weight),env,fetcher);
+  const result=hasSupabaseQuota(env)
+    ?await reserveSupabase(kind,digest,now(),weight,env,fetcher)
+    :await reserve(makeReservation(kind,digest,now(),weight),env,fetcher);
   return result.ok?{allowed:true,mode:'ATOMIC_SHARED_QUOTA',kind}
    :hold('RATE_LIMITED',429,'Too many requests right now. Please try again later.',
      result.window===1||result.window===3?60:3600);
