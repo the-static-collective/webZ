@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#163a30"><meta name="referrer" content="no-referrer">
+<meta name="description" content="One need, one offer, two human conversations, and an accountable return. Account-free, invitation-scoped community experiment.">
+<title>First Crossing · The Heartbeat · Abundent</title>
+<link rel="stylesheet" href="/heartbeat/style.css"><script type="module" src="/heartbeat/app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the heartbeat</a>
+<div class="marquee">✳ ABUNDENT × JAR;VIS ✳ ONE REAL NEED × ONE REAL OFFER ✳ NO AUTOMATIC INTRODUCTIONS ✳</div>
+<header><a href="/">abundent<span>.</span></a><nav><a href="/gather/">Garden Commons</a><a href="/tables/live/">The Living Chair</a></nav></header>
+<main id="main">
+<section class="hero">
+<div class="stamp">HEARTBEAT 002 · THE FIRST HUMAN CROSSING</div>
+<h1>ONE SMALL THING.<br><em>DONE TOGETHER.</em></h1>
+<p>A voluntary offer. A genuine need. Two independent conversations. An account of what happened, even if the answer is <strong>not yet</strong>.</p>
+<div class="pulse-strip">DISCOVER <b>→</b> COMPOSE <b>→</b> ACT <b>→</b> WITNESS <b>→</b> RETURN</div>
+</section>
+<aside class="truth"><strong>THE REAL BOUNDARY</strong>
+This is an <em>independent Abundent experiment</em>, not an official grocery, Coalition, campus or church service. It uses the existing account-free Seventh Table ledger. People may submit real offers, needs, voluntary expressions of interest and reports to one invitation-scoped room. <b>It does not authenticate identities, verify consent, perform work, share private contact information, message participants, or prove completion.</b> Meet and obtain permission directly; choose safe, lawful work with the people involved.
+</aside>
+<section class="paper" id="entry">
+<span class="stamp">01 · ENTER WITH AN INVITATION</span><h2>Have a table? Bring its key.</h2>
+<p>To begin, a host opens a <a href="/tables/live/">Living Chair room</a> and privately shares the guest invitation with people interested in one small project. They post their own NEED and OFFER cards in that room. The host reviews cards before other guests can see them.</p>
+<form id="join-form"><label for="join-url">Paste a Living Chair guest or host link</label><input id="join-url" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://abundent.org/tables/live/#table=..."><button type="submit">OPEN THE HEARTBEAT →</button></form>
+<p class="fine">This page keeps your room key in your browser URL fragment only. Do not forward your private host key. Guests and hosts can both submit notes, but host moderation determines what other guests can see.</p>
+<a class="button secondary" href="/tables/live/">OPEN A NEW LIVE TABLE ↗</a>
+</section>
+<section id="room" hidden>
+<div class="room-head"><div><span class="stamp">CONNECTED TO AN INVITATION-SCOPED ROOM</span><h2 id="room-title"></h2><p id="room-purpose"></p></div><div class="tag" id="role"></div></div>
+<div class="room-actions"><button type="button" id="open-source">MANAGE NEED / OFFER CARDS AT THE LIVING CHAIR ↗</button><button type="button" id="refresh">↻ REFRESH FROM THE ROOM</button><button type="button" id="leave">LEAVE THE ROOM ON THIS PAGE</button></div>
+<p class="fine">Cards are read only from this room. An unapproved or withdrawn card cannot be used to form an active proposal. Card authors can use the withdrawal receipts obtained when posting. Nothing automatically publishes elsewhere.</p>
+<div id="stage-list" class="stages" aria-label="Heartbeat stages"></div>
+<section class="paper"><span class="stamp">02 · DISCOVER</span><h2>What is already here?</h2><p class="fine">Visible cards only. A useful match is a human judgment, never an automatic promise.</p>
+<div class="twocol"><div><h3>NEEDS</h3><div id="needs"></div></div><div><h3>OFFERS</h3><div id="offers"></div></div></div></section>
+<section class="paper"><span class="stamp">03 · COMPOSE</span><h2>Propose one possible crossing.</h2>
+<p>Select one visible need and one visible offer. Publish a short proposed plan in this room. This does <b>not</b> contact anyone or authorize work. Guest proposals require host review.</p>
+<form id="proposal-form">
+<label for="need-select">Need card</label><select id="need-select" required></select>
+<label for="offer-select">Offer card</label><select id="offer-select" required></select>
+<label for="plan">Smallest useful next step (public-safe)</label><textarea id="plan" minlength="12" maxlength="225" rows="3" required placeholder="Ask whether a volunteer with a truck could help carry a pantry donation. Confirm time, safety and permissions directly."></textarea>
+<label class="check"><input type="checkbox" id="plan-confirm" required><span>I understand this is a request to talk, not permission to share private information or proceed.</span></label>
+<button type="submit" id="plan-submit">POST THE PROPOSAL FOR REVIEW ↗</button></form></section>
+<section class="paper"><span class="stamp">04 · TWO SEPARATE VOICES</span><h2>Did each person choose this?</h2>
+<p>A person who actually contributed a NEED or OFFER card may independently express interest in one proposal. These are <b>self-declared statements</b>, not verified identity, binding consent or authorization to do work. Do not submit on someone else's behalf. Any real introduction must be separately agreed to offline.</p>
+<form id="yes-form">
+<label for="yes-proposal">Proposal</label><select id="yes-proposal" required></select>
+<label for="yes-side">Which original card is yours?</label><select id="yes-side" required><option value="">Choose…</option><option value="need">I posted the NEED</option><option value="offer">I posted the OFFER</option></select>
+<label class="check"><input type="checkbox" id="yes-confirm" required><span>I am speaking for myself. I am interested in a direct conversation about this particular proposal. This does not share my contact details or authorize anyone to act for me.</span></label>
+<button type="submit" id="yes-submit">PLACE MY OWN EXPRESSION OF INTEREST ↗</button></form>
+<div id="proposals" class="proposals"></div></section>
+<section class="paper"><span class="stamp">05 · WITNESS &amp; RETURN</span><h2>What actually happened?</h2>
+<p>Report the outcome, including partial progress, a declined plan, or simply <em>unknown</em>. Completion statements remain unverified. A host may review guest reports before they appear. No report causes a payment, broadcast, credit or external action.</p>
+<form id="witness-form">
+<label for="witness-proposal">Proposal</label><select id="witness-proposal" required></select>
+<label for="outcome">What are you reporting?</label><select id="outcome" required><option value="unknown">Unknown / awaiting news</option><option value="blocked">Stopped / declined / could not proceed</option><option value="partial">Partly done (self-reported)</option><option value="completed">Completed (self-reported)</option></select>
+<label for="details">What did you personally observe?</label><textarea id="details" minlength="8" maxlength="245" required rows="3" placeholder="We spoke directly. Both people wanted to try, but the pickup has not happened yet."></textarea>
+<label class="check"><input type="checkbox" id="witness-confirm" required><span>This is my own account; I understand it is not independently verified.</span></label>
+<button type="submit" id="witness-submit">SUBMIT MY REPORT ↗</button></form>
+<div id="returns"></div></section>
+</section>
+<section class="paper" id="receipt" hidden><span class="stamp">SAVE THIS BEFORE YOU LEAVE</span><h2>Private withdrawal receipt.</h2>
+<p>Only the original poster gets this key. Save it now. Anybody holding both this key and the room invitation can withdraw this specific note. Do not share it publicly.</p>
+<textarea id="receipt-text" readonly rows="4"></textarea><button id="receipt-save" type="button">DOWNLOAD PRIVATE RECEIPT ↓</button>
+</section>
+<p id="status" role="status" aria-live="polite" class="status">Nothing submitted.</p>
+<footer>NO ACCOUNT · NO AUTOMATIC INTRODUCTION · NO ASSUMED AUTHORITY<br><a href="/tables/live/">THE LIVING CHAIR</a> · <a href="/gather/">THE NEXT TABLE</a> · <a href="/contact/">OPTIONAL CONTACT DESK</a><p>Integrity &gt; Continuity · An unknown outcome remains unknown.</p></footer>
+</main></body></html>
