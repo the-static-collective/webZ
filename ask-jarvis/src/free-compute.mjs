@@ -55,7 +55,7 @@ export function selectRoute(env={},route='auto',fetcher=fetch,ai=null) {
     : makeFreeApiProvider(id,env,fetcher);
   return {id,model:info.model,mode:info.mode,route,provider};
 }
-async function boundedPost(url,token,body,fetcher,headers={},deadlineMs=10500) {
+async function boundedPost(url,token,body,fetcher,headers={},deadlineMs=10500,maxResponseBytes=14000) {
   // url is fixed by the caller's immutable provider id, never supplied by visitor.
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),deadlineMs);
@@ -66,7 +66,7 @@ async function boundedPost(url,token,body,fetcher,headers={},deadlineMs=10500) {
       body:JSON.stringify(body)
     });
     if(!res.ok)throw Error('FREE_PROVIDER_HTTP_'+res.status);
-    if(Number(res.headers.get('content-length'))>14000)throw Error('FREE_PROVIDER_RESPONSE_LIMIT');
+    if(Number(res.headers.get('content-length'))>maxResponseBytes)throw Error('FREE_PROVIDER_RESPONSE_LIMIT');
     const reader=res.body?.getReader();
     if(!reader)throw Error('FREE_PROVIDER_EMPTY');
     const chunks=[];let bytes=0;
@@ -75,7 +75,7 @@ async function boundedPost(url,token,body,fetcher,headers={},deadlineMs=10500) {
         const {value,done}=await reader.read();
         if(done)break;
         bytes+=value.byteLength;
-        if(bytes>14000)throw Error('FREE_PROVIDER_RESPONSE_LIMIT');
+        if(bytes>maxResponseBytes)throw Error('FREE_PROVIDER_RESPONSE_LIMIT');
         chunks.push(value);
       }
     } finally {void reader.cancel().catch(()=>{});reader.releaseLock();}
@@ -94,9 +94,22 @@ export function makeFreeApiProvider(id,env={},fetcher=fetch) {
       case 'groq': return boundedPost('https://api.groq.com/openai/v1/chat/completions',env.GROQ_API_KEY,
         {model:'openai/gpt-oss-120b',messages,temperature:0.2,max_completion_tokens:1100,
           reasoning_effort:'low',response_format:{type:'json_object'},stream:false},fetcher);
-      case 'openrouter':return boundedPost('https://openrouter.ai/api/v1/chat/completions',env.OPENROUTER_API_KEY,
-        {model:'openrouter/free',messages,max_tokens:1400,temperature:0.2,stream:false,
-          response_format:{type:'json_object'}},fetcher,{},14500);
+      case 'openrouter': {
+        // OpenRouter's free router can return a large JSON envelope (reasoning metadata,
+        // token usage and provider details) even when its actual visible answer is short.
+        // Bound the *raw envelope* separately and discard unrelated metadata before
+        // passing one short text candidate to VIS's strict JSON schema validator.
+        const raw=await boundedPost('https://openrouter.ai/api/v1/chat/completions',env.OPENROUTER_API_KEY,
+          {model:'openrouter/free',messages,max_tokens:1400,temperature:0.2,stream:false,
+            response_format:{type:'json_object'}},fetcher,{},14500,98304);
+        const candidate=raw?.choices?.[0]?.message?.content;
+        const text=typeof candidate==='string' ? candidate
+          : Array.isArray(candidate) && candidate.every(p=>p?.type==='text'&&typeof p.text==='string')
+            ? candidate.map(p=>p.text).join('') : null;
+        if(typeof text!=='string'||text.trim().length===0)throw Error('OPENROUTER_NO_VISIBLE_TEXT');
+        if(new TextEncoder().encode(text).byteLength>9000)throw Error('OPENROUTER_VISIBLE_TEXT_LIMIT');
+        return {choices:[{message:{content:text}}]};
+      }
       case 'gemini': {
         const raw=await boundedPost(
           'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent',
