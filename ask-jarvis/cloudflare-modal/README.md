@@ -59,3 +59,15 @@ For safer **already-proxied** traffic, we applied and read back three Cloudflare
 Dry-run also confirmed that changing apex and www to orange-cloud would touch three production DNS records. **We deliberately did not apply that proxy change** because the live origin should be smoke-tested after HTTPS ingress changes rather than combining them with a new compute experiment.
 
 The Cloudflare connection available via Porkbun permits DNS and zone security adjustments, but **does not provide Worker deployment or Modal account access**. Wrangler authentication (or a future separate Cloudflare integration) and Modal workspace setup are remaining operator steps. This code and an open PR are not an active Worker deployment.
+
+## TOMORROW-020: the user-facing experiment (needs no secrets or Modal)
+
+`/tomorrow.html` is now a fully local, mobile-friendly mission builder embedded into the Ask JAR;VIS static assets and linked prominently from `/index.html`.
+
+Opening the page immediately generates **three specific mission proposals** from the default tomatoes + printer + two-hours scenario. Visitors can replace the inventory with their own offers, choose a few relevant resource chips, pick a 30-minute / two-hour / one-day / one-week window, and generate ranked missions for food access, gathering invitations, music, parks, tools, and art.
+
+Selecting a mission produces a permission-first invitation and three concrete checkpoints. Users can **copy**, **open the device Share sheet**, **print a one-page field card**, and **download a JSON receipt of self-reported progress/outcome**. Progress is in page memory until user explicitly downloads it; no model, storage service, background POST, account, signup, analytics or external coordination is used. External communication begins only when a human chooses Share and selects a destination.
+
+The UI and all mission outputs distinguish suggestions from verified needs, confirmed partnerships, permissions and actual service delivery. It is useful with `JARVIS_MODAL_ENABLED=0` and before the shared Supabase key is connected. Source and regression tests live in `public/tomorrow-machine.mjs`, `public/tomorrow-ui.mjs` and `test/tomorrow-machine.test.mjs`.
+
+The existing optional Modal path `/field-kit-lab.html` is a separate opt-in experiment and continues to hold without credentials. It is not required for Tomorrow Machine to work.
