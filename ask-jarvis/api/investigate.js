@@ -8,7 +8,7 @@ export default async function handler(req,res){
   res.setHeader('Referrer-Policy','no-referrer');
   if(req.method!=='POST')return res.status(405).json({error:'METHOD_NOT_ALLOWED'});
   // Rate limiting + cost cap are prerequisites for operator enabling this on public domains.
-  if(process.env.JARVIS_AI_ENABLED!=='1')return res.status(503).json({
+  if(process.env.VERCEL_ENV!=='preview'||process.env.JARVIS_AI_ENABLED!=='1')return res.status(503).json({
     schema:'ask-jarvis/investigation-v1',status:'HOLD',reason:'MODEL_NOT_ENABLED',
     message:'VIS model investigation is not enabled on this site. The original question machine still works.'
   });
