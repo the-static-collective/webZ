@@ -99,7 +99,7 @@ export async function investigate({question,kind='auto',lens='standard',assemble
       // willingness. A false partner/permission claim must HOLD before release.
       const all=[result.summary,result.firstTest,result.consentCheck,
         ...result.connections.map(x=>x.idea),...result.unknowns].join(' ');
-      if(/\bon[ -]?record\b|\b(?:already |has )?agreed to\b|\bconfirmed (?:willing |local )?(?:steward|partner|venue|organizer|host)\b|\b(?:is|are) verified willing\b/i.test(all))
+      if(/\bon[ -]?record\b|\balready agreed to\b|\bconfirmed (?:willing |local )?(?:steward|partner|venue|organizer|host)\b|\b(?:is|are) verified willing\b/i.test(all))
         throw Error('UNSUPPORTED_FIELD_VERIFICATION');
       // Effectful first steps still require an unidentified willing human gate.
       if(!/\b(draft|review|ask|request|check|verify|clarify)\b/i.test(result.firstTest))
