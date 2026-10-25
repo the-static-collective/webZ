@@ -24,7 +24,7 @@ Create a Modal **proxy token** so requests without credentials are rejected befo
 
 Save the returned `wk-...` key and `ws-...` secret securely. The Modal ASGI endpoint declares `requires_proxy_auth=True`. Its secondary timestamped HMAC is defense in depth, not a substitute for Modal proxy authorization.
 
-The resulting `https://<workspace>--jarvis-field-kit-app.modal.run`-style function URL is entered as Cloudflare Worker secret `MODAL_FIELD_KIT_URL` (not a URL chosen by a visitor). Store the exact same random token as Worker secret `MODAL_BRIDGE_SECRET`. Also put the Modal proxy credentials into the Worker **secrets** `MODAL_PROXY_KEY` and `MODAL_PROXY_SECRET` respectively. If preferred, use Modal dashboard secrets; no token belongs in source control.
+The resulting `https://<workspace>--jarvis-field-kit-endpoint.modal.run`-style function URL is entered as Cloudflare Worker secret `MODAL_FIELD_KIT_URL` (not a URL chosen by a visitor). Store the exact same random token as Worker secret `MODAL_BRIDGE_SECRET`. Also put the Modal proxy credentials into the Worker **secrets** `MODAL_PROXY_KEY` and `MODAL_PROXY_SECRET` respectively. If preferred, use Modal dashboard secrets; no token belongs in source control.
 
 ## Cloudflare operator action
 
@@ -49,3 +49,13 @@ Deploy initially with `JARVIS_MODAL_ENABLED=0`, confirm `GET /api/health` and bo
 Do not edit Porkbun's retired DNS zone. **Cloudflare currently answers abundent.org's authoritative DNS.** Cloudflare Workers Custom Domains automatically provision routing/DNS when configured in Wrangler. Once the Worker is deployed, budgets and fail-closed paths pass, review an isolated `lab.abundent.org` custom-domain route (instead of `connections.abundent.org` or the apex). Only then update config with `routes: [{pattern:"lab.abundent.org",custom_domain:true}]` and redeploy through the authorized Cloudflare account; inspect the live Cloudflare DNS record after deploy. Never manually create a conflicting `lab` DNS record before Custom Domain creation.
 
 No live hostnames, Vercel production deployments, or Cloudflare DNS records were changed by this branch.
+
+## Porkbun / Cloudflare verification (2026-10-25)
+
+The authorized Porkbun connector reports Cloudflare zone `abundent.org` active, with `damien.ns.cloudflare.com` and `lilith.ns.cloudflare.com`. The main web origin is still Vercel (both apex A records and `www` DNS-only). Existing `connections`, `garden`, and `msyou` remain DNS-only Vercel records. The separate `ph` CNAME points to Cloudflare Pages and is proxied.
+
+For safer **already-proxied** traffic, we applied and read back three Cloudflare zone settings: **TLS Full (strict)**, **Always Use HTTPS enabled**, and **minimum TLS 1.2**. Cloudflare reported success and no warnings. No record was changed or orange-clouded. As a result, this is HTTPS hardening, **not** a move of the existing Vercel site behind Cloudflare.
+
+Dry-run also confirmed that changing apex and www to orange-cloud would touch three production DNS records. **We deliberately did not apply that proxy change** because the live origin should be smoke-tested after HTTPS ingress changes rather than combining them with a new compute experiment.
+
+The Cloudflare connection available via Porkbun permits DNS and zone security adjustments, but **does not provide Worker deployment or Modal account access**. Wrangler authentication (or a future separate Cloudflare integration) and Modal workspace setup are remaining operator steps. This code and an open PR are not an active Worker deployment.
