@@ -1,0 +1,83 @@
+// CASE 002 / THE VANISHING CARTON — self-contained fictional game.
+// Linked to the existing Seven-Day Table by voluntary, fragment-only handoff.
+// This page never reads/writes database rows or automatically submits any response.
+export const MILK_CASE = String.raw`<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Who Murdered Tomorrow? Case 002: the Vanishing Carton. A fictional mystery and optional seven-day food sourcing experiment.">
+<title>Who Murdered Tomorrow? · The Vanishing Carton · Seven-Day Table</title>
+<style>
+:root{--ink:#19362e;--bg:#f1eee4;--paper:#fffdf6;--line:#aabeb1;--lime:#d8e9c8;--gold:#f3d88e;--rust:#965034}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#172c25;font:16px/1.52 system-ui,sans-serif}button,select,textarea{font:inherit}button,a.button{background:var(--ink);color:white;border:2px solid var(--ink);border-radius:5px;padding:10px 14px;display:inline-block;cursor:pointer;text-decoration:none;font-weight:750}button:disabled{opacity:.45;cursor:not-allowed}button.secondary,a.secondary{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+header{background:var(--ink);color:white;padding:34px max(20px,calc((100vw - 1080px)/2)) 50px}.stamp{color:var(--gold);font:.75rem/1.3 monospace;letter-spacing:.12em;text-transform:uppercase}h1,h2{font-family:Georgia,serif;letter-spacing:-.04em;line-height:1.04}h1{font-size:clamp(2.6rem,7vw,5rem);margin:14px 0}h1 em{color:var(--gold);font-style:normal}h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 13px}h3{font:700 1.3rem Georgia,serif;margin:0 0 10px}.wrap{width:min(1080px,calc(100% - 34px));margin:auto}.warning{background:#fff0cb;border-left:6px solid var(--rust);padding:14px 19px;margin:-25px auto 20px;position:relative}.section{padding:27px 0}.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:17px}.card{padding:22px;border:1px solid var(--line);background:var(--paper);margin:0 0 16px}.tag{font-weight:850;text-transform:uppercase;color:#7b4934;letter-spacing:.09em;font-size:.76rem}p{margin:10px 0 14px}.clue{padding:12px 16px;background:#eff4e9;border-left:5px solid var(--rust);margin:8px 0}.clue strong{display:block;font:.76rem monospace;margin-bottom:3px}.buttons{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.choice{display:flex;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);align-items:start}.choice input{margin-top:6px;flex-shrink:0}.notice{background:#e7f1dd;padding:14px;border-left:5px solid #316d44;margin:15px 0;white-space:pre-wrap}.hidden{display:none!important}.week{border-left:4px solid var(--ink);padding:8px 12px;margin:9px 0;background:#edf2e7}.week strong{display:block}.dark{background:#dce8d9;padding:25px 0}textarea{display:block;width:100%;min-height:115px;padding:12px;border:1px solid #92aa9b;border-radius:4px}a{color:#1a5d50}.small{font-size:.86rem;color:#405b4d}.mono{font-family:monospace;overflow-wrap:anywhere}footer{padding:35px 0;background:var(--ink);color:#e4efe4;font-size:.86rem}footer a{color:var(--gold)}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.card{padding:16px}header{padding:28px 19px 48px}}
+@media print{header{color:black;background:white;padding:10px 0}.warning{margin:10px 0}.buttons,nav,footer{display:none!important}.card{break-inside:avoid}.wrap{width:100%}.hidden.printable{display:block!important}body{background:white}}
+</style></head><body>
+<header><div class="stamp">The Static Collective · Reality.2 · The Postponed Supper · Case 002</div>
+<h1>WHO MURDERED <em>TOMORROW?</em></h1><p style="font-size:1.25rem"><strong>The Vanishing Carton.</strong> The pantry says the milk disappeared. The butler brought a receipt. Nobody checked the receiving log.</p>
+<p>Play the mystery first. Then, if you choose, carry one useful question to an existing seven-day invitation circle.</p></header>
+<main><div class="wrap"><aside class="warning"><strong>Fiction and real work are separate.</strong> This case invents every shipment, character, price and grant described in its mystery. No real food shelf, cooperative, foundation, farmer, university or person has authorized this event or agreed to supply food. The optional field experiment requires an independent yes from its actual steward.</aside>
+<nav class="buttons" aria-label="Case navigation"><button id="toTable" class="secondary">Return to my table</button><button id="copyPublic" class="secondary">Copy public game invitation</button><button id="print" class="secondary">Print</button></nav>
+<div class="section grid"><div><div class="card"><div class="tag">The case / fictional / 25 minutes</div><h2>The refrigerator is empty.</h2>
+<p>The Almost-Community Pantry expected <strong>24 cases</strong> of milk. The schedule says “MILK COVERED.” The Committee says the Milk Thief struck again.</p>
+<p>Six suspicious excuses appear: <strong>Nobody Asked, Everybody Assumed, Somebody Else, Not My Department, We Tried That Once</strong> and <strong>The Committee</strong>.</p>
+<p>Who actually moved the milk? What evidence could establish a delivery? Were promises mistaken for inventory?</p></div>
+<div class="card"><div class="tag">Open in order</div><h2>Three envelopes. No cows harmed.</h2>
+<div id="clues"><div class="clue"><strong>SCENE · 08:00</strong>Empty shelves. No receiving receipt.</div></div>
+<div class="buttons"><button id="openA">Open A / Expectations</button><button id="openB" disabled>Open B / Paperwork</button><button id="openC" disabled>Open C / Custody</button><button class="secondary" id="reset">Reset</button></div></div>
+<div class="card"><div class="tag">The accusation</div><h2>What really happened?</h2>
+<label class="choice"><input type="radio" name="verdict" value="theft">A regional supplier stole the milk.</label>
+<label class="choice"><input type="radio" name="verdict" value="permanent">A real-world grant has permanently ended everywhere.</label>
+<label class="choice"><input type="radio" name="verdict" value="paper">A past fictional grant allocation and an unaccepted quote were mistakenly treated as a confirmed delivery.</label>
+<label class="choice"><input type="radio" name="verdict" value="undetermined">No evidence yet proves theft. The transaction status must be checked.</label>
+<div class="buttons"><button id="judge">Check the evidence</button></div><div id="verdict" aria-live="polite" role="status"></div></div>
+</div>
+<aside><div class="card"><div class="tag">The evidence / not a promise</div><h3>Whose word would count?</h3>
+<p>“Covered” is a statement about a plan.</p><p>A grant allocation is conditional supply.</p><p>A quote is not a purchase order.</p><p>A purchase order is not a delivery.</p><p>A delivery without a receiving check is not confirmed custody.</p><p class="small">These distinctions matter just as much when investigating real procurement questions.</p></div>
+<div class="card"><div class="tag">Exit from fiction</div><h3>The case closes before the invitation opens.</h3><p>At the end, read aloud:</p><blockquote>“The characters, carton counts and records were fictional. No one owes us a commitment. Would anyone like to help investigate one actual question?”</blockquote>
+<p>Observers, people who pass, and guests who leave are welcome. No account, attendance capture, tracking, automated contact, or private hardship data.</p></div></aside></div></div>
+<section class="dark section" id="field"><div class="wrap"><div class="tag">The real experiment / proposed only</div><h2>MILK BRIDGE 001</h2><p style="max-width:850px">A Waseca food-shelf director reportedly described difficulty finding affordable nutritious food, buying bread and chicken, using Channel One for some supplies, and anticipating a change in milk funding. These are conversation leads, not verified current procurement data. The first task is to ask which item actually needs help.</p>
+<div class="grid"><div class="card"><h3>Seven days, one bounded return.</h3>
+<div class="week"><strong>0 · ASK</strong>Would an actual authorized food-shelf steward welcome a one-item comparison? A no ends the experiment.</div>
+<div class="week"><strong>1 · VERIFY</strong>With permission, identify which Channel One program, category, allocation and date apply. No assumptions about statewide milk grants.</div>
+<div class="week"><strong>2 · QUOTE</strong>Seek one appropriate supplier's current conditional price, only if welcomed; record units, restrictions, available quantity and date.</div>
+<div class="week"><strong>3 · COMPARE</strong>Compare delivered usable unit cost: product + fees + freight + necessary handling, with unknowns visible.</div>
+<div class="week"><strong>4 · WEAVE</strong>Only if requested, test overlap with bread, protein, producers or refrigerated transport. No presumed shared buyer or institutional agreement.</div>
+<div class="week"><strong>5 · RETURN</strong>Offer a one-page comparison to the actual decision-maker, not a purchase order.</div>
+<div class="week"><strong>6 · RECEIVE</strong>Record yes, no, correction or not yet from the person who can evaluate the work.</div>
+<div class="week"><strong>7 · WITNESS</strong>Note what can actually be confirmed and what remains open, without identifying beneficiaries or leaking private prices.</div></div>
+<aside class="card"><h3>Who holds the next question?</h3><p><strong>Food shelf:</strong> Which item would genuinely save you time?</p><p><strong>Channel One:</strong> What milk allocation and purchasing terms apply?</p><p><strong>Waseca co-op:</strong> Would a permissioned, anonymized sourcing lesson help feasibility work?</p><p><strong>Regional friends and Coalition:</strong> Is one voluntary introduction or useful expertise available?</p><p><strong>Technology volunteers:</strong> Can a paper/online flow save time without collecting client information?</p>
+<p class="small">These are possible invitations, not enrolled participants or named commitments.</p>
+<p><a href="https://www.helpingfeedpeople.org/agencies/" target="_blank" rel="noopener noreferrer">Channel One agency information ↗</a></p></aside></div></div></section>
+<section class="section" id="handoff"><div class="wrap"><div class="card"><div class="tag">THE NEXT TABLE / invitation chain</div><h2>Investigate together. Pass the question forward.</h2>
+<p>The existing <strong>One Table · Seven Days</strong> system handles private invitations. Its host may prepare up to eight original seats; an original invitee may invite up to two more people <em>or</em> name a willing ambassador in their place. Neither forwarding a link nor playing this game is consent to act.</p>
+<p><strong>The game never saves to the table.</strong> Pressing the button below carries only a fixed, public-safe question back to your already-issued invitation. You can edit it and must separately choose whether to submit. No game responses, contact details, or private case notes are transferred.</p>
+<div class="notice"><strong>Suggested question:</strong> Would a food-shelf purchasing steward welcome a one-page, dated comparison of current milk sourcing and one eligible alternative, with every missing fact made explicit?</div>
+<div class="buttons"><button id="carry">Bring this question to my table (editable)</button><a id="tableLink" class="button secondary" href="https://garden.abundent.org/seven">Open invitation table</a></div><p class="small" id="carryHelp" role="status">You can play without any invite. If you do have a private seat link, return using that link to contribute or invite two others.</p>
+<h3>One printable, unsent invitation</h3><textarea id="message" aria-label="Editable optional invitation">Want to solve a ridiculous missing-milk mystery, then help ask one useful question about Waseca food sourcing? It's an independent, optional seven-day table—not an official food-shelf or co-op event. You can join the conversation, pass, invite two others if your private invitation allows it, or send a willing ambassador in your place.</textarea>
+<div class="buttons"><button id="copyInvite" class="secondary">Copy this wording (no private link)</button></div>
+</div></div></section>
+</main><footer><div class="wrap">The Static Collective · Fiction stays fiction · Invitations remain voluntary · The buyer owns the purchasing decision. No external script, sign-in, database write, or automated invitation originates from this page.</div></footer>
+<script>
+(()=>{'use strict';
+const el=x=>document.getElementById(x);
+const packs={
+a:[['A01 · THE SIGN','The words MILK COVERED are from last Thursday. No Friday delivery was specified.'],['A02 · THE PLAN','Twenty-four cases are expected on a planning sheet. Expected does not mean received.'],['A03 · THE NOTICE','No one witnessed theft. The announcement relies entirely on an empty fridge.']],
+b:[['B01 · FICTIONAL GRANT','Sixteen cases were allocated for WEEK FOUR ONLY; there is no confirmed WEEK FIVE allocation.'],['B02 · UNSIGNED QUOTE','A fictional supplier quoted eight cases subject to a purchase order. Nobody accepted the quote.'],['B03 · THE STAMP','The clerk changed the planning sheet to SECURED after finding the letter and quote.']],
+c:[['C01 · RECEIVING LOG','Zero cases were delivered on Friday according to the available receiving log.'],['C02 · BACK-ROOM NOTE','Verify grant status. If absent, compare options; obtain permission before buying.'],['C03 · BUTLER RECEIPT','24 EXPECTED · 0 CONFIRMED · 16 PRIOR ALLOCATION · 8 UNACCEPTED QUOTE.']]}
+let step=0;
+const open=(which)=>{const expected=['a','b','c'][step];if(which!==expected)return;const root=el('clues');for(const [label,body] of packs[which]){const box=document.createElement('div'),strong=document.createElement('strong');box.className='clue';strong.textContent=label;box.append(strong,document.createTextNode(body));root.append(box)}step++;el('openA').disabled=step>0;el('openB').disabled=step!==1;el('openC').disabled=step!==2;};
+for(const k of ['a','b','c'])el('open'+k.toUpperCase()).onclick=()=>open(k);
+el('reset').onclick=()=>{step=0;el('clues').replaceChildren();const x=document.createElement('div');x.className='clue';x.textContent='SCENE · 08:00 — Empty shelves. No receiving receipt.';el('clues').append(x);el('openA').disabled=false;el('openB').disabled=true;el('openC').disabled=true;el('verdict').textContent='';document.querySelectorAll('[name=verdict]').forEach(x=>x.checked=false)};
+el('judge').onclick=()=>{const v=document.querySelector('[name=verdict]:checked')?.value;const out=el('verdict');out.className='notice';out.textContent=!v?'Choose a theory first.':v==='paper'?'CASE SOLVED. Nothing in the records supports theft. The past allocation and unaccepted quote were incorrectly promoted to SECURED. Ask the actual purchasing steward before any real-world action.':v==='undetermined'?'GOOD EVIDENCE DISCIPLINE. No theft is established. Open all three envelopes: the fictional status error is the fuller explanation.':'The evidence does not support accusing anyone of stealing or making broad claims about real food-bank grants. Open the envelopes and inspect the custody record.';};
+const table=new URL('https://garden.abundent.org/seven');const state=new URLSearchParams(location.hash.slice(1));const saved=new URLSearchParams();
+for(const k of ['r','h','s','k'])if(state.has(k))saved.set(k,state.get(k));
+const valid=!!saved.get('r')&&(!!saved.get('h')||!!saved.get('s')&&!!saved.get('k'));
+function target(focus){const u=new URL(table);const q=new URLSearchParams(saved);if(focus)q.set('focus','milk-bridge');u.hash=q.toString();return u.toString();}
+el('toTable').onclick=()=>location.assign(target(false));el('tableLink').href=target(false);
+el('carry').onclick=()=>{if(!valid){el('carryHelp').textContent='This public game has no private seat attached. To submit a contribution, use an invitation link voluntarily sent by an existing participant. The suggested question is above for copying.';return;}location.assign(target(true))};
+const publicURL='https://garden.abundent.org/seven?case=milk';
+async function copy(text,id){try{await navigator.clipboard.writeText(text);el(id).textContent='Copied. No message was sent.'}catch{el(id).textContent='Clipboard unavailable; select the text to copy manually.'}}
+el('copyPublic').onclick=()=>copy('A silly mystery about a missing carton of milk, with an optional seven-day local food sourcing experiment. Anyone can play; no signup required: '+publicURL,'carryHelp');
+el('copyInvite').onclick=()=>copy(el('message').value,'carryHelp');el('print').onclick=()=>window.print();
+})();
+</script></body></html>`;
