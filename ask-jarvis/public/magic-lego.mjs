@@ -27,6 +27,6 @@ export function composeTools(question,kind='auto'){
  if(kind==='song')scores.set('gather',(scores.get('gather')||0)+3);
  if(kind==='door')scores.set('doors',(scores.get('doors')||0)+4);
  const ids=scores.size?[...scores].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).map(([id])=>id):['doors','contact'];
- const selected=[...new Set([...ids,'doors'])].slice(0,3);
+ const selected=[...new Set([...ids,'doors','contact'])].slice(0,3);
  return selected.map(id=>TOOL_CATALOG.find(t=>t.id===id));
 }
