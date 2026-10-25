@@ -5,6 +5,7 @@ on:
       - feature/jarvis-cloudflare-modal-canary-019
       - feature/jarvis-steward-seeds-021
       - feature/jarvis-campfire-right-to-try-022
+      - feature/aippy-sparkfork-023
     paths:
       - 'ask-jarvis/**'
       - '.github/workflows/jarvis-edge-modal-canary.yml'
