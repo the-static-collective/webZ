@@ -1,4 +1,4 @@
-import {COMMONS_ENTRIES,COMMONS_RELEASE,COMMONS_DISCLOSURE,selectCommons} from './commons.mjs';
+import {COMMONS_ENTRIES,COMMONS_RELEASE,COMMONS_DISCLOSURE,COMMONS_PUBLIC_METHOD_DOORS,selectCommons} from './commons.mjs';
 const $=s=>document.querySelector(s);
 const el=(tag,value)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;return n;};
 const query=$('#commons-query'),status=$('#commons-count'),list=$('#commons-library');
@@ -23,3 +23,11 @@ $('#commons-search').addEventListener('click',search);
 $('#commons-all').addEventListener('click',()=>{query.value='';render(COMMONS_ENTRIES)});
 query.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();search()}});
 render(COMMONS_ENTRIES);
+
+const links=$('#commons-method-doors');
+links.replaceChildren(...COMMONS_PUBLIC_METHOD_DOORS.map(d=>{
+  const li=el('li'),a=el('a',d.name+' →');
+  a.href=d.url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';
+  li.append(a,el('small','',d.repo+' · exact pinned source README · method only; no partner participation inferred'));
+  return li;
+}));
