@@ -63,7 +63,7 @@ export function roleForQuestion(question){
  if(typeof question!=='string'||!question.trim()||question.length>500||SENSITIVE.test(question))
   return getRole('question-listener');
  const q=question.toLowerCase();
- const ranked=ROLES.map((role,i)=>{
+ const ranked=ROLES.filter(role=>role.id!=='question-listener').map((role,i)=>{
   const score=role.keywords.reduce((count,key)=>{
    // literal token boundary to avoid 'art' inside 'partnership'
    const pattern=new RegExp('(^|[^a-z])'+key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'($|[^a-z])','i');
