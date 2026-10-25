@@ -84,6 +84,17 @@ function show(data) {
     if(s.sha256)li.append(el('small','',s.sha256));
     return li;
   }));
+  const commons=data.commons?.selected||[];
+  $('#commons-disclosure').textContent=data.commons?.disclosure ||
+    'The public project Commons could not be inspected on this return.';
+  $('#commons-notes').replaceChildren(...commons.map(c=>{
+    const li=el('li');
+    li.append(el('b','',c.lane.replace(/_/g,' ').toUpperCase()+' · '+c.status),
+      el('p','',c.observation),el('small','','SMALLEST CHECK · '+c.firstCheck),
+      el('small','','CURATED PUBLIC SNAPSHOT · '+c.id+' · source key '+c.sourceId+
+        ' (owner-held source register; not a public citation)'));
+    return li;
+  }));
   $('#next-question').textContent=data.nextQuestion;
   $('#hash').textContent='Return receipt: '+data.receiptHash;
   $('#receipt-state').textContent='Receipt verified in this browser · unsigned';
@@ -205,15 +216,23 @@ async function askCouncil() {
         ' No automatic retry or paid fallback.';
       return;
     }
+    // Pin this council answer to exactly the selected snapshot. Public site
+    // knowledge travels automatically; operator imports are a separate override.
+    const expectedPack=fieldPack||normalizeFieldPack({
+      schema:'ask-jarvis/field-witness-v1',
+      entries:(last.commons?.selected||[]).map(({relevance,...entry})=>entry)
+    });
+    const expectedOrigin=fieldPack?'OPERATOR_SELECTED_UNVERIFIED':'SITE_PUBLISHED_UNVERIFIED';
     if(!response.ok||!await verifyCouncil(value)||!matchesCouncilSources(last,value)
-      ||(fieldPack ? value.fieldWitness?.packHash!==await sha256(JSON.stringify(fieldPack))
-        : value.fieldWitness!==null))
+      ||value.fieldWitness?.status!==expectedOrigin
+      ||value.fieldWitness?.packHash!==await sha256(JSON.stringify(expectedPack)))
       throw Error('Council receipt or inspected sources did not verify.');
     const panel=el('div','vis-answer');
     panel.append(el('h4','','TWO-MODEL SOURCE-FIRST REASONING · GROQ → GEMINI'));
     panel.append(el('small','','2 API calls · 3 fixed source constitutions inspected separately · no execution · unsigned'));
     if(value.fieldWitness?.count) panel.append(el('p','',
-      'FIELD WITNESS: '+value.fieldWitness.count+' operator-selected document summaries inspected by both models. These are NOT independent proof of actual community agreement. The pack was not stored on the server.'));
+      'FIELD WITNESS: '+value.fieldWitness.count+(fieldPack?' locally imported':' site-published')+
+      ' curated project summaries used by both models. These are NOT independent proof of community agreement or consent. No server-side pack storage.'));
     panel.append(el('h4','','GROQ · THE MISSING INGREDIENT'),el('p','',value.scout.missingIngredient));
     panel.append(el('p','',value.scout.hypothesis),el('p','',value.scout.whyThisOne));
     function sourceRow(sourceIds,heading){
@@ -268,7 +287,7 @@ fieldInput.addEventListener('change',async()=>{
 $('#field-witness-clear').addEventListener('click',()=>{
   councilActive?.abort();councilActive=null;
   fieldPack=null;fieldInput.value='';
-  fieldState.textContent='CLEARED: imported notes dropped from page memory. No information was sent by this action.';
+  fieldState.textContent='CLEARED: optional import dropped. Public Commons still loads automatically for everyone. No information was sent by this action.';
   $('#council-investigate').disabled=false;
 });
 
