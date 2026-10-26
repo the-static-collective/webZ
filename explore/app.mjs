@@ -55,7 +55,7 @@ function randomItem(array){const a=new Uint32Array(1);crypto.getRandomValues(a);
 function generate(){
  const a=selected.slice,b=selected.treasure;
  if(!a||!b){note('Choose one source from each engine, or press Surprise me.');return}
- const lens=$('lens').value;const lines=lensText[lens]||lensText.question;
+ const lens=$('lens').value;const lines=(lensText[lens]||lensText.question)(a,b);
  proposalText=[
  '# An idea crossing — candidate / not a conclusion',
  '',
