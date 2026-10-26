@@ -12,6 +12,8 @@ const paths=[
  ['/board/history.mjs','public/board/history.mjs'],
  ['/board/memory.mjs','public/board/memory.mjs'],
  ['/board/memory-ui.mjs','public/board/memory-ui.mjs'],
+ ['/board/open-seats.mjs','public/board/open-seats.mjs'],
+ ['/board/open-seats-ui.mjs','public/board/open-seats-ui.mjs'],
  ['/role-seeds.mjs','public/role-seeds.mjs'],
  ['/campfire/model.mjs','public/campfire/model.mjs'],
  ['/table-bridge.mjs','public/table-bridge.mjs'],
@@ -22,7 +24,8 @@ const target=s=>base+'?asset='+encodeURIComponent(s.slice(1));
 let html=src['/board/'];
 html=html.replaceAll('src="/board/app.mjs"','src="'+target('/board/app.mjs')+'"')
  .replaceAll('src="/board/history.mjs"','src="'+target('/board/history.mjs')+'"')
- .replaceAll('src="/board/memory-ui.mjs"','src="'+target('/board/memory-ui.mjs')+'"');
+ .replaceAll('src="/board/memory-ui.mjs"','src="'+target('/board/memory-ui.mjs')+'"')
+ .replaceAll('src="/board/open-seats-ui.mjs"','src="'+target('/board/open-seats-ui.mjs')+'"');
 html=html.replaceAll('href="/board/"','href="'+base+'"');
 for(const name of ['campfire','roles','tables','contact','doors','weave','town','gather'])
  html=html.replaceAll('href="/'+name+'/"','href="https://abundent.org/'+name+'/"');
