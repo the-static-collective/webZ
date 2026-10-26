@@ -186,6 +186,11 @@ export async function buildComputerBooks({output,files,commit}) {
     +'The computer book is at [manifest.json]('+ORIGIN+'/for-computers/manifest.json). '
     +'The catalog is at [index.json]('+ORIGIN+'/for-computers/index.json). '
     +'Human pages remain the source; machine cards are separate descendants.\n\n'
+    +'## Books for computers — idea engines\n\n'
+    +'- [The organization-shaped empty chair]('+ORIGIN+'/for-computers/ideas/identity/manifest.json)\n'
+    +'- [Daily Slice — forward formation engine]('+ORIGIN+'/for-computers/ideas/slice/manifest.json)\n'
+    +'- [National Treasure — backward evidence engine]('+ORIGIN+'/for-computers/ideas/treasure/manifest.json)\n'
+    +'- [Machine edition library]('+ORIGIN+'/for-computers/ideas/)\n\n'
     +'## Machine-native pamphlets\n\n'
     +books.map(b=>'- ['+b.title+']('+b.url+')').join('\n')+'\n\n'
     +'## Public page cards\n\n'
@@ -198,6 +203,7 @@ export async function buildComputerBooks({output,files,commit}) {
     +'</head><body><main><h1>Books for Computers</h1>'
     +'<p>Human pages are the originals. These are cards and experimental machine editions, not a grant of authority.</p>'
     +'<p><a href="./manifest.json">Computer book manifest (JSON)</a> · <a href="./index.json">Machine catalog (JSON)</a> · <a href="./sites/index.json">Five live sites (dated observation)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
+    +'<h2>Explorable idea editions</h2><p><a href="./ideas/">Open the new identity, Daily Slice and National Treasure machine books →</a></p>'
     +'<ul>'+machineBooks.map(b=>'<li><a href="./books/'+b.id+'.md">'+esc(b.title)+'</a></li>').join('')+'</ul>'
     +'<p><a href="/">Return to Abundent</a></p></main></body></html>\n';
   await emit('for-computers/index.html',landing);
@@ -206,6 +212,7 @@ export async function buildComputerBooks({output,files,commit}) {
     +'> Public retrieval guide. Not a training license, authorization token, or evidence of completed real-world action.\n\n'
     +'- [Computer-book manifest]('+ORIGIN+'/for-computers/manifest.json): any-entry fragments and relation graph\n'
     +'- [Machine catalog]('+ORIGIN+'/for-computers/index.json): page cards and machine-native pamphlets\n'    +'- [Observed Abundent site network]('+ORIGIN+'/for-computers/sites/index.json): five distinct hosts, evidence-limited dated fragments\n'
+    +'- [Idea engines for computer readers]('+ORIGIN+'/for-computers/ideas/index.json): source-pinned exploratory editions; questions are not evidence\n'
     +'- [Machine reading guide]('+ORIGIN+'/for-computers/README.md): provenance and interpretation limits\n'
     +'- [LemonPRESS source](https://github.com/the-static-collective/lemonPRESS): publishing house and edition boundaries\n\n'
     +'## Site pages\n\n'
