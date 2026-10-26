@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#192b24"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://kbhqacsdvjsstzyplqij.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Operator Desk · Reality 2.0 / Waseca</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to work</a>
+<header><div class="brand"><a href="https://reality.abundent.org/">abundent<span>.</span></a><strong>REALITY 2.0 / OPERATOR DESK</strong></div><div class="tiny"><span class="tag">REVIEW DESK · 001</span><a href="https://reality.abundent.org/" rel="noreferrer">Public field ↗</a></div></header>
+<main id="main" class="wrap">
+<section class="hero"><p class="eyebrow">WASECA FIELD EXPERIMENT · THE HUMAN GATE</p><h1>Keep the fire.<br><em>Not the authority.</em></h1><p>Listen to incoming cards, review their public-safe wording, invite stewards, and record what actually changed. Nothing publishes because a model thinks it should.</p></section>
+<section id="gate" class="auth card">
+<h2>Operator access</h2><p>This desk requires a private, expiring operator key. Public visitors cannot open the queue or publish entries. The key is kept only for this browser tab's session, not in a server-side page or shared link.</p>
+<label for="key-input">Operator key</label><input id="key-input" type="password" autocomplete="off" spellcheck="false" placeholder="Paste the private 43-character operator key">
+<div class="actions"><button id="unlock" type="button" class="primary">Unlock review desk</button><a href="https://reality.abundent.org/" class="button">Return to public field</a></div>
+<p id="gate-state" role="status" aria-live="polite">Not signed in. No data is loaded.</p>
+<div class="warning">Do not share operator links containing a key, screenshots of unreviewed submissions, or private contact information. Access expires automatically. This is a scoped pilot operator credential, not organization-wide authority.</div>
+</section>
+<section id="desk" hidden>
+<div class="desk-top card"><div><p class="eyebrow">AUTHENTICATED / HUMAN REVIEW REQUIRED</p><h2 id="operator-name">Operator</h2><p id="operator-expiry" class="muted"></p></div><div class="actions"><button id="refresh" class="primary" type="button">Refresh queue</button><button id="logout" type="button">Lock desk</button></div></div>
+<div class="metrics"><div><small>AWAITING A PERSON</small><strong id="pending-count">–</strong></div><div><small>PUBLICLY REVIEWED</small><strong id="published-count">–</strong></div><div><small>OPERATOR EVENTS</small><strong id="audit-count">–</strong></div></div>
+<p id="desk-state" role="status" aria-live="polite" class="status">Ready to load review queue.</p>
+<div class="navtabs" aria-label="Desk sections"><a href="#pending">Needs review</a><a href="#published">Public progress</a><a href="#history">Review history</a></div>
+<section id="pending" class="section"><div class="section-head"><div><p class="eyebrow">01 / PRIVATE INBOX</p><h2>Incoming cards</h2></div><p>Submitted text is private and unverified. Verify that publication is safe, edit redacted public wording, then choose explicitly to publish or reject.</p></div><div id="pending-list" class="cards"></div></section>
+<section id="published" class="section"><div class="section-head"><div><p class="eyebrow">02 / PUBLIC FIELD</p><h2>What people can see</h2></div><p>Updates here appear on the public board and JAR;VIS opportunity feed after refresh. Changing a card's progress never proves the underlying work happened.</p></div><div id="published-list" class="cards"></div></section>
+<section id="history" class="section"><div class="section-head"><div><p class="eyebrow">03 / PRIVATE HISTORY</p><h2>Who changed what?</h2></div><p>Metadata-only audit. No private report text is duplicated into these records.</p></div><div id="audit-list" class="audit-list"></div></section>
+</section>
+<section class="boundary"><h2>The operator's promise</h2><p>Review ≠ verification. Publication ≠ endorsement. A bug report ≠ a person's obligation to fix it. Real people must volunteer; receiving organizations keep their own decisions. If a card contains personal or sensitive information, reject it rather than publish an edited accusation.</p></section>
+</main><footer>THE STATIC COLLECTIVE · REALITY 2.0 · WASECA / EXPERIMENT 001</footer>
+</body></html>
