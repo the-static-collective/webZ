@@ -44,6 +44,21 @@ with sync_playwright() as play:
     assert page.locator("#save-return").is_disabled()
     assert page.evaluate("sessionStorage.getItem('abundent.crossings.public.session.v1')") is None
 
+    # A nondefault topic must also preselect the independently moderated
+    # backend feed and the submission-form topic without posting anything.
+    page.goto(BASE+"/first-yes/",wait_until="domcontentloaded")
+    page.locator("#question").fill("Could willing neighbors research current milk supply pricing?")
+    page.locator("#topic").select_option("milk")
+    page.locator("#prepare").click()
+    page.locator("#open-crossing").click()
+    page.wait_for_url("**/crossings/")
+    with page.expect_navigation():
+        page.locator("#door-list a[href='/board/']").click()
+    assert "A milk-supply question worth verifying" in page.locator("#thread-title").inner_text()
+    assert page.locator("#history-thread").input_value()=="milk"
+    assert page.locator("#history-scope").input_value()=="milk"
+    assert len([r for r in requests if r[0]=="POST"])==0,requests
+
     # Care must not quietly appear on public Board under another topic.
     page.goto(BASE+"/first-yes/",wait_until="domcontentloaded")
     page.locator("#question").fill("Can willing people prepare a public safety stewardship checklist?")
