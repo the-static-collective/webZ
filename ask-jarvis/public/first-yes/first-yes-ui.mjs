@@ -1,5 +1,6 @@
 import {composePublicFirstYes,printablePublicFirstYes,classifyArea} from './first-yes.mjs';
 import {THREADS} from '../board/memory.mjs';
+import {makeCrossing} from '../crossings/model.mjs';
 
 const $=id=>document.getElementById(id);
 const node=(tag,text='',cls='')=>{
@@ -16,7 +17,7 @@ function area(){
 function clearPrepared(why='Question changed; prepare again before copying or saving.'){
  state.kit=null;state.paper=null;
  $('result').hidden=true;
- for(const id of ['copy','save','print'])$(id).disabled=true;
+ for(const id of ['copy','save','print','save-crossing'])$(id).disabled=true;
  say('status',why);
 }
 function clearSource(){
@@ -71,7 +72,7 @@ function show(kit){
  say('invitation',f.voluntaryInvitation);
  $('threadLink').href=kit.destinations.reviewedWorkboardThread;
  $('threadLink').textContent='Open '+kit.topicLabel+' discussion ↗';
- for(const id of ['copy','save','print'])$(id).disabled=false;
+ for(const id of ['copy','save','print','save-crossing'])$(id).disabled=false;
  say('status','PUBLIC-SAFE DRAFT READY. No contact, enrollment, private Firebox read, backend write, or verified delivery.');
 }
 $('firstYesForm').addEventListener('submit',e=>{
@@ -132,7 +133,7 @@ $('readHistory').addEventListener('click',async()=>{
   clearTimeout(timer);btn.disabled=false;
  }
 });
-$('copy').disabled=$('save').disabled=$('print').disabled=true;
+$('copy').disabled=$('save').disabled=$('print').disabled=$('save-crossing').disabled=true;
 $('copy').addEventListener('click',async()=>{
  if(!state.paper)return;
  try{await navigator.clipboard.writeText(state.paper);
@@ -159,4 +160,21 @@ $('print').addEventListener('click',()=>{
  say('printPaper',state.paper);
  window.print();
  say('status','Print prepared locally. It is still a proposed, unsent work card.');
+});
+
+// Explicit file relay to the independent Crossings workbench. Public topic only:
+// never include the visitor's question, notes, contact details, or private narrative.
+$('save-crossing').addEventListener('click',()=>{
+ if(state.kit?.standing!=='PUBLIC_DRAFT_PREPARED_UNSENT')return;
+ try{
+  const packet=makeCrossing(state.kit);
+  const file=new Blob([JSON.stringify(packet,null,2)+'\n'],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(file),a=node('a');a.href=url;
+  a.download='abundent-crossing-'+packet.topic+'-unsent.json';
+  document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1200);
+  say('status','Portable PUBLIC-SAFE crossing ticket saved locally. It has no question text and was not transmitted. Open /crossings/ to choose the next door.');
+ }catch{
+  say('status','No public-safe crossing ticket was prepared; nothing was exported.');
+ }
 });
