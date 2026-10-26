@@ -1,6 +1,7 @@
 import {composePublicFirstYes,printablePublicFirstYes,classifyArea} from './first-yes.mjs';
 import {THREADS} from '../board/memory.mjs';
 import {makeCrossing} from '../crossings/model.mjs';
+import {putSessionCrossing} from '../crossings/session.mjs';
 
 const $=id=>document.getElementById(id);
 const node=(tag,text='',cls='')=>{
@@ -17,7 +18,7 @@ function area(){
 function clearPrepared(why='Question changed; prepare again before copying or saving.'){
  state.kit=null;state.paper=null;
  $('result').hidden=true;
- for(const id of ['copy','save','print','save-crossing'])$(id).disabled=true;
+ for(const id of ['copy','save','print','save-crossing','open-crossing'])$(id).disabled=true;
  say('status',why);
 }
 function clearSource(){
@@ -133,7 +134,7 @@ $('readHistory').addEventListener('click',async()=>{
   clearTimeout(timer);btn.disabled=false;
  }
 });
-$('copy').disabled=$('save').disabled=$('print').disabled=$('save-crossing').disabled=true;
+$('copy').disabled=$('save').disabled=$('print').disabled=$('save-crossing').disabled=$('open-crossing').disabled=true;
 $('copy').addEventListener('click',async()=>{
  if(!state.paper)return;
  try{await navigator.clipboard.writeText(state.paper);
@@ -176,5 +177,17 @@ $('save-crossing').addEventListener('click',()=>{
   say('status','Portable PUBLIC-SAFE crossing ticket saved locally. It has no question text and was not transmitted. Open /crossings/ to choose the next door.');
  }catch{
   say('status','No public-safe crossing ticket was prepared; nothing was exported.');
+ }
+});
+
+// A visitor chooses to continue; the tiny public-only ticket is carried
+// automatically through this browser tab. No download, URL payload or API call.
+$('open-crossing').addEventListener('click',()=>{
+ if(state.kit?.standing!=='PUBLIC_DRAFT_PREPARED_UNSENT')return;
+ try{
+  putSessionCrossing(window.sessionStorage,makeCrossing(state.kit));
+  location.assign('/crossings/');
+ }catch{
+  say('status','This browser blocked automatic continuation. You can still save a crossing ticket, then open Crossings and import it manually. Nothing was sent.');
  }
 });
