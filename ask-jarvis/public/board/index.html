@@ -52,6 +52,20 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 @media(max-width:760px){.board{grid-template-columns:1fr}.left{position:static}.flow{grid-template-columns:1fr 1fr}.hero{padding:2.2rem 0}h1{font-size:3.45rem}}
 @media(max-width:460px){.flow,.clues{grid-template-columns:1fr}.wrap{width:calc(100% - 22px)}.buttons>.btn{flex:1 1 120px}}
 @media print{@page{size:letter;margin:.65in}header,main,footer{display:none!important}#print-detail{display:block;white-space:pre-wrap;font:11pt/1.5 Georgia,serif;color:black}}
+
+.history-area{margin:3rem 0 1rem;background:#fffdf7;border:2px solid var(--forest);box-shadow:7px 9px 0 #d6ddcf;padding:clamp(1rem,3vw,2.4rem)}
+.history-controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:end;margin:1rem 0}.history-controls label{flex:1 0 170px}
+.history-controls select{flex:2 0 200px}
+.history-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;margin:1rem 0}
+.history-entry{background:#f2f8f0;padding:1.15rem;border:1px solid #bacdba;overflow-wrap:anywhere}
+.history-entry .history-text{font:1.08rem/1.5 Georgia,serif;white-space:pre-wrap}
+.history-entry .withdrawn{font-style:italic;color:#675d54}
+.history-consent{display:flex;gap:.7rem;align-items:start;font-weight:600}
+.history-consent input{width:22px;min-width:22px;height:22px;margin-top:3px}
+.history-receipt{padding:1rem;margin:1rem 0;border-left:5px solid var(--forest);background:#fff3cf}
+.history-receipt code{overflow-wrap:anywhere}.withdraw-box{margin:1.3rem 0;padding:1rem;border:1px solid var(--edge)}
+.withdraw-box summary{font-weight:900;cursor:pointer}.withdraw-box input{margin-bottom:.6rem}
+@media(max-width:660px){.history-list{grid-template-columns:1fr}}
 </style></head>
 <body>
 <header><div class="wrap">
@@ -63,7 +77,7 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 </div></div></header>
 <main class="wrap">
 <div class="flow" aria-label="Four-step method"><div><strong>01 / CONVERSATION</strong>Ask, correct, disagree.</div><div><strong>02 / OPPORTUNITY</strong>Find what is missing.</div><div><strong>03 / USEFUL WORK</strong>Try one bounded thing.</div><div><strong>04 / RETURN</strong>Record what changed—and what didn't.</div></div>
-<aside class="notice"><strong>How this first version works:</strong> The starting threads are editorial examples, not a live public discussion feed. Your entries are local drafts, not shared posts. You can explicitly copy, print, or share an invitation, or open a separate private contact desk. A true community-wide discussion history needs a moderated shared service before public launch. No partner affiliation is implied.</aside>
+<aside class="notice"><strong>How this first version works:</strong> Starter questions are editorial examples, not evidence of community commitments. The shared history below displays only reviewed contributions; drafts above stay on your device unless you deliberately submit them for separate human review. No partner affiliation is implied.</aside>
 <div class="board">
 <aside class="left" aria-label="Open opportunities">
 <div class="tag">THE OPEN THREADS</div><h2>What's worth doing?</h2>
@@ -113,8 +127,54 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 <button id="download" type="button" class="btn alt">Save local receipt ↓</button></div>
 <p class="quiet">Private follow-up copies your words and opens a separate opt-in contact desk; paste and edit them yourself. No silent submission. Downloads are self-reports, not verified outcomes.</p>
 </section><p id="status" role="status" aria-live="polite"></p>
-</article></div></main>
+</article></div>
+<section class="history-area" id="shared-history" aria-labelledby="history-title">
+<div class="tag">WORKBOARD-025 · PERSISTENT COMMUNITY HISTORY</div>
+<h2 id="history-title">What has actually entered the conversation?</h2>
+<p>These are shared contributions <b>only after human review</b>. A reviewed post is not independently verified evidence, a partner commitment, or proof of work.</p>
+<div class="history-controls"><label for="history-scope">Read from</label>
+<select id="history-scope"><option value="all">Every open thread</option>
+<option value="grocery">Community grocery</option><option value="milk">Milk supply</option>
+<option value="care">Care connections</option><option value="artists">Artist-led gathering</option>
+<option value="park">Park stewardship</option><option value="church">Church/community</option></select>
+<button class="btn alt" type="button" id="history-refresh">Refresh ↻</button></div>
+<p class="quiet" id="history-status" role="status" aria-live="polite">Reading reviewed history…</p>
+<div id="history-entries" class="history-list"></div>
+<button type="button" class="btn alt" id="history-more" hidden>Read earlier contributions ↓</button>
+<hr><div class="tag">YOUR VOICE · PRIVATE UNTIL HUMAN REVIEW</div>
+<h3>Make a contribution that can outlast the meeting.</h3>
+<p>Question, objection, limited offer, small experiment, or personal observation. No account is needed. Your text is private until a human explicitly approves a version for publication.</p>
+<form id="history-post" class="response">
+<label for="history-thread">Conversation</label>
+<select id="history-thread"><option value="grocery">Community grocery</option><option value="milk">Milk supply</option><option value="care">Care connections</option>
+<option value="artists">Artist-led gathering</option><option value="park">Park stewardship</option><option value="church">Church/community</option></select>
+<label for="history-kind">What are you bringing?</label>
+<select id="history-kind"><option value="question">Question / missing information</option>
+<option value="concern">Concern / disagreement / correction</option><option value="offer">Bounded offer</option>
+<option value="proposal">Reversible experiment</option><option value="return">Self-reported observation / return</option></select>
+<label for="history-parent">Reply to a reviewed contribution (optional)</label>
+<select id="history-parent"><option value="">A new top-level contribution</option></select>
+<label for="history-text">Your words</label><textarea id="history-text" required minlength="12" maxlength="400" autocomplete="off" placeholder="I noticed something we might be missing…"></textarea>
+<p class="quiet">12–400 characters. Please omit names, addresses, contact details, URLs, medical information, private stories, and promises on another person's behalf.</p>
+<label class="history-consent"><input type="checkbox" id="history-consent" required>
+<span>I consent to sending this text for private human review. A reviewer may reject it or publish a reviewed version. No community member or organization is enrolled through this form.</span></label>
+<button type="submit" id="history-send" class="btn gold">Submit privately for review →</button>
+<p id="history-post-status" class="quiet" role="status" aria-live="polite"></p>
+<div id="history-receipt" class="history-receipt" hidden><strong>Private submission receipt — copy now</strong>
+<p>ID: <code id="receipt-id"></code></p><p>Withdrawal key: <code id="receipt-key"></code></p>
+<p class="quiet">The key is not saved in your browser. Keep it private. It permits withdrawal, not proof of participation.</p>
+<button type="button" class="btn alt" id="history-copy-receipt">Copy private receipt</button></div></form>
+<details class="withdraw-box"><summary>Withdraw your contribution (with its original receipt)</summary>
+<form id="history-withdraw">
+<label for="withdraw-id">Submission ID</label><input id="withdraw-id" required autocomplete="off">
+<label for="withdraw-key">Withdrawal key</label><input id="withdraw-key" required autocomplete="off">
+<button type="submit" class="btn alt" id="history-withdraw-button">Withdraw this contribution</button>
+<p id="withdraw-status" role="status" aria-live="polite"></p></form>
+<p class="quiet">Previously public contributions leave a text-free tombstone. For lost receipt recovery, use the separate private contact desk.</p>
+</details></section>
+</main>
 <div id="print-detail" aria-hidden="true"></div>
 <footer><div class="wrap"><strong>EVERY CONVERSATION CAN BECOME A DOORWAY.</strong> &nbsp; Work is voluntary. A refusal is an answer. A suggestion is not proof; a receipt is not permission. <a href="/contact/">Contact</a> · <a href="/campfire/">Campfire</a> · <a href="/">JAR;VIS</a>.</div></footer>
 <script type="module" src="/board/app.mjs"></script>
+<script type="module" src="/board/history.mjs"></script>
 </body></html>
