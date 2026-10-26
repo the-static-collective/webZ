@@ -1,9 +1,10 @@
-// COMMONS-010: a first site-published, non-identifying public project index.
+// COMMONS-011: site-published, non-identifying public project index and gated survivor-support proposal context.
+import {COMMUNITY_BRAIN_ENTRIES,eligibleCommunityBrainQuestion} from './community-brain.mjs';
 // This is a static EDITORIAL SNAPSHOT, not a live roster, endorsement,
 // verified human observation, private Drive mirror, or production AI training.
 // A sourceId is an owner-held source register key, NOT a public citation.
-export const COMMONS_RELEASE='commons-010-2026-10-25';
-export const COMMONS_DISCLOSURE='Publicly shared project summaries curated from owner-held planning notes. Proposals, prototypes and discussions are not operating services, partner agreements, or verified current needs. Original private documents and contact records are not published.';
+export const COMMONS_RELEASE='commons-011-2026-10-26';
+export const COMMONS_DISCLOSURE='Publicly shared project summaries curated from owner-held planning notes. Proposals, prototypes and discussions are not operating services, partner agreements, or verified current needs. Original private documents and contact records are not published. Survivors should not provide personal case stories, custody records or identifying information to this public research interface.';
 export const COMMONS_ENTRIES=Object.freeze([
   {id:'FW-GROCERY-001',lane:'grocery',status:'DOCUMENTED_PROPOSAL',sourceId:'S01',
     observation:'An independent Waseca community grocery effort is being explored. The Static Collective has drafted optional infrastructure support ideas; governing decisions, feasibility, suppliers and participation remain with the actual grocery organizers.',
@@ -106,7 +107,12 @@ const score=(entry,wanted)=>{
 export function selectCommons(question,{limit=6}={}) {
   if(typeof question!=='string'||question.length>360)throw Error('COMMONS_QUESTION_INVALID');
   const wanted=[...new Set(terms(question).map(norm))];
-  const ranked=COMMONS_ENTRIES.map((entry,index)=>({entry,index,score:score(entry,wanted)}))
+  // Project-level Still Here questions get a public editorial knowledge slice.
+  // No sensitive person's narrative or contact record is added to Commons.
+  const pool=eligibleCommunityBrainQuestion(question)
+    ? [...COMMUNITY_BRAIN_ENTRIES,...COMMONS_ENTRIES]
+    : COMMONS_ENTRIES;
+  const ranked=pool.map((entry,index)=>({entry,index,score:score(entry,wanted)}))
     .sort((a,b)=>b.score-a.score||a.index-b.index);
   const selected=[];const lanes=new Set();
   const positive=ranked.filter(x=>x.score>0);
