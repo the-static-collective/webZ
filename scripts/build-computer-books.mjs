@@ -103,7 +103,7 @@ export async function buildComputerBooks({output,files,commit}) {
       '# '+b.title+'\n\nWork: '+meta.id+'\n\nEdition: '+meta.edition
       +'\n\nStatus: experimental machine-native pamphlet, not a source override.\n\n'
       +b.text+'\n\n'
-      +'Published by: The Static Collective / lemonPRESS-inspired experimental lane.\n'
+      +'Prepared by: The Static Collective / lemonPRESS-inspired experimental lane.\n'
       +'Rights: All rights reserved; no blanket reuse license.\n');
   }
   const catalog={
