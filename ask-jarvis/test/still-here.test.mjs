@@ -42,11 +42,16 @@ test('No inline scripts or styles are needed under site CSP; print and keyboard 
   assert.match(html, /aria-live="polite"/);
 });
 
-test('Human support and costs use directly reachable reputable referral doors', () => {
-  for(const url of ['https://www.thehotline.org/', 'https://dayoneservices.org/domestic-violence/help-now/',
-    'https://mncourts.gov/selfhelp','https://mncourts.gov/help-topics/fee-waiver-ifp']) {
-    assert.ok(html.includes(url));
+test('Survivor-first door gives private action tools, not crisis hotline routing', () => {
+  assert.match(html, /survivors standing beside survivors/i);
+  assert.match(html, /beginning with fathers/i);
+  assert.match(html, /we are not yet operating an authenticated peer network/i);
+  assert.match(html, /private-in-your-browser toolkit/i);
+  assert.ok(html.includes('https://mncourts.gov/selfhelp'));
+  assert.ok(html.includes('https://mncourts.gov/help-topics/fee-waiver-ifp'));
+  for (const phrase of ['thehotline.org', 'dayoneservices.org', '800-799-7233', '88788', '988', 'hotline', 'crisis line']) {
+    assert.equal(html.toLowerCase().includes(phrase), false, 'unwanted crisis routing: '+phrase);
   }
-  assert.match(html, /800-799-7233/);
-  assert.match(html, /612-399-9995/);
+  assert.match(home, /YOU DON'T HAVE TO DO THIS ALONE/);
+  assert.match(home, /no live helper service claimed/);
 });
