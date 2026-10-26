@@ -11,7 +11,7 @@ const q='Could local grocery organizers work with church musicians on a food tab
 const mock=async()=>new Response('# Public repository\nA public project document without actual partner commitments.\n',{status:200});
 test('public Commons has 15 safe, distinct, bounded and explicitly unverified project notes',()=>{
  assert.equal(COMMONS_ENTRIES.length,15);
- assert.match(COMMONS_RELEASE,/^commons-010/);
+ assert.match(COMMONS_RELEASE,/^commons-011/);
  assert.match(COMMONS_DISCLOSURE,/not operating services/i);
  assert.equal(new Set(COMMONS_ENTRIES.map(x=>x.id)).size,COMMONS_ENTRIES.length);
  const normalized=normalizeFieldPack({schema:'ask-jarvis/field-witness-v1',entries:COMMONS_ENTRIES});
