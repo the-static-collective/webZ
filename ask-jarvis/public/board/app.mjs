@@ -12,6 +12,7 @@ function pick(topic,updateURL=true){
  $('local-result').hidden=true;$('path').hidden=true;
  if(updateURL)history.replaceState(null,'',opportunityLink(location.href,topic));
  paintList();paintTopic();notify('');
+ window.dispatchEvent(new CustomEvent('board-topic-selected',{detail:{thread:topic.id}}));
 }
 function paintList(){
  $('thread-list').replaceChildren();
