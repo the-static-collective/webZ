@@ -21,3 +21,11 @@ code,.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-w
 .mission p{max-width:78ch;margin:12px 0;line-height:1.65}
 .mission .actions{margin-bottom:0}
 @media print{.mission{display:none}}
+
+/* A separate invitation to help build the circle; never a claim of staffing. */
+.starter-door{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 28px;margin:18px 0 29px;background:#fff1d8;border-left:7px solid #bf7c49;border-top:2px solid #ddc8a8;border-bottom:2px solid #ddc8a8}
+.starter-door h2{font-size:clamp(1.8rem,3.7vw,2.8rem);margin:10px 0}
+.starter-door p{max-width:65ch;margin:0}
+.starter-door .btn{white-space:nowrap}
+@media(max-width:730px){.starter-door{flex-direction:column;align-items:flex-start;padding:18px}.starter-door .btn{white-space:normal}}
+@media print{.starter-door{display:none}}
