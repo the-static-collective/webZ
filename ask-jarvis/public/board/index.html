@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183329"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Abundent Workboard: every conversation can lead to a useful first step. Discover questions, make a bounded contribution, invite others, return with learning.">
+<title>The Workboard · Questions become useful work · Abundent</title>
+<style>
+:root{--dark:#19362e;--forest:#264d3c;--paper:#f8f4e8;--ink:#20332c;--rust:#a94f32;--gold:#f6d587;--edge:#becabc;--mint:#e4eddb;--soft:#fffdf6;color-scheme:light;font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper)}button,textarea,input,select{font:inherit}button{cursor:pointer}a{color:var(--forest)}[hidden]{display:none!important}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+header{background:radial-gradient(circle at 90% 14%,#39694d 0,transparent 37%),var(--dark);color:white;position:relative;overflow:hidden}
+.wrap{width:min(1190px,calc(100% - 36px));margin:auto}.nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid #ffffff42;padding:1.1rem 0;font-size:.83rem;font-weight:800}.nav a{color:var(--gold)}.eyebrow{font:.8rem/1.5 ui-monospace,Consolas,monospace;letter-spacing:.15em;color:var(--gold);font-weight:800}
+.hero{padding:3.1rem 0 3.7rem;max-width:870px}h1,h2,h3{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.045em;line-height:1.07}
+h1{font-size:clamp(3.3rem,9vw,6.5rem);margin:.6rem 0 1rem}h1 em{color:var(--gold);font-style:normal}
+h2{font-size:clamp(1.8rem,3vw,2.8rem);margin:.4rem 0 1rem}h3{font-size:1.5rem;margin:.3rem 0 .6rem}
+.lead{font-size:1.2rem;max-width:720px;color:#e5efe8}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin:0 0 1rem}
+.flow div{padding:1.1rem .8rem;background:#fffdf2;border-top:6px solid var(--rust);font-size:.85rem}
+.flow strong{display:block;font-size:1rem;color:var(--dark)}
+.notice{padding:1rem 1.2rem;background:#fff0c6;border-left:6px solid #a94f32;margin:1rem 0 2rem;font-size:.88rem}
+main{padding:1.8rem 0 4rem}.board{display:grid;grid-template-columns:minmax(250px,365px) minmax(0,1fr);gap:1.3rem;align-items:start}
+.left,.detail{background:var(--soft);border:2px solid var(--edge);box-shadow:6px 7px 0 #d9dfd0;padding:1.25rem;min-width:0}
+.left{position:sticky;top:1rem}.detail{padding:clamp(1.3rem,3.4vw,2.4rem)}
+.tag{font:.72rem/1.4 ui-monospace,monospace;font-weight:900;letter-spacing:.08em;color:var(--rust)}
+.quiet{color:#52695b;font-size:.85rem}.thread-list{display:grid;gap:.55rem;margin-top:1rem}
+.thread{width:100%;border:1px solid var(--edge);background:#fff;padding:.85rem;text-align:left;border-radius:5px;display:grid;gap:.2rem;color:var(--ink)}
+.thread[aria-current=true]{border-color:var(--rust);border-width:2px;background:#fff1d9;box-shadow:3px 3px 0 #e6c9ab}
+.thread strong{font-size:1rem;line-height:1.2}.thread small{font-size:.82rem;color:#4b6054}
+input,textarea,select{width:100%;min-height:43px;background:#fff;border:1px solid #8da38e;border-radius:4px;padding:.7rem .75rem;color:var(--ink)}
+textarea{min-height:100px;resize:vertical}label{font-weight:800;display:block;margin:.8rem 0 .35rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:45px;padding:.7rem .95rem;border:2px solid var(--dark);border-radius:5px;font-weight:850;background:var(--dark);color:#fff;text-decoration:none}
+.btn.gold{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.btn.alt{background:transparent;color:var(--dark)}.btn:hover,.thread:hover{filter:brightness(.97)}.buttons{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}
+.new{border-top:2px dashed var(--edge);margin-top:1.5rem;padding-top:1rem}
+.question{font:1.3rem/1.48 Georgia,serif;border-left:5px solid #b17545;padding:.45rem 0 .45rem 1rem;margin:1rem 0 1.5rem}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.clues section{background:var(--mint);padding:1rem;border:1px solid var(--edge)}
+.clues h3{font:900 .72rem system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rust);margin:0 0 .5rem}
+.clues p{margin:0}
+.step{padding:1.2rem;background:#fce8ba;margin:1rem 0;border-left:6px solid var(--forest)}
+.step p{font-size:1.07rem;margin:.5rem 0}
+.gate{background:#f2f4ef;border-left:4px solid #819788;padding:.7rem .9rem;font-size:.88rem;margin:.8rem 0}
+hr{border:0;border-top:1px solid var(--edge);margin:1.6rem 0}
+.response{background:#ecf3e9;padding:1.2rem;margin-top:1rem;border:1px solid var(--edge)}
+#local-preview{padding:.8rem;background:#fff;border:1px dashed var(--forest);margin:1rem 0}
+#local-preview p{margin:.4rem 0}
+#status,#question-status{min-height:1.6rem;font-size:.85rem;font-weight:750;color:#6b3c29;margin:.55rem 0;overflow-wrap:anywhere}
+.door-row{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}
+.door-row a{font-size:.88rem}
+#path{border-left:4px solid var(--rust);background:#fff8de;padding:1rem;margin:1rem 0}
+#special-garden{padding:1rem;background:#ecf3e8;border:1px solid #acc0ae;margin-top:1rem}
+footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a{color:var(--gold)}
+#print-detail{display:none}
+@media(max-width:760px){.board{grid-template-columns:1fr}.left{position:static}.flow{grid-template-columns:1fr 1fr}.hero{padding:2.2rem 0}h1{font-size:3.45rem}}
+@media(max-width:460px){.flow,.clues{grid-template-columns:1fr}.wrap{width:calc(100% - 22px)}.buttons>.btn{flex:1 1 120px}}
+@media print{@page{size:letter;margin:.65in}header,main,footer{display:none!important}#print-detail{display:block;white-space:pre-wrap;font:11pt/1.5 Georgia,serif;color:black}}
+
+.history-area{margin:3rem 0 1rem;background:#fffdf7;border:2px solid var(--forest);box-shadow:7px 9px 0 #d6ddcf;padding:clamp(1rem,3vw,2.4rem)}
+.history-controls{display:flex;gap:.75rem;flex-wrap:wrap;align-items:end;margin:1rem 0}.history-controls label{flex:1 0 170px}
+.history-controls select{flex:2 0 200px}
+.history-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;margin:1rem 0}
+.history-entry{background:#f2f8f0;padding:1.15rem;border:1px solid #bacdba;overflow-wrap:anywhere}
+.history-entry .history-text{font:1.08rem/1.5 Georgia,serif;white-space:pre-wrap}
+.history-entry .withdrawn{font-style:italic;color:#675d54}
+.history-consent{display:flex;gap:.7rem;align-items:start;font-weight:600}
+.history-consent input{width:22px;min-width:22px;height:22px;margin-top:3px}
+.history-receipt{padding:1rem;margin:1rem 0;border-left:5px solid var(--forest);background:#fff3cf}
+.history-receipt code{overflow-wrap:anywhere}.withdraw-box{margin:1.3rem 0;padding:1rem;border:1px solid var(--edge)}
+.withdraw-box summary{font-weight:900;cursor:pointer}.withdraw-box input{margin-bottom:.6rem}
+@media(max-width:660px){.history-list{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div class="wrap">
+<nav class="nav"><strong>✳ ABUNDENT / WORKBOARD · EXPERIMENT 024</strong><div><a href="/">ASK JAR;VIS</a> &nbsp; <a href="/campfire/">CAMPFIRE</a> &nbsp; <a href="/doors/">ALL DOORS</a></div></nav>
+<div class="hero"><div class="eyebrow">THE OLD BULLETIN BOARD · WITH WORK ATTACHED</div>
+<h1>Talk is a <em>doorway.</em><br>Work is a return.</h1>
+<p class="lead">Find a question worth exploring. Bring a concern or a useful offer. Shape a seven-day experiment. Return with what actually happened.</p>
+<p>Reading is open. Listening counts. You don't need an account, an appointed leader, or an organization to begin a safe draft.</p>
+</div></div></header>
+<main class="wrap">
+<div class="flow" aria-label="Four-step method"><div><strong>01 / CONVERSATION</strong>Ask, correct, disagree.</div><div><strong>02 / OPPORTUNITY</strong>Find what is missing.</div><div><strong>03 / USEFUL WORK</strong>Try one bounded thing.</div><div><strong>04 / RETURN</strong>Record what changed—and what didn't.</div></div>
+<aside class="notice"><strong>How this first version works:</strong> Starter questions are editorial examples, not evidence of community commitments. The shared history below displays only reviewed contributions; drafts above stay on your device unless you deliberately submit them for separate human review. No partner affiliation is implied.</aside>
+<div class="board">
+<aside class="left" aria-label="Open opportunities">
+<div class="tag">THE OPEN THREADS</div><h2>What's worth doing?</h2>
+<label for="filter">Find a question</label><input id="filter" type="search" placeholder="Food, arts, parks, care…">
+<div id="thread-list" class="thread-list"></div>
+<form id="new-question" class="new"><h3>Open another question</h3>
+<p class="quiet">Create a shareable *question*, not a new public post. Keep names and sensitive details out.</p>
+<label for="question">What could we make possible?</label>
+<textarea id="question" minlength="12" maxlength="220" required placeholder="Could neighbors try one small tool-sharing table?"></textarea>
+<button class="btn" type="submit">Open this question →</button><p id="question-status" role="status"></p>
+</form></aside>
+<article class="detail" id="topic-detail" aria-label="Selected opportunity">
+<div class="tag" id="thread-category"></div><h2 id="thread-title"></h2>
+<div class="tag" id="topic-identity"></div>
+<p class="question" id="thread-question"></p>
+<div class="clues"><section><h3>What we know (with limits)</h3><p id="thread-known"></p></section>
+<section><h3>What still needs an answer</h3><p id="thread-missing"></p></section></div>
+<p class="quiet">Editorial source status: <strong id="thread-source"></strong>. There are no implied confirmed participants or completed tasks.</p>
+<div class="step"><span class="tag">A FIRST USEFUL MOVE · SEVEN-DAY WINDOW</span><p id="thread-first"></p>
+<button type="button" class="btn gold" id="preview-path">What could I do this week? →</button></div>
+<div id="path" hidden></div>
+<div class="gate"><strong>Permission before consequence:</strong> <span id="thread-gate"></span></div>
+<div class="door-row"><a id="link-campfire" class="btn" href="/campfire/">◎ Try at the Campfire</a>
+<a id="link-roles" class="btn alt" href="/roles/">Open roles →</a><a id="link-table" class="btn alt" href="/tables/">Invite to a table →</a></div>
+<div id="special-garden" hidden><strong>There is also a working, separately moderated Garden Signal pilot.</strong>
+<p class="quiet">It accepts voluntary grocery questions and offers for private human review. Sending there is a separate explicit choice; an entry here does not travel there.</p><a href="https://garden.abundent.org/signal" rel="noopener noreferrer">Open Garden Signal ↗</a><p class="quiet">For a deeper idea source, explore the ten historical food practices reimagined as permission-first experiments.</p><a href="https://garden.abundent.org/heritage/" rel="noopener noreferrer">Explore the archaeology of abundance ↗</a></div>
+<hr>
+<div class="tag">GOT A DIFFERENT IDEA? THAT COUNTS.</div><h3>Take the conversation somewhere.</h3>
+<p>Questions, corrections and objections are as useful as offers. None automatically become commitments.</p>
+<div class="buttons"><button id="compose" type="button" class="btn">Write a contribution ↓</button>
+<button id="share" type="button" class="btn alt">Share / invite 1–2 people</button>
+<button id="print" type="button" class="btn alt">Print question</button></div>
+<section id="draft-panel" class="response" hidden>
+<form id="draft-form"><label for="kind">What kind of contribution?</label>
+<select id="kind"><option value="question">A question / information gap</option>
+<option value="concern">A concern / correction / objection</option><option value="offer">A bounded offer</option>
+<option value="proposal">A small experiment</option><option value="return">A self-reported result or refusal</option></select>
+<label for="draft">Your words (local draft only)</label>
+<textarea id="draft" minlength="12" maxlength="260" required placeholder="Here's what I think we should check first…"></textarea>
+<p class="quiet">12–260 characters. No other people's names, addresses, contact information, URLs or sensitive personal stories. You control whether it leaves your device.</p>
+<button type="submit" class="btn gold">Prepare next step →</button>
+</form></section>
+<section id="local-result" class="response" hidden><div class="tag">LOCALLY PREPARED · NOT PUBLISHED</div>
+<div id="local-preview"></div>
+<div class="buttons"><button id="copy" type="button" class="btn">Copy invitation + draft</button>
+<button id="private" type="button" class="btn alt">Prepare private follow-up ↗</button>
+<button id="download" type="button" class="btn alt">Save local receipt ↓</button></div>
+<p class="quiet">Private follow-up copies your words and opens a separate opt-in contact desk; paste and edit them yourself. No silent submission. Downloads are self-reports, not verified outcomes.</p>
+</section><p id="status" role="status" aria-live="polite"></p>
+</article></div>
+<section class="history-area" id="shared-history" aria-labelledby="history-title">
+<div class="tag">WORKBOARD-025 · PERSISTENT COMMUNITY HISTORY</div>
+<h2 id="history-title">What has actually entered the conversation?</h2>
+<p>These are shared contributions <b>only after human review</b>. A reviewed post is not independently verified evidence, a partner commitment, or proof of work.</p>
+<div class="history-controls"><label for="history-scope">Read from</label>
+<select id="history-scope"><option value="all">Every open thread</option>
+<option value="grocery">Community grocery</option><option value="milk">Milk supply</option>
+<option value="care">Care connections</option><option value="artists">Artist-led gathering</option>
+<option value="park">Park stewardship</option><option value="church">Church/community</option></select>
+<button class="btn alt" type="button" id="history-refresh">Refresh ↻</button></div>
+<p class="quiet" id="history-status" role="status" aria-live="polite">Reading reviewed history…</p>
+<div id="history-entries" class="history-list"></div>
+<button type="button" class="btn alt" id="history-more" hidden>Read earlier contributions ↓</button>
+<hr><div class="tag">YOUR VOICE · PRIVATE UNTIL HUMAN REVIEW</div>
+<h3>Make a contribution that can outlast the meeting.</h3>
+<p>Question, objection, limited offer, small experiment, or personal observation. No account is needed. Your text is private until a human explicitly approves a version for publication.</p>
+<form id="history-post" class="response">
+<label for="history-thread">Conversation</label>
+<select id="history-thread"><option value="grocery">Community grocery</option><option value="milk">Milk supply</option><option value="care">Care connections</option>
+<option value="artists">Artist-led gathering</option><option value="park">Park stewardship</option><option value="church">Church/community</option></select>
+<label for="history-kind">What are you bringing?</label>
+<select id="history-kind"><option value="question">Question / missing information</option>
+<option value="concern">Concern / disagreement / correction</option><option value="offer">Bounded offer</option>
+<option value="proposal">Reversible experiment</option><option value="return">Self-reported observation / return</option></select>
+<label for="history-parent">Reply to a reviewed contribution (optional)</label>
+<select id="history-parent"><option value="">A new top-level contribution</option></select>
+<label for="history-text">Your words</label><textarea id="history-text" required minlength="12" maxlength="400" autocomplete="off" placeholder="I noticed something we might be missing…"></textarea>
+<p class="quiet">12–400 characters. Please omit names, addresses, contact details, URLs, medical information, private stories, and promises on another person's behalf.</p>
+<label class="history-consent"><input type="checkbox" id="history-consent" required>
+<span>I consent to sending this text for private human review. A reviewer may reject it or publish a reviewed version. No community member or organization is enrolled through this form.</span></label>
+<button type="submit" id="history-send" class="btn gold">Submit privately for review →</button>
+<p id="history-post-status" class="quiet" role="status" aria-live="polite"></p>
+<div id="history-receipt" class="history-receipt" hidden><strong>Private submission receipt — copy now</strong>
+<p>ID: <code id="receipt-id"></code></p><p>Withdrawal key: <code id="receipt-key"></code></p>
+<p class="quiet">The key is not saved in your browser. Keep it private. It permits withdrawal, not proof of participation.</p>
+<button type="button" class="btn alt" id="history-copy-receipt">Copy private receipt</button></div></form>
+<details class="withdraw-box"><summary>Withdraw your contribution (with its original receipt)</summary>
+<form id="history-withdraw">
+<label for="withdraw-id">Submission ID</label><input id="withdraw-id" required autocomplete="off">
+<label for="withdraw-key">Withdrawal key</label><input id="withdraw-key" required autocomplete="off">
+<button type="submit" class="btn alt" id="history-withdraw-button">Withdraw this contribution</button>
+<p id="withdraw-status" role="status" aria-live="polite"></p></form>
+<p class="quiet">Previously public contributions leave a text-free tombstone. For lost receipt recovery, use the separate private contact desk.</p>
+</details></section>
+</main>
+<div id="print-detail" aria-hidden="true"></div>
+<footer><div class="wrap"><strong>EVERY CONVERSATION CAN BECOME A DOORWAY.</strong> &nbsp; Work is voluntary. A refusal is an answer. A suggestion is not proof; a receipt is not permission. <a href="/contact/">Contact</a> · <a href="/campfire/">Campfire</a> · <a href="/">JAR;VIS</a>.</div></footer>
+<script type="module" src="/board/app.mjs"></script>
+<script type="module" src="/board/history.mjs"></script>
+</body></html>
