@@ -73,7 +73,7 @@ function show(kit){
  say('invitation',f.voluntaryInvitation);
  $('threadLink').href=kit.destinations.reviewedWorkboardThread;
  $('threadLink').textContent='Open '+kit.topicLabel+' discussion ↗';
- for(const id of ['copy','save','print','save-crossing'])$(id).disabled=false;
+ for(const id of ['copy','save','print','save-crossing','open-crossing'])$(id).disabled=false;
  say('status','PUBLIC-SAFE DRAFT READY. No contact, enrollment, private Firebox read, backend write, or verified delivery.');
 }
 $('firstYesForm').addEventListener('submit',e=>{
