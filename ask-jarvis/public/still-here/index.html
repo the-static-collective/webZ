@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173b34">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<title>Still Here · You don't have to start over · Abundent</title>
+<meta name="description" content="A quiet, private first door for someone navigating conflict, separation, or difficult co-parenting. Leave with one usable next step.">
+<link rel="stylesheet" href="/still-here/style.css">
+</head>
+<body>
+<a class="skip" href="#choose">Skip to choices</a>
+<header>
+ <div class="wrap">
+  <div class="nav"><div class="sig">ABUNDENT <b>✳</b> FIRST DOOR</div><a href="/">← Return to JAR;VIS</a></div>
+  <div class="hero"><div class="eyebrow">STILL HERE / THE CONTINUITY ROOM</div><h1>You don't have to <em>start over.</em></h1>
+   <p>If your life has become a constant cycle of explaining, defending, proving, and starting again, this room is for you. Especially if you're a parent trying to keep a road open to your child.</p>
+   <div class="aside">No account. No public feed. No verdict about your relationship. One useful step at a time.</div>
+  </div>
+ </div>
+</header>
+<main class="wrap">
+ <div class="topnote"><strong>Before you type anything personal</strong>This page does not send your notes to Abundent or its AI. It does not save them to a server or browser storage. What you type remains on this page until you leave or refresh, unless you explicitly copy, print, or download it. A shared or monitored device, screenshots, downloads, and browser history can still expose activity. Use a trusted device if privacy is a concern. <a href="https://www.thehotline.org/plan-for-safety/internet-safety/" target="_blank" rel="noopener noreferrer">Read digital-safety guidance ↗</a>.</div>
+ <section class="intro" id="choose"><div class="badge">START WHERE YOU ARE</div><h2>What would actually help right now?</h2><p>You do not have to persuade this page that your pain is real. Choose a door. Every door returns something you can use.</p></section>
+ <div class="door-grid screen-only" role="group" aria-label="Choose a starting point">
+  <button class="door" type="button" data-door="tonight" aria-pressed="false"><span class="number">01 / IMMEDIATE</span><strong>Get through tonight</strong><small>I'm overwhelmed. I need one safe, practical thing to do.</small></button>
+  <button class="door" type="button" data-door="remember" aria-pressed="false"><span class="number">02 / CONTINUITY</span><strong>Stop repeating the story</strong><small>Make a careful, portable record—facts, reports, unknowns, and next steps.</small></button>
+  <button class="door" type="button" data-door="person" aria-pressed="false"><span class="number">03 / CONNECTION</span><strong>Find one person</strong><small>I need someone to help without debating the entire history.</small></button>
+  <button class="door" type="button" data-door="parent" aria-pressed="false"><span class="number">04 / PARENTING</span><strong>Keep the road open</strong><small>I'm worried about my child, co-parent conflict, court, or costs.</small></button>
+ </div>
+ <section class="panel" id="welcome"><span class="badge">NO WRONG DOOR</span><h2>You can begin with one sentence.</h2><p class="introline">What happened matters. So does what happens next. You do not have to settle your entire case or relationship today.</p><p>Select a door above to create something you can carry out of this room. You can switch doors without erasing what you've typed. Nothing is submitted to anyone.</p></section>
+ <section class="panel" id="tonight" hidden aria-labelledby="tonight-heading"><span class="badge">01 / STEADY</span><h2 id="tonight-heading">Just the next hour.</h2><p class="introline">Don't decide the rest of your life tonight. Pick the smallest action that makes the next hour safer or less isolated.</p>
+  <div class="note"><strong>Are you or a child in immediate danger?</strong> Call 911 (US). If not, you can still speak with a live domestic-abuse advocate without filing a police report. If you feel close to acting violently, physically separate from the conflict and contact someone you trust or a crisis professional now.</div>
+  <ol class="steps"><li>Put some distance between yourself and any confrontation. Do not send the angry message or make a public accusation tonight.</li><li>Choose one trustworthy person you could contact without explaining everything.</li><li>Preserve anything time-sensitive, but leave interpretation and decisions for later.</li><li>Eat, drink water, rest if possible. These are practical actions, not a substitute for help.</li></ol>
+  <div class="field"><label for="next-hour">One thing I can safely do in the next hour</label><textarea class="small" maxlength="500" id="next-hour" placeholder="Example: ask my brother to sit with me; put screenshots in a private folder; call an advocate."></textarea></div>
+  <div class="actions"><button class="btn" type="button" id="copy-hour">Copy my one-step plan</button><a class="btn alt" href="tel:18007997233">Call National DV Hotline</a></div>
+  <p class="tiny">National Domestic Violence Hotline: 800-799-7233; text START to 88788. Available to people of any gender. For an immediate mental-health crisis in the US, call or text 988.</p>
+ </section>
+ <section class="panel" id="remember" hidden aria-labelledby="remember-heading"><span class="badge">02 / WITNESS, NOT VERDICT</span><h2 id="remember-heading">A record that carries its own context.</h2><p class="introline">Write one event at a time. Keep what you witnessed separate from what someone told you and from what you infer. Accuracy protects credibility.</p>
+  <div class="cols"><div class="field"><label for="event-time">When did it happen?</label><input id="event-time" type="datetime-local"><small class="hint">Approximate is okay. Clarify that in the description.</small></div><div class="field"><label for="basis">How do I know?</label><select id="basis"><option value="Directly witnessed by me">I personally witnessed this</option><option value="Reported to me by someone else">Someone reported this to me</option><option value="Inferred, not confirmed">My inference; not confirmed</option><option value="Document or message I possess">I have a document or message</option></select></div></div>
+  <div class="field"><label for="event-desc">What happened? In plain words.</label><textarea id="event-desc" maxlength="4000" placeholder="Describe what was said or done. Use quotations only when exact; otherwise say 'in substance'."></textarea></div>
+  <div class="cols"><div class="field"><label for="event-proof">Where is the original record?</label><textarea id="event-proof" class="small" maxlength="800" placeholder="Screenshot saved on phone; call log; person who heard it..."></textarea></div><div class="field"><label for="event-unknown">What is still unconfirmed?</label><textarea id="event-unknown" class="small" maxlength="800" placeholder="For example: destination, witness's exact wording, release terms..."></textarea></div></div>
+  <div class="actions"><button class="btn" type="button" id="add-event">Add to local timeline</button><button class="btn alt" type="button" id="clear-events">Clear timeline on this page</button></div>
+  <p class="tiny">Entries stay in memory only. Refreshing or closing loses them unless you copy or download. An exported summary is your own account, not independent verification or a certified evidence record. Keep originals unchanged.</p>
+  <h3>My working timeline <small id="event-count"></small></h3><div id="events" role="status" aria-live="polite"><p class="tiny">No events added yet.</p></div>
+  <div class="field"><label for="carry-goal">What matters most now?</label><textarea id="carry-goal" class="small" maxlength="1000" placeholder="Example: establish my child's whereabouts, avoid escalation, preserve access to my child."></textarea></div>
+  <div class="field"><label for="carry-step">Next specific, lawful step</label><textarea id="carry-step" class="small" maxlength="1000" placeholder="Example: ask the victim advocate about reporting a new call; speak with a self-help center."></textarea></div>
+  <div class="actions"><button class="btn" type="button" id="copy-note">Copy one-page context</button><button class="btn alt" type="button" id="download-note">Save .txt to my device</button><button class="btn alt" type="button" id="print-note-btn">Print context page</button></div><p class="print-warning">Think about who can access your clipboard, downloads folder, printer or printed pages.</p>
+ </section>
+ <section class="panel" id="person" hidden aria-labelledby="person-heading"><span class="badge">03 / ONE HUMAN</span><h2 id="person-heading">Ask for help without asking for a verdict.</h2><p class="introline">Sometimes the first useful thing isn't a lawyer, a platform, or a committee. It's one person who can listen, read, accompany, or help with one small task.</p>
+  <div class="field"><label for="person-request">What would help from another person?</label><select id="person-request"><option value="listen without deciding who is right">Listen without deciding who is right</option><option value="read a short factual summary and tell me what is unclear">Read a short factual summary</option><option value="sit with me while I make a difficult phone call">Stay with me for a difficult call</option><option value="help me find free legal or advocacy information">Help find free information</option><option value="help with a practical task this week">Help with a practical task</option></select></div>
+  <div class="field"><label for="person-detail">One detail you'd like to include (optional)</label><textarea id="person-detail" maxlength="500" class="small" placeholder="Example: I don't need advice tonight. I need company for twenty minutes."></textarea></div>
+  <div class="actions"><button class="btn" type="button" id="make-invite">Make a message I can send</button><button class="btn alt" type="button" id="copy-invite">Copy message</button></div><div class="output" id="invite-output" aria-live="polite">Choose a kind of help and make your message.</div>
+  <div class="note good"><strong>No one is recruited just by receiving this invitation.</strong> The other person can accept, decline, or suggest a smaller way to help. Your message is not sent automatically.</div>
+ </section>
+ <section class="panel" id="parent" hidden aria-labelledby="parent-heading"><span class="badge">04 / THE ROAD TO YOUR CHILD</span><h2 id="parent-heading">Protect the relationship, not the argument.</h2><p class="introline">You can pursue clarity about your child without escalating a conflict with your co-parent. You can also seek legal information without committing to years of litigation.</p>
+  <div class="note"><strong>Child's whereabouts unknown?</strong> Separate what you know from your hypothesis. If there's credible evidence of immediate danger or abduction, contact law enforcement. Otherwise, urgently ask a qualified family-law resource how parentage, custody orders, relocation, jurisdiction, and safe contact apply to your specific situation. Do not use a third party to circumvent a protective order.</div>
+  <h3>Three conversations worth preparing</h3><ol class="steps"><li><strong>With an advocate:</strong> “I am a parent navigating possible coercion and isolation. I need a safety plan and local resources, not a diagnosis of the other parent.”</li><li><strong>With a legal self-help service:</strong> “What low-cost steps can protect my parenting relationship? Are there fee waivers, pro se forms, or urgent temporary remedies? What deadlines matter?”</li><li><strong>With a prosecutor or victim advocate, if testimony is being pressured:</strong> “I want to report a specific statement I believe was intended to influence testimony. Here is what was said, who heard it, and what I can document.”</li></ol>
+  <div class="field"><label for="parent-question">My one question for tomorrow</label><textarea id="parent-question" maxlength="700" class="small" placeholder="Example: Which court, if any, has custody jurisdiction if a child has recently traveled to another state?"></textarea></div>
+  <div class="actions"><button class="btn" type="button" id="copy-parent">Copy question and call script</button><a class="btn alt" href="https://mncourts.gov/help-topics/fee-waiver-ifp" target="_blank" rel="noopener noreferrer">MN court fee waiver ↗</a></div>
+  <p class="tiny">This room offers general information, not legal representation. Filing requirements and custody rights depend on jurisdiction, orders, and legal parentage.</p>
+ </section>
+ <section class="panel" id="resources"><span class="badge">DOORS TO REAL PEOPLE</span><h2>Free or low-cost starting points</h2><p>These are independent services, not Static Collective partners. Contacting them is your choice. No referral is transmitted by this page.</p>
+  <div class="resource-grid"><article class="resource"><h3>Talk to a live abuse advocate</h3><strong>National Domestic Violence Hotline</strong><p>800-799-7233 · text START to 88788</p><p>Confidential advocacy and safety planning, including for men.</p><a href="https://www.thehotline.org/" target="_blank" rel="noopener noreferrer">Open official site ↗</a></article>
+  <article class="resource"><h3>Minnesota, statewide</h3><strong>Day One crisis line</strong><p>866-223-1111 · text 612-399-9995</p><p>24/7 advocacy, safety planning and referrals.</p><a href="https://dayoneservices.org/domestic-violence/help-now/" target="_blank" rel="noopener noreferrer">Open official site ↗</a></article>
+  <article class="resource"><h3>Understand court options</h3><strong>Minnesota Judicial Branch Self-Help Center</strong><p>651-435-6535</p><p>Forms, procedures and access to self-help support—not legal representation.</p><a href="https://mncourts.gov/selfhelp" target="_blank" rel="noopener noreferrer">Open court resources ↗</a></article>
+  <article class="resource"><h3>Fees and finances</h3><strong>Minnesota fee waiver information</strong><p>A filing-fee waiver may be available based on financial circumstances.</p><a href="https://mncourts.gov/help-topics/fee-waiver-ifp" target="_blank" rel="noopener noreferrer">Official information ↗</a></article></div>
+  <details style="margin-top:20px"><summary>What this room cannot do</summary><p>It cannot determine who is truthful, diagnose an absent person, verify an allegation, submit evidence, store a secure legal file, contact a lawyer, report a crime, or arrange a rescue. Its purpose is to help you regain a little continuity and identify a human next step.</p></details>
+ </section>
+ <div class="note good"><strong>One particular, one action, one return.</strong> You may be a father, mother, grandparent, friend, or someone who doesn't have words for what is happening. You don't have to prove the whole history to get one useful step started.</div>
+ <div id="status" role="status" aria-live="polite"></div>
+</main>
+<div id="print-note"></div>
+<footer class="footer"><div class="wrap">STILL HERE · AN ABUNDENT FIRST DOOR · BUILT TO RETURN SOMETHING USEFUL. <br>Nothing typed here is submitted, indexed, or retained by this page. <a href="/">Back to JAR;VIS</a></div></footer>
+<script src="/still-here/app.mjs" type="module"></script>
+</body>
+</html>
