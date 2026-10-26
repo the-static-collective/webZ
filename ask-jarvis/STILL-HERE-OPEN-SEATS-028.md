@@ -28,7 +28,7 @@ Every public role remains **UNFILLED / DESIGN_ONLY**, not a personnel directory 
 ## What was built
 
 - `public/still-here/index.html`: mobile-first page with a discreet `The Porch` tab title, monitored-device warning, simple next-step doors, seven work-generated open seats, editable-no-story content, copy/print voluntary invitations, and an explicitly separate builders-only contact desk.
-- `public/still-here/model.mjs`: five generic initial survivor needs and seven roles, with specific first trials and prohibition/authority gates. No participant identity, stories, signed-up persons or imaginary completed work.
+- `public/still-here/model.mjs`: five generic initial survivor needs and seven roles, with specific first trials and prohibition/authority gates. A **copyable fictional-only exercise** is provided for every role so a willing helper can contribute something useful without interacting with survivors or confidential records. No participant identity, stories, signed-up persons or imaginary completed work.
 - `public/still-here/app.mjs`: local-only client interactions. No fetch, analytics, cookies, WebSocket, LocalStorage, IndexedDB, incident text fields, or submission forms.
 - `test/still-here-open-seats.test.mjs`: strict checks for no data intake, local-only model, privacy and staff truth boundaries.
 - `database/supabase/functions/porch-doors/index.ts`: wholly separate read-only Edge preview on the existing project. Denies POST, forbids scripts from making network connections, sends no-store/no-referrer/no-index page metadata and does not access databases.
