@@ -1,6 +1,6 @@
 // STILL-HERE-028 · No data collection, no fetch, no storage, no analytics.
 // All interactions use local editorial text. Case narratives are never typed here.
-import {NEEDS,SEATS,needFor,seatFor,seatForNeed,careStep,inviteText,BLANK_CHRONOLOGY} from './model.mjs';
+import {NEEDS,SEATS,needFor,seatFor,seatForNeed,careStep,inviteText,BLANK_CHRONOLOGY,trialWorksheet} from './model.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,value='',className='')=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
 const slow=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -74,6 +74,8 @@ $('need-copy').addEventListener('click',()=>{
 });
 $('copy-chronology').addEventListener('click',()=>void tryCopy(BLANK_CHRONOLOGY,'need-status',
  'A blank template was copied. Clipboards may be visible to others using or monitoring your device.'));
+$('seat-worksheet').addEventListener('click',()=>void tryCopy(trialWorksheet(seat.id),'seat-status',
+ 'The fictional starter exercise was copied. You can test it without receiving any survivor information.'));
 $('seat-invite').addEventListener('click',()=>void tryCopy(inviteText(seat.id,'invite'),'seat-status',
  'An independent invitation was copied. Send it only to someone you choose; no enrollment occurred.'));
 $('seat-ambassador').addEventListener('click',()=>void tryCopy(inviteText(seat.id,'ambassador'),'seat-status',
