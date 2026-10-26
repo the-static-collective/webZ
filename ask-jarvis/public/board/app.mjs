@@ -7,7 +7,7 @@ const make=(tag,className='',value)=>{const n=document.createElement(tag);if(cla
 // A reviewed-public-only continuation may choose the *starting card* on arrival.
  // No question text is imported and the Board's private submission requires
  // its own explicit consent and human moderation.
-const carriedTopic=carriedBoardTopic(window.sessionStorage,getOpportunity);
+const carriedTopic=carriedBoardTopic(getOpportunity);
 const state={topic:readOpportunityLink(location.hash)||carriedTopic||getOpportunity('grocery'),entry:null,term:''};
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 function notify(message){$('status').textContent=message;}
