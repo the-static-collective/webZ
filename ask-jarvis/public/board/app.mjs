@@ -9,6 +9,7 @@ function notify(message){$('status').textContent=message;}
 function pick(topic,updateURL=true){
  state.topic=topic;state.entry=null;
  $('draft').value='';$('kind').value='question';$('draft-panel').hidden=true;
+ $('local-result').hidden=true;$('path').hidden=true;
  if(updateURL)history.replaceState(null,'',opportunityLink(location.href,topic));
  paintList();paintTopic();notify('');
 }
@@ -66,6 +67,8 @@ $('new-question').addEventListener('submit',e=>{
   $('topic-detail').scrollIntoView({behavior:reduced()?'auto':'smooth'});
  }catch{$('question-status').textContent='That question needs simpler, non-identifying wording.';}
 });
+$('draft').addEventListener('input',()=>{state.entry=null;$('local-result').hidden=true;});
+$('kind').addEventListener('change',()=>{state.entry=null;$('local-result').hidden=true;});
 $('compose').addEventListener('click',()=>{
  $('draft-panel').hidden=false;$('draft').focus();
  notify('Choose an entry type. A concern, refusal or correction is welcome. Nothing is sent automatically.');
@@ -115,8 +118,8 @@ $('private').addEventListener('click',async()=>{
    'BOARD DRAFT · '+state.topic.title+'\n'+state.entry.kind.toUpperCase()+': '+state.entry.text:
    'BOARD QUESTION · '+state.topic.title+'\n'+state.topic.question;
   await copyText(excerpt);
-  notify('Copied your words for a PRIVATE note. The contact desk will open in a new tab; paste and edit them, then decide whether to submit.');
-  window.open('/contact/','_blank','noopener,noreferrer');
+  notify('Copied for a PRIVATE note. Now opening the contact desk; paste, edit, and decide whether to submit.');
+  location.assign('/contact/');
  }catch{notify('Copy was blocked. Open /contact/ yourself and describe the question only if you wish.');}
 });
 $('download').addEventListener('click',()=>{
