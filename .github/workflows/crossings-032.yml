@@ -1,0 +1,29 @@
+name: CROSSINGS-032 Public File Relay
+on:
+  push:
+    branches:
+      - feature/abundent-crossings-032
+  pull_request:
+    branches:
+      - feature/abundent-public-first-yes-030
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated Ask JAR;VIS and Crossings tests
+        run: |
+          cd ask-jarvis
+          npm test
+      - name: Syntax-check standalone browser modules
+        run: |
+          node --check ask-jarvis/public/crossings/model.mjs
+          node --check ask-jarvis/public/crossings/app.mjs
+          node --check ask-jarvis/public/first-yes/first-yes-ui.mjs
