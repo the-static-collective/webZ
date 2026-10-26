@@ -47,8 +47,8 @@ test('Survivor-first door gives private action tools, not crisis hotline routing
   assert.match(html, /beginning with fathers/i);
   assert.match(html, /we are not yet operating an authenticated peer network/i);
   assert.match(html, /private-in-your-browser toolkit/i);
-  assert.match(html, /mncourts.gov\\/selfhelp/);
-  assert.match(html, /mncourts.gov\\/help-topics\\/fee-waiver-ifp/);
+  assert.ok(html.includes('https://mncourts.gov/selfhelp'));
+  assert.ok(html.includes('https://mncourts.gov/help-topics/fee-waiver-ifp'));
   for (const phrase of ['thehotline.org', 'dayoneservices.org', '800-799-7233', '88788', '988', 'hotline', 'crisis line']) {
     assert.equal(html.toLowerCase().includes(phrase), false, 'unwanted crisis routing: '+phrase);
   }
