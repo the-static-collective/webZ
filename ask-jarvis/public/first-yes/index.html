@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#193d30"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Ask one public-safe community question. Prepare a useful, printable first step—without sharing your private details or enrolling anyone.">
+<title>The First Yes · Abundent</title>
+<style>
+:root{color-scheme:light;--pine:#183a2f;--dark:#18342a;--ivory:#fffbf0;--cream:#f3ecda;--gold:#f7cb7b;--gold2:#dba54c;--line:#b9c9b2;--sage:#e3ecde;--red:#a44c36;--muted:#496457}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ivory);color:var(--dark);font:16px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif}a{color:#1f5b42}a:hover{text-decoration-thickness:2px}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.035em;line-height:1.1}h1{font-size:clamp(3.4rem,9vw,6.4rem);margin:.4em 0 .25em}h2{font-size:clamp(2rem,4vw,2.9rem);margin:.2em 0 .6em}h3{font-size:1.35rem;margin:.3em 0 .6em}
+header{background:radial-gradient(circle at 88% 5%,#38644a 0,transparent 43%),radial-gradient(circle at 12% 85%,#265843 0,transparent 40%),var(--pine);color:white;padding:24px 0 65px}.wrap{width:min(980px,calc(100% - 34px));margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid #ffffff56;padding:8px 0 22px;font-size:.81rem;letter-spacing:.08em;font-weight:800;text-transform:uppercase}.nav a{color:#f6d29c}
+.eyebrow{font:bold .73rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.15em;text-transform:uppercase;color:#f8cf82}.hero{max-width:790px;padding-top:30px}.hero p{font-size:clamp(1.1rem,2.4vw,1.35rem);color:#e0eade;max-width:720px}.hero strong{color:#ffda91}
+.bridge{margin-top:-35px;position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.bridge span{background:#fffdf6;border-top:6px solid var(--gold2);box-shadow:0 8px 25px #15372e22;padding:20px 12px;font-size:.87rem}.bridge b{display:block;font:1.15rem Georgia,serif;margin-bottom:4px}.bridge small{color:#547060}
+main{padding:30px 0 70px}.panel{background:white;border:1px solid var(--line);box-shadow:0 9px 25px #233c2612;padding:clamp(20px,4vw,36px);border-radius:8px;margin:26px 0}.panel.experiment{border-top:8px solid var(--gold2)}.panel.quiet{background:#f2f5ed}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{min-width:0}label{font-weight:750;display:block;margin:17px 0 8px}textarea,select{width:100%;padding:12px;border:1.5px solid #9eaf9f;border-radius:5px;background:#fffcf6;color:#1a3d30;font:inherit}textarea{min-height:115px;resize:vertical}textarea:focus,select:focus{outline:3px solid var(--gold);outline-offset:1px}
+button,.button{display:inline-block;background:var(--pine);color:white;border:2px solid var(--pine);border-radius:6px;padding:12px 17px;font:750 .96rem/1.2 system-ui,sans-serif;text-decoration:none;cursor:pointer;margin:5px 9px 5px 0;max-width:100%;text-align:center}button:hover,.button:hover{filter:brightness(1.12)}button.secondary,.button.secondary{background:#f4ebd3;color:#183b2c;border-color:#bdac8a}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.note{font-size:.88rem;color:var(--muted);line-height:1.6}.warn{padding:13px 17px;background:#fff1d5;border-left:5px solid var(--red);font-size:.9rem}.actions{margin-top:23px}.status{padding:12px 14px;background:#e8f0e5;border-left:5px solid #477752;font-size:.92rem;margin:15px 0;white-space:pre-wrap}.historybox{border:1px dashed #9daf9b;padding:14px 17px;background:#f4f7f0;margin:22px 0}.historybox p{margin:5px 0 12px}
+.result{border-top:1px solid #c3cfc0;padding-top:23px;margin-top:26px}.result[hidden]{display:none!important}.kicker{font:700 .72rem/1.5 ui-monospace,Consolas,monospace;letter-spacing:.14em;color:#885b24;text-transform:uppercase}.result-status{font-size:.8rem;color:#5e4932;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.result-grid article{border:1px solid var(--line);border-radius:6px;padding:18px;background:#f8f8f2;overflow-wrap:anywhere}.result-grid article:first-child{background:#f5eccc}.result-grid strong{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#4c654d}.result-grid p{margin:7px 0 0}.result ol{padding-left:18px}.invitation{padding:20px;border:1px solid #c4be9e;background:#fff8e4;border-left:6px solid var(--gold2)}
+.hidden{display:none!important}#printPaper{display:none;white-space:pre-wrap;font:13px/1.6 Georgia,serif}footer{background:#173528;color:#e6eee6;padding:34px 0 48px;font-size:.93rem}footer a{color:#ffdc9a}
+@media(max-width:700px){.fields,.result-grid{grid-template-columns:1fr}.bridge{grid-template-columns:repeat(2,minmax(0,1fr))}.bridge span{padding:15px 10px}header{padding-bottom:54px}.panel{margin:20px 0}}
+@media print{header,.bridge,.panel,.nav,footer{display:none!important}body{background:white;color:black}#printPaper{display:block!important;margin:0;padding:0;width:100%}@page{margin:14mm}}
+</style><script type="module" src="./first-yes-ui.mjs"></script>
+</head>
+<body>
+<header><div class="wrap"><nav class="nav"><a href="/">ABUNDENT · ASK JAR;VIS</a><span>THE FIRST YES · EXPERIMENT 030</span><a href="/board/">PUBLIC WORKBOARD ↗</a></nav>
+<div class="hero"><div class="eyebrow">The question becomes a place to begin</div>
+<h1>One useful<br><em style="color:#f5ca78;font-style:normal">thing.</em></h1>
+<p>Bring a public-safe community question. Leave with a concrete first step, an invitation you may choose to share, and a clear way to recognize what <strong>actually happened.</strong></p>
+<p style="font-size:.88rem">No login. No private Campfire key. No automatic messages. No assumption that somebody agreed.</p></div></div></header>
+<div class="wrap"><div class="bridge" aria-label="Four voluntary steps">
+<span><b>1 · Ask</b><small>What are we trying to learn?</small></span>
+<span><b>2 · Prepare</b><small>One achievable first artifact</small></span>
+<span><b>3 · Invite</b><small>Permission before participation</small></span>
+<span><b>4 · Return</b><small>What really happened?</small></span></div>
+<main><section class="panel experiment" aria-labelledby="form-title">
+<div class="kicker">The public doorway · prepare locally</div><h2 id="form-title">What could we make possible?</h2>
+<p>This is the public side of First Yes. Your question stays in this browser. The private Campfire Attention Desk is <strong>not</strong> contacted. No one is enrolled or contacted.</p>
+<p class="warn"><strong>Please don't enter personal case histories, names, contact information, addresses, credentials, or private survivor details.</strong> For private, local-only tools, use <a href="/still-here/">Still Here</a>. This is a community project planning worksheet, not a secure intake form.</p>
+<form id="firstYesForm" autocomplete="off">
+<label for="question">One community-level question</label>
+<textarea id="question" minlength="12" maxlength="280" required placeholder="What small experiment would help our neighbors find an affordable fresh-food option?">How could willing neighbors improve local food access this week?</textarea>
+<div class="fields">
+<div class="field"><label for="topic">What part of the community?</label>
+<select id="topic"><option value="auto">Suggest from the question (or ask me to choose)</option>
+<option value="grocery">Community grocery</option><option value="milk">Milk supply</option>
+<option value="care">Care connections</option><option value="artists">Artist-led gathering</option>
+<option value="park">Park stewardship</option><option value="church">Church / community</option></select></div>
+<div class="field"><label for="capacity">What could you prepare first?</label>
+<select id="capacity"><option value="listen">Listen to someone</option>
+<option value="research">Research a fact</option><option value="print">Make a printable card</option>
+<option value="convene">Prepare a gathering</option><option value="build">Build a small prototype</option>
+<option value="create">Make something expressive</option></select></div>
+</div>
+<div class="historybox"><strong>Optional · Read the public Workboard</strong>
+<p id="historyStatus" class="note" role="status">Not requested. The first card will use clearly labeled editorial starting ideas; it will not pretend to know what the community has said.</p>
+<button id="readHistory" type="button" class="secondary">Read human-reviewed public updates ↗</button>
+<p class="note">This fetches only already-public, human-reviewed Workboard contributions for the selected topic. <strong>It does not send your question.</strong> Human review means publication was approved; it does not verify the claims. If the feed is unavailable, you can still prepare an editorial-only draft.</p>
+</div>
+<div class="actions"><button type="submit" id="prepare">Prepare one useful work card →</button>
+<a href="/board/" class="button secondary">Explore open conversations ↗</a></div>
+<p id="status" class="status" role="status">Ready to prepare. Nothing has been sent or stored remotely.</p>
+</form>
+<section id="result" class="result" hidden aria-live="polite">
+<div class="kicker">Your first yes · UNSENT</div><h2 id="resultTitle">Your one useful step</h2>
+<div id="resultIntro" class="note"></div>
+<div id="resultGrid" class="result-grid"></div>
+<h3>One voluntary invitation</h3><blockquote id="invitation" class="invitation"></blockquote>
+<p class="note">This is a proposal, not a real commitment or proof of delivery. You choose whether anyone sees it. The Workboard is moderated; publishing there requires a separate opt-in and review.</p>
+<div class="actions">
+<button id="copy" type="button">Copy the draft</button>
+<button id="save" type="button" class="secondary">Save work card (.md)</button>
+<button id="print" type="button" class="secondary">Print</button>
+<a id="threadLink" class="button secondary" href="/board/">Open the relevant discussion ↗</a>
+</div></section>
+</section>
+<section class="panel quiet"><div class="kicker">The honest boundary</div><h2>What this page knows—and doesn't</h2>
+<div class="result-grid">
+<article><strong>What it can do</strong><p>Prepare a first useful experiment with a permission gate and return questions, optionally citing already-reviewed public Workboard history.</p></article>
+<article><strong>What it cannot do</strong><p>Read private Firebox records, authenticate volunteers, inspect personal cases, contact organizations, verify deliveries, or decide that a project has been approved.</p></article>
+</div>
+<p>Our <a href="/campfire/">Campfire</a>, <a href="/board/">Workboard</a>, and <a href="/ignite/">Ignition</a> are separate doors. A person can explore without signing up, and choosing not to continue is a complete answer.</p>
+</section></main></div>
+<pre id="printPaper"></pre>
+<footer><div class="wrap"><strong>The software remembers possibilities. People choose what happens.</strong><br>
+Abundent · The Static Collective · Integrity &gt; Continuity · <a href="/">Ask JAR;VIS</a> · <a href="/board/">Workboard</a> · <a href="/still-here/">Private first door</a></div></footer>
+</body></html>
