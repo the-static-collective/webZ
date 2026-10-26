@@ -69,7 +69,7 @@ test('the workboard is navigable, accessible and has no hidden network submissio
  assert.match(html,/@media print/);assert.match(html,/aria-live="polite"/);
  assert.match(app,/navigator\.share/);assert.match(app,/window\.print/);
  assert.doesNotMatch(app,/\bfetch\s*\(|sendBeacon|localStorage|sessionStorage|\binnerHTML\s*=/);
- assert.match(html,/human-reviewed contributions/i);
+ assert.match(html,/only after human review/i);
  assert.ok(html.includes('src="/board/app.mjs"'));
  const homepage=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
  const campfire=readFileSync(new URL('../public/campfire/index.html',import.meta.url),'utf8');
