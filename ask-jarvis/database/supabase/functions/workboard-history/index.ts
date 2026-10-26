@@ -8,6 +8,7 @@ if(!HOST||!SECRET)throw Error('WORKBOARD_SERVER_CONFIG_REQUIRED');
 const db=createClient(HOST,SECRET,{auth:{persistSession:false,autoRefreshToken:false}});
 const ORIGINS=new Set([
  'https://abundent.org','https://www.abundent.org','https://connections.abundent.org',
+ 'https://kbhqacsdvjsstzyplqij.supabase.co',
  'https://ask-jarvis-workboard-024-review-rbjcudset.vercel.app',
  'https://ask-jarvis-workboard-0-git-00aa71-theotherlucasv-1250s-projects.vercel.app'
 ]);
