@@ -137,3 +137,38 @@ export const BLANK_CHRONOLOGY=[
   'Next question for a qualified professional:',
   'Do not change an original document. Keep originals and note corrections separately.'
 ].join('\n');
+
+
+const FICTIONAL_TRIALS=Object.freeze({
+ safety:'A fictional visitor is browsing on a family-shared phone. The page keeps no form data but the browser history and copied text may still be visible.',
+ moderation:'A fictional community post includes an accusation and enough contextual details to recognize another person. The author later asks for the words to be removed.',
+ listener:'A fictional visitor wants ten minutes of company but declines to explain what happened. A well-meaning helper starts asking for proof.',
+ documents:'A fictional timeline says “I saw a door close” and “they intended to frighten me” in one sentence without distinguishing observation and inference.',
+ navigation:'A fictional parent asks for a specific custody deadline, but the jurisdiction, case type and order status are not established.',
+ access:'On a fictional small-screen phone, a keyboard-only visitor cannot easily find a safe exit and feels forced to choose a label describing their identity.',
+ builder:'A fictional prototype puts a sensitive timeline in a URL fragment and stores an export automatically. There is no genuine user data in this demonstration.'
+});
+export function trialWorksheet(id){
+ const s=seatFor(id);if(!s)throw Error('UNKNOWN_SEAT');
+ return [
+  'STILL HERE · SMALL VOLUNTARY DESIGN EXERCISE',
+  'EVERY PERSON AND EVENT IN THIS PACKET IS FICTIONAL.',
+  'No real stories, documents, names, contacts or private accounts should be used.',
+  '',
+  'Role: '+s.name,
+  'Fictional situation: '+FICTIONAL_TRIALS[id],
+  '',
+  'Step 1 · Identify the privacy, dignity, accuracy or safety risks.',
+  'Step 2 · Draft a small, reversible improvement using fictional material only.',
+  'Step 3 · Explain when you would decline, pause or refer a matter to a qualified operator.',
+  'Step 4 · Identify what must be approved before contacting real people.',
+  'Step 5 · Record one test outcome and one unresolved question.',
+  '',
+  'Bounded first task: '+s.first,
+  'Return to share with the project only if you choose: '+s.return,
+  'Permission gate: '+s.authority,
+  'Boundary: '+s.boundary,
+  '',
+  'This worksheet grants no reviewer access, authority, role, legal status or contact permission.'
+ ].join('\n');
+}
