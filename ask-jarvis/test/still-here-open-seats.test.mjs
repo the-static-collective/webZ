@@ -53,7 +53,7 @@ test('invites recruit capability, not identities or stories',()=>{
    const s=inviteText(seat.id,mode);
    assert.match(s,/fictional examples only/i);
    assert.match(s,/no live support service/i);
-   assert.match(s,/no personal story or commitment|no personal story|no commitment/i);
+   assert.match(s,/no personal story or commitment|no personal story|no commitment|do not send survivor stories/i);
    assert.doesNotMatch(s,/mailto:|https?:\/\/|api[_ -]?key/i);
   }
  }
@@ -76,7 +76,7 @@ test('live page is read-only, discreet, accessible and no private story is colle
  }
  assert.match(html,/<title>The Porch · Abundent<\/title>/);
  assert.match(html,/noindex,nofollow,noarchive/i);
- assert.match(html,/history.*cannot erase/i);
+ assert.match(html,/cannot erase history/i);
  assert.match(html,/not a confidential survivor intake channel/i);
  assert.match(html,/script type="module" src="\.\/app\.mjs"/);
  assert.match(js,/inviteText/);
