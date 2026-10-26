@@ -74,9 +74,15 @@ async function loadHistory(append=false){
   render();
   message(items.length?items.length+' reviewed contributions shown · '+(scope==='all'?'all threads':LABEL[scope]):
    'The reviewed public history is currently empty. Unreviewed contributions are never shown.');
+  window.dispatchEvent(new CustomEvent('workboard-reviewed-history',{detail:{
+   entries:items.map(e=>({id:e.id,thread:e.thread,parentId:e.parentId,kind:e.kind,
+    text:e.text,status:e.status,createdAt:e.createdAt,publishedAt:e.publishedAt})),
+   scope,complete:!cursor
+  }}));
  }catch{
   if(!append){items=[];render();}
   message('The shared history could not be loaded. Local drafting still works. You can try Refresh.');
+  window.dispatchEvent(new Event('workboard-history-error'));
  }finally{busy=false;$('history-refresh').disabled=false;$('history-more').disabled=false;}
 }
 $('history-scope').addEventListener('change',e=>selectScope(e.target.value));
