@@ -67,7 +67,8 @@ export function actionReceipt(summary,origin,{now=new Date()}={}){
  if(!summary||!Object.hasOwn(THREADS,summary.thread)||!summary.next||!(now instanceof Date)||!Number.isFinite(+now))
   throw Error('INVALID_ACTION');
  const u=new URL(origin);if(u.protocol!=='https:'&&u.hostname!=='localhost')throw Error('SECURE_ORIGIN_REQUIRED');
- const location=new URL('/board/',u);location.hash='v=1&topic='+summary.thread;
+ const pathname=u.pathname.includes('/functions/v1/workboard-preview')?'/functions/v1/workboard-preview':'/board/';
+ const location=new URL(pathname,u);location.search='';location.hash='v=1&topic='+summary.thread;
  const reference=summary.anchor;
  return Object.freeze({
   schema:'abundent/actionable-memory-candidate-v1',createdAt:now.toISOString(),
