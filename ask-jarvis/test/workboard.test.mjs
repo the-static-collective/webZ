@@ -70,7 +70,7 @@ test('the workboard is navigable, accessible and has no hidden network submissio
  assert.match(app,/navigator\.share/);assert.match(app,/window\.print/);
  assert.doesNotMatch(app,/\bfetch\s*\(|sendBeacon|localStorage|sessionStorage|\binnerHTML\s*=/);
  assert.match(html,/not a live public discussion feed/i);
- assert.match(html,//board\/app\.mjs/);
+ assert.ok(html.includes('src="/board/app.mjs"'));
  const homepage=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
  const campfire=readFileSync(new URL('../public/campfire/index.html',import.meta.url),'utf8');
  assert.match(homepage,/href="\/board\/"/);
