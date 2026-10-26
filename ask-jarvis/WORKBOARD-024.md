@@ -6,7 +6,7 @@ This is the **front-facing interaction model** for JAR;VIS / Abundent. It borrow
 
 ## Implemented, reviewable first slice
 
-`/board/` contains six editorial starter threads (grocery, a **secondhand/unverified** milk-supply lead, Coalition-adjacent care networking, artist-led gathering, park stewardship and an optional church/community conversation) and a public-safe locally created question. Each offers:
+`/board/` contains seven editorial starter threads (grocery, the **Garden Table** sensory food-culture pilot, a **secondhand/unverified** milk-supply lead, Coalition-adjacent care networking, artist-led gathering, park stewardship and an optional church/community conversation) and a public-safe locally created question. Each offers:
 
 - a precise question;
 - what is known **and how uncertain it is**;
