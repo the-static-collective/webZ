@@ -85,6 +85,18 @@ async function loadHistory(append=false){
   window.dispatchEvent(new Event('workboard-history-error'));
  }finally{busy=false;$('history-refresh').disabled=false;$('history-more').disabled=false;}
 }
+window.addEventListener('workboard-compose-candidate',e=>{
+ const d=e.detail||{};
+ if(!isKnown(d.thread)||typeof d.text!=='string'||d.text.length<12||d.text.length>400)return;
+ selectScope(d.thread);
+ $('history-thread').value=d.thread;
+ $('history-kind').value='proposal';
+ $('history-text').value=d.text;
+ $('history-consent').checked=false;
+ reply.value='';
+ $('history-post-status').textContent='An action suggestion has become an editable draft. You must approve its wording and separately consent before submitting it for review.';
+ $('history-text').focus({preventScroll:true});
+});
 $('history-scope').addEventListener('change',e=>selectScope(e.target.value));
 $('history-refresh').addEventListener('click',()=>{cursor=null;void loadHistory(false);});
 $('history-more').addEventListener('click',()=>void loadHistory(true));
