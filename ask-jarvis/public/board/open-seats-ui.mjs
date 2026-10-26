@@ -74,7 +74,7 @@ $('seat-help').addEventListener('click',()=>{
  // No private data or applicant status is attached to a URL.
  const form=document.createElement('a');form.href='https://abundent.org/contact/';
  form.target='_blank';form.rel='noopener noreferrer';document.body.append(form);form.click();form.remove();
- note('The separate Abundent contact desk opened. Choose Helping / volunteering and describe the '+active.title+
+ note('The independent Abundent contact desk was requested in a new tab. Choose Helping / volunteering and describe the '+active.title+
   ' interest if you wish. Only the desk can receive the private message, with your explicit consent.');
 });
 window.addEventListener('open-seat-from-memory',e=>{
@@ -84,4 +84,5 @@ window.addEventListener('open-seat-from-memory',e=>{
   note('This conversation suggests exploring '+suggestion.title+'. The source contribution does not enroll its author.');
  }catch{note('Unable to connect this question with a specific capability yet.');}
 });
-choose('review');
+const entry=new URLSearchParams(location.search).get('seat');
+choose(getGate(entry)?entry:'review',Boolean(getGate(entry)));
