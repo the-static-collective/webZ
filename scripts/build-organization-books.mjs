@@ -15,7 +15,7 @@ export async function buildOrganizationBooks({output,files,commit}){
   if(!/^[a-z][a-z0-9-]{2,40}$/.test(seed.id)||ids.has(seed.id))throw Error('BAD_SEED_ID');
   ids.add(seed.id);
   for(const k of ['title','mission','firstAct','firstQuestion','firstSteward','firstReceipt','guardrail']){
-   if(typeof seed[k]!=='string'||seed[k].trim().length<25)throw Error('BAD_SEED_FIELD:'+seed.id+':'+k);
+   if(typeof seed[k]!=='string'||seed[k].trim().length<(k==='title'?5:25))throw Error('BAD_SEED_FIELD:'+seed.id+':'+k);
   }
   if(!Array.isArray(seed.neighbors)||seed.neighbors.some(n=>typeof n.title!=='string'||!/^https:\/\//.test(n.url)))throw Error('BAD_SEED_NEIGHBORS');
  }
