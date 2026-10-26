@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {PROJECT,NEEDS,SEATS,needFor,seatFor,seatForNeed,recruitmentSeat,inviteText,careStep,BLANK_CHRONOLOGY} from '../public/still-here/model.mjs';
+import {PROJECT,NEEDS,SEATS,needFor,seatFor,seatForNeed,recruitmentSeat,inviteText,careStep,BLANK_CHRONOLOGY,trialWorksheet} from '../public/still-here/model.mjs';
 
 test('the survivor first doorway is explicitly unstaffed and does not demand case intake',()=>{
  assert.equal(PROJECT.status,'INDEPENDENT_EARLY_PROTOTYPE_NOT_A_STAFFED_SERVICE');
@@ -60,6 +60,17 @@ test('invites recruit capability, not identities or stories',()=>{
  assert.throws(()=>inviteText('safety','emergency'));
  assert.throws(()=>inviteText('not-a-role'));
 });
+test('an unfilled role has an immediately executable fictional exercise',()=>{
+ for(const seat of SEATS){
+  const worksheet=trialWorksheet(seat.id);
+  assert.match(worksheet,/FICTIONAL/);
+  assert.match(worksheet,/no reviewer access|grants no reviewer access/i);
+  assert.match(worksheet,/Bounded first task:/);
+  assert.match(worksheet,/Step 5/);
+  assert.ok(worksheet.length>400);
+ }
+ assert.throws(()=>trialWorksheet('bad-seat'));
+});
 test('chronology keeps facts, reports, inferences and questions separate',()=>{
  assert.match(BLANK_CHRONOLOGY,/directly observed/i);
  assert.match(BLANK_CHRONOLOGY,/someone else told me/i);
@@ -71,7 +82,7 @@ test('live page is read-only, discreet, accessible and no private story is colle
  const html=readFileSync(new URL('../public/still-here/index.html',import.meta.url),'utf8');
  const js=readFileSync(new URL('../public/still-here/app.mjs',import.meta.url),'utf8');
  for(const id of ['first-step','needs','need-detail','need-first','need-copy','copy-chronology',
-  'open-seats','seats','seat-detail','seat-invite','seat-ambassador','seat-print','seat-status','leave']){
+  'open-seats','seats','seat-detail','seat-worksheet','seat-invite','seat-ambassador','seat-print','seat-status','leave']){
   assert.ok(html.includes('id="'+id+'"'),id);
  }
  assert.match(html,/<title>The Porch · Abundent<\/title>/);
@@ -80,6 +91,7 @@ test('live page is read-only, discreet, accessible and no private story is colle
  assert.match(html,/not a confidential survivor intake channel/i);
  assert.match(html,/script type="module" src="\.\/app\.mjs"/);
  assert.match(js,/inviteText/);
+ assert.match(js,/trialWorksheet/);
  assert.match(js,/careStep/);
  assert.doesNotMatch(html,/<form\b|<input\b|<textarea\b/i);
  assert.doesNotMatch(js,/\bfetch\s*\(|sendBeacon|WebSocket|localStorage|sessionStorage|indexedDB|\binnerHTML\s*=/i);
