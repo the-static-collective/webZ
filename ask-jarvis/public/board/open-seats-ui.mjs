@@ -5,7 +5,6 @@ const $=id=>document.getElementById(id);
 const node=(tag,value='',className='')=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
 let active=getGate('review');
 function note(value){$('seat-status').textContent=value;}
-function snapshot(){return seatPacket(active,{issue:$('seat-issue').value.trim()});}
 function show(){
  const s=seatPacket(active);
  for(const [id,val] of [['seat-name',s.title],['seat-why',s.reason],['seat-first',s.firstMove],
@@ -33,12 +32,20 @@ function card(gate){
 }
 for(const gate of BOTTLENECK_GATES)$('seat-cards').append(card(gate));
 $('seat-choice').addEventListener('change',e=>choose(e.target.value));
+$('seat-spotlight-open').addEventListener('click',()=>choose('review',true));
 $('seat-diagnose').addEventListener('submit',e=>{
  e.preventDefault();const issue=$('seat-issue').value.trim();
  if(!safePublicIssue(issue)){note('Use a 12–220 character public-safe description, without names, contact details, URLs or private stories.');return;}
  choose(matchGate(issue).id);
  note('A possible missing capability: '+active.title+'. Nobody is assigned. You can invite someone to help shape the role.');
 });
+function ensureShareable(){
+ const typed=$('seat-issue').value.trim();
+ if(typed&&!safePublicIssue(typed)){
+  note('Remove identifying details from the question before sharing or printing.');return null;
+ }
+ return seatPacket(active,{issue:typed});
+}
 async function copy(text){
  if(navigator.clipboard&&isSecureContext)return navigator.clipboard.writeText(text);
  const box=node('textarea');box.value=text;box.style.position='fixed';box.style.left='-9999px';
@@ -46,17 +53,20 @@ async function copy(text){
  if(!ok)throw Error('COPY_UNAVAILABLE');
 }
 $('seat-copy').addEventListener('click',async()=>{
- try{await copy(recruitmentCopy(snapshot(),'invite'));
+ try{const p=ensureShareable();if(!p)return;
+  await copy(recruitmentCopy(p,'invite'));
   note('Invitation copied. You decide whom to ask. Nobody is enrolled or appointed.');
  }catch{note('Copy was blocked. You can print the invitation.');}
 });
 $('seat-ambassador').addEventListener('click',async()=>{
- try{await copy(recruitmentCopy(snapshot(),'ambassador'));
+ try{const p=ensureShareable();if(!p)return;
+  await copy(recruitmentCopy(p,'ambassador'));
   note('Ambassador invitation copied. Any introduction requires the people involved to consent.');
  }catch{note('Copy was blocked. You can print the invitation instead.');}
 });
 $('seat-print').addEventListener('click',()=>{
- $('print-detail').textContent=recruitmentCopy(snapshot(),'invite');
+ const p=ensureShareable();if(!p)return;
+ $('print-detail').textContent=recruitmentCopy(p,'invite');
  note('This is an invitation draft, not an appointment.');window.print();
 });
 $('seat-help').addEventListener('click',()=>{
