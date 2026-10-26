@@ -1,7 +1,7 @@
 'use strict';
 const $=id=>document.getElementById(id);
-const doorIds=['tonight','remember','person','parent'];
-const timeline=[];
+const doorIds=['tonight','remember','person','parent','blackstar'];
+export const timeline=[];
 const stamp=()=>new Date().toLocaleString();
 const limit=(s,n=15000)=>String(s??'').slice(0,n).trim();
 function status(s){$('status').textContent=s;}
@@ -16,8 +16,8 @@ async function copy(text){
  catch{status('Automatic copy was blocked. Select the text from the visible output, or download your one-page note.');}
 }
 $('copy-hour').addEventListener('click',()=>copy('MY NEXT-HOUR PLAN · '+stamp()+'\n'+limit($('next-hour').value,500)+'\n\nA draft for me to use, not sent to anyone.'));
-function eventObject(){return {when:$('event-time').value||'Date/time not entered',basis:$('basis').value,account:limit($('event-desc').value,4000),original:limit($('event-proof').value,800)||'Not identified',unknown:limit($('event-unknown').value,800)||'Not recorded'};}
-function formatEvent(e,i){return `EVENT ${i+1} · ${e.when}\nBasis: ${e.basis}\nAccount: ${e.account}\nOriginal/source: ${e.original}\nUnconfirmed: ${e.unknown}`;}
+function eventObject(){return {when:$('event-time').value||'Date/time not entered',learnedAt:$('event-discovered').value||'',basis:$('basis').value,account:limit($('event-desc').value,4000),original:limit($('event-proof').value,800)||'Not identified',unknown:limit($('event-unknown').value,800)||'Not recorded'};}
+function formatEvent(e,i){return `EVENT ${i+1} · ${e.when}\nBasis: ${e.basis}\nFirst source encounter: ${e.learnedAt||'Not recorded'}\nAccount: ${e.account}\nOriginal/source: ${e.original}\nUnconfirmed: ${e.unknown}`;}
 function renderEvents(){
  const root=$('events');root.replaceChildren();$('event-count').textContent=`(${timeline.length})`;
  if(!timeline.length){const p=document.createElement('p');p.className='tiny';p.textContent='No events added yet.';root.append(p);return;}
