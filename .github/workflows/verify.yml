@@ -26,6 +26,7 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: npm run test:browser
       - run: WEBZ_TEST_SITE=dist WEBZ_WITNESS_NAME=export python tests/navigator_browser.py
+      - run: WEBZ_TEST_SITE=dist python tests/explorers_browser.py
       - run: npm run replay -- evidence/browser/voyage.frozen.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
