@@ -1,15 +1,13 @@
 import {OPPORTUNITIES,KINDS,getOpportunity,newOpportunity,readOpportunityLink,
  opportunityLink,composeContribution,invitationText,campfireDoor,mapHandoff,publicSafeText} from './model.mjs';
 
-import {readSessionCrossing} from '../crossings/session.mjs';
+import {carriedBoardTopic} from '../crossings/workboard-adapter.mjs';
 const $=id=>document.getElementById(id);
 const make=(tag,className='',value)=>{const n=document.createElement(tag);if(className)n.className=className;if(value!==undefined)n.textContent=String(value);return n;};
 // A reviewed-public-only continuation may choose the *starting card* on arrival.
  // No question text is imported and the Board's private submission requires
  // its own explicit consent and human moderation.
-let carried=null;
-try{carried=readSessionCrossing(window.sessionStorage);}catch{}
-const carriedTopic=carried&&carried.topic!=='care'?getOpportunity(carried.topic):null;
+const carriedTopic=carriedBoardTopic(window.sessionStorage,getOpportunity);
 const state={topic:readOpportunityLink(location.hash)||carriedTopic||getOpportunity('grocery'),entry:null,term:''};
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 function notify(message){$('status').textContent=message;}
