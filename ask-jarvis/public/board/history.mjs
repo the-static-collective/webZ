@@ -1,6 +1,7 @@
 // WORKBOARD-025 · Shared, durable, HUMAN-REVIEWED conversation history.
 // The public feed and the private submission queue intentionally have different visibility.
-import {readOpportunityLink} from './model.mjs';
+import {readOpportunityLink,getOpportunity} from './model.mjs';
+import {carriedBoardTopic} from '../crossings/workboard-adapter.mjs';
 const API='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/workboard-history';
 const KINDS={question:'Question',concern:'Concern / correction',offer:'Bounded offer',
  proposal:'Possible experiment',return:'Self-reported return'};
@@ -160,5 +161,13 @@ $('history-withdraw').addEventListener('submit',async e=>{
  }catch(err){$('withdraw-status').textContent='Withdrawal was not confirmed: '+String(err?.message||'network error').slice(0,75);}
  finally{button.disabled=false;}
 });
+// An explicit deep link wins; otherwise a public-only browser continuation may
+// initialize the reviewed-feed topic. It cannot submit to the review queue.
+const initial=readOpportunityLink(location.hash)||carriedBoardTopic(getOpportunity);
+if(initial&&isKnown(initial.id)){
+ scope=initial.id;
+ $('history-scope').value=scope;
+ $('history-thread').value=scope;
+}
 // This is an actual shared, reviewed feed; the rest of Workboard remains available offline.
 void loadHistory(false);
