@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#15372f">
+<meta name="description" content="An independent, privacy-conscious set of simple next steps and voluntary ways to build community capacity.">
+<title>The Porch · Abundent</title>
+<style>
+:root{color-scheme:light;font:16px/1.58 system-ui,-apple-system,Segoe UI,sans-serif;--ink:#15372f;--paper:#f7f2e8;--cream:#fffcf4;--sage:#e5eee4;--gold:#f8d899;--rust:#ab5e40;--muted:#4b6259;--edge:#b6c9b7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.07;letter-spacing:-.04em}h1{font-size:clamp(3.7rem,11vw,7.8rem);margin:.15em 0}h2{font-size:clamp(2rem,5vw,3.5rem);margin:.15em 0 .45em}h3{font-size:clamp(1.4rem,3vw,1.75rem);margin:.3em 0 .6em}
+p{margin:.6em 0 1em}a{color:inherit}a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #bc4f25;outline-offset:3px}
+button{font:inherit;cursor:pointer;min-height:42px}button[disabled]{opacity:.55;cursor:not-allowed}select{font:inherit;min-height:44px;padding:.55em;max-width:100%;width:100%;border:2px solid var(--edge);background:#fff}
+.wrap{width:min(1140px,calc(100% - 32px));margin:auto}.top{background:#122e27;color:#f7f2e8;border-bottom:4px solid #d6ba76}
+.nav{display:flex;gap:12px;justify-content:space-between;align-items:center;padding:1rem 0;font-weight:800;font-size:.88rem;flex-wrap:wrap}.nav a{color:#f9dda0}
+.hero{padding:3rem 0 3.5rem;max-width:980px}.eyebrow,.tag{font:800 .75rem/1.4 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase}
+.eyebrow{color:#f8d899}.hero p{font-size:clamp(1.05rem,2.5vw,1.33rem);max-width:795px}
+.button,.btn{display:inline-flex;justify-content:center;align-items:center;text-align:center;gap:.5em;min-height:44px;padding:.7rem 1rem;background:#254f3d;color:#fff!important;border:2px solid #254f3d;border-radius:4px;text-decoration:none;font-weight:850;font-size:.94rem}
+.btn:hover,.button:hover{filter:brightness(1.11)}.btn.gold{background:var(--gold);color:var(--ink)!important;border-color:var(--gold)}.btn.outline{background:transparent;color:var(--ink)!important;border-color:var(--ink)}
+.top .btn.outline{color:#fff!important;border-color:#dcebd9}.actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
+.discretion{margin:1.3rem 0;background:#fff0d6;border-left:6px solid var(--rust);padding:1rem 1.2rem;max-width:1040px}.discretion strong{display:block;margin-bottom:.2rem}
+section{padding:3rem 0}.section-intro{max-width:870px}.shade{background:#e8eee4;border-block:1px solid #c9d7c8}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem;margin:1.1rem 0}
+.tile{background:var(--cream);border:1px solid var(--edge);border-top:5px solid #618877;padding:1.1rem;text-align:left;color:var(--ink);min-width:0;display:flex;flex-direction:column;justify-content:start}
+.tile strong{display:block;font:1.4rem/1.18 Georgia,serif;margin:.4em 0}.tile small{color:var(--muted);font-size:.84rem}.tile[aria-current=true]{border:3px solid var(--rust);border-top:6px solid var(--rust);background:#fff6e4}
+.panel{border:2px solid var(--ink);background:var(--cream);padding:clamp(1rem,3vw,2rem);margin-top:1.2rem}
+.panel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.box{padding:1rem;background:var(--sage);border-left:4px solid #85a08d}.box strong{display:block;margin-bottom:.3rem;color:#754626}
+.truth{border-left:5px solid var(--rust);background:#fff0d8;padding:1rem;margin-top:1rem}
+.panel-actions{display:flex;gap:.55rem;flex-wrap:wrap;margin:1.1rem 0}.status{min-height:1.55rem;color:#355942;font-weight:800}
+.story{font-size:1.13rem;border-left:4px solid #709a7a;padding:0 0 0 1.1rem;max-width:750px}
+.road{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:1.2rem 0}.road div{padding:1rem;background:#fffdf5;border:1px solid var(--edge)}
+.road b{display:block;color:#834c2f;font:800 .7rem ui-monospace,monospace}.road strong{display:block;font-size:1rem;margin:.6rem 0}
+.tiny{font-size:.86rem;color:var(--muted)}.noaccount{font-weight:850;display:inline-block;background:#f4ddae;padding:.25rem .5rem;margin-bottom:1rem}
+details{margin:1.3rem 0;padding:1rem;border:1px solid var(--edge);background:#fffdf5}summary{cursor:pointer;font-weight:850}
+footer{background:#122e27;color:#ecf6ec;padding:2.5rem 0;margin-top:2.5rem}footer a{color:#f8d899}
+#print-sheet{display:none}
+@media(max-width:800px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.road{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.tiles,.panel-grid,.road{grid-template-columns:1fr}section{padding:2.2rem 0}.hero{padding:2rem 0}.tile strong{font-size:1.35rem}}
+@media print{@page{size:letter;margin:.7in}body>*:not(#print-sheet){display:none!important}#print-sheet{display:block!important;white-space:pre-wrap;font:12pt/1.55 Georgia,serif;color:#111;overflow-wrap:anywhere}#print-sheet:before{content:"INDEPENDENT VOLUNTARY INVITATION · NOT AN APPOINTMENT";display:block;font:800 10pt system-ui;margin-bottom:18pt;border-bottom:1pt solid #666;padding-bottom:9pt}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<nav class="nav"><span>✳ ABUNDENT · THE PORCH</span><a href="https://www.weather.gov/" rel="noreferrer" referrerpolicy="no-referrer" id="leave">Leave this page ↗</a></nav>
+<div class="hero">
+<div class="eyebrow">STILL HERE · A BEGINNING, NOT A DEMAND</div>
+<h1>You don't have to<br>explain everything.</h1>
+<p>A small doorway for people who have experienced controlling or abusive relationships, especially fathers feeling isolated while navigating co-parenting or legal questions. Everyone is welcome. You don't need to prove your story to use these tools.</p>
+<p class="tiny" style="color:#e1eddf">Independent early prototype. Not a staffed peer service, private message channel, legal office, or emergency response.</p>
+<div class="actions">
+<a class="btn gold" href="#first-step">Find one next step ↓</a>
+<a class="btn outline" href="#open-seats">Help build what's missing ↓</a>
+</div></div></div></header>
+
+<main>
+<div class="wrap"><aside class="discretion" aria-label="Privacy notice">
+<strong>Before using this page, consider your device and privacy.</strong>
+It does not ask for accounts, names, incident descriptions, or documents. We don't store your story here. A shared or monitored device may reveal browsing history, clipboard contents, downloads or printing; the hosting provider may retain request logs. “Leave this page” navigates away but cannot erase history. Avoid using the page if it creates additional risk.
+</aside></div>
+
+<section id="first-step" class="wrap" aria-labelledby="first-title">
+<span class="tag">DOOR ONE · USEFUL RIGHT NOW</span>
+<h2 id="first-title">What's one manageable next step?</h2>
+<p class="section-intro">You don't have to type your story. Pick the kind of help that would be useful. These are private, informational prompts; selecting one doesn't contact anyone or create a case record.</p>
+<div class="tiles" id="needs" aria-label="Choose a useful next step"></div>
+<div class="panel" id="need-detail" tabindex="-1">
+<span class="tag">A SINGLE NEXT STEP · NO SUBMISSION</span>
+<h3 id="need-title">Select one question above</h3>
+<div class="panel-grid">
+<div class="box"><strong>A possible move today</strong><p id="need-first"></p></div>
+<div class="box"><strong>What this cannot do</strong><p id="need-limit"></p></div></div>
+<p id="need-bottleneck" class="truth"></p>
+<div class="panel-actions">
+<button class="btn" type="button" id="need-seat">What helper capability is missing? ↓</button>
+<button class="btn outline" type="button" id="need-copy">Copy a generic first-step prompt</button>
+</div>
+<p id="need-status" role="status" aria-live="polite" class="status"></p></div>
+<details><summary>Make a private chronology without posting it here</summary>
+<p>Separate what you saw, what someone reported, what you inferred, and what is still unknown. Preserve originals. Do not submit details to this page or public discussions.</p>
+<button class="btn" id="copy-chronology" type="button">Copy a blank chronology template</button>
+<p class="tiny">Copying puts the blank template on your device's clipboard. Paste it only somewhere you judge safe; this page does not accept completed timelines.</p>
+</details></section>
+
+<section class="shade" id="open-seats" aria-labelledby="seats-title">
+<div class="wrap">
+<span class="tag">DOOR TWO · THE WORK CREATES THE ROLES</span>
+<h2 id="seats-title">When something is missing,<br>make a place for someone to help.</h2>
+<p class="section-intro">The greatest current bottleneck isn't a shortage of survivor stories. It's the absence of a trusted, safely operated space. We can recruit people to build the safety rules, listening format, resource checks and private tools <em>before</em> asking anyone vulnerable to participate.</p>
+<p class="noaccount">You can help design these roles without identifying as a survivor.</p>
+<div class="road" aria-label="The evolving support loop">
+<div><b>01 · OBSERVE</b><strong>What isn't possible yet?</strong><span class="tiny">Name the missing capability, not a person to blame.</span></div>
+<div><b>02 · INVITE</b><strong>Make a small open seat</strong><span class="tiny">A bounded first contribution, not an office or employment claim.</span></div>
+<div><b>03 · PERMISSION</b><strong>Ask the responsible person</strong><span class="tiny">No live support or confidential access before proper approval.</span></div>
+<div><b>04 · RETURN</b><strong>Keep useful learning</strong><span class="tiny">Record approved process lessons, never private case narratives.</span></div>
+</div>
+<div class="tiles" id="seats" aria-label="Explore possible volunteer capacities"></div>
+<div class="panel" id="seat-detail" tabindex="-1">
+<span class="tag" id="seat-state">OPEN DESIGN TASK · NO ONE ASSIGNED</span>
+<h3 id="seat-name">Choose a capability above</h3>
+<div class="panel-grid">
+<div class="box"><strong>Why this capacity matters</strong><p id="seat-capability"></p></div>
+<div class="box"><strong>Try this with fictional examples</strong><p id="seat-first"></p></div>
+<div class="box"><strong>A useful return</strong><p id="seat-return"></p></div>
+<div class="box"><strong>Human authorization gate</strong><p id="seat-authority"></p></div>
+</div>
+<p class="truth"><strong>Out of bounds:</strong> <span id="seat-boundary"></span></p>
+<div class="panel-actions">
+<button type="button" class="btn gold" id="seat-worksheet">Copy a fictional starter exercise</button>
+<button type="button" class="btn" id="seat-invite">Copy an invitation</button>
+<button type="button" class="btn outline" id="seat-ambassador">Ask an ambassador</button>
+<button type="button" class="btn outline" id="seat-print">Print an invitation</button>
+</div>
+<p id="seat-status" role="status" aria-live="polite" class="status"></p>
+</div>
+</div></section>
+
+<section class="wrap" aria-labelledby="joining-title">
+<span class="tag">DOOR THREE · PEOPLE ARE NOT APPLICATIONS</span>
+<h2 id="joining-title">Help shape the work, without claiming authority.</h2>
+<p class="story">Someone who can review fictional cases for one afternoon may make the first survivor conversation safer. Someone who checks a source may prevent misleading advice. A person who notices an inaccessible button may make the entire project more usable.</p>
+<p>Potential builders and volunteer coordinators can use the existing independent <a href="https://abundent.org/contact/" rel="noreferrer" referrerpolicy="no-referrer">Abundent contact desk</a> to express interest, with explicit contact consent. <strong>That desk is not a confidential survivor intake channel.</strong> Please do not send identifying stories, case documents, allegations or information about children through it. There are no confirmed survivor-group staff, matched peers or appointments.</p>
+<div class="actions">
+<a href="https://abundent.org/contact/" rel="noreferrer" referrerpolicy="no-referrer" class="btn">Prospective helpers: contact Abundent ↗</a>
+<a href="#first-step" class="btn outline">Return to a private next step ↑</a>
+</div>
+<details><summary>When could a real peer group begin?</summary>
+<p>Not when a page is built or a volunteer clicks “yes.” Before live peer support, the group needs a responsible human operator, confidentiality and data minimization rules, trained/vetted moderators, consent and contact protocols, conflict and abuse-response procedures, boundaries with legal representation, and a tested withdrawal/complaint process. People with lived experience may help shape those rules without disclosing their stories.</p>
+</details>
+<details><summary>What about Still Here, BLACKSTAR and GRAFT?</summary>
+<p>This page is the early doorway, not a case database. Still Here's private chronology approach informs the blank template. BLACKSTAR and GRAFT are candidate tools for a future privately controlled workflow, but this page does not open their databases, upload records or claim a deployed integration. Approved, de-identified process improvements—not individual stories—could eventually inform the shared project knowledge.</p>
+</details>
+</section>
+</main>
+<footer><div class="wrap"><strong>STILL HERE · THE STATIC COLLECTIVE / ABUNDENT</strong>
+<p>Someone's safety is not a recruitment metric. Silence is not consent. A proposed role isn't an appointment. A lived experience is not public content.</p>
+<p class="tiny" style="color:#e0efe1">No accounts, no story submission, no automatic contact, no web analytics added by this page. Hosting systems may log the request.</p>
+<a href="https://abundent.org/" rel="noreferrer">Abundent home</a></div></footer>
+<div id="print-sheet" aria-label="Printable independent invitation"></div>
+<script type="module" src="./app.mjs"></script>
+</body></html>
