@@ -1,0 +1,35 @@
+name: FIRST-YES-030 Mobile Public Door
+on:
+  push:
+    branches:
+      - feature/abundent-public-first-yes-030
+  pull_request:
+    branches:
+      - feature/jarvis-community-brain-029
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  local-client-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout proposed public doorway
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all Ask JAR;VIS privacy and source contracts
+        run: |
+          cd ask-jarvis
+          npm test
+      - name: Install Chromium browser harness
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Exercise actual phone-sized browser, no real network submissions
+        run: |
+          python -m http.server 8123 --bind 127.0.0.1 --directory ask-jarvis/public > /tmp/first-yes-server.log 2>&1 &
+          sleep 2
+          python ask-jarvis/tests/first_yes_browser.py
