@@ -71,6 +71,12 @@ Your private invitation link will go here.</div>
 <div class="split"><div><div class="panel"><h3>Bring one useful thing</h3><label class="label" for="availability">When could you connect, if at all?</label><select id="availability"><option value="async">Asynchronously anytime this week</option><option value="morning">Mornings</option><option value="afternoon">Afternoons</option><option value="evening">Evenings</option><option value="weekend">Weekend</option><option value="unavailable">No live time works; written contribution only</option></select>
 <label class="label" for="response">Your question, possibility, resource, or proposed small action</label><textarea id="response" maxlength="500" placeholder="One thing we could usefully test is..."></textarea>
 <p class="small">12–500 characters. No names, emails, phone numbers, links, private hardship details or commitments on behalf of someone else.</p>
+<div class="panel" style="margin:14px 0;background:#f6f1dc">
+ <div class="tag">BananaGram · question with handles</div>
+ <p>Want to make sense of your question before contributing? Open a private Pocket Gram, preserve a trace or a tension, and deliberately carry back only one reviewed sentence.</p>
+ <button class="btn" type="button" id="openPocket">Shape a BananaGram privately</button>
+ <p class="small" id="pocketStatus" role="status">Your seat stays open here. No response is submitted until you press <strong>Save my contribution</strong>.</p>
+</div>
 <label class="check"><input type="checkbox" id="shared"><span>Share this exact response anonymously with other invited participants. Without this choice it stays visible only to the host.</span></label>
 <div class="buttons"><button class="btn gold" id="submitSeat">Save my contribution</button><button class="btn" id="declineSeat">Decline this invitation</button></div><p class="status" id="seatStatus" role="status"></p></div></div>
 <aside><div class="panel"><h3>Two doors, one alternative</h3><p>Invite up to <strong>two other people</strong> whose perspective could add something useful. Only direct original invitations can open these two extra places.</p>
@@ -90,6 +96,47 @@ const makeText=(link)=>$('sample').textContent.replace('Your private invitation 
 const caseURL=link=>{const u=new URL(link);u.searchParams.set('case','milk');return u.toString();};
 $('playCase').href=caseURL(location.href);
 let room=null,all=[],self=null,last=null,cardText='';
+let pocketWindow=null,pocketNonce=null;
+const POCKET_MESSAGE='bananagram.reviewed-seat-draft/v0';
+function pocketNonce32(){
+ const random=crypto.getRandomValues(new Uint8Array(16));
+ return Array.from(random,x=>x.toString(16).padStart(2,'0')).join('');
+}
+function isSafePocketDraft(value){
+ return typeof value==='string'&&value.length>=12&&value.length<=240
+   &&!/https?:\/\/|www\.|[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?1[ .-]?)?\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}/i.test(value)
+   && !/[\u0000-\u001f\u007f]/.test(value);
+}
+$('openPocket').onclick=()=>{
+ if(!authed||asHost||!self||room?.closed||self.status==='declined'||self.status==='delegated'){
+  $('pocketStatus').textContent='An active private seat is required to bring a draft back.';return;
+ }
+ if(!location.pathname.startsWith('/functions/v1/seven-day-table')){
+  $('pocketStatus').textContent='The private Pocket handoff requires the Garden direct table page. Open your original invite link.';return;
+ }
+ pocketNonce=pocketNonce32();
+ const url=new URL('/functions/v1/banana-pocket',location.origin);
+ url.hash='returnToTable='+pocketNonce;
+ pocketWindow=window.open(url.toString(),'_blank');
+ if(!pocketWindow){pocketNonce=null;$('pocketStatus').textContent='Popup blocked. Allow a new tab or use garden.abundent.org/gram independently.';return;}
+ $('pocketStatus').textContent='Pocket opened in another tab. Return a deliberately reviewed question to preview it here; nothing is sent or saved automatically.';
+};
+window.addEventListener('message',event=>{
+ if(!pocketNonce||!pocketWindow||event.origin!==location.origin||event.source!==pocketWindow)return;
+ const value=event.data;
+ if(!value||value.type!==POCKET_MESSAGE||value.nonce!==pocketNonce)return;
+ if(!authed||asHost||!self||room?.closed||self.status==='declined'||self.status==='delegated')return;
+ const summary=value.summary;
+ if(value.standing!=='PROPOSE_ONLY'||!isSafePocketDraft(summary)){
+  $('pocketStatus').textContent='Pocket handoff refused. It must be a reviewed, contact-free proposal under 240 characters.';return;
+ }
+ const existing=$('response').value.trim();
+ if(existing&&existing!==summary&&!confirm('Replace your existing unsent contribution draft with this BananaGram sentence? Nothing will be saved yet.'))return;
+ $('response').value=summary;
+ $('shared').checked=false; // A Pocket handoff never opts in to invited-circle redistribution.
+ $('pocketStatus').textContent='Reviewed question copied into your editable response draft. Sharing is off. Nothing has been saved. Review and press Save my contribution only if you choose.';
+ pocketWindow=null;pocketNonce=null;$('response').focus();
+});
 async function api(action,data={}){const response=await fetch(location.pathname,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...base(),action,...data})});let v;try{v=await response.json();}catch{throw Error('Unexpected server response');}if(!response.ok)throw Error(v.error||'Unable to complete');return v;}
 async function copy(t,target){try{await navigator.clipboard.writeText(t);$(target).textContent='Copied to clipboard.';}catch{$(target).textContent='Clipboard unavailable. Select and copy the text manually.';}}
 $('copySample').onclick=()=>copy($('sample').textContent,'accessHint');
