@@ -12,13 +12,14 @@ const ORIGINS=new Set([
  'https://ask-jarvis-workboard-0-git-00aa71-theotherlucasv-1250s-projects.vercel.app'
 ]);
 const THREADS=new Set(['grocery','milk','care','artists','park','church']);
+const isAllowedOrigin=o=>ORIGINS.has(o)||/^https:\/\/ask-jarvis-workboard-024-review-[a-z0-9]+\.vercel\.app$/.test(o);
 const KINDS=new Set(['question','concern','offer','proposal','return']);
 const UUID=/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 const WITHDRAW=/^[A-Za-z0-9_-]{43}$/;
 const PII=/[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?1[ .-]?)?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}|(?:https?:\/\/|www\.)|\b\d{1,5}\s+(?:[a-z]+\s+){0,4}(?:street|avenue|road|drive|lane|st|ave|rd|dr|ln)\b|\b(?:password|api[_ -]?key|access[_ -]?token|social security|ssn|private key)\b/i;
 class Err extends Error{constructor(message,status=400){super(message);this.status=status;}}
 function cors(origin){
- const allowed=ORIGINS.has(origin);
+ const allowed=isAllowedOrigin(origin);
  return {'access-control-allow-origin':allowed?origin:'null','vary':'Origin',
   'access-control-allow-methods':'GET,POST,OPTIONS','access-control-allow-headers':'content-type'};
 }
@@ -58,16 +59,16 @@ async function bounded(req){
 }
 async function publicFeed(url){
  const key=url.searchParams.get('thread');
- if(!THREADS.has(key))throw new Err('INVALID_THREAD');
+ if(key!=='all'&&!THREADS.has(key))throw new Err('INVALID_THREAD');
  const limit=25;const before=url.searchParams.get('before')||'';
  if(before&&(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$/.test(before)||!Number.isFinite(Date.parse(before))))
   throw new Err('INVALID_CURSOR');
  let q=db.from('workboard_entries')
   .select('id,thread_key,parent_id,kind,public_body,status,created_at,published_at,withdrawn_at')
-  .eq('thread_key',key)
   .or('status.eq.PUBLIC_REVIEWED,and(status.eq.WITHDRAWN,published_at.not.is.null)')
   .order('created_at',{ascending:false})
   .limit(limit+1);
+ if(key!=='all')q=q.eq('thread_key',key);
  if(before)q=q.lt('created_at',before);
  const {data,error}=await q;
  if(error)throw new Err('HISTORY_UNAVAILABLE',503);
@@ -82,7 +83,7 @@ async function publicFeed(url){
    note:e.status==='WITHDRAWN'?'A previously published contribution was withdrawn.':
     'Reviewed for publication, not independently verified as factual.'
   })),
-  nextBefore:(data||[]).length>limit?page.at(-1).created_at:null};
+  nextBefore:(data||[]).length>limit?new Date(page.at(-1).created_at).toISOString():null};
 }
 async function admission(req){
  // Network headers are not an identity system: per-client controls are best effort.
