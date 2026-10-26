@@ -4,13 +4,16 @@
 
 ## Architecture, actually deployed
 
-- Standalone Vercel static page: `https://reality2-waseca-001.vercel.app/`
+- Public domain: `https://reality.abundent.org/` (Cloudflare DNS-only CNAME → Vercel), with stable Vercel fallback `https://reality2-waseca-001.vercel.app/`
 - Source of the static assets: `webZ/waseca/{index.html,style.css,app.mjs,live.mjs}`.
 - Supabase project: `pantry-gate` (shared Abundent backend), project ref `kbhqacsdvjsstzyplqij`.
 - Edge endpoint: `https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/reality2-waseca` (verify_jwt=false; request validation, Origin control on POST, body size caps, quotas; never trust client-provided identity).
 - DB migration: `reality2_waseca_persistent_field_001`.
 - Tables `public.reality2_entries` and `public.reality2_quotas` have RLS enabled. Anon and authenticated have no table rights. Supabase service role is confined to server-side Edge Function; **never send service key to browsers**.
 - No server-side secrets in any GitHub file or public webpage.
+- Edge write CORS explicitly allows `https://reality.abundent.org` and stable fallback; publication policy is unchanged.
+- Two project-owned, explicitly proposed starter tasks were manually published: test phone cards, and design safe review stewardship. They assert no recruited humans or verified outcomes.
+- One synthetic end-to-end write/status/withdraw smoke test passed and was withdrawn; withdrawn test tombstone remains in the record count, not in the public feed.
 - The public UI fetches counts and *human-reviewed* entries only. A visitor's own pending status/withdrawal is available via UUID + secret key; this is a bearer capability and must remain private.
 
 ## Live public contract for JAR;VIS, GRAFT, lemonPRESS
