@@ -76,3 +76,19 @@ test('the workboard is navigable, accessible and has no hidden network submissio
  assert.match(homepage,/href="\/board\/"/);
  assert.match(campfire,/href="\/board\/"/);
 });
+
+test('shared review panel has deliberate submission and withdrawal controls',()=>{
+ const html=readFileSync(new URL('../public/board/index.html',import.meta.url),'utf8');
+ const client=readFileSync(new URL('../public/board/history.mjs',import.meta.url),'utf8');
+ const server=readFileSync(new URL('../database/supabase/functions/workboard-history/index.ts',import.meta.url),'utf8');
+ for(const id of ['shared-history','history-entries','history-post','history-consent','history-receipt','history-withdraw'])
+  assert.ok(html.includes('id="'+id+'"'));
+ assert.ok(html.includes('src="/board/history.mjs"'));
+ assert.ok(client.includes("action:'submit'"));
+ assert.ok(client.includes("action:'withdraw'"));
+ assert.ok(client.includes('receipt.withdrawKey'));
+ assert.ok(server.includes("status:'PENDING'"));
+ assert.ok(server.includes('PUBLIC_REVIEWED'));
+ assert.ok(server.includes('workboard_reserve'));
+ assert.ok(!client.includes('localStorage'));
+});
