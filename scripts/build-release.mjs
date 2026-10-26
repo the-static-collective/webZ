@@ -4,6 +4,8 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {STATIC_PATHS} from './render-field.mjs';
 import {fieldArtifacts} from './build-field.mjs';
+import {buildComputerBooks} from './build-computer-books.mjs';
+import {buildSiteNetwork} from './build-site-network.mjs';
 const root=new URL('../',import.meta.url),output=new URL('dist/',root);
 const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
 const sha=bytes=>'sha256:'+createHash('sha256').update(bytes).digest('hex');
@@ -37,8 +39,10 @@ for(const path of paths){
 }
 await rm(output,{recursive:true,force:true});await mkdir(output,{recursive:true});
 for(const file of files){const url=new URL(file.path,output);await mkdir(new URL('./',url),{recursive:true});await writeFile(url,await readFile(new URL(file.path,root)));}
+const computerBooks=await buildComputerBooks({output,files,commit});
+const siteNetwork=await buildSiteNetwork({output,files,commit});
 const receipt=JSON.parse(await readFile(new URL('field/public-field-receipt.json',root)));
 const provenance=JSON.parse(await readFile(new URL('field/navigation-provenance.json',root)));
-const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,navigation:provenance,boundary:'Public first-party static code and committed inspection catalog only. No remote effects, visitor inputs, real receiving-world replies or owner admission.',files};
+const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,computerBooks,siteNetwork,navigation:provenance,boundary:'Public first-party static code, committed inspection catalog and source-linked computer-reading projections only. Machine cards do not grant reuse or owner authority. No remote effects, visitor inputs, real receiving-world replies or owner admission.',files};
 await writeFile(new URL('release.json',output),JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify({commit,tree,files:files.length,releaseHash:sha(JSON.stringify(manifest,null,2)+'\n')},null,2));
