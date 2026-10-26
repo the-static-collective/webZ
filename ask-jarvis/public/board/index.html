@@ -78,6 +78,22 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 .memory-actions{display:flex;gap:.5rem;flex-wrap:wrap}.memory-actions .btn{font-size:.79rem;min-height:38px;padding:.5rem .7rem}
 .memory-note{font-size:.88rem;border-top:1px dashed var(--edge);padding-top:1rem}
 @media(max-width:740px){.memory-cards{grid-template-columns:1fr}}
+
+.seats-area{margin:2rem 0;background:#e6efdc;border:2px solid #426c51;box-shadow:8px 8px 0 #c5d3bb;padding:clamp(1.15rem,3vw,2.5rem)}
+.seats-area>h2 em{font-style:normal;color:#a45b3b}.seats-lead{font-size:1.12rem;max-width:790px}
+.seat-spotlight{margin:1.6rem 0;background:#1e4736;color:#fff;padding:1.4rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.seat-spotlight .tag{color:#ffdf9e}.seat-spotlight .quiet{color:#d8eadc}.seat-spotlight>div{flex:1 1 330px}
+.seat-spotlight h3{font-size:1.75rem}.seat-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.seat-card{background:#fffdf3;border:1px solid #90ad96;padding:.9rem;display:grid;gap:.3rem;text-align:left;min-height:112px;color:#173329}
+.seat-card strong{font-size:1.1rem}.seat-card-desc{font-size:.84rem}.seat-card[aria-current=true]{border:3px solid #955137;background:#fff1d7}
+.seat-card:hover{background:#fff7e5}.seat-detail{margin-top:1.3rem;border:2px solid #193b2d;background:#fffef8;padding:1.3rem}
+.seat-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.seat-fields>div{padding:.9rem;background:#e9f2e6}
+.seat-fields strong{color:#9a4b2a}.seat-fields p{margin:.4rem 0 0}
+.seat-buttons{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.15rem 0}.seat-buttons .btn{font-size:.89rem}
+.seat-status{font-weight:750;color:#4f5b36;min-height:1.5rem}.seat-diagnose{margin-top:1.4rem;padding:1rem;border:1px dashed #86a188;background:#fffdf3}
+.seat-diagnose summary{cursor:pointer;font-weight:850}.seat-diagnose label{margin:1rem 0 .35rem}
+@media(max-width:750px){.seat-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.seat-fields{grid-template-columns:1fr}}
+@media(max-width:480px){.seat-cards{grid-template-columns:1fr}}
 </style></head>
 <body>
 <header><div class="wrap">
@@ -140,6 +156,46 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 <p class="quiet">Private follow-up copies your words and opens a separate opt-in contact desk; paste and edit them yourself. No silent submission. Downloads are self-reports, not verified outcomes.</p>
 </section><p id="status" role="status" aria-live="polite"></p>
 </article></div>
+<section id="open-seats" class="seats-area" aria-labelledby="seats-title">
+<div class="tag">OPEN-SEATS-027 · WHEN WORK STOPS, OPEN A DOOR</div>
+<h2 id="seats-title">What's missing? <em>Who could help us try?</em></h2>
+<p class="seats-lead">Every bottleneck is a question about a capability the work needs. Instead of waiting for a title, open a small, voluntary invitation. Some roles need authorized people; an offer of interest never grants that authority.</p>
+<div class="seat-spotlight"><div><div class="tag">OUR FIRST KNOWN BOTTLENECK · THE WORKBOARD ITSELF</div>
+<h3>We need a human review steward.</h3>
+<p>The shared conversation history has a private moderation queue, but no self-service moderator console or confirmed reviewer. A safe first contribution is to help design a fair review rubric using fictional examples.</p>
+<p class="quiet">No one is appointed. The Abundent operator must separately authorize any access to real submissions.</p></div>
+<button type="button" class="btn gold" onclick="document.getElementById('seat-detail').scrollIntoView({behavior:'smooth'})">Explore the first open seat ↓</button></div>
+<h3>Other places help could open a door</h3>
+<div id="seat-cards" class="seat-cards" aria-label="Possible capability roles"></div>
+<div class="seat-detail" id="seat-detail">
+<div class="tag" id="seat-source"></div><h3 id="seat-name"></h3>
+<div class="seat-fields">
+<div><strong>What we need</strong><p id="seat-why"></p></div>
+<div><strong>A safe first trial</strong><p id="seat-first"></p></div>
+<div><strong>What a useful return would look like</strong><p id="seat-proof"></p></div>
+<div><strong>Whose authority is still needed</strong><p id="seat-approval"></p></div></div>
+<div class="gate"><strong>Don't cross this boundary:</strong> <span id="seat-limit"></span></div>
+<div class="seat-buttons">
+<button type="button" id="seat-help" class="btn gold">I might be able to help ↗</button>
+<button type="button" id="seat-copy" class="btn">Invite someone</button>
+<button type="button" id="seat-ambassador" class="btn alt">Ask an ambassador</button>
+<button type="button" id="seat-print" class="btn alt">Print this invitation</button></div>
+<p class="quiet">The interest button opens the existing independent Abundent contact desk in a new tab. Nothing is submitted here, and no organization or individual is claimed as a partner.</p>
+<p id="seat-status" role="status" aria-live="polite" class="seat-status"></p>
+</div>
+<details class="seat-diagnose"><summary>Blocked somewhere else? Identify the missing capability.</summary>
+<form id="seat-diagnose">
+<label for="seat-issue">What particular step is stuck?</label>
+<textarea id="seat-issue" minlength="12" maxlength="220" placeholder="Our next discussion needs someone to clarify who can approve it."></textarea>
+<p class="quiet">Keep identifying details out. This analysis stays on your device.</p>
+<button class="btn" type="submit">Find the next open seat →</button>
+<label for="seat-choice">Or choose the missing capability directly</label>
+<select id="seat-choice">
+<option value="review">Human review and moderation</option><option value="permission">Approval or permission</option>
+<option value="verify">Verify an uncertain claim</option><option value="build">A prototype or tool</option>
+<option value="invite">People aren't connected yet</option><option value="return">An actual outcome hasn't been reported</option></select>
+</form></details>
+</section>
 <section class="memory-area" id="actionable-memory" aria-labelledby="memory-title">
 <div class="tag">MEMORY-026 · THE COMMUNITY'S RETURN PATH</div>
 <h2 id="memory-title">What could we do next?</h2>
@@ -199,4 +255,5 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 <script type="module" src="/board/app.mjs"></script>
 <script type="module" src="/board/history.mjs"></script>
 <script type="module" src="/board/memory-ui.mjs"></script>
+<script type="module" src="/board/open-seats-ui.mjs"></script>
 </body></html>
