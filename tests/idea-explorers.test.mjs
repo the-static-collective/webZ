@@ -14,9 +14,9 @@ test('the human idea surfaces have source-readable pages and local-only interfac
   assert.match(s,/<title>/);assert.match(s,/<meta name="description"/);
   assert.match(s,/<main\b/);assert.match(s,/\/explore\/style.css/);
  }
+ // New explorers remain separate from the pinned offline shell until its cache is regenerated.
  const home=await readFile(new URL('../index.html',import.meta.url),'utf8');
- assert.match(home,/href="\/becoming\/"/);
- assert.match(home,/href="\/explore\/"/);
+ assert.match(home,/Garden Workbench/);
  const js=await readFile(new URL('../explore/app.mjs',import.meta.url),'utf8');
  assert.match(js,/navigator.clipboard.writeText/);
  assert.match(js,/credentials:'omit'/);
