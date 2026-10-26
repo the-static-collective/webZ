@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#15271e">
+<title>The Unformed Organizations · The Static Collective / Abundent</title>
+<meta name="description" content="Six open chairs for organizations that do not exist yet. Explore an idea and prepare a consent-first local invitation without creating an institution or collecting personal data.">
+<link rel="stylesheet" href="/explore/style.css"><link rel="stylesheet" href="/becoming/doors/style.css"><script type="module" src="/becoming/doors/app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to open chairs</a>
+<header class="mast"><a class="wordmark" href="/">abundent<span>.</span></a><nav aria-label="Nearby doors"><a href="/becoming/">What is the Collective?</a><a href="/explore/">Idea crossroads</a><a href="/for-computers/organizations/">Computer book</a></nav></header>
+<main id="main" class="nursery">
+<div class="kicker">WEBZ-036 · THE ORGANIZATION NURSERY · OCTOBER 26, 2026</div>
+<section class="nursery-lede"><div><h1>Doors into organizations <em>that don't exist yet.</em></h1>
+<p class="lede">The chair can exist before anyone takes it. The door can open before an institution is formed.</p>
+<p>These are six deliberately <strong>unformed</strong> organizational ideas. Browse what each might do, choose an empty chair, and prepare a small, reversible first invitation. No registration, no assigning other people, no magic declarations of existence.</p>
+</div><div class="chair-art" aria-hidden="true"><span>○</span><b>?</b><small>OPEN<br>CHAIR</small></div></section>
+<div class="status-rule"><strong>Every door is a proposal.</strong> Not a nonprofit, business, cooperative, formal partnership, membership program or claim of real-world work. <a href="/becoming/">Read the working identity ↗</a></div>
+<nav aria-label="Ways through the nursery" class="nursery-jumps"><a href="#shelf">01 · Explore the chairs</a><a href="#desk">02 · Prepare an invitation</a><a href="/for-computers/organizations/">03 · Books for computers</a></nav>
+<section id="shelf" aria-labelledby="shelf-title"><div class="section-top"><div class="kicker">PLACES WAITING TO BEGIN</div><h2 id="shelf-title">Six chairs. Nobody assigned.</h2><p>Each card carries a possibility, one startable task, a kind of steward who <em>might</em> opt in, and a boundary that cannot be skipped.</p></div>
+<div class="seed-filters"><label for="search">Look for a direction</label><input type="search" id="search" placeholder="Try food, care, repair, art, books…" autocomplete="off"></div>
+<div id="seed-count" role="status" class="seed-count">Loading source-pinned seed catalog…</div><div id="seed-grid" class="seed-grid"></div>
+<p id="load-error" role="alert" hidden></p>
+<div class="unwritten"><div><span class="kicker">07 / THE CHAIR THAT DOESN'T HAVE A NAME</span><h3>Something else is trying to begin.</h3><p>You don't need to squeeze a new possibility into one of these six shapes.</p></div><button type="button" id="open-blank" class="action primary">Start with an empty chair ↗</button></div>
+</section>
+<section id="desk" aria-labelledby="desk-title" class="formation-section"><div class="section-top"><div class="kicker">A LOCAL PAPER WORKBENCH</div><h2 id="desk-title">Make an invitation, not an institution.</h2><p>A candidate organization should be allowed to remain a candidate. The only thing this desk can create is a private, downloadable proposal for a willing person to consider.</p></div>
+<div class="formation-layout"><section class="seed-description" aria-label="Selected door">
+<div class="selected-cap"><span class="kicker">CURRENT EMPTY CHAIR</span><span class="tag" id="seed-state">NOT SELECTED</span></div><h3 id="chosen-title">Choose a seed or open the unnamed chair.</h3>
+<p id="chosen-mission">The garden is allowed to have unoccupied chairs.</p>
+<dl><dt>What might a first experiment look like?</dt><dd id="chosen-act">A small task that someone can freely choose.</dd>
+<dt>Who might steward it?</dt><dd id="chosen-steward">A willing person, not someone we volunteered for them.</dd>
+<dt>What would count as a return?</dt><dd id="chosen-evidence">Evidence of a task or an honest unfinished/declined outcome.</dd>
+<dt>What remains outside this invitation?</dt><dd id="chosen-guard">No promises, secret partnerships, or assumed consent.</dd></dl>
+<div><div class="kicker">RELATED SOURCES · INSPIRATION ONLY</div><ul id="sources" class="source-doors"></ul></div></section>
+<form class="seed-editor" id="seed-editor" autocomplete="off"><div class="kicker">THE SEED SHEET · UNSENT DRAFT</div>
+<label for="charter-name">Working name</label><input id="charter-name" maxlength="90" placeholder="A name to explore, not a registered entity" required>
+<label for="charter-why">What good might this organization do?</label><textarea id="charter-why" rows="3" maxlength="550" placeholder="A specific, revisable purpose."></textarea>
+<label for="charter-act">Smallest first useful act</label><textarea id="charter-act" rows="3" maxlength="450" placeholder="A task that can be tried with permission."></textarea>
+<label for="charter-question">Question that could change the idea</label><textarea id="charter-question" rows="2" maxlength="350" placeholder="What would make us reconsider?"></textarea>
+<label for="charter-proof">How would a return be witnessed?</label><textarea id="charter-proof" rows="2" maxlength="450" placeholder="Documented completed act, refusal, or unknown — not a promise."></textarea>
+<div class="consent-box"><label><input type="checkbox" id="understand"><span>This is a <strong>proposal only</strong>. I am not enrolling, naming, or committing anyone else; I will not enter identifying, confidential, or survivor information into a shared draft.</span></label></div>
+<div class="action-row"><button class="action primary" id="prepare" type="submit">Prepare a seed sheet</button><button type="button" id="reset" class="action">Reset this chair</button></div>
+<p id="form-note" class="tiny" role="status">Nothing is transmitted. No visitor draft is saved by Abundent.</p>
+</form></div>
+<article id="draft" class="seed-output" hidden aria-label="Generated seed sheet"><div><span class="kicker">LOCAL DRAFT · NO PUBLIC SUBMISSION</span><h3>One place for a future to begin.</h3><p>Inspect the proposed work before sharing it yourself. This is neither consent nor proof of an organization.</p></div><pre id="draft-text" tabindex="0"></pre>
+<div class="action-row"><button type="button" id="copy-draft" class="action">Copy invitation</button><button type="button" id="save-md" class="action primary">Save Markdown</button><button type="button" id="save-json" class="action">Save machine card (JSON)</button></div>
+</article>
+</section>
+<section class="nursery-ending"><div class="kicker">THE HOUSE DOES NOT NEED TO OWN WHAT GROWS HERE</div><blockquote>We do not have to know what something will become to make room for it to begin.</blockquote><p>If one of these ideas eventually becomes a real project or organization, that should happen through independently chosen stewardship, observed useful work, and whatever actual governance or registration its context requires.</p>
+<div class="machine-doors"><a href="/for-computers/organizations/">Read machine-native seed fragments ↗</a><a href="/becoming/">Return to the identity statement ↗</a><a href="/explore/">Take an idea through the crossroads ↗</a></div></section>
+<footer class="footerline"><span>THE STATIC COLLECTIVE / WEBZ · UNFORMED ORGANIZATION SEEDS · READ-ONLY PUBLIC CATALOG</span><a href="/">Abundent ↑</a></footer>
+</main></body></html>
