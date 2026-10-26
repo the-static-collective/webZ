@@ -56,6 +56,13 @@ function card(s){
  article.append(el('p','Permission before consequence: '+s.next.gate,'memory-gate'));
  const actions=el('div','','memory-actions');
  const row=[
+  ['Draft a response',()=>{
+    window.dispatchEvent(new CustomEvent('workboard-compose-candidate',{detail:{
+     thread:s.thread,kind:'proposal',text:s.next.text
+    }}));
+    $('shared-history')?.scrollIntoView({behavior:'smooth'});
+    notify('Prepared a local response draft only. Review and edit it yourself; nothing is submitted until you give consent and press Submit.');
+   }],
   ['Read thread',()=>{window.dispatchEvent(new CustomEvent('board-topic-selected',{detail:{thread:s.thread}}));
     $('shared-history')?.scrollIntoView({behavior:'smooth'});}],
   ['Copy invitation',()=>void copy(s)],
