@@ -182,6 +182,7 @@ export async function buildComputerBooks({output,files,commit}) {
   await emit('for-computers/README.md',
     '# Books for Computers · Abundent\n\n'
     +'A retrieval-native, provisional lemonPRESS edition of public webZ surfaces.\n\n'
+    +'A dated five-host field register is at [sites/index.json]('+ORIGIN+'/for-computers/sites/index.json). Those independently deployed sites are only recorded at selected observed URLs, not magically included in this webZ bundle.\n\n'
     +'The computer book is at [manifest.json]('+ORIGIN+'/for-computers/manifest.json). '
     +'The catalog is at [index.json]('+ORIGIN+'/for-computers/index.json). '
     +'Human pages remain the source; machine cards are separate descendants.\n\n'
@@ -196,7 +197,7 @@ export async function buildComputerBooks({output,files,commit}) {
     +'<meta name="description" content="Public machine-reading catalog and provisional lemonPRESS pamphlets.">'
     +'</head><body><main><h1>Books for Computers</h1>'
     +'<p>Human pages are the originals. These are cards and experimental machine editions, not a grant of authority.</p>'
-    +'<p><a href="./manifest.json">Computer book manifest (JSON)</a> · <a href="./index.json">Machine catalog (JSON)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
+    +'<p><a href="./manifest.json">Computer book manifest (JSON)</a> · <a href="./index.json">Machine catalog (JSON)</a> · <a href="./sites/index.json">Five live sites (dated observation)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
     +'<ul>'+machineBooks.map(b=>'<li><a href="./books/'+b.id+'.md">'+esc(b.title)+'</a></li>').join('')+'</ul>'
     +'<p><a href="/">Return to Abundent</a></p></main></body></html>\n';
   await emit('for-computers/index.html',landing);
@@ -204,7 +205,7 @@ export async function buildComputerBooks({output,files,commit}) {
     '# Abundent.org — Books for Computers\n\n'
     +'> Public retrieval guide. Not a training license, authorization token, or evidence of completed real-world action.\n\n'
     +'- [Computer-book manifest]('+ORIGIN+'/for-computers/manifest.json): any-entry fragments and relation graph\n'
-    +'- [Machine catalog]('+ORIGIN+'/for-computers/index.json): page cards and machine-native pamphlets\n'
+    +'- [Machine catalog]('+ORIGIN+'/for-computers/index.json): page cards and machine-native pamphlets\n'    +'- [Observed Abundent site network]('+ORIGIN+'/for-computers/sites/index.json): five distinct hosts, evidence-limited dated fragments\n'
     +'- [Machine reading guide]('+ORIGIN+'/for-computers/README.md): provenance and interpretation limits\n'
     +'- [LemonPRESS source](https://github.com/the-static-collective/lemonPRESS): publishing house and edition boundaries\n\n'
     +'## Site pages\n\n'
