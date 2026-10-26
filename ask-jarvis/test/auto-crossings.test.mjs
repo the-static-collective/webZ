@@ -71,8 +71,10 @@ test('one-tap UI, import fallback, and independent-room adapters are present',()
  assert.match(crossings,/type="file"/);
  assert.doesNotMatch(receipt,/fetch\(|navigator\.sendBeacon\(|document\.cookie|\.submit\(/);
  const board=readFileSync(new URL('board/app.mjs',base),'utf8');
- assert.match(board,/readSessionCrossing\(window\.sessionStorage\)/);
- assert.match(board,/carried\.topic!=='care'/);
+ assert.match(board,/carriedBoardTopic\(window\.sessionStorage,getOpportunity\)/);
+ const adapter=readFileSync(new URL('crossings/workboard-adapter.mjs',base),'utf8');
+ assert.match(adapter,/ticket\.topic==='care'/);
+ assert.doesNotMatch(adapter,/fetch\(|\.submit\(/);
  for(const area of ['board','campfire','tables','weave']){
   const source=readFileSync(new URL(area+'/index.html',base),'utf8');
   assert.match(source,/crossings\/receiving\.mjs/);
