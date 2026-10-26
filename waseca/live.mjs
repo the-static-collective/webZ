@@ -123,3 +123,5 @@ $("check-receipt").addEventListener("click",()=>checkReceipt(lastReceipt,"share-
 $("withdraw-receipt").addEventListener("click",()=>withdraw(lastReceipt,"share-state"));
 wireClip();
 refresh();
+// Small field experiment: refresh when visible, no push socket or visitor tracking.
+setInterval(()=>{if(!document.hidden)refresh();},60000);
