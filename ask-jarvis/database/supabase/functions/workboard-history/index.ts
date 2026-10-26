@@ -66,10 +66,10 @@ async function publicFeed(url){
  let q=db.from('workboard_entries')
   .select('id,thread_key,parent_id,kind,public_body,status,created_at,published_at,withdrawn_at')
   .or('status.eq.PUBLIC_REVIEWED,and(status.eq.WITHDRAWN,published_at.not.is.null)')
-  .order('created_at',{ascending:false})
+  .order('published_at',{ascending:false})
   .limit(limit+1);
  if(key!=='all')q=q.eq('thread_key',key);
- if(before)q=q.lt('created_at',before);
+ if(before)q=q.lt('published_at',before);
  const {data,error}=await q;
  if(error)throw new Err('HISTORY_UNAVAILABLE',503);
  const page=(data||[]).slice(0,limit);
@@ -83,7 +83,7 @@ async function publicFeed(url){
    note:e.status==='WITHDRAWN'?'A previously published contribution was withdrawn.':
     'Reviewed for publication, not independently verified as factual.'
   })),
-  nextBefore:(data||[]).length>limit?new Date(page.at(-1).created_at).toISOString():null};
+  nextBefore:(data||[]).length>limit?new Date(page.at(-1).published_at).toISOString():null};
 }
 async function admission(req){
  // Network headers are not an identity system: per-client controls are best effort.
