@@ -47,7 +47,7 @@ test('lemonPRESS machine edition indexes all released public HTML, not visitor t
       assert.equal(manifest.retrieval_contract[law],false);
     const fragmentDir=join(root,'for-computers','fragments');
     const edges=(await readFile(join(root,'for-computers','relations.jsonl'),'utf8'))
-      .trim().split('\\n').map(line=>JSON.parse(line));
+      .trim().split('\n').map(line=>JSON.parse(line));
     const observed=[];
     for(const entry of manifest.fragments) {
       const fragment=JSON.parse(await readFile(join(fragmentDir,entry.fragment_id+'.json'),'utf8'));
