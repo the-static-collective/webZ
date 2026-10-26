@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/post-office/useful-letter",
+      "schedule": "0 15 * * *"
+    }
+  ]
+}
