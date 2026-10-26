@@ -83,7 +83,8 @@ test('public UI has an explicit, local-only file relay and preserves original Fi
  assert.match(portal,/type="file"/);
  assert.match(portal,/processed in this browser/);
  assert.match(app,/file\.text\(\)/);
- assert.match(app,/readCrossing\(raw\)/);
+ assert.match(app,/readCrossing\(await file\.text\(\)\)/);
  assert.match(app,/makeReturn\(ticket/);
- assert.doesNotMatch(app,/fetch\(|localStorage|sessionStorage|sendBeacon|XMLHttpRequest/);
+ assert.doesNotMatch(app,/fetch\(|localStorage|sendBeacon|XMLHttpRequest/);
+ assert.match(app,/readSessionCrossing\(window\.sessionStorage\)/);
 });

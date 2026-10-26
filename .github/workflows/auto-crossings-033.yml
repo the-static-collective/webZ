@@ -1,0 +1,41 @@
+name: AUTO-CROSSINGS-033 One-Tap Public Continuation
+on:
+  push:
+    branches:
+      - feature/abundent-auto-crossings-033
+  pull_request:
+    branches:
+      - feature/abundent-crossings-032
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-one-tap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Verify public relay and independent contracts
+        run: |
+          cd ask-jarvis
+          npm test
+      - name: Validate syntax of imported browser modules
+        run: |
+          node --check ask-jarvis/public/crossings/model.mjs
+          node --check ask-jarvis/public/crossings/session.mjs
+          node --check ask-jarvis/public/crossings/receiving.mjs
+          node --check ask-jarvis/public/crossings/app.mjs
+          node --check ask-jarvis/public/first-yes/first-yes-ui.mjs
+          node --check ask-jarvis/public/board/app.mjs
+      - name: Install local-only browser test requirements
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Verify physical-phone-sized one-tap browser path
+        run: |
+          python -m http.server 8123 --bind 127.0.0.1 --directory ask-jarvis/public > /tmp/auto-crossings-http.log 2>&1 &
+          sleep 2
+          python ask-jarvis/tests/auto_crossings_browser.py
