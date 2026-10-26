@@ -20,7 +20,7 @@ with sync_playwright() as play:
     # No save-to-file step anywhere in the primary user flow.
     page.locator("#open-crossing").click()
     page.wait_for_url("**/crossings/")
-    page.locator("#ticket-status").get_by_text("AUTOMATIC CONTINUATION READY",exact=False).wait_for()
+    page.wait_for_function("document.querySelector(\'#ticket-status\')?.textContent?.includes(\'AUTOMATIC CONTINUATION READY\')")
     status=page.locator("#ticket-status").inner_text()
     assert "Community grocery" in status,status
     assert "original question absent" in status,status
