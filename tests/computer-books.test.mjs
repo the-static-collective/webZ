@@ -38,6 +38,34 @@ test('lemonPRESS machine edition indexes all released public HTML, not visitor t
     assert.equal(catalog.pages[0].title,'Abundent & friends');
     assert.equal(catalog.pages[0].sourceCommit,'a'.repeat(40));
     assert.doesNotMatch(JSON.stringify(catalog),/NOT_FOR_METADATA/);
+    const manifest=JSON.parse(await readFile(join(root,'for-computers','manifest.json'),'utf8'));
+    assert.equal(manifest.schema_version,'computer-book-manifest-v0');
+    assert.equal(manifest.lane,'crawler');
+    assert.equal(manifest.fragments.length,2);
+    for(const law of ['retrieved_is_read','chunk_is_book','fragment_is_context',
+      'retrieval_order_is_authority','reading_order_is_ancestry'])
+      assert.equal(manifest.retrieval_contract[law],false);
+    const fragmentDir=join(root,'for-computers','fragments');
+    const edges=(await readFile(join(root,'for-computers','relations.jsonl'),'utf8'))
+      .trim().split('\\n').map(line=>JSON.parse(line));
+    const observed=[];
+    for(const entry of manifest.fragments) {
+      const fragment=JSON.parse(await readFile(join(fragmentDir,entry.fragment_id+'.json'),'utf8'));
+      assert.equal(fragment.schema_version,'computer-book-fragment-v0');
+      assert.equal(fragment.work_id,manifest.work_id);
+      assert.equal(fragment.edition_id,manifest.edition_id);
+      assert.equal(fragment.fragment_id,entry.fragment_id);
+      assert.equal(fragment.retrieval.warning,'FRAGMENT != BOOK');
+      assert.equal(fragment.retrieval.manifest,'../manifest.json');
+      assert.equal(fragment.authority.level,'none');
+      assert.ok(fragment.ancestry.length>0);
+      assert.ok(fragment.uncertainty.length>0);
+      for(const edge of fragment.retrieval.continuations)
+        observed.push({from:fragment.fragment_id,relation:edge.relation,to:edge.target,scope:edge.scope});
+    }
+    assert.deepEqual(observed,edges);
+    assert.ok(edges.every(e=>manifest.fragments.some(f=>f.fragment_id===e.to)));
+
     assert.match(await readFile(join(root,'llms.txt'),'utf8'),/RETRIEVAL != COMPLETE READING/);
     assert.match(await readFile(join(root,'sitemap.xml'),'utf8'),/https:\/\/abundent.org\/welcome\//);
     assert.match(await readFile(join(root,'for-computers','books','001-a-leaf-is-not-the-forest.md'),'utf8'),/A Leaf Is Not the Forest/);
