@@ -119,6 +119,7 @@ export async function buildIdeaEditions({output,files,commit}){
  },null,2)+'\n');
  const landing='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explorable idea editions · lemonPRESS</title><meta name="description" content="Source-pinned books for computer readers exploring the Static Collective, Daily Slice and National Treasure."></head><body><main><h1>Books for Computers · the idea engines</h1><p>Experimental source-linked editions. Fragments are not complete readings, and proposals are not evidence.</p><ul>'
   +'<li><a href="./identity/manifest.json">An Organization of Organizations That Do Not Exist Yet</a></li>'
+  + '<li><a href="/for-computers/organizations/">The Unformed Organizations (six organizational seeds)</a></li>'
   +editions.map(x=>'<li><a href="./'+x.lane+'/manifest.json">'+esc(x.title)+'</a> · '+x.count+' source fragments</li>').join('')
   +'</ul><p><a href="./index.json">Machine-readable edition list</a> · <a href="/explore/">Human exploration table</a> · <a href="/for-computers/">Computer library</a></p></main></body></html>\n';
  await emit('for-computers/ideas/index.html',landing);

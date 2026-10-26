@@ -7,6 +7,7 @@ import {fieldArtifacts} from './build-field.mjs';
 import {buildComputerBooks} from './build-computer-books.mjs';
 import {buildSiteNetwork} from './build-site-network.mjs';
 import {buildIdeaEditions} from './build-idea-editions.mjs';
+import {buildOrganizationBooks} from './build-organization-books.mjs';
 const root=new URL('../',import.meta.url),output=new URL('dist/',root);
 const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
 const sha=bytes=>'sha256:'+createHash('sha256').update(bytes).digest('hex');
@@ -25,7 +26,7 @@ catch{
  sourceEntries=new Map(listing.tree.filter(e=>e.type==='blob').map(e=>[e.path,e.sha]));
 }
 // Tracked shell drift cannot masquerade as an immutable committed release.
-const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'commons/index.html','commons/style.css','sw.js','week/index.html','week/week.css','week/week.mjs','music/2day/index.html','music/2day/style.css','music/2day/albums.json','music/rooms/index.html','music/rooms/style.css','music/rooms/rooms.mjs','music/rooms/catalog.json','composer/index.html','composer/style.css','composer/model.mjs','composer/ui.mjs','needs/index.html','needs/style.css','needs/model.mjs','needs/ui.mjs','field/cards/index.html','field/cards/style.css','field/cards/seed.mjs','field/cards/core.mjs','field/cards/app.mjs','field/cards/sw.js','field/cards/vendor/qrcode.min.js','field/cards/vendor/LICENSE.qrcodejs.txt','circulation/index.html','circulation/style.css','circulation/app.js','circulation/003/index.html','circulation/003/style.css','circulation/003/app.mjs','circulation/003/packet.mjs','circulation/004/index.html','circulation/004/style.css','circulation/004/app.mjs','circulation/004/model.mjs','becoming/index.html','explore/index.html','explore/slice/index.html','explore/treasure/index.html','explore/style.css','explore/app.mjs','explore/catalog.json'])].sort();
+const paths=[...new Set([...STATIC_PATHS.map(p=>p===''||p.endsWith('/')?p+'index.html':p),'commons/index.html','commons/style.css','sw.js','week/index.html','week/week.css','week/week.mjs','music/2day/index.html','music/2day/style.css','music/2day/albums.json','music/rooms/index.html','music/rooms/style.css','music/rooms/rooms.mjs','music/rooms/catalog.json','composer/index.html','composer/style.css','composer/model.mjs','composer/ui.mjs','needs/index.html','needs/style.css','needs/model.mjs','needs/ui.mjs','field/cards/index.html','field/cards/style.css','field/cards/seed.mjs','field/cards/core.mjs','field/cards/app.mjs','field/cards/sw.js','field/cards/vendor/qrcode.min.js','field/cards/vendor/LICENSE.qrcodejs.txt','circulation/index.html','circulation/style.css','circulation/app.js','circulation/003/index.html','circulation/003/style.css','circulation/003/app.mjs','circulation/003/packet.mjs','circulation/004/index.html','circulation/004/style.css','circulation/004/app.mjs','circulation/004/model.mjs','becoming/index.html','explore/index.html','explore/slice/index.html','explore/treasure/index.html','explore/style.css','explore/app.mjs','explore/catalog.json','becoming/doors/index.html','becoming/doors/style.css','becoming/doors/app.mjs','becoming/doors/seeds.json'])].sort();
 const files=[];
 for(const path of paths){
  const bytes=await readFile(new URL(path,root));
@@ -43,8 +44,9 @@ for(const file of files){const url=new URL(file.path,output);await mkdir(new URL
 const computerBooks=await buildComputerBooks({output,files,commit});
 const siteNetwork=await buildSiteNetwork({output,files,commit});
 const ideaEditions=await buildIdeaEditions({output,files,commit});
+const organizationBooks=await buildOrganizationBooks({output,files,commit});
 const receipt=JSON.parse(await readFile(new URL('field/public-field-receipt.json',root)));
 const provenance=JSON.parse(await readFile(new URL('field/navigation-provenance.json',root)));
-const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,computerBooks,siteNetwork,ideaEditions,navigation:provenance,boundary:'Public first-party static code, committed inspection catalog and source-linked computer-reading projections only. Machine cards do not grant reuse or owner authority. No remote effects, visitor inputs, real receiving-world replies or owner admission.',files};
+const manifest={schema:'webz/immutable-release/v0',sourceCommit:commit,sourceTree:tree,fieldHash:receipt.fieldHash,observationsHash:receipt.observationsHash,computerBooks,siteNetwork,ideaEditions,organizationBooks,navigation:provenance,boundary:'Public first-party static code, committed inspection catalog and source-linked computer-reading projections only. Machine cards do not grant reuse or owner authority. No remote effects, visitor inputs, real receiving-world replies or owner admission.',files};
 await writeFile(new URL('release.json',output),JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify({commit,tree,files:files.length,releaseHash:sha(JSON.stringify(manifest,null,2)+'\n')},null,2));

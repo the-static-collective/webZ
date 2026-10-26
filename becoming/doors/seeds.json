@@ -1,0 +1,172 @@
+{
+  "schema": "webz/organization-seeds/v1",
+  "edition": "036",
+  "issued": "2026-10-26",
+  "status": "design-proposals-only",
+  "owner": "The Static Collective / webZ",
+  "title": "Organizations That Don't Exist Yet",
+  "description": "Open chairs for possible organizations. A web door is an invitation to draft, not a representation that an organization exists.",
+  "laws": [
+    "INVITATION != CONSENT",
+    "CONNECTION != COMMITMENT",
+    "PROPOSAL != INSTITUTION",
+    "WEAVE != WE'VE",
+    "ASSISTANCE != OWNERSHIP",
+    "NO DATA COLLECTION"
+  ],
+  "boundaries": {
+    "noLegalEntity": true,
+    "noPartnersClaimed": true,
+    "noVolunteersAssigned": true,
+    "noVisitorDataStorage": true,
+    "noAutomaticPublishing": true,
+    "noClaimsOfCompletedWork": true,
+    "important": "This is not a membership registry, recruitment system, intake, application or public directory of people. These seed names are provisional and are not legal entities."
+  },
+  "seeds": [
+    {
+      "id": "garden-table",
+      "title": "The Garden Table",
+      "symbol": "✳",
+      "domainIdea": "table.abundent.org",
+      "area": "Food · neighborhood economies",
+      "headline": "Food travels better when people can find each other.",
+      "mission": "Explore a small, producer-aware community grocery and tasting table where local people can discover, offer, and discuss food access without pretending a store or cooperative has already opened.",
+      "firstQuestion": "What is one useful food-sharing or discovery experiment neighbors could try with permission and minimal expense?",
+      "firstAct": "Draft a one-page, clearly proposed sample-table invitation; invite one willing person to review it without collecting shoppers’ personal histories.",
+      "firstSteward": "Someone willing to convene a bounded listening and tasting experiment, not an appointed store director.",
+      "firstReceipt": "A public, consent-cleared sample-table plan or a documented decision not to proceed.",
+      "guardrail": "Not an operating grocery, co-op, food shelf, or partnership. Food-handling rules, venue permission, sourcing claims and accessibility need separate review.",
+      "neighbors": [
+        {
+          "title": "webZ · Garden workbench",
+          "url": "https://github.com/the-static-collective/webZ"
+        },
+        {
+          "title": "Abundent · Garden field atlas",
+          "url": "https://garden.abundent.org/"
+        }
+      ]
+    },
+    {
+      "id": "porchlight",
+      "title": "Porchlight Circle",
+      "symbol": "◌",
+      "domainIdea": "porchlight.abundent.org",
+      "area": "Care · belonging",
+      "headline": "Nobody needs an audience to deserve a place at the table.",
+      "mission": "Imagine a voluntary, privacy-first peer circle for isolated parents and other people rebuilding connection after difficult family circumstances.",
+      "firstQuestion": "What does a respectful first conversation require so nobody must disclose a story, identity, or legal case to participate?",
+      "firstAct": "Write one page of peer-listening boundaries and an invitation that requires no survivor narrative, uploads, names, or commitments.",
+      "firstSteward": "An opted-in listener who understands boundaries and referral limits, never a claimed counselor or legal representative.",
+      "firstReceipt": "A reviewed, privacy-safe invitation and listening agreement, with no participant registry or private testimony.",
+      "guardrail": "No public survivor directory or intake. No promises of confidentiality on an untested platform, legal representation, therapy, safety intervention, or outcomes.",
+      "neighbors": [
+        {
+          "title": "Black Star · independent source",
+          "url": "https://github.com/the-static-collective/black-star"
+        },
+        {
+          "title": "WITNESS · community audio project",
+          "url": "https://github.com/the-static-collective/WITNESS"
+        }
+      ]
+    },
+    {
+      "id": "common-press",
+      "title": "The Common Press",
+      "symbol": "▤",
+      "domainIdea": "commonpress.abundent.org",
+      "area": "Publishing · collective imagination",
+      "headline": "Publish for the readers who haven't arrived.",
+      "mission": "Explore an independent publishing commons for unusual books, listening editions, small print experiments and future machine readers.",
+      "firstQuestion": "What small original work could be offered in two legible forms while keeping author consent and source lineage intact?",
+      "firstAct": "Prepare a one-page rights-and-attribution checklist and a mock edition for an original, expressly permitted work.",
+      "firstSteward": "A voluntary editor or production steward whose permission does not replace the creator's rights.",
+      "firstReceipt": "A draft specimen labeled experimental, plus the author’s explicit publication choice if actual release is proposed.",
+      "guardrail": "No automatic admission to lemonPRESS or claims of artist contracts, transferred copyright, publication or distribution.",
+      "neighbors": [
+        {
+          "title": "lemonPRESS · publishing house",
+          "url": "https://github.com/the-static-collective/lemonPRESS"
+        },
+        {
+          "title": "Books for Computers",
+          "url": "https://abundent.org/for-computers/"
+        }
+      ]
+    },
+    {
+      "id": "tool-shed",
+      "title": "The Useful Tool Shed",
+      "symbol": "⚙",
+      "domainIdea": "toolshed.abundent.org",
+      "area": "Repair · shared infrastructure",
+      "headline": "The useful machine might already be in somebody's closet.",
+      "mission": "Imagine a consent-based neighborhood commons for repair knowledge, idle computing equipment and practical technical help.",
+      "firstQuestion": "Which harmless, low-cost maintenance task could be made easier by sharing knowledge before sharing hardware?",
+      "firstAct": "Make a read-only demonstration repair card using fictional equipment and a clear voluntary request-for-help path.",
+      "firstSteward": "A volunteer technician who can say no and explain which tools, permissions and safety precautions are necessary.",
+      "firstReceipt": "A tested instructional card, not a claim that equipment was donated, power was routed, or a repair completed.",
+      "guardrail": "No asset claims, remote execution, shared credentials, unsafe electrical work, or use of another person's hardware without explicit permission.",
+      "neighbors": [
+        {
+          "title": "GHoT · resource experiments",
+          "url": "https://github.com/the-static-collective/GHoT"
+        },
+        {
+          "title": "MSyoU · public civic technology",
+          "url": "https://github.com/the-static-collective/MSyoU"
+        }
+      ]
+    },
+    {
+      "id": "artist-commons",
+      "title": "The Artist Commons",
+      "symbol": "♫",
+      "domainIdea": "artistcommons.abundent.org",
+      "area": "Music · art · gathering",
+      "headline": "Let the artists make the gathering.",
+      "mission": "Explore an artist-led creative meeting place where music, visual work and informal gatherings can grow from actual participation instead of organizational gatekeeping.",
+      "firstQuestion": "What would a tiny artist-led listening or making session look like if every participating artist chose the rules?",
+      "firstAct": "Create an example one-hour gathering outline with an empty venue field and an open invitation for artists to shape it.",
+      "firstSteward": "An artist or host who volunteers; no named festival, venue or coordinator is presumed involved.",
+      "firstReceipt": "An approved artist-controlled plan or an honest account of what couldn't be organized.",
+      "guardrail": "No venue reservation, festival affiliation, commercial use of works, participant consent or ticketed event is implied.",
+      "neighbors": [
+        {
+          "title": "Static Live · broadcast experiments",
+          "url": "https://github.com/the-static-collective/static-live"
+        },
+        {
+          "title": "The Static Collective · music",
+          "url": "https://thestaticcollective.bandcamp.com/"
+        }
+      ]
+    },
+    {
+      "id": "return-table",
+      "title": "The Return Table",
+      "symbol": "⌘",
+      "domainIdea": "returntable.abundent.org",
+      "area": "Needs · offers · stewardship",
+      "headline": "A need becomes a little less lonely when a genuine offer can find it.",
+      "mission": "Explore a neighborhood coordination table that helps people offer resources, identify missing connections and close the loop on small practical work.",
+      "firstQuestion": "How can a request move from being noticed to a consented response without turning a request into a public personal record?",
+      "firstAct": "Use fictional needs and offers to sketch one complete request → review → offer → consent → outcome-or-unknown trace.",
+      "firstSteward": "A willing reviewer who cannot assign work to others or publish someone else's needs without permission.",
+      "firstReceipt": "One completely fictional test with explicit refusal/unknown states before any real-person trial.",
+      "guardrail": "No live matchmaking, personal data collection, commitments, verified deliveries, partner authorizations or automatic routing.",
+      "neighbors": [
+        {
+          "title": "reLATTE · permissioned crossings",
+          "url": "https://github.com/the-static-collective/reLATTE"
+        },
+        {
+          "title": "GRAFT · source-aware connections",
+          "url": "https://github.com/the-static-collective/GRAFT"
+        }
+      ]
+    }
+  ]
+}
