@@ -66,6 +66,18 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 .history-receipt code{overflow-wrap:anywhere}.withdraw-box{margin:1.3rem 0;padding:1rem;border:1px solid var(--edge)}
 .withdraw-box summary{font-weight:900;cursor:pointer}.withdraw-box input{margin-bottom:.6rem}
 @media(max-width:660px){.history-list{grid-template-columns:1fr}}
+
+.memory-area{margin:1.2rem 0 3rem;background:#f6f5e9;border:2px solid #738e72;padding:clamp(1rem,3vw,2.3rem)}
+.memory-area>h2{max-width:780px}.memory-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+.memory-card{border:1px solid var(--edge);border-top:5px solid var(--forest);background:#fffdf5;padding:1.2rem;min-width:0}
+.memory-card-heading{display:flex;align-items:start;justify-content:space-between;gap:.7rem;flex-wrap:wrap}
+.memory-name{font:1.35rem Georgia,serif;font-weight:800}.memory-evidence{margin:1rem 0;border-left:3px solid var(--rust);padding:.5rem 0 .5rem .85rem;background:#f4f6f0}
+.memory-evidence p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.93rem}
+.memory-move{padding:.7rem 0}.memory-move h3{font-size:1.34rem}.memory-move p{margin:.5rem 0}
+.memory-gate{font-size:.84rem;background:#faeed3;padding:.7rem;border-left:4px solid var(--rust)}
+.memory-actions{display:flex;gap:.5rem;flex-wrap:wrap}.memory-actions .btn{font-size:.79rem;min-height:38px;padding:.5rem .7rem}
+.memory-note{font-size:.88rem;border-top:1px dashed var(--edge);padding-top:1rem}
+@media(max-width:740px){.memory-cards{grid-template-columns:1fr}}
 </style></head>
 <body>
 <header><div class="wrap">
@@ -128,6 +140,15 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 <p class="quiet">Private follow-up copies your words and opens a separate opt-in contact desk; paste and edit them yourself. No silent submission. Downloads are self-reports, not verified outcomes.</p>
 </section><p id="status" role="status" aria-live="polite"></p>
 </article></div>
+<section class="memory-area" id="actionable-memory" aria-labelledby="memory-title">
+<div class="tag">MEMORY-026 · THE COMMUNITY'S RETURN PATH</div>
+<h2 id="memory-title">What could we do next?</h2>
+<p>Every reviewed conversation may suggest a next small action. These cards distinguish <strong>what someone actually posted</strong> from <strong>what the software merely proposes</strong>. Neither publication nor a drafted step verifies outcomes or authorizes action.</p>
+<p id="memory-status" role="status" aria-live="polite" class="quiet">Reading reviewed community history…</p>
+<p id="memory-coverage" class="quiet">Coverage is limited to the pages of public, reviewed history currently loaded.</p>
+<div id="memory-cards" class="memory-cards"></div>
+<p class="memory-note">The Workboard can remember a question without pretending somebody answered it. Offers are not commitments; objections are not obstacles; reported returns are not independent proof. No participation is required.</p>
+</section>
 <section class="history-area" id="shared-history" aria-labelledby="history-title">
 <div class="tag">WORKBOARD-025 · PERSISTENT COMMUNITY HISTORY</div>
 <h2 id="history-title">What has actually entered the conversation?</h2>
@@ -177,4 +198,5 @@ footer{padding:2rem 0;background:#132c24;color:#dce9da;font-size:.87rem}footer a
 <footer><div class="wrap"><strong>EVERY CONVERSATION CAN BECOME A DOORWAY.</strong> &nbsp; Work is voluntary. A refusal is an answer. A suggestion is not proof; a receipt is not permission. <a href="/contact/">Contact</a> · <a href="/campfire/">Campfire</a> · <a href="/">JAR;VIS</a>.</div></footer>
 <script type="module" src="/board/app.mjs"></script>
 <script type="module" src="/board/history.mjs"></script>
+<script type="module" src="/board/memory-ui.mjs"></script>
 </body></html>
