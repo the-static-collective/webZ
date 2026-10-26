@@ -91,5 +91,8 @@ test('UI integrates with reviewed-only history, is accessible, and does not sile
  assert.match(builder,/memory\.mjs/);
  assert.doesNotMatch(ui,/\bfetch\s*\(|sendBeacon|localStorage|sessionStorage|innerHTML\s*=/);
  assert.match(ui,/printableInvitation/);
+ assert.match(ui,/workboard-compose-candidate/);
+ assert.match(history,/workboard-compose-candidate/);
+ assert.match(history,/history-consent/);
  assert.match(ui,/memory-status/);
 });
