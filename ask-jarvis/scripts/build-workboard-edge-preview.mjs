@@ -10,6 +10,8 @@ const paths=[
  ['/board/app.mjs','public/board/app.mjs'],
  ['/board/model.mjs','public/board/model.mjs'],
  ['/board/history.mjs','public/board/history.mjs'],
+ ['/board/memory.mjs','public/board/memory.mjs'],
+ ['/board/memory-ui.mjs','public/board/memory-ui.mjs'],
  ['/role-seeds.mjs','public/role-seeds.mjs'],
  ['/campfire/model.mjs','public/campfire/model.mjs'],
  ['/table-bridge.mjs','public/table-bridge.mjs'],
@@ -19,7 +21,8 @@ const src=Object.fromEntries(paths.map(([url,file])=>[url,readFileSync(resolve(h
 const target=s=>base+'?asset='+encodeURIComponent(s.slice(1));
 let html=src['/board/'];
 html=html.replaceAll('src="/board/app.mjs"','src="'+target('/board/app.mjs')+'"')
- .replaceAll('src="/board/history.mjs"','src="'+target('/board/history.mjs')+'"');
+ .replaceAll('src="/board/history.mjs"','src="'+target('/board/history.mjs')+'"')
+ .replaceAll('src="/board/memory-ui.mjs"','src="'+target('/board/memory-ui.mjs')+'"');
 html=html.replaceAll('href="/board/"','href="'+base+'"');
 for(const name of ['campfire','roles','tables','contact','doors','weave','town','gather'])
  html=html.replaceAll('href="/'+name+'/"','href="https://abundent.org/'+name+'/"');
