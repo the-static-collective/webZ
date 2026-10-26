@@ -71,7 +71,7 @@ test('one-tap UI, import fallback, and independent-room adapters are present',()
  assert.match(crossings,/type="file"/);
  assert.doesNotMatch(receipt,/fetch\(|navigator\.sendBeacon\(|document\.cookie|\.submit\(/);
  const board=readFileSync(new URL('board/app.mjs',base),'utf8');
- assert.match(board,/carriedBoardTopic\(window\.sessionStorage,getOpportunity\)/);
+ assert.match(board,/carriedBoardTopic\(getOpportunity\)/);
  const adapter=readFileSync(new URL('crossings/workboard-adapter.mjs',base),'utf8');
  assert.match(adapter,/ticket\.topic==='care'/);
  assert.doesNotMatch(adapter,/fetch\(|\.submit\(/);
