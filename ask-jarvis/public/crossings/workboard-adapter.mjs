@@ -1,7 +1,7 @@
 // A bounded public-only board adapter, outside the Board's existing write logic.
 // This cannot create a contribution, submit a form, or read private backend data.
 import {readSessionCrossing} from './session.mjs';
-export function carriedBoardTopic(storage,lookup,at=Date.now()){
+export function carriedBoardTopic(lookup,storage=window.sessionStorage,at=Date.now()){
   if(typeof lookup!=='function')return null;
   try{
     const ticket=readSessionCrossing(storage,at);
