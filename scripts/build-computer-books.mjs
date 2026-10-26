@@ -203,6 +203,7 @@ export async function buildComputerBooks({output,files,commit}) {
     +'</head><body><main><h1>Books for Computers</h1>'
     +'<p>Human pages are the originals. These are cards and experimental machine editions, not a grant of authority.</p>'
     +'<p><a href="./manifest.json">Computer book manifest (JSON)</a> · <a href="./index.json">Machine catalog (JSON)</a> · <a href="./sites/index.json">Five live sites (dated observation)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
+    +'<h2>The Unformed Organizations</h2><p><a href="./organizations/">Six empty chairs: organization seeds for computers →</a></p>'
     +'<h2>Explorable idea editions</h2><p><a href="./ideas/">Open the new identity, Daily Slice and National Treasure machine books →</a></p>'
     +'<ul>'+machineBooks.map(b=>'<li><a href="./books/'+b.id+'.md">'+esc(b.title)+'</a></li>').join('')+'</ul>'
     +'<p><a href="/">Return to Abundent</a></p></main></body></html>\n';
