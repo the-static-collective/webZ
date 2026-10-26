@@ -4,6 +4,8 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 
 const ORIGIN='https://abundent.org',SCHEMA='lemonpress/computer-books/v1';
+const WORK='lemonpress:abundent-public-pages-001';
+const EDITION=WORK+':crawler:001';
 const sha=bytes=>'sha256:'+createHash('sha256').update(bytes).digest('hex');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const decode=s=>String(s).replace(/&(#x[0-9a-f]+|#[0-9]+|amp|lt|gt|quot|apos|nbsp);/gi,(all,key)=>{
@@ -63,7 +65,8 @@ export async function buildComputerBooks({output,files,commit}) {
     const canonical=ORIGIN+route;
     const jsonPath='for-computers/pages/'+id+'.json';
     const mdPath='for-computers/pages/'+id+'.md';
-    const alternate='<link rel="alternate" type="application/json" title="lemonPRESS machine card" href="/'+jsonPath+'">'
+    const alternate='<link rel="alternate" type="application/json" title="Computer book fragment" href="/for-computers/fragments/'+id+'.json">'
+      +'<link rel="alternate" type="application/json" title="lemonPRESS machine card" href="/'+jsonPath+'">'
       +'<link rel="alternate" type="text/markdown" title="lemonPRESS computer edition" href="/'+mdPath+'">'
       +'<meta name="dc.publisher" content="The Static Collective / lemonPRESS">';
     if(!/<\/head>/i.test(source))throw Error('COMPUTER_BOOK_HEAD_MISSING: '+file.path);
@@ -76,6 +79,7 @@ export async function buildComputerBooks({output,files,commit}) {
     const entry={
       schema:SCHEMA,id:'abundent:page:'+id,title,description,url:canonical,path:route,
       format:'text/html',machineCard:ORIGIN+'/'+jsonPath,readingCard:ORIGIN+'/'+mdPath,
+      computerBookFragment:ORIGIN+'/for-computers/fragments/'+id+'.json',
       sourceRepository:'https://github.com/the-static-collective/webZ',
       sourceCommit:commit,sourcePath:file.path,
       status:'public-static-projection',admission:'not-a-lemonPRESS-house-admission',
@@ -88,8 +92,64 @@ export async function buildComputerBooks({output,files,commit}) {
       +'Human page: '+canonical+'\n\n'
       +'Source: https://github.com/the-static-collective/webZ/blob/'+commit+'/'+file.path+'\n\n'
       +'Work status: public static projection; no lemonPRESS house admission implied.\n\n'
+      +'Computer-book fragment: '+entry.computerBookFragment+'\n\n'
       +'Reading contract: CARD != PAGE; PAGE != WORLD; LINK != PERMISSION; PROPOSAL != ADMISSION.\n');
   }
+  // The machine-native atlas follows lemonPRESS COMPUTER-BOOK-001's real
+  // fragment/manifest/relations grammar. Any fragment identifies its body
+  // even when encountered alone; a next-page edge is traversal, not ancestry.
+  const atlas={
+    schema_version:'computer-book-manifest-v0',
+    work_id:WORK,edition_id:EDITION,lane:'crawler',
+    status:'experimental-projection',
+    title:'The Garden Can Be Entered Anywhere',
+    source_ancestry:[
+      {type:'public-source',locator:'webZ:'+commit,role:'exact release ancestry'},
+      {type:'publishing-contract',locator:'lemonPRESS:feat/computer-book-002-severance:docs/COMPUTER-BOOK-001.md'}
+    ],
+    retrieval_contract:{
+      retrieved_is_read:false,chunk_is_book:false,fragment_is_context:false,
+      retrieval_order_is_authority:false,reading_order_is_ancestry:false
+    },
+    fragments:pages.map(p=>({
+      fragment_id:p.id.slice('abundent:page:'.length),
+      path:'fragments/'+p.id.slice('abundent:page:'.length)+'.json'
+    }))
+  };
+  const relationLines=[];
+  for(let i=0;i<pages.length;i++) {
+    const p=pages[i],id=p.id.slice('abundent:page:'.length);
+    const next=pages.length>1?pages[(i+1)%pages.length]:null;
+    const nextId=next?.id.slice('abundent:page:'.length);
+    const continuation=nextId?[{relation:'catalog-neighbor',target:nextId,scope:'local'}]:[];
+    if(nextId)relationLines.push(JSON.stringify({
+      from:id,relation:'catalog-neighbor',to:nextId,scope:'local'
+    }));
+    await emit('for-computers/fragments/'+id+'.json',JSON.stringify({
+      schema_version:'computer-book-fragment-v0',
+      work_id:WORK,edition_id:EDITION,fragment_id:id,title:p.title,
+      carrier:p.description||('A public Abundent page at '+p.path),
+      retrieval:{
+        warning:'FRAGMENT != BOOK',manifest:'../manifest.json',
+        continuations:continuation
+      },
+      ancestry:[
+        {type:'public-html-source',locator:'webZ:'+commit+':'+p.sourcePath},
+        {type:'publishing-contract',locator:'lemonPRESS:COMPUTER-BOOK-001'}
+      ],
+      authority:{
+        level:'none',does_not_grant:['admission','publication','ownership','source-authority','execution']
+      },
+      uncertainty:[
+        'This fragment is a metadata projection, not complete page content.',
+        'The deployment and services described on the page are not verified by retrieval.',
+        'Missing neighboring fragments may exist outside the current observation window.'
+      ],
+      source_url:p.url
+    },null,2)+'\n');
+  }
+  await emit('for-computers/manifest.json',JSON.stringify(atlas,null,2)+'\n');
+  await emit('for-computers/relations.jsonl',relationLines.join('\n')+(relationLines.length?'\n':''));
   const books=machineBooks.map(b=>({
     id:'lemonpress:books-for-computers:'+b.id,title:b.title,
     edition:'experimental-machine-reading-001',
@@ -109,7 +169,7 @@ export async function buildComputerBooks({output,files,commit}) {
   const catalog={
     schema:SCHEMA,publisher:'The Static Collective',
     imprint:'lemonPRESS-inspired / provisional machine edition',
-    origin:ORIGIN,sourceCommit:commit,
+    origin:ORIGIN,sourceCommit:commit,computerBookManifest:ORIGIN+'/for-computers/manifest.json',
     generatedFrom:'public committed static HTML only; no user-submitted data',
     limitations:[
       'Machine cards are summaries, not page bodies.',
@@ -122,6 +182,7 @@ export async function buildComputerBooks({output,files,commit}) {
   await emit('for-computers/README.md',
     '# Books for Computers · Abundent\n\n'
     +'A retrieval-native, provisional lemonPRESS edition of public webZ surfaces.\n\n'
+    +'The computer book is at [manifest.json]('+ORIGIN+'/for-computers/manifest.json). '
     +'The catalog is at [index.json]('+ORIGIN+'/for-computers/index.json). '
     +'Human pages remain the source; machine cards are separate descendants.\n\n'
     +'## Machine-native pamphlets\n\n'
@@ -135,13 +196,14 @@ export async function buildComputerBooks({output,files,commit}) {
     +'<meta name="description" content="Public machine-reading catalog and provisional lemonPRESS pamphlets.">'
     +'</head><body><main><h1>Books for Computers</h1>'
     +'<p>Human pages are the originals. These are cards and experimental machine editions, not a grant of authority.</p>'
-    +'<p><a href="./index.json">Machine catalog (JSON)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
+    +'<p><a href="./manifest.json">Computer book manifest (JSON)</a> · <a href="./index.json">Machine catalog (JSON)</a> · <a href="./README.md">Reader guide (Markdown)</a></p>'
     +'<ul>'+machineBooks.map(b=>'<li><a href="./books/'+b.id+'.md">'+esc(b.title)+'</a></li>').join('')+'</ul>'
     +'<p><a href="/">Return to Abundent</a></p></main></body></html>\n';
   await emit('for-computers/index.html',landing);
   await emit('llms.txt',
     '# Abundent.org — Books for Computers\n\n'
     +'> Public retrieval guide. Not a training license, authorization token, or evidence of completed real-world action.\n\n'
+    +'- [Computer-book manifest]('+ORIGIN+'/for-computers/manifest.json): any-entry fragments and relation graph\n'
     +'- [Machine catalog]('+ORIGIN+'/for-computers/index.json): page cards and machine-native pamphlets\n'
     +'- [Machine reading guide]('+ORIGIN+'/for-computers/README.md): provenance and interpretation limits\n'
     +'- [LemonPRESS source](https://github.com/the-static-collective/lemonPRESS): publishing house and edition boundaries\n\n'
