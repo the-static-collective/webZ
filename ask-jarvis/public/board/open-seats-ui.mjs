@@ -1,6 +1,6 @@
 // OPEN-SEATS-027 · A missing capability becomes a voluntary invitation.
 // Public-facing interface does not collect, transmit or store contact details.
-import {BOTTLENECK_GATES,getGate,matchGate,safePublicIssue,seatPacket,recruitmentCopy,gateForSummary} from './open-seats.mjs';
+import {BOTTLENECK_GATES,getGate,matchGate,safePublicIssue,seatPacket,recruitmentCopy,openSeatLink,gateForSummary} from './open-seats.mjs';
 const $=id=>document.getElementById(id);
 const node=(tag,value='',className='')=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
 let active=getGate('review');
@@ -54,13 +54,13 @@ async function copy(text){
 }
 $('seat-copy').addEventListener('click',async()=>{
  try{const p=ensureShareable();if(!p)return;
-  await copy(recruitmentCopy(p,'invite'));
+  await copy(recruitmentCopy(p,'invite',openSeatLink(location.href,p.gate)));
   note('Invitation copied. You decide whom to ask. Nobody is enrolled or appointed.');
  }catch{note('Copy was blocked. You can print the invitation.');}
 });
 $('seat-ambassador').addEventListener('click',async()=>{
  try{const p=ensureShareable();if(!p)return;
-  await copy(recruitmentCopy(p,'ambassador'));
+  await copy(recruitmentCopy(p,'ambassador',openSeatLink(location.href,p.gate)));
   note('Ambassador invitation copied. Any introduction requires the people involved to consent.');
  }catch{note('Copy was blocked. You can print the invitation instead.');}
 });
