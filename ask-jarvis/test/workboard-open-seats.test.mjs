@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {BOTTLENECK_GATES,getGate,matchGate,safePublicIssue,seatPacket,recruitmentCopy,gateForSummary} from '../public/board/open-seats.mjs';
+import {BOTTLENECK_GATES,getGate,matchGate,safePublicIssue,seatPacket,recruitmentCopy,openSeatLink,gateForSummary} from '../public/board/open-seats.mjs';
 import {summarizeHistory} from '../public/board/memory.mjs';
 
 test('the first known operational constraint is an invitation, never appointment',()=>{
@@ -88,4 +88,13 @@ test('mobile role recruitment is integrated, account-free and never writes priva
  assert.match(preview,/open-seats\.mjs/);
  assert.doesNotMatch(ui,/\bfetch\s*\(|\bsendBeacon\b|localStorage|sessionStorage|innerHTML\s*=/);
  assert.doesNotMatch(html,/onclick=/);
+});
+
+test('safe seat invitation is linkable without leaking personal text',()=>{
+ const seat=seatPacket('review');
+ const path=openSeatLink('https://abundent.org/board/',seat.gate);
+ assert.equal(new URL(path).searchParams.get('seat'),'review');
+ assert.ok(recruitmentCopy(seat,'invite',path).includes('Explore the open seat:'));
+ assert.equal(new URL(openSeatLink('https://abundent.org/board/#private','review')).hash,'');
+ assert.throws(()=>openSeatLink('http://example.org/board/','review'));
 });
