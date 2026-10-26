@@ -56,6 +56,11 @@ function card(s){
  article.append(el('p','Permission before consequence: '+s.next.gate,'memory-gate'));
  const actions=el('div','','memory-actions');
  const row=[
+  ['Find the missing helper',()=>{
+    window.dispatchEvent(new CustomEvent('open-seat-from-memory',{detail:{summary:s}}));
+    $('open-seats')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    notify('A possible missing capability is ready to explore. Nobody was assigned or signed up.');
+   }],
   ['Draft a response',()=>{
     window.dispatchEvent(new CustomEvent('workboard-compose-candidate',{detail:{
      thread:s.thread,kind:'proposal',text:s.next.text
