@@ -21,10 +21,16 @@ Add through **Vercel project settings or Resend Marketplace integration**, not G
 **Operator invocation** (only after domain is VERIFIED and variables are present; do not include tokens in browser query strings):
 
 ```sh
-curl -i -X POST https://abundent.org/api/post-office/proof \
+curl -i -X POST https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/api/post-office/proof \
   -H "Authorization: Bearer ${POST_OFFICE_OPERATOR_TOKEN}"
 ```
 
 The operator must obtain a server-side secret through an approved secure channel; if the integration is not project-attached, this remains a dry runway. Request fails HOLD until all guards pass. Verify actual email arrival and reply manually before enabling individualized outreach through JAR;VIS Post Office 001.
 
 **No email has been sent by creating this endpoint.** This artifact is a controlled ability, not exercise of that ability.
+
+## Actual route verification — 2026-10-26
+
+Vercel production deploy `df2b48cbe02b6f6f60f290269c0c99ed7fc8488b` is READY. A GET on `https://webz-field-porch-theotherlucasv-1250s-projects.vercel.app/api/post-office/proof` returned HTTP 405 — correct for the POST-only sender. The bare `https://abundent.org/api/post-office/proof` returned 404, and `https://abundent.org/` presently renders the distinct Ask JAR;VIS site, rather than webZ's root landing page. Therefore **use the specific webZ Vercel hostname for this endpoint**, not the apex. Do not change apex DNS or misrepresent the public site's routing to make the proof pass. A root-domain integration is a separate, scoped, owner-approved change.
+
+The operator token and private test recipient have been provisioned in the production environment, with redacted names-only readback. The Resend API key and verified sending-domain DNS are **not** yet observed on this project. No outbound dispatch performed.
