@@ -51,7 +51,7 @@ function paintTopic(){
  $('link-table').href='/tables/';
  $('topic-identity').textContent=t.id==='open'?'LOCAL OPEN QUESTION · NOT PUBLISHED':
   'STARTER CARD · NOT A LIVE STATUS REPORT';
- $('special-garden').hidden=!['grocery','milk'].includes(t.id);
+ $('special-garden').hidden=!['grocery','garden-table','milk'].includes(t.id);
 }
 $('filter').addEventListener('input',e=>{
  state.term=e.target.value.trim().toLowerCase();paintList();
