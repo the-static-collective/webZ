@@ -4,6 +4,16 @@
 
 A deliberately 1999-looking, single-box temporary front door for Abundent, deployable as a standalone **Cloudflare Worker with static assets**. Built on the exact webZ CIRCULATION-004 ancestry. **LIVE RELEASE (2026-10-23):** By owner's explicit instruction, the tested Ask JAR;VIS Vercel deployment was assigned the `abundent.org` alias. No DNS records were changed, and no real agents or external project actions execute. The original Garden Workbench remains preserved at its own Vercel URL. **Cloudflare Worker deployment is still planned**, not claimed.
 
+## FIRST-YES-030 · Actual public doorway — one useful thing
+
+**[Open the live First Yes Desk](https://abundent-first-yes-030.vercel.app/first-yes/)** (isolated public deployment, no login required).
+
+This is the public, safe complement to the [local private Campfire × JAR;VIS crossing](https://github.com/the-static-collective/JAR-VIS/pull/10). A community-level question is composed **entirely in the browser** into a first-15-minute task, next-90-minute action, 24-hour voluntary invitation, permission gate and field-return worksheet. Visitors can copy, print or save the work card without sending the question or assigning anyone.
+
+By default the foundation is honestly **editorial**. On explicit click only, the page reads already-human-reviewed public Workboard history for a fixed chosen topic, and carefully marks review as **publication approval, not factual verification**. Sensitive personal cases are held out of printable packets and routed to separate self-directed tools. **No private Firebox, local operator key, actual survivor histories, consented volunteers, physical aid, public posts or organizational approvals are claimed.**
+
+Implementation, release boundaries and tests: [FIRST-YES-030](FIRST-YES-030.md). New route: `/first-yes/`. Its navigation is linked from both Ask JAR;VIS and Workboard on this branch. **The current apex `abundent.org` has not been changed by this draft.**
+
 ## Curiosity 005 — review-only enhancement
 
 This branch improves the public deterministic attendant without adding accounts, model APIs, data retention, or project execution:
