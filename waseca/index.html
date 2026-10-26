@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#14251f"><meta name="referrer" content="no-referrer">
+<meta name="description" content="Waseca Reality 2.0: a public experiment in turning small needs and offers into useful, voluntary work.">
+<title>Reality 2.0 / Waseca Field Experiment</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to experiment</a>
+<header class="top"><a class="logo" href="../commons/">abundent<span>.</span></a><span class="stamp">EXPERIMENT 001 · OPEN</span><nav><a href="../commons/">Commons</a><a href="https://garden.abundent.org/">Garden ↗</a></nav></header>
+<main id="main">
+<section class="hero wrap"><div><div class="eyebrow">WASECA, MINNESOTA · STARTED 26 OCT 2026</div>
+<h1>Reality <em>2.0</em><br>starts with<br><i>one useful thing.</i></h1>
+<p class="lead">Not a simulation of a better town. A small, public experiment in helping actual neighbors notice possibilities, make invitations, do useful work, and bring back what happened.</p>
+<div class="actions"><a class="btn primary" href="#make">Make a field card ↓</a><a class="btn" href="#how">How this experiment works</a></div>
+<p class="note"><b>LIVE</b> means this public experiment page is open for use. It does <b>not</b> mean a staffed help service, approved co-op project, or operational community database. No account. No tracking code. No form submissions.</p>
+</div><div class="dial" aria-hidden="true"><span>NOTICE</span><span>INVITE</span><strong>✳</strong><span>ACT</span><span>RETURN</span><small>THE FIRST LOOP</small></div></section>
+<div class="ribbon" aria-label="Experiment sequence"><span>01 Notice</span><b>→</b><span>02 Invite</span><b>→</b><span>03 Choose</span><b>→</b><span>04 Act</span><b>→</b><span>05 Return</span></div>
+<section id="make" class="wrap section">
+<div class="section-heading"><div class="eyebrow">THE FIRST PLAYABLE THING</div><h2>Make a card.<br><i>Give possibility a handle.</i></h2><p>Use this workbench to make a non-sensitive invitation or return receipt. It stays in this page until <strong>you</strong> choose to copy, save, or print it. Nothing is sent to us.</p></div>
+<div class="lab">
+<form id="card-form" class="workbench" autocomplete="off"><div class="eyebrow">LOCAL CARD WORKBENCH</div>
+<fieldset><legend>What sort of card is this?</legend><div class="choices">
+<label><input type="radio" name="kind" value="NEED" checked> I noticed a need</label>
+<label><input type="radio" name="kind" value="OFFER"> I can offer something</label>
+<label><input type="radio" name="kind" value="TABLE"> I want to gather people</label>
+<label><input type="radio" name="kind" value="STEWARDSHIP"> This needs a steward</label>
+</div></fieldset>
+<label class="field"><span>One-sentence invitation <small>(no names or personal details)</small></span><input id="title" maxlength="110" placeholder="Could three neighbors help test a weekly food-share table?" required></label>
+<label class="field"><span>One small next step</span><textarea id="step" maxlength="420" rows="3" placeholder="Find one willing neighbor, agree on a 30-minute test, and write down what worked."></textarea></label>
+<label class="field"><span>Area of work</span><select id="area"><option>Food & neighborhood</option><option>Practical help</option><option>Art & music</option><option>Open tools</option><option>Community care (non-sensitive)</option><option>Other</option></select></label>
+<label class="field"><span>What's happened so far?</span><select id="stage"><option value="PROPOSED">Only proposed — nobody has agreed</option><option value="INVITED">Invitation shared — response unverified</option><option value="AGREED">A person voluntarily agreed — self-reported</option><option value="TRIED">A small action was tried — self-reported</option></select></label>
+<details class="return"><summary>After you try it: make a return receipt</summary>
+<p>Describe only non-sensitive facts you are entitled to share. A return is your report, not proof or somebody else's consent.</p>
+<label class="field"><span>What actually happened?</span><textarea id="happened" maxlength="420" rows="3" placeholder="We met. Two people volunteered. Still waiting for an available location."></textarea></label>
+<label class="field"><span>What remains open?</span><input id="open" maxlength="160" placeholder="Need a location and a second steward."></label>
+</details>
+<div class="caution"><strong>Keep people safe.</strong> No addresses, phone numbers, survivor stories, custody details, medical records, identifying evidence, private accusations, or information about children. Do not use this page for emergencies.</div>
+</form>
+<div class="preview-column"><div class="eyebrow">THE CARD · LIVE LOCAL PREVIEW</div>
+<article class="card" id="card-print" aria-live="polite"><div class="card-head"><b>REALITY 2.0</b><span>WASECA · EXPERIMENT 001</span></div><div class="card-kind" id="out-kind">NEED / PROPOSAL</div><h3 id="out-title">Your first invitation starts here.</h3><p id="out-step">Write one small next step on the left.</p><div class="card-meta"><span id="out-area">Food & neighborhood</span><span id="out-stage">PROPOSED</span></div><div id="return-box" hidden><hr><b>RETURN · SELF-REPORTED</b><p id="out-happened"></p><p id="out-open"></p></div><footer><span>Notice → Invite → Act → Return</span><span>NOT AN AGREEMENT OR VERIFIED RESULT</span></footer></article>
+<div class="actions card-actions"><button class="btn primary" type="button" id="print">Print this card</button><button class="btn" type="button" id="copy">Copy text</button><button class="btn" type="button" id="save">Save a text receipt</button></div>
+<p id="status" class="note" role="status" aria-live="polite">Editing only in this browser tab. No upload, no public posting, no save to a server.</p>
+</div></div>
+</section>
+<section id="how" class="wrap section small"><div class="eyebrow">PLAY IN THE REAL WORLD</div><h2>What counts as a win?</h2><div class="steps">
+<article><span>01</span><h3>Notice something particular.</h3><p>One actual need, resource, skill, or question. Be specific without exposing somebody else's private life.</p></article>
+<article><span>02</span><h3>Offer a voluntary doorway.</h3><p>Print a card, talk to somebody, or bring it to a table. Being invited isn't being obligated.</p></article>
+<article><span>03</span><h3>Try one useful thing.</h3><p>Choose a tiny, reversible action with the people who actually have authority to agree.</p></article>
+<article><span>04</span><h3>Return with an honest trace.</h3><p>What happened? What didn't? What kind of steward is missing? A local receipt is not independent verification.</p></article></div>
+</section>
+<section class="wrap section opportunities"><div class="eyebrow">FOUR POSSIBLE FIRST PLAYS · EXAMPLES, NOT ACTIVE REQUESTS</div><h2>Start somewhere real.</h2><div class="samples">
+<button type="button" class="sample" data-kind="NEED" data-area="Food & neighborhood" data-title="What would make access to groceries easier for one household this week?" data-step="Ask willing neighbors for one non-sensitive, practical idea; check any proposed action with its owners.">Food table <span>→</span></button>
+<button type="button" class="sample" data-kind="STEWARDSHIP" data-area="Community care (non-sensitive)" data-title="Can someone help draft a safe welcome process for a future peer-support circle?" data-step="Review a written welcome and privacy checklist; do not collect survivor stories or offer unstaffed counseling.">Care & return <span>→</span></button>
+<button type="button" class="sample" data-kind="TABLE" data-area="Art & music" data-title="Who wants to host a small, consent-based local listening table?" data-step="Invite interested artists to a 30-minute gathering; confirm venue permission before advertising.">Culture <span>→</span></button>
+<button type="button" class="sample" data-kind="OFFER" data-area="Open tools" data-title="I can test the Waseca field card experiment on my phone." data-step="Try printing, copying, and saving; record defects without sharing personal details.">Help test this <span>→</span></button>
+</div></section>
+<section class="wrap boundary"><h2>Who is running this?</h2><p>This is an independent, experimental initiative from <a href="../commons/">Abundent / The Static Collective</a>, beginning in Waseca. It is <strong>not</strong> an official project of the City of Waseca, any grocery cooperative, food shelf, church, or the Coalition of Care. Relationships with those groups require their own explicit agreement.</p><p>These cards are local drafts, not published listings, monitored requests, partner endorsements, or proof of help delivered. Please do not mistake a copied card for a vetted need or promise.</p><p>To explore existing public pathways, visit the <a href="../commons/">Commons</a>, the <a href="https://garden.abundent.org/">Garden experiment</a>, or the <a href="https://github.com/the-static-collective/webZ">open source</a>. The separate <a href="https://connections.abundent.org/">public question desk</a> is experimental and must not be used for sensitive information.</p></section>
+</main><footer class="bottom"><span>ABUNDENT · WASECA FIELD EXPERIMENT</span><span>Release 001 · 2026-10-26 · <a href="../commons/">Back to the table ↗</a></span></footer>
+</body></html>
