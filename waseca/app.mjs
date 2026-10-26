@@ -1,4 +1,4 @@
-// Local-only field cards: no fetch(), analytics, accounts, storage, or form delivery.
+// Local-only field cards: no network requests, analytics, storage, or form delivery.
 const $=id=>document.getElementById(id);
 const form=$('card-form'), title=$('title'), step=$('step'), area=$('area'), stage=$('stage'), happened=$('happened'), open=$('open'), status=$('status');
 const kind=()=>form.querySelector('input[name="kind"]:checked').value;
