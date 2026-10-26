@@ -59,3 +59,17 @@ Implemented host-only, client-side successor composer at https://garden.abundent
 These are TWO independent pilot systems. A Seven-Day Table ID or bearer token MUST NOT be passed as a Seventh Table parent. The first portable card has an empty parent/chain; later cards can form native Seventh Table lineage. No cross-system verified completion, participant enrollment, supplier agreement or food order is asserted.
 
 Static integrity checks include DOM/script parse, exact portable schema, no private token in payload, explicit share consent, and Central Time day arithmetic. End-to-end host browser/download/new-host handoff still needs manual smoke test. No third-party messages are sent.
+
+## BananaGram Pocket ↔ private Seat (draft handoff 001)
+
+The public Seven-Day Table now links to the **public, local-only** [BananaGram Pocket](https://garden.abundent.org/gram). A person with an actual authorized **private seat** may press **Shape a BananaGram privately** to open Pocket as a new tab. The original seat page retains the only invitation bearer token; it is **never copied into Pocket or the return payload**.
+
+1. Seat generates a 128-bit fresh in-memory handoff nonce, opens `/functions/v1/banana-pocket#returnToTable=<nonce>` on the **same Supabase origin**. A cross-origin or independent Pocket window has no return-to-seat button.
+2. In Pocket, the person creates a local Gram, deliberately prepares a distinct redacted proposal, and checks author, consent, and review boxes.
+3. Clicking **Return reviewed question to my Table** posts only `{type,nonce,standing:'PROPOSE_ONLY',summary}` to the popup opener with an exact `location.origin` target. No private traces, household data, full Gram, invite keys, or author records leave Pocket.
+4. The Seat page requires the **exact popup window**, **same origin**, matching **one-time session nonce**, active authorized seat, valid standing, and a short contact-free summary. It will ask before replacing existing text, then populate the **unsent/editable** contribution box and turn off sharing. The person must still press **Save my contribution** to save anything.
+5. Any message from another window, wrong origin, wrong nonce, invalid state, private URL/contact, or absent active seat fails closed; no new backend POST action, database table, or role permission is created.
+
+The public `/gram` remains a standalone non-network drafting door for people without a private seat. The table is not an open submission inbox. This uses a live ephemeral in-browser postMessage boundary instead of exporting/importing manual JSON, while keeping direct network authority with the existing table API.
+
+**Testing:** module + inline script syntax checks, source-level checks and simulated parent/child message flows. New Node regression `tests/banana-pocket-seat-return.test.mjs` exercises origin/source/nonce refusal and unsent-draft behavior. Still needs a real browser/mobile popup / keyboard / response test with a test seat. No real contacts or institutional endorsement implied.

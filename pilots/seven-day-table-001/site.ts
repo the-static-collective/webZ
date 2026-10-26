@@ -5,11 +5,11 @@ export const SITE = String.raw`<!doctype html><html lang="en"><head><meta charse
 :root{--forest:#163d32;--ink:#1c332b;--paper:#fbf7ed;--white:#fffefa;--gold:#f1da99;--sage:#dce9d9;--muted:#526c5e;--line:#b9ccb9;--rust:#995235}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,sans-serif}a{color:inherit}button,input,textarea,select{font:inherit}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--rust);outline-offset:3px}.wrap{width:min(1030px,calc(100% - 32px));margin:auto}header{background:var(--forest);color:white;padding-bottom:60px}nav{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:17px 0;border-bottom:1px solid #ffffff45;font-size:.84rem}nav strong{letter-spacing:.14em}nav a{color:var(--gold)}h1,h2,h3{font-family:Georgia,serif;letter-spacing:-.035em}h1{font-size:clamp(3.2rem,9vw,6.7rem);line-height:.97;margin:42px 0 19px}h1 em{font-style:normal;color:var(--gold)}h2{font-size:clamp(2rem,4vw,3rem);margin:0 0 15px;line-height:1.07}h3{font-size:1.45rem;margin:6px 0 10px}.eyebrow,.tag{text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:.13em;color:var(--rust)}header .eyebrow{color:var(--gold)}.hero{font-size:1.14rem;max-width:735px}.btn{border:1px solid var(--forest);display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--forest);color:white;padding:11px 15px;min-height:43px;cursor:pointer;text-decoration:none;border-radius:6px;font-weight:800}.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}.btn.outline{background:transparent;color:inherit;border-color:currentColor}.btn:disabled{opacity:.65;cursor:default}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.guard{background:#fff1ce;padding:16px 21px;border-left:5px solid var(--rust);margin-top:-20px;position:relative;font-size:.89rem}.section{padding:42px 0}.soft{background:var(--sage);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.lead{font-size:1.07rem;color:var(--muted);max-width:850px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tile{background:white;border:1px solid var(--line);padding:20px;min-width:0}.tile p{font-size:.92rem}.card{border:1px solid var(--line);padding:22px;background:#fff;margin:17px 0}.panel{max-width:860px;background:var(--white);padding:23px;border:2px solid var(--forest);margin:18px 0}.panel p{max-width:720px}.label{display:block;font-weight:800;margin:14px 0 6px}input[type=text],textarea,select{width:100%;padding:11px;border:1px solid #91a99b;color:var(--ink);background:#fff;border-radius:5px;max-width:700px}textarea{min-height:105px;resize:vertical}input[type=checkbox]{width:20px;height:20px;flex-shrink:0;accent-color:var(--forest)}.check{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:.87rem}.small{font-size:.84rem;color:var(--muted)}.message{white-space:pre-wrap;background:#f3f7ef;padding:16px;border-left:5px solid var(--forest);overflow-wrap:anywhere;line-height:1.5}.status{font-size:.9rem;color:#3f6047;font-weight:700;min-height:20px;margin-top:12px}.invite{background:#eff3e9;padding:14px;border:1px solid var(--line);margin:10px 0}.invite code{display:block;font:12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.flow>div{background:white;padding:16px;border-top:5px solid var(--forest)}.flow strong{display:block}.hide[hidden]{display:none!important}.roles{border-bottom:1px solid var(--line);padding:12px 0}.roles p{margin:5px 0}.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.pill{background:#e9efd9;color:#264733;padding:5px 8px;font-weight:750;font-size:.76rem;border-radius:12px}.split{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}.footer{background:#102c22;color:#edf2e6;padding:29px 0;font-size:.82rem}.footer a{color:var(--gold)}.alert{border-left:5px solid var(--rust);padding:12px 16px;background:#fff1d1}.summary{white-space:pre-wrap;line-height:1.65}.actionCard{white-space:pre-wrap;background:#e6eee0;border:1px solid var(--line);padding:17px;font-size:.92rem;line-height:1.62;overflow-wrap:anywhere}.actionCard[hidden]{display:none}.never{font-weight:800;color:#7b4330}.disclose{background:#e3efdf;padding:13px;border:1px solid var(--line)}@media(max-width:760px){.grid,.split{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}}@media(max-width:450px){.flow{grid-template-columns:1fr}.section{padding:28px 0}.panel{padding:15px}h1{font-size:3.3rem}}@media print{@page{size:letter;margin:.55in}header{background:#fff;color:#111;padding-bottom:4px}body{font:11pt/1.4 Georgia,serif;background:#fff}.guard,.buttons,#hostUI,#seatUI,.footer,nav{display:none!important}.section{padding:6px}.tile{break-inside:avoid}.print{display:block!important}}.print{display:none}
 .caseBox{background:#fffcf2;border:2px solid var(--forest);padding:23px;margin:18px 0}.caseBox .fine{background:#eff3e6;border-left:4px solid var(--forest);padding:12px;margin:15px 0}.caseBox .caseLine{margin:8px 0}.caseBox input[type=date],.caseBox input[type=text]{width:min(100%,680px);padding:11px;border:1px solid #91a99b;border-radius:5px;background:#fff;color:var(--ink)}.caseBox .caseLink{display:block;overflow-wrap:anywhere;margin:10px 0}.caseBox .check{max-width:770px}</style></head><body>
-<header><div class="wrap"><nav><strong>THE GARDEN · SEVEN-DAY TABLE</strong><div><a href="https://garden.abundent.org/">Garden atlas ↗</a> &nbsp; <a href="https://garden.abundent.org/signal">The Garden Signal ↗</a></div></nav>
+<header><div class="wrap"><nav><strong>THE GARDEN · SEVEN-DAY TABLE</strong><div><a href="https://garden.abundent.org/">Garden atlas ↗</a> &nbsp; <a href="https://garden.abundent.org/signal">The Garden Signal ↗</a> &nbsp; <a href="https://garden.abundent.org/gram">BananaGram Pocket ↗</a></div></nav>
 <div class="eyebrow" style="padding-top:40px">Waseca × Greater Mankato · an independent invitation</div><h1>One table.<br><em>Seven days.</em><br>Many hands.</h1>
 <p class="hero">You don't have to be free for the same meeting to help make something happen. Bring one useful question or contribution, invite up to two other voices, or send an ambassador in your place.</p>
 <p class="hero"><strong>One week to turn existing goodwill into one concrete next step.</strong></p>
-<div class="buttons"><a class="btn gold" id="playCase" href="?case=milk">Play the Vanishing Carton mystery</a><a class="btn outline" href="#circle">See the real-world question</a></div>
+<div class="buttons"><a class="btn gold" id="playCase" href="?case=milk">Play the Vanishing Carton mystery</a><a class="btn outline" href="#circle">See the real-world question</a><a class="btn outline" href="https://garden.abundent.org/gram">Shape a question privately</a></div>
 <p class="small" style="color:#dce9d9">A silly fictional mystery, then an optional invitation to test a real sourcing question. No game response is shared or submitted.</p><p class="print">garden.abundent.org/seven</p>
 </div></header>
 <div class="wrap"><aside class="guard"><strong>Independent working experiment, not an official committee.</strong> This invitation is organized through Static Collective / Abundent. It does not imply participation, endorsement, or representation by the Waseca food co-op, Coalition of Care, SMIF, MSU Mankato, any food shelf, producer, or other organization. Each person and institution decides for itself.</aside></div>
@@ -71,6 +71,12 @@ Your private invitation link will go here.</div>
 <div class="split"><div><div class="panel"><h3>Bring one useful thing</h3><label class="label" for="availability">When could you connect, if at all?</label><select id="availability"><option value="async">Asynchronously anytime this week</option><option value="morning">Mornings</option><option value="afternoon">Afternoons</option><option value="evening">Evenings</option><option value="weekend">Weekend</option><option value="unavailable">No live time works; written contribution only</option></select>
 <label class="label" for="response">Your question, possibility, resource, or proposed small action</label><textarea id="response" maxlength="500" placeholder="One thing we could usefully test is..."></textarea>
 <p class="small">12–500 characters. No names, emails, phone numbers, links, private hardship details or commitments on behalf of someone else.</p>
+<div class="panel" style="margin:14px 0;background:#f6f1dc">
+ <div class="tag">BananaGram · question with handles</div>
+ <p>Want to make sense of your question before contributing? Open a private Pocket Gram, preserve a trace or a tension, and deliberately carry back only one reviewed sentence.</p>
+ <button class="btn" type="button" id="openPocket">Shape a BananaGram privately</button>
+ <p class="small" id="pocketStatus" role="status">Your seat stays open here. No response is submitted until you press <strong>Save my contribution</strong>.</p>
+</div>
 <label class="check"><input type="checkbox" id="shared"><span>Share this exact response anonymously with other invited participants. Without this choice it stays visible only to the host.</span></label>
 <div class="buttons"><button class="btn gold" id="submitSeat">Save my contribution</button><button class="btn" id="declineSeat">Decline this invitation</button></div><p class="status" id="seatStatus" role="status"></p></div></div>
 <aside><div class="panel"><h3>Two doors, one alternative</h3><p>Invite up to <strong>two other people</strong> whose perspective could add something useful. Only direct original invitations can open these two extra places.</p>
@@ -90,6 +96,47 @@ const makeText=(link)=>$('sample').textContent.replace('Your private invitation 
 const caseURL=link=>{const u=new URL(link);u.searchParams.set('case','milk');return u.toString();};
 $('playCase').href=caseURL(location.href);
 let room=null,all=[],self=null,last=null,cardText='';
+let pocketWindow=null,pocketNonce=null;
+const POCKET_MESSAGE='bananagram.reviewed-seat-draft/v0';
+function pocketNonce32(){
+ const random=crypto.getRandomValues(new Uint8Array(16));
+ return Array.from(random,x=>x.toString(16).padStart(2,'0')).join('');
+}
+function isSafePocketDraft(value){
+ return typeof value==='string'&&value.length>=12&&value.length<=240
+   &&!/https?:\/\/|www\.|[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?1[ .-]?)?\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}/i.test(value)
+   && !/[\u0000-\u001f\u007f]/.test(value);
+}
+$('openPocket').onclick=()=>{
+ if(!authed||asHost||!self||room?.closed||self.status==='declined'||self.status==='delegated'){
+  $('pocketStatus').textContent='An active private seat is required to bring a draft back.';return;
+ }
+ if(!location.pathname.startsWith('/functions/v1/seven-day-table')){
+  $('pocketStatus').textContent='The private Pocket handoff requires the Garden direct table page. Open your original invite link.';return;
+ }
+ pocketNonce=pocketNonce32();
+ const url=new URL('/functions/v1/banana-pocket',location.origin);
+ url.hash='returnToTable='+pocketNonce;
+ pocketWindow=window.open(url.toString(),'_blank');
+ if(!pocketWindow){pocketNonce=null;$('pocketStatus').textContent='Popup blocked. Allow a new tab or use garden.abundent.org/gram independently.';return;}
+ $('pocketStatus').textContent='Pocket opened in another tab. Return a deliberately reviewed question to preview it here; nothing is sent or saved automatically.';
+};
+window.addEventListener('message',event=>{
+ if(!pocketNonce||!pocketWindow||event.origin!==location.origin||event.source!==pocketWindow)return;
+ const value=event.data;
+ if(!value||value.type!==POCKET_MESSAGE||value.nonce!==pocketNonce)return;
+ if(!authed||asHost||!self||room?.closed||self.status==='declined'||self.status==='delegated')return;
+ const summary=value.summary;
+ if(value.standing!=='PROPOSE_ONLY'||!isSafePocketDraft(summary)){
+  $('pocketStatus').textContent='Pocket handoff refused. It must be a reviewed, contact-free proposal under 240 characters.';return;
+ }
+ const existing=$('response').value.trim();
+ if(existing&&existing!==summary&&!confirm('Replace your existing unsent contribution draft with this BananaGram sentence? Nothing will be saved yet.'))return;
+ $('response').value=summary;
+ $('shared').checked=false; // A Pocket handoff never opts in to invited-circle redistribution.
+ $('pocketStatus').textContent='Reviewed question copied into your editable response draft. Sharing is off. Nothing has been saved. Review and press Save my contribution only if you choose.';
+ pocketWindow=null;pocketNonce=null;$('response').focus();
+});
 async function api(action,data={}){const response=await fetch(location.pathname,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...base(),action,...data})});let v;try{v=await response.json();}catch{throw Error('Unexpected server response');}if(!response.ok)throw Error(v.error||'Unable to complete');return v;}
 async function copy(t,target){try{await navigator.clipboard.writeText(t);$(target).textContent='Copied to clipboard.';}catch{$(target).textContent='Clipboard unavailable. Select and copy the text manually.';}}
 $('copySample').onclick=()=>copy($('sample').textContent,'accessHint');
