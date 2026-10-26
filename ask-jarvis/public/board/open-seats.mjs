@@ -97,7 +97,7 @@ export function recruitmentCopy(packet,mode='interested'){
  :'Could you or someone you know help shape this small, voluntary role? A no is welcome.';
  return [intro,'',packet.title,packet.blocker,'',
   'Why this could be useful: '+packet.reason,
-  'A safe first trial: '+packet.firstMove,
+  'A small trial (safe and reversible): '+packet.firstMove,
   'What would demonstrate the trial: '+packet.evidenceOfTrial,
   'Permission still needed: '+packet.approvalFrom,
   'Boundary: '+packet.limit,'',
