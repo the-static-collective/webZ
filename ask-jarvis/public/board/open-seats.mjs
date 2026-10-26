@@ -51,8 +51,8 @@ const DEFAULT_BY_THREAD=Object.freeze({
  grocery:'permission',milk:'verify',care:'invite',artists:'invite',park:'permission',church:'permission'
 });
 const RULES=Object.freeze([
- {id:'review',terms:['moderate','moderation','editor','review pending','publication approval','redact','community post']},
- {id:'permission',terms:['permission','approval','authorize','site owner','venue','legal clearance','governance']},
+ {id:'review',terms:['moderate','moderation','moderator','editor','review pending','publication approval','redact','community post']},
+ {id:'permission',terms:['permission','approval','approve','sign off','authorize','site owner','venue','legal clearance','governance']},
  {id:'verify',terms:['evidence','verify','unverified','source','fact','research','confirm']},
  {id:'build',terms:['prototype','build','printer','software','hardware','tool','deploy']},
  {id:'invite',terms:['invite','recruit','interest','connect','outreach','contact','members']},
@@ -88,7 +88,21 @@ export function seatPacket(gateOrId,{issue='',thread=null,sourceRef=null}={}){
   noAccountRequired:true,declineAccepted:true
  });
 }
-export function recruitmentCopy(packet,mode='interested'){
+export function openSeatLink(origin,gateId){
+ if(!getGate(gateId))throw Error('UNKNOWN_SEAT');
+ const u=new URL(origin);
+ if(u.protocol!=='https:'&&u.hostname!=='localhost')throw Error('SECURE_ORIGIN_REQUIRED');
+ const where=u.pathname.includes('/functions/v1/workboard-preview')?
+   '/functions/v1/workboard-preview':'/board/';
+ const link=new URL(where,u);link.search='?seat='+encodeURIComponent(gateId);link.hash='';
+ return link.toString();
+}
+export function recruitmentCopy(packet,mode='interested',landing=''){
+ if(landing){
+  let url;try{url=new URL(landing);}catch{throw Error('INVALID_LANDING');}
+  if(url.protocol!=='https:'&&url.hostname!=='localhost')throw Error('INVALID_LANDING');
+  if(url.searchParams.get('seat')!==packet.gate)throw Error('INVALID_LANDING');
+ }
  if(packet?.schema!=='abundent/open-seat-candidate-v1'||!['interested','invite','ambassador'].includes(mode))throw Error('INVALID_INVITE');
  const intro=mode==='interested'
  ?'I would like to explore helping with this missing capability, without accepting a role yet.'
@@ -102,6 +116,7 @@ export function recruitmentCopy(packet,mode='interested'){
   'Permission still needed: '+packet.approvalFrom,
   'Boundary: '+packet.limit,'',
   'Independent Abundent exploration · interest is not appointment, credentials, a public role vacancy, or permission to act.',
+  landing?'Explore the open seat: '+landing:'',
   'A refusal or referral is an acceptable return. This is an unsubmitted draft.'
  ].join('\n');
 }
