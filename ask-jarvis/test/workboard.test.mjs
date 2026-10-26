@@ -16,6 +16,9 @@ test('every starter thread is editorial, not evidence of completion or a person 
   assert.equal(getOpportunity(t.id),t);
   assert.equal(new URL(campfireDoor('https://abundent.org/board/',t)).pathname,'/campfire/');
  }
+ assert.match(getOpportunity('garden-table').known,/Infinity Catering/);
+ assert.match(getOpportunity('garden-table').first,/nonfood tactile bean display/);
+ assert.match(getOpportunity('garden-table').gate,/allergen and temperature controls/);
  assert.match(getOpportunity('milk').known,/unverified lead/i);
  assert.match(getOpportunity('church').gate,/never a condition/i);
 });
