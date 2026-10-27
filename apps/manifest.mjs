@@ -52,8 +52,8 @@ export const DOORS = [
     "category": "publishing",
     "description": "LemonPRESS-style books for things, tools, and systems that do not exist yet.",
     "href": "https://books.abundent.org/",
-    "status": "open",
-    "note": "Experimental publishing surface.",
+    "status": "repair",
+    "note": "Needs repair: public hostname currently renders a generic Garden Workbench page, not the intended books interface.",
     "project": "abundent-computer-books-034"
   },
   {
@@ -82,8 +82,8 @@ export const DOORS = [
     "category": "community",
     "description": "Help an uncertain idea reach its first willing real-world steward.",
     "href": "https://firstyes.abundent.org/",
-    "status": "open",
-    "note": "Invitation and proposal, not preapproved assistance.",
+    "status": "repair",
+    "note": "Needs repair: hostname currently renders Ask JAR;VIS, not the First Yes experiment.",
     "project": "abundent-first-yes-030"
   },
   {
@@ -92,8 +92,8 @@ export const DOORS = [
     "category": "tools",
     "description": "Field-origin crossing and evidence review experiment.",
     "href": "https://webz.abundent.org/",
-    "status": "open",
-    "note": "A page visit does not authorize data transfer.",
+    "status": "repair",
+    "note": "Needs repair: hostname currently renders Garden Workbench, not the webZ Field Porch. No crossing authorization implied.",
     "project": "webz-field-porch"
   },
   {

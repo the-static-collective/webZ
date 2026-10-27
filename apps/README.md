@@ -17,6 +17,18 @@ No accounts, cookies, contact collection, backend, analytics, embedding, iframe,
 
 The registered primary site `abundent.org` and its existing `/doors/` entry are independent of this app. The directory **does not replace the home page** or alter apex, MX, TXT, Resend or existing Cloudflare application records.
 
+## Current field/deployment evidence (2026-10-27)
+
+Source was merged as webZ PR #154 and GitHub Actions passed. The nine newly bound production Vercel custom hostnames resolved and rendered after Cloudflare propagation, but a content audit found **three wrong application landings**:
+
+- `books.abundent.org` renders a generic Garden Workbench instead of Books for Computers.
+- `firstyes.abundent.org` renders Ask JAR;VIS instead of First Yes.
+- `webz.abundent.org` renders a generic Garden Workbench instead of Field Porch.
+
+These are kept in the inventory as **Needs repair** and are **not** represented as correct application doors.
+
+The `apps.abundent.org` domain is verified on the new `abundent-switchboard` Vercel project and its Cloudflare CNAME is installed, **but the project has no deployment**: the Vercel Hobby account returned HTTP 402 with `api-deployments-free-per-day` (100 API deployments/day). Do not tell visitors the directory is live until a production deployment is READY and the rendered page is verified. API retries without quota relief are not useful. The primary `abundent.org` page has not been changed.
+
 ## Status vocabulary
 
 - **Web door configured:** a project/domain association was created or already existed. The directory does not continuously verify availability.
