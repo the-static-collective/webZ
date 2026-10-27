@@ -47,6 +47,12 @@ For a GitHub Pages release, a repo admin must first activate **Settings → Page
 
 Avoid commit-per-file publishing to this connected repository: create one reviewed atomic multi-file commit to prevent preview deployment fan-out.
 
-## GitHub Pages custom-domain proof
+## GitHub Pages custom-domain verification and controlled cutover
 
-On 2026-10-27 the owner reported saving `apps.abundent.org` in GitHub Pages settings. The authoritative Cloudflare CNAME was updated from `cname.vercel-dns.com` to `the-static-collective.github.io` (DNS-only), with Vercel retained as a rollback target. The Pages publishing workflow independently verifies `repository.pages.cname` is the intended hostname before release. A URL may appear to work while DNS/certificate caches propagate; mark the migration confirmed only after this check and live HTTPS page/asset fetches.
+The Switchboard is available independently at `https://the-static-collective.github.io/webZ/`; it also remains available at `https://apps.abundent.org/` on Vercel.
+
+**Operational rule:** a reported click on **Settings → Pages → Custom domain → Save** does not establish that GitHub stored the domain. The authoritative check is the repository's GitHub Pages API field `.cname`, read inside the `publish-pages` GitHub Actions job. We observed `.cname = null` during the previous attempted migration and restored Cloudflare's single `apps` CNAME to the Vercel target `cname.vercel-dns.com`.
+
+A subsequent owner confirmation requires another read of the Pages API before changing authoritative Cloudflare DNS. If GitHub reports `apps.abundent.org`, change that one CNAME from `cname.vercel-dns.com` to `the-static-collective.github.io` (DNS only), then verify page, JavaScript, and HTTPS from the branded host. Preserve the Vercel domain binding for rollback until GitHub Pages is independently proven healthy. Never migrate the apex, email records, or other subdomains as part of this operation.
+
+The portable release workflow emits the configured Pages hostname for audit. It warns but continues to update the independent `github.io` backup if no custom hostname is set; it rejects an unexpected third-party hostname. This avoids coupling backup publishing to an unfinished custom-domain migration.
