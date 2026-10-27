@@ -1,6 +1,6 @@
-# Vendor-independent build: produces an artifact on every reviewed main change.
-# Publishing to GitHub Pages is opt-in, manual, and requires Pages enabled
-# with GitHub Actions as the repository's Pages source.
+# Vendor-independent build: publishes the reviewed main-branch static site to GitHub Pages.
+# Requires Pages enabled with GitHub Actions as the repository's Pages source.
+# Does not change custom domains, DNS or the current Vercel production deployment.
 name: Abundent portable static release
 
 on:
@@ -57,8 +57,9 @@ jobs:
           if-no-files-found: error
           retention-days: 30
   publish-pages:
-    # Explicit opt-in; routine commits never publish to Pages or touch DNS.
-    if: github.event_name == 'workflow_dispatch' && inputs.publish_to_pages
+    # Owner enabled GitHub Actions as the Pages source. Build and publish reviewed main on push;
+    # manual dispatch remains an explicit fallback. DNS cutover is an independent decision.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish_to_pages))
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
