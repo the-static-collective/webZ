@@ -46,3 +46,7 @@ The app also builds without Vercel. Our [portable static workflow](../.github/wo
 For a GitHub Pages release, a repo admin must first activate **Settings → Pages → Source: GitHub Actions**; then manually run **Abundent portable static release** with `publish_to_pages: true`. It intentionally does not move DNS or claim that Pages is already enabled. Custom domain cutover has a separate verification/approval gate. See [Deployment Independence 001](../docs/ABUNDENT-DEPLOYMENT-INDEPENDENCE-001.md).
 
 Avoid commit-per-file publishing to this connected repository: create one reviewed atomic multi-file commit to prevent preview deployment fan-out.
+
+## GitHub Pages custom-domain proof
+
+On 2026-10-27 the owner reported saving `apps.abundent.org` in GitHub Pages settings. The authoritative Cloudflare CNAME was updated from `cname.vercel-dns.com` to `the-static-collective.github.io` (DNS-only), with Vercel retained as a rollback target. The Pages publishing workflow independently verifies `repository.pages.cname` is the intended hostname before release. A URL may appear to work while DNS/certificate caches propagate; mark the migration confirmed only after this check and live HTTPS page/asset fetches.

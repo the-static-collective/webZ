@@ -76,6 +76,18 @@ jobs:
           name: abundent-static-switchboard
           path: _site
       - uses: actions/configure-pages@v5
+      - name: Verify the registered GitHub Pages custom domain
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUIRED_PAGES_CNAME: apps.abundent.org
+        run: |
+          set -euo pipefail
+          actual="$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.cname // ""')"
+          echo "GitHub Pages configured custom domain: ${actual:-<none>}"
+          if [ "$actual" != "$REQUIRED_PAGES_CNAME" ]; then
+            echo "::error::GitHub Pages has not registered apps.abundent.org. Visit Settings > Pages > Custom domain, save it, and verify ownership before cutting over DNS."
+            exit 1
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
