@@ -38,3 +38,11 @@ The `apps.abundent.org` domain is verified on the new `abundent-switchboard` Ver
 A link never proves that a program serves clients or that any proposed partnership exists.
 
 **Inventory date:** 2026-10-27, account: `theotherlucasv-1250s-projects`.
+
+## Independent static releases when Vercel is capped
+
+The app also builds without Vercel. Our [portable static workflow](../.github/workflows/abundent-portable-static.yml) runs `npm test` + `npm run build` and uploads the exact static `dist/` tree as a GitHub Actions artifact whenever reviewed `apps/**` source lands on `main`. You can download and publish the bundle to a static host without a Vercel API request.
+
+For a GitHub Pages release, a repo admin must first activate **Settings → Pages → Source: GitHub Actions**; then manually run **Abundent portable static release** with `publish_to_pages: true`. It intentionally does not move DNS or claim that Pages is already enabled. Custom domain cutover has a separate verification/approval gate. See [Deployment Independence 001](../docs/ABUNDENT-DEPLOYMENT-INDEPENDENCE-001.md).
+
+Avoid commit-per-file publishing to this connected repository: create one reviewed atomic multi-file commit to prevent preview deployment fan-out.

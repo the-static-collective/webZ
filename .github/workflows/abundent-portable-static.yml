@@ -1,0 +1,83 @@
+# Vendor-independent build: produces an artifact on every reviewed main change.
+# Publishing to GitHub Pages is opt-in, manual, and requires Pages enabled
+# with GitHub Actions as the repository's Pages source.
+name: Abundent portable static release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - '.github/workflows/abundent-portable-static.yml'
+  workflow_dispatch:
+    inputs:
+      publish_to_pages:
+        description: 'Publish to GitHub Pages after the repository Pages source has been configured'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abundent-static-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout checked-in source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify switchboard contract
+        run: npm --prefix apps test
+      - name: Build self-contained static publication
+        run: npm --prefix apps run build
+      - name: Validate publish tree
+        run: |
+          set -eu
+          test -f apps/dist/index.html
+          test -f apps/dist/main.mjs
+          test -f apps/dist/manifest.mjs
+          test -f apps/dist/style.css
+          test ! -e apps/dist/.env
+      - name: Save provider-independent site bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: abundent-static-switchboard
+          path: apps/dist/
+          if-no-files-found: error
+          retention-days: 30
+  publish-pages:
+    # Explicit opt-in; routine commits never publish to Pages or touch DNS.
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_to_pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: abundent-static-switchboard
+          path: _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Publish reviewed static artifact
+        id: deploy
+        uses: actions/deploy-pages@v4
