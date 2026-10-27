@@ -47,7 +47,7 @@ test('page stays static, no sensitive intake, contact, analytics or automatic me
 test('no participant identity or attendance is treated as a process receipt',()=>{
   assert.match(governance,/no central archive of survivor testimony/i);
   assert.match(governance,/A signed HOLD is not admission/i);
-  assert.match(governance,/not copied into common group records/i);
+  assert.match(governance,/never copied into common group records/i);
   assert.match(governance,/not invented volunteers/i);
   assert.match(page,/No member count, no attendance tracking/i);
 });
