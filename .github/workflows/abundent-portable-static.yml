@@ -84,9 +84,13 @@ jobs:
           set -euo pipefail
           actual="$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.cname // ""')"
           echo "GitHub Pages configured custom domain: ${actual:-<none>}"
-          if [ "$actual" != "$REQUIRED_PAGES_CNAME" ]; then
-            echo "::error::GitHub Pages has not registered apps.abundent.org. Visit Settings > Pages > Custom domain, save it, and verify ownership before cutting over DNS."
+          if [ -z "$actual" ]; then
+            echo "::warning::GitHub Pages has no registered custom domain. Publish the independent github.io backup, but do not point apps.abundent.org DNS to GitHub yet."
+          elif [ "$actual" != "$REQUIRED_PAGES_CNAME" ]; then
+            echo "::error::GitHub Pages currently points to an unexpected custom domain. Verify GitHub Pages Settings before publishing."
             exit 1
+          else
+            echo "GitHub Pages custom domain is correctly registered."
           fi
       - uses: actions/upload-pages-artifact@v3
         with:
