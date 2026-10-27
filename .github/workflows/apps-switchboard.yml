@@ -1,0 +1,26 @@
+name: Abundent switchboard
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+      - '.github/workflows/apps-switchboard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - '.github/workflows/apps-switchboard.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm --prefix apps test
+      - run: npm --prefix apps run build
+      - name: Inspect static output
+        run: test -f apps/dist/index.html && test -f apps/dist/manifest.mjs
