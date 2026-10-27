@@ -22,7 +22,7 @@ The founder may convene a public-safe mock planning session. They **may not cert
 
 ## The first experiment: a *founding workshop*, not a survivor group
 
-**Length:** 45 minutes. **Participants:** founder plus one known, consenting adult, ideally with an additional independent safeguarding reviewer when available. **Inputs:** this public protocol and **fictional examples only**. No survivor stories, no custody details, no names of family members, no private evidence, no recording.
+**Length:** 45 minutes only if an independent adult voluntarily opts into the rehearsal. **Participants:** founder plus a consenting volunteer reviewer, who need not know the founder personally; an independent safeguarding professional should separately examine readiness. The prework can be inspected or printed by anyone without enrolling. **Inputs:** this public protocol and **fictional examples only**. No survivor stories, no custody details, no names of family members, no private evidence, no recording. There is no personal-friend prerequisite. If no volunteer appears, the founding packet remains useful and the session does not occur.
 
 | Minutes | Activity | Concrete return |
 | --- | --- | --- |
@@ -33,9 +33,9 @@ The founder may convene a public-safe mock planning session. They **may not cert
 | 35–42 | Pick one bounded next step owned by a willing person; define what cannot be done yet. | One consensual action |
 | 42–45 | Ask separately whether any process note may be made public; no response means **no publication**. | Public-safe correction or HOLD |
 
-**Invite text for one trusted adult** (send manually; not an endorsement or enrollment):
+**Public open invitation** (safe to share only after the page is reviewed and actually published; no endorsement or enrollment):
 
-> I'm helping design Still Here, a possible peer circle for isolated survivors, beginning with dads. It's not running as a support group yet. Would you be willing to spend 45 minutes reviewing the **rules using fictional examples only**? No personal histories, case details, or access to anyone seeking help. You can critique the idea, decline, or stop at any point; there's no commitment to join. I'm especially hoping you'll tell me what we are missing before we invite anyone vulnerable.
+> STILL HERE — We're preparing a possible peer circle for isolated survivors, beginning with dads. It is **not operating as a support group yet**. Want to help make the foundations trustworthy? Review a public rule, test a fictional safety scenario, help with accessibility or bring professional safeguarding expertise. **No need to know us personally.** No survivor histories, case data, private introductions, or access to participants. Use the optional consent-based volunteer contact desk linked from the founding page if you wish to be contacted. No one is automatically enrolled or appointed; declining and leaving are always welcome.
 
 **Independent expert review request** (no presumed relationship):
 
@@ -72,16 +72,29 @@ A live, invitation-only trial with adults occurs **only after** the following ar
 
 **Any unchecked item = no live survivor circle.** This does **not** prevent the no-intake Porch, individual local practice, fictional rehearsal, or independently requested professional advice.
 
+## An invitation that can be found without knowing anyone
+
+The founder currently does **not** have a trusted person to invite. That is a design constraint, not a failure of the founder or a reason to demand more unpaid social labor. Our initial distribution strategy is **build the no-intake Porch and a public-safe open invitation**, then give strangers a way to offer *bounded, non-sensitive* help at a distance. A contact-desk submission is a prospect's explicit request to be contacted; do not publish their identity, forward their message to other volunteers, or treat it as proof they are vetted.
+
+1. **Useful without participation:** the no-account Porch, printable founding rules, local private exercises, and clear progress status must work for someone who arrives alone; no human responder is implied.
+2. **Open roles rather than private introductions:** post clear, inspectable, accessible needs—safeguarding critique, fictional scenario review, proofreading, accessibility, steward accountability. Prospective contributors may join the work without needing to share a survivor identity.
+3. **One bounded opt-in:** a reader can choose a role in `/still-here/start/`, then *separately* open the existing `/contact/` volunteer desk, provide an email, affirm permission for reply and explicitly send. Do not accept abuse narratives at this desk. A submitted interest is not an application, appointment, a secure service request, or guaranteed reply.
+4. **Incoming work stays on HOLD:** no automated match or distribution, no survivor-member directory, no processing unmoderated disclosures, no implicit follower, no child records. Humans must review requests before any introduction or role assignment.
+5. **Discovery once released:** link public-safe welcome and helping doors from Abundent; publish a poster/short invitation only when its landing page really works and has been checked. No dependence on the founder's existing friends and no invented reach/engagement metrics. Avoid implying affiliations with churches, agencies, advocates or local organizations who have not agreed.
+6. **Growth gate:** a public page is allowed; opening a confidential survivor group still requires independent qualified safeguards, trained facilitators, separate complaints handling and consent/withdrawal procedures.
+
+**The group cannot demand connections from people whose isolation is part of the reason the group must exist.**
+
 ## Seven days toward real capacity
 
 | Window | Actual evidence to seek | Honest fallback |
 | --- | --- | --- |
-| Day 1 | One manually sent **invitation to review the rules**, without case information | Unsent draft |
-| Days 2–3 | One willing adult performs or declines a 45-minute fictional rehearsal | Open seat; clarify why |
-| Days 4–5 | Approach a qualified independent safeguarding reviewer about consultation (no assumed response) | Requested / pending |
-| Days 6–7 | Amend covenant and risk ledger; publish only non-identifying, separately consented process learnings | HOLD if no consent |
+| Day 1 | Prepare a public-safe welcome/open-call link, and verify it before any public release | Draft / preview only |
+| Days 2–3 | Allow independently interested people to self-select a non-sensitive task via separate consent-based contact | No expression of interest; seat remains open |
+| Days 4–5 | Prepare or make an appropriately scoped request for qualified independent safeguarding review | Not requested / pending |
+| Days 6–7 | Improve one accessible public instrument or safety rule; publish only separately consented, generic process learnings | HOLD if no consent; instrument remains useful |
 
-A good first week ends with **one corrected operating rule and one real person who voluntarily engaged**, not a vanity member count. Refusals are valid evidence of a boundary, not failures.
+A good first week can end with **one real useful door and a truthful open role**, even if no one has yet arrived. An actual volunteer or independently reviewed safeguard is a further milestone, not something to fabricate. No member-count target. Refusals and silence are valid, not failures.
 
 ## What belongs in which system
 
