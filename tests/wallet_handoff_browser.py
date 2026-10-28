@@ -35,6 +35,9 @@ try:
   requests=[];errors=[]
   inbox.on("pageerror",lambda e:errors.append(str(e)))
   def mock_api(route):
+   if route.request.method=="OPTIONS":
+    route.fulfill(status=204,headers={"access-control-allow-origin":"https://apps.abundent.org","access-control-allow-methods":"POST, OPTIONS","access-control-allow-headers":"content-type"})
+    return
    body=json.loads(route.request.post_data)
    assert body["action"]=="create"
    route.fulfill(status=200,content_type="application/json",
