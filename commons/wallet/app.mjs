@@ -101,10 +101,11 @@ $("createForm").addEventListener("submit",async event=>{
 });
 $("unlockForm").addEventListener("submit",async event=>{
  event.preventDefault();
+ const passphrase=event.currentTarget.elements.pass.value;
  try{await run(async()=>{
   const data=await readVault();
   if(!data)throw Error("No saved wallet on this device.");
-  const opened=await unlockWallet(data,event.currentTarget.elements.pass.value);
+  const opened=await unlockWallet(data,passphrase);
   openVault(opened);clearForm("unlockForm");message("Wallet unlocked only in this tab. Your links were decrypted locally.");
  })}catch(e){message(e.message,true)}
 });
