@@ -27,6 +27,9 @@ input::placeholder{color:#a8b6ad}input[type=file]{padding:1rem}select{appearance
 .linkcard .chip{display:inline-block;border:1px solid #738a66;border-radius:40px;padding:.25rem .5rem;color:var(--gold);font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
 .linkcard button{padding:.5rem .75rem;border-radius:7px;background:transparent;color:var(--cream);border:1px solid #739e85;font-size:.8rem;font-weight:800}
 .linkcard button.remove{border-color:#a37575}.empty{padding:1.2rem;border:1px dashed #769c87;border-radius:8px;color:#b0d6bb}
+.handoff-preview{border:1px solid #719e7c;border-radius:10px;padding:1rem 1.2rem;background:#0b3025;overflow-wrap:anywhere}
+.preview-title{font-family:Georgia,serif;font-size:1.45rem;color:var(--gold);margin:.3rem 0}
+#handoff{border:2px solid #b4c982;box-shadow:0 0 0 4px rgba(216,208,117,.08)}
 .advanced{border-top:1px solid #547e69;padding:1rem 0;margin:2rem 0 0}.advanced summary{cursor:pointer;font-weight:850;color:var(--gold)}
 #status{max-width:1000px;margin:1rem auto;padding:1rem 0;line-height:1.6;font-weight:650;color:#c7e9c7}
 #status[data-error=true]{color:#ffc0af}.footnote{margin:3rem auto;line-height:1.8;color:var(--soft)}

@@ -30,6 +30,16 @@
 <p class="fine">Restoring replaces the encrypted wallet on this device. Back up anything important first. This does not revoke or rotate original invitation links.</p>
 <button class="outline" type="submit">Validate and restore backup</button>
 </form></section>
+<section class="panel" id="handoff" hidden aria-live="polite">
+<p class="eyebrow">INCOMING DOOR / MANUAL REVIEW REQUIRED</p><h2>Keep this link?</h2>
+<p>This door was offered by another page on this same Abundent hostname. No link has been saved. Confirm its source and requested access before keeping it.</p>
+<div class="handoff-preview">
+<p id="handoffName" class="preview-title"></p><p id="handoffType"></p>
+<p id="handoffHost"></p><p class="fine">A private owner invitation is a credential, not proof of your identity. External permissions stay with the originating room.</p>
+</div>
+<p id="handoffUnlockHint" class="fine">Create or unlock your encrypted wallet first, then choose Keep link.</p>
+<div class="actions"><button id="handoffSave" type="button" class="primary" disabled>Keep link in wallet</button><button id="handoffDiscard" type="button" class="outline">Discard offered link</button></div>
+</section>
 <section class="panel" id="vault" hidden>
 <div class="sectionhead"><p class="eyebrow">01 / YOUR POCKET WEB</p><h2>Doors you can carry.</h2><p id="count" class="fine">0 links</p></div>
 <div class="actions"><button id="lock" class="outline" type="button">Lock wallet</button>
