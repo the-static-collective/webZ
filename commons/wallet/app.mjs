@@ -26,8 +26,7 @@ function canReceive(){
   const openerPath=window.opener.location.pathname;
   return openerPath.endsWith("/commons/inbox/")||
      openerPath.endsWith("/commons/")||
-     openerPath.endsWith("/apps/")||
-     openerPath.endsWith("/");
+     openerPath.endsWith("/apps/")||openerPath==="/";
  }catch{return false}
 }
 if(new URLSearchParams(location.search).get("handoff")==="1"&&canReceive()){
