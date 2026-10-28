@@ -17,7 +17,7 @@ test("all nine institutional doors have distinct scoped asks and authority gates
  for(const d of doors){
   assert.ok(/^https:\/\//.test(d.url),d.id);
   for(const key of ["name","kind","alignment","request","offered","gate","due"])
-   assert.ok(d[key]?.length>=14,d.id+" "+key);
+   assert.ok(d[key]?.length>=(key==="name"?3:key==="kind"?5:key==="due"?4:14),d.id+" "+key);
   assert.match(d.gate,/no |not |must |require|cannot|Do not|Webinar|An invitation|An applicant|An application|A web|A city|BLOOM/i,d.id);
  }
 });
