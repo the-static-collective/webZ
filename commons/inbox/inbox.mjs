@@ -38,8 +38,8 @@ function saveOffer(url,scopeName){
  try{
   if(!room)throw Error("Open the inbox before saving an invitation.");
   const owner=scopeName==="owner";
-  offerLinkToWallet({title:room.title+" · "+scopeName+" access",url,scope:scopeName,
-    group:room.region,note:owner?"Private owner key; do not share.":"Invitation capability; possession grants access."},
+  offerLinkToWallet({title:(room.title.slice(0,60)+" · "+scopeName+" access").slice(0,80),url,scope:scopeName,
+    group:room.region.slice(0,48),note:owner?"Private owner key; do not share.":"Invitation capability; possession grants access."},
     "../wallet/");
   message("Wallet opened with an unsaved link offer. Review it there and explicitly choose Keep.");
  }catch(e){message(e.message,true)}
