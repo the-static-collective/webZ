@@ -1,27 +1,28 @@
 """Wallet Handoff 002 — real Chromium inbox and Switchboard → encrypted wallet.
 No private URL in popup navigation, browser storage, query or backend. Synthetic only.
 """
-import json,pathlib,threading
-from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
+import json,pathlib,mimetypes
+from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-class Handler(SimpleHTTPRequestHandler):
- def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
- def do_GET(self):
-  if self.path.startswith("/nested/webZ/apps/commons/"):
-   self.path="/commons/"+self.path.split("/nested/webZ/apps/commons/",1)[1]
-  elif self.path.startswith("/nested/webZ/"):
-   self.path=self.path[len("/nested/webZ"):]
-  return super().do_GET()
- def log_message(self,*args):pass
-s=ThreadingHTTPServer(("127.0.0.1",0),Handler)
-threading.Thread(target=s.serve_forever,daemon=True).start()
-root=f"http://127.0.0.1:{s.server_port}/nested/webZ/"
+root="https://apps.abundent.org/"
+def serve_static(route):
+ path=urlparse(route.request.url).path
+ if path=="/":file=ROOT/"apps/index.html"
+ elif path in {"/style.css","/main.mjs","/manifest.mjs"}:file=ROOT/"apps"/path.lstrip("/")
+ elif path.endswith("/"):file=ROOT/path.lstrip("/")/"index.html"
+ else:file=ROOT/path.lstrip("/")
+ if not file.is_file():
+  route.fulfill(status=404,body="Not Found")
+  return
+ mime=mimetypes.guess_type(str(file))[0] or "application/octet-stream"
+ route.fulfill(status=200,body=file.read_bytes(),content_type=mime,
+  headers={"cache-control":"no-store"})
 room="a1234567-b123-4234-8234-123456789abc"
-owner="SYNTHETIC_OWNER_KEY_1234567890123456789012"
-reviewer="SYNTHETIC_REVIEWER_KEY_1234567890123456789"
-submitter="SYNTHETIC_SUBMITTER_KEY_123456789012345678"
+owner="SYNTHETIC_OWNER_KEY_12345678901234567890123"
+reviewer="SYNTHETIC_REVIEWER_KEY_12345678901234567890"
+submitter="SYNTHETIC_SUBMITTER_KEY_1234567890123456789"
 assert len(owner)==43 and len(reviewer)==43 and len(submitter)==43
 passphrase="Handoff test sufficiently long passphrase"
 try:
@@ -29,6 +30,7 @@ try:
   browser=p.chromium.launch(headless=True)
   ctx=browser.new_context(viewport={"width":390,"height":844},device_scale_factor=1,
     service_workers="block",accept_downloads=True)
+  ctx.route("https://apps.abundent.org/**",serve_static)
   inbox=ctx.new_page()
   requests=[];errors=[]
   inbox.on("pageerror",lambda e:errors.append(str(e)))
@@ -36,7 +38,7 @@ try:
    body=json.loads(route.request.post_data)
    assert body["action"]=="create"
    route.fulfill(status=200,content_type="application/json",
-    headers={"access-control-allow-origin":root.rstrip("/").split("/nested/",1)[0]},
+    headers={"access-control-allow-origin":"https://apps.abundent.org"},
     body=json.dumps({"room":{"id":room,"title":"SYNTHETIC Local Pantry Room","region":"Fictional test",
      "createdAt":"2026-10-28T20:00:00.000Z","closed":False},
      "role":"owner","keys":{"owner":owner,"reviewer":reviewer,"submitter":submitter}}))
@@ -82,7 +84,7 @@ try:
   # Newly opened same-origin app index offers a public bookmark.
   switch=ctx.new_page()
   switch.on("pageerror",lambda e:errors.append(str(e)))
-  switch.goto(root+"apps/")
+  switch.goto(root)
   switch.get_by_role("heading",name="One garden. Many doors.").wait_for()
   keep=switch.get_by_role("button",name="Keep",exact=False).first
   with switch.expect_popup() as popup2:keep.click()
@@ -101,4 +103,4 @@ try:
     "ciphertext_storage_only":True,"switchboard_offer":True,
     "discard_without_save":True,"page_errors":errors}))
   browser.close()
-finally:s.shutdown()
+# All test state was in isolated Playwright contexts, no remote partner inbox was created.
