@@ -132,6 +132,13 @@ export default {
   async fetch(request,env) {
     const url=new URL(request.url);
     if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-004',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/recent-work'){
+      if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
+      const cut=await readRecentWork('recent useful projects',{fetcher:fetch});
+      return response({status:cut.status,release:cut.release,reviewedOn:cut.reviewedOn,
+        sourceSha256:cut.sourceSha256,selectedIds:cut.selected.map(x=>x.id),
+        disclosure:cut.disclosure||'The catalog was not available; no project is inferred.'},cut.status==='READ'?200:503);
+    }
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;

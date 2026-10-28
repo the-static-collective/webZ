@@ -8,7 +8,7 @@ const publicHost=/^(?:apps|garden|night|postoffice|becoming)\.abundent\.org$|^we
 const sourceRx=/^https:\/\/github\.com\/the-static-collective\/[A-Za-z0-9.-]+\/blob\/[a-f0-9]{40}\/[A-Za-z0-9_./-]+$/;
 const safe=v=>typeof v==='string'&&!/[\u0000-\u001f\u007f<>]/.test(v);
 const words=v=>[...new Set((String(v).toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>2&&!STOP.has(w)).map(w=>w.endsWith('ies')?w.slice(0,-3)+'y':w.endsWith('s')&&w.length>4?w.slice(0,-1):w))];
-const STOP=new Set(['and','the','with','from','what','would','could','should','there','their','your','does','this','that','these','about','some','when','where','which','into','have','will','just','make','our','want','need','project','projects','community','communities','people','work','help','today','please','recently']);
+const STOP=new Set(['and','the','with','from','what','would','could','should','there','their','your','does','this','that','these','about','some','when','where','which','into','have','will','just','make','our','want','need','project','projects','field','community','communities','people','work','help','today','please','recently']);
 export function parseRecentFeed(raw){
  if(typeof raw!=='string'||new TextEncoder().encode(raw).byteLength>32000)throw Error('RECENT_FEED_SIZE');
  let d;try{d=JSON.parse(raw)}catch{throw Error('RECENT_FEED_JSON')}
