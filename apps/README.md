@@ -64,3 +64,7 @@ The static build now copies [`../commons/`](../commons/) into `apps/dist/commons
 ## Jubilee Circuit public room (October 28)
 
 The build copies [../jubilee/](../jubilee/) into apps/dist/jubilee/ and the switchboard links to it. This is a print-ready two-hour host guide and a local-only invitation composer. Its voluntary music-to-useful-work protocol is at [../docs/JUBILEE-CIRCUIT-001.md](../docs/JUBILEE-CIRCUIT-001.md). This is not an enrollment, confirmed partner network, or donation intake. 
+
+## BRIDGE-001 — Between Rooms (2026-10-28)
+
+The static build includes `../bridge/` in `apps/dist/bridge/` and links from the Switchboard. It contains nine institution-specific **prospective** invitations, a machine-readable public-safe proposal manifest and a local synthetic HOLD/REFUSE rehearsal. It does **not** send invitations, enroll institutions, establish city cooperation or implement reLATTE receiver signatures. See [BRIDGE-001 source and acceptance gates](../docs/BRIDGE-001.md).

@@ -29,3 +29,18 @@ test('Jubilee Circuit is linked and included in the portable static build',async
  assert.match(landing,/href="\.\/jubilee\/"/);
  assert.ok(fs.existsSync(new URL('../jubilee/index.html',import.meta.url)));
 });
+
+test('Between Rooms proposal room is linked and shipped in the static artifact',async()=>{
+ const fs=await import('node:fs');
+ const build=fs.readFileSync(new URL('./build.mjs',import.meta.url),'utf8');
+ const landing=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ assert.match(build,/join\\(root,'\\.\\.\\/bridge'\\)/);
+ assert.match(landing,/href="\\.\\/bridge\\/"/);
+ for(const p of ['index.html','app.mjs','style.css','model.mjs','bridge-proposal-v0.json']){
+  assert.ok(fs.existsSync(new URL('../bridge/'+p,import.meta.url)),p);
+ }
+ const manifest=JSON.parse(fs.readFileSync(new URL('../bridge/bridge-proposal-v0.json',import.meta.url),'utf8'));
+ assert.equal(manifest.schema,'abundent/bridge-network-manifest-v0');
+ assert.equal(manifest.status,'PROSPECTIVE_ONLY');
+ assert.equal(manifest.doors.length,9);
+});

@@ -9,4 +9,6 @@ for(const file of ['index.html','main.mjs','manifest.mjs','style.css'])cpSync(jo
 cpSync(join(root,'../commons'),join(out,'commons'),{recursive:true});
 // Include the Jubilee Circuit public field kit on the same verified Abundent hostname.
 cpSync(join(root,'../jubilee'),join(out,'jubilee'),{recursive:true});
+// BRIDGE-001 is an account-free, read-only institutional proposal room.
+cpSync(join(root,'../bridge'),join(out,'bridge'),{recursive:true});
 console.log('Abundent Switchboard: static dist built (no accounts, API keys or shared database).');
