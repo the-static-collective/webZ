@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10231f"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Between Rooms · Private Operator Ledger · Abundent</title>
+<meta name="description" content="A private, locally encrypted application and relationship work journal. Human claims remain independent from institutional verification.">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head>
+<body>
+<a class="skip" href="#main">Skip to journal</a>
+<header class="top"><a class="logo" href="../../">abundent <b>✳</b><small>the static collective / webZ</small></a>
+<nav><a href="../network/">23-room atlas</a><a href="../">Between Rooms</a><a href="../../commons/wallet/">Private Link Wallet</a><a href="https://github.com/the-static-collective/webZ/blob/main/docs/BRIDGE-LEDGER-004.md">How this works ↗</a></nav></header>
+<main id="main">
+<section class="hero desk-hero"><p class="overline">BRIDGE-LEDGER-004 / AN OPERATOR-OWNED JOURNAL</p>
+<h1>The next<br><em>true crossing.</em></h1>
+<p class="lead">A private ledger for applications, introductions and their independently owned decisions.</p>
+<p>The institutional map tracks possibilities. This ledger records what <strong>you say actually happened</strong>, with dates and optional public references. An operator's entry is not proof of an institution's answer, admission, award or field outcome.</p>
+<p class="status">LOCAL ENCRYPTION <span>·</span> Never sends messages or applications. Never publishes an entry. No accounts, public tracking or network API calls. Keep names, confidential replies, bearer links, and beneficiary information out of these notes.</p></section>
+<section id="welcome" class="start"><div class="eyebrow">PRIVATE WORKSPACE / DEVICE OWNED</div>
+<h2 id="welcome-title">Set up your encrypted ledger.</h2>
+<p>All entries are encrypted into this browser's own storage. Choose a passphrase you can remember, and save encrypted backups regularly. Neither a passphrase nor a recovery key goes to Abundent.</p>
+<form id="create-form" class="vault-form" hidden><h3>Create a private ledger</h3>
+<label>New passphrase (at least 12 characters)<input required autocomplete="new-password" id="create-pass" type="password" minlength="12" maxlength="200"></label>
+<label>Confirm passphrase<input required autocomplete="new-password" id="confirm-pass" type="password" minlength="12" maxlength="200"></label>
+<button class="pill primary" type="submit">Create encrypted ledger</button></form>
+<form id="unlock-form" class="vault-form" hidden><h3>Unlock existing ledger</h3>
+<label>Passphrase<input required autocomplete="current-password" id="unlock-pass" type="password" minlength="12" maxlength="200"></label>
+<button class="pill primary" type="submit">Unlock on this device</button></form>
+<div class="restore-toggle"><button id="show-restore" type="button" class="pill">Restore encrypted backup on an empty device</button></div>
+<form id="restore-form" class="vault-form" hidden><h3>Restore a previously downloaded encrypted backup</h3><p>Restoration never overwrites an existing local ledger. If one exists, unlock it instead.</p>
+<label>Encrypted JSON backup<input id="restore-file" type="file" accept="application/json,.json" required></label>
+<label>Backup passphrase<input id="restore-pass" type="password" minlength="12" maxlength="200" required autocomplete="off"></label>
+<button type="submit" class="pill primary">Check integrity and restore</button></form>
+</section>
+<section id="desk" hidden>
+<div class="workspace-top"><div><div class="eyebrow">THE PRIVATE OPERATOR DESK</div><h2>23 doors, one actual history.</h2><p>Every candidate starts as a prospect. Only your explicitly entered events are stored.</p></div><div class="buttons"><button id="backup" type="button" class="pill primary">Download encrypted backup</button><button id="lock" type="button" class="pill">Lock</button></div></div>
+<div class="summary" id="summary" aria-live="polite"></div>
+<div class="desk-columns">
+<div class="queue-panel"><h3>Next useful doors <small id="visible-count"></small></h3>
+<div class="filters"><label>Find an institution<input id="find" type="search" placeholder="Voqal, food, community..." autocomplete="off"></label>
+<label>Focus<select id="filter"><option value="all">All 23 prospects</option><option value="urgent">Deadline within 7 days</option><option value="recorded">With a local event</option><option value="unstarted">Not yet started</option></select></label></div>
+<div id="queue" role="group" aria-label="Application and relationship work queue"></div></div>
+<article class="record-panel">
+<div class="eyebrow">SELECTED PROSPECT / OWNER-ATTESTED LOG</div>
+<h3 id="door-name"></h3><p id="door-due" class="due"></p>
+<div class="actions"><a id="official" class="pill primary" target="_blank" rel="noopener noreferrer">Official opportunity ↗</a><a id="map" class="pill" href="../network/">Public candidate map ↗</a><button class="pill" id="draft" type="button">Copy unsent introduction</button></div>
+<p class="gate" id="gate"></p>
+<div class="current"><b>Recorded standing</b><p id="standing">No work recorded.</p><p id="next"></p></div>
+<form id="event-form" class="event-form"><h4>Append one owner-attested event</h4>
+<label>What happened?<select id="kind" required></select></label>
+<label>Short factual note (8–400 characters; no private names or contact details)<textarea id="note" required rows="3" minlength="8" maxlength="400" placeholder="Example: Read official application instructions; local eligibility still needs review."></textarea></label>
+<label>Optional PUBLIC evidence link (HTTPS only, no ?queries or #private tokens)<input id="evidence" type="url" maxlength="1200" placeholder="https://example.org/public-evidence"></label>
+<button type="submit" class="pill primary">Append encrypted event</button>
+<p class="fine">An entry is your dated statement; links are references, not externally validated receipts. A message or application must be sent separately through its actual recipient's channel.</p></form>
+<h4>History for this institution</h4><div id="history" class="history" aria-live="polite"></div>
+</article></div>
+</section>
+<p id="status" class="message" role="status" aria-live="polite"></p>
+<section class="close"><div class="eyebrow">CUSTODY BOUNDARY</div><h2>Evidence before celebration.</h2>
+<p>This system cannot verify an institution's identity, a response's authenticity, a grant award, delivery, or an independent review. Its cryptographic digest chain detects alterations to your local journal; it is not a cryptographic signature by a third party. A browser wipe can erase the local ciphertext. Export backups and keep them privately.</p>
+<a href="../network/" class="pill">Return to the 23-room public atlas ↗</a></section>
+</main><footer>BRIDGE-LEDGER-004 · Local entry ≠ third-party receipt · Submission report ≠ award · Claimed review ≠ verified result</footer>
+</body></html>
