@@ -42,7 +42,7 @@ export function presentUnified(data){
     for(const item of s.recentWork.slice(0,3)){
       const li=el('li');li.append(el('strong','',item.title+' · '+item.state),
         el('p','','First real check: '+item.firstCheck));
-      try{const u=new URL(item.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){
+      try{const u=new URL(item.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming|connections)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){
        const link=el('a','','Open public door ↗');link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
       if(/^https:\\/\\/github\\.com\\/the-static-collective\\/[A-Za-z0-9.-]+\\/blob\\/[a-f0-9]{40}\\/[A-Za-z0-9_./-]+$/.test(item.source)){
        const source=el('a','',' · Read source ↗');source.href=item.source;source.target='_blank';source.rel='noopener noreferrer';li.append(source);}
