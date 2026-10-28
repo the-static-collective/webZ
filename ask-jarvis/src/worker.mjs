@@ -202,6 +202,13 @@ export default {
       try{return response(await investigate({question:obj.question,kind:obj.kind??'auto',lens:obj.lens??'standard',assemble,provider:makeWorkersProvider(env.AI)}));}
       catch(e){return response({error:inputError(e)},422);}
     }
+    if(url.pathname==='/api/recent-work'){
+      if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
+      const cut=await readRecentWork('recent useful projects',{fetcher:fetch});
+      return response({status:cut.status,release:cut.release,reviewedOn:cut.reviewedOn,
+        sourceSha256:cut.sourceSha256,selectedIds:cut.selected.map(x=>x.id),
+        disclosure:cut.disclosure||'The catalog was not available; no project is inferred.'},cut.status==='READ'?200:503);
+    }
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;
