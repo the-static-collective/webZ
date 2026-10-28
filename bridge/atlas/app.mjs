@@ -1,4 +1,4 @@
-import atlas from "./atlas.json" with {type:"json"};
+import atlas from "./atlas-data.mjs";
 const $=id=>document.getElementById(id);
 const byName=Object.fromEntries(atlas.repositories.map(r=>[r.name,r]));
 const findTrail=id=>atlas.paths.find(t=>t.id===id);

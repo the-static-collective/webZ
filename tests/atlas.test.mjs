@@ -30,3 +30,5 @@ test("browser reader is an entirely local review projection",()=>{
  assert.match(js,/CANDIDATE_ONLY_NOT_APPROVED/);
  assert.doesNotMatch(js,/\bfetch\s*\(|\blocalStorage\b|\bsessionStorage\b/);
 });
+
+test('browser JS export mirrors inspectable static JSON exactly',async()=>{const {default:browserAtlas}=await import('../bridge/atlas/atlas-data.mjs');assert.deepEqual(browserAtlas,atlas);});
