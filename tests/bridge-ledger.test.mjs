@@ -1,0 +1,78 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {emptyJournal,appendEvent,verifyJournal,historyFor,summarize,queue,evidenceUrl,TYPES} from "../bridge/desk/ledger.mjs";
+import {createVault,unlockVault,resealVault,validateEnvelope} from "../bridge/desk/vault.mjs";
+import {allDoors} from "../bridge/network/model.mjs";
+
+test("ledger is a distinct bounded owner-only journal across all 23 source opportunities",async()=>{
+ const j=emptyJournal();
+ assert.equal(j.events.length,0);
+ assert.equal(queue(j,new Date("2026-10-28T12:00:00")).length,allDoors.length);
+ assert.equal(summarize(j,"voqal").classification,"PROSPECT_ONLY");
+ assert.ok(TYPES.length>=10);
+ let next=await appendEvent(j,{doorId:"voqal",kind:"SOURCE_CHECKED",note:"Looked at the primary program source."},"2026-10-28T15:00:00.000Z");
+ assert.equal(next.events.length,1);
+ assert.equal(j.events.length,0);
+ next=await appendEvent(next,{doorId:"voqal",kind:"DRAFT_PREPARED",note:"Made a limited introduction draft."},"2026-10-28T15:01:00.000Z");
+ assert.equal(next.events[1].previous,next.events[0].digest);
+ assert.equal((await verifyJournal(next)).events.length,2);
+ assert.equal(historyFor(next,"voqal").length,2);
+ assert.equal(historyFor(next,"nexus").length,0);
+ assert.equal(summarize(next,"voqal").classification,"OWNER_ATTESTED_NOT_EXTERNALLY_VERIFIED");
+ assert.equal(summarize(next,"voqal").submittedClaim,false);
+});
+test("human-reported submit/review is not promoted to independently authenticated state",async()=>{
+ let j=emptyJournal();
+ j=await appendEvent(j,{doorId:"nexus",kind:"APPLICATION_REPORTED",note:"Operator reports submission, recipient not independently verified."});
+ j=await appendEvent(j,{doorId:"nexus",kind:"INDEPENDENT_REVIEW_REPORTED",note:"Operator reports a distinct reviewer; no signature attached."});
+ const state=summarize(j,"nexus");
+ assert.equal(state.submittedClaim,true);
+ assert.equal(state.reviewClaim,true);
+ assert.equal(state.classification,"OWNER_ATTESTED_NOT_EXTERNALLY_VERIFIED");
+ assert.notEqual(queue(j).find(x=>x.id==="nexus").priority,"VERIFY_NOW");
+});
+test("forged event, changed ancestry and unsafe source links reject",async()=>{
+ const journal=await appendEvent(emptyJournal(),{doorId:"voqal",kind:"SOURCE_CHECKED",note:"Read official eligibility guidance."});
+ const forged=structuredClone(journal);
+ forged.events[0].note="A different claim";
+ await assert.rejects(()=>verifyJournal(forged),/digest/);
+ const extra=structuredClone(journal);extra.events[0].signedByInstitution=true;
+ await assert.rejects(()=>verifyJournal(extra),/fields/);
+ const missing=structuredClone(journal);missing.events[0].previous="f".repeat(64);
+ await assert.rejects(()=>verifyJournal(missing),/chain/);
+ await assert.rejects(()=>appendEvent(journal,{doorId:"voqal",kind:"PARTNER",note:"Not an accepted event."}),/Unknown/);
+ await assert.rejects(()=>appendEvent(journal,{doorId:"other",kind:"SOURCE_CHECKED",note:"Fake institution."}),/Unknown/);
+ assert.throws(()=>evidenceUrl("https://example.org/private#bearer=secret"),/public HTTPS/);
+ assert.throws(()=>evidenceUrl("https://example.org?token=test"),/public HTTPS/);
+ assert.throws(()=>evidenceUrl("http://example.org"),/public HTTPS/);
+ assert.equal(evidenceUrl("https://example.org/public"),"https://example.org/public");
+});
+test("AES-GCM vault survives multiple saves, wrong passphrase and tamper reject",async()=>{
+ const v=await createVault("a-long-private-passphrase-004");
+ assert.equal(v.journal.events.length,0);
+ assert.equal(v.envelope.schema,"abundent/bridge-ledger-ciphertext-v1");
+ const after=await appendEvent(v.journal,{doorId:"voqal",kind:"SOURCE_CHECKED",note:"Checked primary web documentation."});
+ const sealed=await resealVault(after,v.key,v.envelope);
+ assert.notEqual(sealed.revision,v.envelope.revision);
+ assert.notEqual(sealed.iv,v.envelope.iv);
+ assert.ok(!JSON.stringify(sealed).includes("Checked primary"));
+ assert.equal((await unlockVault(sealed,"a-long-private-passphrase-004")).journal.events.length,1);
+ await assert.rejects(()=>unlockVault(sealed,"wrong-long-passphrase-004"),/Wrong passphrase/);
+ const broken={...sealed,ciphertext:sealed.ciphertext.slice(0,-2)+"ZZ"};
+ await assert.rejects(()=>unlockVault(broken,"a-long-private-passphrase-004"));
+ assert.throws(()=>validateEnvelope({...sealed,permission:"PARTNER"}),/fields/);
+});
+test("private desk linked and browser cannot make automatic external requests",()=>{
+ const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+ const main=read("bridge/index.html"),network=read("bridge/network/index.html");
+ const html=read("bridge/desk/index.html"),app=read("bridge/desk/app.mjs"),store=read("bridge/desk/store.mjs");
+ assert.match(main,/Private application ledger/);
+ assert.match(network,/Work this door privately/);
+ assert.match(html,/connect-src 'none'/);
+ assert.match(html,/Private Operator Ledger/);
+ assert.match(app,/APPLICATION_REPORTED/);
+ assert.doesNotMatch(app,/\bfetch\s*\(|\bsendBeacon\s*\(|\blocalStorage\b|\bsessionStorage\b/);
+ assert.match(store,/abundent_bridge_ledger_004/);
+ assert.match(read("apps/build.mjs"),/cpSync\(join\(root,'\.\.\/bridge'\)/);
+});
