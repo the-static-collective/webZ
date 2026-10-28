@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#0c251e">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="The Abundent Link Wallet: an encrypted keyring for your worlds, invitations, and community inboxes. No account.">
+<title>Link Wallet · Abundent</title>
+<link rel="stylesheet" href="./wallet.css">
+<script type="module" src="./app.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to wallet</a>
+<header class="top"><a class="brand" href="../../">ABUNDENT <span>✳</span><small>THE STATIC COLLECTIVE</small></a>
+<nav aria-label="Public navigation"><a href="../../">Switchboard</a><a href="../inbox/">Living Inbox</a><a href="../">Commons</a></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">WEBZ / PERSONAL KEYRING / 001</p>
+<h1>Your worlds.<br><em>One keyring.</em></h1>
+<p>Keep the doors you've opened: private invitations, community inboxes, useful tools, and ordinary bookmarks. <strong>No Abundent account.</strong> Your links stay encrypted on this device until you choose otherwise.</p>
+<div class="pillrow"><span>LOCAL FIRST</span><span>LOCKED BY PASSPHRASE</span><span>EXPORTABLE</span></div></section>
+<div class="boundary" role="note"><strong>Possession ≠ identity.</strong> A saved owner link is an access credential, not a verified right to represent an organization. Do not share your wallet file unencrypted. This protects against casual access to browser storage, <em>not</em> malware, malicious same-origin code, stolen unlocked devices or browser extensions. No password recovery or automatic cloud sync.</div>
+<section class="panel" id="welcome">
+<div class="sectionhead"><p class="eyebrow">00 / ENCRYPTION</p><h2 id="welcomeTitle">Create your local wallet</h2></div>
+<form id="createForm" hidden>
+<label>Choose a passphrase (12–200 characters)<input name="pass" type="password" autocomplete="new-password" minlength="12" maxlength="200" required></label>
+<label>Repeat passphrase<input name="repeat" type="password" autocomplete="new-password" minlength="12" maxlength="200" required></label>
+<p class="fine">The password is not sent to us. Losing it means losing access unless you already exported a backup and remember its passphrase.</p>
+<button class="primary" type="submit">Create encrypted wallet</button></form>
+<form id="unlockForm" hidden><label>Unlock with your passphrase<input name="pass" type="password" autocomplete="current-password" minlength="12" maxlength="200" required></label><button class="primary" type="submit">Unlock this device</button></form>
+<div class="actions"><button id="restoreStart" class="outline" type="button">Restore an encrypted backup</button></div>
+<form id="restoreForm" hidden>
+<label>Choose an encrypted Abundent wallet backup<input name="file" type="file" accept=".json,application/json" required></label>
+<label>Backup passphrase<input name="pass" type="password" autocomplete="current-password" minlength="12" maxlength="200" required></label>
+<p class="fine">Restoring replaces the encrypted wallet on this device. Back up anything important first. This does not revoke or rotate original invitation links.</p>
+<button class="outline" type="submit">Validate and restore backup</button>
+</form></section>
+<section class="panel" id="vault" hidden>
+<div class="sectionhead"><p class="eyebrow">01 / YOUR POCKET WEB</p><h2>Doors you can carry.</h2><p id="count" class="fine">0 links</p></div>
+<div class="actions"><button id="lock" class="outline" type="button">Lock wallet</button>
+<button id="backup" class="outline" type="button">Download encrypted backup</button></div>
+<div class="dashboard"><label>Find a door<input id="search" type="search" placeholder="Garden, Paula, review, radio…" autocomplete="off" maxlength="80"></label>
+<label>Type<select id="filter"><option value="all">All links</option>
+<option value="owner">Owner</option><option value="reviewer">Reviewer</option>
+<option value="submitter">Submitter</option><option value="invite">Invitation</option>
+<option value="public">Public door</option><option value="other">Other</option></select></label></div>
+<div id="entries" class="cards" aria-live="polite"></div>
+<h3>Add a door to the keyring</h3>
+<p class="fine">From a Living Inbox invitation, use Copy Link, then paste it here. A sensitive URL is never displayed in the list; opening or copying it requires your action.</p>
+<form id="addForm">
+<div class="grid"><label>Label<input name="title" minlength="2" maxlength="80" required placeholder="Garden · owner door"></label>
+<label>Access type<select name="scope"><option value="owner">Owner — highest responsibility</option>
+<option value="reviewer">Reviewer</option><option value="submitter">Submitter</option>
+<option value="invite">Invitation</option><option value="public">Public bookmark</option>
+<option value="other">Other</option></select></label></div>
+<label>Complete HTTPS link<input name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://apps.abundent.org/commons/inbox/#room=…" required></label>
+<div class="grid"><label>Collection (optional)<input name="group" maxlength="48" placeholder="Waseca / Ghana / Music"></label>
+<label>Reminder (optional)<input name="note" maxlength="180" placeholder="My local review invitation"></label></div>
+<button class="primary" type="submit">Encrypt and save link</button></form>
+<details class="advanced"><summary>Vault controls</summary>
+<h3>Change wallet passphrase</h3><p class="fine">Changes encryption of this local copy and future backups. Does not rotate access to an external inbox; use that inbox's own rotation controls if a link leaks.</p>
+<form id="rekeyForm"><label>New passphrase<input name="pass" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></label>
+<label>Repeat new passphrase<input name="repeat" type="password" autocomplete="new-password" required minlength="12" maxlength="200"></label>
+<button class="outline" type="submit">Re-encrypt wallet</button></form>
+<h3>Delete this device's copy</h3><p class="fine">This will erase the encrypted wallet in this browser. It does not delete any external inbox or revoke invitations.</p>
+<button id="deleteWallet" class="danger" type="button">Delete local wallet permanently</button>
+</details></section>
+<p id="status" role="status" aria-live="polite">Wallet initializing.</p>
+<section class="footnote"><p class="eyebrow">02 / WEBZ PORTABILITY</p><h2>One person. Many origins.</h2>
+<p>This keyring belongs to this browser and hostname, not to the whole web. To move to another device or webZ hostname, export the <strong>encrypted</strong> backup, transfer it privately, and restore it with your passphrase. Nothing syncs automatically.</p>
+<p>Opening a private link from this wallet is deliberate. You can still explore public worlds from the <a href="../../">Abundent Switchboard</a> without creating or unlocking a wallet.</p></section>
+</main><footer>ABUNDENT LINK WALLET 001 · THE KEYRING DOES NOT CREATE THE KEY.</footer>
+</body></html>
