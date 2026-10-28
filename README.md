@@ -71,3 +71,7 @@ The new [Porchlight Commons prototype](commons/) drafts privacy-conscious organi
 ## Living Receiver 001 — account-free community review
 
 The [Living Receiver](commons/receiver/) extends the Commons exchange desk. A person can locally open a small, non-sensitive HOLD card or JAR;VIS planZ return candidate, record an **unsigned self-attested** HOLD/REFUSE/ACCEPT_FOR_LOCAL_REVIEW note, and prepare a separately unverified field report. Export and re-import JSON on any device without installing our software. No provider authentication, cryptographic signature, sending, shared storage, verified recipient receipt, money flow or service placement is implied. [Field protocol](docs/LIVING-RECEIVER-001.md).
+
+## Living Receiver 002 — Private invitation inbox
+
+The [persistent Living Inbox](commons/inbox/) connects to an isolated Supabase Edge Function and private commons_inbox_* tables. The creator receives three random bearer capabilities: owner (manage), reviewer (read and self-attested review), and submitter (blind proposal submission). Only token hashes are stored. All tables use RLS and have no anon/authenticated direct grants. The service role stays server-side. A capability link is not verified identity; a review is not signed reLATTE ADMIT, and a report is not confirmed fulfillment. Owners can rotate reviewer/submitter links, close, or permanently delete. [Full protocol](docs/LIVING-INBOX-002.md).

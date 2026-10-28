@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0c1918">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://kbhqacsdvjsstzyplqij.supabase.co; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Create and manage a small, private community proposal inbox using invitation links.">
+<title>Living Inbox · Porchlight Commons</title>
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./inbox.css">
+<script type="module" src="./inbox.mjs"></script></head><body>
+<a class="skip" href="#inbox">Skip to inbox</a>
+<header><a class="brand" href="../">PORCHLIGHT COMMONS / LIVING INBOX</a>
+<nav><a href="../">Exchange Desk</a> · <a href="../receiver/">Offline Receiver</a></nav></header>
+<main id="inbox">
+<p class="eyebrow">LIVING RECEIVER 002 / PRIVATE INVITATION INBOX</p>
+<h1>Work can cross without taking over.</h1>
+<p class="lead">One community owns its inbox. Another can submit a proposed resource or method. Only invited reviewers can read and respond. Every report remains unverified until actual people confirm it.</p>
+<div class="alert"><strong>Capability-link pilot.</strong> An invitation link grants access to whoever possesses it; it does <em>not</em> authenticate their identity or establish organizational permission. Do not use this for shelter casework, personal details, client names, contacts, home or shelter addresses, remittances or medical records. No real organizations are enrolled automatically.</div>
+<section class="section" id="createSection"><p class="eyebrow">00 / START</p><h2>Open a private community inbox</h2>
+<p class="small">Create one for a real organization <em>only with its permission</em>. For practice, create a fictional test inbox and use fictional cards. The backend rate-limits creation; no accounts or payments are required.</p>
+<form id="createForm"><div class="grid">
+<label>Inbox title<input name="title" required minlength="4" maxlength="90" placeholder="Commons test inbox (practice only)"></label>
+<label>General region<input name="region" required minlength="3" maxlength="90" placeholder="Waseca / Greater Mankato"></label>
+</div>
+<label class="check"><input name="consent" required type="checkbox"> I understand these links are secret capabilities, not verified identities, and will share only non-sensitive organizational proposals.</label>
+<button type="submit">Create inbox and invitation links</button></form></section>
+<section class="section" id="newKeys" hidden><p class="eyebrow">SAVE THESE NOW</p><h2>Your invitation links</h2>
+<p><strong>Owner:</strong> full control, including close, deletion, and key rotation. Never share publicly.</p>
+<label>Owner link<input id="ownerLink" readonly></label>
+<p><strong>Reviewer:</strong> can read proposals, decide locally, and record unverified reports.</p>
+<label>Reviewer invitation<input id="reviewerLink" readonly></label>
+<p><strong>Submitter:</strong> can contribute a proposal but cannot inspect anyone else's submissions.</p>
+<label>Submitter invitation<input id="submitterLink" readonly></label>
+<div class="actions"><button type="button" id="copyOwner">Copy owner link</button><button type="button" class="secondary" id="copyReviewer">Copy reviewer invitation</button><button type="button" class="secondary" id="copySubmitter">Copy submitter invitation</button></div>
+<p class="small">Links contain the capability in the URL fragment, not the address sent to the server. Store the owner link safely. If an invitation leaks, rotate that role from the owner desk. Losing the owner link means losing control of this inbox.</p></section>
+<section class="section" id="desk" hidden>
+<p class="eyebrow">01 / CONNECTED INBOX</p><h2 id="roomTitle">Community inbox</h2>
+<p class="small" id="roomInfo"></p>
+<div class="actions"><button type="button" id="reload">Refresh inbox</button>
+<button type="button" class="secondary" id="leave">Leave / hide key from this address</button></div>
+<p class="small">This site does not store your capability in localStorage. You must keep the invitation link to return on another device.</p>
+</section>
+<section class="section" id="submissionSection" hidden>
+<p class="eyebrow">02 / SUBMIT · NON-SENSITIVE</p><h2>Send a reviewed card into this inbox</h2>
+<p>First build an organizational HOLD card at the <a href="../">Commons Exchange Desk</a>, or import an unverified JAR;VIS/planZ return. No automatic dispatch or partner enrollment.</p>
+<label>JSON file (max 12 KB)<input id="file" type="file" accept=".json,application/json"></label>
+<label>Or paste JSON<textarea id="packetText" rows="6" maxlength="13000" spellcheck="false"></textarea></label>
+<form id="submitForm"><label class="check"><input name="consent" type="checkbox" required> This card contains no personal details, contact information, case records, identifiable participants, or confidential locations; I have permission to propose it.</label>
+<button type="submit">Submit for local review</button></form>
+<p id="submissionReceipt" class="small" aria-live="polite"></p>
+</section>
+<section class="section" id="reviewSection" hidden>
+<p class="eyebrow">03 / OWNER & REVIEWER</p><h2>Proposals awaiting your judgment</h2>
+<p class="small">All proposals and reviews are persisted; this is not a verified partner directory. Only the latest human review note determines whether a report may be submitted. A report cannot count as an independently verified outcome.</p>
+<div id="cards" class="cards-list"></div>
+<form id="decisionForm">
+<h3>Record one review decision</h3>
+<label>Item<select name="itemId" id="decisionItem" required></select></label>
+<div class="grid"><label>Local choice<select name="decision">
+<option value="HOLD">HOLD — no permission</option><option value="REFUSE">REFUSE — decline</option>
+<option value="ACCEPT_FOR_LOCAL_REVIEW">Accept for LOCAL REVIEW only</option></select></label></div>
+<label>Reason (12–220 characters)<textarea name="reason" minlength="12" maxlength="220" required rows="3"></textarea></label>
+<button type="submit">Save review decision</button></form>
+<form id="reportForm">
+<h3>Record an unverified report</h3><label>Item<select name="itemId" id="reportItem" required></select></label>
+<div class="grid">
+<label>Report status<select name="status"><option value="REPORTED_PARTIAL">Reported partial</option><option value="REPORTED_COMPLETE">Reported complete (unverified)</option><option value="BLOCKED">Blocked</option></select></label>
+<label>Reported quantity<input name="quantity" type="number" value="0" min="0" max="100000" required></label>
+<label>Unit<select name="unit"><option value="items">Items</option><option value="parcels">Parcels</option><option value="meals">Meals</option><option value="kg">kg</option><option value="hours">Hours</option><option value="kWh">kWh</option><option value="sessions">Sessions</option></select></label></div>
+<label>Non-sensitive report (20–220 characters)<textarea name="summary" required minlength="20" maxlength="220" rows="3"></textarea></label>
+<button type="submit">Save UNVERIFIED report</button></form>
+<h3>Recent review history</h3><div id="eventHistory" class="cards-list"></div>
+</section>
+<section class="section" id="ownerSection" hidden>
+<p class="eyebrow">04 / OWNER CONTROLS</p><h2>Withdraw, rotate, or delete</h2>
+<p>Closing stops new submissions and new reviews; previously stored cards remain readable by invited reviewers. Rotating a key immediately invalidates the old reviewer or submitter invitation. Deleting removes the inbox, its cards, and its review history.</p>
+<div class="actions"><button type="button" id="rotateReviewer" class="secondary">Rotate reviewer link</button>
+<button type="button" id="rotateSubmitter" class="secondary">Rotate submitter link</button>
+<button type="button" id="closeInbox" class="secondary">Close inbox</button>
+<button type="button" id="deleteInbox" class="secondary">Delete inbox and its records</button></div>
+<label id="rotatedKeyWrap" hidden>New invitation — copy before leaving<input id="rotatedKey" readonly></label>
+</section>
+<p id="status" role="status" aria-live="polite">No inbox has been connected. You can create a test inbox or open a private invitation.</p>
+<section class="section"><h2>What is still not established?</h2>
+<p>The invitation key identifies a <em>capability</em>, not an actual person. This inbox does not sign reLATTE crossings, make a legal agreement, authorize equipment shipment, move money, place anyone into housing, or prove that a food delivery occurred. Independent local stewardship and recipient confirmation are still necessary.</p>
+<p><a href="https://github.com/the-static-collective/webZ/blob/main/docs/LIVING-INBOX-002.md">Read the data, permission and safety protocol</a>.</p>
+</section></main><footer><p>Porchlight Commons · LIVING INBOX 002 · Private bearer-capability prototype · No automatic global federation.</p></footer></body></html>

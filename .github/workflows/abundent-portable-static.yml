@@ -55,6 +55,9 @@ jobs:
           test -f apps/dist/commons/receiver/index.html
           test -f apps/dist/commons/receiver/receiver-ui.mjs
           test -f apps/dist/commons/receiver-protocol.mjs
+          test -f apps/dist/commons/inbox/index.html
+          test -f apps/dist/commons/inbox/inbox.mjs
+          test -f apps/dist/commons/inbox/inbox.css
           test ! -e apps/dist/.env
       - name: Save provider-independent site bundle
         uses: actions/upload-artifact@v4
