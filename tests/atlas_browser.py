@@ -46,8 +46,8 @@ try:
         assert exported["executed"] is False
         assert "GHoT" in exported["route"]["nodes"]
         page.locator("#search").fill("GHoT")
-        assert page.locator("#projects button").count()==1
-        page.locator("#projects button").first.click()
+        assert page.locator("#projects button").count()>=1 # Other roles can mention GHoT legitimately.
+        page.locator("#projects button").get_by_text("GHoT",exact=True).click()
         assert page.locator("#detailName").inner_text()=="GHoT"
         assert "energy" in page.locator("#detailExtra").inner_text().lower()
         assert "Proposed GHoT worship-stage" in page.locator("#detailExtra").inner_text()
