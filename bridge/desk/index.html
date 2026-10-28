@@ -45,6 +45,15 @@
 <div class="actions"><a id="official" class="pill primary" target="_blank" rel="noopener noreferrer">Official opportunity ↗</a><a id="map" class="pill" href="../network/">Public candidate map ↗</a><button class="pill" id="draft" type="button">Copy unsent introduction</button></div>
 <p class="gate" id="gate"></p>
 <div class="current"><b>Recorded standing</b><p id="standing">No work recorded.</p><p id="next"></p></div>
+<section class="handoff-card" aria-label="Bounded work card export"><div class="eyebrow">BRIDGE-005 / REVIEWED HANDOFF</div><h4>Carry one public question into another instrument.</h4>
+<p>Review a proposed next step for this institution. Export an inert JSON card to JAR;VIS or planZ for their own independent local review. No private ledger history, notes, identities, links or contacts are included.</p>
+<form id="work-form"><label>Receiver
+<select id="work-target"><option value="JARVIS">JAR;VIS — local attention review</option><option value="PLANZ">planZ — owner-local triage</option></select></label>
+<label>One bounded next step<select id="work-action"></select></label>
+<div id="work-preview" class="work-preview" aria-live="polite"></div>
+<label class="ack"><input type="checkbox" id="work-ack" required> I have read this exact public-only packet and understand it is not sent, signed, permission to act or institutional acceptance.</label>
+<button type="submit" class="pill primary">Download reviewed work card (unsent)</button></form>
+<p id="work-message" class="fine" role="status">Nothing has been carried or transmitted.</p></section>
 <form id="event-form" class="event-form"><h4>Append one owner-attested event</h4>
 <label>What happened?<select id="kind" required></select></label>
 <label>Short factual note (8–400 characters; no private names or contact details)<textarea id="note" required rows="3" minlength="8" maxlength="400" placeholder="Example: Read official application instructions; local eligibility still needs review."></textarea></label>
