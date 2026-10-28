@@ -4,6 +4,7 @@ export const ENVELOPE_SCHEMA="abundent/bridge-ledger-ciphertext-v1";
 const CONTENT="ABUNDENT-BRIDGE-LEDGER-V1",ITERATIONS=600000;
 const enc=new TextEncoder(),dec=new TextDecoder("utf-8",{fatal:true});
 const context=enc.encode(CONTENT);
+function secureRevision(){return Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,"0")).join("")}
 const fail=s=>{throw Error(s)};
 function exact(o,keys){if(!o||typeof o!=="object"||Array.isArray(o)||Object.keys(o).sort().join("|")!==keys.slice().sort().join("|"))fail("Unexpected vault fields.")}
 function b64(a){let s="";for(const b of a)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
@@ -29,17 +30,12 @@ async function seal(journal,key,salt){
  const cipher=await crypto.subtle.encrypt({name:"AES-GCM",iv,additionalData:context},key,plain);
  return validateEnvelope({schema:ENVELOPE_SCHEMA,kdf:"PBKDF2-SHA256/AES-256-GCM",
  iterations:ITERATIONS,salt:b64(salt),iv:b64(iv),ciphertext:b64(new Uint8Array(cipher)),
- revision:b64(crypto.getRandomValues(new Uint8Array(16))).replace(/[^a-f0-9]/g,"").padEnd(32,"0").slice(0,32),
+ revision:secureRevision(),
  updatedAt:new Date().toISOString()});
-}
-function secureRevision(){return Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,"0")).join("")}
-async function encrypted(journal,key,salt){
- const result=await seal(journal,key,salt);
- return {...result,revision:secureRevision()};
 }
 export async function createVault(pass){
  const salt=crypto.getRandomValues(new Uint8Array(16)),key=await derive(pass,salt),journal=emptyJournal();
- return {key,journal,envelope:await encrypted(journal,key,salt)};
+ return {key,journal,envelope:await seal(journal,key,salt)};
 }
 export async function unlockVault(envelope,pass){
  const e=validateEnvelope(envelope),key=await derive(pass,decode(e.salt,32));
@@ -52,5 +48,5 @@ export async function unlockVault(envelope,pass){
 }
 export async function resealVault(journal,key,previous){
  const e=validateEnvelope(previous);
- return encrypted(journal,key,decode(e.salt,32));
+ return seal(journal,key,decode(e.salt,32));
 }
