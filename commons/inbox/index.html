@@ -31,12 +31,13 @@
 <p><strong>Submitter:</strong> can contribute a proposal but cannot inspect anyone else's submissions.</p>
 <label>Submitter invitation<input id="submitterLink" readonly></label>
 <div class="actions"><button type="button" id="copyOwner">Copy owner link</button><button type="button" class="secondary" id="copyReviewer">Copy reviewer invitation</button><button type="button" class="secondary" id="copySubmitter">Copy submitter invitation</button></div>
+<div class="actions" aria-label="Keep your invitations in the encrypted wallet"><button type="button" class="secondary" id="keepOwner">Keep owner link in wallet ↗</button><button type="button" class="secondary" id="keepReviewer">Keep reviewer link ↗</button><button type="button" class="secondary" id="keepSubmitter">Keep submitter link ↗</button></div>
 <p class="small">Links contain the capability in the URL fragment, not the address sent to the server. Store the owner link safely. If an invitation leaks, rotate that role from the owner desk. Losing the owner link means losing control of this inbox.</p></section>
 <section class="section" id="desk" hidden>
 <p class="eyebrow">01 / CONNECTED INBOX</p><h2 id="roomTitle">Community inbox</h2>
 <p class="small" id="roomInfo"></p>
 <div class="actions"><button type="button" id="reload">Refresh inbox</button>
-<button type="button" class="secondary" id="leave">Leave / hide key from this address</button></div>
+<button type="button" class="secondary" id="leave">Leave / hide key from this address</button><button type="button" class="secondary" id="keepCurrent">Keep my invitation in wallet ↗</button></div>
 <p class="small">This site does not store your capability in localStorage. You must keep the invitation link to return on another device.</p>
 </section>
 <section class="section" id="submissionSection" hidden>
@@ -77,7 +78,7 @@
 <button type="button" id="rotateSubmitter" class="secondary">Rotate submitter link</button>
 <button type="button" id="closeInbox" class="secondary">Close inbox</button>
 <button type="button" id="deleteInbox" class="secondary">Delete inbox and its records</button></div>
-<label id="rotatedKeyWrap" hidden>New invitation — copy before leaving<input id="rotatedKey" readonly></label>
+<label id="rotatedKeyWrap" hidden>New invitation — copy before leaving<input id="rotatedKey" readonly></label><button id="keepRotated" type="button" class="secondary" hidden>Keep rotated invitation in wallet ↗</button>
 </section>
 <p id="status" role="status" aria-live="polite">No inbox has been connected. You can create a test inbox or open a private invitation.</p>
 <section class="section"><h2>What is still not established?</h2>
