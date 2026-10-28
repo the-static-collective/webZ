@@ -76,24 +76,35 @@ $("backup").onclick=()=>{
 };
 for(const [value,title] of TYPES){const op=element("option",title);op.value=value;$("kind").append(op)}
 $("kind").value="SOURCE_CHECKED";
-function refreshWorkPreview(){
+let previewRevision=0,reviewedPacketId=null;
+async function refreshWorkPreview(){
+ const revision=++previewRevision;
  const d=door(active),action=workLabels[$("work-action").value];
- $("work-ack").checked=false;
+ reviewedPacketId=null;$("work-ack").checked=false;$("work-ack").disabled=true;
  $("work-preview").replaceChildren();
- const summary=element("p",d.name+" → "+$("work-target").value+" → "+action);
- const gates=element("p","Eligibility / human review gate: "+d.gate);
- const limits=element("p","PUBLIC ONLY · DRAFT · NO OUTBOUND CONTACT · NOT A RECEIVER DECISION");
- $("work-preview").append(summary,gates,limits);
+ $("work-preview").append(element("p","Preparing the exact public-only packet…"));
+ try{
+  const packet=await buildWorkCard({doorId:d.id,target:$("work-target").value,actionCode:$("work-action").value},allDoors);
+  if(revision!==previewRevision)return;
+  reviewedPacketId=packet.candidateId;
+  $("work-preview").replaceChildren();
+  const header=element("p",d.name+" → "+packet.target+" → "+action);
+  const gate=element("p","Eligibility and human review gate: "+d.gate);
+  const exact=element("pre",JSON.stringify(packet,null,2),"packet-preview");
+  $("work-preview").append(header,gate,exact);
+  $("work-ack").disabled=false;
+ }catch(err){if(revision===previewRevision)$("work-preview").replaceChildren(element("p","HOLD: "+err.message))}
 }
 $("work-action").addEventListener("change",refreshWorkPreview);
 $("work-target").addEventListener("change",refreshWorkPreview);
 $("work-form").addEventListener("submit",async e=>{
  e.preventDefault();
  if(!key){message("Unlock your ledger before preparing a handoff.",true);return}
- if(!$("work-ack").checked){$("work-message").textContent="Review and acknowledge this particular packet first.";return}
+ if(!$("work-ack").checked||!reviewedPacketId){$("work-message").textContent="Review and acknowledge this particular packet first.";return}
  try{
   // Importantly NO journal events, notes, links, people, capabilities or authority are exported.
   const packet=await buildWorkCard({doorId:active,target:$("work-target").value,actionCode:$("work-action").value},allDoors);
+  if(packet.candidateId!==reviewedPacketId)throw Error("Selection changed after review; inspect the new packet.");
   const b=new Blob([JSON.stringify(packet,null,2)+"\\n"],{type:"application/json"});
   const url=URL.createObjectURL(b),a=element("a");a.href=url;a.download="bridge005-"+active+"-"+packet.target+"-HOLD.json";
   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
