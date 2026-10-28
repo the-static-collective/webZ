@@ -1,0 +1,20 @@
+name: Living Inbox 002 real HTTP role-boundary smoke
+on:
+  pull_request:
+    paths:
+      - 'tests/inbox-remote-smoke.mjs'
+      - '.github/workflows/living-inbox-http.yml'
+      - 'backend/commons-inbox/**'
+permissions:
+  contents: read
+jobs:
+  synthetic-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Create, inspect, review, rotate, close and delete synthetic inbox
+        run: node tests/inbox-remote-smoke.mjs
