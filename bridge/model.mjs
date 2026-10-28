@@ -1,0 +1,159 @@
+// BRIDGE-001 · A portable proposal, NOT a record of institutional participation.
+// All target institutions below are prospective. No outreach, consent or partnership is asserted.
+export const proposal = Object.freeze({
+  schema: "abundent/bridge-proposal-v0",
+  id: "BRIDGE-001",
+  version: "2026-10-28.1",
+  title: "Between Rooms",
+  subtitle: "The proposal is the first bridge.",
+  publicStatus: "PROTOTYPE_INVITATION_ONLY",
+  thesis: "Let independently governed communities exchange a bounded need, a useful method, a scoped invitation and an inspectable return without surrendering their systems or their authority.",
+  pilot: {
+    id: "SYNTHETIC-FOOD-ACCESS-001",
+    classification: "FICTIONAL_DEMONSTRATION",
+    publicQuestion: "How could a locally governed food-access group compare sourcing, a two-hour information table and reusable methods without sharing any resident records?",
+    nextRealGate: "A willing local organizer must define one non-sensitive need, and any host must separately approve an actual field test.",
+    excluded: ["resident or shelter case records", "personal identifiers", "addresses of vulnerable sites", "remittance details", "unapproved contacts", "automated public-service delivery"]
+  },
+  sequence: [
+    {name:"LISTEN", meaning:"A local steward names the problem. The problem is not invented by a model."},
+    {name:"MAP", meaning:"JAR;VIS may research candidates; planZ displays blockers and source lineage."},
+    {name:"INVITE", meaning:"A tailored, revocable proposal is offered to one institution. A proposal is not permission."},
+    {name:"RECEIVE", meaning:"The receiving institution controls HOLD, REFUSE or review of the specific offer."},
+    {name:"ACT", meaning:"Only a separate authorized local decision can permit bounded real work."},
+    {name:"REPORT", meaning:"A participant's reported result is testimony, not independent confirmation."},
+    {name:"VERIFY", meaning:"An independent, qualified reviewer checks evidence within an agreed scope."},
+    {name:"RETURN", meaning:"A public-safe method can be shared only after authorization and review."}
+  ],
+  projects: [
+    {name:"JAR;VIS", role:"Attention, proposals, operator-held review", status:"LOCAL_PROTOTYPE", url:"https://github.com/the-static-collective/JAR-VIS"},
+    {name:"planZ", role:"Plans, blockers, owner-gated next steps", status:"PUBLIC_READ_ONLY_INDEX", url:"https://github.com/the-static-collective/planZ/blob/main/public/attention-v1.json"},
+    {name:"reLATTE / COMMUTER", role:"Signed crossings and receiver-owned disposition", status:"EXECUTABLE_LIBRARY_NOT_LIVE_PARTNER_INTEGRATION", url:"https://github.com/the-static-collective/reLATTE/blob/main/docs/COMMUTER-001.md"},
+    {name:"webZ Living Inbox", role:"Experimental account-free proposal exchange, bearer links", status:"EXPERIMENTAL_SHARED_BACKEND", url:"https://github.com/the-static-collective/webZ/blob/main/docs/LIVING-INBOX-002.md"},
+    {name:"Abundent Link Wallet", role:"Locally encrypted custody of invitation links", status:"LOCAL_ENCRYPTED_BROWSER_VAULT", url:"https://github.com/the-static-collective/webZ/blob/main/docs/LINK-WALLET-001.md"},
+    {name:"GRAFT", role:"Source-pinned read-only research and printable field kits", status:"LOCAL_OR_CI_EXPERIMENTS", url:"https://github.com/the-static-collective/GRAFT"},
+    {name:"Garden / Porchlight Commons", role:"Food access and intercommunity method exchange", status:"PROPOSAL_AND_PUBLIC_PROTOTYPE", url:"https://github.com/the-static-collective/webZ/blob/main/docs/PORCHLIGHT-COMMONS-001.md"},
+    {name:"Jubilee Circuit", role:"Consented gatherings and culture-led invitations", status:"PRINT_READY_FIELD_KIT_NOT_ENROLLED_PARTNERS", url:"https://github.com/the-static-collective/webZ/blob/main/docs/JUBILEE-CIRCUIT-001.md"}
+  ],
+  institutionalStatus: "NO_TARGET_INVITED_OR_ENROLLED_BY_THIS_PAGE",
+  safeguards: [
+    "Each institution and local community retains independent authority.",
+    "No institution listed here has joined, endorsed, funded, or even received this proposal by virtue of being listed.",
+    "A submitted form, link access, or a simulated acceptance is not verified identity or consent.",
+    "Live participants must approve scope, data policy, publication and field actions separately.",
+    "No resident records, precise shelter locations, case files, secrets or credentials belong in public bridge packets.",
+    "REPORTED != VERIFIED; SIGNED != TRUE; REVIEWED != ADMITTED; PUBLIC != PERMITTED."
+  ]
+});
+
+export const doors = Object.freeze([
+  {
+    id:"mit-solve", name:"MIT Solve", kind:"Global innovation review", due:"November 6, 2026, noon EST",
+    url:"https://solve.mit.edu/challenges/2027-global-economic-prosperity-challenge",
+    alignment:"Test whether a working coordination prototype can improve economic resilience and housing support without centralizing local authority.",
+    request:"Review a working prototype and connect us to appropriate pilots and technical mentors.",
+    offered:"A reproducible synthetic demo, current-source implementation pointers and a testable pilot plan.",
+    gate:"Global Challenges require a functioning prototype; an application is not acceptance. The solution must be framed to match housing or economic opportunity, not merely a generic coordination system."
+  },
+  {
+    id:"rochester-task-force", name:"Rochester Health, Hunger & Nutrition Task Force", kind:"Prospective public-service problem owner", due:"Exploratory conversation; no known application deadline",
+    url:"https://www.rochestermn.gov/council-administration/mayor-s-office/health-hunger-nutrition-task-force/",
+    alignment:"City-defined food-access bottleneck, community priorities and responsible local delivery.",
+    request:"Identify one non-sensitive coordination problem, one authorized city contact and one meaningful success measure; tell us if the approach is useful.",
+    offered:"A no-cost demonstration and a bounded, city-defined pilot-design worksheet.",
+    gate:"Municipal conversation and consent are not established. Do not imply task-force sponsorship, city data access or city endorsement."
+  },
+  {
+    id:"rochester-grant", name:"Rochester Building Community Grant", kind:"Small local field test", due:"November 30, 2026",
+    url:"https://www.rochestermn.gov/council-administration/who-we-are/building-community-grant/",
+    alignment:"A Rochester-located community demonstration that builds participation and learning.",
+    request:"Evaluate eligibility of a locally hosted public information or participation experiment.",
+    offered:"A contained program, costed materials, accessible public learning and an honest outcomes report.",
+    gate:"Requires Rochester-based activities and an eligible proposal; no award, venue permission or local partner is assumed."
+  },
+  {
+    id:"cities-deliver", name:"Rockefeller / OpenAI Foundation Cities Deliver", kind:"Potential city + eligible lead collaboration", due:"November 29, 2026, 11:59 p.m. EST",
+    url:"https://www.rockefellerfoundation.org/cities-deliver-ai-solutions-for-public-services/",
+    alignment:"A city-prioritized AI-enabled public-service workflow that improves food access or civic engagement.",
+    request:"Only after an eligible lead and city partner opt in, co-design a city-owned service pilot and evaluation.",
+    offered:"A bounded architecture, responsible AI controls, source-backed prototype pieces and a draft evaluation framework.",
+    gate:"Organization—not an individual—must apply; a qualifying city government partner and authorized letter of intent are required at Round 1. No such partner or letter exists here."
+  },
+  {
+    id:"code-for-america", name:"Code for America Summit Demo Lab", kind:"Civic technology demonstration", due:"Submissions November 12–23, 2026",
+    url:"https://summit.codeforamerica.org/demo-lab/",
+    alignment:"Show a real problem-to-proposal-to-human-review interface to public-service practitioners.",
+    request:"Examine a one-minute synthetic demonstration; identify the next usable field test and failure modes.",
+    offered:"A public demo, downloadable portable invitation packet, source links and explicit limits.",
+    gate:"An invitation or Demo Lab submission does not establish acceptance or government adoption."
+  },
+  {
+    id:"bloom", name:"BLOOM Public Assembly on AI", kind:"Community deliberation and decision rights", due:"November 20, 2026",
+    url:"https://bloom-project.org/cohort/",
+    alignment:"Let residents and institutions deliberate before AI is allowed to influence public coordination.",
+    request:"Explore whether an existing, locally rooted organization wants to host a real assembly, with independently defined local decisions.",
+    offered:"A transparent demonstration of human HOLD/REFUSE and the issues requiring public choice.",
+    gate:"BLOOM seeks convening organizations with local relationships. The Static Collective does not claim to be an accepted host; assemblies cannot be replaced by software."
+  },
+  {
+    id:"igh", name:"Institute of Global Homelessness", kind:"International practice exchange", due:"Open inquiry; no verified deadline",
+    url:"https://ighomelessness.org/connectwithus/",
+    alignment:"Learn which cross-community homelessness methods are portable and which are unsafe or context-bound.",
+    request:"Review a practice-exchange proposal and identify practitioners willing to critique a no-case-data pilot.",
+    offered:"A locally governed method card format that preserves origin, consent boundaries and receiving-community refusal.",
+    gate:"No international network affiliation or practitioner approval is established. Never exchange beneficiary records or shelter locations."
+  },
+  {
+    id:"dpga", name:"Digital Public Goods Alliance", kind:"Independent software standards review", due:"Readiness assessment; no verified deadline",
+    url:"https://www.digitalpublicgoods.net/standard",
+    alignment:"Evaluate whether a separable open-source bridge component meets digital-public-good requirements.",
+    request:"Use the public standard to expose privacy, documentation, licensing and portability gaps.",
+    offered:"A candidate open exchange contract, source code, export schema and visible shortcomings.",
+    gate:"A web demo is not DPG recognition; licensing, non-PII data extraction, privacy, security and other criteria require actual evidence."
+  },
+  {
+    id:"umn-extension", name:"University of Minnesota Extension / Rural Grocery", kind:"Operator-led pilot discovery", due:"November 11, 2026 webinar",
+    url:"https://extension.umn.edu/event/shelf-life-lessons-one-year-manna-food-co-op",
+    alignment:"Hear rural operators' practical sourcing, staffing and financial constraints before selecting a technical solution.",
+    request:"Invite a grocer or extension practitioner to name one specific workflow worth studying.",
+    offered:"A public-safe food-access sample, field questions and a way to return a reusable method without sharing customer data.",
+    gate:"Webinar attendance is not university endorsement. No real grocery operator is enrolled."
+  }
+]);
+
+export function invitationFor(id) {
+  const door=doors.find(item=>item.id===id);
+  if (!door) throw new RangeError("Unknown institution door");
+  return {
+    schema:"abundent/bridge-invitation-v0",
+    proposalId:proposal.id, version:proposal.version, target:door.name,
+    classification:"DRAFT_NOT_SENT", relationship:"PROSPECTIVE_ONLY",
+    purpose:door.alignment, specificRequest:door.request, whatWeCanBring:door.offered,
+    requiredHumanGate:door.gate, sourceProposal:"https://github.com/the-static-collective/webZ/blob/main/docs/BRIDGE-001.md",
+    demonstration:proposal.pilot, authority:"Each receiver independently chooses whether to reply, review, refuse or participate.",
+    noPersonalData:true
+  };
+}
+
+export function draftFor(id) {
+  const door=doors.find(item=>item.id===id);
+  if (!door) throw new RangeError("Unknown institution door");
+  return `Subject: Between Rooms — a bounded community coordination experiment
+
+Hello,
+
+I'm working on an open, community-governed experiment called Between Rooms. It explores how independent groups can exchange one well-defined need, a proposed method and an inspectable outcome without adopting one another's systems or transferring authority.
+
+Why I thought of ${door.name}: ${door.alignment}
+
+What we could bring: ${door.offered}
+
+The specific conversation I'm requesting: ${door.request}
+
+This is an invitation to critique or explore a small test, not a claim that your institution has joined or endorsed our work. We would not use your name as a partner, access records or undertake field actions without separate permission.
+
+If this is relevant, who would be appropriate for a brief initial conversation?
+
+Thank you,
+The Static Collective / Abundent`;
+}
