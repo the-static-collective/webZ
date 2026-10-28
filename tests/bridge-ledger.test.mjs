@@ -71,7 +71,7 @@ test("private desk linked and browser cannot make automatic external requests",(
  assert.match(network,/Work this door privately/);
  assert.match(html,/connect-src 'none'/);
  assert.match(html,/Private Operator Ledger/);
- assert.match(app,/APPLICATION_REPORTED/);
+ assert.match(app,/appendEvent/);
  assert.doesNotMatch(app,/\bfetch\s*\(|\bsendBeacon\s*\(|\blocalStorage\b|\bsessionStorage\b/);
  assert.match(store,/abundent_bridge_ledger_004/);
  assert.match(read("apps/build.mjs"),/cpSync\(join\(root,'\.\.\/bridge'\)/);
