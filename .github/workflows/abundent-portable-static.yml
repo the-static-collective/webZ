@@ -62,6 +62,7 @@ jobs:
           test -f apps/dist/commons/wallet/crypto.mjs
           test -f apps/dist/commons/wallet/store.mjs
           test -f apps/dist/commons/wallet/app.mjs
+          test -f apps/dist/commons/wallet/handoff.mjs
           test ! -e apps/dist/.env
       - name: Save provider-independent site bundle
         uses: actions/upload-artifact@v4
