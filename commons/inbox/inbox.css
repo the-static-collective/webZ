@@ -1,0 +1,13 @@
+.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;z-index:10;background:var(--accent);color:var(--bg);padding:.5rem}
+textarea{width:100%;display:block;background:#0f2420;color:white;border:1px solid #789c8b;border-radius:9px;resize:vertical;padding:.75rem;font:inherit;margin:.4rem 0 1rem}
+.cards-list{display:grid;gap:1rem;margin:1rem 0 2rem}
+.inbox-card{background:var(--panel2);padding:1rem;border:1px solid var(--line);border-radius:12px}
+.inbox-card h3{font-size:1.08rem;margin:.25rem 0}.inbox-card p{margin:.35rem 0;overflow-wrap:anywhere}
+.inbox-card code{display:block;overflow-wrap:anywhere;font-size:.75rem;opacity:.9}
+.inbox-card summary{cursor:pointer;font-size:.9rem}
+.inbox-card pre{max-height:210px;font-size:.71rem}
+h3{margin:1.1rem 0 .6rem}input[readonly]{font-size:.85rem}
+label.check{margin:1rem 0}#status{margin:1rem auto;max-width:1000px;font-weight:650;color:var(--accent)}
+#status[data-error="true"]{color:#ffbca8}
+#ownerSection button:last-child{border-color:#ad6e68}
+@media(max-width:650px){.brand{font-size:.8rem}.section{padding:1rem}.actions button{width:100%}}
