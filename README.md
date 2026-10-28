@@ -67,3 +67,7 @@ The new [Porchlight Commons prototype](commons/) drafts privacy-conscious organi
 ## Jubilee Circuit 001 — Music carries the culture
 
 [The Road Brings the Feast](jubilee/) provides a static, print-ready two-hour field kit and local-only invitation composer for a proposed festival × church × community-led network. [Operating protocol](docs/JUBILEE-CIRCUIT-001.md). No partners, songs, services or outcomes are presented as confirmed. Tests: node --test tests/jubilee.test.mjs.
+
+## Living Receiver 001 — account-free community review
+
+The [Living Receiver](commons/receiver/) extends the Commons exchange desk. A person can locally open a small, non-sensitive HOLD card or JAR;VIS planZ return candidate, record an **unsigned self-attested** HOLD/REFUSE/ACCEPT_FOR_LOCAL_REVIEW note, and prepare a separately unverified field report. Export and re-import JSON on any device without installing our software. No provider authentication, cryptographic signature, sending, shared storage, verified recipient receipt, money flow or service placement is implied. [Field protocol](docs/LIVING-RECEIVER-001.md).
