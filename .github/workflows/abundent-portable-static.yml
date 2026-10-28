@@ -48,6 +48,10 @@ jobs:
           test -f apps/dist/main.mjs
           test -f apps/dist/manifest.mjs
           test -f apps/dist/style.css
+          test -f apps/dist/commons/index.html
+          test -f apps/dist/commons/main.mjs
+          test -f apps/dist/commons/exchange.mjs
+          test -f apps/dist/commons/style.css
           test ! -e apps/dist/.env
       - name: Save provider-independent site bundle
         uses: actions/upload-artifact@v4
