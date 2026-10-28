@@ -19,3 +19,13 @@ test('partner-safe descriptions never conflate prototypes and live services',()=
   assert.ok(DOORS.find(d=>d.slug==='farm')?.note.includes('No farm partnership'));
   assert.ok(DOORS.find(d=>d.slug==='msyou')?.note.includes('not a university service'));
 });
+
+// Regression: the switchboard must ship its own /jubilee/ path, not a dangling link.
+test('Jubilee Circuit is linked and included in the portable static build',async()=>{
+ const fs=await import('node:fs');
+ const build=fs.readFileSync(new URL('./build.mjs',import.meta.url),'utf8');
+ const landing=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ assert.match(build,/join\(root,'\.\.\/jubilee'\)/);
+ assert.match(landing,/href="\.\/jubilee\/"/);
+ assert.ok(fs.existsSync(new URL('../jubilee/index.html',import.meta.url)));
+});

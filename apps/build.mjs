@@ -7,4 +7,6 @@ for(const file of ['index.html','main.mjs','manifest.mjs','style.css'])cpSync(jo
 // Keep this public, browser-only Commons room in the same portable static artifact.
 // The source is local to this repository: no service credentials or remote network.
 cpSync(join(root,'../commons'),join(out,'commons'),{recursive:true});
+// Include the Jubilee Circuit public field kit on the same verified Abundent hostname.
+cpSync(join(root,'../jubilee'),join(out,'jubilee'),{recursive:true});
 console.log('Abundent Switchboard: static dist built (no accounts, API keys or shared database).');

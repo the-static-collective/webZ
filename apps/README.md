@@ -60,3 +60,7 @@ The portable release workflow emits the configured Pages hostname for audit. It 
 ## Porchlight Commons source-bundled room (October 28)
 
 The static build now copies [`../commons/`](../commons/) into `apps/dist/commons/`, reachable as a local route **if the published bundle actually deploys**. It is an organizational HOLD-card and cost-comparison prototype only, not a provider matching service, a backend, a publicly verified Ghana pilot, or an authorized exchange. Source: [Commons protocol](../docs/PORCHLIGHT-COMMONS-001.md). No DNS or Vercel project setting is changed by this repository edit.
+
+## Jubilee Circuit public room (October 28)
+
+The build copies [../jubilee/](../jubilee/) into apps/dist/jubilee/ and the switchboard links to it. This is a print-ready two-hour host guide and a local-only invitation composer. Its voluntary music-to-useful-work protocol is at [../docs/JUBILEE-CIRCUIT-001.md](../docs/JUBILEE-CIRCUIT-001.md). This is not an enrollment, confirmed partner network, or donation intake. 
