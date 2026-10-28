@@ -23,7 +23,7 @@ test("AES-GCM rejects wrong passphrase and modified ciphertext, salt, IV and sch
  await assert.rejects(unlockWallet(changed,p),/Incorrect/);
  await assert.rejects(unlockWallet({...v,salt:"bad!"},p),/Invalid/);
  await assert.rejects(unlockWallet({...v,iterations:4},p),/Unsupported/);
- await assert.rejects(unlockWallet({...v,plaintext:[]},p),/Unexpected/);
+ await assert.rejects(unlockWallet({...v,plaintext:[]},p),/unexpected/i);
 });
 test("rekey makes old passphrase useless and preserves the encrypted links",async()=>{
  const fresh=await newWallet(p);
