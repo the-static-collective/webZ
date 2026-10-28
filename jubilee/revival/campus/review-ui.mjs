@@ -1,0 +1,14 @@
+import{REVIEW_STATES,RESEARCH_LEADS,makeReview,safeImport,exportNotebook,REVIEW_SCHEMA}from"./review.mjs";
+const $=id=>document.getElementById(id),lead=$("research-lead"),state=$("research-state"),listing=$("research-ledger");
+let notes=[];
+for(const item of RESEARCH_LEADS){const o=document.createElement("option");o.value=item.id;o.textContent=item.type+" · "+item.name+" · "+item.city;lead.append(o)}
+for(const [key,label] of Object.entries(REVIEW_STATES)){const o=document.createElement("option");o.value=key;o.textContent=label;state.append(o)}
+$("research-date").value=new Date().toISOString().slice(0,10);
+function render(){listing.replaceChildren();$("research-ledger-count").textContent=notes.length+" unsent local observations (not partnership receipts).";
+for(const [i,n] of notes.entries()){const li=document.createElement("li");const label=document.createElement("span");label.textContent=n.leadName+" — "+REVIEW_STATES[n.reviewState]+" · "+n.reviewedOn;const remove=document.createElement("button");remove.type="button";remove.textContent="Discard";remove.className="mini";remove.addEventListener("click",()=>{notes.splice(i,1);render()});li.append(label,remove);listing.append(li)}
+$("research-export").disabled=notes.length===0;$("research-clear").disabled=notes.length===0}
+$("research-add").addEventListener("click",()=>{try{const row=makeReview(lead.value,state.value,$("research-date").value);notes=notes.filter(r=>r.leadId!==row.leadId);notes.push(row);render();$("research-status").textContent="Local research state recorded in this tab only. Nothing was submitted or saved remotely."}catch(e){$("research-status").textContent=e.message}});
+$("research-clear").addEventListener("click",()=>{notes=[];render();$("research-status").textContent="Local notes cleared from this tab; previous downloaded files are unaffected."});
+$("research-export").addEventListener("click",()=>{const blob=new Blob([exportNotebook(notes)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="common-ground-research-notebook.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$("research-status").textContent="Unsigned JSON exported for manual review; not submitted or published."});
+$("research-import").addEventListener("change",async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>100000)throw Error("File too large.");const payload=JSON.parse(await file.text());if(payload.schema!==REVIEW_SCHEMA)throw Error("Different notebook schema.");notes=safeImport(payload);render();$("research-status").textContent="Imported "+notes.length+" local, unsigned research observations. Nothing has been verified remotely."}catch(err){$("research-status").textContent="Import refused: "+err.message}finally{e.target.value=""}});
+render();
