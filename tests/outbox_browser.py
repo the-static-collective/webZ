@@ -52,7 +52,8 @@ try:
   page.locator("#letter-status").select_option("DRAFT")
   page.locator("#find").fill("")
   assert not exceptions,exceptions
-  assert req and all(url.startswith(base) for url in req),req
+  assert req and all(url.startswith(f"http://127.0.0.1:{srv.server_port}/bridge/") for url in req),req 
+  assert all("/api/" not in url for url in req),req
   assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
   print(json.dumps({"schema":"abundent/outbox-mobile-proof-v1","seeded_letters":33,"encrypted_at_rest":True,"edit_recovered_after_unlock":True,"reported_sent_requires_evidence":True,"no_network":True,"page_errors":0}))
   browser.close()
