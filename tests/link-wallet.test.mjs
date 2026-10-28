@@ -19,7 +19,8 @@ test("AES-GCM rejects wrong passphrase and modified ciphertext, salt, IV and sch
  const fresh=await newWallet(p);
  await assert.rejects(unlockWallet(fresh.envelope,"This is a different and incorrect passphrase"),/Incorrect/);
  const v=fresh.envelope;
- const changed={...v,ciphertext:v.ciphertext.slice(0,-1)+(v.ciphertext.at(-1)==="A"?"B":"A")};
+ const i=Math.floor(v.ciphertext.length/2); // Flip a real base64 data symbol, never padding.
+ const changed={...v,ciphertext:v.ciphertext.slice(0,i)+(v.ciphertext[i]==="A"?"B":"A")+v.ciphertext.slice(i+1)};
  await assert.rejects(unlockWallet(changed,p),/Incorrect/);
  await assert.rejects(unlockWallet({...v,salt:"bad!"},p),/Invalid/);
  await assert.rejects(unlockWallet({...v,iterations:4},p),/Unsupported/);
