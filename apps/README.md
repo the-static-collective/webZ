@@ -56,3 +56,7 @@ The Switchboard is available independently at `https://the-static-collective.git
 A subsequent owner confirmation requires another read of the Pages API before changing authoritative Cloudflare DNS. If GitHub reports `apps.abundent.org`, change that one CNAME from `cname.vercel-dns.com` to `the-static-collective.github.io` (DNS only), then verify page, JavaScript, and HTTPS from the branded host. Preserve the Vercel domain binding for rollback until GitHub Pages is independently proven healthy. Never migrate the apex, email records, or other subdomains as part of this operation.
 
 The portable release workflow emits the configured Pages hostname for audit. It warns but continues to update the independent `github.io` backup if no custom hostname is set; it rejects an unexpected third-party hostname. This avoids coupling backup publishing to an unfinished custom-domain migration.
+
+## Porchlight Commons source-bundled room (October 28)
+
+The static build now copies [`../commons/`](../commons/) into `apps/dist/commons/`, reachable as a local route **if the published bundle actually deploys**. It is an organizational HOLD-card and cost-comparison prototype only, not a provider matching service, a backend, a publicly verified Ghana pilot, or an authorized exchange. Source: [Commons protocol](../docs/PORCHLIGHT-COMMONS-001.md). No DNS or Vercel project setting is changed by this repository edit.
