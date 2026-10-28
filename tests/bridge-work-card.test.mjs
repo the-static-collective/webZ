@@ -33,7 +33,7 @@ test("handoff appears only behind operator-controlled local review in private de
  const app=fs.readFileSync(new URL("../bridge/desk/app.mjs",import.meta.url),"utf8");
  const html=fs.readFileSync(new URL("../bridge/desk/index.html",import.meta.url),"utf8");
  assert.match(html,/work-ack/);assert.match(html,/reviewed work card/i);
- assert.match(app,/if\(!\$\("work-ack"\)\.checked\)/);
+ assert.match(app,/reviewedPacketId/);
  assert.match(app,/buildWorkCard/);
  assert.doesNotMatch(app,/fetch\s*\(/);
 });
