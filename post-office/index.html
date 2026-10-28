@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Post Office · Abundent operator desk</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./ui.js"></script></head>
+<body><main class="shell">
+<header class="mast"><div><div class="eyebrow">ABUNDENT / POST OFFICE 007</div><h1>The Post Office</h1><p>Private operator desk · reviewed organizational correspondence</p></div><span class="seal">NO AUTO-SEND</span></header>
+<section class="paper" id="lock">
+<h2>Open the operator desk</h2>
+<p>No API token is needed in your browser. Request a code sent to the existing private owner inbox, then enter it here. No new mailbox is created.</p>
+<div class="actions"><button id="request" type="button">Email me a sign-in code</button></div>
+<label for="code">12-digit code</label>
+<input id="code" type="text" inputmode="numeric" pattern="[0-9]{12}" maxlength="12" autocomplete="one-time-code" placeholder="000000000000" spellcheck="false">
+<button id="verify" type="button" class="secondary">Unlock</button>
+<p class="fine">The code is valid for a short interval. The secure session expires after two hours. Signing in never sends outreach.</p>
+</section>
+<section class="paper" id="desk" hidden>
+<div class="row"><div><h2>Review the next letter</h2><p>Only source-approved messages can be sent. No free-text recipients or mass mailing.</p></div><button id="logout" type="button" class="quiet">Sign out</button></div>
+<div id="queue" aria-live="polite"></div>
+</section>
+<p id="status" role="status" aria-live="polite" class="status">Locked. No messages sent.</p>
+<footer><p>PROVIDER_ACCEPTED ≠ delivered · An email reply is not a service agreement.<br>
+No survivor or child histories, case intake, or private documents belong in this outreach desk. An attempted send may need provider-log inspection before retrying.</p></footer>
+</main></body></html>
