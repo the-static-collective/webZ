@@ -35,3 +35,33 @@ Heat urgency cannot wait for green wood to season. Treat **existing, tested-dry,
 - Day 7: report only what actually occurred, with permission and no private household identification.
 
 **Source precedes permission, permission precedes movement, movement precedes a receipt.** No direct submissions exist on the public app. The on-page composer produces unsent public-safe text only.
+
+
+## WINTER WARMTH 002 — Waseca seven-door pilot (28 October 2026)
+
+The public page's **pilot contact desk** is generated from `jubilee/wood/pilot.mjs`: seven research leads, each independently sourced. These are public contact channels, not enrolled members or evidence of services offered. Nothing is submitted, emailed or stored remotely. Local unsigned notes cannot self-certify interest, permissions or completed service. `tests/jubilee-pilot.test.mjs` checks the guardrails.
+
+**First conversation (needs/referrals)**: Minnesota Valley Action Council Waseca, 507-835-8240 (EAP 507-345-6822 / eap@mnvac.org), https://www.mnvac.org/programs/energy/energy-assistance-eap-2/ . The agency's site says applications are available but funds are unavailable until a future November date; do not treat the State's Oct 26 funding announcement as payment confirmation. First ask: is a non-duplicative wood-heat support gap actually present, and who owns referrals? Do not request any client names.
+
+**Second conversation (community steward discovery)**: Waseca Area Neighborhood Service Center, 507-833-4119, director@wasecaservicecenter.org, https://www.wasecaareaneighborhoodservicecenter.com/about-us . Its community volunteer and food distribution networks exist; it has *not* said it wants a wood bank. Ask for a no-case-data problem statement and the appropriate reviewer, not approval on behalf of its leadership.
+
+**Dry vendor discovery**: Moonlight Firewood, Owatonna, 507-475-1985, publicly listed among MDA-certified firewood producers: https://www.mda.state.mn.us/plants-insects/firewood-certification . Ask current stock, tested dryness, legal delivery region, supplier capacity, price, vendor eligibility for EAP, and only then whether an authorized pilot could be viable. MDA listing alone is not a sale, pledge, current certificate check, or proof of stock.
+
+**Existing voluntary cross-institution bridge**: Faith United Methodist Church, 507-835-3167, https://wasecafaithumc.com/outreach/ publicly identifies support of Neighborhood Services Center and an MVAC hygiene donation program. Ask about referral to an appropriate community steward. There is no firewood offer.
+
+**Municipal permission discovery**: Waseca County Solid Waste & Recycling, 507-835-0664, https://www.wasecacounty.gov/133/Solid-WasteRecycling . County accepts certain brush/logs, but deposit or disposal does not mean they are free to take. Written permission, ownership, municipal rules and pest restrictions precede any recovery.
+
+**Professional arborist source discovery**: WoodchuX Tree Care, Montgomery, 507-933-0133, https://www.bbb.org/us/mn/montgomery/profile/tree-service/woodchux-tree-care-llc-0704-1000077834 ; independently check insurance, logs, disposal rights, transport and risk. No volunteer felling.
+
+**Training/forest-pest knowledge**: UMN Extension Waseca County, 507-835-0600, https://extension.umn.edu/about/our-work/local/waseca-county ; ask for guidance and safe adult learning. Youth are not a source of chainsaw labor.
+
+### Exactly one small proof, without misreporting
+
+- Day 1: identify a genuinely unmet wood-heat need at the organizational level, without household records. Record YES / NO / UNKNOWN; no false affiliation.
+- Day 2: identify an authorized receiving steward. Refusal or a referral to a better organization is valid.
+- Day 3: identify one potential tested-dry stock source and verify what it actually has. If not available, switch the pilot to a *future-season storage and moisture-education* experiment.
+- Day 4: assess pest/quarantine, owner consent, dry fuel quality, chimney and appliance suitability, transport, insurance and proper receiving procedures.
+- Day 5: one participating organization independently authorizes a bounded reversible trial, if appropriate. Until that point, nothing moves.
+- Day 6–7: report exactly what happened, even if the answer is “three calls; no approved heat transfer; learned that MVAC referral is the right first step.”
+
+**Technical source-of-truth status**: public-sourced *research leads*, neither signed reLATTE crossings nor an enrolled PlanZ/JAR;VIS network. A human may copy the unsent outreach draft; recipients must control their own consent and intake systems. **Do not publish a resident's wood-heating status or identifiable address.**
