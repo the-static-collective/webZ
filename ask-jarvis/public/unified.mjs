@@ -32,6 +32,24 @@ export function presentUnified(data){
   }
   if(list.childNodes.length)p.append(list);
   p.append(el('p','', 'First useful check: '+s.firstMove));
+  // Recent published project notes are a dated, source-owned editorial feed,
+  // not inspected partner consent or proof that an event or service exists.
+  if(data.recent?.status==='READ'&&Array.isArray(s.recentWork)&&s.recentWork.length){
+    const shelf=el('section','recent-work-panel');
+    shelf.append(el('h4','','Recently opened doors · '+data.recent.reviewedOn),
+      el('p','','Editorial project notes only. Every proposed field use needs its own human approval.'));
+    const ul=el('ul');
+    for(const item of s.recentWork.slice(0,3)){
+      const li=el('li');li.append(el('strong','',item.title+' · '+item.state),
+        el('p','','First real check: '+item.firstCheck));
+      try{const u=new URL(item.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){
+       const link=el('a','','Open public door ↗');link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
+      if(/^https:\\/\\/github\\.com\\/the-static-collective\\/[A-Za-z0-9.-]+\\/blob\\/[a-f0-9]{40}\\/[A-Za-z0-9_./-]+$/.test(item.source)){
+       const source=el('a','',' · Read source ↗');source.href=item.source;source.target='_blank';source.rel='noopener noreferrer';li.append(source);}
+      ul.append(li);
+    }
+    shelf.append(ul,el('small','','Catalog '+data.recent.release+' · received bytes '+data.recent.sourceSha256));p.append(shelf);
+  }
   // Open exploration roles grow from real interest. A role card is an
   // invitation, not a claim of existing local leadership or permission.
   const role=getRole(s.openStarterRole?.id);
