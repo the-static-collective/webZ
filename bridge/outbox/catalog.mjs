@@ -4,7 +4,7 @@ import {allDoors,draftFor} from "../network/model.mjs";
 import {firstInquiry} from "../locus/model.mjs";
 const sourceBase="https://github.com/the-static-collective/";
 function splitLetter(letter){const match=/^Subject:\s*(.+?)\n\s*\n([\s\S]*)$/i.exec(letter.trim());return match?{subject:match[1].trim(),body:match[2].trim()}:{subject:"Draft — review subject",body:letter.trim()};}
-function seed(id,group,title,letter,source,{to="",kind="SOURCE_DRAFT",note=""}={}){return Object.freeze({id,group,title,...splitLetter(letter),to,kind,source,note,origin:"PUBLIC_OR_RECONSTRUCTED_SEED",status:"DRAFT",sentEvidence:"",sentAt:""});}
+function seed(id,group,title,letter,source,{to="",kind="SOURCE_DRAFT",note="",status="DRAFT"}={}){return Object.freeze({id,group,title,...splitLetter(letter),to,kind,source,note,origin:"PUBLIC_OR_RECONSTRUCTED_SEED",status,sentEvidence:"",sentAt:""});}
 const institution=allDoors.map(d=>seed("bridge-"+d.id,"Institutions",d.name,draftFor(d.id),sourceBase+"webZ/blob/main/bridge/network/model.mjs",{note:"Prospective institution only; check deadline, eligibility and actual recipient. Not sent by this project."}));
 const local=[
 seed("shelf-wansc","Food & Care","Waseca food shelf — first question",firstInquiry("shelf"),sourceBase+"webZ/blob/main/bridge/locus/model.mjs",{to:"director@wasecaservicecenter.org",note:"Public organizational address requires recheck; no recipient permission or field operation."}),
@@ -41,7 +41,7 @@ Thank you for the work you do in our communities.
 
 The Static Collective
 us@abundent.org
-https://abundent.org/`,sourceBase+"webZ/blob/main/api/post-office/outreach.js",{to:"info@cadamn.org",note:"A separately reviewed fixed envelope also exists in Post Office 007. Its actual provider send status is NOT synchronized here; inspect original operator panel/provider history. Never infer unsent or delivered from this catalog."}),
+https://abundent.org/`,sourceBase+"webZ/blob/main/api/post-office/outreach.js",{to:"info@cadamn.org",status:"HOLD",note:"A separately reviewed fixed envelope also exists in Post Office 007. Its actual provider send status is NOT synchronized here; inspect original operator panel/provider history. Never infer unsent or delivered from this catalog."}),
 seed("porchlight-tpc","Housing & Exchange","The People Concern — method review inquiry",`Subject: Porchlight Commons — request for one provider-defined practical question
 
 Hello,

@@ -5,7 +5,7 @@
 ## What was actually unified
 - 23 prospective institutional draft letters are derived directly from [BRIDGE-NETWORK-003](../bridge/network/model.mjs), not copied into a conflicting independent roster.
 - 2 Waseca SHELF-001 local need inquiries come from the [public food source/receiver model](../bridge/locus/model.mjs).
-- 1 CADA independent safeguarding review letter is copied from the **already public** exact approved envelope in [POST OFFICE 006](../api/post-office/outreach.js). Its status here is **unknown**; the outbox cannot read Resend provider logs, and source presence is not proof the letter was never sent. It is not a new sending authorization.
+- 1 CADA independent safeguarding review letter is copied from the **already public** exact approved envelope in [POST OFFICE 006](../api/post-office/outreach.js). It is seeded as **HOLD**, pending an inspection of actual provider history. Its external status remains **unknown**; the outbox cannot read Resend provider logs, and source presence is not proof the letter was never sent. It is not a new sending authorization.
 - 1 Bryan/MSU technical follow-up is copied from [MSyoU's unsent contact note](https://github.com/the-static-collective/MSyoU/blob/main/docs/CONTACT-NOTE.md).
 - 3 Porchlight shelter-provider introductory **reconstructions**, plus Kinship, Coalition of Care, and Benya editorial **newly reconstructed templates**. These are explicitly `RECONSTRUCTED_TEMPLATE`, not claims to have recovered the exact old message wording.
 - The user can add and edit additional private drafts, recipients, notes, readiness, a self-reported sent/replied date and account evidence. Do not promise that 100% of drafts in old chats, email accounts and unindexed repositories were found.

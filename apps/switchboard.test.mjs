@@ -63,3 +63,10 @@ test('portable Switchboard includes the private source-derived outbox with no ba
  assert.ok(outbox.includes("connect-src 'none'"));
  assert.ok(fs.existsSync(new URL('../bridge/outbox/vault.mjs',import.meta.url)));
 });
+
+test('Pages publication triggers for independently owned rooms, without an apps file touch',async()=>{
+ const fs=await import('node:fs');
+ const workflow=fs.readFileSync(new URL('../.github/workflows/abundent-portable-static.yml',import.meta.url),'utf8');
+ for(const path of ["'apps/**'","'bridge/**'","'commons/**'","'jubilee/**'"]) assert.ok(workflow.includes(path),path);
+ assert.ok(workflow.includes('test -f apps/dist/bridge/outbox/index.html'));
+});
