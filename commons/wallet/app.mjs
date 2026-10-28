@@ -117,7 +117,7 @@ $("addForm").addEventListener("submit",async event=>{
   const entry=createEntry({title:f.title.value,url:f.url.value,scope:f.scope.value,group:f.group.value,note:f.note.value});
   if(entries.some(x=>x.url===entry.url))throw Error("This exact link is already saved.");
   await persist([...entries,entry]);
-  event.currentTarget.reset();
+  $("addForm").reset();
   message("Link encrypted and saved locally. No link or label was uploaded.");
  })}catch(e){message(e.message,true)}
 });
