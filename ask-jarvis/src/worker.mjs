@@ -2,6 +2,7 @@
 import {CAPABILITIES, selectSources, sourceUrl} from './registry.mjs';
 import {formEncounter, composeReturn} from './encounter.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
+import {readRecentWork} from './recent-work.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -70,7 +71,7 @@ async function inspect(c,fetcher) {
   }
 }
 
-export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
+export async function assemble(question,fetcher=fetch,{kind='auto',recent=null}={}) {
   if(typeof question!=='string') throw Error('QUESTION_REQUIRED');
   if(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(question)) throw Error('QUESTION_CONTROL');
   if(question.length>360) throw Error('QUESTION_LENGTH');
@@ -83,13 +84,18 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
   const found = sources.filter(s=>s.status==='INSPECTED').length;
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
+  const recentCut=recent??{schema:'jarvis/recent-work-cut-v1',status:'NOT_REQUESTED',selected:[]};
+  const recentMatches=recentCut.status==='READ'?recentCut.selected:[];
+  const firstRecent=recentMatches[0]??null;
   const guidance = found ? `I inspected ${found} of ${sources.length} public source documents and composed this ${returned.kind==='question'?'question card':returned.kind+' draft'}. The draft uses local rules; the documents show possible tools, not commitments.`
     : 'I could not verify a source document on this run. The draft below is locally composed from your question; no project connection is being claimed.';
+  const nextQuestion=firstRecent?.firstCheck??returned.nextQuestion;
   const workbenchRequest = {schema:'ask-jarvis/workbench-request-v1',dispatch:'MANUAL_EXPORT_ONLY',authority:'NONE',
     task:{operation:'PREPARE_DRAFT',kind:returned.kind,question},
     encounter,sourceReferences:sources.map(s=>({id:s.id,commit:s.commit,sha256:s.sha256,status:s.status})),
     requiredBeforeDispatch:['Operator-reviewed endpoint and authentication','Owner-approved capability and input scope','Receiver-issued outcome and reconciliation contract']};
   const steps = [
+    {name:'Recent work registry',status:recentCut.status==='READ'?'READ':'HOLD',detail:recentCut.status==='READ'?'Read a reviewed, dated public catalog; '+recentMatches.length+' question-relevant editorial leads. No underlying project or partner was independently verified.':'Registry unavailable or not requested; no recent work is inferred.'},
     {name:'JAR;VIS',status:'DONE',detail:'Received one question; deterministic rules, no model or question storage.'},
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
     {name:'TABLElogic encounter',status:'DONE',detail:'Locally separated the question, draft ideas and possible relations; unresolved gaps remain open. No TABLElogic runtime invoked.'},
@@ -104,11 +110,13 @@ export async function assemble(question,fetcher=fetch,{kind='auto'}={}) {
     '# ASK JAR;VIS / QUESTION CARD',`Question: ${q}`,'',returned.title,'',returned.body,'',
     `Observation: ${guidance}`,'','Sources inspected (read-only):',
     ...sources.map(s=>`- ${s.name} — ${s.status} — ${s.source}${s.sha256?' ['+s.sha256+']':''}`),'',
-    `Next question: ${returned.nextQuestion}`,'',
+    'Recent public editorial leads (not inspected project evidence):',
+    ...recentMatches.map(x=>'- '+x.title+' ['+x.state+'] '+x.publicUrl+' SOURCE: '+x.source+' FIRST CHECK: '+x.firstCheck),
+    `Next question: ${nextQuestion}`,'',
     'No organizer affiliation, verified human consent, remote execution, partner commitment, or fulfilled service is claimed.',
     `Generated: ${observedAt}`
   ].join('\n');
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion:returned.nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,recent:recentCut};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;
@@ -130,7 +138,7 @@ export default {
       try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
       catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
       if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
-      try{return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto'}));}
+      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',recent}));}
       catch(e){return response({error:inputError(e)},422);}
     }
     if(url.pathname.startsWith('/api/'))return response({error:'NOT_FOUND'},404);

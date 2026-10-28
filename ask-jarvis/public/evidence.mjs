@@ -11,7 +11,8 @@ export function evidenceBody(data) {
     mode:data.mode, question:data.question, observedAt:data.observedAt,
     encounter:data.encounter, return:data.return, sources:data.sources,
     steps:data.steps, guidance:data.guidance, nextQuestion:data.nextQuestion,
-    artifact:data.artifact, workbenchRequest:data.workbenchRequest
+    artifact:data.artifact, workbenchRequest:data.workbenchRequest,
+    ...(data.recent?{recent:data.recent}:{})
   };
 }
 

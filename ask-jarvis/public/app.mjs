@@ -50,6 +50,21 @@ function sourceLink(label,url) {
   }
   return a;
 }
+function showRecent(cut){
+ const box=$('#recent-work');box.replaceChildren();box.hidden=true;
+ if(cut?.status!=='READ'||!Array.isArray(cut.selected)||!cut.selected.length)return;
+ const title=el('h3','', 'Recent work that may help');
+ const notice=el('p','','These are dated, source-linked public project notes, not confirmed partners, verified services, or completed work. Choose a door; a human owner decides what follows.');
+ const list=el('ul','sources');
+ for(const x of cut.selected.slice(0,3)){
+  const li=el('li');li.append(el('strong','',x.title+' · '+x.state),el('p','',x.summary),el('small','','First check: '+x.firstCheck));
+  const link=el('a','','Open public door ↗');
+  try{const u=new URL(x.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
+  if(/^https:\\/\\/github\\.com\\/the-static-collective\\/[A-Za-z0-9.-]+\\/blob\\/[a-f0-9]{40}\\/[A-Za-z0-9_./-]+$/.test(x.source)){const s=el('a','',' · Source at exact commit ↗');s.href=x.source;s.target='_blank';s.rel='noopener noreferrer';li.append(s);}
+  list.append(li);
+ }
+ box.append(title,notice,list,el('small','','Catalog '+cut.release+' · reviewed '+cut.reviewedOn+' · feed bytes '+cut.sourceSha256));box.hidden=false;
+}
 function show(data) {
   if(!Array.isArray(data.sources)||!Array.isArray(data.steps)||!Array.isArray(data.encounter?.gaps)||!['question','invitation','door','song','plan'].includes(data.return?.kind))throw Error('Unexpected return format.');
   const returned=data.return;
@@ -57,6 +72,7 @@ function show(data) {
   $('#mode').textContent='SOURCE CHECK + LOCAL DRAFT';
   steps.replaceChildren(...data.steps.map(statusStep));
   $('#answer').textContent=data.guidance;
+  showRecent(data.recent);
   $('#return-label').textContent={question:'A QUESTION CARD',invitation:'AN INVITATION DRAFT',door:'A POSSIBLE DOOR',song:'OR SIMPLY A SONG',plan:'A POSSIBLE FIELD PLAN'}[returned.kind];
   $('#return-title').textContent=returned.title;$('#return-body').textContent=returned.body;
   $('#return-doors').replaceChildren(...returned.doors.map(d=>{
