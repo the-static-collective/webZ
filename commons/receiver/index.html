@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#0c1918">
+<meta name="description" content="An offline, owner-local receiving desk for reviewing resource and method proposals without account sign-up or case records.">
+<title>Living Receiver · Porchlight Commons</title>
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./receiver.css">
+<script type="module" src="./receiver-ui.mjs"></script></head><body>
+<a class="skip" href="#receive">Skip to import</a>
+<header><a href="../" class="brand">PORCHLIGHT COMMONS / LIVING RECEIVER</a><nav aria-label="Related pages"><a href="../">Exchange Desk</a> · <a href="../../">Switchboard</a></nav></header>
+<main>
+  <p class="eyebrow">LIVING RECEIVER 001 / PUBLIC FIELD INSTRUMENT</p>
+  <h1>A door that can say yes, no, or not yet.</h1>
+  <p class="lead">Open an organizational need or reusable-method card. Decide what to examine locally. Return a response by file, printout, or your existing communication channels.</p>
+  <div class="alert" role="note"><strong>This is a local, unsigned demonstration.</strong> No accounts, database, identity verification, automatic matchmaking, partner enrollment or sending. All processing remains in this browser tab; closing it clears the session. Do not enter client names, personal contact details, shelter addresses, case records or confidential financial information. A content hash is <em>not</em> a signature.</div>
+  <div class="steps" aria-label="Four phases">
+    <span>01 · RECEIVE</span><span>02 · DECIDE</span><span>03 · REPORT</span><span>04 · RETURN</span>
+  </div>
+  <section class="section" id="receive">
+    <p class="eyebrow">01 / RECEIVE</p><h2>Open one portable packet</h2>
+    <p class="small">Accepts Porchlight Commons HOLD cards or JAR;VIS → planZ return candidates, as well as prior receiver responses/reports for read-only inspection. Nothing is uploaded.</p>
+    <div class="grid">
+      <label>Choose JSON file (max 16 KB)<input id="packetFile" type="file" accept=".json,application/json"></label>
+      <div><button class="secondary" type="button" id="sample">Try a clearly synthetic sample</button></div>
+    </div>
+    <label>Or paste a JSON packet<textarea id="packetText" rows="5" maxlength="18000" placeholder='{"schema":"porchlight-commons/exchange-packet/v0", ...}'></textarea></label>
+    <div class="actions"><button type="button" id="inspect">Inspect packet</button><button type="button" class="secondary" id="reset">Clear this tab</button></div>
+    <p id="status" role="status" aria-live="polite">No packet loaded. No decision recorded.</p>
+    <div id="inspection" class="inspection" hidden>
+      <p class="eyebrow" id="kind">SOURCE / UNVERIFIED</p>
+      <h3 id="heading"></h3><p id="region"></p><p id="detail"></p>
+      <p id="sourceLink" hidden></p>
+      <p class="small wraptext"><strong>Local packet digest:</strong> <code id="packetId"></code></p>
+      <p class="small">The digest identifies these local bytes, not the identity or authorization of their sender. Source approval and suitability must be checked outside this tool.</p>
+    </div>
+  </section>
+  <section class="section" id="decisionSection" hidden>
+    <p class="eyebrow">02 / DECIDE</p><h2>The receiving community chooses</h2>
+    <p>The origin's request does not create your obligation. A decision here is a <strong>self-attested local review note</strong>, not a legally binding commitment or a signed reLATTE admission receipt.</p>
+    <form id="decisionForm">
+      <div class="grid">
+        <label>Local action<select name="decision" required>
+          <option value="HOLD">HOLD · Ask questions / no commitment</option>
+          <option value="REFUSE">REFUSE · Not appropriate here</option>
+          <option value="ACCEPT_FOR_LOCAL_REVIEW">ACCEPT FOR LOCAL REVIEW · Explore a reversible trial</option>
+        </select></label>
+        <label>Your role (self-described)<select name="reviewer_role">
+          <option value="local-steward">Community steward</option>
+          <option value="organization-operator">Organization operator</option>
+          <option value="community-reviewer">Independent community reviewer</option>
+        </select></label>
+      </div>
+      <label>Non-sensitive reason (12–220 characters)
+        <textarea name="reason" minlength="12" maxlength="220" rows="3" required placeholder="We can evaluate a safe local purchasing trial, subject to operator permission."></textarea>
+      </label>
+      <label class="check"><input type="checkbox" name="attestation" required> I am recording my own local review decision. I understand this tool cannot verify my identity, a partner's permission, or anyone's receipt of aid.</label>
+      <button type="submit">Make review response</button>
+    </form>
+    <div id="decisionResult" hidden>
+      <p class="good">Review response created in this tab. It has not been sent or signed.</p>
+      <pre id="responseJson" aria-label="Review response JSON"></pre>
+      <div class="actions"><button type="button" id="downloadResponse">Download response JSON</button><button type="button" class="secondary" id="printResponse">Print response</button></div>
+    </div>
+  </section>
+  <section class="section" id="reportSection" hidden>
+    <p class="eyebrow">03 / REPORT</p><h2>What happened after local review?</h2>
+    <p>Only an accepted-for-review proposal can create a field report. A report is someone's statement—not a confirmed delivery, independently witnessed outcome, or Full Measure Deed.</p>
+    <form id="reportForm">
+      <div class="grid">
+        <label>Unverified report status<select name="field_status" required>
+          <option value="REPORTED_PARTIAL">Reported partial progress</option>
+          <option value="REPORTED_COMPLETE">Reported work completed (not confirmed)</option>
+          <option value="BLOCKED">Blocked / did not happen</option>
+        </select></label>
+        <label>Quantity reported<input type="number" name="quantity_reported" min="0" max="100000" step="1" value="0" required></label>
+        <label>Units<select name="unit">
+          <option value="parcels">Parcels</option><option value="kg">Kilograms</option>
+          <option value="meals">Meals</option><option value="items">Items</option>
+          <option value="hours">Hours</option><option value="kWh">kWh</option>
+          <option value="sessions">Sessions</option>
+        </select></label>
+      </div>
+      <label>Non-sensitive account of reported activity (20–220 characters)
+        <textarea name="summary" minlength="20" maxlength="220" rows="3" required placeholder="The group reports testing a pickup route; recipient confirmation has not been obtained."></textarea>
+      </label>
+      <label class="check"><input name="attestation" type="checkbox" required> This is an unverified report. I am not asserting independent recipient confirmation, grant of authority, or proven impact.</label>
+      <button type="submit">Prepare unverified report</button>
+    </form>
+    <div id="reportResult" hidden>
+      <p class="good">Unverified report prepared; an independent recipient/operator must confirm actual benefit separately.</p>
+      <pre id="reportJson"></pre>
+      <div class="actions"><button id="downloadReport" type="button">Download report JSON</button><button id="printReport" class="secondary" type="button">Print report</button></div>
+    </div>
+  </section>
+  <section class="section"><p class="eyebrow">04 / RETURN</p><h2>Keep the receiving organization in control</h2>
+    <p>Hand the JSON file or printout back through an already agreed channel—email, messaging, USB, or a community meeting. The other person can open it here without joining your software. Treat decisions as unverified until confirmed with the organization directly.</p>
+    <p>For signed crossing and receiver-local admission, the reLATTE owner-operated software is a <em>separate</em> trust boundary. This browser page has neither key custody nor access to that receiver. For real food, energy or shelter work, follow existing local safety and consent processes.</p>
+    <p><a href="https://github.com/the-static-collective/webZ/blob/main/docs/LIVING-RECEIVER-001.md">Field protocol and limitations</a></p>
+  </section>
+</main>
+<footer><p><strong>A card is not consent. A response is not fulfillment. A report is not independent confirmation.</strong><br>Living Receiver 001 · Local tab only · Accounts not required.</p></footer>
+</body></html>
