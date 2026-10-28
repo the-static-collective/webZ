@@ -188,6 +188,8 @@ export async function makeFieldReport(inspected,response,input,at=new Date().toI
   if(!STATUSES.includes(field_status))throw Error("Choose an unverified report status.");
   if(!UNITS.includes(unit)||!Number.isSafeInteger(quantity_reported)||
      quantity_reported<0||quantity_reported>100000)throw Error("Invalid reported quantity or unit.");
+  if(field_status==="BLOCKED"&&quantity_reported!==0)throw Error("A blocked trial must report zero completed units.");
+  if(field_status==="REPORTED_COMPLETE"&&quantity_reported===0)throw Error("A complete report needs a positive quantity.");
   if(inspected.unit && inspected.unit!==unit)throw Error("Use the same unit as the original need.");
   if(inspected.quantity!==null && quantity_reported>inspected.quantity)
     throw Error("Reported units exceed the original need; create a separate source card.");

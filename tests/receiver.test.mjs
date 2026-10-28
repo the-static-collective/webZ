@@ -34,7 +34,7 @@ test("forged need authorization, contact data, and hidden case fields are refuse
  const auth=structuredClone(source);auth.need.local_operator_authorized=true;
  await assert.rejects(inspectPacket(auth),/authority-escalated/);
  const pii=structuredClone(source);pii.need.requirement.summary="Reach client@example.org";
- await assert.rejects(inspectPacket(pii),/Remove personal/);
+ await assert.rejects(inspectPacket(pii),/Remove contact information|Remove personal/);
  const extra=structuredClone(source);extra.private_guest_list=["name"];
  await assert.rejects(inspectPacket(extra),/Unexpected fields/);
 });
@@ -81,4 +81,11 @@ test("reject packets beyond size limits or unknown schemas",async()=>{
  await assert.rejects(inspectPacket("x".repeat(17000)),/16 KB/);
  await assert.rejects(inspectPacket("{notjson"),/Not valid JSON/);
  await assert.rejects(inspectPacket({schema:"relatte.receipt/v0",semantic_effect:"proof"}),/Unknown/);
+});
+
+test("blocked work cannot report delivered units or complete zero work",async()=>{
+ const source=await inspectPacket(draftPacket(draftNeed({region:"Waseca MN",category:"food",summary:"Meals for a community food table",quantity:30,unit:"meals",window:"7-days"}),compareRoutes([{route:"local-purchase",estimatedUSD:30,reviewed:false},{route:"remote-donation",estimatedUSD:"",reviewed:false},{route:"knowledge-transfer",estimatedUSD:"",reviewed:false}])));
+ const response=await makeReceiverResponse(source,action);
+ await assert.rejects(makeFieldReport(source,response,{field_status:"BLOCKED",quantity_reported:3,unit:"meals",summary:"The delivery was blocked for safety.",attestation:true}),/zero completed/);
+ await assert.rejects(makeFieldReport(source,response,{field_status:"REPORTED_COMPLETE",quantity_reported:0,unit:"meals",summary:"No meals were actually delivered yet.",attestation:true}),/positive quantity/);
 });
