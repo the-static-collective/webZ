@@ -61,8 +61,18 @@ function showRecent(cut){
   const link=el('a','','Open public door ↗');
   try{const u=new URL(x.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming|connections)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
   if(/^https:\\/\\/github\\.com\\/the-static-collective\\/[A-Za-z0-9.-]+\\/blob\\/[a-f0-9]{40}\\/[A-Za-z0-9_./-]+$/.test(x.source)){const s=el('a','',' · Source at exact commit ↗');s.href=x.source;s.target='_blank';s.rel='noopener noreferrer';li.append(s);}
+  const watched=cut.observations?.status==='READ'
+   ?cut.observations.selected?.find(s=>s.repo===String(x.source).split('/')[4]):null;
+  if(watched){
+   li.append(el('small','','SOURCE WATCH · '+watched.repo+' / '+watched.ref+' · '+watched.status+
+    ' · observed '+watched.checkedAt+' · a branch pointer is not proof of deployment or completed work.'));
+   if(watched.status==='OBSERVED_HEAD'&&watched.commitUrl){
+    const a=el('a','',' Observed ref ↗');a.href=watched.commitUrl;a.target='_blank';a.rel='noopener noreferrer';li.append(a);
+   }
+  }
   list.append(li);
  }
+ if(cut.observations?.status!=='READ')box.append(el('small','','Source watch on HOLD (unavailable or stale). Earlier editorial notes are not evidence of fresh implementation.'));
  box.append(title,notice,list,el('small','','Catalog '+cut.release+' · reviewed '+cut.reviewedOn+' · feed bytes '+cut.sourceSha256));box.hidden=false;
 }
 function show(data) {

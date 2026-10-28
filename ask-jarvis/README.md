@@ -65,3 +65,7 @@ The original 1999 question machine remains the homepage. The **fully fictional, 
 ## Recent-work relay (October 28, 2026)
 
 A bounded, read-only source-owned editorial index now lives at [JAR-VIS/commons/recent-work-v1.json](https://github.com/the-static-collective/JAR-VIS/blob/main/commons/recent-work-v1.json). The public question machine fetches this fixed manifest, hashes it, validates each public reference and privately selects up to three topic-relevant summaries. A visitor question is never sent to GitHub. Outages HOLD, never fabricate a match. Entries are included in the original unsigned downloadable return and browser-verified receipt. This is not live partner discovery, automatic dispatch or source-project adoption.
+
+## Source observatory / automatic updates
+
+The scheduled source pointer observatory in JAR-VIS publishes `commons/source-observations-v1.json` from 11 allowlisted public Git repositories. Every regular question can cross-reference a relevant curated editorial note with the observed source branch tip. The public health endpoint `GET /api/source-observations` returns the exact checked-at timestamp, source-feed digest, counts and HOLDs. A branch ref, including main, is **not canon, deployment evidence, consent, or verified fulfillment**. Stale or invalid feeds HOLD; they never overwrite editorial meaning. No user question is sent to GitHub by either fixed manifest fetch.

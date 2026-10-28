@@ -3,6 +3,7 @@ import {CAPABILITIES, selectSources, sourceUrl} from './registry.mjs';
 import {formEncounter, composeReturn} from './encounter.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {readRecentWork} from './recent-work.mjs';
+import {readObservations} from './source-observations.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -132,6 +133,11 @@ export default {
   async fetch(request,env) {
     const url=new URL(request.url);
     if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-004',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/source-observations'){
+      if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
+      const cut=await readObservations(null,{fetcher:fetch});
+      return response(cut,cut.status==='READ'?200:503);
+    }
     if(url.pathname==='/api/recent-work'){
       if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
       const cut=await readRecentWork('recent useful projects',{fetcher:fetch});
@@ -145,7 +151,7 @@ export default {
       try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
       catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
       if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
-      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',recent}));}
+      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});recent.observations=await readObservations(recent,{fetcher:fetch});return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',recent}));}
       catch(e){return response({error:inputError(e)},422);}
     }
     if(url.pathname.startsWith('/api/'))return response({error:'NOT_FOUND'},404);
