@@ -75,3 +75,9 @@ The [Living Receiver](commons/receiver/) extends the Commons exchange desk. A pe
 ## Living Receiver 002 — Private invitation inbox
 
 The [persistent Living Inbox](commons/inbox/) connects to an isolated Supabase Edge Function and private commons_inbox_* tables. The creator receives three random bearer capabilities: owner (manage), reviewer (read and self-attested review), and submitter (blind proposal submission). Only token hashes are stored. All tables use RLS and have no anon/authenticated direct grants. The service role stays server-side. A capability link is not verified identity; a review is not signed reLATTE ADMIT, and a report is not confirmed fulfillment. Owners can rotate reviewer/submitter links, close, or permanently delete. [Full protocol](docs/LIVING-INBOX-002.md).
+
+## Abundent Link Wallet 001 — private account-free keyring
+
+[Open the Link Wallet](commons/wallet/). Stores up to 200 HTTPS invitation links and public bookmarks in a **single AES-256-GCM encrypted local vault**, with a 600,000-iteration PBKDF2-SHA256 passphrase-derived key. Encrypted ciphertext, salt, IV and revision alone are stored in IndexedDB. Decrypted URLs, labels and in-memory CryptoKey exist only while the vault is unlocked in that browser tab. You can search, group and label doors; open/copy with deliberate clicks; lock, delete local vault, re-encrypt with a new passphrase, and export/import an encrypted JSON backup to move across devices or domains. No backend, account, synchronizer or third-party script. [Security and recovery guide](docs/LINK-WALLET-001.md).
+
+**Important:** A wallet is a protective container for bearer links, not an authentication system, proof of invitation legitimacy, or authority to act. Losing the passphrase and backup is irreversible. External access must be revoked at each originating service, not by deleting a wallet item. Browser-origin storage is not automatically shared across Abundent / Vercel / GitHub Pages hostnames.
