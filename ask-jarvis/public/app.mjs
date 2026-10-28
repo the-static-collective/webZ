@@ -59,7 +59,7 @@ function showRecent(cut){
  for(const x of cut.selected.slice(0,3)){
   const li=el('li');li.append(el('strong','',x.title+' · '+x.state),el('p','',x.summary),el('small','','First check: '+x.firstCheck));
   const link=el('a','','Open public door ↗');
-  try{const u=new URL(x.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
+  try{const u=new URL(x.publicUrl);if(u.protocol==='https:'&&/^(?:apps|garden|night|postoffice|becoming|connections)\\.abundent\\.org$|^webz-field-porch-theotherlucasv-1250s-projects\\.vercel\\.app$|^github\\.com$/.test(u.hostname)){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';li.append(link);}}catch{}
   if(/^https:\\/\\/github\\.com\\/the-static-collective\\/[A-Za-z0-9.-]+\\/blob\\/[a-f0-9]{40}\\/[A-Za-z0-9_./-]+$/.test(x.source)){const s=el('a','',' · Source at exact commit ↗');s.href=x.source;s.target='_blank';s.rel='noopener noreferrer';li.append(s);}
   list.append(li);
  }

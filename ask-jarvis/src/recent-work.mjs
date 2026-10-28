@@ -4,7 +4,7 @@ import {sha256} from '../public/evidence.mjs';
 export const RECENT_FEED_URL='https://raw.githubusercontent.com/the-static-collective/JAR-VIS/main/commons/recent-work-v1.json';
 const SCHEMA='static-collective/recent-work-feed-v1';
 const STATES=new Set(['PUBLIC_PROTOTYPE','RESEARCH_PROPOSAL','DOCUMENTED_IMPLEMENTATION','DOCUMENTED_PROTOCOL','LOCAL_OPERATOR_PROTOTYPE']);
-const publicHost=/^(?:apps|garden|night|postoffice|becoming)\.abundent\.org$|^webz-field-porch-theotherlucasv-1250s-projects\.vercel\.app$|^github\.com$/;
+const publicHost=/^(?:apps|garden|night|postoffice|becoming|connections)\.abundent\.org$|^webz-field-porch-theotherlucasv-1250s-projects\.vercel\.app$|^github\.com$/;
 const sourceRx=/^https:\/\/github\.com\/the-static-collective\/[A-Za-z0-9.-]+\/blob\/[a-f0-9]{40}\/[A-Za-z0-9_./-]+$/;
 const safe=v=>typeof v==='string'&&!/[\u0000-\u001f\u007f<>]/.test(v);
 const words=v=>[...new Set((String(v).toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>2&&!STOP.has(w)).map(w=>w.endsWith('ies')?w.slice(0,-3)+'y':w.endsWith('s')&&w.length>4?w.slice(0,-1):w))];
