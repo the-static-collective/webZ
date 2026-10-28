@@ -73,3 +73,7 @@ The scheduled source pointer observatory in JAR-VIS publishes `commons/source-ob
 ## CHANGE-REVIEW-001 (pending claims only)
 
 The source-owned GitHub Actions job creates [candidate comparisons](https://github.com/the-static-collective/JAR-VIS/blob/main/commons/change-candidates-v1.json). The bounded read-only `/api/change-candidates` endpoint and `/changes.html` review shelf show exact source compare links, changed paths, and explicit HOLD vs PENDING_REVIEW. The regular question machine draws topic-relevant candidates into its signed-by-hash but **unsigned-authorship** downloadable return. No automatic publication, deployment, partner approval or verified-work promotion takes place. Editor-reviewed descriptions remain separately governed.
+
+## REVIEW-DECISION-001 — GitHub-authenticated, durable human dispositions
+
+The source reviewer UI at `/changes.html` now opens a prefilled, public GitHub issue for an exact candidate. Anyone may **propose**; only a GitHub repository **write/admin** reviewer who comments an exact `/jarvis-review` disposition can trigger a source-only append-only journal write via GitHub Actions. The public `GET /api/review-decisions` projects the source-owned journal. Decisions can HOLD, request evidence, acknowledge a source diff, or dismiss; no result becomes an automatic feature release or community accomplishment. See [the owning review protocol](https://github.com/the-static-collective/JAR-VIS/blob/main/docs/REVIEW-DECISION-001.md).

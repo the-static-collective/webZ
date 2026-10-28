@@ -5,6 +5,7 @@ import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {readRecentWork} from './recent-work.mjs';
 import {readObservations} from './source-observations.mjs';
 import {readChangeCandidates} from './change-review.mjs';
+import {readReviewDecisions} from './review-decisions.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -134,6 +135,11 @@ export default {
   async fetch(request,env) {
     const url=new URL(request.url);
     if(url.pathname==='/api/health'&&request.method==='GET') return response({ok:true,name:'ask JAR;VIS',mode:'read-only-source-inspection',release:'public-return-004',returns:['question','invitation','door','song','plan'],bridge:'manual-export-only'});
+    if(url.pathname==='/api/review-decisions'){
+      if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
+      const cut=await readReviewDecisions({fetcher:fetch});
+      return response(cut,cut.status==='READ'?200:503);
+    }
     if(url.pathname==='/api/change-candidates'){
       if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
       const cut=await readChangeCandidates(null,{fetcher:fetch});
