@@ -59,3 +59,7 @@ unsigned** limited invitation for manual WEBZ porch review. It does not
 transmit, collect or authenticate actual physical resources.
 
 See [GLEAN-001 guide](docs/GLEAN-001-REMAINDER-PORCH.md).
+
+## Porchlight Commons 001 — Organizational Exchange Desk
+
+The new [Porchlight Commons prototype](commons/) drafts privacy-conscious organizational needs and compares **local purchase / distant donation / knowledge transfer**, without network submission, accounts, partner claims, case data or unverified delivery confirmation. [Plan, first crossing, gates and limitations](docs/PORCHLIGHT-COMMONS-001.md). Tests: `node --test tests/commons.test.mjs`.

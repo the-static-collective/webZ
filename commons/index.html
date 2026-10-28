@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#0c1918">
+<title>Porchlight Commons | Exchange Desk</title><link rel="stylesheet" href="./style.css"><script type="module" src="./main.mjs"></script>
+</head><body>
+<header><a class="brand" href="../">WEBZ / PORCHLIGHT COMMONS</a><nav aria-label="Related doors"><a href="../tomorrow/">Stewardship invitations</a> · <a href="mailto:us@abundent.org?subject=Porchlight%20Commons">Contact</a></nav></header>
+<main><div class="eyebrow">Global Crossing 001 / Minnesota ↔ Ghana / prototype</div>
+<h1>What's missing here may exist elsewhere.</h1>
+<p class="lead">An exchange desk for community organizations to compare local supply, distant resources, and reusable know-how. Begin with one bounded need; never exchange somebody's private case file.</p>
+<div class="cards">
+  <div class="tile"><strong>01 / LISTEN</strong><p>A local steward defines an organizational need.</p></div>
+  <div class="tile"><strong>02 / COMPARE</strong><p>Consider local purchase, responsible transfer, and knowledge exchange.</p></div>
+  <div class="tile"><strong>03 / RETURN</strong><p>Partner approvals and independently confirmed outcomes belong to real people.</p></div>
+</div>
+<div class="alert"><strong>Demonstration only.</strong> This page has no accounts, backend, partners, service placement, sending, or live matching. Nothing is saved or transmitted. Never enter names, contact details, client records, shelter addresses, or sensitive locations. Exported cards require human inspection.</div>
+<section class="section"><h2>Build one organizational HOLD card</h2>
+<form id="exchange-form">
+<fieldset><legend>Need / organization-level only</legend><div class="grid">
+<label>General region<input name="region" required maxlength="80" value="Nima / Accra, Ghana (proposed)" autocomplete="off"></label>
+<label>Category<select name="category"><option value="food">Food</option><option value="energy">Energy / heat</option><option value="communication">Communication</option><option value="transport">Transport</option><option value="tools">Tools</option><option value="shelter-support">Shelter support</option><option value="practice">Reusable practice</option></select></label>
+<label>Public, non-personal need<input name="summary" required maxlength="160" value="Shelf-stable food parcels for a locally approved distribution circuit" autocomplete="off"></label>
+<label>Quantity<input name="quantity" type="number" min="1" max="100000" value="30" required></label>
+<label>Unit<select name="unit"><option value="parcels">Parcels</option><option value="kg">Kilograms</option><option value="meals">Meals</option><option value="items">Items</option><option value="hours">Hours</option><option value="kWh">kWh</option><option value="sessions">Sessions</option></select></label>
+<label>Time window<select name="window"><option value="30-days">Within 30 days</option><option value="7-days">Within 7 days</option><option value="exploratory">Exploratory, not urgent</option></select></label>
+</div></fieldset>
+<fieldset><legend>Compare possible pathways (optional estimates, USD)</legend>
+<p class="small">Include full landed costs, delivery, maintenance, licensing and local opportunity costs before marking reviewed. A price estimate is not a quote or a commitment.</p>
+<div class="route"><strong>Local purchase / Ghanaian supplier</strong><div class="grid"><label>Estimated total USD<input id="local-cost" type="number" min="0" step="0.01" placeholder="Not quoted"></label><label class="check"><input id="local-reviewed" type="checkbox"> Local suitability and availability reviewed by a steward</label></div></div>
+<div class="route"><strong>Distant donation / shipping</strong><div class="grid"><label>Estimated total landed USD<input id="import-cost" type="number" min="0" step="0.01" placeholder="Not quoted"></label><div><label class="check"><input id="import-reviewed" type="checkbox"> Suitability reviewed</label><label class="check"><input id="import-cleared" type="checkbox"> Import, e-waste and shipping compliance checked</label></div></div></div>
+<div class="route"><strong>Knowledge transfer / teach a locally buildable method</strong><div class="grid"><label>Estimated total USD<input id="knowledge-cost" type="number" min="0" step="0.01" placeholder="Not quoted"></label><label class="check"><input id="knowledge-reviewed" type="checkbox"> Locally implementable and safe method reviewed</label></div></div>
+</fieldset>
+<div class="actions"><button type="submit">Build HOLD card</button><button id="clear" class="secondary" type="button">Clear</button></div></form>
+<p role="status" aria-live="polite" id="status">No crossing has been proposed or authorized.</p>
+</section>
+<section class="section"><h2>Inspect before sharing</h2><p class="small">This packet is explicitly unverified. For actual participation: obtain a named organization's approval, independent lived-experience review, written scope and privacy limits, then use its existing volunteer/donation process. A reported delivery is never an independently confirmed receipt.</p>
+<div class="actions"><button id="download" disabled>Export local JSON draft</button><button id="print" class="secondary" disabled>Print reviewed card</button></div>
+<pre id="result" aria-label="Proposed exchange packet">No draft created.</pre>
+</section>
+<section class="section"><h2>First crossing to investigate</h2><p><strong>Nima/Accra:</strong> ask Healer's existing community contacts whether a low-capital food shelf, charging point, or communications desk is useful. <strong>Minnesota:</strong> ask one shelter operator which authorized, non-sensitive practical task a neighbor could complete. Neither side is enrolled here.</p><p>Possible pathways: source food locally before shipping; lend technical instructions rather than unusable hardware; test solar and thermal storage only with local review; record actual costs and recipient-confirmed outcomes before publishing a reusable method.</p><p><a href="https://github.com/the-static-collective/BananaSpork/blob/main/docs/proposals/porchlight-001-partnership-onramp.md">Read the provider-first Porchlight on-ramp</a>.</p></section>
+</main><footer><p><strong>A proposed match is not a promise. A report is not confirmation.</strong><br>Porchlight Commons 001 · Static Collective research prototype · No guest-level records.</p></footer>
+</body></html>
