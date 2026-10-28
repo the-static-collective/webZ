@@ -70,9 +70,18 @@ function showRecent(cut){
     const a=el('a','',' Observed ref ↗');a.href=watched.commitUrl;a.target='_blank';a.rel='noopener noreferrer';li.append(a);
    }
   }
+  const candidates=cut.changeCandidates?.status==='READ'
+   ?(cut.changeCandidates.selected||[]).filter(c=>c.repo===String(x.source).split('/')[4]):[];
+  for(const c of candidates.slice(0,2)){
+   const box=el('div','change-note');box.append(el('b','','CHANGE CANDIDATE · '+c.state),
+    el('p','','GitHub compared '+c.from.slice(0,8)+' → '+c.to.slice(0,8)+' · '+(c.totalFiles??'unresolved')+' changed file(s). This has not been human-reviewed.'));
+   for(const f of c.files.slice(0,4))box.append(el('small','',f.status+' · '+f.category+' · '+f.path));
+   const a=el('a','','Inspect exact compare ↗');a.href=c.compareUrl;a.target='_blank';a.rel='noopener noreferrer';box.append(a);li.append(box);
+  }
   list.append(li);
  }
  if(cut.observations?.status!=='READ')box.append(el('small','','Source watch on HOLD (unavailable or stale). Earlier editorial notes are not evidence of fresh implementation.'));
+ const queue=el('a','','Open the public change-review queue ↗');queue.href='/changes.html';box.append(queue);
  box.append(title,notice,list,el('small','','Catalog '+cut.release+' · reviewed '+cut.reviewedOn+' · feed bytes '+cut.sourceSha256));box.hidden=false;
 }
 function show(data) {

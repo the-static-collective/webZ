@@ -69,3 +69,7 @@ A bounded, read-only source-owned editorial index now lives at [JAR-VIS/commons/
 ## Source observatory / automatic updates
 
 The scheduled source pointer observatory in JAR-VIS publishes `commons/source-observations-v1.json` from 11 allowlisted public Git repositories. Every regular question can cross-reference a relevant curated editorial note with the observed source branch tip. The public health endpoint `GET /api/source-observations` returns the exact checked-at timestamp, source-feed digest, counts and HOLDs. A branch ref, including main, is **not canon, deployment evidence, consent, or verified fulfillment**. Stale or invalid feeds HOLD; they never overwrite editorial meaning. No user question is sent to GitHub by either fixed manifest fetch.
+
+## CHANGE-REVIEW-001 (pending claims only)
+
+The source-owned GitHub Actions job creates [candidate comparisons](https://github.com/the-static-collective/JAR-VIS/blob/main/commons/change-candidates-v1.json). The bounded read-only `/api/change-candidates` endpoint and `/changes.html` review shelf show exact source compare links, changed paths, and explicit HOLD vs PENDING_REVIEW. The regular question machine draws topic-relevant candidates into its signed-by-hash but **unsigned-authorship** downloadable return. No automatic publication, deployment, partner approval or verified-work promotion takes place. Editor-reviewed descriptions remain separately governed.
