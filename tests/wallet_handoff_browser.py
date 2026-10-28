@@ -103,4 +103,6 @@ try:
     "ciphertext_storage_only":True,"switchboard_offer":True,
     "discard_without_save":True,"page_errors":errors}))
   browser.close()
-# All test state was in isolated Playwright contexts, no remote partner inbox was created.
+finally:
+ # All test state was in isolated Playwright contexts; no remote partner inbox was created.
+ pass
