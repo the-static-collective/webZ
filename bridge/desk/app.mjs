@@ -2,11 +2,15 @@ import {allDoors,door,draftFor} from "../network/model.mjs";
 import {TYPES,emptyJournal,appendEvent,historyFor,summarize,queue} from "./ledger.mjs";
 import {createVault,unlockVault,resealVault,validateEnvelope} from "./vault.mjs";
 import {readVault,writeVault} from "./store.mjs";
+import {WORK_ACTIONS,buildWorkCard} from "./work-card.mjs";
 const $=id=>document.getElementById(id);
 const wanted=new URLSearchParams(location.search).get("door");
 let active=allDoors.some(d=>d.id===wanted)?wanted:"voqal";
 let key=null,envelope=null,journal=emptyJournal(),busy=false,lastUse=Date.now(),background=null;
 const labelFor=Object.fromEntries(TYPES);
+const workLabels=Object.fromEntries(WORK_ACTIONS);
+for(const [value,label] of WORK_ACTIONS){const op=document.createElement("option");op.value=value;op.textContent=label;$("work-action").append(op)}
+$("work-action").value="VERIFY_ELIGIBILITY";
 function message(s,error=false){$("status").textContent=s;$("status").dataset.error=String(error)}
 function element(tag,content,cls){const e=document.createElement(tag);if(content!==undefined)e.textContent=content;if(cls)e.className=cls;return e}
 async function run(fn){if(busy)throw Error("Another journal operation is in progress.");busy=true;try{return await fn()}finally{busy=false}}
@@ -72,6 +76,31 @@ $("backup").onclick=()=>{
 };
 for(const [value,title] of TYPES){const op=element("option",title);op.value=value;$("kind").append(op)}
 $("kind").value="SOURCE_CHECKED";
+function refreshWorkPreview(){
+ const d=door(active),action=workLabels[$("work-action").value];
+ $("work-ack").checked=false;
+ $("work-preview").replaceChildren();
+ const summary=element("p",d.name+" → "+$("work-target").value+" → "+action);
+ const gates=element("p","Eligibility / human review gate: "+d.gate);
+ const limits=element("p","PUBLIC ONLY · DRAFT · NO OUTBOUND CONTACT · NOT A RECEIVER DECISION");
+ $("work-preview").append(summary,gates,limits);
+}
+$("work-action").addEventListener("change",refreshWorkPreview);
+$("work-target").addEventListener("change",refreshWorkPreview);
+$("work-form").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!key){message("Unlock your ledger before preparing a handoff.",true);return}
+ if(!$("work-ack").checked){$("work-message").textContent="Review and acknowledge this particular packet first.";return}
+ try{
+  // Importantly NO journal events, notes, links, people, capabilities or authority are exported.
+  const packet=await buildWorkCard({doorId:active,target:$("work-target").value,actionCode:$("work-action").value},allDoors);
+  const b=new Blob([JSON.stringify(packet,null,2)+"\\n"],{type:"application/json"});
+  const url=URL.createObjectURL(b),a=element("a");a.href=url;a.download="bridge005-"+active+"-"+packet.target+"-HOLD.json";
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  $("work-ack").checked=false;
+  $("work-message").textContent="A public-only candidate file was downloaded, NOT sent. The receiving system must independently inspect it and HOLD for human action.";
+ }catch(err){$("work-message").textContent="HOLD: "+err.message}
+});
 function choose(id){
  active=id;
  history.replaceState(null,"",location.pathname+"?door="+encodeURIComponent(active));
@@ -108,6 +137,7 @@ function render(){
 function renderDetail(){
  const d=door(active),s=summarize(journal,active),events=historyFor(journal,active);
  $("door-name").textContent=d.name;$("door-due").textContent=d.due;$("gate").textContent=d.gate;
+ refreshWorkPreview();
  $("official").href=d.url;$("map").href="../network/?door="+encodeURIComponent(active);
  $("standing").textContent=s.total?("LAST OPERATOR ENTRY: "+s.label+" · "+s.classification.replaceAll("_"," ")):
  "PROSPECT ONLY. No genuine applicant permission, outreach or external relationship is known to this journal.";
