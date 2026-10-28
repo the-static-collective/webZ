@@ -105,7 +105,7 @@ $("work-form").addEventListener("submit",async e=>{
   // Importantly NO journal events, notes, links, people, capabilities or authority are exported.
   const packet=await buildWorkCard({doorId:active,target:$("work-target").value,actionCode:$("work-action").value},allDoors);
   if(packet.candidateId!==reviewedPacketId)throw Error("Selection changed after review; inspect the new packet.");
-  const b=new Blob([JSON.stringify(packet,null,2)+"\\n"],{type:"application/json"});
+  const b=new Blob([JSON.stringify(packet,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(b),a=element("a");a.href=url;a.download="bridge005-"+active+"-"+packet.target+"-HOLD.json";
   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   $("work-ack").checked=false;
