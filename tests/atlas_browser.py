@@ -3,7 +3,7 @@ import json
 import pathlib
 import threading
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 class Handler(SimpleHTTPRequestHandler):
@@ -24,7 +24,7 @@ try:
         page.on("pageerror",lambda err:errors.append(str(err)))
         page.on("request",lambda request:outbound.append(request.url))
         page.goto(base,wait_until="load")
-        page.wait_for_function("document.getElementById('repoCount').textContent.trim() === '89'",timeout=15000)
+        expect(page.locator("#repoCount")).to_have_text("89",timeout=15000)
         assert not errors,errors
         assert page.locator("#refCount").inner_text()=="2,207"
         assert page.locator("#prCount").inner_text()=="1,067"
