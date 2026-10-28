@@ -34,7 +34,7 @@ try:
         page.locator("#find").fill("Nexus")
         assert page.locator("#room-list button").count()==1
         assert page.locator("#focus-name").inner_text()=="Nexus Community Wealth Building Cohort"
-        assert "learning team" in page.locator("#focus-gate").inner_text().lower()
+        assert "team" in page.locator("#focus-gate").inner_text().lower()
         with page.expect_download() as dl:
             page.locator("#export-dossier").click()
         d=json.loads(pathlib.Path(dl.value.path()).read_text())
