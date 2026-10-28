@@ -44,3 +44,13 @@ test('Between Rooms proposal room is linked and shipped in the static artifact',
  assert.equal(manifest.status,'PROSPECTIVE_ONLY');
  assert.equal(manifest.doors.length,9);
 });
+
+test('Constellation atlas has an independently built source address rack',async()=>{
+ const fs=await import('node:fs');
+ const build=fs.readFileSync(new URL('./build.mjs',import.meta.url),'utf8');
+ const landing=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ assert.ok(build.includes("cpSync(join(root,'../bridge'),join(out,'bridge'),{recursive:true});"));
+ assert.ok(landing.includes('href="./bridge/atlas/"'));
+ const atlas=JSON.parse(fs.readFileSync(new URL('../bridge/atlas/atlas.json',import.meta.url),'utf8'));
+ assert.equal(atlas.repositories.length,89);
+});
