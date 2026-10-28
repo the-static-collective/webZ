@@ -45,7 +45,7 @@ function renderMap(rows){
 function renderFocus(){
  const d=door(active);text("focus-name",d.name);text("focus-kind",d.kind+" / "+nice(d.entry));text("focus-due",d.due);
  text("focus-alignment",d.alignment);text("focus-ask",d.request);text("focus-offered",d.offered);text("focus-gate",d.gate);text("focus-next",d.next);
- $("focus-source").href=d.url;text("copy-state","Nothing has been sent, submitted, signed, or stored.");
+ $("focus-source").href=d.url;$("desk-link").href="../desk/?door="+encodeURIComponent(active);text("copy-state","Nothing has been sent, submitted, signed, or stored.");
  const box=$("focus-organs");box.replaceChildren();
  for(const id of d.organs){const o=organs.find(o=>o.id===id);const link=el("a","chip",o.name+" ↗");link.href=o.url;link.target="_blank";link.rel="noopener noreferrer";link.title=o.role;box.append(link)}
 }
