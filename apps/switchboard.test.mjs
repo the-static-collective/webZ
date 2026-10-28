@@ -54,3 +54,12 @@ test('Constellation atlas has an independently built source address rack',async(
  const atlas=JSON.parse(fs.readFileSync(new URL('../bridge/atlas/atlas.json',import.meta.url),'utf8'));
  assert.equal(atlas.repositories.length,89);
 });
+
+test('portable Switchboard includes the private source-derived outbox with no backend client',async()=>{
+ const fs=await import('node:fs');
+ const src=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ const outbox=fs.readFileSync(new URL('../bridge/outbox/index.html',import.meta.url),'utf8');
+ assert.ok(src.includes('href="./bridge/outbox/"'));
+ assert.ok(outbox.includes("connect-src 'none'"));
+ assert.ok(fs.existsSync(new URL('../bridge/outbox/vault.mjs',import.meta.url)));
+});
