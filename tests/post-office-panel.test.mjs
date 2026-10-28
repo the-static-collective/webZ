@@ -62,7 +62,7 @@ test('email code, signed cookie, expiry, and CSRF gates',async()=>{
  const bad=await invoke('POST',{action:'verify-code',code:'000000000000'},{headers:validHeaders});
  assert.equal(bad.statusCode,401);
  assert.equal((await invoke('GET',null,{headers:{cookie},time:now+2*60*60*1000+1})).statusCode,401);
- assert.equal((await invoke('GET',null,{headers:{cookie:cookie.replace(/.$/,'a')}})).statusCode,401);
+ assert.equal((await invoke('GET',null,{headers:{cookie:cookie.slice(0,-2)+(cookie.at(-2)==='a'?'b':'a')+cookie.at(-1)}})).statusCode,401);
  const badCSRF=await invoke('POST',{action:'send',confirm:'SEND',messageId:'still-here-cada-safeguarding-001'},
    {headers:{...validHeaders,cookie,'x-post-office-csrf':'wrong'}});
  assert.equal(badCSRF.statusCode,403);
