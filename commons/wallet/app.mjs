@@ -2,12 +2,83 @@ import {createEntry,validateEntries,validateEnvelope,newWallet,unlockWallet,seal
 import {readVault,writeVault,deleteVault} from "./store.mjs";
 const $=id=>document.getElementById(id);
 let key=null,entries=[],envelope=null,busy=false,lastActivity=Date.now(),hiddenAt=null;
+const HANDOFF_SCHEMA="abundent.wallet-handoff/v1";
+const HANDOFF_TTL=300000;
+let incoming=null,challenge=null,requestedAt=0;
+function showHandoff(){
+ const panel=$("handoff");
+ panel.hidden=!incoming;
+ if(!incoming)return;
+ $("handoffName").textContent=incoming.title;
+ $("handoffType").textContent="Proposed type: "+incoming.scope+
+  (incoming.group?" · Collection: "+incoming.group:"");
+ $("handoffHost").textContent="Destination: "+humanHost(incoming.url);
+ $("handoffSave").disabled=!key;
+ $("handoffUnlockHint").hidden=!!key;
+}
+function discardHandoff(){
+ incoming=null;challenge=null;
+ showHandoff();
+}
+function canReceive(){
+ try{
+  if(!window.opener||window.opener.closed||window.opener.location.origin!==location.origin)return false;
+  const openerPath=window.opener.location.pathname;
+  return openerPath.endsWith("/commons/inbox/")||
+     openerPath.endsWith("/commons/")||
+     openerPath.endsWith("/apps/")||openerPath==="/";
+ }catch{return false}
+}
+if(new URLSearchParams(location.search).get("handoff")==="1"&&canReceive()){
+ challenge=Array.from(crypto.getRandomValues(new Uint8Array(16)),
+  b=>b.toString(16).padStart(2,"0")).join("");
+ requestedAt=Date.now();
+ window.addEventListener("message",event=>{
+  if(event.origin!==location.origin||event.source!==window.opener||
+      !challenge||Date.now()-requestedAt>60000||
+      event.data?.schema!==HANDOFF_SCHEMA||event.data?.kind!=="OFFER"||
+      event.data?.challenge!==challenge)return;
+  challenge=null;
+  try{
+   // validate and normalize, no persistence until separate explicit click.
+   const proposed=createEntry(event.data.entry);
+   incoming={title:proposed.title,url:proposed.url,scope:proposed.scope,
+     group:proposed.group,note:proposed.note};
+   requestedAt=Date.now();
+   showHandoff();
+   window.opener.postMessage({schema:HANDOFF_SCHEMA,kind:"RECEIVED",
+     nonce:event.data.nonce},location.origin);
+   message("Incoming link is ready for review. It has NOT been saved.");
+  }catch{message("Unsafe or unsupported incoming link was refused.",true);}
+ });
+ history.replaceState(null,"",location.pathname);
+ window.opener.postMessage({schema:HANDOFF_SCHEMA,kind:"READY",challenge},location.origin);
+ setTimeout(()=>{
+  if(challenge||incoming&&Date.now()-requestedAt>=HANDOFF_TTL)discardHandoff();
+ },HANDOFF_TTL);
+}
+$("handoffDiscard").addEventListener("click",()=>{
+ discardHandoff();message("Offered link discarded. Nothing was added to your wallet.");
+});
+$("handoffSave").addEventListener("click",async()=>{
+ if(!incoming||!key)return;
+ try{await run(async()=>{
+  if(Date.now()-requestedAt>HANDOFF_TTL)throw Error("Link offer expired; request a fresh handoff.");
+  if(entries.some(e=>e.url===incoming.url))
+   throw Error("This exact link is already in your wallet; no duplicate was saved.");
+  const e=createEntry(incoming);
+  await persist([...entries,e]);
+  discardHandoff();
+  message("Link saved in your encrypted wallet after your explicit approval.");
+ })}catch(e){message(e.message,true)}
+});
 function message(text,error=false){$("status").textContent=text;$("status").dataset.error=String(error)}
 function clearForm(id){const f=$(id);f.reset();for(const el of f.querySelectorAll('input[type="password"]'))el.value=""}
 function lock(announcement="Wallet locked. Your encrypted links remain on this device."){
  key=null;entries=[];envelope=null;busy=false;
  $("entries").replaceChildren();$("search").value="";
  $("vault").hidden=true;$("welcome").hidden=false;
+ discardHandoff();
  initWelcome().catch(e=>message(e.message,true));
  message(announcement);
 }
@@ -33,7 +104,7 @@ function openVault(value){
  key=value.key;entries=value.entries;envelope=value.envelope;
  $("welcome").hidden=true;$("vault").hidden=false;
  lastActivity=Date.now();
- render();
+ render();showHandoff();
 }
 async function run(task){
  if(busy)throw Error("A wallet update is already in progress.");

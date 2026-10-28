@@ -1,7 +1,8 @@
 import {inspectPacket} from "../receiver-protocol.mjs";
+import {offerLinkToWallet} from "../wallet/handoff.mjs";
 const API="https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/commons-inbox";
 const $=id=>document.getElementById(id);
-let roomId="",key="",role="",room=null,items=[],events=[],linkedKeys=null;
+let roomId="",key="",role="",room=null,items=[],events=[],linkedKeys=null,rotatedRole=null;
 const text=(parent,s,tag="p")=>{const el=document.createElement(tag);el.textContent=s;parent.append(el);return el};
 function message(s,error=false){$("status").textContent=s;$("status").dataset.error=error?"true":"false"}
 function link(roleName,token,forRoom=roomId){
@@ -10,7 +11,8 @@ function link(roleName,token,forRoom=roomId){
  return url.toString();
 }
 function resetSensitive(){
- linkedKeys=null;key="";roomId="";role="";room=null;items=[];events=[];
+ linkedKeys=null;rotatedRole=null;key="";roomId="";role="";room=null;items=[];events=[];
+ $("keepRotated").hidden=true;
  for(const id of ["desk","newKeys","reviewSection","ownerSection","submissionSection"])$(id).hidden=true;
  $("createSection").hidden=false;
  $("cards").replaceChildren();$("eventHistory").replaceChildren();
@@ -31,6 +33,16 @@ function showLinks(keys){
  const map={owner:["ownerLink","copyOwner"],reviewer:["reviewerLink","copyReviewer"],submitter:["submitterLink","copySubmitter"]};
  for(const [k,[id]] of Object.entries(map))$(id).value=link(k,keys[k]);
  $("newKeys").hidden=false;
+}
+function saveOffer(url,scopeName){
+ try{
+  if(!room)throw Error("Open the inbox before saving an invitation.");
+  const owner=scopeName==="owner";
+  offerLinkToWallet({title:(room.title.slice(0,60)+" · "+scopeName+" access").slice(0,80),url,scope:scopeName,
+    group:room.region.slice(0,48),note:owner?"Private owner key; do not share.":"Invitation capability; possession grants access."},
+    "../wallet/");
+  message("Wallet opened with an unsaved link offer. Review it there and explicitly choose Keep.");
+ }catch(e){message(e.message,true)}
 }
 function renderState(){
  $("desk").hidden=!room;
@@ -109,6 +121,20 @@ for(const [button,input] of [["copyOwner","ownerLink"],["copyReviewer","reviewer
   catch{message("Clipboard unavailable; select and copy the link field manually.",true)}
  });
 }
+for(const [id,scopeName] of [["keepOwner","owner"],["keepReviewer","reviewer"],["keepSubmitter","submitter"]]){
+ $(id).addEventListener("click",()=>{
+  if(!linkedKeys?.[scopeName])return message("This original invitation is no longer in this tab.",true);
+  saveOffer(link(scopeName,linkedKeys[scopeName]),scopeName);
+ });
+}
+$("keepCurrent").addEventListener("click",()=>{
+ if(!roomId||!key)return message("Open your invitation first.",true);
+ saveOffer(link(role,key),role);
+});
+$("keepRotated").addEventListener("click",()=>{
+ if(!rotatedRole||!$("rotatedKey").value)return;
+ saveOffer($("rotatedKey").value,rotatedRole);
+});
 $("reload").addEventListener("click",()=>refresh().catch(e=>message(e.message,true)));
 $("leave").addEventListener("click",()=>{
  history.replaceState(null,"",location.pathname);resetSensitive();
@@ -157,8 +183,10 @@ async function rotate(which){
  if(!window.confirm("Rotate "+which+"? Every previously shared "+which+" invitation will stop working."))return;
  const out=await api({action:"rotate",...scope(),role:which});
  const l=link(which,out.key);
+ rotatedRole=which;
  $("rotatedKey").value=l;
  $("rotatedKeyWrap").hidden=false;
+ $("keepRotated").hidden=false;
  message("Old "+which+" capability revoked. Copy and share the new invitation.");
 }
 $("rotateReviewer").addEventListener("click",()=>rotate("reviewer").catch(e=>message(e.message,true)));

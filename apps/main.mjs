@@ -1,4 +1,5 @@
 import { DOORS } from './manifest.mjs';
+import {offerLinkToWallet} from './commons/wallet/handoff.mjs';
 const container = document.getElementById('results');
 const search = document.getElementById('search');
 const filters = document.getElementById('filters');
@@ -45,6 +46,21 @@ function render(){
       a.href=d.href; a.rel='noopener noreferrer'; a.target='_blank';
       a.setAttribute('aria-label',d.title+', '+statusLabels[d.status]+', opens in new tab');
       bottom.append(a);
+      const save=element('button','keep-link','Keep in wallet +');
+      save.type='button';
+      save.setAttribute('aria-label','Keep '+d.title+' in your encrypted Link Wallet');
+      save.addEventListener('click',()=>{
+       try{
+        offerLinkToWallet({title:d.title,url:d.href,scope:'public',
+          group:d.category,note:'Public Switchboard door; no access permission is implied.'},
+          './commons/wallet/');
+       }catch(e){
+        // No private URL is included in this error.
+        save.textContent='Open wallet to paste ↗';
+        save.onclick=()=>window.open('./commons/wallet/','_blank','noopener,noreferrer');
+       }
+      });
+      bottom.append(save);
     }
     bottom.append(element('code','project',d.project));
     article.append(bottom);container.append(article);
