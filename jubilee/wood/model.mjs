@@ -45,7 +45,7 @@ export function prepareWoodFieldCard({kind,county,condition,urgency,moisture,pub
  "[ ] Qualified insured tree professional, not amateur volunteers, handles standing, fallen-risk or storm-damaged trees.",
  "[ ] No painted, treated, glued, construction or suspect contaminated material.",
  "[ ] Check tree health and wood species; inspect pests and disease before movement.",
- "[ ] Minnesota Department of Agriculture quarantine and actual origin/destination rules checked for this exact wood.",
+ "[ ] Minnesota Department of Agriculture (MDA quarantine) and actual origin/destination rules checked for this exact wood.",
  "[ ] Properly seasoned fuel independently checked with an appropriate moisture meter (best <20%).",
  "[ ] Authorized receiver verifies stove suitability and accepts delivery privately.",
  "[ ] Handling, stacking, vehicles, safety equipment and insurance approved; no unapproved youth chainsaw activity.",
