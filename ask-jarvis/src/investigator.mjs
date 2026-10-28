@@ -46,6 +46,7 @@ export function publicContext(base) {
     preexistingLocalIdeas:(base.encounter.bridges||[]).slice(0,4),
     commonsNotes:(base.commons?.selected||[]).filter(x=>x.relevance==='KEYWORD_MATCH').slice(0,5)
       .map(x=>({id:x.id,status:x.status,observation:x.observation,firstCheck:x.firstCheck})),
+    ...(base.recent?.status==='READ'&&base.context?.relation!=='INDEPENDENT_QUESTION'?{recentNotes:(base.recent.selected||[]).slice(0,3).map(x=>({id:x.id,title:x.title,state:x.state,summary:x.summary,firstCheck:x.firstCheck,authority:'EDITORIAL_NOT_INDEPENDENT_EVIDENCE'}))}:{}),
     graftNotes:(base.graft?.selected||[]).slice(0,3)
       .map(x=>({id:x.id,status:x.status,publication:x.publication,summary:x.summary})),
     ...(base.context?{northStar:{

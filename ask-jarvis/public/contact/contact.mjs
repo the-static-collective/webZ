@@ -1,4 +1,5 @@
 import {readRoleHash,intakePreview} from '../role-seeds.mjs';
+import {readInterestHash} from '../still-here/start/model.mjs';
 // Abundent permission-first intake. Public Supabase publishable key only; RLS denies reads/updates/deletes.
 const API = 'https://kbhqacsdvjsstzyplqij.supabase.co/rest/v1/abundent_interest';
 const PUBLISHABLE_KEY = 'sb_publishable_Bv9JuOctSQTmnE3O1dP8RA_MKRNSD-o';
@@ -16,6 +17,25 @@ if(role){
  const label=document.querySelector('#role-intent');
  if(label){label.hidden=false;label.textContent='You opened an interest draft for '+role.name+
   '. This does not appoint you, contact a partner, or submit anything. Edit the note, choose whether to give contact permission, and press Send only if you want private follow-up.';}
+}
+// Survivor support is NOT collected through this desk. This optional interest
+// prefill carries only an allowlisted public role and chosen campfire distance.
+const stillHereInterest=readInterestHash(location.hash);
+if(stillHereInterest){
+ form.elements.interest.value='volunteer';
+ form.elements.standing.value=stillHereInterest.circle.id;
+ form.elements.note.value='STILL HERE / POTENTIAL FIRST STEWARD: '+stillHereInterest.role.name+
+  '. I may be available to review or try a small, reversible public-safe task. '+
+  'Please contact me about the proposed role and safeguarding expectations. '+
+  'No survivor case information is included or requested.';
+ const notice=document.querySelector('#role-intent');
+ if(notice){
+  notice.hidden=false;
+  notice.textContent='You are offering interest in a POSSIBLE first-steward experiment ('+
+   stillHereInterest.role.name+'). This is not a peer-listener signup, approved position, or a way to ask for survivor help. '+
+   'Do not enter allegations, identifying case details, documents, or survivor stories. '+
+   'Nothing has been submitted. You may edit or leave without sending.';
+ }
 }
 let sending = false;
 form.addEventListener('submit', async (event) => {

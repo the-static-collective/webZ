@@ -119,3 +119,7 @@ node scripts/build-reviewed-return-graph.mjs
 ```
 
 Review `test/unified.test.mjs` for cross-lineage, independent-question and triad regressions. A Vercel Preview build must use **root directory `ask-jarvis`**; a successful build of webZ's repository root is NOT sufficient to prove the Ask JAR;VIS package or its tests passed. Validate mobile sharing and the optional Council on protected preview, then separately authorize any public production release. No release is implied by the integration branch itself.
+
+## RECENT-001 · Cross-project source-owned current work
+
+The fixed, validated, read-only [JAR;VIS recent work feed](https://github.com/the-static-collective/JAR-VIS/blob/main/commons/recent-work-v1.json) is available to normal public questions and optional contextual model proposals. It includes Jubilee, Porchlight, Garden, Night Desk, COMMUTER, work that inherits, survivor-first support, music and other October experiments. No question text is sent to GitHub; failures HOLD without invented partner or field evidence. Only explicitly relevant topics appear; unrelated questions remain independent. The feed revision and byte digest are preserved in the original unsigned return receipt. Public reference URLs are allowlisted and commit-pinned.

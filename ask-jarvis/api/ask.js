@@ -1,5 +1,6 @@
 // Temporary Vercel preview adapter. Canonical runtime remains Cloudflare Worker.
 import {assemble,inputError,REQUEST_LIMIT} from "../src/worker.mjs";
+import {readRecentWork} from "../src/recent-work.mjs";
 import {readGraftFeed} from "../src/graft-feed.mjs";
 import {admitRequest,applyAdmission} from "../src/usage-guard.mjs";
 export default async function handler(req,res){
@@ -14,7 +15,8 @@ export default async function handler(req,res){
   if(applyAdmission(res,admission))return;
   try{
     const graft=await readGraftFeed(obj.question,{env:process.env,fetcher:fetch});
-    return res.status(200).json(await assemble(obj.question,fetch,{kind:obj.kind??'auto',lens:obj.lens??'standard',graft}));
+    const recent=await readRecentWork(obj.question,{fetcher:fetch});
+    return res.status(200).json(await assemble(obj.question,fetch,{kind:obj.kind??'auto',lens:obj.lens??'standard',graft,recent}));
   }
   catch(error){return res.status(422).json({error:inputError(error)});}
 }

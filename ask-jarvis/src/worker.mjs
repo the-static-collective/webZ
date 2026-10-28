@@ -4,6 +4,7 @@ import {formEncounter, composeReturn} from './encounter.mjs';
 import {summarizeForQuestion} from './inquiry.mjs';
 import {researchTargets,composeTriad,RESEARCH_LENSES} from './triad.mjs';
 import {sha256, evidenceBody} from '../public/evidence.mjs';
+import {readRecentWork} from './recent-work.mjs';
 import {investigate,makeWorkersProvider} from './investigator.mjs';
 import {orientQuestion} from './discovery.mjs';
 import mission from '../context/mission-v1.json' with {type:'json'};
@@ -71,7 +72,7 @@ async function inspect(c,fetcher,question) {
   }
 }
 
-export async function assemble(question,fetcher=fetch,{kind='auto',lens='standard',graft=null}={}) {
+export async function assemble(question,fetcher=fetch,{kind='auto',lens='standard',graft=null,recent=null}={}) {
   if(!RESEARCH_LENSES.includes(lens))throw Error('RESEARCH_LENS');
   if(typeof question!=='string') throw Error('QUESTION_REQUIRED');
   if(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(question)) throw Error('QUESTION_CONTROL');
@@ -86,6 +87,9 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
   const found = sources.filter(s=>s.status==='INSPECTED').length;
   const returned = composeReturn(encounter,sources,await sha256(question));
   const observedAt = new Date().toISOString();
+  const recentCut=recent??{schema:'jarvis/recent-work-cut-v1',status:'NOT_REQUESTED',selected:[]};
+  const recentMatches=orientation.relation==='INDEPENDENT_QUESTION'?[]:recentCut.status==='READ'?recentCut.selected:[];
+  const firstRecent=recentMatches[0]??null;
   const triad=lens==='triad'?composeTriad({question:q,kind:encounter.kind,sources,observedAt}):null;
   const commons=publicCommonsFor(q);
   const matches=orientation.relation==='INDEPENDENT_QUESTION' ? []
@@ -107,10 +111,11 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     openStarterRole:starterRole?{id:starterRole.id,name:starterRole.name,
       state:'OPEN_ROLE_NO_INCUMBENT_REQUIRED',firstTask:starterRole.starter,
       interestDoor:'/roles/#role='+starterRole.id,appointment:false}:null,
+    recentWork:recentMatches.slice(0,3).map(x=>({id:x.id,state:x.state,title:x.title,firstCheck:x.firstCheck,publicUrl:x.publicUrl,source:x.source,authority:x.authority})),
     verifiedProjectReads:found,
     humanGate:'Interested people may begin exploring an open role immediately with drafts and listening. Real-world access, public affiliation, food handling, volunteer assignments, service delivery and publishing still require the responsible owner’s specific consent.'
   };
-  const nextQuestion=starterStep??first?.firstCheck??returned.nextQuestion;
+  const nextQuestion=firstRecent?.firstCheck??starterStep??first?.firstCheck??returned.nextQuestion;
   const guidance=orientation.relation==='INDEPENDENT_QUESTION'
     ? 'This is an independent question, not a forced Collective project match. Here is an optional draft; verify external facts independently.'
     :!found
@@ -124,6 +129,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     requiredBeforeDispatch:['Operator-reviewed endpoint and authentication','Owner-approved capability and input scope','Receiver-issued outcome and reconciliation contract'],
     ...(triad?{researchCut:triad.schema,capabilityFence:triad.loadout.fenced}: {})};
   const steps = [
+    {name:'Recent work registry',status:recentCut.status==='READ'?'READ':'HOLD',detail:recentCut.status==='READ'?'Read dated owner editorial catalog; '+recentMatches.length+' topic-related entries. No source project or partner was independently verified by this feed.':'No recent feed available or requested; none inferred.'},
     {name:'Abundent North Star',status:'DONE',detail:orientation.relation==='INDEPENDENT_QUESTION'?'Read the mission and respected an independent question without forcing a project connection.':'Read the mission and identified optional related workstreams; no existing local commitment inferred.'},
     {name:'JAR;VIS',status:'DONE',detail:'Received one question; deterministic rules, no model or question storage.'},
     {name:'Workbench handoff',status:'PREPARED',detail:'Prepared a draft-only manual request. No local Workbench was contacted.'},
@@ -148,6 +154,8 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     `Observation: ${guidance}`,'',
     'Related public project notes (not commitments):',
     ...matches.slice(0,3).map(x=>'- '+x.id+': '+x.observation+' FIRST CHECK: '+x.firstCheck),
+    'Recent public editorial leads (not inspected project evidence):',
+    ...recentMatches.map(x=>'- '+x.title+' ['+x.state+'] '+x.publicUrl+' SOURCE: '+x.source+' FIRST CHECK: '+x.firstCheck),
     'Role seeds (interest is not appointment):',
     ...(starterRole?['- Open role: '+starterRole.name+' — /roles/#role='+starterRole.id,
       '- First independent starter task: '+starterRole.starter,
@@ -164,7 +172,7 @@ export async function assemble(question,fetcher=fetch,{kind='auto',lens='standar
     goal:orientation.goal,relation:orientation.relation,
     workstreams:orientation.workstreams,ideas:orientation.ideas,
     caution:orientation.advice,grounding:'EDITORIAL_DIRECTION_NOT_LOCAL_EVIDENCE'};
-  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,context,commons,graft:graftSnapshot,synthesis,...(triad?{triad}: {})};
+  const result={schema:'ask-jarvis/return-v0',mode:'LIVE_PUBLIC_SOURCE_INSPECTION_ONLY',question:q,observedAt,guidance,nextQuestion,sources,steps,artifact,encounter,return:returned,workbenchRequest,context,commons,graft:graftSnapshot,synthesis,recent:recentCut,...(triad?{triad}: {})};
   result.evidence=evidenceBody(result);
   result.receiptHash=await sha256(JSON.stringify(result.evidence));
   return result;
@@ -194,13 +202,20 @@ export default {
       try{return response(await investigate({question:obj.question,kind:obj.kind??'auto',lens:obj.lens??'standard',assemble,provider:makeWorkersProvider(env.AI)}));}
       catch(e){return response({error:inputError(e)},422);}
     }
+    if(url.pathname==='/api/recent-work'){
+      if(request.method!=='GET')return response({error:'METHOD_NOT_ALLOWED'},405);
+      const cut=await readRecentWork('recent useful projects',{fetcher:fetch});
+      return response({status:cut.status,release:cut.release,reviewedOn:cut.reviewedOn,
+        sourceSha256:cut.sourceSha256,selectedIds:cut.selected.map(x=>x.id),
+        disclosure:cut.disclosure||'The catalog was not available; no project is inferred.'},cut.status==='READ'?200:503);
+    }
     if(url.pathname==='/api/ask') {
       if(request.method!=='POST') return response({error:'METHOD_NOT_ALLOWED'},405);
       let obj;
       try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
       catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
       if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
-      try{return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',lens:obj.lens??'standard'}));}
+      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',lens:obj.lens??'standard',recent}));}
       catch(e){return response({error:inputError(e)},422);}
     }
     if(url.pathname.startsWith('/api/'))return response({error:'NOT_FOUND'},404);

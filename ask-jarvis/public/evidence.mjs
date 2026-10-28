@@ -16,6 +16,7 @@ export function evidenceBody(data) {
     ...(data.triad?{triad:data.triad}:{}),
     ...(data.commons?{commons:data.commons}:{}),
     ...(data.graft?{graft:data.graft}:{}),
+    ...(data.recent?{recent:data.recent}:{}),
     ...(data.synthesis?{synthesis:data.synthesis}:{})
   };
 }
