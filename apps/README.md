@@ -68,3 +68,12 @@ The build copies [../jubilee/](../jubilee/) into apps/dist/jubilee/ and the swit
 ## BRIDGE-001 — Between Rooms (2026-10-28)
 
 The static build includes `../bridge/` in `apps/dist/bridge/` and links from the Switchboard. It contains nine institution-specific **prospective** invitations, a machine-readable public-safe proposal manifest and a local synthetic HOLD/REFUSE rehearsal. It does **not** send invitations, enroll institutions, establish city cooperation or implement reLATTE receiver signatures. See [BRIDGE-001 source and acceptance gates](../docs/BRIDGE-001.md).
+
+
+## Common Ground 001 — Church × College × School Bridge (October 28)
+
+The Switchboard statically bundles `../jubilee/revival/campus/` and links it next to the 20-county Revival Atlas. The source-linked directory currently contains 24 educational research entries and 12 **unverified Waseca church directory leads**, not verified open ministries or accepted partners. It does not represent an invitation, enrollment, agreement, ongoing service, student participation, institutional endorsement or a verified contact.
+
+The independent research review notebook at `/jubilee/revival/campus/#notebook` can make local, unsigned, public-source-only review observations; it holds entries in memory for the current tab, permits manual JSON import/export, and makes no network request. It is **not** a public record, authenticated audit, persistent backend, signed reLATTE receipt, partner register, school information system, or automatic outreach engine. Each organization independently approves proposed work. Public K–12 activity remains nonsectarian and governed by school policy, student privacy and safeguarding; private religious speech is separate and voluntary. Source: `../jubilee/revival/campus/data.mjs` and `review.mjs`; tests: `../tests/jubilee-campus.test.mjs` and `../tests/jubilee-review.test.mjs`.
+
+Build note: `apps/build.mjs` already copies the complete `../jubilee/` directory; no extra hostname, project, secret, API connection or DNS change is needed for the room. The portable-static workflow remains independent of the Vercel API deployment quota.
