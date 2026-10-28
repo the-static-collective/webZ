@@ -1075,8 +1075,8 @@
         "observed": "Experimental scene/film construction across independent branches.",
         "candidate": "Produce an optional illustrative scene package from approved materials.",
         "nextGate": "Branch proposals are not a shipped video or Toaster integration.",
-        "source": "https://github.com/the-static-collective/the-haunted-blender/blob/main/README.md",
-        "sourceStatus": "READ_ME_OR_PROJECT_DOCUMENTED"
+        "source": "https://github.com/the-static-collective/the-haunted-blender",
+        "sourceStatus": "MAP_ORIENTATION_HYPOTHESIS"
       },
       "notableOpenPr": null
     },

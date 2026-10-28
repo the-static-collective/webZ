@@ -29,7 +29,11 @@ try:
         assert page.locator("#refCount").inner_text()=="2,207"
         assert page.locator("#prCount").inner_text()=="1,067"
         assert page.locator("#projects button").count()==89
-        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"),"mobile horizontal overflow"
+        if not page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"):
+            details=page.evaluate("""() => ({width:innerWidth,scroll:document.documentElement.scrollWidth,
+                offenders:[...document.querySelectorAll('main *')].map(e=>({tag:e.tagName,class:e.className,outer:e.getBoundingClientRect().right,w:e.scrollWidth})).filter(e=>e.outer>innerWidth+2).slice(0,10)})""")
+            print(json.dumps(details),flush=True)
+            raise AssertionError("mobile horizontal overflow")
         assert "CANDIDATE COMPOSITION" in page.locator("#trailStatus").inner_text()
         page.get_by_role("button",name="Spare machines → community work").click()
         assert "Spare machines" in page.locator("#trailName").inner_text()

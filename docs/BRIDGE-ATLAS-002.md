@@ -11,7 +11,7 @@ The viewer is a copied *dated public snapshot*, not a live, automatically update
 
 ## What was added
 - 89 public addresses with observed source SHA for the default ref and observed branch/PR counts.
-- 34 carefully delimited role cards, with a source pointer and an explicit **candidate** bridge use. Three research roles rely on map orientation rather than independently read native features and are marked `MAP_ORIENTATION_HYPOTHESIS`.
+- 34 carefully delimited role cards, with a source pointer and an explicit **candidate** bridge use. Four roles, including a Blender branch-only visual candidate, rely on map orientation rather than independently read native features and are marked `MAP_ORIENTATION_HYPOTHESIS`.
 - 5 already source-declared adjacency relations, separate from candidate routes.
 - 6 practical, human-gated candidate routes: food access, spare compute, evidence/accountability, music-driven participation, international method exchange and institutional invitations.
 - Local-only JSON export for one selected route. It is `CANDIDATE_ONLY_NOT_APPROVED`, with observed source pointers and all execution/receipt flags false. No request goes to a backend.
