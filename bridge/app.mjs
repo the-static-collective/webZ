@@ -1,4 +1,5 @@
-import {proposal,doors,invitationFor,draftFor} from "./model.mjs";
+import {proposal} from "./model.mjs";
+import {allDoors as doors,invitationFor,draftFor} from "./network/model.mjs";
 const $=(id)=>document.getElementById(id);
 const selected=(new URLSearchParams(location.search)).get("door");
 let active=doors.some(d=>d.id===selected)?selected:doors[0].id;

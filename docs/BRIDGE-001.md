@@ -1,6 +1,8 @@
 # BRIDGE-001 — BETWEEN ROOMS
 **The proposal is the first bridge.** Public prototype dated 2026-10-28.
 
+**Extended 2026-10-28:** [BRIDGE-NETWORK-003](./BRIDGE-NETWORK-003.md) composes these original nine candidates with fourteen additional opportunities/community doors into a 23-room, explicitly **prospective** institutional relationship atlas. The original v0 JSON remains a dated nine-room artifact, not a live partner list. The atlas is source code pending independently verified custom-domain release; see [production HOLD #173](https://github.com/the-static-collective/webZ/issues/173).
+
 [Open the public proposal room](../bridge/) · [machine-readable proposal model](../bridge/model.mjs) · [existing Commons receiver](../commons/inbox/) · [Link Wallet](../commons/wallet/)
 
 ## Problem and invention
