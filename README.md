@@ -63,3 +63,7 @@ See [GLEAN-001 guide](docs/GLEAN-001-REMAINDER-PORCH.md).
 ## Porchlight Commons 001 — Organizational Exchange Desk
 
 The new [Porchlight Commons prototype](commons/) drafts privacy-conscious organizational needs and compares **local purchase / distant donation / knowledge transfer**, without network submission, accounts, partner claims, case data or unverified delivery confirmation. [Plan, first crossing, gates and limitations](docs/PORCHLIGHT-COMMONS-001.md). Tests: `node --test tests/commons.test.mjs`.
+
+## Jubilee Circuit 001 — Music carries the culture
+
+[The Road Brings the Feast](jubilee/) provides a static, print-ready two-hour field kit and local-only invitation composer for a proposed festival × church × community-led network. [Operating protocol](docs/JUBILEE-CIRCUIT-001.md). No partners, songs, services or outcomes are presented as confirmed. Tests: node --test tests/jubilee.test.mjs.

@@ -1,0 +1,6 @@
+import test from "node:test";import assert from "node:assert/strict";import {prepareInvitation,ROLES} from "../jubilee/invite.mjs";
+const seed={role:"host",region:"Southern Minnesota",offer:"We could host a music and food table for our neighbors.",publicOnly:true};
+test("all seven participation roles yield only draft invitations",()=>{for(const role of Object.keys(ROLES)){const a=prepareInvitation({...seed,role});assert.match(a,/DRAFT INVITATION/);assert.match(a,/An offer is not a receipt/);}});
+test("consent, known roles and useful idea required",()=>{assert.throws(()=>prepareInvitation({...seed,publicOnly:false}),/Confirm/);assert.throws(()=>prepareInvitation({...seed,role:"fake"}),/valid/);assert.throws(()=>prepareInvitation({...seed,offer:"hi"}),/12 characters/);});
+test("contact and case details blocked",()=>{for(const offer of ["Mail me citizen@example.com","Call +1 (612) 555-0198","guest name: Example Person","Shelter address: hidden"]){assert.throws(()=>prepareInvitation({...seed,offer}),/Remove contact/);}});
+test("optional region never becomes a fictitious partner",()=>{const a=prepareInvitation({...seed,region:""});assert.match(a,/Not specified/);assert.match(a,/No partner/);});

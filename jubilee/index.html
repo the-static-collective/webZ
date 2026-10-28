@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#182a1e">
+<meta name="description" content="The Jubilee Circuit: a song travels between festivals, churches and locally governed communities, carrying one useful act.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>The Jubilee Circuit · The Road Brings the Feast</title><link rel="stylesheet" href="./style.css"><script type="module" src="./main.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="../">webZ <span>/ Jubilee Circuit</span></a><nav aria-label="Other doors"><a href="../week/">Listening room</a><a href="../commons/">Exchange desk</a><a href="#field-table">Field table</a><a href="#invite">Join in</a></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">THE STATIC COLLECTIVE / JUBILEE CIRCUIT 001 / OPEN INVITATION</p><h1>The road brings<br><em>the feast.</em></h1>
+<p class="lead">Festivals gather the village. Churches and neighbors sustain it. Communities lead the work. <strong>Music carries the culture between them.</strong></p>
+<p>A traveling celebration that leaves one useful thing behind—and carries its next invitation as a song.</p>
+<div class="actions"><a class="button primary" href="#invite">Bring something ↘</a><a class="button" href="#field-table">Run a two-hour gathering</a><a class="button" href="../week/">Hear a week together ↗</a></div>
+<p class="notice"><b>PROPOSED, NOT ENROLLED.</b> No festival, congregation, Ghanaian community or song creator is represented as a confirmed partner. This page collects no submissions.</p></section>
+<section class="section" id="song"><p class="eyebrow">01 / THE THREAD</p><h2>One song. Many voices.<br>One useful thing.</h2>
+<div class="steps">
+<article><span>01</span><h3>Sing</h3><p>A community freely offers a song or seed with its own credit and reuse terms.</p></article>
+<article><span>02</span><h3>Carry</h3><p>A musician, church, radio show or festival shares it only with permission.</p></article>
+<article><span>03</span><h3>Answer</h3><p>Another community responds with a verse, rhythm, invitation or practical offer.</p></article>
+<article><span>04</span><h3>Build</h3><p>Locally chosen stewards approve one safe, bounded piece of useful work.</p></article>
+<article><span>05</span><h3>Return</h3><p>Independently confirm what happened. Carry the lesson and next song onward.</p></article>
+</div><blockquote>Music is not the soundtrack to the work. It is how the people recognize each other and remember what they built.</blockquote></section>
+<section class="section shade"><p class="eyebrow">02 / SONG 001 · FIRST CROSSING</p><h2>Minnesota ↔ Ghana.<br><em>An invitation, not a claim.</em></h2>
+<p class="lead">One voluntary Minnesota host. One independently authorized Ghanaian steward. One consented song. One locally verified organizational need. One small completed act. One return verse.</p>
+<div class="checks"><div><b>Minnesota host</b><span>NOT CONFIRMED</span></div><div><b>Ghanaian steward</b><span>NOT INDEPENDENTLY CONFIRMED</span></div><div><b>Musical seed</b><span>AWAITING CONSENTED CONTRIBUTION</span></div><div><b>Community need</b><span>NOT YET VERIFIED</span></div><div><b>Completed work</b><span>NOT YET CONFIRMED</span></div></div>
+<p class="small">Potential first work: community-approved food access, charging, communication or practical repair. Investigate local purchasing and locally maintainable methods before shipping hardware. No personal case histories, precise shelter addresses, or unsuitable e-waste.</p></section>
+<section class="section" id="field-table"><p class="eyebrow">03 / PRINTABLE FIELD KIT</p><h2>Two hours.<br>One useful thing.</h2><p>Start smaller than a festival. Make the first gathering a rehearsal for lasting community care.</p>
+<ol class="timeline">
+<li><time>00–15</time><div><b>Welcome, food, introductions</b><p>Open to everyone. Help is not conditional on worship, performances or testimony.</p></div></li>
+<li><time>15–35</time><div><b>Play and listen</b><p>One song from the host community; offer an optional, freely consented answer.</p></div></li>
+<li><time>35–55</time><div><b>Hear one public need</b><p>A responsible local steward describes one organization-level task.</p></div></li>
+<li><time>55–90</time><div><b>Do one bounded thing</b><p>Cook, repair, design, research, introduce a resource or recruit a steward.</p></div></li>
+<li><time>90–110</time><div><b>Witness the actual result</b><p>Keep offers, accepted commitments, refusals and verified work separate.</p></div></li>
+<li><time>110–120</time><div><b>Send the next song</b><p>Invite the next community to answer and choose its own useful act.</p></div></li></ol>
+<div class="actions"><button class="button primary" id="print-kit" type="button">Print the table</button><a class="button" href="../commons/">Open Porchlight resource exchange ↗</a></div></section>
+<section class="section shade" id="invite"><p class="eyebrow">04 / A LETTER TO THE NEXT TABLE</p><h2>What could you bring?</h2>
+<p>Prepare a public, organization-level invitation on this device. It is not submitted, stored, or shared automatically. Inspect the draft before opening your own email client.</p>
+<form id="invitation-form"><div class="grid"><label>How would you like to participate?<select id="role" required>
+<option value="song">Bring a song or rhythm</option><option value="host">Host a field table</option><option value="food">Share food or kitchen skills</option><option value="crew">Bring festival production skills</option><option value="tech">Offer repair, energy or communications skills</option><option value="steward">Explore local stewardship</option><option value="translate">Translate or teach across cultures</option></select></label>
+<label>Broad region (optional)<input id="region" type="text" maxlength="70" autocomplete="off" placeholder="e.g. Southern Minnesota"></label></div>
+<label>One public, non-personal idea or offer<textarea id="offer" maxlength="240" rows="4" required placeholder="We could host a small music-and-food table."></textarea></label>
+<label class="check"><input id="public-only" type="checkbox" required> This draft contains no private names, contacts, addresses, case details, or sensitive locations.</label>
+<div class="actions"><button class="button primary" type="submit">Prepare invitation</button><a class="button disabled" id="email-draft" aria-disabled="true">Open email draft</a></div>
+<p id="compose-status" role="status" aria-live="polite">No invitation has been prepared or sent.</p>
+<label>Review your local invitation<textarea id="prepared" rows="11" readonly placeholder="Your invitation appears here."></textarea></label>
+<p class="small">An email draft opens only when you choose. Your own email application handles sending.</p></form></section>
+<section class="section"><p class="eyebrow">05 / CULTURAL AGREEMENT</p><h2>Different voices.<br>Shared repertoire.</h2><div class="principles">
+<p><b>Local authority.</b> A receiving community chooses goals and controls its story.</p>
+<p><b>Musical consent.</b> Recording, remix, translation, credit and distribution require creator permissions.</p>
+<p><b>Unconditional care.</b> Services never depend on beliefs, worship or participation.</p>
+<p><b>Receipts over mythology.</b> A contact is not a partner. An offer is not a delivery.</p>
+<p><b>Useful return.</b> Document safe, reusable lessons and leave room for refusal.</p>
+</div><div class="actions"><a class="button" href="https://github.com/the-static-collective/webZ/blob/main/docs/JUBILEE-CIRCUIT-001.md">Read the operating protocol ↗</a><a class="button" href="mailto:us@abundent.org?subject=Jubilee%20Circuit">Write us ↗</a></div></section>
+</main><footer><span>THE ROAD BRINGS THE FEAST · 2026</span><span>OPEN INVITATION / NO PARTNER CLAIMS · <a href="../">webZ</a></span></footer></body></html>
