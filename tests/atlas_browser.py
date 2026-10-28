@@ -24,7 +24,8 @@ try:
         page.on("pageerror",lambda err:errors.append(str(err)))
         page.on("request",lambda request:outbound.append(request.url))
         page.goto(base,wait_until="load")
-        page.locator("#repoCount").get_by_text("89").wait_for()
+        page.wait_for_function("document.getElementById('repoCount').textContent.trim() === '89'",timeout=15000)
+        assert not errors,errors
         assert page.locator("#refCount").inner_text()=="2,207"
         assert page.locator("#prCount").inner_text()=="1,067"
         assert page.locator("#projects button").count()==89
