@@ -1,0 +1,139 @@
+export const need={
+  "schema": "abundent/shelf-001-evidence-v1",
+  "id": "SHELF-001",
+  "status": "DOCUMENTED_NEED_UNCONFIRMED_SPECIFIC_HANDOFF",
+  "captured": "2026-10-28",
+  "title": "The Missing Handoff",
+  "hypothesis": "A recipient-approved, volunteer-optional, explicitly checked offer-to-shelf handoff could address an existing sourcing or food rescue logistics friction. No current recipient or donor has confirmed this is their unmet step.",
+  "firstContact": "Waseca Area Neighborhood Service Center, director@wasecaservicecenter.org — inquiry only; not a partner",
+  "secondContact": "Waseca Area Food Cooperative and MSU supply-chain instructor — inquiry only; current contact not yet verified",
+  "facts": [
+    {
+      "title": "Supply squeeze at Waseca Food Shelf",
+      "kind": "ORGANIZATION_SELF_REPORT",
+      "date": "2026-10-28 observation",
+      "body": "WANSC reports rising need, reduced access to discounted food-bank stock, and more costly wholesale/retail sourcing. Historical data must not be represented as live inventory.",
+      "url": "https://www.givemn.org/organization/Waseca-Neighborhood-Service-Center"
+    },
+    {
+      "title": "Surplus produce and possible harvest help",
+      "kind": "LOCAL_JOURNALISM",
+      "date": "2026-07-23",
+      "body": "The food shelf director welcomed fresh garden produce and said volunteers might help harvest. The report records June 2026 service to 680 households and more than 20,000 pounds of food.",
+      "url": "https://www.wasecacountypioneer.com/news/food-shelf-welcomes-donations-gardens"
+    },
+    {
+      "title": "Waseca co-op + university already studying logistics",
+      "kind": "LOCAL_JOURNALISM",
+      "date": "2026-10-22",
+      "body": "The Waseca Area Food Cooperative's MSU supply-chain course discussion included local produce sourcing, voucher processes and food rescue logistics. Their work must not be duplicated or claimed as ours.",
+      "url": "https://wasecacountypioneer.com/news/community-invited-learn-about-grocery-co-op"
+    },
+    {
+      "title": "SROC has a documented harvest-sharing precedent",
+      "kind": "UNIVERSITY_2025_REPORT",
+      "date": "2025-09-09",
+      "body": "UMN reported more than two tons of produce donated from SROC research during the 2025 growing season. This does not establish any available crop in late 2026.",
+      "url": "https://cfans.umn.edu/news/harvest-research-generosity"
+    },
+    {
+      "title": "UMN has practical farm-to-grocery methods",
+      "kind": "UNIVERSITY_RESOURCE",
+      "date": "2026-10-28 observation",
+      "body": "Extension provides regulatory, labeling, safe-handling, invoice and distribution guidance to reuse rather than reinvent.",
+      "url": "https://extension.umn.edu/food/selling-and-distributing/rural-grocery-stores"
+    }
+  ],
+  "doors": [
+    {
+      "name": "Waseca Area Neighborhood Service Center",
+      "ask": "Ask whether any particular source-to-shelf handoff needs attention; the receiving shelf names its own problem.",
+      "gate": "Recipient permission is missing."
+    },
+    {
+      "name": "Waseca Area Food Cooperative / MSU",
+      "ask": "Ask whether their existing food rescue logistics coursework could use a small software method rather than duplicate it.",
+      "gate": "Co-op and course owners have not opted in."
+    },
+    {
+      "name": "University of Minnesota Extension",
+      "ask": "Ask for method review on food safety, farm-to-grocery fit and what no new system should replace.",
+      "gate": "Technical advice is not endorsement."
+    },
+    {
+      "name": "MIT Solve 2027 Climate",
+      "ask": "Explore a prototype addressing resilient and equitable local food distribution, only with credible stage and outcome evidence.",
+      "gate": "Deadline November 6, 2026 noon EST; a synthetic-only demo may not qualify."
+    },
+    {
+      "name": "Code for America Demo Lab",
+      "ask": "Show a 60-second demonstration of accountable, receiver-governed sourcing.",
+      "gate": "November 12–23 submissions, not acceptance."
+    },
+    {
+      "name": "Rochester Hunger Task Force",
+      "ask": "Ask if a separate Rochester-defined last-mile problem merits a local comparison.",
+      "gate": "Rochester has not defined or authorized our pilot."
+    },
+    {
+      "name": "Rockefeller / Cities Deliver",
+      "ask": "Later explore an eligible lead + qualifying municipality for accountable food-service AI.",
+      "gate": "A city letter and eligible organizational applicant are absent."
+    },
+    {
+      "name": "BLOOM Civic Host",
+      "ask": "Let local people deliberate over what AI may and may not decide in food distribution.",
+      "gate": "Must be locally convened, human-led, with the host's permission."
+    },
+    {
+      "name": "Institute of Global Homelessness",
+      "ask": "Seek feedback on a transferrable no-case-data essential-goods method.",
+      "gate": "No recipient, shelter or country has opted in."
+    },
+    {
+      "name": "Digital Public Goods Alliance",
+      "ask": "Assess a separable open source handoff contract against published standards.",
+      "gate": "No digital-public-good designation is claimed."
+    }
+  ],
+  "excluded": [
+    "household/beneficiary records",
+    "client location",
+    "unsupported inventory claims",
+    "unauthorized food movement",
+    "current volunteer assignments",
+    "claimed city or university approval"
+  ]
+};
+
+export const scenario=Object.freeze({schema:"abundent/shelf-001-sim-v1",id:"SHELF-001-FICTIONAL",item:"10 sealed shelf-stable packages (fictional)",note:"No actual stock, donor, shelf acceptance, pickup or delivery exists.",source:"synthetic_fixture"});
+const routes=Object.freeze({START:{HOLD:"RECIPIENT_HOLD",REFUSE:"RECIPIENT_REFUSED",REVIEW:"RECIPIENT_REVIEW_ONLY"},RECIPIENT_HOLD:{REFUSE:"RECIPIENT_REFUSED",REVIEW:"RECIPIENT_REVIEW_ONLY"},RECIPIENT_REVIEW_ONLY:{CARRIER:"CARRIER_INTEREST_REHEARSED"},CARRIER_INTEREST_REHEARSED:{AUTHORIZE:"LOCAL_AUTHORIZATION_REHEARSED"},LOCAL_AUTHORIZATION_REHEARSED:{REPORT:"SELF_REPORT_REHEARSED"},SELF_REPORT_REHEARSED:{CHECK:"DIFFERENT_RECEIVER_CHECK_REHEARSED"}});
+export function start(){return {schema:scenario.schema,caseId:scenario.id,phase:"START",classification:"SYNTHETIC_LOCAL_ONLY",events:[],fieldAction:false,recipientAgreement:false,realVerified:false,externalDelivery:"NOT_SENT"};}
+export function options(state){return Object.keys(routes[state.phase]||{});}
+export function cross(state,action){if(!state||state.schema!==scenario.schema||state.classification!=="SYNTHETIC_LOCAL_ONLY")throw new TypeError("Wrong packet");if(action==="RESET")return start();const next=routes[state.phase]?.[action];if(!next)throw new RangeError("HOLD: unsupported state change");return {...state,phase:next,events:[...state.events,{action,result:next,mode:"SIMULATED_NOT_REAL"}]};}
+export function firstInquiry(target="shelf"){
+ if(target==="coop")return `Subject: Waseca food rescue logistics — a small complementary demonstration?
+
+Hello,
+
+I saw the October 22 reporting on the Waseca co-op's MSU supply-chain coursework, including local produce sources and food rescue logistics. I don't want to duplicate existing work.
+
+We've prepared a small public-safe fictional handoff demonstration that keeps a potential offer, receiver approval, a carrier, an actor report and a separate confirmation distinct.
+
+Is there a particular unresolved logistical step that could benefit from a bounded prototype, or is this work already well covered? This is an inquiry, not a claim of university or co-op partnership.
+
+The Static Collective / Abundent`;
+ return `Subject: A question about one supply-to-shelf handoff
+
+Hello,
+
+I read the public reports about Waseca's growing food shelf demand, supply cost pressure, and interest in suitable garden produce. Your director also pointed out that cash donations often stretch much further because of bulk buying, which we want to respect.
+
+Before proposing technology, may I ask: is there ONE recurring, non-sensitive supply, volunteer, donated-food suitability or pickup handoff that your team would actually like made easier?
+
+We have a fictional browser demonstration that separates an offer from recipient approval, volunteer interest, reported work and independently confirmed receipt. It has no field deployment and will not involve clients' private records. We wouldn't use your name as a partner or coordinate real food movement without explicit permission.
+
+If this isn't useful, a no is valuable guidance.
+
+The Static Collective / Abundent`;
+}
