@@ -52,3 +52,11 @@ export async function readReviewDecisions({fetcher=fetch,now=Date.now}={}){
   ledgerSha256:cache.digest,...reviewProjection(cache.data),
   disclosure:'Only GitHub write/admin reviewers can record decisions. A source-only review is not approval, deployment, partner consent or completed field work.'};
 }
+
+export function selectDecisionsForQuestion(decisions,candidates){
+ const ids=new Set((candidates?.selected||[]).map(c=>c.id));
+ return {status:decisions.status,total:decisions.total??0,
+  ledgerSha256:decisions.ledgerSha256??null,
+  selected:decisions.status==='READ'?(decisions.latest||[]).filter(r=>ids.has(r.candidateId)).slice(0,5):[],
+  disclosure:'An authenticated source-only review does not verify a production deployment or human outcome.'};
+}

@@ -5,7 +5,7 @@ import {sha256, evidenceBody} from '../public/evidence.mjs';
 import {readRecentWork} from './recent-work.mjs';
 import {readObservations} from './source-observations.mjs';
 import {readChangeCandidates} from './change-review.mjs';
-import {readReviewDecisions} from './review-decisions.mjs';
+import {readReviewDecisions,selectDecisionsForQuestion} from './review-decisions.mjs';
 export {CAPABILITIES};
 
 const SOURCE_LIMIT = 90000;
@@ -163,7 +163,7 @@ export default {
       try {obj=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(await readBounded(request,REQUEST_LIMIT,AbortSignal.timeout(5000))));}
       catch(e){return response({error:e.message==='BODY_TOO_LARGE'?'QUESTION_TOO_LARGE':'INVALID_JSON'},e.message==='BODY_TOO_LARGE'?413:400);}
       if(!obj||typeof obj.question!=='string')return response({error:'QUESTION_REQUIRED'},400);
-      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});recent.observations=await readObservations(recent,{fetcher:fetch});recent.changeCandidates=await readChangeCandidates(recent,{fetcher:fetch});return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',recent}));}
+      try{const recent=await readRecentWork(obj.question,{fetcher:fetch});recent.observations=await readObservations(recent,{fetcher:fetch});recent.changeCandidates=await readChangeCandidates(recent,{fetcher:fetch});recent.reviewDecisions=selectDecisionsForQuestion(await readReviewDecisions({fetcher:fetch}),recent.changeCandidates);return response(await assemble(obj.question,fetch,{kind:obj.kind??'auto',recent}));}
       catch(e){return response({error:inputError(e)},422);}
     }
     if(url.pathname.startsWith('/api/'))return response({error:'NOT_FOUND'},404);

@@ -73,6 +73,8 @@ function showRecent(cut){
   const candidates=cut.changeCandidates?.status==='READ'
    ?(cut.changeCandidates.selected||[]).filter(c=>c.repo===String(x.source).split('/')[4]):[];
   for(const c of candidates.slice(0,2)){
+   const reviewed=cut.reviewDecisions?.status==='READ'?cut.reviewDecisions.selected?.find(r=>r.candidateId===c.id):null;
+   if(reviewed){const p=el('p','','Authenticated source review: '+reviewed.disposition+' · '+reviewed.reviewer+' · does NOT establish field completion.');li.append(p);const a=el('a','','View reviewer comment ↗');a.href=reviewed.commentUrl;a.target='_blank';a.rel='noopener noreferrer';li.append(a);}
    const box=el('div','change-note');box.append(el('b','','CHANGE CANDIDATE · '+c.state),
     el('p','','GitHub compared '+c.from.slice(0,8)+' → '+c.to.slice(0,8)+' · '+(c.totalFiles??'unresolved')+' changed file(s). This has not been human-reviewed.'));
    for(const f of c.files.slice(0,4))box.append(el('small','',f.status+' · '+f.category+' · '+f.path));
