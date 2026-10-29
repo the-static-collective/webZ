@@ -51,3 +51,9 @@ Every public entry links to a project-owned GitHub README. Entries without a pub
 ## Verification
 
 `node --test tests/harmony-culture.test.mjs`, `npm --prefix apps test`, `npm --prefix apps run build`. CSS print exposes all slides while screen navigation shows one at a time. No analytics, fetch or remote side effects occur in the deck.
+
+## Culture Seed Printer 003 — actual reusable candidate, not pretend media generation
+
+Slide 04 now accepts one **public-safe, browser-local topic** (maximum 240 characters) and exports a deterministic `abundent.culture-seed/v1` candidate with seven independently reviewable expression plans: music, visual film, photo, comic/manga, booklet, live encounter and playable world. Each plan links to the appropriate source-owned creative organs and carries the *actual* source readiness flag. This is the smallest technical bridge between a mission question and the expressive ecosystem. No audio, video, art, print or event is produced by the exporter. The local subject text is never stored or sent by this site.
+
+`composeCulturalSeed(profileId, topic)` is a pure importable adapter for future independently authorized workflows. Any downstream consumer must establish its own input, rights and receipt contract rather than treating the brief as an executable command. The `CULTURE_SEED` is not a new institution, source evidence, or grant.
