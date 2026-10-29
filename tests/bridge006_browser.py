@@ -21,7 +21,7 @@ try:
         expect(page.locator("#budget .total")).to_contain_text("$30,000")
         assert page.locator("#gates .gate-row").count()>=8
         assert page.locator(".draft-card").count()==2
-        assert page.locator("#source-list a").count()==7
+        assert page.locator("#source-list a").count()==9
         assert "NO FIELD PARTICIPATION" in page.locator(".first-hero .status").inner_text()
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
         with page.expect_download() as dl:
