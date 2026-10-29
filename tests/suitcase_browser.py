@@ -33,6 +33,7 @@ try:
   make_room(pa,"Garden fictional sender room","PERSON")
   make_room(pb,"Church fictional receiver room","CHURCH_CANDIDATE")
   pa.get_by_role("button",name="SIGN OFFER · SAVE LOCALLY").click()
+  print("SUITCASE_OFFER_DEBUG",pa.locator("#status").inner_text(),"sender",pa.locator("#offer-sender").input_value(), "valid",pa.locator("#offer-form").evaluate("(f)=>f.checkValidity()"),flush=True)
   expect(pa.locator("#packet-count")).to_have_text("1",timeout=16000)
   offer=transport_from(pa,"OFFER:")
   p_offer=json.loads(offer);assert p_offer["payload"]["kind"]=="OFFER"
