@@ -4,7 +4,7 @@ export const CASES=Object.freeze({
  newcomer:{interest:'accessibility',need:'I know nobody here. What is one voluntary way to join?',action:'Ask a consenting host about one accessible, account-free welcome table.'},
  food:{interest:'food',need:'Could neighbors share a meal without an intake database?',action:'Ask a food-safe, separately authorized host to critique a small shared table.'},
  repair:{interest:'repair',need:'Can I contribute practical skills without claiming access to anyone’s property?',action:'Ask a qualified owner to identify one reversible, properly supervised task.'},
- music:{interest:'How might a stranger contribute an original song?',action:'Ask an actual host and rights holders about a voluntary, accessible music table.'}
+ music:{interest:'music',need:'How might a stranger contribute an original song?',action:'Ask an actual host and rights holders about a voluntary, accessible music table.'}
 });
 const hold=s=>{throw Error('STRANGER_GAUNTLET_HOLD_'+s)};
 const requirements=[
