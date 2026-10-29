@@ -29,7 +29,7 @@
 
 **Actual design goal:** People do not merely learn what the founding architecture means; they help build the next cultural institution by selecting voluntary roles, shaping programming and choosing independently governed successors. The community may refuse the whole proposition. `ONE FESTIVAL != AUTHORITY_TO_PRODUCE_NEXT_FESTIVAL`.
 
-This is a human first-contact and community-power experiment, not an unqualified survivor-support group, political organizing operation, new crypto economy or existing campus/church/venue partnership. Independent community members—including those with little institutional access—have their own judgment and veto. Existing authorities may steward real infrastructure; they do not authorize other people's lives.
+There is no inherited permit or event license, no automatic key authority and no inherited membership between any of these events.\n\nThis is a human first-contact and community-power experiment, not an unqualified survivor-support group, political organizing operation, new crypto economy or existing campus/church/venue partnership. Independent community members—including those with little institutional access—have their own judgment and veto. Existing authorities may steward real infrastructure; they do not authorize other people's lives.
 
 ## Stage 1 — "Weird Worship Nights" as road-crew laboratories, not a membership gate
 
