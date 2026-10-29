@@ -5,11 +5,15 @@
 ## Project Name (max 200)
 Still Here: The Second Table
 
-## Project Description (723/750; source of truth: `bridge/first/voqal-people-budget.mjs`)
-I'm a father trying to make a world my daughter can inherit and enjoy living in—and that other people can help shape. Still Here: The Second Table tests whether a meal, song or practical task can help isolated neighbors connect, complete something useful and begin a group they govern. I've joined the Coalition of Care core team in southern Minnesota and met local leaders in food access, co-ops, philanthropy and higher education; none has endorsed this project. The fellowship would fund accessible gatherings, fairly paid resident co-design, independent safety review and honest evidence of what works. Participation, faith and music are optional. A second table must be free to change the method or refuse its founder.
+## Project Description (748/750; source: bridge/first/voqal-people-budget.mjs)
+I'm a dad trying to build a world my daughter—and other children—can inherit and enjoy. Nourish Kids began with a practical question: what can a caregiver make tonight, and which ingredients are missing rather than unknown? Still Here: The Second Table starts there, using voluntary, accessible tables to connect a concrete food or shared-work need with a consented, independently confirmed useful act. Participants can form a second table they own or refuse the idea entirely. I've joined the Coalition of Care core team and met local food, co-op and campus leaders; none has endorsed this proposal. Funds support paid resident co-design, access, safe food-practice review and modest gatherings, not purchasing meetings. No child data is required.
 
 ## Program Area (applicant must choose)
 **Suggested for review: Economic Justice.** The concrete mechanism is resident control over community resources, participation costs, and the ability to create a successor without permission. This is an interpretive choice, not a fact about the applicant.
+
+## The practical first doorway: Nourish Kids (VOQAL-016)
+
+Nourish Kids is an existing separate family-food-budget and meal-planning prototype, not a proposed new nonprofit or an operating child-feeding program. Its draft source-owned fulfillment logic distinguishes what a caregiver explicitly has, what is missing, and what is unknown, then produces a selected-only held help slip. That matters because a family's real dinner is more tangible than a speculative token, event or network. During the fellowship I would ask willing caregivers and authorized local food stewards to help decide whether an entirely voluntary, privacy-safe, qualified food-safety-reviewed version of that interaction has real value. Neither the code nor a reported ingredient offer can establish that a child ate. The proposed test asks whether the consenting recipient independently confirms a useful result and whether participants can start an independent second table. Other optional first doors (music, repairs, arts) remain possible.
 
 ## Impact: What's Possible (max 10,000; draft for applicant revision)
 
@@ -28,6 +32,8 @@ My long-term goal is not a single platform or a leader whom everyone needs. In t
 The six-month project is an experiment in actual relationships, not a software launch.
 
 **April 2027: Listen and protect.** Seek permission from appropriate local hosts and conveners to review the idea; commission independent accessibility and safeguarding critique; compensate voluntary community co-designers; identify a small, practical task that people want, not a problem chosen for them. Draft no-account paper invitations, accessible information and a method for recording both acceptance and refusal without collecting personal testimonies.
+
+**Nourish-first pilot:** With caregiver permission and qualified review, a small food table can ask what tonight's dinner requires, identify one explicitly missing ingredient, and seek a narrow, optional conversation with an authorized local steward. Do not transmit unknown quantities, identifying details about children, medical history or full pantry contents. A food referral or offered ingredient is not a completed meal; only caregiver-approved confirmation can establish a real useful return. Participants may also choose non-food activities.
 
 **May–June: Meet and return.** Attempt one accessible community table and one short resource-steward conversation per week when hosts and participants choose to do so. Use free existing rooms when possible. Pay the real costs of accessible participation and modest food, but no access fees to institutional leaders. Each encounter asks who owns a resource, whether a useful action is genuinely authorized, and who can independently confirm that it happened. A task not completed remains an offer or a plan, not an outcome.
 
@@ -54,6 +60,8 @@ This isn't an idea I discovered while preparing a grant application. Looking bac
 Music taught me something about making room. I began with drums and now play guitar and write songs, including in a worship ensemble. When the music has a steady pulse, other musicians can enter with their own parts. The community experiment uses a related idea: a low-pressure starting point such as a meal, song, repair or creative workshop, followed by a chance to do something useful together. Participation in music or faith is optional. The point isn't an audience; it's belonging and agency.
 
 I have worked with technology, web design and collaborative creative work, and more recently helped build experimental open-source tools through The Static Collective. Those prototypes can demonstrate portable methods and rights to refuse, but they have not created verified human communities. I want the real-world tests to be governed by the people who actually participate.
+
+In July 2026, that concern became the Nourish Kids question: what can a family actually cook with the food available, what is truly missing, and how could a consenting household confirm real help rather than merely receive a digital promise? It belongs at the beginning of this proposal because it's small enough to verify and grounded in care, not because software alone solves food insecurity.
 
 In October 2026 I joined the Greater Mankato Coalition of Care core team and spoke face-to-face with five people working across community philanthropy, grassroots organizing, food access, co-ops and university technology. That gives me a beginning, not institutional endorsement or committed partners. The conversations happened without a grant. The fellowship could make sustained organizing possible while paying residents for substantive co-design and meeting real participation, access and independent safety costs.
 
