@@ -1,0 +1,95 @@
+name: TIMEBACK native creative conformance
+on:
+  pull_request:
+    paths:
+      - "apps/arcade/**"
+      - "tools/timeback-*.mjs"
+      - "tests/timeback-source.test.mjs"
+      - ".github/workflows/timeback-creative.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout proposed browser code
+        uses: actions/checkout@v4
+        with:
+          path: webz
+          persist-credentials: false
+      - name: Checkout exact original PlayDeck source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/playdeck
+          ref: a7cf718421e767fd382a01894063c3eeba3d2930
+          path: playdeck
+          persist-credentials: false
+      - name: Checkout exact original LemonPRESS schema
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/lemonPRESS
+          ref: 02feb4454240d482a5e0e03258f24f8b5cc0b9f5
+          path: lemonpress
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify first-party preparation contracts
+        working-directory: webz
+        run: node --test tests/timeback-source.test.mjs apps/arcade/engine.test.mjs
+      - name: Prepare dependencies for the original PlayDeck composer
+        working-directory: playdeck
+        run: npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+      - name: Run real-source PlayDeck composer on synthetic media
+        working-directory: webz
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffprobe
+          mkdir -p native-evidence
+          node tools/timeback-synthetic-fixture.mjs native-fixtures
+          node tools/timeback-native-playdeck.mjs \
+            --packet native-fixtures/playdeck-packet.json \
+            --playdeck ../playdeck \
+            --images ../playdeck/examples/ingest-001/images \
+            --audio native-fixtures/synthetic-song.wav \
+            --out native-evidence/playdeck > native-evidence/summary.json
+          test -s native-evidence/playdeck/plan.json
+          test -s native-evidence/playdeck/receipt.projected.json
+          test ! -f native-evidence/playdeck/final.mp4
+          cat native-evidence/summary.json
+      - name: Validate real native LemonPRESS JSON Schema
+        working-directory: webz
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C ../lemonpress hash-object schemas/work-manifest.schema.json)" = "44f2f764e272c7a3e2591d6154a8d1daa3394f2d"
+          python -m pip install jsonschema==4.23.0 --disable-pip-version-check -q
+          python - <<'PY'
+          import json, pathlib
+          from jsonschema import Draft202012Validator
+          schema=json.loads(pathlib.Path("../lemonpress/schemas/work-manifest.schema.json").read_text())
+          packet=json.loads(pathlib.Path("native-fixtures/lemonpress-packet.json").read_text())
+          manifest=packet["nativeContract"]
+          Draft202012Validator(schema).validate(manifest)
+          assert manifest["status"]=="forming"
+          assert manifest["admission"]["state"]=="pending"
+          assert manifest["admission"]["receipt"] is None
+          assert packet["safety"]["externalExecutionAuthorized"] is False
+          print(json.dumps({"schema":"abundent/timeback-lemonpress-native-schema-result/v1","sourceSchemaGitBlob":"44f2f764e272c7a3e2591d6154a8d1daa3394f2d","validation":"PASS","admitted":False,"published":False}))
+          PY
+      - name: Keep source-owned synthetic plan and receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: timeback-native-creative-source-witness
+          path: |
+            webz/native-evidence/
+            webz/native-fixtures/playdeck-packet.json
+            webz/native-fixtures/lemonpress-packet.json
+          retention-days: 30
+          if-no-files-found: error
