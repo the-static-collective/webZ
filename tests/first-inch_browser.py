@@ -105,6 +105,22 @@ try:
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         assert page.evaluate("localStorage.length === 0 && sessionStorage.length === 0")
 
+        # Read a PINNED public editorial directory only after explicit user request.
+        page.locator("#source-lab > summary").click()
+        page.locator("#find-sources").click()
+        expect(page.locator("#source-message")).to_contain_text("public project pointer(s)")
+        expect(page.locator(".source-card").first).to_be_visible()
+        source_cards = page.locator(".source-card").all_inner_texts()
+        assert any("The Garden" in card for card in source_cards)
+        assert all("Source pointer only" in card for card in source_cards)
+        assert page.locator('.source-card a').first.get_attribute("href").startswith("https://github.com/the-static-collective/")
+        # Changing the question invalidates prior matching; no stale source result survives.
+        page.locator("#goal").fill("Compose a community church music festival")
+        expect(page.locator(".source-card")).to_have_count(0)
+        assert page.evaluate("localStorage.length === 0 && sessionStorage.length === 0")
+        # No browser request may contain the person's question as a URL parameter.
+        assert not any("grocery%20" in url.lower() or "volunteer-led" in url.lower() for url in requests)
+
         assert all(url.startswith(base) for url in requests), requests
         assert not errors, errors
         print(json.dumps({

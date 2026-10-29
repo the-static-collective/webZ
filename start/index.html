@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#132b26">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Start with a goal · Abundent</title>
   <meta name="description" content="A simple first step: tell Abundent what you want to accomplish and prepare a private, reviewable work card.">
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./app.mjs"></script>
+  <script type="module" src="./source-lab.mjs"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to main</a>
@@ -71,6 +72,13 @@
           <pre id="ablation-view"></pre>
           <p class="fine">A graph path may still exist when a required AND-dependency is missing. Dogram receives only a graph specimen if you explicitly save it; the page does not execute Dogram.</p>
         </details>
+      </details>
+      <details id="source-lab" class="planning-lab">
+        <summary>Find relevant work already documented <span>Optional · dated public source catalog, not verified resources</span></summary>
+        <p>This searches a reviewed public JAR;VIS project directory by exact words, in your browser. Your goal is never sent to JAR;VIS, GitHub or a model. The matches are <strong>not available partners or supplies</strong>.</p>
+        <button type="button" id="find-sources">Find public project notes</button>
+        <p id="source-message" class="message" role="status" aria-live="polite"></p>
+        <div id="source-results" class="source-results" aria-live="polite"></div>
       </details>
     </section>
 
