@@ -1,0 +1,235 @@
+/* Public source composition; no private Drive data or organization membership roster. */
+export const HARMONY_CATALOG = {
+  "schema": "abundent.harmony-catalog/v1",
+  "asOf": "2026-10-29",
+  "status": "PUBLIC_SAFE_PROTOTYPE_NOT_PARTNERSHIP",
+  "orientation": "A voluntary cultural overtone to existing institutions, never a replacement or compulsory membership.",
+  "invariants": [
+    "CULTURE_NOT_CONQUEST",
+    "INVITATION_NOT_ENROLLMENT",
+    "RELEVANCE_NOT_AUTHORITY",
+    "SOURCE_NOT_STORY",
+    "PROPOSAL_NOT_ADMISSION",
+    "REPORT_NOT_CONFIRMATION",
+    "EXIT_WITHOUT_PENALTY",
+    "NO_CENTRAL_OWNER"
+  ],
+  "practices": [
+    "Recognize work already alive.",
+    "Ask what may travel and what must stay local.",
+    "Choose TAKE, HOLD or PASS without penalty.",
+    "Distinguish a proposal from an agreed act.",
+    "Ask a separate receiver to acknowledge the result.",
+    "Let every host adapt the method or decline it."
+  ],
+  "profiles": [
+    {
+      "id": "food",
+      "title": "Food access / community grocery",
+      "question": "Which single handoff would become easier if its receiver could HOLD, REFUSE, and independently confirm what happened?",
+      "offer": "Rehearse one fictional food-shelf question before asking a real organizer to review the method.",
+      "first": "../locus/",
+      "firstName": "SHELF-001 · bounded local handoff",
+      "neighbors": [
+        [
+          "Porchlight Commons",
+          "../../commons/"
+        ],
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ],
+        [
+          "Living Suitcase",
+          "../suitcase/"
+        ]
+      ],
+      "gates": [
+        "The actual food steward owns custody and food safety.",
+        "No real inventory, money, or beneficiary data is represented by this demo."
+      ]
+    },
+    {
+      "id": "fellowship",
+      "title": "Church / voluntary fellowship",
+      "question": "Can one optional supper or musical gathering leave one useful, independently confirmed act?",
+      "offer": "Inspect a printable field kit without presuming sponsorship or compulsory participation.",
+      "first": "../../jubilee/",
+      "firstName": "Jubilee Circuit · table and road kit",
+      "neighbors": [
+        [
+          "Living Suitcase",
+          "../suitcase/"
+        ],
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ],
+        [
+          "The Bridge",
+          "../"
+        ]
+      ],
+      "gates": [
+        "A named authorized host decides whether to use a venue.",
+        "Prayer and worship are voluntary; safeguarding is independent."
+      ]
+    },
+    {
+      "id": "campus",
+      "title": "University / community research lab",
+      "question": "Can independent offline devices preserve a source, a proposal, and a refusal without central authority?",
+      "offer": "Test two separate keys and signed local packets on approved devices before discussing any real pilot.",
+      "first": "../suitcase/",
+      "firstName": "Living Suitcase · signed-room demo",
+      "neighbors": [
+        [
+          "Source constellation",
+          "../atlas/"
+        ],
+        [
+          "The Bridge",
+          "../"
+        ],
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ]
+      ],
+      "gates": [
+        "University access, compute, data and branding are not granted.",
+        "A digital demo is not a verified Linux installation or a real field test."
+      ]
+    },
+    {
+      "id": "festival",
+      "title": "Festival / artists / mobile crew",
+      "question": "Can music carry an invitation forward without turning the audience into members?",
+      "offer": "Start with a print-only gathering kit and preserve the right to decline any next task.",
+      "first": "../../jubilee/",
+      "firstName": "Jubilee Circuit · music carries culture",
+      "neighbors": [
+        [
+          "Private Outbox",
+          "../outbox/"
+        ],
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ],
+        [
+          "Living Suitcase",
+          "../suitcase/"
+        ]
+      ],
+      "gates": [
+        "Hosts, organizers and artists retain their own decisions.",
+        "No event, fee, power draw, safety service or volunteer role is authorized."
+      ]
+    },
+    {
+      "id": "care",
+      "title": "Independent care / mutual aid",
+      "question": "How can a need become an authorized question without becoming a permanent dossier about a person?",
+      "offer": "Use fictional needs to explore locally owned offers and refusals without collecting personal records.",
+      "first": "../../commons/",
+      "firstName": "Porchlight Commons · local draft desk",
+      "neighbors": [
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ],
+        [
+          "Link Wallet",
+          "../../commons/wallet/"
+        ],
+        [
+          "The Bridge",
+          "../"
+        ]
+      ],
+      "gates": [
+        "Never put survivor, health, child or shelter details into public packets.",
+        "No case management, emergency service or live placement is offered."
+      ]
+    },
+    {
+      "id": "farm",
+      "title": "Farm / cooperative / producer",
+      "question": "Which bounded change could travel between independently owned systems without transferring their decisions?",
+      "offer": "Draft one public-safe integration question, then leave actual system selection and data grants to the operators.",
+      "first": "../",
+      "firstName": "Between Rooms · prospective coordination",
+      "neighbors": [
+        [
+          "Private Outbox",
+          "../outbox/"
+        ],
+        [
+          "SHELF-001",
+          "../locus/"
+        ],
+        [
+          "Source constellation",
+          "../atlas/"
+        ]
+      ],
+      "gates": [
+        "There is no assumed provider, API, order or commercial partner.",
+        "Purchase, charitable support and volunteer work remain separate."
+      ]
+    },
+    {
+      "id": "civic",
+      "title": "Library / civic table / neighbor host",
+      "question": "What can a gathering teach the next one without imposing a central membership?",
+      "offer": "Rehearse a small public-safe ask/return card and let the local host decide whether to repeat it.",
+      "first": "../../commons/receiver/",
+      "firstName": "Living Receiver · local review",
+      "neighbors": [
+        [
+          "Porchlight Commons",
+          "../../commons/"
+        ],
+        [
+          "Living Suitcase",
+          "../suitcase/"
+        ],
+        [
+          "The Bridge",
+          "../"
+        ]
+      ],
+      "gates": [
+        "Venue permission and privacy policy belong to the host.",
+        "No library patron information or organizational endorsement is implied."
+      ]
+    },
+    {
+      "id": "founder",
+      "title": "Independent person / founding circle",
+      "question": "What can we found that remains usable and free when its founder leaves?",
+      "offer": "Create a self-attested local room with a separate key and a right of refusal.",
+      "first": "../suitcase/",
+      "firstName": "Living Suitcase · voluntary genesis",
+      "neighbors": [
+        [
+          "Link Wallet",
+          "../../commons/wallet/"
+        ],
+        [
+          "Living Receiver",
+          "../../commons/receiver/"
+        ],
+        [
+          "Source constellation",
+          "../atlas/"
+        ]
+      ],
+      "gates": [
+        "Self-attested genesis is neither verified human identity nor legal incorporation.",
+        "Independent groups retain their own operating rules and can freely exit."
+      ]
+    }
+  ]
+};
