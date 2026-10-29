@@ -1,0 +1,52 @@
+name: Relational Inheritance 008 - native signed independent founding proof
+on:
+  push:
+    branches:
+      - experiment/relational-inheritance-no-authority-008
+  pull_request:
+    paths:
+      - bridge/first/relational-inheritance.mjs
+      - bridge/suitcase/protocol.mjs
+      - bridge/suitcase/foundry.mjs
+      - scripts/relational-inheritance.mjs
+      - tests/relational-inheritance.test.mjs
+      - .github/workflows/relational-inheritance-008.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-inheritance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test actual WebZ Suitcase native signed cross-room rules
+        run: node --test tests/relational-inheritance.test.mjs
+      - name: Generate publicly inspectable fictional eleven-packet proof and independently cold verify
+        run: |
+          mkdir -p public-evidence
+          node scripts/relational-inheritance.mjs build public-evidence/lineage-public-only.json
+          node scripts/relational-inheritance.mjs verify public-evidence/lineage-public-only.json > public-evidence/cold-review.json
+      - name: Reject changed signed SEED while protecting the original evidence
+        run: |
+          cp public-evidence/lineage-public-only.json public-evidence/hostile-copy.json
+          node --input-type=module -e '
+            import {readFileSync,writeFileSync} from "node:fs";
+            const p="public-evidence/hostile-copy.json";
+            const d=JSON.parse(readFileSync(p,"utf8"));
+            d.packets.seedAB.payload.body.message+=" unauthorized";
+            writeFileSync(p,JSON.stringify(d));
+          '
+          if node scripts/relational-inheritance.mjs verify public-evidence/hostile-copy.json; then
+            echo "ERROR: forged seed passed verification"; exit 1
+          fi
+          rm public-evidence/hostile-copy.json
+          node scripts/relational-inheritance.mjs verify public-evidence/lineage-public-only.json
+      - name: Upload synthetic, public-only original verified lineage and review
+        uses: actions/upload-artifact@v4
+        with:
+          name: relational-inheritance-008-fictitious-keys-not-human-evidence
+          path: public-evidence/
+          retention-days: 30
