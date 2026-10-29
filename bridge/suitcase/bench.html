@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#111b22"><title>SUITCASE-003 · Build at the Table · Abundent</title>
+<link rel="stylesheet" href="./style.css"></head><body>
+<a class="skip" href="#build">Skip to the build</a>
+<header class="mast"><a class="brand" href="./">ABUNDENT ✳ / SUITCASE</a><span>BENCH-003 / FIRST PHYSICAL BUILD</span>
+<nav><a href="./">Working machine</a><a href="./paper-kit.html">Founding cards</a><a href="../../">Switchboard</a></nav></header>
+<main><section class="architecture" id="build">
+<div class="chapter"><span>REAL PARTS · REAL TEST · NO INVENTED PARTNERS</span><h2>BUILD AT THE TABLE.</h2><span>PHONE-FIRST / OFFLINE-FIRST</span></div>
+<p class="banner"><strong>Goal:</strong> one ordinary reusable physical suitcase that survives loss of internet and preserves independent, signed, public-safe founding records. The first bench build is <em>not</em> a mesh network, a safe private messenger, a legal organization or a deployed service. It needs no soldering, Linux flashing, LoRa transmitter or central server.</p>
+<div class="blueprint"><div><b>POWER</b><h3>Approved USB bank</h3><p>Use an intact, certified commercial bank and its matching cable. Keep it ventilated and supervised.</p></div>
+<div class="arrow">→</div><div><b>COMPUTE</b><h3>Maintained phone</h3><p>A device-local key and offline-cached browser app. The key stays in this browser's storage.</p></div>
+<div class="arrow">→</div><div><b>MEMORY</b><h3>Paper + signed JSON</h3><p>Intentional USB/phone transfer and printouts. Do not move confidential records in this first experiment.</p></div></div>
+<h2>00 / PREPARE THE BENCH</h2>
+<p>Put these on the table before mounting anything. Use the substitute available; do not purchase a special enclosure merely for the first dry run.</p>
+<p>□ Dry case / tool box / briefcase  &nbsp; □ Working maintained Android phone or other browser device &nbsp; □ Intact certified power bank + approved USB cable &nbsp; □ Printed founding cards or blank paper &nbsp; □ File-sharing option (Bluetooth/USB/removable drive) &nbsp; □ Optional second independently controlled device.</p>
+<p><strong>Stop conditions:</strong> swollen, leaking, punctured, visibly damaged or overheating battery; exposed mains wiring; uncertain charging circuit; case pinching cables or crushing a device. Do not solder, reconstruct or rewire a lithium pack. Do not connect salvaged solar panels directly to a phone or battery unless through an appropriate, compatible regulated charger. Do not charge a device inside a sealed, unventilated case. Disconnect malfunctioning equipment.</p>
+<h2>01 / PHYSICAL LAYOUT · NOTHING PERMANENT YET</h2>
+<p>Place paper in one side of the case and the phone in the other, with space for airflow and cable removal. Secure components only with reversible nonconductive restraints that do not cover vents or buttons. Keep USB ports accessible and ensure the lid closes without force. Check that nothing shifts against the screen or power-bank connectors. Perform the software test with the case <strong>open</strong> before making a permanent mount.</p>
+<p>Power-on observation (no personally identifying data): ________________________________________</p>
+<h2>02 / INSTALL THE OFFLINE SHELL, ONCE WHILE CONNECTED</h2>
+<p>On the device, open <a href="./">The Suitcase Internet</a> over HTTPS while online. On Android Chrome, use the browser menu's <strong>Install app</strong> or <strong>Add to Home screen</strong> option if offered; this is convenient but not required. Allow an initial visit and a reload so the service worker can cache the public application shell. Do not clear browser site data afterward: that also risks destroying the private signing key.</p>
+<p>Then turn <strong>mobile data and internet Wi-Fi access off</strong>, or enable airplane mode. If you will transfer a file by Bluetooth or a local Wi-Fi radio, explicitly re-enable just that radio without connecting to the internet. Close/reopen or reload the page. The title, forms and local rooms should still appear. Test this before trusting the case.</p>
+<p>□ App loaded online  □ Reloaded  □ Opened/reloaded without internet  □ Local storage persisted. If offline fails, reconnect once, revisit the exact app URL, reload, confirm the app was stored, and repeat. A brand-new device cannot fetch this page for the first time without internet or a separately provided local server; this version does not provide a hotspot server.</p>
+<h2>03 / ESTABLISH A FIRST KEY · PHONE A</h2>
+<p>At Step 01 in the app, choose <strong>Individual / private device</strong>, give the room a generic label such as <code>Suitcase Test A</code>, acknowledge device control, and create a room. Copy its public fingerprint onto paper and compare it in full when transferring packets. Fingerprints are public; they do not reveal or verify human identity.</p>
+<p>A public fingerprint (never a private key): _________________________________________________</p>
+<p>Go to <strong>05 / Make a Seed Invitation</strong>, sign a fictional public-safe invitation, and use the <strong>Signed parcels</strong> section to download its signed JSON. Keep the JSON as an exact file; it does not contain the private key. This experiment uses plaintext files: <strong>no survivor data, client names, private addresses, secret tokens or confidential contacts.</strong></p>
+<p>Seed digest (first 16 hexadecimal characters for convenience): _________________________________</p>
+<h2>04 / GIVE A SECOND DEVICE ITS OWN KEY · PHONE B</h2>
+<p>On another device, install/cache the same public app while internet is available, then test it offline. Its holder creates a <em>different</em> room and key. Transfer Phone A's SEED JSON intentionally as a file (USB, direct device file transfer or another approved path). On B, import the signed JSON and check the issuer fingerprint out-of-band against A's paper record.</p>
+<p>At <strong>06 / Found an Independent Room</strong>, select B's own room, choose the imported seed, write a public-safe purpose and locally chosen operating rules, explicitly accept, then sign a GENESIS. Download this signed GENESIS JSON and give it to A for verification. On B, optionally publish a fictional opt-in CAPABILITY and share that signed file with A too.</p>
+<p>B public fingerprint: _________________________________________________________________</p>
+<p>B Genesis digest (first 16 characters): __________________________________________________</p>
+<p>□ Two distinct device keys  □ Valid seed import  □ Child GENESIS names seed  □ Parent did not sign child's rules  □ A separately imports B's GENESIS.</p>
+<p><strong>Independence boundary:</strong> two devices operated by the same person demonstrate separate cryptographic keys, <em>not</em> independently governed organizations. To claim NODE ALIVE, a second consenting actual operator must exercise their own authority, independent storage and right to refuse.</p>
+<h2>05 / REQUEST → REFUSAL → RETURN</h2>
+<p>A imports B's public-safe CAPABILITY. In the local directory, tap <strong>Address an OFFER to this key</strong>, fill in a fictional offer and sign it. Transfer its JSON to B. B imports, checks it, chooses <strong>REFUSE</strong>, signs a DISPOSITION and transfers it back to A. A imports it and checks that the response cryptographically references the offer. Neither the initial offer nor REFUSE grants physical services, access, affiliation or legal status.</p>
+<p>□ Offer signed by A  □ Imported by B  □ REFUSE signed by B  □ Response imported by A  □ Response matches exact offer digest  □ Refusal respected.</p>
+<h2>06 / LOSS-OF-NETWORK TEST</h2>
+<p>While internet is still disabled, restart/reopen both app sessions. Verify that each retains <em>its own</em> locally stored key and the signed packets imported so far. Repeat viewing the refused offer. Confirm both devices can still display founding cards, especially <a href="./paper-kit.html">the print fallback</a>. Never erase storage to “test recovery”: current key recovery does not exist.</p>
+<p>□ Device A restarted offline  □ Device B restarted offline  □ Signed records readable on both  □ No HTTP relay needed for the file handoff.</p>
+<h2>07 / LABEL THE EVIDENCE HONESTLY</h2>
+<p>Site / venue type (generic; no residential address): __________________________________________</p>
+<p>Bench date: ____________________  Device A model: __________________  Device B model: __________________</p>
+<p>Intact bank capacity / rating (read from label): ____________________  Offline run observed: _____________</p>
+<p>Transport actually used: _______________________________  Failure / repair notes: _____________________________</p>
+<p>What is established? □ Physical enclosure assembled  □ App works offline  □ Two separately signed keys  □ Seed ancestry checked  □ Refusal returned  □ Power operation observed.</p>
+<p>What is <strong>not</strong> established without independent evidence? □ Independent real human operators  □ Host permission  □ Real-world organizational governance  □ Beneficiary confirmation  □ Secure private communications  □ NODE ALIVE.</p>
+<p><strong>Receipt class: SELF-ATTESTED BENCH OBSERVATION.</strong> Sign and date on paper if desired; a completed form is not an independent witness. Do not publish venue-specific details, key custody arrangements or sensitive personal information.</p>
+<h2>08 / NEXT HARDWARE GATE, NOT PART OF TODAY'S BUILD</h2>
+<p>To let a <em>brand-new</em> phone connect without prior internet, a subsequent prototype needs a local HTTP(S) server on an approved spare computer/router, and a tested secure-origin installation path. The current static Suitcase uses the first online load to install its offline shell. The Linux boot/install composer and optional Reticulum/Meshtastic transports remain separate future modules; no receive-only radio is assumed capable of transmission. Do not wire power distribution or transmit until equipment-specific safety and radio compliance are known.</p>
+<p><strong>First actual deliverable:</strong> a physical case, a running offline-capable phone, a signed seed, an independent signed response and a recorded refusal. For the full <strong>NODE ALIVE</strong> claim, independently witnessed physical operation and real human governance are still necessary.</p>
+<p><a href="./">RETURN TO THE WORKING SUITCASE</a> · <a href="./paper-kit.html">OPEN SIX-CARD PRINT KIT</a> · <a href="https://github.com/the-static-collective/webZ/issues/184">INSPECT NODE ALIVE GATES</a></p>
+</section></main>
+<footer><span>SUITCASE-003 / OFFLINE BENCH GUIDE / PUBLIC-SAFE ONLY</span><span>Every descendant retains its own key and its own right to refuse.</span></footer>
+</body></html>
