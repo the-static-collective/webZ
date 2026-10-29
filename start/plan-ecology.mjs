@@ -12,7 +12,7 @@ export const NODES = Object.freeze([
   {id:"trial", prerequisites:["draft","approval"], effort:4},
   {id:"outcome", prerequisites:["trial"], effort:0, gate:"Independently checked field outcome"},
   {id:"review", prerequisites:["outcome"], effort:2}
-]);
+].map(n=>Object.freeze({...n,prerequisites:Object.freeze([...n.prerequisites])})));
 const nodeMap = new Map(NODES.map(n=>[n.id,n]));
 const ROLES = Object.freeze([
   {id:"QUESTION",target:"question",label:"Ask one sharp question",variants:[
@@ -45,7 +45,7 @@ const ROLES = Object.freeze([
     "Draft a before/after comparison with named evidence that would be required after a real event.",
     "Design a review form that distinguishes reports, corroboration, gaps and refusals."
   ]}
-]);
+].map(r=>Object.freeze({...r,variants:Object.freeze([...r.variants])})));
 const roleMap = new Map(ROLES.map(r=>[r.id,r]));
 const nodes = NODES.map(n=>n.id);
 const edges = NODES.flatMap(n=>n.prerequisites.map(parent=>[parent,n.id]));
@@ -122,7 +122,9 @@ export function compareAblation(removed = "approval") {
   };
 }
 export function generateSixUp({goal, have="", needs="", kind="other", effortBudget=8, round=0}={}) {
-  const card = createCard({goal,have,needs,kind});
+  const normalizedHave = String(have??"").replace(/\s+/g," ").trim();
+  const normalizedNeeds = String(needs??"").replace(/\s+/g," ").trim();
+  const card = createCard({goal,have:normalizedHave,needs:normalizedNeeds,kind});
   if (!Number.isSafeInteger(effortBudget) || effortBudget<1 || effortBudget>50) throw new RangeError("Effort budget must be a whole number from 1 to 50.");
   if (!Number.isSafeInteger(round) || round<0 || round>99) throw new RangeError("Rehearsal round must be 0–99.");
   const candidates = ROLES.map((role,index)=>{
@@ -146,7 +148,7 @@ export function generateSixUp({goal, have="", needs="", kind="other", effortBudg
   });
   return {
     schema:"abundent/first-inch-six-up/v1",
-    input:{goal:card.goal,have:have.trim(),needs:needs.trim(),kind,effortBudget,round},
+    input:{goal:card.goal,have:normalizedHave,needs:normalizedNeeds,kind,effortBudget,round},
     units:"Declared abstract planning-effort points; not hours, money, or real-world estimates.",
     candidates,
     rules:["Six distinct structural roles, not AI-generated answers.",
@@ -163,7 +165,7 @@ export function candidateParetoFrontier(sixUp) {
   })).map(x=>x.id);
 }
 export function keepCandidate(sixUp, id) {
-  if(sixUp?.schema!=="abundent/first-inch-six-up/v1") throw new TypeError("Invalid six-up.");
+  if(!verifySixUp(sixUp)) throw new TypeError("Invalid or altered six-up.");
   const candidate=sixUp.candidates.find(x=>x.id===id);
   if(!candidate || !roleMap.has(id))throw new RangeError("Cannot KEEP an unknown candidate.");
   return Object.freeze({
