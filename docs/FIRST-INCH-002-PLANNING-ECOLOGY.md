@@ -32,7 +32,7 @@ Each candidate has three prewritten, accurate procedural variants. SCRAPE moves 
 
 ## The Dogram separation
 
-Dogram's public `ablate@1` accepts a graph, one removed node or edge and requested reachability queries. The optional **Save Dogram graph-ablation specimen** emits a well-formed `dogram.specimen/v0` input representing the above graph and removing `approval`, with queries from goal to request, trial, and review. It includes **no visitor goal or resource text**. The visitor can independently inspect/run it in a properly installed Dogram; this browser does **not** execute Dogram.
+Dogram's public `ablate@1` accepts a graph, one removed node or edge and requested reachability queries. The optional **Save Dogram graph-ablation specimen** emits a well-formed `dogram.specimen/v0` input representing the above graph and removing `approval`, with queries from goal to request, trial, and review. It includes **no visitor goal or resource text**. The visitor can independently inspect/run it in a properly installed Dogram; this browser does **not** execute Dogram. For an operator with the **original clean Dogram checkout** pinned to commit `551b5f9df18f17ec69b452ddcdff01718e0ff771`, the optional `node tools/first-inch-native-dogram.mjs --dogram /path/to/Dogram` invokes its **actual Python `ablate@1`** and cross-checks its reachability reports against the independent JS graph. It refuses mismatched or locally modified source and never runs from the public web app. This operator check has not been claimed as a successful field execution merely because its code was written.
 
 **The critical paradox is deliberate and tested:** removing `approval` can leave a graph-theoretic path `goal → inventory → draft → trial`. But the trial has **AND prerequisites** (`draft` and `approval`). Therefore a surviving path does **not** make the trial possible or authorized. The browser includes a distinct all-prerequisites check, never upgrades a graph result to world proof.
 
@@ -69,7 +69,7 @@ The mobile Chromium witness tests visible six-up, a HELD trial KEEP, SCRAPE rege
 - Real resource/skill matching; truthful interpretation of an arbitrary goal by a language model.
 - Authenticating a participant or stewards; collecting their consent through a UI toggle.
 - Real constraint optimization with verified time/money/stock, real safety checks, or physical proof.
-- End-to-end Dogram runtime source execution or Toaster code integration.
+- End-to-end unattended Dogram runtime execution or Toaster code integration (only an **explicit operator-run, source-pinned native Dogram checker** is provided).
 - JAR;VIS/CANNON planner handoff, public deployment, new partner claims and field outcomes.
 
 **Next proper crossing:** optional frozen proposal → JAR;VIS candidate only after a human opt-in, reviewed source contract, and explicit HOLD; native Dogram on a separately pinned test runner; use Wolfram to cross-check expanded quantitative constraints once actual dimensions and measurements exist.
