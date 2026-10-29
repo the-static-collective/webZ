@@ -49,3 +49,11 @@ footer{border-top:1px solid var(--line);color:var(--muted);display:flex;gap:18px
 .six-card button{width:100%;font-size:13px;margin-top:10px}
 @media(max-width:620px){.six-grid{grid-template-columns:1fr}}
 @media print{.planning-lab{display:none!important}}
+
+
+.source-results{display:grid;gap:12px;margin:18px 0}
+.source-card{border:1px solid var(--line);background:#10251f;padding:16px;border-radius:10px}
+.source-card h3{margin:0 0 6px;font-size:18px;color:var(--ink)}
+.source-card p{margin:7px 0;font-size:14px}
+.source-card a{display:inline-block;margin-top:8px;font-size:14px;color:var(--accent)}
+@media print{#source-lab{display:none!important}}
