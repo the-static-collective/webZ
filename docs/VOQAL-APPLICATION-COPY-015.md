@@ -5,8 +5,8 @@
 ## Project Name (max 200)
 Still Here: The Second Table
 
-## Project Description (max 750; source of truth: `bridge/first/voqal-people-budget.mjs`)
-Still Here: The Second Table will test whether isolated neighbors can move from a welcoming meal or shared activity to practical cooperation and an independent group they control. During six months in southern Minnesota, I will invite residents, food-access workers and local stewards to low-cost, permission-based gatherings. We will pay community co-designers and safety/access experts for substantive work, not pay decision-makers for access. Participants can refuse, adapt or create the next table. We will report independently confirmed useful acts and test whether a successor continues without its founder. Music and a small festival rehearsal are optional; a Harmony Park finale requires separate permission and financing.
+## Project Description (691/750; source of truth: `bridge/first/voqal-people-budget.mjs`)
+Still Here: The Second Table tests whether a meal, song or shared task can help isolated neighbors connect and form a group they govern. I'm on the Coalition of Care core team in southern Minnesota and have met people in food access, co-ops, philanthropy, organizing and higher education; none has endorsed this project. Over six months I will host accessible, permission-based gatherings, compensate resident co-designers and independent safety/access reviewers, and document useful acts confirmed by participants. Each successor table may change the method or refuse its founder. Music is an optional invitation, not a requirement. Any large festival needs its own permissions and funding.
 
 ## Program Area (applicant must choose)
 **Suggested for review: Economic Justice.** The concrete mechanism is resident control over community resources, participation costs, and the ability to create a successor without permission. This is an interpretive choice, not a fact about the applicant.
