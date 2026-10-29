@@ -33,6 +33,10 @@ try:
         assert record["fieldPilotAuthorized"] is False
         assert record["independentFieldResult"] is False
         assert record["totalUSD"]==30000
+        assert record["commonsCircuit"]["budgetUSD"]==30000
+        assert record["commonsCircuit"]["claimedHosts"]==0
+        assert record["commonsCircuit"]["applicationSubmitted"] is False
+        assert len(record["commonsCircuit"]["weekly"])==4
         assert all(url.startswith(f"http://127.0.0.1:{server.server_port}/bridge/") for url in requests),requests
         assert not errors,errors
         print(json.dumps({"schema":"bridge006-browser-proof/v1","drafts":2,"funding":30000,
