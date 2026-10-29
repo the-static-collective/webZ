@@ -4,7 +4,7 @@ import {sign,verify} from "./protocol.mjs";
 import {rooms,packets,addPacket} from "./store.mjs";
 import {assessGenesis,foundingFor,discover,localEvidence} from "./foundry.mjs";
 const $=id=>document.getElementById(id);
-const add=(p,tag,value)=>{const e=document.createElement(tag);e.textContent=value;p.append(e);return e};
+const add=(p,tag,value)=>{const e=document.createElement(tag);e.textContent=value??"";p.append(e);return e};
 let state={rooms:[],packets:[]},busy=false;
 function notice(t,error=false){$("foundry-status").textContent=(error?"HOLD — ":"")+t;$("foundry-status").style.borderColor=error?"#ca5b43":"#edce79"}
 function options(id,values,empty){const select=$(id),old=select.value;select.replaceChildren();if(!values.length){const o=add(select,"option",empty);o.value="";return}
@@ -50,7 +50,7 @@ function renderEvidence(){
  const ul=add(area,"ul",undefined);for(const [name,val] of flags)add(ul,"li",(val?"✓ ":"○ ")+name);
  add(area,"p","ANCESTRY: "+result.ancestry+" · NODE ALIVE: NOT VERIFIED. The browser cannot certify real-world independence, field operation, or permission.");
 }
-async function act(fn){if(busy)return;busy=true;try{await fn();await refresh();dispatchEvent(new Event("suitcase:changed"))}catch(e){notice(e?.message||String(e),true)}finally{busy=false}}
+async function act(fn){if(busy)return;busy=true;try{await fn();await refresh();dispatchEvent(new Event("suitcase:foundry-changed"))}catch(e){notice(e?.message||String(e),true)}finally{busy=false}}
 $("seed-form").addEventListener("submit",e=>{e.preventDefault();act(async()=>{
  const packet=await sign(room("seed-room"),"SEED",{purpose:$("seed-purpose").value.trim(),
   message:$("seed-message").value.trim(),expiresAt:new Date(Date.now()+30*86400000).toISOString(),authority:"INVITATION_NOT_CONTROL"});
@@ -88,5 +88,5 @@ $("withdraw-form").addEventListener("submit",e=>{e.preventDefault();act(async()=
 })});
 $("refresh-foundry").addEventListener("click",()=>refresh().catch(e=>notice(e.message,true)));
 $("evidence-room").addEventListener("change",renderEvidence);
-addEventListener("suitcase:changed",()=>refresh().catch(e=>notice(e.message,true)));
+addEventListener("suitcase:base-changed",()=>refresh().catch(e=>notice(e.message,true)));
 refresh().catch(e=>notice("Local foundry unavailable: "+e.message,true));
