@@ -1,0 +1,74 @@
+import {HARMONY_CATALOG as H} from './catalog.mjs';
+import {composeCulturePresentation} from './culture-presentation.mjs';
+const $=id=>document.getElementById(id);
+const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
+const p=(parent,tag,text,cls)=>{const x=el(tag,text,cls);parent.append(x);return x;};
+function title(section,eyebrow,heading,lead){p(section,'p',eyebrow,'eyebrow');p(section,'h2',heading);if(lead)p(section,'p',lead,'lead');}
+function a(parent,label,url){const x=p(parent,'a',label);x.href=url;x.target='_blank';x.rel='noopener noreferrer';return x;}
+function organCard(org){const d=el('article',undefined,'card');if(org.source)a(d,org.name+' ↗',org.source);else p(d,'strong',org.name);
+ p(d,'p',org.purpose);p(d,'small',org.caveat);p(d,'div',org.status.replaceAll('_',' '),'status');return d;}
+function slide(label,draw){const s=el('section',undefined,'slide');s.dataset.label=label;draw(s);return s;}
+function build(data){
+ const {entry:e,scene,stages}=data;
+ const created=[];
+ created.push(slide('The doorway',s=>{
+  p(s,'p','01 / ONE CONTEXT / ONE DOOR','eyebrow');p(s,'h1','The whole thing.\nOne doorway at a time.');
+  p(s,'p',e.title,'badge');p(s,'blockquote',e.openingQuestion);p(s,'p',e.boundedOffer,'lead');
+  p(s,'p','We begin with work already alive. We do not ask a host to become part of a new institution.','small');
+ }));
+ created.push(slide('The proposition',s=>{
+  title(s,'02 / THE THESIS','We help ideas become shareable culture.','Not one more platform. A voluntary ecology of making, doing, documenting, expressing, and transmitting.');
+  const g=p(s,'div',undefined,'grid');
+  [['NOTICE','A real person has a need, idea, performance or invitation.'],['COMPOSE','The owner selects a bounded next experiment and any useful tools.'],['MAKE','A song, film, photo, panel, book, world or event carries the idea.'],['RETURN','Evidence, consent and a usable method survive the encounter.']].forEach(([h,t])=>{const c=p(g,'div',undefined,'card');p(c,'h3',h);p(c,'p',t)});
+  p(s,'div','Participation is always voluntary. One source may grow many descendants; none inherits its creator’s authority.','warning');
+ }));
+ created.push(slide('One bounded pilot',s=>{
+  title(s,'03 / AN HONEST FIRST MOVE','Begin with a single reversible experiment.',scene.ask);
+  const b=p(s,'div',undefined,'split');const left=p(b,'div',undefined,'card');p(left,'h3','Start here');a(left,e.firstInstrument.label+' ↗',new URL(e.firstInstrument.href,location.href).href);p(left,'p',e.firstInstrument.status,'status');p(left,'p',e.nonClaim,'small');
+  const right=p(b,'div',undefined,'card');p(right,'h3','Local decision gates');const ul=p(right,'ul',undefined,'list');e.localDecisionGates.forEach(t=>p(ul,'li',t));
+  p(s,'h3','What could count as a return?');p(s,'p',scene.proof);p(s,'p','No outside organization has authorized this hypothetical pilot.','small');
+ }));
+ created.push(slide('Culture in motion',s=>{
+  title(s,'04 / MAKE IT MEAN SOMETHING','An act can develop a cultural life.',scene.example);
+  const g=p(s,'div',undefined,'grid');[['FIELD','A choice, invitation or activity that actually happens.'],['STUDIO',scene.art],['CIRCULATION','People choose whether to listen, read, remix, teach, perform or carry it.'],['MEMORY','The source, approvals, changes and open questions remain retrievable.']].forEach(([h,t])=>{const c=p(g,'article',undefined,'card');p(c,'h3',h);p(c,'p',t)});
+  p(s,'p','Media is not decoration added after impact. Songs, image, story, ritual and repeated shared practices can be how cultures travel.','lead');
+ }));
+ const showStage=(stage,code,headline)=>created.push(slide(headline,s=>{
+  const st=stages.find(x=>x.id===stage);title(s,code+' / ONE PART OF THE ORGANISM',st.title,st.subtitle);
+  const cards=p(s,'div',undefined,'catalog');st.organs.forEach(x=>cards.append(organCard(x)));
+  p(s,'p','These are distinct project-owned source descriptions. A listed project is not necessarily integrated into this presentation runtime.','small');
+ }));
+ showStage('sound','05','Sound and participation');showStage('visual','06','Visual and sequential art');
+ showStage('publish','07','Publication and circulation');
+ showStage('found','08','Founding and coordination');
+ showStage('act','09','Useful action and consent');
+ showStage('world','10','Independent worlds and memory');
+ showStage('machine','11','Independent compute and continuity');
+ showStage('circulate','12','Public doors and return paths');
+ created.push(slide('The whole ecosystem',s=>{
+  title(s,'13 / ONE BODY / MANY INDEPENDENT ORGANS','Cohesion is not centralization.',data.organsCount+' source-labeled organs across eight distinct roles. The links are real; the connections shown here are a proposal for reviewed integration.');
+  const g=p(s,'div',undefined,'grid');stages.forEach(st=>{const c=p(g,'article',undefined,'card');p(c,'h3',st.title);p(c,'p',st.organs.map(x=>x.name).join(' · '),'small')});
+  p(s,'p','A potential host only needs one relevant entrance. The larger system is discoverable without being compulsory.','lead');
+ }));
+ created.push(slide('What to test',s=>{
+  title(s,'14 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
+  p(s,'blockquote',scene.proof);
+  p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
+  p(s,'p','Organ source statuses, production rights and current branches must be checked before any live offer or public performance.','small');
+ }));
+ return created;
+}
+let slides=[],page=0,active='food',lastData=null;
+for(const profile of H.profiles){const opt=p($('audience'),'option',profile.title);opt.value=profile.id;}
+function view(index){page=Math.max(0,Math.min(index,slides.length-1));slides.forEach((s,i)=>{s.classList.toggle('active',i===page);s.setAttribute('aria-hidden',String(i!==page));});
+ $('counter').textContent=(page+1)+' / '+slides.length;$('previous').disabled=page===0;$('next').disabled=page===slides.length-1;}
+function show(id){active=id;const data=composeCulturePresentation(id);lastData=data;slides=build(data);$('pages').replaceChildren(...slides);$('audience').value=id;view(0);history.replaceState(null,'','#'+id);}
+$('audience').addEventListener('change',e=>show(e.target.value));
+$('previous').addEventListener('click',()=>view(page-1));$('next').addEventListener('click',()=>view(page+1));
+document.addEventListener('keydown',e=>{if(e.target.matches('select,button,input,textarea'))return;if(e.key==='ArrowRight')view(page+1);if(e.key==='ArrowLeft')view(page-1);});
+$('print').addEventListener('click',()=>window.print());
+$('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(lastData,null,2)+'\n'],{type:'application/json'});
+ const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='harmony-whole-constellation-'+active+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+const start=location.hash.slice(1);show(H.profiles.some(x=>x.id===start)?start:'food');
