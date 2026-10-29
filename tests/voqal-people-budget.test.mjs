@@ -6,7 +6,8 @@ test("budget, contact stages and independent relationship boundaries",()=>{
  assert.equal(TOTAL_USD,30000);
  assert(DESCRIPTION_750.length<=750);
  assert.match(DESCRIPTION_750,/Coalition of Care core team/);
- assert.match(DESCRIPTION_750,/Music is an optional invitation/);
+ assert.match(DESCRIPTION_750,/Participation, faith and music are optional/);
+ assert.match(DESCRIPTION_750,/my daughter can inherit and enjoy living in/);
  assert.match(DESCRIPTION_750,/none has endorsed this project/);
  assert.equal(BUDGET.length,11);
  assert.equal(PROSPECTS.length,9);
@@ -24,8 +25,9 @@ test("applicant draft uses the exact short answer and keeps origin as self-repor
  const doc=readFileSync(new URL("../docs/VOQAL-APPLICATION-COPY-015.md",import.meta.url),"utf8");
  assert(doc.includes(DESCRIPTION_750));
  assert.match(doc,/core team/);
- assert.match(doc,/not commitments by their organizations/);
- assert.match(doc,/Music is an optional/);
+ assert.match(doc,/not institutional endorsement or committed partners/);
+ assert.match(doc,/fatherhood/i);
+ assert.match(doc,/Participation in music or faith is optional/);
  assert.match(doc,/Applicant must review/);
  assert.match(doc,/NOT SUBMITTED/);
 });
