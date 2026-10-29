@@ -70,7 +70,7 @@ test('presentation baseline makes a working object distinct from a reproducible 
  assert.match(page,/not yet verified/);
  assert.match(baseline,/WORKING BUILD != REPRODUCIBLE BLUEPRINT/);
  assert.match(baseline,/no new cryptocurrency is required|no new coin/i);
- assert.match(baseline,/No real cross-node build reproduction has been demonstrated yet/);
+ assert.match(baseline,/no real cross-node build reproduction has been demonstrated yet/i);
  assert.match(baseline,/42 claimed wood/i);
  assert.match(baseline,/GrO/);
  assert.match(baseline,/Full Measure/);
