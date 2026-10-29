@@ -62,3 +62,12 @@ test('browser craft and presentation remain local and source-linked',()=>{
  assert.ok(read('apps/index.html').includes('./bridge/harmony/craft.html'));
  assert.ok(html.includes('Fictional')||html.includes('FICTIONAL'));
 });
+
+test('CANNON source-pinned culture execution is exposed but never claimed as canon or field proof',()=>{
+ const h=read('bridge/harmony/craft.html'),p=read('bridge/harmony/pitch.mjs'),d=read('docs/HARMONY-MATTER-IDEA-CRAFT-004.md');
+ assert.ok(h.includes('CANNON/actions/runs/40866198913'));
+ assert.ok(p.includes('CANNON/actions/runs/40866198913'));
+ assert.ok(p.includes('unmerged CANNON branch'));
+ assert.ok(d.includes('CANNON/pull/37'));
+ assert.ok(d.includes('experimental unmerged'));
+});
