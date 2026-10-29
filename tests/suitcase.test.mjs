@@ -9,7 +9,7 @@ test("two separate nonexportable keys produce independently verifiable portable 
  const offer=await sign(a,"OFFER",{title:"Local produce handoff",description:"Can a steward identify one public-safe logistics friction?",scope:"Review only; no physical distribution is authorized.",toFingerprint:b.fingerprint,expiresAt:new Date(Date.now()+86400000).toISOString()});
  const bytes=JSON.stringify(offer);assert.equal(offer.schema,SCHEMA);assert.equal((await verify(bytes)).kind,"OFFER");assert.equal(addressedTo(offer,b),true);assert.equal(mayAnswer(offer,b),true);assert.equal(mayAnswer(offer,a),false);
  const decision=await sign(b,"DISPOSITION",{onDigest:offer.digest,decision:"HOLD",note:"Receiving room has not admitted the field test."});
- assert.equal((await verify(JSON.parse(JSON.stringify(decision))).kind),"DISPOSITION");
+ assert.equal((await verify(JSON.parse(JSON.stringify(decision)))).kind,"DISPOSITION");
  assert.equal(decision.payload.body.onDigest,offer.digest);
  assert.notEqual(decision.payload.issuer.fingerprint,offer.payload.issuer.fingerprint);
 });
