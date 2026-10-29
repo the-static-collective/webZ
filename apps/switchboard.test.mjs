@@ -79,3 +79,27 @@ test('portable signed Suitcase Internet is visibly navigable and bundled',async(
  assert.ok(switchboard.includes('href="./suitcase/"'));
  for(const p of ['index.html','app.mjs','protocol.mjs','nodes.mjs','store.mjs','sw.js','manifest.webmanifest','icon.svg'])assert.ok(fs.existsSync(new URL('../bridge/suitcase/'+p,import.meta.url)),p);
 });
+
+// USE-FIRST-001: actual download and verifiably bundled first-user paths.
+test('Use the Tools shelf is linked, offline-bundled and honest about alpha versus prototypes',async()=>{
+ const fs=await import('node:fs');
+ const build=fs.readFileSync(new URL('./build.mjs',import.meta.url),'utf8');
+ const home=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ const shelf=fs.readFileSync(new URL('./use/index.html',import.meta.url),'utf8');
+ assert.ok(build.includes("cpSync(join(root,'use'),join(out,'use'),{recursive:true});"));
+ assert.ok(home.includes('href="./use/"'));
+ assert.match(shelf,/Make something/);
+ assert.match(shelf,/DOWNLOADABLE WINDOWS APP/);
+ assert.match(shelf,/PUBLIC ALPHA/);
+ assert.match(shelf,/Haunted-Toaster-0\.5\.0-alpha\.8-x64-Portable\.exe/);
+ assert.match(shelf,/Haunted-Toaster-0\.5\.0-alpha\.8-x64-Setup\.exe/);
+ assert.match(shelf,/unsigned prerelease/);
+ assert.match(shelf,/current publicly downloadable alpha predates the unreleased beta/i);
+ assert.match(shelf,/href="\.\.\/commons\/"/);
+ assert.match(shelf,/href="\.\.\/jubilee\/"/);
+ assert.match(shelf,/href="\.\.\/commons\/wallet\/"/);
+ assert.match(shelf,/href="\.\.\/commons\/receiver\/"/);
+ assert.match(shelf,/connect-src 'none'/);
+ assert.match(shelf,/script-src 'none'/);
+ assert.doesNotMatch(shelf,/<iframe|<form|<script[^>]+src=/i);
+});

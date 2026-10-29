@@ -77,3 +77,8 @@ The Switchboard statically bundles `../jubilee/revival/campus/` and links it nex
 The independent research review notebook at `/jubilee/revival/campus/#notebook` can make local, unsigned, public-source-only review observations; it holds entries in memory for the current tab, permits manual JSON import/export, and makes no network request. It is **not** a public record, authenticated audit, persistent backend, signed reLATTE receipt, partner register, school information system, or automatic outreach engine. Each organization independently approves proposed work. Public K–12 activity remains nonsectarian and governed by school policy, student privacy and safeguarding; private religious speech is separate and voluntary. Source: `../jubilee/revival/campus/data.mjs` and `review.mjs`; tests: `../tests/jubilee-campus.test.mjs` and `../tests/jubilee-review.test.mjs`.
 
 Build note: `apps/build.mjs` already copies the complete `../jubilee/` directory; no extra hostname, project, secret, API connection or DNS change is needed for the room. The portable-static workflow remains independent of the Vercel API deployment quota.
+
+
+## USE-FIRST-001 — Public capability shelf (draft)
+
+The [human-first tool shelf](use/) starts with a direct official Haunted Toaster Windows alpha download, then gives explicit browser-only routes into Commons, Jubilee, Link Wallet and Living Receiver. Unlike the source atlas, it explains *what someone can make* and distinguishes a downloadable app from an experimental browser tool. The shelf is included in the existing static build. [Release/readiness and adoption protocol](../docs/USE-FIRST-001-DISTRIBUTION.md). No visitor analytics, new server, Vercel deployment, DNS change, outreach or licensing claim is introduced.
