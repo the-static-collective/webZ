@@ -26,6 +26,13 @@ jobs:
           ref: a7cf718421e767fd382a01894063c3eeba3d2930
           path: playdeck
           persist-credentials: false
+      - name: Checkout exact original Haunted Toaster source
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/the-haunted-toaster
+          ref: 3652c2a96b6b287cda316d1c92daadf7c7417eaf
+          path: toaster
+          persist-credentials: false
       - name: Checkout exact original LemonPRESS schema
         uses: actions/checkout@v4
         with:
@@ -99,6 +106,14 @@ jobs:
           assert packet["safety"]["externalExecutionAuthorized"] is False
           print(json.dumps({"schema":"abundent/timeback-lemonpress-native-schema-result/v1","sourceSchemaGitBlob":"44f2f764e272c7a3e2591d6154a8d1daa3394f2d","validation":"PASS","admitted":False,"published":False}))
           PY
+      - name: Run original Toaster move-deck on fictional bounded card ecology
+        working-directory: webz
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tools/timeback-native-toaster.mjs --toaster ../toaster > native-evidence/toaster.json
+          test -s native-evidence/toaster.json
+          cat native-evidence/toaster.json
       - name: Keep source-owned synthetic plan and receipts
         uses: actions/upload-artifact@v4
         with:
