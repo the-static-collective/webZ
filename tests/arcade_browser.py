@@ -34,6 +34,15 @@ try:
         assert topic in data and "No real-world event" in data
         # Export original-source-compatible preparation contracts only after human choice.
         page.locator(".creative-door summary").click()
+        with page.expect_download() as pocket_dl:
+            page.locator("#zine-download").click()
+        pocket=pathlib.Path(pocket_dl.value.path()).read_text()
+        assert "<!doctype html>" in pocket
+        assert topic in pocket
+        assert "PRIVATE PRINT PROOF" in pocket
+        assert "@page{size:6in 9in" in pocket
+        assert "<script" not in pocket
+        expect(page.locator("#handoff-status")).to_contain_text("printable pocket book")
         with page.expect_download() as press_dl:
             page.locator("#press-handoff").click()
         press=json.loads(pathlib.Path(press_dl.value.path()).read_text())
