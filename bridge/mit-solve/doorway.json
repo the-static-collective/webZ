@@ -1,0 +1,94 @@
+{
+  "schema": "abundent/mit-solve-door-v1",
+  "version": "2026-10-29.1",
+  "id": "BRIDGE-MIT-001",
+  "solution": {
+    "name": "Living Suitcase",
+    "owner_label": "The Static Collective / Abundent",
+    "organizational_status": "UNCONFIRMED_BY_PUBLIC_DOOR",
+    "scope": "Portable, locally governed community organization and coordination toolkit",
+    "sector": "Economic Prosperity",
+    "initial_question": "Can locally governed rural groups complete and independently review one resource handoff with less administrative burden?"
+  },
+  "opportunity": {
+    "institution": "MIT Solve",
+    "challenge": "2027 Global Economic Prosperity Challenge",
+    "official_url": "https://solve.mit.edu/challenges/2027-global-economic-prosperity-challenge",
+    "deadline_local": "2026-11-06T11:00:00-06:00",
+    "deadline_eastern": "2026-11-06T12:00:00-05:00",
+    "date_conflict_note": "Some pages of official application PDF retain Nov 2; live challenge and PDF cover say Nov 6. Verify live portal before submitting.",
+    "program": "Competitive solver selection and resources; application itself carries no award."
+  },
+  "application": {
+    "state": "DRAFT_NOT_SUBMITTED",
+    "solver_selected": false,
+    "partner_count_verified": 0,
+    "recipient_count_verified": 0,
+    "public_profile_review_needed": true,
+    "stage_claim": "CANDIDATE_WORKING_BROWSER_PROTOTYPE_REVIEW_REQUIRED",
+    "stage_gate": "Concept-stage projects are excluded from Global Challenge review; evidence of solution-level functioning prototype is needed."
+  },
+  "core_fabric": [
+    {
+      "name": "TABLELIGHT",
+      "role": "locally agreed real tables and accepted handoffs",
+      "implementation": "PROPOSED_HUMAN_PILOT",
+      "source": "https://github.com/the-static-collective/webZ/blob/main/docs/STATIC-COMMONS-001.md"
+    },
+    {
+      "name": "Browser Living Suitcase",
+      "role": "independent device-local signed offers, responses and founding cards",
+      "implementation": "WORKING_BROWSER_DEMO_ONLY",
+      "source": "https://github.com/the-static-collective/webZ/tree/main/bridge/suitcase"
+    },
+    {
+      "name": "reLATTE",
+      "role": "source-attributed signed crossings, owner-local HOLD/REFUSE and transport",
+      "implementation": "SEPARATE_PROTOCOL_EXPERIMENT",
+      "source": "https://github.com/the-static-collective/reLATTE"
+    },
+    {
+      "name": "STATIC OS",
+      "role": "mission-specific composition plan and safe offline bench prototype",
+      "implementation": "UNMERGED_READ_ONLY_COMPONENTS",
+      "source": "https://github.com/the-static-collective/static-os/pull/91"
+    },
+    {
+      "name": "JAR;VIS, planZ, GRAFT",
+      "role": "prepare bounded work, preserve blockers, review reusable methods",
+      "implementation": "SEPARATE_NOT_FIELD_INTEGRATED",
+      "source": "https://github.com/the-static-collective/JAR-VIS"
+    },
+    {
+      "name": "Garden / SHELF",
+      "role": "proposed first non-sensitive food logistics test",
+      "implementation": "PROSPECTIVE_NO_OPERATOR_OR_HUMAN_RESULT",
+      "source": "https://github.com/the-static-collective/webZ/tree/main/bridge/locus"
+    }
+  ],
+  "pilot": {
+    "setting": "rural food logistics",
+    "status": "PROPOSED_ONLY",
+    "participants_authorized": 0,
+    "first_table_observed": false,
+    "completion_observed": false,
+    "reviewed_real_result": false
+  },
+  "risk_policy": {
+    "publishes_sensitive_people": false,
+    "auto_submits": false,
+    "auto_contacts": false,
+    "auto_assigns": false,
+    "global_discoverability": false,
+    "requires_consent_per_organization": true,
+    "provenance_not_authority": true
+  },
+  "next_human_gates": [
+    "Reviewer verify genuine prototype stage and official deadline",
+    "Owner edits application in their own voice and approves public profile",
+    "Willing local steward and host approve a real bounded need",
+    "Independent human validates actual outcome",
+    "Applicant manually submits before deadline"
+  ],
+  "supporting_page": "https://github.com/the-static-collective/webZ/blob/grant/mit-solve-2027-living-suitcase-door/docs/MIT-SOLVE-2027-LIVING-SUITCASE.md"
+}
