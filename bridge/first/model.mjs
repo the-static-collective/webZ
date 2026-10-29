@@ -1,7 +1,7 @@
 // BRIDGE-006 · source-first, UNSENT first-crossing field kit.
 // Published contacts and opportunity terms are source observations, not permission.
-export const REVIEWED_AT="2026-10-28";
-export const PROJECT="Between Rooms — Community-Owned Infrastructure for Cooperation";
+export const REVIEWED_AT="2026-10-29";
+export const PROJECT="Still Here — The First Circle Foundry (candidate, not submitted)";
 export const PROSPECTS=Object.freeze([
  {id:"voqal",name:"Voqal Partners Fellowship 2027",kind:"INDIVIDUAL_APPLICATION",
   source:"https://voqalpartners.org/fellowship/",
@@ -9,7 +9,7 @@ export const PROSPECTS=Object.freeze([
   due:"2026-10-31T22:59:00-05:00",dueDisplay:"Saturday October 31, 2026 · 10:59 p.m. Central / 11:59 p.m. Eastern",
   offer:"$30,000 six-month individual fellowship; April–September 2027; three required convenings",
   gate:"Applicant personally confirms U.S. eligibility, availability, truthful first-person history, portal registration and final submission.",
-  state:"APPLICATION_NOT_SUBMITTED",contactStatus:"NO_INSTITUTIONAL_RELATIONSHIP"},
+  state:"APPLICATION_NOT_SUBMITTED",contactStatus:"NO_INSTITUTIONAL_RELATIONSHIP",proposalStatus:"APPLICANT_UNAPPROVED_CANDIDATE"},
  {id:"wansc",name:"Waseca Area Neighborhood Service Center (WANSC)",kind:"LOCAL_STEWARD_INQUIRY",
   source:"https://www.wasecaareaneighborhoodservicecenter.com/food-shelf-programs",
   context:"https://www.givemn.org/organization/Waseca-Neighborhood-Service-Center",
@@ -29,6 +29,7 @@ export const ALLOCATION=Object.freeze([
 export function budgetTotal(){return ALLOCATION.reduce((n,[,v])=>n+v,0)}
 export const SOURCES=Object.freeze([
  {title:"Voqal program and deadline",href:PROSPECTS[0].source},
+ {title:"Voqal 2027 — candidate First Circle Foundry, source-linked strategy",href:"https://github.com/the-static-collective/webZ/blob/proposal/voqal-first-circle-foundry-007/docs/VOQAL-FIRST-CIRCLE-FOUNDRY-007.md"},
  {title:"Official fellowship application guide and character caps",href:PROSPECTS[0].guide},
  {title:"WANSC choice food shelf, hours and official contact",href:PROSPECTS[1].source},
  {title:"WANSC reported food-purchasing pressure (historical, not inventory)",href:PROSPECTS[1].context},
@@ -36,15 +37,15 @@ export const SOURCES=Object.freeze([
 ]);
 export const DRAFTS=Object.freeze([
  {id:"elevator",label:"Voqal · Project overview (max 750 characters)",limit:750,
-  value:"Between Rooms is a community-governed way to connect unmet needs, willing neighbors, existing institutions, and verified outcomes without requiring any organization to surrender control of its information or decisions. Starting with food access in southern Minnesota, I will ask local people what coordination actually fails, co-design one permission-based trial, and publish an adaptable open toolkit: invitations, human review, bounded task matching, refusal rights, and independently checked results. The goal is not another platform that claims to serve communities, but infrastructure those communities can keep, change, refuse, or own."},
+  value:"Still Here — The First Circle Foundry asks how people cut off from trusted networks can form new, independently governed circles of practical support. Beginning with isolated adults, especially fathers affected by relationship abuse and family separation, we will co-design a need-first, testimony-optional first contact with paid survivor advisors and qualified safeguarding reviewers. Through paper, phone and optional offline tools, we will test voluntary introductions to existing resources, real refusal and withdrawal, and independently reviewed outcomes. The long-term goal is a reproducible founding method communities can own, change, and carry forward without our permission or dependence on a platform."},
  {id:"wansc",label:"WANSC · One-question introduction · UNSENT",limit:null,
   value:"Subject: Waseca food shelf — one specific coordination question\n\nHello,\n\nI'm working on a small community-owned idea in Waseca and want to avoid building something that duplicates work or creates more work for the food shelf.\n\nI read your public materials about food assistance and sourcing pressure. Before proposing any technology or volunteer arrangement, may I ask whether there is one recurring step in accepting suitable food donations, finding suppliers, or coordinating a pickup that your team would genuinely like help with—or whether existing processes and financial donations already serve you better?\n\nIf there is a useful question, I could prepare a one-page, paper-friendly sketch for your review. Nothing would be implemented, published as your project, or offered on your behalf without the proper staff permission. It is also completely fine if this is not useful.\n\nThank you for the work your center already does.\n\n[Sender: add your name and reply contact privately before sending.]"}
 ]);
 export const FOUNDER_GATES=Object.freeze([
  "Confirm individual U.S. eligibility and willingness to prioritize the project in April–September 2027.",
  "Verify availability for Voqal's three required in-person convenings.",
- "Personalize lived experience, community ties, coaching history, and AI-use disclosure honestly.",
- "Review the $30,000 draft allocation against actual 2027 project needs.",
+ "Approve or reject this revised systemic framing, and personally verify all lived experience, community ties, coaching history, and AI-use disclosure.",
+ "Review the earlier $30,000 illustrative allocation against the qualified safeguarding, accessibility and compensation needs of this candidate.",
  "Create or sign into your own Foundant application account via Voqal's official APPLY TODAY link.",
  "Submit through Voqal's actual portal before deadline and preserve a real confirmation in private custody.",
  "Ask WANSC the one question via its published contact route only after separate human review and approval.",
