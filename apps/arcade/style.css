@@ -34,3 +34,11 @@ footer{text-align:center;padding:26px;font-size:12px;color:#d7c9dc}footer a{colo
 .creative-door .buttons button{flex:1;min-width:min(210px,100%)}
 .creative-door .tool-link{font-size:13px;display:block;color:var(--mint);margin:12px 0}
 @media print{.creative-door{display:none!important}}
+
+/* TIMEBACK-FILM-001: optional audio-free recipe handoff in the bounded arcade. */
+.film-panel{border-top:1px solid #a68ab3;margin:15px 0 8px;padding-top:21px;width:100%}
+.film-panel label{display:block;font-size:13px;color:#e6d9ee;margin-bottom:5px}
+.film-panel input{max-width:140px;display:block;padding:10px;margin-bottom:12px}
+.film-panel button{width:100%}
+.film-panel .fine{max-width:650px}
+@media print{.film-panel{display:none!important}}

@@ -1,6 +1,7 @@
 import {threeGifts,textFor,LIMIT} from "./engine.mjs";
 import {makeCreativeCarry} from "./source-carry.mjs";
 import {makePocketEdition} from "./edition.mjs";
+import {makeFilmRecipe} from "./film-recipe.mjs";
 const el=id=>document.getElementById(id);
 let cards=null,index=0,ended=false;
 function showCard(){
@@ -93,6 +94,24 @@ el("zine-download").addEventListener("click",()=>{
 });
 el("press-handoff").addEventListener("click",()=>exportSourceCarry("lemonpress"));
 el("playdeck-handoff").addEventListener("click",()=>exportSourceCarry("playdeck"));
+el("film-recipe-download").addEventListener("click",()=>{
+  if(!cards||ended)return;
+  try{
+    const seconds=Number(el("film-seconds").value);
+    const manifest=makeFilmRecipe(el("topic").value,index,seconds);
+    const url=URL.createObjectURL(new Blob([JSON.stringify(manifest,null,2)+"\n"],{type:"application/json;charset=utf-8"}));
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="three-bells-"+cards[index].id+"-music-film-recipe.json";
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    el("handoff-status").textContent="A private offline film recipe was downloaded. No song was uploaded and no video was rendered.";
+  }catch(e){
+    el("handoff-status").textContent="Choose a duration from 10 to 3600 seconds before exporting.";
+  }
+});
 el("print").addEventListener("click",()=>{
   if(cards&&!ended)window.print();
 });

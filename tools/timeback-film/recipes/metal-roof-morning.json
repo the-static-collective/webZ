@@ -1,0 +1,88 @@
+{
+  "schema": "abundent/timeback-film-recipe/v1",
+  "title": "Metal Roof Morning",
+  "palette": "blue-dawn",
+  "video": {
+    "width": 960,
+    "height": 540,
+    "fps": 14
+  },
+  "artisticNote": "A visual recipe adapted from the completed offline first film; optional captions are editorial labels, not lyric-transcription or exact karaoke timestamps.",
+  "scenes": [
+    {
+      "start": 0,
+      "kind": "roof",
+      "lines": [
+        "METAL ROOF",
+        "M O R N I N G"
+      ]
+    },
+    {
+      "start": 13.5,
+      "kind": "window",
+      "lines": [
+        "rain on the",
+        "METAL ROOF"
+      ]
+    },
+    {
+      "start": 35,
+      "kind": "hands",
+      "lines": [
+        "waking up",
+        "S L O W"
+      ]
+    },
+    {
+      "start": 51,
+      "kind": "rings",
+      "palette": "violet-evening",
+      "lines": [
+        "HERE",
+        "WITH YOU"
+      ]
+    },
+    {
+      "start": 70,
+      "kind": "coffee",
+      "palette": "amber-dawn",
+      "lines": [
+        "coffee rings",
+        "ON SCARRED WOOD"
+      ]
+    },
+    {
+      "start": 92,
+      "kind": "rings",
+      "lines": [
+        "every little",
+        "T H I N G"
+      ]
+    },
+    {
+      "start": 109,
+      "kind": "window",
+      "palette": "amber-dawn",
+      "lines": [
+        "LET THE DAY",
+        "WAIT OUTSIDE"
+      ]
+    },
+    {
+      "start": 129,
+      "kind": "notes",
+      "lines": [
+        "with our tune",
+        "IN THE ROOM"
+      ]
+    },
+    {
+      "start": 150,
+      "kind": "roof",
+      "lines": [
+        "HERE WITH",
+        "Y O U"
+      ]
+    }
+  ]
+}

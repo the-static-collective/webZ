@@ -1,0 +1,53 @@
+name: TIMEBACK Film — offline music-to-video proof
+on:
+  pull_request:
+    paths:
+      - "tools/timeback-film/**"
+      - "tests/timeback_film_test.py"
+      - ".github/workflows/timeback-film.yml"
+      - "docs/TIMEBACK-FILM-001.md"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  film-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install offline video production dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -q numpy pillow opencv-python-headless
+          ffmpeg -version | head -n 1
+      - name: Replay source grammar and render-test actual H.264 / AAC
+        run: python -m unittest tests/timeback_film_test.py -v
+      - name: Render independently downloadable fictional six-second specimen
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p timeback-film-proof
+          python tools/timeback-film/synthetic_song.py timeback-film-proof/fictional-song.wav
+          python tools/timeback-film/render.py \
+            --audio timeback-film-proof/fictional-song.wav \
+            --recipe tools/timeback-film/recipes/short-synthetic.json \
+            --out timeback-film-proof/fictional-song-film.mp4 --small
+          test -s timeback-film-proof/fictional-song-film.mp4
+          test -s timeback-film-proof/fictional-song-film.receipt.json
+          test -s timeback-film-proof/fictional-song-film.contact.jpg
+      - name: Preserve synthetic native media, stills and integrity receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: timeback-film-001-synthetic-render
+          path: |
+            timeback-film-proof/fictional-song-film.mp4
+            timeback-film-proof/fictional-song-film.receipt.json
+            timeback-film-proof/fictional-song-film.contact.jpg
+          if-no-files-found: error
+          retention-days: 30

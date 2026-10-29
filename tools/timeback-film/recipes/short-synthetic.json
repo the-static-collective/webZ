@@ -1,0 +1,37 @@
+{
+  "schema": "abundent/timeback-film-recipe/v1",
+  "title": "A Little Morning Machine",
+  "palette": "blue-dawn",
+  "video": {
+    "width": 640,
+    "height": 360,
+    "fps": 12
+  },
+  "scenes": [
+    {
+      "start": 0,
+      "kind": "roof",
+      "lines": [
+        "MORNING",
+        "IS A MACHINE"
+      ]
+    },
+    {
+      "start": 2,
+      "kind": "window",
+      "lines": [
+        "A LITTLE",
+        "WONDER"
+      ]
+    },
+    {
+      "start": 4,
+      "kind": "coffee",
+      "palette": "amber-dawn",
+      "lines": [
+        "TAKE IT",
+        "WITH YOU"
+      ]
+    }
+  ]
+}
