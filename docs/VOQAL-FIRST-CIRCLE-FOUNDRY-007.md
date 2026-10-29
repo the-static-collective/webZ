@@ -1,5 +1,8 @@
 # VOQAL-007 — STILL HERE: THE FIRST CIRCLE FOUNDRY
 
+**Later applicant-unapproved revision:** [VOQAL-009 — Commons Circuit](./VOQAL-COMMONS-CIRCUIT-009.md) elevates recurring *in-person* tables, potluck relays, music gatherings, festivals and institutional stewardship listening as the actual fellowship spending/field-learning mechanism. This earlier text is preserved as design ancestry, **not** an additional fellowship application, partner consent or live survivor-service pilot.
+
+
 **October 29, 2026 · proposed strategic revision for applicant review only · NOT an authorized final application, launched support service, outreach, partnership or completed field pilot.**
 
 ## Decision: widen the horizon, not the six-month pilot

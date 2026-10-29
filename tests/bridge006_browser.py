@@ -21,7 +21,7 @@ try:
         expect(page.locator("#budget .total")).to_contain_text("$30,000")
         assert page.locator("#gates .gate-row").count()>=8
         assert page.locator(".draft-card").count()==2
-        assert page.locator("#source-list a").count()==6
+        assert page.locator("#source-list a").count()==7
         assert "NO FIELD PARTICIPATION" in page.locator(".first-hero .status").inner_text()
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
         with page.expect_download() as dl:
@@ -33,6 +33,10 @@ try:
         assert record["fieldPilotAuthorized"] is False
         assert record["independentFieldResult"] is False
         assert record["totalUSD"]==30000
+        assert record["commonsCircuit"]["budgetUSD"]==30000
+        assert record["commonsCircuit"]["claimedHosts"]==0
+        assert record["commonsCircuit"]["applicationSubmitted"] is False
+        assert len(record["commonsCircuit"]["weekly"])==4
         assert all(url.startswith(f"http://127.0.0.1:{server.server_port}/bridge/") for url in requests),requests
         assert not errors,errors
         print(json.dumps({"schema":"bridge006-browser-proof/v1","drafts":2,"funding":30000,

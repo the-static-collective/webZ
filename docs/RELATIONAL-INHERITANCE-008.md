@@ -1,5 +1,8 @@
 # RELATIONAL-INHERITANCE-008 — A METHOD CAN TRAVEL WITHOUT ITS FOUNDER'S POWER
 
+**Field successor:** [VOQAL-009 — Commons Circuit](./VOQAL-COMMONS-CIRCUIT-009.md) prioritizes real shared meals, cultural events, and voluntary weekly institutional/community encounters. This signing proof remains a **software boundary demonstration** only; the actual test of human relationship/inheritance is in those optional, independently governed encounters.
+
+
 **October 29, 2026 · independently authored, RDL-informed research question · public-safe FOUR-KEY laboratory demonstration · NOT A PARTNER, joint experiment, external endorsement, human service or fellowship submission.**
 
 ## Explicit intellectual neighbor: LX Cast's Relational Design Lab
