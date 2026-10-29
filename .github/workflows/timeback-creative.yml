@@ -63,6 +63,17 @@ jobs:
           test -s native-evidence/playdeck/receipt.projected.json
           test ! -f native-evidence/playdeck/final.mp4
           cat native-evidence/summary.json
+      - name: Prepare actual local printable edition from source-owned forming manifest
+        working-directory: webz
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tools/timeback-press-edition.mjs --packet native-fixtures/lemonpress-packet.json --out native-evidence/press
+          test -s native-evidence/press/edition.html
+          test -s native-evidence/press/source.md
+          test -s native-evidence/press/work-manifest.json
+          test -s native-evidence/press/wrench-preparation.json
+          test "$(grep -c 'PRIVATE PRINT PROOF / NOT PUBLISHED' native-evidence/press/edition.html)" = "1"
       - name: Validate real native LemonPRESS JSON Schema
         working-directory: webz
         shell: bash
