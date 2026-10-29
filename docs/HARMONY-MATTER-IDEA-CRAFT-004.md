@@ -45,3 +45,9 @@ A finished cultural asset could later become usable as *an authorized licensed p
 **Verification:** `node --test tests/harmony-craft.test.mjs`. Tests cover bounded quantities, disputed observation, zero actual spend, SHA-256 tampering, nonconsumptive seven-medium creativity, refusal of invented extra authority fields, and presentation integration.
 
 This document authorizes no physical action. In particular, the wood-to-ash branch is a classification/lineage example, not a fire-building instruction.
+
+## CANNON CULTURE FORGE 001 — actual original code execution (2026-10-29)
+
+A separate stacked [CANNON PR #37](https://github.com/the-static-collective/CANNON/pull/37) now calls **real pinned WebZ and GrO source functions** after original-Git-object and execution-file verification. Its [successful source-pinned CI run](https://github.com/the-static-collective/CANNON/actions/runs/40866198913) produced two actual locally generated files — a printable six-panel `comic.html` and `field-card.md` — plus the source/provenance receipt and replay request. Independent cold replay and hostile output corruption rejection passed; the CI artifact bundle is downloadable there (GitHub login may be required). 
+
+This is a **much stronger proof than a hypothetical JSON craft preview**: executable donors, output bytes, and reconstruction are independently inspected. It remains a **fictional case and experimental unmerged branch** stacked on CANNON PRESENT USE 003 PR #5; it does not merge original repositories, select canon, establish creative rights, mint NFT or PENNY, publish actual cultural outputs to third-party receivers, or authenticate a real world participant. Any release requires separate human editorial review and third-party consent if applicable.

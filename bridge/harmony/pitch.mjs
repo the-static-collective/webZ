@@ -67,8 +67,16 @@ function build(data){
  const link=p(s,'p');a(link,'Open the live Matter × Idea Craft demonstrator ↗','./craft.html');
  p(s,'p','No actual NFT mint, price, license, deed or custody proof occurs here.','warning');
  }));
+ created.push(slide('Source-pinned execution evidence',s=>{
+ title(s,'15 / RUN ORIGINAL CODE','The creative example now actually executes.','CANNON runs native, independently pinned Harmony and GrO source in GitHub Actions, creates a printable six-panel comic and field card, then cold-verifies every output byte.');
+ const g=p(s,'div',undefined,'grid');
+ const examples=[['SOURCES','10 exact Git objects verified from 2 independent repositories.'],['REAL WORK','Original source functions execute. One comic.html and one field-card.md are actually written.'],['CHECKS','Rebuild and compare every file; mutated output must be refused.'],['LIMITS','Still a fictional case: no field witness, copyright transfer, PENNY, NFTs, reLATTE effect or canon admission.']];
+ for(const [h,b] of examples){const card=p(g,'article',undefined,'card');p(card,'h3',h);p(card,'p',b);}
+ const row=p(s,'p');a(row,'Inspect passing original-source workflow & download artifact ↗','https://github.com/the-static-collective/CANNON/actions/runs/40866198913');
+ p(s,'p','This executable experiment lives on an unmerged CANNON branch stacked on PRESENT USE 003. CANNON main is not canon; the output is an inspectable demonstration, not a third-party release.','warning');
+ }));
  created.push(slide('What to test',s=>{
-  title(s,'15 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  title(s,'16 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
   const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
   p(s,'blockquote',scene.proof);
   p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
