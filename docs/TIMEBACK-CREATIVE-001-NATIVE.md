@@ -6,7 +6,7 @@
 
 1. Visit the existing, bounded Three Bells arcade. Choose a topic (or none), read a finite local card and keep it or leave.
 2. Open **Make something bigger from this card** only if interested. This is optional, never a mandatory next step to complete the episode.
-3. Click **Prepare a tiny book edition** to download a canonical `lemonPRESS` forming/pending work packet, or **Prepare a PlayDeck video job** for a source-pinned native execution request.
+3. Click **Download your printable pocket book** for a standalone self-contained HTML mini-book immediately on the same phone or computer. Optionally click **Export lemonPRESS preparation manifest** to obtain a canonical `lemonPRESS` forming/pending work packet, or **Prepare a PlayDeck video job** for a source-pinned native execution request.
 4. The person can stop immediately. No upload, contact, account, email, rendering or publishing happens in the browser. This is a *carry*, not an effect.
 5. When using an operator computer, explicit local commands can turn an approved source packet into an actual privately printable HTML edition, or compose a real PlayDeck plan from user-supplied images and audio.
 
@@ -19,6 +19,10 @@
 | Haunted Toaster | Official published Windows portable/installer release `v0.5.0-alpha.8` and developer source, with unmerged beta PR `#275` kept distinct | Direct deliberate navigation to the original published application so a person can use the native desktop renderer, with their own rights-cleared song. | Three Bells does not control an installed Toaster, render videos on its behalf, or represent its unmerged beta as a released binary. |
 
 A downloaded packet contains visitor text **locally**, and they choose whether to share or upload it anywhere else. It is not hashed as a signed authority. Any human permission, third-party resource, rights to use song and images, or publication rights remain external human responsibilities.
+
+### One-click human-facing printable book (no tool installation)
+
+The in-browser **Download your printable pocket book** button makes a self-contained 6×9 print-CSS HTML edition from the selected card. It is a normal take-home artifact: open the downloaded `.html` file in a browser, print it or print to PDF. User text is encoded as text, never executable HTML. The original card remains a forming, private, unadmitted draft. This static projection is made by the browser module `apps/arcade/edition.mjs`, not by an unprovided LemonPRESS native publishing service.
 
 ### Direct user-facing output: private tiny print edition
 
