@@ -95,8 +95,20 @@ function build(data){
  a(aRow,'Original GHoT × signed reLATTE HOLD ↗','https://github.com/the-static-collective/CANNON/actions/runs/40870169565');
  p(s,'p','No real authenticated participant, verified cultural use, rights release, publication, economic issuance or external exchange is claimed.','warning');
  }));
+ created.push(slide('Culture returns to the next room',s=>{
+ title(s,'18 / NATIVE ELEVEN-SOURCE REENTRY','The artifact becomes a new proposal, not a mandate.',
+ 'Original planZ matches an explicitly selected public source plan, GRAFT proposes an independent nursery candidate and JAR;VIS produces the next operator-held question.');
+ const grid=p(s,'div',undefined,'grid');
+ for(const [head,detail] of [['planZ','Owner review for an existing source-linked plan. No issue update.'],
+ ['GRAFT','A source-addressed nursery proposal, not an automatically created Git branch.'],
+ ['JAR;VIS','The original attention index and matcher run; no model, new task or contact.'],
+ ['CANNON','Eleven pinned original repositories; the full signed ancestor is replayed and altered output rejected.']]){
+ const card=p(grid,'article',undefined,'card');p(card,'h3',head);p(card,'p',detail);}
+ const links=p(s,'p');a(links,'Inspect passed eleven-repository execution ↗','https://github.com/the-static-collective/CANNON/actions/runs/40873374247');
+ p(s,'p','All proposed next work is HOLD. No real human, rights holder, field use, penny, token, partner or canon is inferred.','warning');
+ }));
  created.push(slide('What to test',s=>{
-  title(s,'18 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  title(s,'19 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
   const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
   p(s,'blockquote',scene.proof);
   p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
