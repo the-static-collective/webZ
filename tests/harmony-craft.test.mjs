@@ -90,3 +90,12 @@ test('all source-owned culture-to-economic return claims link successful native 
  assert.ok(p.includes('No real authenticated participant'));
  assert.ok(d.includes('Authenticated real human Deeds remain 0'));
 });
+
+test('the verified culture reentry is shown with independent owner-review restrictions',()=>{
+ const h=read('bridge/harmony/craft.html'),p=read('bridge/harmony/pitch.mjs');
+ const d=read('docs/HARMONY-MATTER-IDEA-CRAFT-004.md');
+ for(const s of [h,p,d])assert.ok(s.includes('40873374247'));
+ assert.ok(p.includes('No issue update'));
+ assert.ok(h.includes('remain open experimental branches'));
+ assert.ok(d.includes('GRAFT does **not** create a Git branch'));
+});
