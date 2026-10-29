@@ -1,4 +1,5 @@
 import {threeGifts,textFor,LIMIT} from "./engine.mjs";
+import {makeCreativeCarry} from "./source-carry.mjs";
 const el=id=>document.getElementById(id);
 let cards=null,index=0,ended=false;
 function showCard(){
@@ -62,6 +63,22 @@ el("save").addEventListener("click",()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
   el("card-status").textContent="Download offered to your device. Nothing uploaded.";
 });
+function exportSourceCarry(lane){
+  if(!cards||ended)return;
+  const packet=makeCreativeCarry(el("topic").value,index,lane);
+  const content=JSON.stringify(packet,null,2)+"\n";
+  const url=URL.createObjectURL(new Blob([content],{type:"application/json;charset=utf-8"}));
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="three-bells-"+cards[index].id+"-"+lane+"-draft.json";
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  el("handoff-status").textContent="Downloaded a preparation-only source packet. Nothing was sent, approved or executed.";
+}
+el("press-handoff").addEventListener("click",()=>exportSourceCarry("lemonpress"));
+el("playdeck-handoff").addEventListener("click",()=>exportSourceCarry("playdeck"));
 el("print").addEventListener("click",()=>{
   if(cards&&!ended)window.print();
 });
