@@ -4,6 +4,7 @@
 import {hash} from '../suitcase/protocol.mjs';
 import {PATTERN,createRelationalInheritanceProof,verifyRelationalInheritanceProof} from './relational-inheritance.mjs';
 import {forkFestival} from './festival-forks.mjs';
+import {inspectStoryRooms} from './story-rooms-receiver.mjs';
 
 export const INTEREST_STATIONS=Object.freeze({
  art:'make',music:'road-stage',food:'table',repair:'build',
@@ -68,9 +69,10 @@ export async function inspectCreativePacket(packet){
  return {accepted:true,disposition:'LOCAL_CHECKSUM_ONLY_NOT_ORIGIN_OR_RIGHTS_AUTHENTICATION',
   sourceIds:ids,questions,creativeReceiptDigest:packet.digest,mayPublish:false,mayExecute:false};
 }
-export async function makeSecondTable({interest='art',creativePacket=null}={}){
+export async function makeSecondTable({interest='art',creativePacket=null,storyPacket=null}={}){
  if(!Object.hasOwn(INTEREST_STATIONS,interest))hold('UNKNOWN_INTEREST');
  const creative=await inspectCreativePacket(creativePacket);
+ const story=await inspectStoryRooms(storyPacket);
  // These ORIGINAL WebZ methods are genuinely run, not reimplemented here.
  const signed=await createRelationalInheritanceProof();
  const review=await verifyRelationalInheritanceProof(signed);
@@ -94,6 +96,11 @@ export async function makeSecondTable({interest='art',creativePacket=null}={}){
    venuePermission:false,independentBudgetConfirmed:false,communitySafetyReviewed:false},
   signedSoftwareReview:review,
   creativeThoughtFood:creative,
+  storyThoughtFood:story,
+  possibleRecursivePlanZInput:story.accepted?{
+   schema:"abundent/planz-story-candidate-input-v1",scope:"HELD_STORY_ONLY",sourceDigest:story.sourceDigest,
+   candidates:story.planCandidates,automaticExecution:false,sourceOwnerApproved:false,
+   externalPlansCreated:false,realParticipation:false}:null,
   festivalIdea:{kind:'INDEPENDENT_FESTIVAL_PROPOSAL_NOT_BOOKED',proposal:festival.branches[0].proposal,
    publicLaunch:festival.branches[0].publicLaunch,sourceMethodDigest:festival.originalWebzMethodDigest},
   falsifier:'If actual participants cannot freely adapt, refuse or continue the second gathering without the first founder, independent community formation is not demonstrated.',

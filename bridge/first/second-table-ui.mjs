@@ -11,7 +11,7 @@ $('run').addEventListener('click',async()=>{
  $('run').disabled=true;$('download').disabled=true;current=null;
  try{
   const raw=$('packet').value.trim();
-  current=await makeSecondTable({interest:$('interest').value,creativePacket:raw||null});
+  current=await makeSecondTable({interest:$('interest').value,creativePacket:raw||null,storyPacket:$('story-packet').value.trim()||null});
   $('proof').textContent=JSON.stringify(current,null,2);
   $('headline').textContent='Two fictional circles, separately governed';
   $('interpret').textContent='Original WebZ signed-key proof: '+current.signedSoftwareReview.verifiedDistinctKeyHolders+
@@ -20,11 +20,14 @@ $('run').addEventListener('click',async()=>{
   $('creative').textContent=current.creativeThoughtFood.accepted?
     current.creativeThoughtFood.questions.join('\n\n'):
     'No JAR;VIS thought-food packet pasted. The first/second-table software demonstration still runs.';
+  $('story-questions').textContent=current.storyThoughtFood.accepted?
+   current.storyThoughtFood.questions.join('\\n\\n'):
+   'No fictional story packet pasted. The original Second Table synthetic proof still runs.';
   $('download').disabled=false;
   tell('Local synthetic proof complete. No application, event, invitation, signup or network request.');
  }catch(error){
   $('headline').textContent='HOLD';$('interpret').textContent=String(error);
-  $('creative').textContent='';$('proof').textContent='No trusted review result.';
+  $('creative').textContent='';$('story-questions').textContent='';$('proof').textContent='No trusted review result.';
   tell('No proof exported. Correct the locally pasted public-safe packet or run without it.');
  }finally{$('run').disabled=false;}
 });
