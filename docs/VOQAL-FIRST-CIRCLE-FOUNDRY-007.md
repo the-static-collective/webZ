@@ -55,6 +55,16 @@ Voqal's official 2027 Fellowship [criteria](https://voqalpartners.org/fellowship
 
 **Shared claim:** these are *design and software capabilities that may make human-led field experimentation cheaper and more inspectable*. No existing PR implies a validated real-world social-service model.
 
+## Explicit relational-design correspondence and falsifiable source-native demonstration
+
+Voqal's own 2026 fellowship includes **LX Cast's Relational Design Lab**. Its independently public work examines belonging, freedom, responsibility and social/digital design that resists extractive governance. We can **explicitly credit this neighboring inquiry** and perhaps *ask* for independent criticism later. We have **no actual collaboration, affiliation, permission to use the Lab's brand as a partner, agreement for review, or correspondence sent**.
+
+Our distinct contribution is a testable **inheritance-without-inherited-authority** proposition. A public-safe founding practice can be inherited through signed source ancestry while each recipient independently controls its own constitution, refusals and optional published offers. New [RELATIONAL-INHERITANCE-008](./RELATIONAL-INHERITANCE-008.md) uses the **original working WebZ Suitcase signing and founding implementations**, not fake verification stubs, to produce eleven signed packets across four **fictional** key holders. The verifier checks public method digest, A→B→D signed lineage, B and D's separate key-bound GENESIS and operating rules, C's signed refusal, outsider withdrawal rejection, and local withdrawal of only B's own published capability. It uses a separate process for cold replay.
+
+Its claim is strictly `SOFTWARE_CRYPTOGRAPHIC_BOUNDARY_VERIFIED_ONLY`, **not actual transferred human power or belonging**. The fellowship would pay real independent relational/safeguarding reviewers to try to falsify the social assumptions: do communities have actual control of records, funding, physical space, entry/exit, safety and governance, even after the original founder is absent? A successful cryptographic result that fails that human test is a real *failure*, not a validated circle.
+
+For reviewers, this is a useful one-paragraph distinction: **We can already demonstrate that ancestry does not itself confer key authority in our software. We are seeking fellowship support to test whether independently governed practices can meaningfully transfer decision-making to real people who have been excluded from existing networks.** A method can travel; belonging cannot be automated.
+
 ## The biggest objection to answer ourselves
 
 **"How can you say 'community-owned' when you don't yet have community co-designers?"** Answer: we cannot claim ownership has already transferred. The fellowship would fund accountable formation: independently compensated participants, power to reject the idea, qualified outside oversight, and genuinely optional local adoption. The founder's lived experience identifies the first problem, but cannot substitute for the community's plural voices.
