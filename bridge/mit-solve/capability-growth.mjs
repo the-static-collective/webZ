@@ -3,6 +3,8 @@
 import {createHash} from 'node:crypto';
 
 export const SOURCE_DOORS=Object.freeze([
+  {owner:"GHoT World Asks Back",role:"eleven read-only instruments notice a fictional missing hinge and propose bounded work in a three-node workshop; no physical fabrication",source:"https://github.com/the-static-collective/GHoT/pull/93",status:"UNMERGED_SYNTHETIC_WORKSHOP"},
+  {owner:"STATIC OS Regenerative Design Capacity",role:"source-verified solid becomes one inert reusable digital design candidate, with zero fabricated units",source:"https://github.com/the-static-collective/static-os/pull/59",status:"UNMERGED_SOFTWARE_DEMONSTRATION"},
   {owner:"STATIC OS",role:"actual OCCT CAD → STL → generic virtual-profile PrusaSlicer G-code; no print",source:"https://github.com/the-static-collective/static-os/pull/61",status:"UNMERGED_SOFTWARE_DEMONSTRATION"},
   {owner:"STATIC OS",role:"ten declared printer families; actual machine selection and signed proposal remain held",source:"https://github.com/the-static-collective/static-os/pull/66",status:"UNMERGED_PROPOSAL"},
   {owner:"GHoT",role:"read-only printer organ and native held proposal",source:"https://github.com/the-static-collective/GHoT/pull/102",status:"UNMERGED_PROPOSAL"},
