@@ -31,7 +31,7 @@ test('separate source ownership and unearned proof are explicit',()=>{
  assert.match(source,/Church.*participation is not required/i);
 });
 test('MIT application packet is subject to evidence, eligibility and user-controlled submission',()=>{
- assert.match(source,/Concept-stage/);
+ assert.match(source,/concept-stage/i);
  assert.match(source,/working prototype/);
  assert.match(source,/before Nov 6, 2026, noon EST/);
  assert.match(source,/draft != submitted/i);
