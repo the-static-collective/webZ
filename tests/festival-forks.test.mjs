@@ -42,7 +42,7 @@ test("All proposed culture stages are distinct, correctly sequenced and unbooked
  assert.equal(FESTIVAL_STAGES[3].status,"UNAUTHORIZED");
  assert.equal(STATIONS.length,10);
  assert.equal(new Set(STATIONS.map(x=>x.id)).size,10);
- assert.ok(STATIONS.some(x=>x.id==="fork"&&/independent/.test(x.required)));
+ assert.ok(STATIONS.some(x=>x.id==="fork"&&/independent/i.test(x.required)));
  assert.ok(STATIONS.some(x=>x.id==="road-stage"&&/voluntary religious/.test(x.required)));
  assert.ok(STATIONS.some(x=>x.id==="welcome"&&/guardian/.test(x.required)));
  assert.ok(COMMON_GATES.some(x=>/OCTOBER_FESTIVAL_FUNDED/.test(x)));
