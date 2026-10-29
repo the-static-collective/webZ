@@ -8,6 +8,8 @@ This was not an unbuilt idea. Several original owners already executed specific 
 
 | Original organ | What was actually executable | What remains unearned |
 |---|---|---|
+| GHoT [WORLD-ASKS-BACK-001 #93](https://github.com/the-static-collective/GHoT/pull/93) | Eleven genuine local read-only instruments identify a *fictional* missing hinge and propose work across three independently pinned workshop fixture nodes | Physical missing-hinge repair, real machine action, human authorization |
+| STATIC OS [REGENERATIVE DESIGN CAPACITY #59](https://github.com/the-static-collective/static-os/pull/59) | Original signed CAD/OCCT source becomes a content-addressed reusable digital-design capacity proposal; zero fabricated machines | Physically realized design, licensed transfer, certified component or manufactured capacity |
 | STATIC OS [STATIC-PRINT-011 #61](https://github.com/the-static-collective/static-os/pull/61) | Native CadQuery/OpenCASCADE solid → STEP/STL → genuine PrusaSlicer G-code, signed source/held proofs in CI | A real approved machine-specific print job or real fabricated part |
 | STATIC OS [FABRICATION-CROSSING-013 #66](https://github.com/the-static-collective/static-os/pull/66) + [reLATTE #87](https://github.com/the-static-collective/reLATTE/pull/87) | Exact proposed request, three independent simulated signed owner worlds, withdrawal and R3_HOLD-like owner-local decisions | Actual identity assurance, authenticated remote printer driver, actuation |
 | GHoT [PRINTER-ORGAN-001 #102](https://github.com/the-static-collective/GHoT/pull/102) | Operator-declared printer capabilities, bounded optional read-only localhost OctoPrint GET, adapter tests | Connected user printer, calibrated settings, permission to print |
