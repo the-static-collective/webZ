@@ -103,3 +103,17 @@ test('Use the Tools shelf is linked, offline-bundled and honest about alpha vers
  assert.match(shelf,/script-src 'none'/);
  assert.doesNotMatch(shelf,/<iframe|<form|<script[^>]+src=/i);
 });
+
+test('Time-first paths offer value before asking anything back',async()=>{
+ const fs=await import('node:fs');
+ const html=fs.readFileSync(new URL('./use/index.html',import.meta.url),'utf8');
+ assert.match(html,/YOUR TIME COMES FIRST/);
+ assert.match(html,/On a phone right now\?/);
+ assert.match(html,/Not enough time today\?/);
+ assert.match(html,/No reply is expected/);
+ assert.ok(html.indexOf('id="time-first-title"')<html.indexOf('id="toaster"'));
+ assert.ok(html.indexOf('id="time-first-title"')<html.indexOf('class="wrap feedback"'));
+ assert.match(html,/href="\.\.\/jubilee\/"/);
+ assert.match(html,/href="#toaster"/);
+ assert.doesNotMatch(html,/<form|localStorage|sessionStorage|sendBeacon/);
+});

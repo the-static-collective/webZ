@@ -24,3 +24,13 @@ Source exists at different maturity levels. Some projects are internal kernel in
 
 ## Next measurable hypothesis
 At least one stranger, without a call with the author, can download the signed-or-clearly-unsigned alpha from the official release, provide their own authorized song, generate a satisfactory video on their own hardware, and describe where they got stuck. Until observed, this is an acquisition hypothesis, not evidence of adoption.
+
+## TIME-FIRST-001 — Attention is not a donation
+
+The user may have only moments of spare attention, and the original developer may not have reliable access to a computer or a regular roster of willing helpers. Therefore no task, first-use path, contribution request or rollout may require a synchronous call or an outside person responding on a schedule.
+
+The first interaction gives something useful without asking for contacts or volunteer time. A mobile visitor can open a prepared printable gathering kit; a Windows visitor can get the original downloadable Toaster; someone with no time today can bookmark a stable link. Refusal, silence, departure, or months of absence are normal behavior, not failure or consent. Feedback stays optional and downstream from the first opportunity to use a tool.
+
+**Time returned is a hypothesis, not a metric inferred from a download or CI pass.** We must measure it only if an independent user voluntarily reports a before/after comparison. Do not promise a specific number of minutes saved. The program must be operational with zero volunteers, while physical/organizational work that requires a real steward stays on HOLD without that person's express permission.
+
+Human design rule: **USE FIRST → OPTIONAL RETURN → NEVER OWED**. This is a small first-touch change in the already proposed tool shelf, not another account system, reminder campaign or outreach dependency.
