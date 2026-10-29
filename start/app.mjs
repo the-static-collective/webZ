@@ -26,6 +26,15 @@ form.addEventListener("submit", event => {
     byId("form-message").textContent = error instanceof RangeError ? error.message : "Could not prepare a draft.";
   }
 });
+// Never leave an earlier draft available to share after its inputs change.
+function invalidateDraft() {
+  result.hidden = true;
+  currentText = "";
+  byId("form-message").textContent = "";
+  byId("card-message").textContent = "";
+}
+form.addEventListener("input", invalidateDraft);
+form.addEventListener("change", invalidateDraft);
 byId("copy").addEventListener("click", async () => {
   if (!currentText) return;
   try {
