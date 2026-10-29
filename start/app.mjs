@@ -162,7 +162,7 @@ byId("effort-budget").addEventListener("change",() => {
 });
 byId("scrape").addEventListener("click",() => {
   if(!sixUp)return;
-  if(round===99){byId("lab-message").textContent="Rehearsal capped at 100 rounds; start a new draft.";return;}
+  if(round===2){byId("lab-message").textContent="All three distinct families explored. Change the declared goal or start a new draft.";return;}
   round++;
   // SCRAPE does not record disapproval or infer preferences.
   currentText=baseText;
