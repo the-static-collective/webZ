@@ -1,4 +1,5 @@
 import {REVIEWED_AT,PROJECT,PROSPECTS,ALLOCATION,SOURCES,DRAFTS,FOUNDER_GATES,budgetTotal,publicStatus} from "./model.mjs";
+import {planningPacket} from "./commons-circuit.mjs";
 const $=id=>document.getElementById(id);
 function element(tag,cls,content){const el=document.createElement(tag);if(cls)el.className=cls;if(content!==undefined)el.textContent=content;return el}
 function money(n){return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n)}
@@ -18,7 +19,7 @@ for(const draft of DRAFTS){
 for(const row of SOURCES){const a=element("a","",row.title+" ↗");a.href=row.href;a.target="_blank";a.rel="noopener noreferrer";$("source-list").append(a)}
 $("export-review").addEventListener("click",()=>{
  const record={...publicStatus(),project:PROJECT,prospects:PROSPECTS.map(p=>({id:p.id,source:p.source,kind:p.kind,state:p.state,gate:p.gate,due:p.due})),
- gateChecklist:FOUNDER_GATES,illustrativeBudget:ALLOCATION.map(([purpose,USD])=>({purpose,USD})),totalUSD:budgetTotal(),
+ gateChecklist:FOUNDER_GATES,illustrativeBudget:ALLOCATION.map(([purpose,USD])=>({purpose,USD})),totalUSD:budgetTotal(),commonsCircuit:planningPacket(),
  reviewedAt:REVIEWED_AT,disclaimer:"PUBLIC REVIEW CHECKLIST ONLY. NO GRANT SUBMISSION, CONTACT OR PARTNER AUTHORIZATION."};
  const blob=new Blob([JSON.stringify(record,null,2)+"\n"],{type:"application/json"}),url=URL.createObjectURL(blob),a=element("a");
  a.href=url;a.download="BRIDGE-006-first-crossing-UNSENT.json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
