@@ -117,3 +117,14 @@ test('Time-first paths offer value before asking anything back',async()=>{
  assert.match(html,/href="#toaster"/);
  assert.doesNotMatch(html,/<form|localStorage|sessionStorage|sendBeacon/);
 });
+
+
+test("three-card arcade is linked and statically bundled",async()=>{
+ const fs=await import("node:fs");
+ const build=fs.readFileSync(new URL("./build.mjs",import.meta.url),"utf8");
+ const home=fs.readFileSync(new URL("./index.html",import.meta.url),"utf8");
+ assert.ok(build.includes("cpSync(join(root,'arcade'),join(out,'arcade'),{recursive:true});"));
+ assert.match(home,/href="\.\/arcade\/"/);
+ for(const p of ["index.html","app.mjs","engine.mjs","style.css"])
+   assert.ok(fs.existsSync(new URL("./arcade/"+p,import.meta.url)),p);
+});
