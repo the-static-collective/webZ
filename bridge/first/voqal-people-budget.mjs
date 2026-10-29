@@ -1,6 +1,6 @@
 // VOQAL-015 — applicant-review alternative, not a published promise or grant submission.
 export const PROJECT_NAME="Still Here: The Second Table";
-export const DESCRIPTION_750="Still Here: The Second Table will test whether isolated neighbors can move from a welcoming meal or shared activity to practical cooperation and an independent group they control. During six months in southern Minnesota, I will invite residents, food-access workers and local stewards to low-cost, permission-based gatherings. We will pay community co-designers and safety/access experts for substantive work, not pay decision-makers for access. Participants can refuse, adapt or create the next table. We will report independently confirmed useful acts and test whether a successor continues without its founder. Music and a small festival rehearsal are optional; a Harmony Park finale requires separate permission and financing.";
+export const DESCRIPTION_750="Still Here: The Second Table tests whether a meal, song or shared task can help isolated neighbors connect and form a group they govern. I'm on the Coalition of Care core team in southern Minnesota and have met people in food access, co-ops, philanthropy, organizing and higher education; none has endorsed this project. Over six months I will host accessible, permission-based gatherings, compensate resident co-designers and independent safety/access reviewers, and document useful acts confirmed by participants. Each successor table may change the method or refuse its founder. Music is an optional invitation, not a requirement. Any large festival needs its own permissions and funding.";
 export const PROSPECTS=Object.freeze([
   {
     "name": "Benya Kraus",
@@ -8,6 +8,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "rural convening and local stewardship",
     "source": "https://smifoundation.org/person/benya-kraus/",
     "firstAsk": "Ask about community-owned successors and which grassroots hosts should design the first table.",
+    "relationshipStage": "MET_IN_PERSON_USER_REPORTED",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -17,6 +18,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "independent resident-led connections",
     "source": "https://www.keyc.com/2026/10/24/coalition-care-seeks-improve-community-one-connection-time/",
     "firstAsk": "Ask for criticism of a founder-independent second table; confirm she is the Deb previously met.",
+    "relationshipStage": "MET_IN_PERSON_USER_REPORTED",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -26,6 +28,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "actual Waseca food-shelf constraints",
     "source": "https://www.wasecaareaneighborhoodservicecenter.com/about-us",
     "firstAsk": "Ask what useful no-data food coordination would complement rather than duplicate the shelf.",
+    "relationshipStage": "MET_IN_PERSON_USER_REPORTED",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -35,6 +38,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "member governance and cooperative staffing",
     "source": "https://wasecacountypioneer.com/news/community-invited-learn-about-grocery-co-op",
     "firstAsk": "Ask about practical governance and what a small volunteer food table cannot responsibly do.",
+    "relationshipStage": "MET_IN_PERSON_USER_REPORTED",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -44,6 +48,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "technical stranger test and campus introduction",
     "source": "https://admin.mnsu.edu/organizational-information/organizational-charts/information-technology-solutions/",
     "firstAsk": "Ask for a 10-minute source-demo critique; institutional participation requires separate permission.",
+    "relationshipStage": "MET_IN_PERSON_USER_REPORTED",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -53,6 +58,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "equitable campus-community participation",
     "source": "https://mankato.mnsu.edu/university-life/diversity-equity-inclusion/diversity-equity-and-inclusion-on-campus-and-beyond/community-partnerships/community-partnerships-staffs/",
     "firstAsk": "Ask how to avoid extracting students' unpaid work; identify the right department for a voluntary pilot.",
+    "relationshipStage": "RESEARCHED_NO_MEETING_CLAIM",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -62,6 +68,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "existing resource network and avoiding duplication",
     "source": "https://www.mankatounitedway.org/staff",
     "firstAsk": "Ask which existing services should not be recreated and which open gatherings are appropriate.",
+    "relationshipStage": "RESEARCHED_NO_MEETING_CLAIM",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -71,6 +78,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "community growing and place stewardship",
     "source": "https://www.livingearthcentermn.org/who-we-are/staff.html",
     "firstAsk": "Ask about separately permitted garden activities; LEC is not the owner of Coalition of Care.",
+    "relationshipStage": "RESEARCHED_NO_MEETING_CLAIM",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   },
@@ -80,6 +88,7 @@ export const PROSPECTS=Object.freeze([
     "purpose": "inclusive low-cost maker table",
     "source": "https://www.wasecacountypioneer.com/news",
     "firstAsk": "Ask about a small creative station with take-home paper invitations.",
+    "relationshipStage": "RESEARCHED_NO_MEETING_CLAIM",
     "status": "UNINVITED_UNCONFIRMED",
     "accessFeeUsd": 0
   }
