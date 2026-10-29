@@ -1,6 +1,6 @@
 # MIT Solve 2027 — Living Suitcase / Between Rooms
 
-**Source date:** 2026-10-29. **State:** application-ready *review packet* and public-safe institutional doorway **in draft Git source**. NOT submitted, selected, funded, partnered or proven in community operation.
+> **CURRENT PRESENTATION BASELINE (October 29, 2026):** [**Living Suitcase / Blueprint Foundry / Mattercraft — Draft 002**](./MIT-SOLVE-2027-BLUEPRINT-FOUNDRY-BASELINE.md). This proposal now *leads* with a working object becoming an independently reproducible blueprint, using reclaimed Suitcase hardware as the first particular. The earlier food logistics/table route remains a proposed downstream application. This file retains the MIT application facts, stage/evidence controls, and earlier candidate wording; it is not proof of an integrated physical product. Nothing has been submitted.\n\n**Source date:** 2026-10-29. **State:** application-ready *review packet* and public-safe institutional doorway **in draft Git source**. NOT submitted, selected, funded, partnered or proven in community operation.
 
 ## Decision
 
@@ -35,15 +35,13 @@ We are testing a narrower proposition: can small, independently governed groups 
 
 **Pending for final answer:** primary local quantitative sources, community interviews and steward consent; no invented population statistics.
 
-## Solution (source material, ≤200 words)
+## Solution (current source material, ≤200 words; applicant must personalize)
 
-**Living Suitcase** is an organizational founding kit and an offline-capable communication instrument. A group chooses a mission—community food access, resilience, local cooperation—and receives a reproducible set of documents, software configuration, tools and privacy controls. TABLELIGHT assembles the willing people and actual resources needed for one next step. The group can keep its own records, accept or refuse offers, and independently create another group.
+**Living Suitcase / Blueprint Foundry** is a proposed community-owned method for turning available equipment and skills into reusable, independently tested capabilities. A local group selects a mission, inventories its parts, reviews compatible assembly and software requirements, builds one functional local computer node, and records the exact bill of materials, substitutions, tests, and failures. Once a separately operated community can build a second working node from those instructions, the resulting method can become a stronger, inspectable blueprint.
 
-The current technical foundation includes a working browser-based two-room signed-offer/response and organization-founding *demonstration*, reLATTE's separately tested signed crossings and receiver-local decisions, and a STATIC OS read-only mission planner plus an inert phone-to-computer local-network demonstration server. These components are not yet one verified physical product: no custom ISO boot, private production communications, actual partner enrollment, or independent field result has occurred.
+Its component research already includes signed browser-room exchanges, a read-only STATIC OS mission composer, synthetic PENNY resource accounting, GrO's held Mattercraft encounters, Full Measure's human-witness boundaries, and independent source-history experiments. The integrated physical build, actual blueprint certification, and cross-organization economic impact are **not yet verified**.
 
-The pilot will connect the smallest practical pieces into one reproducible public-safe workflow, test operation without internet, and return a transparently reviewed outcome. The physical case is a proposed deployment form—not yet a proven device.
-
-## Who it serves (source material, ≤200 words)
+We will test whether documentation plus locally governed coordination decreases cost, repairs, and setup time relative to ordinary manual setup. Communities retain control over materials, identities, records and participation; no new cryptocurrency is required.\n\n## Who it serves (source material, ≤200 words)
 
 The initial intended users are rural community organizers and small voluntary groups facing scarcity of funding, technical support and administrative capacity, along with residents whose food, transportation or economic needs require coordination across organizations. Instead of insisting that people join a new central service, the kit gives a willing local steward a clear way to convene resource-holders and complete a specific task. Its goals are to reduce repeat explanations and referrals that never result in action, improve local continuity when connectivity fails, and build durable community-owned capabilities. Churches, cooperatives and mutual-aid groups are possible host types—not established partnerships. The public pilot uses no survivor cases or vulnerable-group identities.
 
@@ -55,38 +53,41 @@ The initial intended users are rural community organizers and small voluntary gr
 | Protocol building blocks | Separate executable reLATTE signed crossing, receiver-local HOLD/REFUSE and replaceable transport specimens | [reLATTE](https://github.com/the-static-collective/reLATTE); integration not demonstrated at field level |
 | System composition | Mission-first STATIC OS read-only plan; 5 profiles, privacy HOLDs, automated contract tests | [STATIC OS PR #91](https://github.com/the-static-collective/static-os/pull/91); draft; *no working installer* |
 | Physical connectivity | Local HTTP demonstration *code* and test plan | PR #91; no second-device disconnected-LAN human witness received |
+| GrO / Mattercraft | 42 WOOD / 39 observed fictional source-bound GrO encounter with HOLD-only quest/ash preview | [GrO PR #32](https://github.com/the-static-collective/GrO/pull/32); not physical verification |
+| Full Measure / PENNY | Separate participation, human witness and synthetic account/custody building blocks | [Full Measure](https://github.com/the-static-collective/full-measure-world-layer); [Jubilee Treasury](https://github.com/the-static-collective/Jubilee-treasury); no integrated economic product |
+| Blueprint Foundry | A proposed build-receipt and independent reproduction protocol, **not yet a functioning physical product** | [Current baseline 002](./MIT-SOLVE-2027-BLUEPRINT-FOUNDRY-BASELINE.md); **no real second build** |
 | Community service | No independently verified food/legal/transport outcomes through this integrated solution | Need local steward, resource holder, consented field experiment and independent reviewer |
 | Partner status | None established by application or public mapping | Prospect != partner |
 
-**Stage to select:** review against the integrated solution. **Prototype** may be supportable if described as the existing *browser-based coordination and founding prototype* with physical Suitcase as future hardware direction. It is **not** supportable as a fully functioning physical Suitcase or delivered aid network. Do not select Pilot or claim users simply because demo links exist.
+**Stage to select:** review against the integrated solution, particularly the currently proposed Blueprint Foundry, which may still be at Concept stage. **Prototype** may be supportable if described as the existing *browser-based coordination and founding prototype* with physical Suitcase as future hardware direction. It is **not** supportable as a fully functioning physical Suitcase or delivered aid network. Do not select Pilot or claim users simply because demo links exist.
 
-## The one meaningful pilot
+## The one meaningful pilot — FIRST BUILD / SECOND BUILD
 
-**SHELF / FIRST TABLE:** a local resource-holder explicitly consents to examine one public-safe food logistics question. An authorized local steward invites a small table with the required resource providers. Each role remains independent. The table records the one actual next step and permissions; one action is reported and a genuinely separate person assesses its evidence. The groups can export a founding kit and test a second independent node. No real beneficiaries need to enter the demonstration data.
+**Blueprint Foundry 001:** one willing, authorized operator assembles an offline local compute node from reclaimed computer/router/phone hardware; a second **independent** operator reproduces the declared functions from a recorded design, accepting only compatible substitutions. The object is not finished merely because a drawing exists.
 
 **Outcome gates:**
-1. One local steward/host gives actual permission.
-2. One real meeting occurs; separate attendance/consent recorded.
-3. One useful work commitment is **accepted**, not inferred from an RSVP.
-4. One result is **observed and independently reviewed**; refusals and failures count as information.
-5. A second node proves it can decline without disconnection or ancestor control.
-6. Offline-network test witnessed on actual hardware; hardware identities and sensitive data kept private.
+1. Actual owner consent and safe inventory for each selected device; no unauthorized disk wipe, unsafe electrical modifications or phantom source materials.
+2. One real first build completes bounded local service, LAN-offline, reboot/recovery and appropriate privacy checks.
+3. Exact build recipe with BOM, software hashes/licenses, power compatibility, method and known failure notes is retained.
+4. Separately operated second build follows the packet and records differences, failed tests and fresh observations.
+5. A distinct reviewer confirms the specific repeatability outcome; one working node is not enough.
+6. Only after successful technical evidence, seek a locally consented real resource-handoff field pilot such as food logistics; track economic and human effects separately.
 
-## Why MIT Solve—not just prize money
+**Older pathway retained:** [The Garden / SHELF](https://github.com/the-static-collective/webZ/tree/main/bridge/locus) remains a candidate first *service* use. It is not an existing organization, grocery, partner or beneficiary network. A paper-table/manual alternative remains the comparator.\n\n## Why MIT Solve—not just prize money
 
 Ask for rigorous prototype assessment, field evaluation design, rural food-system and service-sector mentors, open-source/privacy/security expertise, affordable supply-chain partners, deployment economics and appropriate legal/governance advice. Funding would support pilot materials, accessibility, travel to participating communities, security review, operator participation and safe hardware experimentation. Do not treat prospective partners as recruited.
 
-## 60-second demo sequence (real/current)
+## 60-second demonstration — honest current components
 
-1. Open existing [browser Suitcase](https://github.com/the-static-collective/webZ/tree/main/bridge/suitcase), create distinct local demo rooms and sign a fictional offer.
-2. Import and verify the offer in a second local room; sign a **REFUSE** or HOLD. Explain `KEY != HUMAN AUTHORITY` and no actual service is delivered.
-3. Show [STATIC OS #91](https://github.com/the-static-collective/static-os/pull/91): choose church/commons/resilience profile and show its deterministic HOLD-only plan.
-4. Show the first-signal phone bench instructions; plainly say **UNTESTED on user hardware**, no local radio claim.
-5. Finish: “A group can leave with its own keys, records and founding method. Our success means it needs us less.”
+1. **Matter → possibility:** GrO [MATTERCRAFT #32](https://github.com/the-static-collective/GrO/pull/32) presents a **fictional** 42 WOOD claim and 39 candidate observed, held without new stock, Deed or payment.
+2. **Blueprint → mission:** [STATIC OS #91](https://github.com/the-static-collective/static-os/pull/91) prints a deterministic read-only profile with explicit HOLD conditions; it does **not** install an OS.
+3. **Independently owned communication:** existing [browser Suitcase](https://github.com/the-static-collective/webZ/tree/main/bridge/suitcase) signs a fictional offer in one room; another room receives and can refuse. Key ≠ human identity.
+4. **Actual versus intended:** show a safe hardware kit and a blank build-evidence card. No recorded, user-witnessed full physical assembly, independent second build, or verified hardware blueprint exists.
+5. **Ask:** “A finished object is one useful thing. A tested blueprint can help another community make its own.”
 
-## Evaluation design and financial sustainability
+**Future field demonstration:** film the *actual* first hardware build, tests, retained failures, and an independent second builder reproducing the specified functions. Do not edit synthetic/current footage to imply that these outcomes have already occurred.\n\n## Evaluation design and financial sustainability
 
-Hypotheses, **not observed results**: volunteer coordination may reduce administrative effort and increase real completions. Record baseline time/cost to identify needed resource, proportion reaching a meeting, completed action count separately from referral/meeting count, organizer burden, cost per independently reviewed result, offline availability, safety/privacy incidents and replication time. Avoid a vanity count of links or nodes. Compare with manual paper-table coordination; software must demonstrate added value.
+Hypotheses, **not observed results**: blueprint-guided reclaimed hardware construction may lower new purchases and repeat setup burden compared with manual setup. Compare bill-of-materials expenditure, skilled labor minutes, installation/repair time, function test results, reboot/offline recovery, accessibility, and independent second-build success. Later, volunteer coordination may reduce administrative effort and increase real completions. Record baseline time/cost to identify needed resource, proportion reaching a meeting, completed action count separately from referral/meeting count, organizer burden, cost per independently reviewed result, offline availability, safety/privacy incidents and replication time. Avoid a vanity count of links or nodes. Compare with manual paper-table coordination; software must demonstrate added value.
 
 Operating economics: free-to-recipient, not free-to-operate. Potential financing: donations, grants, in-kind host support, fiscal sponsorship/contracted support **only after separately negotiated real commitments**. Operators must retain governance and access without mandatory payment to Abundent.
 
@@ -96,7 +97,7 @@ Churches can be *optional host infrastructure* (fellowship space, tables, volunt
 
 ## Application completion checklist (human-owned)
 
-- [ ] Decide exact **one** MIT challenge and describe measurable challenge-specific outcomes.
+- [ ] Review and personalize the [current Blueprint Foundry presentation baseline](./MIT-SOLVE-2027-BLUEPRINT-FOUNDRY-BASELINE.md); one working build ≠ reproducible blueprint.\n- [ ] Decide exact **one** MIT challenge and describe measurable challenge-specific outcomes.
 - [ ] Verify whether the current integrated scope genuinely qualifies as **Prototype**, not Concept.
 - [ ] Confirm correct organizational registration classification and actual team size/time working.
 - [ ] Supply truthful geographic headquarters, operations, beneficiaries (likely **0**) and links.
