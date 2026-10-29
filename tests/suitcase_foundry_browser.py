@@ -68,6 +68,8 @@ try:
   # A second unrelated key's withdrawal could not have revoked the child's capability.
   assert "NODE ALIVE: NOT VERIFIED" in a.locator("#node-evidence").inner_text()
   for p in (a,b):
+   if not p.evaluate("document.documentElement.scrollWidth<=window.innerWidth"):
+    print("MOBILE_OVERFLOW",p.evaluate("""()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,culprits:[...document.querySelectorAll("*")].filter(x=>x.getBoundingClientRect().right>innerWidth+2).slice(0,12).map(x=>({tag:x.tagName,id:x.id,klass:x.className,right:Math.round(x.getBoundingClientRect().right),text:(x.innerText||"").slice(0,55)}))})"""),flush=True)
    assert p.evaluate("document.documentElement.scrollWidth<=window.innerWidth")
   b.evaluate("navigator.serviceWorker.ready")
   b.reload(wait_until="load")
