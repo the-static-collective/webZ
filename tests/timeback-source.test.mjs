@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {makeCreativeCarry,verifyCreativeCarry,OWNERS} from "../apps/arcade/source-carry.mjs";
+import {makePocketEdition} from "../apps/arcade/edition.mjs";
 import {readFileSync} from "node:fs";
 const example="A song for the neighbors";
 
@@ -52,4 +53,14 @@ test("browser gives explicit choice, original app link, no uploads or implicit r
   assert.match(ui,/new Blob\(\[content\]/);
   assert.doesNotMatch(ui,/fetch\(|sendBeacon|localStorage|sessionStorage|eval\(/);
   assert.equal(Object.keys(OWNERS).length,2);
+});
+
+test("standalone pocket edition is an actual user take-away, printable and safe on arbitrary text",()=>{
+  const html=makePocketEdition("<img src=x onerror=alert(1)> A song",0);
+  assert.match(html,/PRIVATE PRINT PROOF/);
+  assert.match(html,/@page\{size:6in 9in/);
+  assert.match(html,/&lt;img src=x/);
+  assert.doesNotMatch(html,/<img|<script/);
+  assert.match(html,/ADMISSION PENDING/);
+  assert.equal(html,makePocketEdition("<img src=x onerror=alert(1)> A song",0));
 });
