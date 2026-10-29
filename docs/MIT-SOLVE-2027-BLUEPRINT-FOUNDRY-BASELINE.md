@@ -113,6 +113,20 @@ Do not claim generated jobs, solved homelessness, operating relief distribution,
 9. **Measures of success** — real time, purchases, support burden, function success, accessibility, reproducibility.
 10. **Ask MIT** — technical rigor, research collaborators, physical test instrumentation, safety evaluation, evaluation design and pilot introductions with consent.
 
+## Recovered optional successor — RECURSIVE-WORKSHOP-001
+
+[Inspect the source-informed next-hands workshop route](../bridge/mit-solve/growth.html) and [the technical/field proof boundary](./RECURSIVE-WORKSHOP-001.md).
+
+We rediscovered an **earlier, actually executable** experimental print-shop stack: STATIC OS signed source CAD → native PrusaSlicer G-code [#61](https://github.com/the-static-collective/static-os/pull/61), machine-selection proposals [#66](https://github.com/the-static-collective/static-os/pull/66), GHoT printer capability/held native composition [#105](https://github.com/the-static-collective/GHoT/pull/105), reLATTE simulated independently signed owner HOLDs [#87](https://github.com/the-static-collective/reLATTE/pull/87), synthetic Robot Garden inspection [#68](https://github.com/the-static-collective/static-os/pull/68), and a PENNY manual printer-evidence tool [#21](https://github.com/the-static-collective/Jubilee-treasury/pull/21). The source PRs remain experimental; none performed a physical print or a built robotic arm.
+
+A future Suitcase could request a **new bounded capability**: print a housing, jig or gripper-shell candidate, supply missing nonprintable motors/electronics/bearings, assemble with qualified human oversight, inspect actual fit/function and preserve a reproducibility packet. An arm/body is not printed in entirety by an ordinary FFF machine, and no motor command or machine authorization follows from this plan.
+
+The new offline `capability-growth.mjs` returns SHA-256 integrity-addressed, HOLD-only cards for `arm`, `body`, `printer` and low-risk public-safe `outreach` fixture, with explicit off-the-shelf parts, required tests and all real-world execution/authorization flags false. This is a **new proposal compositor**, *not* an invocation of the original printer organs or a verified integrated build. It permits an actual first physical pilot only with independent owner authorization, machine-specific safety review and measured physical witness. Preserve the present MIT narrow scope: first prove a basic offline computer/phone/router node; optional print-shop extension is a later test.
+
+The Voqal/Still Here application shares only the future **accessible print/paper invitation kit and independently reusable method**, not autonomous robotics, survivor data processing or fabricated safeguarding. It remains an independently governed human first-contact experiment.
+
+**PRINTABLE GEOMETRY != FABRICATED PART · PRINTED PART != FUNCTIONAL ROBOT · FUNCTIONAL ROBOT != REPRODUCIBLE BLUEPRINT · PROCESS RECEIPT != COMMUNITY BENEFIT.**
+
 ## Specific unresolved proof and application gates
 
 - [ ] Record the user's actual available equipment and independently observed capabilities; current physical tests are **not yet verified**.
