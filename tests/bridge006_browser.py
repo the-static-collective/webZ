@@ -37,6 +37,10 @@ try:
         assert record["commonsCircuit"]["claimedHosts"]==0
         assert record["commonsCircuit"]["applicationSubmitted"] is False
         assert len(record["commonsCircuit"]["weekly"])==4
+        assert record["commonsCircuit"]["finale"]["initialSeedUSD"]==5000
+        assert record["commonsCircuit"]["finale"]["venueBooked"] is False
+        assert record["commonsCircuit"]["finale"]["voqalInvitationsSent"] is False
+        assert record["commonsCircuit"]["finale"]["fullyFinanced"] is False
         assert all(url.startswith(f"http://127.0.0.1:{server.server_port}/bridge/") for url in requests),requests
         assert not errors,errors
         print(json.dumps({"schema":"bridge006-browser-proof/v1","drafts":2,"funding":30000,
