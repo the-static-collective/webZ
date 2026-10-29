@@ -80,3 +80,13 @@ test('independent lemonPRESS native receiver passing evidence is included with n
  assert.ok(p.includes('not publication'));
  assert.ok(d.includes('press-refused/'));
 });
+
+test('all source-owned culture-to-economic return claims link successful native evidence',()=>{
+ const h=read('bridge/harmony/craft.html'),p=read('bridge/harmony/pitch.mjs');
+ const d=read('docs/HARMONY-MATTER-IDEA-CRAFT-004.md');
+ for(const run of ['40869577086','40870169565']){
+  assert.ok(h.includes(run));assert.ok(p.includes(run));assert.ok(d.includes(run));
+ }
+ assert.ok(p.includes('No real authenticated participant'));
+ assert.ok(d.includes('Authenticated real human Deeds remain 0'));
+});
