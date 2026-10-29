@@ -1,5 +1,6 @@
 import {HARMONY_CATALOG as H} from './catalog.mjs';
 import {composeCulturePresentation} from './culture-presentation.mjs';
+import {composeCulturalSeed} from './culture-seed.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 const p=(parent,tag,text,cls)=>{const x=el(tag,text,cls);parent.append(x);return x;};
@@ -32,6 +33,10 @@ function build(data){
   title(s,'04 / MAKE IT MEAN SOMETHING','An act can develop a cultural life.',scene.example);
   const g=p(s,'div',undefined,'grid');[['FIELD','A choice, invitation or activity that actually happens.'],['STUDIO',scene.art],['CIRCULATION','People choose whether to listen, read, remix, teach, perform or carry it.'],['MEMORY','The source, approvals, changes and open questions remain retrievable.']].forEach(([h,t])=>{const c=p(g,'article',undefined,'card');p(c,'h3',h);p(c,'p',t)});
   p(s,'p','Media is not decoration added after impact. Songs, image, story, ritual and repeated shared practices can be how cultures travel.','lead');
+  const field=p(s,'div',undefined,'seed-box');p(field,'label','One optional public-safe idea to express (never upload):').htmlFor='culture-topic';
+  const input=p(field,'textarea');input.id='culture-topic';input.rows=2;input.maxLength=240;input.placeholder='Describe a question or idea without private names, contact details or media content.';
+  const button=p(field,'button','Create 7-medium culture seed (.json)');button.id='culture-export';button.type='button';
+  p(field,'p','A genuine local brief, not a generated song, image, movie, comic, publication, event or world. Each receiving tool still needs its own source rights and review.','small');
  }));
  const showStage=(stage,code,headline)=>created.push(slide(headline,s=>{
   const st=stages.find(x=>x.id===stage);title(s,code+' / ONE PART OF THE ORGANISM',st.title,st.subtitle);
@@ -67,7 +72,10 @@ function show(id){active=id;const data=composeCulturePresentation(id);lastData=d
 $('audience').addEventListener('change',e=>show(e.target.value));
 $('previous').addEventListener('click',()=>view(page-1));$('next').addEventListener('click',()=>view(page+1));
 document.addEventListener('keydown',e=>{if(e.target.matches('select,button,input,textarea'))return;if(e.key==='ArrowRight')view(page+1);if(e.key==='ArrowLeft')view(page-1);});
+function saveJson(filename,content){const blob=new Blob([JSON.stringify(content,null,2)+'\n'],{type:'application/json'});
+ const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('print').addEventListener('click',()=>window.print());
+$('pages').addEventListener('click',e=>{if(e.target?.id==='culture-export')saveJson('harmony-culture-seed-'+active+'.json',composeCulturalSeed(active,$('culture-topic').value));});
 $('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(lastData,null,2)+'\n'],{type:'application/json'});
  const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='harmony-whole-constellation-'+active+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });

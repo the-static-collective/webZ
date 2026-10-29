@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {CULTURE_CONSTELLATION as C,CULTURE_SCENES as S} from '../bridge/harmony/culture.mjs';
 import {composeCulturePresentation,cultureIndex,getCultureOrgan} from '../bridge/harmony/culture-presentation.mjs';
+import {composeCulturalSeed} from '../bridge/harmony/culture-seed.mjs';
 import {HARMONY_CATALOG as H} from '../bridge/harmony/catalog.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 test('every existing mission profile receives a coherent 8-stage source-backed presentation',()=>{
@@ -55,4 +56,24 @@ test('public presentation builds from independent static source and sends no con
  assert.ok(read('bridge/harmony/index.html').includes('./presentation.html'));
  assert.ok(read('apps/index.html').includes('./bridge/harmony/presentation.html'));
  assert.ok(read('apps/build.mjs').includes("cpSync(join(root,'../bridge'),join(out,'bridge'),{recursive:true});"));
+});
+
+test('one source question can produce seven separately held cross-medium proposals without fabricating media',()=>{
+ for(const profile of H.profiles){
+  const seed=composeCulturalSeed(profile.id);
+  assert.equal(seed.schema,'abundent.culture-seed/v1');
+  assert.equal(seed.expressions.length,7);
+  assert.equal(seed.classification,'LOCAL_BRIEF_ONLY_NOT_GENERATED');
+  assert.equal(seed.institutionalAffiliation,'NONE_VERIFIED');
+  assert.equal(seed.fieldOutcome,'NOT_VERIFIED');
+  assert.ok(seed.expressions.every(e=>e.generated===false&&e.accepted===false&&e.possibleInstruments.length>=1));
+  assert.ok(seed.expressions.flatMap(e=>e.possibleInstruments).some(x=>x.id==='toaster'));
+  assert.ok(seed.expressions.flatMap(e=>e.possibleInstruments).some(x=>x.id==='manga'));
+ }
+ const custom=composeCulturalSeed('food','A neighborhood supper becomes a freely adapted pattern');
+ assert.equal(custom.source.type,'OPERATOR_ENTERED_UNVERIFIED');
+ assert.equal(custom.expressions[0].question,custom.source.question);
+ assert.throws(()=>composeCulturalSeed('food','x'.repeat(241)),RangeError);
+ assert.ok(read('bridge/harmony/pitch.mjs').includes('culture-export'));
+ assert.ok(!read('bridge/harmony/culture-seed.mjs').includes('fetch('));
 });
