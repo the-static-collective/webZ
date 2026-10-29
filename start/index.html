@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132b26">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Start with a goal · Abundent</title>
+  <meta name="description" content="A simple first step: tell Abundent what you want to accomplish and prepare a private, reviewable work card.">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main</a>
+  <header class="top">
+    <a class="brand" href="../">Abundent <span> / a doorway to useful work</span></a>
+    <span class="badge">NO ACCOUNT · LOCAL DRAFT</span>
+  </header>
+  <main id="main" class="wrap">
+    <div class="eyebrow">START HERE / THE FIRST INCH</div>
+    <h1>What are you trying<br>to accomplish?</h1>
+    <p class="lead">We connect what people have with what people need, and help turn that connection into something real.</p>
+
+    <form id="work-form" novalidate>
+      <label for="goal">Describe the goal in plain language.</label>
+      <textarea id="goal" rows="4" minlength="10" maxlength="600" required placeholder="I want to help my community with…"></textarea>
+      <details class="optional">
+        <summary>Anything else? <span>Optional</span></summary>
+        <label for="kind">What kind of work is it?</label>
+        <select id="kind">
+          <option value="other">Something else / not sure</option>
+          <option value="community">Community need or event</option>
+          <option value="creative">Creative work or a tool</option>
+        </select>
+        <label for="have">What do you already have?</label>
+        <textarea id="have" rows="2" maxlength="400" placeholder="Space, people, materials, time, an idea…"></textarea>
+        <label for="needs">What's missing or uncertain?</label>
+        <textarea id="needs" rows="2" maxlength="400" placeholder="Permission, a partner, materials…"></textarea>
+      </details>
+      <button class="primary" type="submit">Make a first-step card <span aria-hidden="true">↗</span></button>
+      <p id="form-message" class="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <section id="result" class="result" aria-labelledby="result-heading" hidden>
+      <div class="eyebrow">YOUR NEXT SMALL STEP / DRAFT ONLY</div>
+      <h2 id="result-heading">A place to begin.</h2>
+      <p>Review this suggestion. Nothing was sent, stored, verified, approved or carried out.</p>
+      <pre id="card-preview" tabindex="0"></pre>
+      <div class="buttons">
+        <button type="button" id="copy">Copy card</button>
+        <button type="button" id="save">Save text</button>
+        <a id="email" href="mailto:us@abundent.org">Open an email draft</a>
+        <button type="button" id="print">Print</button>
+      </div>
+      <p id="card-message" class="message" role="status" aria-live="polite"></p>
+      <p class="fine">Email opens your own mail app with a draft for review. You choose whether to send it.</p>
+    </section>
+
+    <details class="why">
+      <summary>What is Abundent building?</summary>
+      <p>Shared, open-source tools for people and organizations who need to turn ideas and resources into useful work. Our first audience is independent organizers, community groups, churches, nonprofits and makers. We connect existing tools and AI models; we are not training a new language model on reviews.</p>
+      <p>This page is an intentionally small, rules-based first step. It does not call an LLM or find real partners yet. Those steps need evidence and human permission.</p>
+    </details>
+  </main>
+  <footer>PEOPLE DECIDE. SUGGESTIONS ARE NOT PERMISSION. <a href="../">Explore webZ</a></footer>
+</body>
+</html>
