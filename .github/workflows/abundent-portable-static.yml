@@ -47,6 +47,8 @@ jobs:
       - name: Validate publish tree
         run: |
           set -eu
+          test -f apps/dist/use/index.html
+          test -f apps/dist/use/style.css
           test -f apps/dist/index.html
           test -f apps/dist/main.mjs
           test -f apps/dist/manifest.mjs
