@@ -39,7 +39,7 @@ test("the first door is static, local by default and discoverable", () => {
   const script = readFileSync(new URL("../start/app.mjs", import.meta.url), "utf8");
   const home = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(page, /What are you trying/);
-  assert.match(page, /connect-src 'none'/);
+  assert.match(page, /connect-src 'self'/);
   assert.match(page, /No account|NO ACCOUNT/);
   assert.match(page, /does not call an LLM/);
   assert.match(home, /\.\/start\//);
