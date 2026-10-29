@@ -42,6 +42,14 @@
       <button type="button" id="zine-download">Download your printable pocket book (.html)</button>
       <button type="button" id="press-handoff">Export lemonPRESS preparation manifest (.json)</button>
       <button type="button" id="playdeck-handoff">Prepare a PlayDeck video job (.json)</button>
+      <div class="film-panel">
+        <label for="film-seconds">Approximate song length (seconds)</label>
+        <input id="film-seconds" type="number" min="10" max="3600" step="1" value="160"
+          aria-describedby="film-explanation">
+        <button type="button" id="film-recipe-download">Make a music-film scene recipe (.json)</button>
+        <p id="film-explanation" class="fine">A six-scene plan for the new offline film renderer. The song stays on your device. This saves a recipe, <strong>not</strong> a finished video; run it with your own music on a computer.</p>
+        <a class="tool-link" href="https://github.com/the-static-collective/webZ/tree/experiment/timeback-film-grammar-001/tools/timeback-film" target="_blank" rel="noopener noreferrer">View the source and original Metal Roof Morning film recipe ↗</a>
+      </div>
     </div>
     <p class="fine">The book packet uses lemonPRESS's original <strong>forming / pending</strong> manifest schema; it is not an admitted or published book. The PlayDeck packet requires your own authorized images and audio plus a separately installed original PlayDeck CLI; it is not an MP4.</p>
     <a class="tool-link" href="https://github.com/the-static-collective/playdeck/blob/a7cf718421e767fd382a01894063c3eeba3d2930/packages/cli/README.md" target="_blank" rel="noopener noreferrer">PlayDeck's real command-line instructions ↗</a>
