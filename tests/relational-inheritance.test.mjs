@@ -2,7 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {createRelationalInheritanceProof,verifyRelationalInheritanceProof,PATTERN} from "../bridge/first/relational-inheritance.mjs";
 import {verify} from "../bridge/suitcase/protocol.mjs";
-import {readFileSync} from "node:fs";
+import {readFileSync,writeFileSync,mkdtempSync,rmSync} from "node:fs";
+import {execFileSync} from "node:child_process";
+import {tmpdir} from "node:os";
+import {join} from "node:path";
 let specimen;
 async function sample(){return specimen??=(await createRelationalInheritanceProof());}
 const change=(value)=>structuredClone(value);
@@ -59,4 +62,21 @@ test("RDL is an explicitly independent influence, not a collaborator, and this h
  assert.match(doc,/No real human belonging is proven/i);
  const model=readFileSync(new URL("../bridge/first/model.mjs",import.meta.url),"utf8");
  assert.match(model,/APPLICATION_NOT_SUBMITTED/);
+});
+
+test("cold proof CLI rebuilds separately, refuses overwrite, and detects forged on-disk packets",()=>{
+ const root=mkdtempSync(join(tmpdir(),"relational-inheritance-"));
+ const target=join(root,"public-example.json");
+ const cli=new URL("../scripts/relational-inheritance.mjs",import.meta.url).pathname;
+ try{
+  const built=JSON.parse(execFileSync(process.execPath,[cli,"build",target],{encoding:"utf8"}));
+  assert.equal(built.review.disposition,"SOFTWARE_CRYPTOGRAPHIC_BOUNDARY_VERIFIED_ONLY");
+  const checked=JSON.parse(execFileSync(process.execPath,[cli,"verify",target],{encoding:"utf8"}));
+  assert.equal(checked.signedPacketsVerified,11);
+  assert.throws(()=>execFileSync(process.execPath,[cli,"build",target],{encoding:"utf8",stdio:"pipe"}),/Command failed/);
+  const original=JSON.parse(readFileSync(target,"utf8"));
+  original.packets.seedAB.payload.body.message+=" MALEVOLENT";
+  writeFileSync(target,JSON.stringify(original));
+  assert.throws(()=>execFileSync(process.execPath,[cli,"verify",target],{encoding:"utf8",stdio:"pipe"}),/Command failed/);
+ }finally{rmSync(root,{recursive:true,force:true});}
 });
