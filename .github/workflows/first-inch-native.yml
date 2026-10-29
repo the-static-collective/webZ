@@ -1,0 +1,62 @@
+name: FIRST-INCH native Dogram + Haunted Toaster witnesses
+on:
+  pull_request:
+    paths:
+      - "start/**"
+      - "tools/first-inch-native-*.mjs"
+      - "tests/first-inch-*.test.mjs"
+      - ".github/workflows/first-inch-native.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout webZ PR exactly
+        uses: actions/checkout@v4
+        with:
+          path: webz
+          persist-credentials: false
+      - name: Checkout original Dogram at exact read-only source commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/Dogram
+          ref: 551b5f9df18f17ec69b452ddcdff01718e0ff771
+          path: dogram
+          persist-credentials: false
+      - name: Checkout original Haunted Toaster at exact read-only source commit
+        uses: actions/checkout@v4
+        with:
+          repository: the-static-collective/the-haunted-toaster
+          ref: 3652c2a96b6b287cda316d1c92daadf7c7417eaf
+          path: toaster
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify local planning and source-pointer contracts
+        working-directory: webz
+        run: node --test tests/first-inch-ecology.test.mjs tests/first-inch-source.test.mjs
+      - name: Execute actual pinned Dogram ablate@1 and actual pinned Toaster move-deck
+        working-directory: webz
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p native-evidence
+          node tools/first-inch-native-dogram.mjs --dogram ../dogram > native-evidence/dogram.json
+          node tools/first-inch-native-toaster.mjs --toaster ../toaster > native-evidence/toaster.json
+          cat native-evidence/dogram.json
+          cat native-evidence/toaster.json
+      - name: Preserve fictional replay witnesses
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-inch-native-source-witnesses
+          path: webz/native-evidence/
+          if-no-files-found: error
