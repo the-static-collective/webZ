@@ -170,5 +170,49 @@
       "retained repair/recovery capability",
       "second independent build success"
     ]
+  },
+  "recursive_workshop_candidate": {
+    "id": "RECURSIVE-WORKSHOP-001",
+    "status": "UNMERGED_HELD_SOURCE_INFORMED_COMPOSITION_NOT_PHYSICAL_PROTOTYPE",
+    "page": "./growth.html",
+    "doc": "../../docs/RECURSIVE-WORKSHOP-001.md",
+    "initial_goal": "ONE_LOW_CONSEQUENCE_FFF_MOUNTING_FIXTURE_AFTER_BASIC_SUITCASE_NODE",
+    "proposed_next_capabilities": [
+      "arm_shell_or_bracket",
+      "modular_body_or_case",
+      "printer_fixture",
+      "public_safe_display_fixture"
+    ],
+    "physical_part_printed": false,
+    "printer_connected": false,
+    "autonomous_3d_printing": false,
+    "robot_operating": false,
+    "independent_physical_inspection": false,
+    "independent_repeatability_verified": false,
+    "machine_owner_authenticated": false,
+    "survivor_intake": false,
+    "sources": [
+      {
+        "owner": "STATIC OS",
+        "url": "https://github.com/the-static-collective/static-os/pull/61",
+        "proof": "native CAD / real G-code software only"
+      },
+      {
+        "owner": "GHoT × Static OS × reLATTE",
+        "url": "https://github.com/the-static-collective/GHoT/pull/105",
+        "proof": "source-pinned native composition and simulated owner HOLD"
+      },
+      {
+        "owner": "STATIC OS Robot Garden",
+        "url": "https://github.com/the-static-collective/static-os/pull/68",
+        "proof": "synthetic image inspection"
+      },
+      {
+        "owner": "PENNY",
+        "url": "https://github.com/the-static-collective/Jubilee-treasury/pull/21",
+        "proof": "manual physical-evidence capture tool; synthetic CI"
+      }
+    ],
+    "boundary": "A G-code packet is not a physical part; a printed bracket is not a robot; safety, ownership, real custody, field outcomes and a second reproduction remain independently gated."
   }
 }
