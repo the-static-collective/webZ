@@ -1,0 +1,22 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+test("Nourish first door stays static, noncollecting, explicitly not an active child-feeding service",()=>{
+ const html=readFileSync(new URL("../bridge/first/nourish-kids.html",import.meta.url),"utf8");
+ const doc=readFileSync(new URL("../docs/VOQAL-NOURISH-KIDS-FIRST-DOOR-016.md",import.meta.url),"utf8");
+ const script=readFileSync(new URL("../scripts/voqal-nourish-native.mjs",import.meta.url),"utf8");
+ assert.match(html,/connect-src 'none'/);
+ assert.match(html,/script-src 'none'/);
+ assert.doesNotMatch(html,/<form\b|<input\b|<textarea\b|localStorage|sessionStorage/i);
+ assert.match(html,/No children enrolled/);
+ assert.match(doc,/not a new funded organization/i);
+ assert.match(doc,/no actual child-feeding program/i);
+ assert.match(doc,/independently confirmed real outcome/);
+ assert.match(doc,/669d9750d62c670cfd3894fcffe367af83e85374/);
+ assert.match(script,/load\("src\/fulfillment\/evaluate\.ts"\)/);
+ assert.match(script,/createFulfillmentEnvelopeV0/);
+ assert.match(script,/envelope.status,"unmet"/);
+ assert.match(script,/unknown.id/);
+ assert.match(script,/childrenFed:0/);
+ assert.match(script,/network:false/);
+});
