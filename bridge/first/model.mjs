@@ -23,6 +23,8 @@ export function budgetTotal(){return TOTAL}
 export const SOURCES=Object.freeze([
  {title:"Voqal program and deadline",href:PROSPECTS[0].source},
  {title:"Voqal 2027 — candidate First Circle Foundry, source-linked strategy",href:"https://github.com/the-static-collective/webZ/blob/proposal/voqal-first-circle-foundry-007/docs/VOQAL-FIRST-CIRCLE-FOUNDRY-007.md"},
+ {title:"Voqal 011 — Road Nights, Courthouse Park rehearsal and station-based October festival fork proposals",href:"https://github.com/the-static-collective/webZ/blob/proposal/festival-fork-network-011/docs/FESTIVAL-FORK-NETWORK-011.md"},
+ {title:"Courthouse Park Waseca County official pavilion and camping information",href:"https://www.wasecacounty.gov/589/Courthouse-Park-Waseca-County-Park"},
  {title:"Voqal 010 — conditional Harmony Park family festival and current 30k review budget",href:"https://github.com/the-static-collective/webZ/blob/proposal/harmony-park-grand-finale-010/docs/VOQAL-HARMONY-PARK-FINALE-010.md"},
  {title:"Harmony Park official venue, stages, family amenities and booking inquiry",href:"https://harmonypark.com/contact/"},
  {title:"Harmony Family Campout 2027 existing independently organized all-ages event",href:"https://www.eventbrite.com/e/harmony-family-campout-2027-tickets-1998551837345"},
