@@ -44,5 +44,5 @@ test("page is static and local: no remote scripts, fetch, storage, sent buttons 
  assert.doesNotMatch(page,/<form[^>]+action=/);
  assert.doesNotMatch(ui,/\bfetch\s*\(|localStorage|sessionStorage|indexedDB|\.send\s*\(/);
  assert.match(ui,/textContent/);assert.match(ui,/window\.print/);
- assert.match(page,/../suitcase/);assert.match(page,/../outbox/);
+ assert.ok(page.includes("../suitcase/"));assert.ok(page.includes("../outbox/"));
 });
