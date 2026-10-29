@@ -32,6 +32,26 @@ try:
             page.locator("#save").click()
         data=pathlib.Path(download.value.path()).read_text()
         assert topic in data and "No real-world event" in data
+        # Export original-source-compatible preparation contracts only after human choice.
+        page.locator(".creative-door summary").click()
+        with page.expect_download() as press_dl:
+            page.locator("#press-handoff").click()
+        press=json.loads(pathlib.Path(press_dl.value.path()).read_text())
+        assert press["lane"]=="lemonpress"
+        assert press["owner"]["repo"]=="the-static-collective/lemonPRESS"
+        assert press["nativeContract"]["status"]=="forming"
+        assert press["nativeContract"]["admission"]["state"]=="pending"
+        assert press["safety"]["networkSent"] is False
+        with page.expect_download() as deck_dl:
+            page.locator("#playdeck-handoff").click()
+        deck=json.loads(pathlib.Path(deck_dl.value.path()).read_text())
+        assert deck["lane"]=="playdeck"
+        assert deck["owner"]["repo"]=="the-static-collective/playdeck"
+        assert deck["nativeContract"]["renderedVideo"] is False
+        assert deck["nativeContract"]["execution"].startswith("ONLY_BY_EXPLICIT")
+        assert deck["createdFrom"]["artifact"]==first
+        expect(page.locator("#handoff-status")).to_contain_text("Nothing was sent")
+
         page.locator("#advance").click()
         expect(page.locator("#progress")).to_have_text("CARD 2 OF 3")
         assert "permission" in page.locator("#artifact").inner_text()
