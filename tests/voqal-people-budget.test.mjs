@@ -6,9 +6,10 @@ test("budget, contact stages and independent relationship boundaries",()=>{
  assert.equal(TOTAL_USD,30000);
  assert(DESCRIPTION_750.length<=750);
  assert.match(DESCRIPTION_750,/Coalition of Care core team/);
- assert.match(DESCRIPTION_750,/Participation, faith and music are optional/);
- assert.match(DESCRIPTION_750,/my daughter can inherit and enjoy living in/);
- assert.match(DESCRIPTION_750,/none has endorsed this project/);
+ assert.match(DESCRIPTION_750,/Nourish Kids/);
+ assert.match(DESCRIPTION_750,/No child data is required/);
+ assert.match(DESCRIPTION_750,/my daughter—and other children—can inherit and enjoy/);
+ assert.match(DESCRIPTION_750,/none has endorsed this proposal/);
  assert.equal(BUDGET.length,11);
  assert.equal(PROSPECTS.length,9);
  assert(BUDGET.every(x=>x.count>0&&x.unitUsd>=0&&x.amountUsd===x.count*x.unitUsd));
@@ -28,6 +29,8 @@ test("applicant draft uses the exact short answer and keeps origin as self-repor
  assert.match(doc,/not institutional endorsement or committed partners/);
  assert.match(doc,/I.m a dad before I.m a technologist/);
  assert.match(doc,/Participation in music or faith is optional/);
+ assert.match(doc,/The practical first doorway: Nourish Kids/);
+ assert.match(doc,/only caregiver-approved confirmation/);
  assert.match(doc,/Applicant review and privacy boundaries/);
  assert.match(doc,/NOT SUBMITTED/);
 });

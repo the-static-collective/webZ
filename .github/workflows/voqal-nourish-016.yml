@@ -1,0 +1,36 @@
+name: VOQAL-016 Nourish Kids native first dinner (synthetic)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/voqal-nourish-native.mjs
+      - tests/voqal-nourish-first-door.test.mjs
+      - bridge/first/nourish-kids.html
+      - docs/VOQAL-NOURISH-KIDS-FIRST-DOOR-016.md
+      - .github/workflows/voqal-nourish-016.yml
+jobs:
+  source-native:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: WebZ local contract and privacy tests
+        run: node --test tests/voqal-nourish-first-door.test.mjs tests/voqal-people-budget.test.mjs
+      - name: Clone original Nourish Kids and pin head
+        run: |
+          git clone --quiet https://github.com/the-static-collective/Nourish-Kids.git /tmp/nourish-kids
+          git -C /tmp/nourish-kids checkout --quiet --detach 669d9750d62c670cfd3894fcffe367af83e85374
+          test "$(git -C /tmp/nourish-kids rev-parse HEAD)" = "669d9750d62c670cfd3894fcffe367af83e85374"
+      - name: Actually execute original Nourish recipe and envelope code
+        run: |
+          node --experimental-strip-types scripts/voqal-nourish-native.mjs /tmp/nourish-kids > /tmp/nourish-016-synthetic.json
+          node --input-type=module -e 'import fs from "node:fs"; const x=JSON.parse(fs.readFileSync("/tmp/nourish-016-synthetic.json","utf8")); if(x.field.childrenFed!==0||x.heldEnvelope.requirements.length!==1||x.heldEnvelope.status!=="unmet"||x.effects.foodDispatch)process.exit(1)'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VOQAL-016-SYNTHETIC-Nourish-native-receipt
+          path: /tmp/nourish-016-synthetic.json
+          retention-days: 7
