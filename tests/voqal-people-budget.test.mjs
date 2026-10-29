@@ -1,2 +1,31 @@
-import test from "node:test";import assert from "node:assert/strict";import {BUDGET,TOTAL_USD,DESCRIPTION_750,PROSPECTS,packet} from "../bridge/first/voqal-people-budget.mjs";
-test("budget and portable application boundaries",()=>{assert.equal(TOTAL_USD,30000);assert(DESCRIPTION_750.length<=750);assert.equal(BUDGET.length,11);assert.equal(PROSPECTS.length,9);assert(BUDGET.every(x=>x.count>0&&x.unitUsd>=0&&x.amountUsd===x.count*x.unitUsd));assert(PROSPECTS.every(p=>p.accessFeeUsd===0&&p.status==="UNINVITED_UNCONFIRMED"&&p.source.startsWith("https://")));const p=packet();assert.equal(p.amountUsd,30000);assert.equal(p.voqalSubmitted,false);assert.equal(p.realPeopleApproachedByThisTool,0);});
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {BUDGET,TOTAL_USD,DESCRIPTION_750,PROSPECTS,packet} from "../bridge/first/voqal-people-budget.mjs";
+test("budget, contact stages and independent relationship boundaries",()=>{
+ assert.equal(TOTAL_USD,30000);
+ assert(DESCRIPTION_750.length<=750);
+ assert.match(DESCRIPTION_750,/Coalition of Care core team/);
+ assert.match(DESCRIPTION_750,/Music is an optional invitation/);
+ assert.match(DESCRIPTION_750,/none has endorsed this project/);
+ assert.equal(BUDGET.length,11);
+ assert.equal(PROSPECTS.length,9);
+ assert(BUDGET.every(x=>x.count>0&&x.unitUsd>=0&&x.amountUsd===x.count*x.unitUsd));
+ assert(PROSPECTS.every(p=>p.accessFeeUsd===0&&p.status==="UNINVITED_UNCONFIRMED"&&p.source.startsWith("https://")));
+ assert.equal(PROSPECTS.filter(p=>p.relationshipStage==="MET_IN_PERSON_USER_REPORTED").length,5);
+ assert.equal(PROSPECTS.filter(p=>p.relationshipStage==="RESEARCHED_NO_MEETING_CLAIM").length,4);
+ const p=packet();
+ assert.equal(p.amountUsd,30000);
+ assert.equal(p.voqalSubmitted,false);
+ assert.equal(p.realPeopleApproachedByThisTool,0);
+ assert.equal(p.agreements,0);
+});
+test("applicant draft uses the exact short answer and keeps origin as self-report",()=>{
+ const doc=readFileSync(new URL("../docs/VOQAL-APPLICATION-COPY-015.md",import.meta.url),"utf8");
+ assert(doc.includes(DESCRIPTION_750));
+ assert.match(doc,/core team/);
+ assert.match(doc,/not commitments by their organizations/);
+ assert.match(doc,/Music is an optional/);
+ assert.match(doc,/Applicant must review/);
+ assert.match(doc,/NOT SUBMITTED/);
+});
