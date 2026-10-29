@@ -1,14 +1,15 @@
 {
   "schema": "abundent/mit-solve-door-v1",
-  "version": "2026-10-29.1",
-  "id": "BRIDGE-MIT-001",
+  "version": "2026-10-29.2",
+  "id": "BRIDGE-MIT-002",
   "solution": {
     "name": "Living Suitcase",
     "owner_label": "The Static Collective / Abundent",
     "organizational_status": "UNCONFIRMED_BY_PUBLIC_DOOR",
-    "scope": "Portable, locally governed community organization and coordination toolkit",
+    "scope": "Reproducible, independently governed community capability blueprints from reclaimed hardware, with consent-based coordination and offline-first deployment",
     "sector": "Economic Prosperity",
-    "initial_question": "Can locally governed rural groups complete and independently review one resource handoff with less administrative burden?"
+    "initial_question": "Can one community document a functional low-cost offline computer node well enough for a second independent community to reproduce its capabilities with less expense and operator burden?",
+    "public_pitch": "A finished object is one useful thing. A tested blueprint helps another community make one of its own."
   },
   "opportunity": {
     "institution": "MIT Solve",
@@ -25,7 +26,7 @@
     "partner_count_verified": 0,
     "recipient_count_verified": 0,
     "public_profile_review_needed": true,
-    "stage_claim": "CANDIDATE_WORKING_BROWSER_PROTOTYPE_REVIEW_REQUIRED",
+    "stage_claim": "CONSTITUENT_WORKING_BROWSER_AND_READ_ONLY_PROTOTYPES_BLUEPRINT_FOUNDRY_CONCEPT_REVIEW_REQUIRED",
     "stage_gate": "Concept-stage projects are excluded from Global Challenge review; evidence of solution-level functioning prototype is needed."
   },
   "core_fabric": [
@@ -64,15 +65,44 @@
       "role": "proposed first non-sensitive food logistics test",
       "implementation": "PROSPECTIVE_NO_OPERATOR_OR_HUMAN_RESULT",
       "source": "https://github.com/the-static-collective/webZ/tree/main/bridge/locus"
+    },
+    {
+      "name": "GrO Mattercraft",
+      "role": "source-addressed physical object/local encounter, unverified 42-WOOD observed-39 candidate, held transformation",
+      "implementation": "UNMERGED_SYNTHETIC_HOLD_ENCOUNTER_NO_INVENTORY",
+      "source": "https://github.com/the-static-collective/GrO/pull/32"
+    },
+    {
+      "name": "Full Measure",
+      "role": "bounded real participation, separate human-witnessed deeds and local world consequences",
+      "implementation": "SEPARATE_PLAYABLE_PROTOTYPE_NO_BLUEPRINT_DEED",
+      "source": "https://github.com/the-static-collective/full-measure-world-layer"
+    },
+    {
+      "name": "PENNY / Jubilee Treasury",
+      "role": "typed custody, work and resource conservation with independent admission",
+      "implementation": "SEPARATE_SYNTHETIC_RESOURCE_PROTOCOLS_NO_FINANCIAL_ISSUANCE",
+      "source": "https://github.com/the-static-collective/Jubilee-treasury"
+    },
+    {
+      "name": "TranchNode / Static Node",
+      "role": "generational source lineage and explicit build/verify receipts (software prototype)",
+      "implementation": "SOURCE_BUILD_EXPERIMENT_NOT_PHYSICAL_BLUEPRINT_VERIFICATION",
+      "source": "https://github.com/the-static-collective/tranchnode/pull/73"
     }
   ],
   "pilot": {
-    "setting": "rural food logistics",
+    "setting": "Two independent operators reproduce an offline local computer node from a documented reclaimed-hardware blueprint; food logistics is a downstream possible service pilot",
     "status": "PROPOSED_ONLY",
     "participants_authorized": 0,
     "first_table_observed": false,
     "completion_observed": false,
-    "reviewed_real_result": false
+    "reviewed_real_result": false,
+    "first_real_build_observed": false,
+    "blueprint_candidate_verification_observed": false,
+    "second_build_independent_verified": false,
+    "field_material_inventory_admitted": false,
+    "real_reward_delivered": false
   },
   "risk_policy": {
     "publishes_sensitive_people": false,
@@ -84,11 +114,61 @@
     "provenance_not_authority": true
   },
   "next_human_gates": [
-    "Reviewer verify genuine prototype stage and official deadline",
-    "Owner edits application in their own voice and approves public profile",
-    "Willing local steward and host approve a real bounded need",
-    "Independent human validates actual outcome",
-    "Applicant manually submits before deadline"
+    "Reviewer establishes whether the actual integrated proposed solution is Prototype rather than Concept for 2027 Global Challenge eligibility",
+    "User personally revises and authorizes application language, media and legal/organizational status",
+    "Owner makes a safe, redacted hardware inventory; no unattended or destructive installation",
+    "First operator completes physical local network and recovery tests with objective evidence",
+    "First operator documents a versioned blueprint and safety/compatibility constraints",
+    "Independent second operator repeats the declared functions on a separate build",
+    "Independent reviewer records successes, failures, costs, maintenance and rights limits",
+    "Separate local steward agrees to any later real food/resource distribution experiment",
+    "Applicant manually submits before confirmed deadline"
   ],
-  "supporting_page": "https://github.com/the-static-collective/webZ/blob/grant/mit-solve-2027-living-suitcase-door/docs/MIT-SOLVE-2027-LIVING-SUITCASE.md"
+  "supporting_page": "https://github.com/the-static-collective/webZ/blob/grant/mit-solve-2027-living-suitcase-door/docs/MIT-SOLVE-2027-BLUEPRINT-FOUNDRY-BASELINE.md",
+  "current_baseline": {
+    "id": "LIVING-SUITCASE-BLUEPRINT-FOUNDRY-002",
+    "label": "Living Suitcase / Mattercraft / Blueprint Foundry",
+    "state": "PRESENTATION_DRAFT_NOT_APPLIED_OR_SUBMITTED",
+    "source": "https://github.com/the-static-collective/webZ/blob/grant/mit-solve-2027-living-suitcase-door/docs/MIT-SOLVE-2027-BLUEPRINT-FOUNDRY-BASELINE.md",
+    "first_object": "Independently operated offline-capable local computer/phone/router node made from suitably verified reclaimed equipment",
+    "hypothesis": "Build instructions with exact parts, compatible substitutions, held evidence and independent retest may reduce setup cost and improve community-owned repairability",
+    "repeatability_evidence_status": "NO_INDEPENDENT_SECOND_BUILD",
+    "field_hardware_evidence_status": "NO_HUMAN_OBSERVED_FULL_PHYSICAL_BUILD",
+    "no_real_material_assets_issued": true,
+    "no_verified_blueprints": true,
+    "first_node_completed": false,
+    "second_independent_node_completed": false,
+    "prototype_eligibility_review_required": true,
+    "technical_steps": [
+      "notice owner-authorized physical parts",
+      "compose compatibility and local permission",
+      "assemble and test one particular object",
+      "capture exact build inputs, failures and bounded receipt",
+      "independent operator replicates exact functional requirements",
+      "separate stewardship review and local federation"
+    ],
+    "blueprint_gates": [
+      "PROPOSED_RECIPE",
+      "ONE_WORKING_BUILD_OBSERVED",
+      "BLUEPRINT_CANDIDATE",
+      "INDEPENDENT_SECOND_BUILD_RETESTED",
+      "FIELD_SUITABILITY_IN_CONTEXT_REVIEWED"
+    ],
+    "functions_to_test": [
+      "known-safe boot",
+      "offline local network",
+      "reboot/recovery",
+      "source/config checksum",
+      "part substitution compatibility",
+      "independent second operator reproduction"
+    ],
+    "impact_metrics": [
+      "actual cash component purchases",
+      "labor minutes and cost",
+      "successful offline operation",
+      "support and failure burden",
+      "retained repair/recovery capability",
+      "second independent build success"
+    ]
+  }
 }
