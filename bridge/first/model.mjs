@@ -23,7 +23,9 @@ export function budgetTotal(){return TOTAL}
 export const SOURCES=Object.freeze([
  {title:"Voqal program and deadline",href:PROSPECTS[0].source},
  {title:"Voqal 2027 — candidate First Circle Foundry, source-linked strategy",href:"https://github.com/the-static-collective/webZ/blob/proposal/voqal-first-circle-foundry-007/docs/VOQAL-FIRST-CIRCLE-FOUNDRY-007.md"},
- {title:"Voqal 009 — Commons Circuit in-person 30k budget and actual steward meeting plan",href:"https://github.com/the-static-collective/webZ/blob/proposal/voqal-commons-circuit-009/docs/VOQAL-COMMONS-CIRCUIT-009.md"},
+ {title:"Voqal 010 — conditional Harmony Park family festival and current 30k review budget",href:"https://github.com/the-static-collective/webZ/blob/proposal/harmony-park-grand-finale-010/docs/VOQAL-HARMONY-PARK-FINALE-010.md"},
+ {title:"Harmony Park official venue, stages, family amenities and booking inquiry",href:"https://harmonypark.com/contact/"},
+ {title:"Harmony Family Campout 2027 existing independently organized all-ages event",href:"https://www.eventbrite.com/e/harmony-family-campout-2027-tickets-1998551837345"},
  {title:"Official fellowship application guide and character caps",href:PROSPECTS[0].guide},
  {title:"WANSC choice food shelf, hours and official contact",href:PROSPECTS[1].source},
  {title:"WANSC reported food-purchasing pressure (historical, not inventory)",href:PROSPECTS[1].context},
@@ -40,6 +42,7 @@ export const FOUNDER_GATES=Object.freeze([
  "Verify availability for Voqal's three required in-person convenings.",
  "Approve or reject this revised systemic framing, and personally verify all lived experience, community ties, coaching history, and AI-use disclosure.",
  "Review the new full $30,000 Commons Circuit allocation: weekly tables, potluck chains, arts, optional festivals, steward meetings, paid co-facilitation, accessibility, founder fieldwork and event safety. Adjust unrestricted funds for actual living needs and permits.",
+ "The September 2027 Harmony Park full festival is an aspirational finale, not booked, priced, fully financed or promised: applicant must confirm venue/operator availability, producer, insurance, safety and any separate funding; invite Voqal independently only if real.",
  "Create or sign into your own Foundant application account via Voqal's official APPLY TODAY link.",
  "Submit through Voqal's actual portal before deadline and preserve a real confirmation in private custody.",
  "Ask WANSC the one question via its published contact route only after separate human review and approval.",

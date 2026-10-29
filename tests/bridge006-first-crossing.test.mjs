@@ -14,7 +14,7 @@ test("BRIDGE-006 has two real-source prospective doors and a truthful public sta
 });
 test("working award draft totals $30,000 with no pre-claimed spending",()=>{
  assert.equal(budgetTotal(),30000);
- assert.equal(ALLOCATION.length,9);
+ assert.equal(ALLOCATION.length,10);
  assert.ok(FOUNDER_GATES.length>=8);
 });
 test("drafts are copyable and within official character limits, never pre-populated with personal identity",()=>{
@@ -25,9 +25,9 @@ test("drafts are copyable and within official character limits, never pre-popula
  }
  assert.match(DRAFTS[1].value,/one recurring step/i);
  assert.match(DRAFTS[1].value,/\[Sender: add your name/);
- assert.equal(SOURCES.length,7);
+ assert.equal(SOURCES.length,9);
  assert.match(DRAFTS[0].value,/First Circle Foundry/);
- assert.match(DRAFTS[0].value,/face-to-face relationships/);
+ assert.match(DRAFTS[0].value,/Harmony Park/);
  assert.ok(DRAFTS[0].value.length<=750);
 });
 test("new public route is copied by build, linked from Bridge, and cannot fetch or submit",()=>{

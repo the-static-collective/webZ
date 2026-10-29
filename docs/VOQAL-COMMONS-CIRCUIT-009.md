@@ -1,5 +1,8 @@
 # VOQAL-009 — THE COMMONS CIRCUIT / TABLE & ROAD
 
+**UPDATED FESTIVAL / BUDGET SCENARIO:** The applicant-unapproved [VOQAL-010 Harmony Park family finale](./VOQAL-HARMONY-PARK-FINALE-010.md) revises this earlier budget: **one rehearsal mini-festival, up to one second only with separate resources, and a conditional full-scale family festival at Harmony Park in September 2027.** It reserves **$5,000 only as a planning seed**, **not** as the total cost of producing a full festival. The prior 009 two-mini-festival figures below are preserved as superseded history and should not be presented as the current application budget. No venue, festival producer, quote, date or Voqal guests have been confirmed.
+
+
 **October 29, 2026 · new applicant-review-only direction · NO REAL EVENTS, GRANTS, PARTNERSHIPS, RECRUITMENT, SUBMISSION OR OUTREACH AUTHORIZED BY THIS DOCUMENT.** The private applicant draft v6 remains separate and unchanged.
 
 ## The critical change
