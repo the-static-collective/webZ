@@ -28,6 +28,6 @@ test("applicant draft uses the exact short answer and keeps origin as self-repor
  assert.match(doc,/not institutional endorsement or committed partners/);
  assert.match(doc,/I.m a dad before I.m a technologist/);
  assert.match(doc,/Participation in music or faith is optional/);
- assert.match(doc,/Applicant must review/);
+ assert.match(doc,/Applicant review and privacy boundaries/);
  assert.match(doc,/NOT SUBMITTED/);
 });
