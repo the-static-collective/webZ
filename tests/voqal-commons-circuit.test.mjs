@@ -51,7 +51,7 @@ test("Plan describes real relation formation, not a fake calendar or partner gra
 test("Public doorway makes human-first work and distinct safeguarding clear, without intake",()=>{
  const page=readFileSync(new URL("../bridge/first/index.html",import.meta.url),"utf8");
  const doc=readFileSync(new URL("../docs/VOQAL-COMMONS-CIRCUIT-009.md",import.meta.url),"utf8");
- assert.match(page,/weekly.*table/i);
+ assert.match(page,/one open community table plus one legitimate resource-steward listening meeting every week/i);
  assert.match(page,/one legitimate resource-steward listening meeting/i);
  assert.match(page,/NOT SUBMITTED/);
  assert.match(page,/no confirmed hosts, partners, festivals/i);
