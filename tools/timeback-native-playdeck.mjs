@@ -37,7 +37,7 @@ if(out===playdeck||out===images||out===audio||out.startsWith(playdeck+"/packages
 const git=spawnSync("git",["rev-parse","HEAD"],{cwd:playdeck,encoding:"utf8",timeout:15000,shell:false});
 if(git.status!==0||git.stdout.trim()!==OWNERS.playdeck.commit)refuse("PlayDeck source must be checked out at the exact reviewed commit.");
 const source=spawnSync("git",["status","--porcelain","--untracked-files=no","--","packages","package.json"],{cwd:playdeck,encoding:"utf8",timeout:15000,shell:false});
-if(source.status!==0||source.stdout.trim())refuse("PlayDeck tracked source has uncommitted modifications (installed dependencies may be untracked).");
+if(source.status!==0||source.stdout.trim())refuse("PlayDeck tracked source modified after npm install: "+source.stdout.trim().slice(0,500));
 const bin=join(playdeck,"packages","cli","bin","playdeck.mjs");
 if(!existsSync(bin)||!existsSync(join(playdeck,"node_modules",".bin","tsx")))
   refuse("Install PlayDeck dependencies locally first with npm install.");
