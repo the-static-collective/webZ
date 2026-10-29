@@ -126,7 +126,7 @@ export function generateSixUp({goal, have="", needs="", kind="other", effortBudg
   const normalizedNeeds = String(needs??"").replace(/\s+/g," ").trim();
   const card = createCard({goal,have:normalizedHave,needs:normalizedNeeds,kind});
   if (!Number.isSafeInteger(effortBudget) || effortBudget<1 || effortBudget>50) throw new RangeError("Effort budget must be a whole number from 1 to 50.");
-  if (!Number.isSafeInteger(round) || round<0 || round>99) throw new RangeError("Rehearsal round must be 0–99.");
+  if (!Number.isSafeInteger(round) || round<0 || round>2) throw new RangeError("Rehearsal round must be 0–2 (three unique families).");
   const candidates = ROLES.map((role,index)=>{
     const steps = ordered(closureFor(role.target));
     const effortPoints = effortFor(steps);
