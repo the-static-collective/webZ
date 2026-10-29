@@ -224,10 +224,10 @@ export const CULTURE_CONSTELLATION = {
       "name": "Haunted Blender",
       "stage": "visual",
       "purpose": "Candidate animation scenes and guest-video replacements.",
-      "status": "NOT_VERIFIED_ON_MAIN",
-      "source": "https://github.com/the-static-collective/the-haunted-blender/blob/main/README.md",
+      "status": "EXPERIMENTAL_BRANCH_UNMERGED",
+      "source": "https://github.com/the-static-collective/the-haunted-blender/blob/integration/franken-blender-008g-cutout-puppet-factory/README.md",
       "repository": "https://github.com/the-static-collective/the-haunted-blender",
-      "caveat": "Accessible main currently has no implementation or README; do not pitch as a working product."
+      "caveat": "Main remains an empty bootstrap; experimental FRANKEN BLENDER PR #54 has a source-described, tested branch, not a merged product."
     },
     {
       "id": "polish",

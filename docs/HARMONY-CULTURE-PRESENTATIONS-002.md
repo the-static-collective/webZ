@@ -21,7 +21,7 @@ A local useful act can become a song, short film, photo set, manga-like sequence
 - **Haunted Toaster:** repository describes source-aware six-up creation and a proposed BETA reconciliation; do not advertise an unmerged BETA release as shipped.
 - **Haunted Phonograph:** source music becomes evidence-tagged proposals and resolved playable performances; distinct from Toaster's video.
 - **Haunted Pol-ish-roids:** README calls it **design/specification**, not a tested production camera organism.
-- **Haunted Blender:** the accessible main branch currently contains only `.gitignore`. Historical work may be on branches; **no working main-branch feature is claimed**.
+- **Haunted Blender:** main currently contains only `.gitignore`, but the advanced, **unmerged** [FRANKEN BLENDER 008g branch](https://github.com/the-static-collective/the-haunted-blender/tree/integration/franken-blender-008g-cutout-puppet-factory) carries tested local puppets, media pipelines and downstream work. Source link explicitly points to that branch; no merged/released full app is claimed.
 - **Manga/sequential panels:** a creative lane; private/source-held work is **not copied to public Git** or presented as a verified executable repo.
 - **PlayDeck:** project-described visual deck runtime; no assumed rights over contributed media.
 - **lemonPRESS:** real catalog and admitted multi-edition specimen; proofs and source rights remain different from public distribution.

@@ -29,7 +29,7 @@ test('the documented creative media and publication bodies are actually present'
   assert.ok(getCultureOrgan(id),id);
  }
  assert.equal(getCultureOrgan('polish').status,'DESIGN_ONLY');
- assert.equal(getCultureOrgan('blender').status,'NOT_VERIFIED_ON_MAIN');
+ assert.equal(getCultureOrgan('blender').status,'EXPERIMENTAL_BRANCH_UNMERGED');
  assert.equal(getCultureOrgan('manga').status,'PRIVATE_SOURCE_NOT_IMPORTED');
  assert.equal(getCultureOrgan('staticos').status,'BOOTSTRAP_NOT_BOOT_VERIFIED');
 });
@@ -40,7 +40,7 @@ test('cross-system similarity cannot become a false common production authority'
   assert.ok(allowed.has(o.stage));assert.ok(o.caveat.length>20);
   if(o.source){
    assert.ok(o.source.startsWith('https://github.com/the-static-collective/'));
-   assert.ok(o.source.endsWith('/blob/main/README.md'));
+   assert.ok(o.source.endsWith('/README.md')); assert.ok(o.source.includes('/blob/main/') || (o.id==='blender' && o.source.includes('/blob/integration/')));
   }else assert.equal(o.status,'PRIVATE_SOURCE_NOT_IMPORTED');
  }
  const d=composeCulturePresentation('festival');d.entry.fieldOutcome='VERIFIED';
