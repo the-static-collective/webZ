@@ -51,6 +51,17 @@ try:
         assert press["nativeContract"]["status"]=="forming"
         assert press["nativeContract"]["admission"]["state"]=="pending"
         assert press["safety"]["networkSent"] is False
+        # A human can also leave with an editable film recipe without uploading audio.
+        page.locator("#film-seconds").fill("161")
+        with page.expect_download() as film_dl:
+            page.locator("#film-recipe-download").click()
+        film=json.loads(pathlib.Path(film_dl.value.path()).read_text())
+        assert film["schema"]=="abundent/timeback-film-recipe/v1"
+        assert len(film["scenes"])==6
+        assert film["scenes"][0]["start"]==0
+        assert film["scenes"][-1]["start"]<161
+        assert film["source"]["status"]=="RECIPE_ONLY_NOT_RENDERED_OR_PUBLISHED"
+        expect(page.locator("#handoff-status")).to_contain_text("No song was uploaded")
         with page.expect_download() as deck_dl:
             page.locator("#playdeck-handoff").click()
         deck=json.loads(pathlib.Path(deck_dl.value.path()).read_text())
