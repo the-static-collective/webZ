@@ -16,6 +16,8 @@ A portable, community-owned kit for turning available materials, skills and infr
 
 **Scope discipline:** The immediate technological experiment is a *source-addressed, inspectable build packet and repeatability protocol* for a small local computer node. Wider material transformation, a marketplace, open-hardware federation, organizations and humanitarian distribution are plausible adjacent futures, not part of the currently demonstrated integrated product.
 
+**Explicit boundary:** No real cross-node build reproduction has been demonstrated yet. No new cryptocurrency is required; possible NFT or public-chain attestations are optional, externally reviewed features rather than a premise of this proposal.
+
 ## The visual five-move story
 
 ```text
