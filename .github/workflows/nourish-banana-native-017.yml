@@ -17,7 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'none'
       - name: WebZ local privacy/provenance assertions
         run: node --test tests/nourish-banana-native-crossing.test.mjs tests/voqal-nourish-first-door.test.mjs tests/voqal-people-budget.test.mjs
       - name: Fetch original source owners at exact pinned commits
