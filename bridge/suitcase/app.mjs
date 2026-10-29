@@ -30,7 +30,7 @@ async function copyPacket(p){await navigator.clipboard.writeText(JSON.stringify(
 function renderPackets(){const mount=$("packets");mount.replaceChildren();$("packet-count").textContent=String(localPackets.length);
  if(!localPackets.length){mount.append(el("p","No parcels yet. Create an offer or import another room's file."));return}
  for(const p of [...localPackets].reverse()){const b=p.payload.body,card=el("article",undefined,"packet-item"),kind=p.payload.kind;
- card.append(el("b",(kind==="OFFER"?"OFFER: "+b.title:kind==="DISPOSITION"?"RESPONSE: "+b.decision:"HOST PROPOSAL: "+b.nodeName)),
+ card.append(el("b",(kind==="OFFER"?"OFFER: "+b.title:kind==="DISPOSITION"?"RESPONSE: "+b.decision:kind==="HOST_INTENT"?"HOST PROPOSAL: "+b.nodeName:kind==="SEED"?"SEED: "+b.purpose:kind==="GENESIS"?"GENESIS: "+b.name:kind==="CAPABILITY"?"CAPABILITY: "+b.title:kind==="WITHDRAW"?"WITHDRAW: "+b.onDigest.slice(0,14):"UNKNOWN PACKET")),
  el("small",p.payload.issuer.label+" · "+short(p.payload.issuer.fingerprint)),el("small","SHA-256 "+p.digest),
  el("small",p.localClassification+" · "+new Date(p.payload.at).toLocaleString()));
  if(kind==="DISPOSITION"){card.append(el("p",responseAssessment(p)))}
