@@ -1,4 +1,6 @@
 import {threeGifts,textFor,LIMIT} from "./engine.mjs";
+import {makeCreativeCarry} from "./source-carry.mjs";
+import {makePocketEdition} from "./edition.mjs";
 const el=id=>document.getElementById(id);
 let cards=null,index=0,ended=false;
 function showCard(){
@@ -62,6 +64,35 @@ el("save").addEventListener("click",()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1000);
   el("card-status").textContent="Download offered to your device. Nothing uploaded.";
 });
+function exportSourceCarry(lane){
+  if(!cards||ended)return;
+  const packet=makeCreativeCarry(el("topic").value,index,lane);
+  const content=JSON.stringify(packet,null,2)+"\n";
+  const url=URL.createObjectURL(new Blob([content],{type:"application/json;charset=utf-8"}));
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="three-bells-"+cards[index].id+"-"+lane+"-draft.json";
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  el("handoff-status").textContent="Downloaded a preparation-only source packet. Nothing was sent, approved or executed.";
+}
+el("zine-download").addEventListener("click",()=>{
+  if(!cards||ended)return;
+  const html=makePocketEdition(el("topic").value,index);
+  const href=URL.createObjectURL(new Blob([html],{type:"text/html;charset=utf-8"}));
+  const link=document.createElement("a");
+  link.href=href;
+  link.download="three-bells-"+cards[index].id+"-pocket-book.html";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(href),1000);
+  el("handoff-status").textContent="Your standalone printable pocket book was offered to your device. It has not been published or uploaded.";
+});
+el("press-handoff").addEventListener("click",()=>exportSourceCarry("lemonpress"));
+el("playdeck-handoff").addEventListener("click",()=>exportSourceCarry("playdeck"));
 el("print").addEventListener("click",()=>{
   if(cards&&!ended)window.print();
 });

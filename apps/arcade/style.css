@@ -24,3 +24,13 @@ footer{text-align:center;padding:26px;font-size:12px;color:#d7c9dc}footer a{colo
 @media(max-width:650px){.wrap{padding:34px 18px}.bar{padding:18px}.bar span{display:block}.paper{transform:none}.next button{width:100%}.plainlink{display:block;margin:14px 0 0}pre{font-size:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.paper{transform:none}}
 @media print{body{background:#fff;color:#000}.bar,.lead,#start,.buttons,.why,footer,.eyebrow,h1,.complete{display:none!important}.wrap{padding:0}.paper{background:#fff;color:#000;border:1px solid #999;box-shadow:none;transform:none;margin:0}}
+
+
+/* TIMEBACK-CREATIVE-001: source-owner doors are optional, never a required next step. */
+.creative-door{margin:27px 0 12px;border:1px solid #a68ab3;border-radius:14px;background:#ffffff0c;padding:20px}
+.creative-door summary{cursor:pointer;font-weight:780;font-size:17px}
+.creative-door summary span{font-size:12px;color:#e1cfe1;font-weight:450}
+.creative-door p{font-size:14px;color:#e8dbe8}
+.creative-door .buttons button{flex:1;min-width:min(210px,100%)}
+.creative-door .tool-link{font-size:13px;display:block;color:var(--mint);margin:12px 0}
+@media print{.creative-door{display:none!important}}
