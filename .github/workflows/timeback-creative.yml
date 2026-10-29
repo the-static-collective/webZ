@@ -45,6 +45,11 @@ jobs:
       - name: Prepare dependencies for the original PlayDeck composer
         working-directory: playdeck
         run: npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+      - name: Install the original PlayDeck media probe dependency
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffprobe
       - name: Run real-source PlayDeck composer on synthetic media
         working-directory: webz
         shell: bash
