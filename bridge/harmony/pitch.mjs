@@ -75,8 +75,21 @@ function build(data){
  const row=p(s,'p');a(row,'Inspect passing original-source workflow & download artifact ↗','https://github.com/the-static-collective/CANNON/actions/runs/40866198913');
  p(s,'p','This executable experiment lives on an unmerged CANNON branch stacked on PRESENT USE 003. CANNON main is not canon; the output is an inspectable demonstration, not a third-party release.','warning');
  }));
+ created.push(slide('Independent publishing receipt',s=>{
+ title(s,'16 / NEW VERIFIED CROSSING','The work is received without losing its source.',
+ 'CANNON now executes the original lemonPRESS receiver on the actual generated comic and field card. lemonPRESS checks their exact bytes and makes its own HOLD or REFUSE.');
+ const grid=p(s,'div',undefined,'grid');
+ for(const [head,detail] of [
+  ['CREATE','Original Harmony × GrO builds real comic.html and field-card.md.'],
+  ['DELIVER','CANNON source-pins the original independent lemonPRESS receiver and passes both exact artifacts.'],
+  ['HOLD / REFUSE','The receiving press independently HOLDs exact media for editorial review, or REFUSEs without copying it.'],
+  ['REPLAY','A fresh process checks originals and receiver receipts; deliberate forgery and tampering fail.']
+ ]){const card=p(grid,'article',undefined,'card');p(card,'h3',head);p(card,'p',detail);}
+ const links=p(s,'p');a(links,'Inspect passing three-owner workflow and held artifact bundle ↗','https://github.com/the-static-collective/CANNON/actions/runs/40867825635');
+ p(s,'p','This proves independently governed reception, not publication, copyright transfer, economic value, PENNY issuance, or a real beneficiary. The two receiver/code PRs remain unmerged experiments.','warning');
+ }));
  created.push(slide('What to test',s=>{
-  title(s,'16 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  title(s,'17 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
   const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
   p(s,'blockquote',scene.proof);
   p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
