@@ -1,5 +1,6 @@
 import {threeGifts,textFor,LIMIT} from "./engine.mjs";
 import {makeCreativeCarry} from "./source-carry.mjs";
+import {makePocketEdition} from "./edition.mjs";
 const el=id=>document.getElementById(id);
 let cards=null,index=0,ended=false;
 function showCard(){
@@ -77,6 +78,19 @@ function exportSourceCarry(lane){
   setTimeout(()=>URL.revokeObjectURL(url),1000);
   el("handoff-status").textContent="Downloaded a preparation-only source packet. Nothing was sent, approved or executed.";
 }
+el("zine-download").addEventListener("click",()=>{
+  if(!cards||ended)return;
+  const html=makePocketEdition(el("topic").value,index);
+  const href=URL.createObjectURL(new Blob([html],{type:"text/html;charset=utf-8"}));
+  const link=document.createElement("a");
+  link.href=href;
+  link.download="three-bells-"+cards[index].id+"-pocket-book.html";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(href),1000);
+  el("handoff-status").textContent="Your standalone printable pocket book was offered to your device. It has not been published or uploaded.";
+});
 el("press-handoff").addEventListener("click",()=>exportSourceCarry("lemonpress"));
 el("playdeck-handoff").addEventListener("click",()=>exportSourceCarry("playdeck"));
 el("print").addEventListener("click",()=>{
