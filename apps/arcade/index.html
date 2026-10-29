@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#291d36">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Three Bells · Abundent</title>
+<meta name="description" content="Three little surprises, a useful take-away, then a real ending. No endless feed.">
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to the arcade</a>
+<header class="bar"><a href="../">ABUNDENT <span>/ THREE BELLS</span></a><a href="../use/">Use a real tool ↗</a></header>
+<main id="main" class="wrap">
+<p class="eyebrow">FINITE-DELIGHT-001 / A VERY SMALL ARCADE</p>
+<h1>A little wonder.<br><em>Your time back.</em></h1>
+<p class="lead">Surprise, relief, and connection in three little cards. <strong>Only three.</strong> Nothing autoplays. Leave whenever you like.</p>
+<form id="start" novalidate autocomplete="off">
+  <label for="topic">What's on your mind? <span>Optional. Blank works too.</span></label>
+  <input id="topic" maxlength="160" type="text" placeholder="A song, a project, a minute to breathe…" aria-describedby="privacy">
+  <button class="primary" type="submit">Open one little surprise ↗</button>
+  <p id="privacy" class="fine">Your words stay in this tab. No account, tracking, or online request.</p>
+  <p id="input-status" role="status" aria-live="polite"></p>
+</form>
+<section id="active" aria-labelledby="card-title" hidden>
+  <p id="progress" class="eyebrow"></p>
+  <article class="paper">
+    <p id="kind" class="kind"></p>
+    <h2 id="card-title" tabindex="-1"></h2>
+    <pre id="artifact" tabindex="0"></pre>
+    <p id="note" class="fine"></p>
+  </article>
+  <div class="buttons">
+    <button id="copy" type="button">Copy card</button>
+    <button id="save" type="button">Save as text</button>
+    <button id="print" type="button">Print</button>
+  </div>
+  <p id="card-status" role="status" aria-live="polite"></p>
+  <div class="buttons next">
+    <button id="advance" type="button" class="primary">Open one more ↗</button>
+    <button id="finish" type="button">That's enough · I'm done</button>
+  </div>
+</section>
+<section id="complete" class="complete" aria-labelledby="complete-title" hidden>
+  <p class="eyebrow">THE END IS A FEATURE</p>
+  <h2 id="complete-title" tabindex="-1">The screen can rest now.</h2>
+  <p>No streak to save, no feed to refresh, and no obligation to come back.</p>
+  <a class="primary link" href="../use/">Make something with a real tool ↗</a>
+  <a class="plainlink" href="../">Return to the tool library ↗</a>
+</section>
+<aside class="why">
+  <h2>Why only three?</h2>
+  <p>The delightful parts of discovery do not require an endless scroll. Each card is explicitly requested and can leave with you as a real text artifact. Your time is not the product.</p>
+  <p class="fine">This is a local, deterministic prototype — not a health treatment or a promise of measured time savings. Source-owned tools remain available separately in the library.</p>
+</aside>
+</main>
+<footer>PLAY IS ALLOWED · ATTENTION IS YOURS · <a href="../use/">USE REAL TOOLS ↗</a></footer>
+</body></html>
