@@ -33,3 +33,19 @@ pre{font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:#10
 footer{border-top:1px solid var(--line);color:var(--muted);display:flex;gap:18px;justify-content:space-between;font-size:12px;letter-spacing:.04em;padding:25px max(26px,calc((100vw - 1150px)/2))}
 @media(max-width:600px){.top{padding:18px}.brand span{display:block}.badge{font-size:9px;padding:6px}.wrap{margin:35px auto 55px;padding:0 16px}footer{flex-direction:column}}
 @media print{body{background:#fff;color:#111}.top,form,.why,footer,.buttons,.fine,.eyebrow,.lead{display:none!important}.wrap{margin:0;max-width:none}.result{border:0;padding:0;margin:0}.result p{display:none}pre{background:#fff;color:#111;border:0;font-size:12pt;max-height:none;white-space:pre-wrap}}
+
+
+/* A complex engine belongs behind an optional disclosure, never ahead of the goal. */
+.planning-lab{margin-top:24px;padding:20px 0 0;border-top:1px solid var(--line);color:var(--muted)}
+.planning-lab>summary{font-weight:760;color:var(--ink);cursor:pointer;font-size:17px}
+.planning-lab>summary span{font-size:12px;font-weight:400;display:block;color:var(--muted)}
+.planning-lab>label{margin:14px 0 7px}
+.planning-lab>input[type=number]{width:100px;border:1px solid #789888;background:#10251f;color:var(--ink);border-radius:7px;font:inherit;padding:9px}
+.six-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:19px 0}
+.six-card{background:#10251f;border:1px solid var(--line);border-radius:12px;padding:15px;min-width:0}
+.six-card h3{font-size:17px;line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;color:var(--ink)}
+.six-card p{font-size:14px;margin:10px 0;overflow-wrap:anywhere}
+.six-card .plan-status{font-size:11px;font-weight:750;letter-spacing:.04em;color:var(--accent)}
+.six-card button{width:100%;font-size:13px;margin-top:10px}
+@media(max-width:620px){.six-grid{grid-template-columns:1fr}}
+@media print{.planning-lab{display:none!important}}
