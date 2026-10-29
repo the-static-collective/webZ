@@ -71,3 +71,12 @@ test('CANNON source-pinned culture execution is exposed but never claimed as can
  assert.ok(d.includes('CANNON/pull/37'));
  assert.ok(d.includes('experimental unmerged'));
 });
+
+test('independent lemonPRESS native receiver passing evidence is included with no false release',()=>{
+ const h=read('bridge/harmony/craft.html'),p=read('bridge/harmony/pitch.mjs'),d=read('docs/HARMONY-MATTER-IDEA-CRAFT-004.md');
+ assert.ok(h.includes('CANNON/actions/runs/40867825635'));
+ assert.ok(h.includes('lemonPRESS/pull/57'));
+ assert.ok(p.includes('CANNON/actions/runs/40867825635'));
+ assert.ok(p.includes('not publication'));
+ assert.ok(d.includes('press-refused/'));
+});
