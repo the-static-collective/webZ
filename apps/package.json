@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test switchboard.test.mjs",
+    "test": "node --test switchboard.test.mjs arcade/engine.test.mjs",
     "build": "node build.mjs"
   },
   "engines": {

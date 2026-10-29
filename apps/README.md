@@ -82,3 +82,8 @@ Build note: `apps/build.mjs` already copies the complete `../jubilee/` directory
 ## USE-FIRST-001 — Public capability shelf (draft)
 
 The [human-first tool shelf](use/) starts with a direct official Haunted Toaster Windows alpha download, then gives explicit browser-only routes into Commons, Jubilee, Link Wallet and Living Receiver. Unlike the source atlas, it explains *what someone can make* and distinguishes a downloadable app from an experimental browser tool. The shelf is included in the existing static build. [Release/readiness and adoption protocol](../docs/USE-FIRST-001-DISTRIBUTION.md). No visitor analytics, new server, Vercel deployment, DNS change, outreach or licensing claim is introduced.
+
+
+## FINITE-DELIGHT-001 — Three Bells
+
+The optional [Three-Bell Arcade](arcade/) produces one tiny piece of fiction, one practical first-step note, and one no-obligation invitation draft. Each next card requires a click, the session ends after three, and the visitor can exit at any time. Copy, local text download, and print are actual functional outputs. No feed, accounts, analytics, notifications, automatic social posting, scoring, LLM calls, or retention optimization. This is an independently running browser prototype, not a live execution of Toaster or Dogram. See [the complete project-owner composition and time-return plan](../docs/FINITE-DELIGHT-001-TIME-RETURN.md).
