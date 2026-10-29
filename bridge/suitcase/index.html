@@ -3,9 +3,9 @@
 <meta name="theme-color" content="#111b22"><meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="description" content="SUITCASE-001: carry an independently signed proposal between separately owned rooms without a central account or online server.">
+<meta name="description" content="SUITCASE-002: found independent organizations and carry independently signed proposals between separately owned rooms without a central account or online server.">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script><script type="module" src="./foundry-ui.mjs"></script>
 <title>The Suitcase Internet · Abundent</title></head>
 <body>
 <a class="skip" href="#desk">Skip to working handoff desk</a>
@@ -62,6 +62,46 @@
 <p class="tiny">The sender may import this separately signed receipt, but cannot sign the receiver's key. Key ownership ≠ verified human identity.</p></section>
 </div>
 <p id="status" role="status" aria-live="polite">Ready. Nothing transmitted, sent, enrolled or authorized.</p>
+</section>
+<section class="machine" id="foundry"><div class="chapter"><span>SUITCASE-002 / THE ORGANIZATION FOUNDRY</span><h2>EVERY NODE CAN FOUND ANOTHER.</h2><span>INDEPENDENCE, NOT FRANCHISING</span></div>
+<p class="warning"><b>REAL SIGNATURES. SELF-ATTESTED ORGANIZATIONS.</b> Genesis means a locally signed proposal and accepted operating rules; it does <strong>not</strong> incorporate a legal entity, verify anyone's institutional authority, or publish a public directory. All cards are unencrypted public-safe plaintext; do not use private survivor, client, child, address or contact records. A parent invitation does not authorize or own a child.</p>
+<div class="workgrid">
+<section class="workpanel"><div class="step"><b>05</b><h3>MAKE A SEED INVITATION</h3></div>
+<p>Any room key may offer a method for founding another organization. Export the signed invitation JSON from the parcel desk. The recipient may refuse or ignore it.</p>
+<form id="seed-form"><label>Inviting room<select id="seed-room" required></select></label>
+<label>Public-safe purpose<input id="seed-purpose" required minlength="4" maxlength="100" value="Establish an independent neighborhood table"></label>
+<label>Invitation terms<textarea id="seed-message" required minlength="12" maxlength="450" rows="3">You may found your own organization with your own key and rules. This invitation creates no parent authority or duty to participate.</textarea></label>
+<button class="primary" type="submit">SIGN SEED · 30 DAYS</button></form>
+<p class="tiny">A seed is a signed invitation from a key, not permission to operate at a venue or proof of a human identity.</p></section>
+<section class="workpanel"><div class="step"><b>06</b><h3>FOUND AN INDEPENDENT ROOM</h3></div>
+<p>Use a <strong>new, separately controlled local room key</strong> (create one at step 01). Optionally import a seed from an ancestor. You can also found a root without any ancestor.</p>
+<form id="genesis-form"><label>Independent founder's room<select id="genesis-room" required></select></label>
+<label>Signed ancestor invitation (optional)<select id="genesis-seed"></select></label>
+<label>Proposed organization name<input id="genesis-name" required minlength="3" maxlength="90" value="Independent Community Table (exercise)"></label>
+<label>Public-safe purpose<textarea id="genesis-purpose" required minlength="12" maxlength="400" rows="3">Coordinate one voluntary, public-safe local experiment without any centralized authority.</textarea></label>
+<label>Self-adopted working rules<textarea id="genesis-rules" required minlength="20" maxlength="800" rows="4">The organization governs its own key, records and resources. It may decline any request. Its ancestors have no governing rights. No real service begins without an independently consenting steward.</textarea></label>
+<label class="check"><input type="checkbox" id="genesis-consent" required><span>I control this room's key and explicitly accept these proposed local rules. This is not legal registration or verified representation.</span></label>
+<button class="primary" type="submit">SIGN GENESIS · OWN KEY</button></form></section>
+<section class="workpanel"><div class="step"><b>07</b><h3>DISCOVER A VOLUNTARY CAPABILITY</h3></div>
+<p>Only nodes with one locally verifiable genesis may offer a public-safe capability. The directory below shows signed files <strong>on this device only</strong>; there is no central listing, crawl, search service or automatic broadcast.</p>
+<form id="cap-form"><label>Room that self-attests this capability<select id="cap-room" required></select></label>
+<label>Type of voluntary offer<select id="cap-category"><option value="FOOD">Food access</option><option value="TRANSPORT">Transportation</option><option value="SPACE">Space / meeting table</option><option value="SKILL">Skills / teaching</option><option value="OTHER">Other</option></select></label>
+<label>Public label<input id="cap-title" required minlength="4" maxlength="100" value="Fictional weekly community food table"></label>
+<label>Scope and real-world approval gates<textarea id="cap-scope" required minlength="12" maxlength="450" rows="3">Demonstration only. Public proposals may be reviewed; no actual food, transport or site use is promised or authorized.</textarea></label>
+<label class="check"><input type="checkbox" id="cap-consent" required><span>I deliberately choose a public-shareable card. Anyone I give the JSON can read and copy it; it contains no sensitive details.</span></label>
+<button class="primary" type="submit">SIGN OPT-IN CAPABILITY · 14 DAYS</button></form>
+<h4>Discoverable on THIS device</h4><div id="cap-list" class="packet-list"></div></section>
+<section class="workpanel"><div class="step"><b>08</b><h3>WITHDRAW OR VERIFY THE GATES</h3></div>
+<p>The original key can sign a withdrawal to distribute to peers. Peers must import the withdrawal to update their own local view; public copies cannot be recalled.</p>
+<form id="withdraw-form"><label>Original capability issuer<select id="withdraw-room" required></select></label>
+<label>Active local capability<select id="withdraw-cap" required></select></label>
+<button type="submit">SIGN WITHDRAWAL · EXPORT IT</button></form>
+<h4>Independent-node evidence (local only)</h4><label>Room to inspect<select id="evidence-room"></select></label>
+<div id="node-evidence"></div>
+<p class="tiny">NODE ALIVE requires actual independently controlled keys and records, a consensual crossing, a valid refusal, a successful offline field test, and real-world stewardship review. Browser records alone cannot certify it.</p>
+<button type="button" id="refresh-foundry">REFRESH LOCAL PACKETS</button></section>
+</div><p id="foundry-status" role="status" aria-live="polite">Nothing published, enrolled or sent by opening this page.</p>
+<p><a class="primary" href="./paper-kit.html">OPEN PRINTABLE SIX-CARD PHYSICAL FOUNDING KIT ↗</a></p><p class="statusline"><b>How to reproduce:</b> create two distinct keys on two devices. Device A signs and exports a SEED. Device B imports it, creates its own key, accepts rules, and signs a GENESIS. B can then sign a CAPABILITY. A imports the GENESIS and CAPABILITY files, sees the voluntary local listing, and can address an OFFER without forcing delivery or work. B can REFUSE and send back its own signed receipt. Paper copies can carry the same questions when no electronics work.</p>
 </section>
 <section class="nodes" id="nodes"><div class="chapter"><span>CHAPTER TWO / LOCATIONS THAT DON'T EXIST YET</span><h2>THE INDEPENDENT NODE ATLAS</h2><span>PROSPECTS ONLY</span></div>
 <p>Every host retains its own facilities, power, data, permission and right to refuse. Choose a possible host type to print an inquiry and optionally sign an <em>unverified host proposal</em> from a room you actually control.</p>

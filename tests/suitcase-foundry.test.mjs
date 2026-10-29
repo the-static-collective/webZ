@@ -1,0 +1,41 @@
+import test from "node:test";import assert from "node:assert/strict";import {webcrypto} from "node:crypto";
+if(!globalThis.crypto)globalThis.crypto=webcrypto;
+import {newRoom,sign,verify} from "../bridge/suitcase/protocol.mjs";
+import {assessGenesis,foundingFor,discover,linkedDisposition,localEvidence} from "../bridge/suitcase/foundry.mjs";
+const later=(ms=86400000)=>new Date(Date.now()+ms).toISOString();
+const genesis=(seedDigest="",ancestorFingerprint="")=>({name:"Cooperative Demo",purpose:"Review public-safe logistical needs among consenting neighbors.",operatingRules:"Each participant may refuse any proposed work and keep independent records.",seedDigest,ancestorFingerprint,status:"SELF_ATTESTED_NOT_LEGAL_ENTITY"});
+test("descendants use their own keys and an ancestor's invitation conveys no control",async()=>{
+ const a=await newRoom("Ancestor demo","PERSON"),b=await newRoom("Descendant demo","PERSON");
+ const seed=await sign(a,"SEED",{purpose:"Start another local table",message:"This is an invitation, never delegated governance.",expiresAt:later(),authority:"INVITATION_NOT_CONTROL"});
+ const g=await sign(b,"GENESIS",genesis(seed.digest,a.fingerprint));
+ const parcels=[seed,g];for(const p of parcels)assert.equal((await verify(p)).kind,p.payload.kind);
+ assert.equal(assessGenesis(g,parcels).status,"SIGNED_INVITATION_VERIFIED_NOT_AUTHORITY");
+ assert.equal(foundingFor(b.fingerprint,parcels).digest,g.digest);
+ assert.equal(foundingFor(a.fingerprint,parcels),null);
+ assert.equal(assessGenesis(g,[g]).valid,false);
+ assert.equal(assessGenesis(g,[seed,g,{...g,digest:"f".repeat(64)}]).valid,false);
+ const forged=structuredClone(g);forged.payload.body.ancestorFingerprint=b.fingerprint;await assert.rejects(()=>verify(forged));
+});
+test("opt-in public capability needs matching founding, expiry, owner withdrawal",async()=>{
+ const a=await newRoom("Public demo","PERSON"),unrelated=await newRoom("Unrelated demo","PERSON");
+ const g=await sign(a,"GENESIS",genesis());
+ const cap=await sign(a,"CAPABILITY",{genesisDigest:g.digest,category:"FOOD",title:"Fictional public table",scope:"We may discuss a synthetic food logistics scenario only.",expiresAt:later(),visibility:"PUBLIC_OPT_IN"});
+ const revByOther=await sign(unrelated,"WITHDRAW",{onDigest:cap.digest,reason:"Attempt to revoke another independent key"});
+ assert.equal(discover([g,cap,revByOther]).length,1);
+ assert.equal(discover([cap]).length,0);
+ const withdraw=await sign(a,"WITHDRAW",{onDigest:cap.digest,reason:"Owner chose to withdraw this public offer"});
+ assert.equal(discover([g,cap,revByOther,withdraw]).length,0);
+ assert.equal(discover([g,cap],Date.now()+2*86400000).length,0);
+ const bad=structuredClone(cap);bad.payload.body.visibility="PRIVATE";await assert.rejects(()=>verify(bad));
+ assert.equal((await verify(withdraw)).kind,"WITHDRAW");
+});
+test("self-attested genesis and local refusal do not fabricate NODE ALIVE",async()=>{
+ const a=await newRoom("Demo source","PERSON"),b=await newRoom("Demo receiver","PERSON");
+ const g=await sign(b,"GENESIS",genesis()),offer=await sign(a,"OFFER",{title:"Synthetic cross room request",description:"Please consider this fictional offer for a dry run.",scope:"Synthetic and public-safe dry run only; no aid promised.",toFingerprint:b.fingerprint,expiresAt:later()});
+ const refusal=await sign(b,"DISPOSITION",{onDigest:offer.digest,decision:"REFUSE",note:"Our local room declines the proposal."});
+ assert.equal(linkedDisposition(refusal,[g,offer,refusal]),true);
+ const flags=localEvidence(b,[g,offer,refusal]);assert.equal(flags.selfAttestedFounding,true);assert.equal(flags.localRefusal,true);
+ assert.equal(flags.nodeAlive,false);assert.equal(flags.independentStewardVerified,false);
+ const aFake=await sign(a,"DISPOSITION",{onDigest:offer.digest,decision:"REVIEW",note:"The sender cannot be the receiver."});
+ assert.equal(linkedDisposition(aFake,[offer,aFake]),false);
+});

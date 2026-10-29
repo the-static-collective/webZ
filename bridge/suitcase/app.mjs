@@ -30,7 +30,7 @@ async function copyPacket(p){await navigator.clipboard.writeText(JSON.stringify(
 function renderPackets(){const mount=$("packets");mount.replaceChildren();$("packet-count").textContent=String(localPackets.length);
  if(!localPackets.length){mount.append(el("p","No parcels yet. Create an offer or import another room's file."));return}
  for(const p of [...localPackets].reverse()){const b=p.payload.body,card=el("article",undefined,"packet-item"),kind=p.payload.kind;
- card.append(el("b",(kind==="OFFER"?"OFFER: "+b.title:kind==="DISPOSITION"?"RESPONSE: "+b.decision:"HOST PROPOSAL: "+b.nodeName)),
+ card.append(el("b",(kind==="OFFER"?"OFFER: "+b.title:kind==="DISPOSITION"?"RESPONSE: "+b.decision:kind==="HOST_INTENT"?"HOST PROPOSAL: "+b.nodeName:kind==="SEED"?"SEED: "+b.purpose:kind==="GENESIS"?"GENESIS: "+b.name:kind==="CAPABILITY"?"CAPABILITY: "+b.title:kind==="WITHDRAW"?"WITHDRAW: "+b.onDigest.slice(0,14):"UNKNOWN PACKET")),
  el("small",p.payload.issuer.label+" · "+short(p.payload.issuer.fingerprint)),el("small","SHA-256 "+p.digest),
  el("small",p.localClassification+" · "+new Date(p.payload.at).toLocaleString()));
  if(kind==="DISPOSITION"){card.append(el("p",responseAssessment(p)))}
@@ -40,7 +40,7 @@ function renderPackets(){const mount=$("packets");mount.replaceChildren();$("pac
 function selectOffers(){const offers=localPackets.filter(x=>x.payload.kind==="OFFER").map(x=>[x.digest,x.payload.body.title+" · "+short(x.digest)]);chooseOptions("reply-offer",offers,"Import an offer first")}
 function renderNodes(){const mount=$("node-cards");mount.replaceChildren();for(const node of NODE_KINDS){const b=el("button");b.type="button";b.setAttribute("aria-pressed",String(node.id===selectedNode.id));b.append(el("span",node.icon),el("b",node.name),el("small","PROPOSED · NOT ENROLLED"));b.onclick=()=>{selectedNode=node;renderNode();renderNodes()};mount.append(b)}}
 function renderNode(){const n=selectedNode;$("node-name").textContent=n.name;$("node-scene").textContent=n.scene;$("node-allow").textContent=n.allowedWork;$("node-disallow").textContent=n.notAllowed;$("node-power").textContent=n.powerPolicy;$("node-authority").textContent=n.authority;const gates=$("node-gates");gates.replaceChildren();const ul=el("ul");for(const g of n.gates)ul.append(el("li",g));gates.append(ul)}
-function render(){selectRooms();renderRooms();renderPackets();selectOffers();renderNodes();renderNode()}
+function render(){selectRooms();renderRooms();renderPackets();selectOffers();renderNodes();renderNode();dispatchEvent(new Event('suitcase:base-changed'))}
 $("room-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{if(!$("room-consent").checked)throw Error("Explicit device-owner acknowledgment required");const room=await newRoom($("room-label").value,$("room-kind").value);await addRoom(room);await load();$("room-label").value="";$("room-consent").checked=false;report("New local signing identity created. Organization affiliation remains UNVERIFIED.")})});
 $("offer-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{const room=currentRoom($("offer-sender").value),address=$("offer-to").value.trim(),at=new Date();const expiry=new Date(at.getTime()+14*86400000).toISOString();if(address&&!/^[a-f0-9]{64}$/.test(address))throw Error("Receiver address must be a 64-character public-key fingerprint");if(address===room.fingerprint)throw Error("A room cannot address itself as independent receiver");
  const packet=await sign(room,"OFFER",{title:$("offer-title").value.trim(),description:$("offer-description").value.trim(),scope:$("offer-scope").value.trim(),toFingerprint:address,expiresAt:expiry});await addPacket(packet,"CREATED_HERE");await load();report("Signed offer saved on THIS DEVICE. Download JSON to move it; nobody has received it yet.")})});
@@ -53,4 +53,5 @@ $("sign-node").onclick=()=>guard(async()=>{const room=currentRoom($("node-room")
 $("print-node").onclick=()=>window.print();
 $("print-story").onclick=()=>window.print();
 if("serviceWorker" in navigator&&(location.protocol==="https:"||["localhost","127.0.0.1"].includes(location.hostname))){navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{/* offline install may be unsupported; never claim it succeeded */})}
+addEventListener("suitcase:foundry-changed",()=>load().catch(e=>report(e.message,true)));
 load().catch(e=>report("Local storage unavailable: "+e.message,true));
