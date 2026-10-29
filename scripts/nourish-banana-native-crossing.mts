@@ -9,7 +9,7 @@ const pins = Object.freeze({
   bananaSpork:"f4c4067b5896eb5eb20a7498f89da38f04731d73",
 });
 if(process.argv.length!==4)throw Error("Usage: tsx scripts/nourish-banana-native-crossing.mts PINNED_NOURISH PINNED_BANANASPORK");
-const [nourish,banana]=process.argv.slice(2).map(resolve);
+const [nourish,banana]=process.argv.slice(2).map(p=>resolve(p));
 const actual=root=>execFileSync("git",["-C",root,"rev-parse","HEAD"],{encoding:"utf8"}).trim();
 if(actual(nourish)!==pins.nourish)throw Error("NOURISH_PIN_MISMATCH");
 if(actual(banana)!==pins.bananaSpork)throw Error("BANANASPORK_PIN_MISMATCH");
