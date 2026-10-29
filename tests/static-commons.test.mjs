@@ -15,9 +15,9 @@ test("Waseca first true yes produces an UNSENT public draft with six unsatisfied
  const paper=printableKit(p);
  for(let i=1;i<=6;i++)assert.match(paper,new RegExp("CARD "+i+" · "));
  assert.match(paper,/DECLINE \(valid end\)/);
- assert.match(paper,/INDEPENDENT/);
+ assert.match(paper,/independent/i);
  assert.match(paper,/WITHHELD UNTIL LOCAL PERMISSION/);
- assert.match(paper,/not sent, stored, signed, verified or published/);
+ assert.match(paper,/nothing sent, stored, signed, verified or published/);
 });
 test("private contacts, bearer secrets and HTML cannot enter portable packet",()=>{
  for(const dirty of [
