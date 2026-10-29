@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111b22"><meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="SUITCASE-001: carry an independently signed proposal between separately owned rooms without a central account or online server.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+<title>The Suitcase Internet · Abundent</title></head>
+<body>
+<a class="skip" href="#desk">Skip to working handoff desk</a>
+<header class="mast"><a class="brand" href="../../">ABUNDENT ✳</a><span>THE STATIC COLLECTIVE // WORLD WITHOUT HEADQUARTERS</span><nav><a href="../">Between Rooms</a><a href="../outbox/">Outbox</a><a href="../../commons/wallet/">Link Wallet</a></nav></header>
+<main>
+<section class="hero" aria-labelledby="hero-title"><div class="issue">A PORTABLE NETWORK EXPERIMENT <span>ISSUE No. 001</span></div>
+<div class="hero-row"><div><p class="kicker">EVERY ROOM KEEPS ITS OWN KEY</p><h1 id="hero-title">THE<br><em>SUITCASE</em><br>INTERNET<span class="bang">!</span></h1>
+<p class="subtitle">What if the internet could leave the building?</p>
+<p>Carry a proposal from one independently controlled room to another—even between disconnected phones. No account, no shared central database, no institution enrolled by putting its name on a diagram.</p>
+<div class="buttons"><a class="primary" href="#desk">OPEN THE WORKING MACHINE ↘</a><a href="#comic">READ THE FIRST SIX PANELS</a><button id="print-story" type="button">PRINT THIS ISSUE</button></div></div>
+<div class="hero-art" aria-label="Illustrated suitcase connected to independent rooms"><div class="orb">◈</div><div class="handle"></div><div class="case"><span>ABUNDENT<br>SUITCASE // 001</span><strong>↔</strong><small>NO MASTER SERVER</small></div><div class="tag">BELONGS TO<br>THE PERSON<br>HOLDING IT</div></div></div>
+<p class="banner"><b>ACTUAL DEMO:</b> browser-created non-exportable P-256 signing keys · separately signed offer and response JSON · offline app shell · printable host plans. <b>NOT:</b> identity verification, encrypted correspondence, partner enrollment, real-world authority, production sync, or live service delivery.</p></section>
+<section class="comic" id="comic"><div class="chapter"><span>CHAPTER ONE</span><h2>AN INTERNET IN SIX PANELS</h2><span>FICTIONAL STORY · NOT FIELD EVIDENCE</span></div>
+<div class="panels">
+<article class="panel p1"><small>01 // THE CHURCH BASEMENT</small><div class="drawing">▥ <span>♪</span></div><h3>THE ROOM</h3><p>“We have a table, a phone, and a question.”</p><div class="caption">A host is a proposal until a real steward agrees.</div></article>
+<article class="panel p2"><small>02 // THE GARDEN</small><div class="drawing">✿ ↗</div><h3>THE OFFER</h3><p>“Could these extra vegetables help?”</p><div class="caption">Source author signs a specific bounded ask.</div></article>
+<article class="panel p3"><small>03 // THE JOURNEY</small><div class="drawing">▣ → ◇</div><h3>THE PARCEL</h3><p>Bluetooth, a file, a USB stick. The envelope doesn't require a server.</p><div class="caption">Carry the JSON, not somebody's private history.</div></article>
+<article class="panel p4"><small>04 // THE OTHER KEY</small><div class="drawing">◇ ↔ ◇</div><h3>THE RECEIVER</h3><p>“I can HOLD this. Or REFUSE it. You don't get to decide for me.”</p><div class="caption">The independent receiver signs its own answer.</div></article>
+<article class="panel p5"><small>05 // NO FAKE YES</small><div class="drawing">HOLD<br>≠ YES</div><h3>THE RECEIPT</h3><p>A cryptographic proof of a key's statement—not proof of identity or completed work.</p><div class="caption">REVIEW is not authorization to act.</div></article>
+<article class="panel p6"><small>06 // THE SEED SPREADS</small><div class="drawing">✦ ✿ ✧</div><h3>THE RETURN</h3><p>Only an approved, inspectable method can move to another room.</p><div class="caption">GRAFT · reLATTE · planZ · GHoT: integration gates remain.</div></article></div></section>
+<section id="desk" class="machine"><div class="chapter"><span>THE ACTUAL EXPERIMENT</span><h2>TWO ROOMS. TWO KEYS. ONE CHOICE.</h2><span>DEVICE-LOCAL · EXPLICIT FILE TRANSFER</span></div>
+<p class="warning"><b>TRAINING / PUBLIC-SAFE ONLY.</b> Proposal text and signed JSON are <strong>not encrypted</strong>. Do not enter real addresses, vulnerable-person records, case files, private contacts, service credentials or confidential institutional material. An address fingerprint limits who can reply in this demo; it does not hide the content. This is not the encrypted Outbox.</p>
+<div class="workgrid">
+<section class="workpanel" aria-labelledby="room-title"><div class="step"><b>01</b><h3 id="room-title">GIVE A ROOM ITS OWN KEY</h3></div>
+<p>Your browser generates a non-exportable signing key and stores it on this device. A church or campus name does not authorize you to represent it.</p>
+<form id="room-form"><label>Room label<input id="room-label" required maxlength="70" minlength="3" placeholder="e.g., Garden demonstration room" autocomplete="off"></label>
+<label>What kind of room?<select id="room-kind"><option value="PERSON">Individual / private device</option><option value="CHURCH_CANDIDATE">Possible church host (NOT authorized)</option><option value="CAMPUS_CANDIDATE">Possible campus host (NOT authorized)</option><option value="COOP_CANDIDATE">Possible grocery / farm host (NOT authorized)</option><option value="FESTIVAL_CANDIDATE">Possible festival host (NOT authorized)</option><option value="COMMUNITY_CANDIDATE">Possible community center host (NOT authorized)</option></select></label>
+<label class="check"><input type="checkbox" id="room-consent" required><span>I control this browser's local room key. I am not enrolling or representing an institution.</span></label>
+<button class="primary" type="submit">CREATE LOCAL ROOM + NONEXPORTABLE KEY</button></form>
+<h4>Rooms on this device <span id="room-count"></span></h4><div id="room-list" class="room-list"><p>No device-local rooms yet.</p></div>
+<p class="tiny">Device loss or cleared browser storage destroys the signing identity: this first experiment does not export private keys. Signed messages remain portable; a room identity is not.</p>
+</section>
+<section class="workpanel" aria-labelledby="offer-title"><div class="step"><b>02</b><h3 id="offer-title">WRITE A BOUNDED OFFER</h3></div><p>Select the room whose key signs the letter. The message itself remains readable to anyone holding the JSON file.</p>
+<form id="offer-form"><label>From local room<select id="offer-sender" required><option value="">Create a room first</option></select></label>
+<label>Title<input id="offer-title" maxlength="100" minlength="4" required value="Could we improve one food handoff?"></label>
+<label>Proposed question / offer<textarea id="offer-description" maxlength="1200" minlength="8" rows="4" required>Could a recipient-owned food shelf identify one public-safe logistics friction worth testing? No deliveries, volunteers or organizations have agreed.</textarea></label>
+<label>Boundary / permission gate<textarea id="offer-scope" maxlength="600" minlength="8" rows="3" required>Discussion or synthetic rehearsal only. The intended receiver must independently approve any field action. No beneficiary records or food handling claims.</textarea></label>
+<label>Optional receiver public-key fingerprint<input id="offer-to" maxlength="64" pattern="[a-f0-9]{64}" placeholder="Leave blank for an open, public invitation" autocomplete="off"></label>
+<button class="primary" type="submit">SIGN OFFER · SAVE LOCALLY</button></form></section>
+<section class="workpanel" aria-labelledby="import-title"><div class="step"><b>03</b><h3 id="import-title">CARRY THE PARCEL</h3></div>
+<p><b>Phone A:</b> download a signed JSON envelope below. Share it directly as a file—Bluetooth, USB, Nearby Share or other deliberate transfer.</p>
+<p><b>Phone B:</b> open this same web application, create a different room, and import the JSON. No online relay is required once the app shell is cached.</p>
+<label class="file">IMPORT SIGNED JSON<input type="file" id="import" accept=".json,application/json"></label>
+<p class="tiny">Signatures prevent unnoticed changes to the envelope. They do not identify an organization's legitimate spokesperson or protect confidentiality.</p>
+<h4>Signed parcels on this device <span id="packet-count"></span></h4><div id="packets" class="packet-list"></div>
+</section>
+<section class="workpanel" aria-labelledby="reply-title"><div class="step"><b>04</b><h3 id="reply-title">THE RECEIVER GETS A VETO</h3></div>
+<p>An independent room may sign HOLD, REFUSE or REVIEW. None of these decisions authorizes real-world action.</p>
+<form id="reply-form"><label>Locally owned receiving room<select id="reply-room" required><option value="">Create a room first</option></select></label>
+<label>Imported offer<select id="reply-offer" required><option value="">Import an offer first</option></select></label>
+<label>Receiver-owned disposition<select id="reply-decision"><option value="HOLD">HOLD — not admitted</option><option value="REFUSE">REFUSE — stop this proposal</option><option value="REVIEW">REVIEW — consider locally; no action authorized</option></select></label>
+<label>Receiver's own note<textarea id="reply-note" minlength="8" maxlength="500" rows="3" required>We have not confirmed a real receiving organization. This is a signed practice response only.</textarea></label>
+<button class="primary" type="submit">SIGN INDEPENDENT RESPONSE</button></form>
+<p class="tiny">The sender may import this separately signed receipt, but cannot sign the receiver's key. Key ownership ≠ verified human identity.</p></section>
+</div>
+<p id="status" role="status" aria-live="polite">Ready. Nothing transmitted, sent, enrolled or authorized.</p>
+</section>
+<section class="nodes" id="nodes"><div class="chapter"><span>CHAPTER TWO / LOCATIONS THAT DON'T EXIST YET</span><h2>THE INDEPENDENT NODE ATLAS</h2><span>PROSPECTS ONLY</span></div>
+<p>Every host retains its own facilities, power, data, permission and right to refuse. Choose a possible host type to print an inquiry and optionally sign an <em>unverified host proposal</em> from a room you actually control.</p>
+<div id="node-cards" class="node-cards"></div>
+<article class="charter"><div><p class="kicker">HOST COVENANT / A PROPOSAL IS NOT AN ADMISSION</p><h3 id="node-name">Select a possible host</h3><p id="node-scene">No church, campus, co-op or event is onboarded by appearing here.</p><h4>Would help with</h4><p id="node-allow"></p><h4>Must not do</h4><p id="node-disallow"></p><h4>Power / energy policy</h4><p id="node-power"></p><h4>Owner gate</h4><p id="node-authority"></p><h4>Questions before installation</h4><div id="node-gates"></div></div>
+<div class="charter-actions"><label>Local room making the suggestion<select id="node-room"></select></label><button type="button" class="primary" id="sign-node">SIGN UNVERIFIED HOST PROPOSAL</button><button type="button" id="print-node">PRINT HOST COVENANT</button><p class="tiny">This does NOT create a real node, connect hardware, grant access, rent a space, or turn any institution into a partner. GHoT compute and reLATTE federation remain separate admission work.</p></div></article>
+</section>
+<section class="architecture"><div class="chapter"><span>CHAPTER THREE / THE SKELETON</span><h2>THE SYSTEM WE COULD GROW</h2><span>STATUS: CANDIDATE CONNECTIONS</span></div>
+<div class="blueprint"><div><b>DEVICE</b><h3>Local room</h3><p>Owner's files, local P-256 key, offline shell, offers and decisions.</p><span>WORKING HERE</span></div><div class="arrow">⇄</div><div><b>PARCEL</b><h3>Signed crossing</h3><p>Public JSON envelopes with digest and receiver-key response.</p><span>WORKING HERE · EXPERIMENTAL</span></div><div class="arrow">⇄</div><div><b>RELAY</b><h3>Optional post office</h3><p>Future zero-knowledge-ish delivery queue, separate access policies and real identity/consent process.</p><span>NOT BUILT HERE</span></div><div class="arrow">⇄</div><div><b>NODE</b><h3>Owner-approved host</h3><p>Future church, campus or co-op installation with physical permission and GHoT energy budgets.</p><span>NO HOST ENROLLED</span></div></div>
+<p class="statusline"><b>Protocol boundary:</b> SUITCASE-001 borrows reLATTE's proposal / receiver decision distinction but is <strong>not</strong> wire-compatible with production reLATTE. GRAFT review, planZ admission, secure routing, encrypted payloads, key backup, independent institutional verification and a real hosted relay remain gated work.</p>
+</section>
+</main>
+<footer><strong>ABUNDENT ✳ SUITCASE-001</strong><span>NO ACCOUNT · NO AUTOMATIC OUTBOUND TRAFFIC · PUBLIC-SAFE EXERCISE ONLY</span><a href="https://github.com/the-static-collective/webZ/blob/main/docs/SUITCASE-001.md" rel="noopener noreferrer">INSPECT SOURCE + LIMITATIONS ↗</a></footer></body></html>

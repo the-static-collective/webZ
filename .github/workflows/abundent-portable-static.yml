@@ -72,6 +72,11 @@ jobs:
           test -f apps/dist/bridge/outbox/vault.mjs
           test -f apps/dist/bridge/outbox/store.mjs
           test -f apps/dist/bridge/outbox/app.mjs
+          test -f apps/dist/bridge/suitcase/index.html
+          test -f apps/dist/bridge/suitcase/app.mjs
+          test -f apps/dist/bridge/suitcase/protocol.mjs
+          test -f apps/dist/bridge/suitcase/sw.js
+          test -f apps/dist/bridge/suitcase/manifest.webmanifest
           test ! -e apps/dist/.env
       - name: Save provider-independent site bundle
         uses: actions/upload-artifact@v4

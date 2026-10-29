@@ -70,3 +70,12 @@ test('Pages publication triggers for independently owned rooms, without an apps 
  for(const path of ["'apps/**'","'bridge/**'","'commons/**'","'jubilee/**'"]) assert.ok(workflow.includes(path),path);
  assert.ok(workflow.includes('test -f apps/dist/bridge/outbox/index.html'));
 });
+
+test('portable signed Suitcase Internet is visibly navigable and bundled',async()=>{
+ const fs=await import('node:fs');
+ const html=fs.readFileSync(new URL('./index.html',import.meta.url),'utf8');
+ const switchboard=fs.readFileSync(new URL('../bridge/index.html',import.meta.url),'utf8');
+ assert.ok(html.includes('href="./bridge/suitcase/"'));
+ assert.ok(switchboard.includes('href="./suitcase/"'));
+ for(const p of ['index.html','app.mjs','protocol.mjs','nodes.mjs','store.mjs','sw.js','manifest.webmanifest','icon.svg'])assert.ok(fs.existsSync(new URL('../bridge/suitcase/'+p,import.meta.url)),p);
+});
