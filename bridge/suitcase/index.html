@@ -38,7 +38,7 @@
 <h4>Rooms on this device <span id="room-count"></span></h4><div id="room-list" class="room-list"><p>No device-local rooms yet.</p></div>
 <p class="tiny">Device loss or cleared browser storage destroys the signing identity: this first experiment does not export private keys. Signed messages remain portable; a room identity is not.</p>
 </section>
-<section class="workpanel" aria-labelledby="offer-title"><div class="step"><b>02</b><h3 id="offer-title">WRITE A BOUNDED OFFER</h3></div><p>Select the room whose key signs the letter. The message itself remains readable to anyone holding the JSON file.</p>
+<section class="workpanel" aria-labelledby="offer-heading"><div class="step"><b>02</b><h3 id="offer-heading">WRITE A BOUNDED OFFER</h3></div><p>Select the room whose key signs the letter. The message itself remains readable to anyone holding the JSON file.</p>
 <form id="offer-form"><label>From local room<select id="offer-sender" required><option value="">Create a room first</option></select></label>
 <label>Title<input id="offer-title" maxlength="100" minlength="4" required value="Could we improve one food handoff?"></label>
 <label>Proposed question / offer<textarea id="offer-description" maxlength="1200" minlength="8" rows="4" required>Could a recipient-owned food shelf identify one public-safe logistics friction worth testing? No deliveries, volunteers or organizations have agreed.</textarea></label>

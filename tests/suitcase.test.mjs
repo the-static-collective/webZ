@@ -45,3 +45,8 @@ test("the suitcase is a static site, offline shell does not intercept credential
  assert.ok(sw.includes('request.method!=="GET"'));assert.ok(sw.includes('url.origin!==self.location.origin'));assert.ok(sw.includes("urls.has(url.pathname)"));
  assert.ok(!sw.includes("/api/"));
 });
+
+test("Suitcase markup never reuses an ID: form inputs must not be shadowed by headings",async()=>{
+ const {readFileSync}=await import("node:fs");const content=readFileSync(new URL("../bridge/suitcase/index.html",import.meta.url),"utf8");
+ const ids=[...content.matchAll(/\\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
+});
