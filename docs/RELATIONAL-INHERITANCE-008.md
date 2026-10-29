@@ -72,6 +72,23 @@ The **build** uses create-only output and refuses to overwrite an existing path.
 
 The second is not inferable from the first.
 
+## Relational Design Lab-informed practice: an independent relational review card
+
+Rather than putting RDL's name on the software, take the *publicly described design orientation* seriously. Its themes of **belonging, freedom and responsibility**, collective data practices, contextual social systems and **proliferation rather than growth controlled by a platform** translate here into questions a real, independently selected reviewer can reject or revise:
+
+| Relational question | Evidence to seek in a future, authorized non-sensitive human study | Invalid substitute |
+| --- | --- | --- |
+| **Whose presence changes the relationship?** | Independently map affected people, nonparticipants, operators and outside services; ask what each gains or loses | A social graph produced by software |
+| **Can the newcomer refuse without punishment?** | A participant can stop, refuse and use an existing service; examine concrete consequences | A signed REFUSE button alone |
+| **Who owns the local practice and accounts?** | Receiving group's actual access to hosting, paper, records and self-governance; ability to cut the upstream connection | An inherited SHA-256 and a fresh key |
+| **What can be changed?** | Participants can revise meeting rules, invitation materials and procedures without original founder veto | A renamed clone of an unchangeable policy |
+| **Who bears unseen labor and risk?** | Compensation, accessibility, privacy, safeguarding and crisis-referral capacity reviewed by qualified outsiders | Calculated volunteer/deed points |
+| **Does it proliferate rather than merely scale?** | An independent group can use the method without centrally managed accounts, branding or compulsory support payment | Increasing database membership or downloads |
+
+For the first public-only test, reviewers may use wholly fictional A/B/C/D paper roles. The *Lab itself does not review, approve, design, or own this worksheet.* If an independent relationship is ever developed, ask the Lab to critique it on its own terms rather than claiming the Lab's work has been implemented by us.
+
+**Software's non-inheritance test is necessary but not sufficient for a social-justice claim.** It tests cryptographic control, not hidden social power through money, physical space, law, reputation, dependency or access to care.
+
 ## Field-ready falsification plan (future, subject to outside safeguarding approval)
 
 Start **without** vulnerable participant data. Ask an independent qualified reviewer to examine a fictional paper version of A, B, C, D and identify *where real-world control could persist*: funding, physical premises, accounts, reputational pressure, crisis access, shared caregivers, software hosting, source-code updates, social influence, or compromised devices. Have a different reviewer attempt a denied withdrawal and forbidden disclosure. Record disagreements and failures.
