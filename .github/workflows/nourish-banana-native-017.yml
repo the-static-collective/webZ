@@ -1,0 +1,44 @@
+name: VOQAL-017 two native owners — Nourish to BananaSpork, no real dispatch
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/nourish-banana-native-crossing.mts'
+      - 'tests/nourish-banana-native-crossing.test.mjs'
+      - 'docs/NOURISH-BANANA-FORK-ROSETTA-017.md'
+      - '.github/workflows/nourish-banana-native-017.yml'
+jobs:
+  synthetic-two-owner-crossing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: WebZ local privacy/provenance assertions
+        run: node --test tests/nourish-banana-native-crossing.test.mjs tests/voqal-nourish-first-door.test.mjs tests/voqal-people-budget.test.mjs
+      - name: Fetch original source owners at exact pinned commits
+        run: |
+          git clone --quiet https://github.com/the-static-collective/Nourish-Kids.git /tmp/nourish-source
+          git -C /tmp/nourish-source checkout --quiet --detach 669d9750d62c670cfd3894fcffe367af83e85374
+          git clone --quiet https://github.com/the-static-collective/BananaSpork.git /tmp/banana-spork-source
+          git -C /tmp/banana-spork-source checkout --quiet --detach f4c4067b5896eb5eb20a7498f89da38f04731d73
+          test "$(git -C /tmp/nourish-source rev-parse HEAD)" = "669d9750d62c670cfd3894fcffe367af83e85374"
+          test "$(git -C /tmp/banana-spork-source rev-parse HEAD)" = "f4c4067b5896eb5eb20a7498f89da38f04731d73"
+      - name: Install receiving owner's pinned dependencies (no lifecycle scripts)
+        working-directory: /tmp/banana-spork-source
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run original recipient Help Slip tests
+        working-directory: /tmp/banana-spork-source
+        run: node --import tsx src/domain/help-slip/helpSlip.test.ts
+      - name: Execute original two-owner code with fictional pantry and refused authority
+        run: |
+          /tmp/banana-spork-source/node_modules/.bin/tsx scripts/nourish-banana-native-crossing.mts /tmp/nourish-source /tmp/banana-spork-source > /tmp/voqal-017-two-owner-SYNTHETIC.json
+          node --input-type=module -e 'import fs from "node:fs";let x=JSON.parse(fs.readFileSync("/tmp/voqal-017-two-owner-SYNTHETIC.json","utf8"));if(x.crossing.negativeCases.length!==8||x.crossing.attemptedPublish!=="authority_failed"||x.actual.childrenFed!==0||x.effects.network)process.exit(1)'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VOQAL-017-two-owner-SYNTHETIC-HOLD-only
+          path: /tmp/voqal-017-two-owner-SYNTHETIC.json
+          retention-days: 7
