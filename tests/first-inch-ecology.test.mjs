@@ -91,7 +91,7 @@ test("refuses oversized input, impossible budget, invalid round and unknown grap
   assert.throws(()=>generateSixUp({...input,effortBudget:51}),RangeError);
   assert.throws(()=>generateSixUp({...input,effortBudget:2.4}),RangeError);
   assert.throws(()=>generateSixUp({...input,round:-1}),RangeError);
-  assert.throws(()=>generateSixUp({...input,round:100}),RangeError);
+  assert.throws(()=>generateSixUp({...input,round:3}),RangeError);
   assert.throws(()=>makeDogramSpecimen("ghost"),RangeError);
   assert.throws(()=>generateSixUp({...input,goal:"no"}),RangeError);
   const a=generateSixUp({...input,have:null,needs:null});
