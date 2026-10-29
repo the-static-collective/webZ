@@ -28,7 +28,7 @@ Six candidate targets: question, inventory, draft, request, trial, review. The e
 
 The engine compares candidate closure sets on two *separate* axes: lower effort points and inclusion of other steps. It returns a non-dominated Pareto frontier without combining the two into a fabricated numerical utility. For these six targets, all six remain incomparable: cheaper question and inventory paths have less scope, while more expensive alternatives have different steps or gates. The UI does not pretend a single 'best' plan.
 
-Each candidate has three prewritten, accurate procedural variants. SCRAPE moves through deterministic indexed alternatives, preserving the supplied text, candidate structural roles and gates. No learning from a rejection, negative preference, network randomness, LLM inference, account or personal memory. KEEP selects a verifiable exact candidate and only changes a local text card. Stale form inputs invalidate the card.
+Each candidate has three prewritten, accurate procedural variants. SCRAPE moves through three unique deterministic indexed alternative families, preserving the supplied text, candidate structural roles and gates. No learning from a rejection, negative preference, network randomness, LLM inference, account or personal memory. KEEP selects a verifiable exact candidate and only changes a local text card. Stale form inputs invalidate the card.
 
 ## The Dogram separation
 
