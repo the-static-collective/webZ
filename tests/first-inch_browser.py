@@ -58,6 +58,14 @@ try:
         assert "mailto:us@abundent.org" in page.locator("#email").get_attribute("href")
         assert page.evaluate("localStorage.length === 0 && sessionStorage.length === 0")
 
+        # Editing a form field must invalidate the earlier, shareable draft.
+        page.locator("#needs").fill("permission and a volunteer signoff")
+        expect(page.locator("#result")).to_be_hidden()
+        page.get_by_role("button", name="Make a first-step card").click()
+        expect(page.locator("#result")).to_be_visible()
+        output = page.locator("#card-preview").inner_text()
+        assert "permission and a volunteer signoff" in output
+
         with page.expect_download() as d:
             page.locator("#save").click()
         saved = pathlib.Path(d.value.path()).read_text()
