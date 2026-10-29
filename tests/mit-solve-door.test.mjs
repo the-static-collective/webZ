@@ -38,3 +38,20 @@ test('MIT application packet is subject to evidence, eligibility and user-contro
  assert.match(source,/AI guidance/);
  assert.match(source,/no-exaggeration/i);
 });
+
+test('machine-readable doorway carries no fictional institutional authority',()=>{
+ const packet=JSON.parse(readFileSync(new URL('../bridge/mit-solve/doorway.json',import.meta.url),'utf8'));
+ assert.equal(packet.schema,'abundent/mit-solve-door-v1');
+ assert.equal(packet.application.state,'DRAFT_NOT_SUBMITTED');
+ assert.equal(packet.application.partner_count_verified,0);
+ assert.equal(packet.application.recipient_count_verified,0);
+ assert.equal(packet.pilot.first_table_observed,false);
+ assert.equal(packet.pilot.completion_observed,false);
+ assert.equal(packet.pilot.reviewed_real_result,false);
+ assert.equal(packet.risk_policy.auto_contacts,false);
+ assert.equal(packet.risk_policy.auto_submits,false);
+ assert.equal(packet.risk_policy.global_discoverability,false);
+ assert.equal(packet.opportunity.deadline_local,'2026-11-06T11:00:00-06:00');
+ assert.equal(packet.core_fabric.length,6);
+ for(const c of packet.core_fabric)assert.ok(c.source.startsWith('https://github.com/the-static-collective/'));
+});
