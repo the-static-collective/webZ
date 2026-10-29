@@ -59,7 +59,11 @@ try:
   expect(pb.locator("#packet-count")).to_have_text("3",timeout=16000)
   assert "NOT permission" in pb.locator("#status").inner_text()
   expect(pa.locator("#room-count")).to_have_text("1")
+  if not pa.evaluate("document.documentElement.scrollWidth<=window.innerWidth"):
+   print("OVERFLOW_A",pa.evaluate("""()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,parts:[...document.querySelectorAll("*")].filter(el=>el.getBoundingClientRect().right>innerWidth+2).slice(0,8).map(el=>({tag:el.tagName,id:el.id,klass:el.className,right:Math.round(el.getBoundingClientRect().right)}))})"""),flush=True)
   assert pa.evaluate("document.documentElement.scrollWidth<=window.innerWidth")
+  if not pb.evaluate("document.documentElement.scrollWidth<=window.innerWidth"):
+   print("OVERFLOW_B",pb.evaluate("""()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,parts:[...document.querySelectorAll("*")].filter(el=>el.getBoundingClientRect().right>innerWidth+2).slice(0,8).map(el=>({tag:el.tagName,id:el.id,klass:el.className,right:Math.round(el.getBoundingClientRect().right)}))})"""),flush=True)
   assert pb.evaluate("document.documentElement.scrollWidth<=window.innerWidth")
   # A new visit should work with network disabled after the SW cached its public shell.
   pa.evaluate("navigator.serviceWorker.ready")
