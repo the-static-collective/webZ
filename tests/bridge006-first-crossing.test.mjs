@@ -25,7 +25,7 @@ test("drafts are copyable and within official character limits, never pre-popula
  }
  assert.match(DRAFTS[1].value,/one recurring step/i);
  assert.match(DRAFTS[1].value,/\[Sender: add your name/);
- assert.equal(SOURCES.length,7);
+ assert.equal(SOURCES.length,9);
  assert.match(DRAFTS[0].value,/First Circle Foundry/);
  assert.match(DRAFTS[0].value,/Harmony Park/);
  assert.ok(DRAFTS[0].value.length<=750);
