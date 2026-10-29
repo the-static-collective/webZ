@@ -1,0 +1,39 @@
+name: VOQAL-014 source-native Stranger Gauntlet (synthetic)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'bridge/first/stranger-gauntlet*'
+      - 'tests/stranger-gauntlet.test.mjs'
+      - 'scripts/stranger-gauntlet-demo.mjs'
+      - '.github/workflows/stranger-gauntlet-014.yml'
+jobs:
+  synthetic-native:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original signed WebZ source + hostile-claim tests
+        run: node --test tests/second-table.test.mjs tests/stranger-gauntlet.test.mjs
+      - name: Four independent fictional challenges and retained evidence
+        run: |
+          mkdir -p /tmp/voqal-014
+          for scenario in newcomer food repair music; do
+            node scripts/stranger-gauntlet-demo.mjs "$scenario" > "/tmp/voqal-014/$scenario-SYNTHETIC-HOLD.json"
+          done
+          node --input-type=module -e '
+            import fs from "node:fs";
+            for(const id of ["newcomer","food","repair","music"]){
+              const p=JSON.parse(fs.readFileSync("/tmp/voqal-014/"+id+"-SYNTHETIC-HOLD.json"));
+              if(p.reviewers.length!==3||p.attacks.length!==7||p.attacks.some(a=>!a.refused)||p.humanEvidence.people!==0) process.exit(1);
+            }
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VOQAL-014-synthetic-not-human-proof
+          path: /tmp/voqal-014/*.json
+          retention-days: 7
