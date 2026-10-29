@@ -71,6 +71,40 @@ try:
         saved = pathlib.Path(d.value.path()).read_text()
         assert saved == output
 
+        # Optional Toaster-style SIX-UP opens without changing first-screen simplicity.
+        page.locator("#planning-lab > summary").click()
+        expect(page.locator(".six-card")).to_have_count(6)
+        expect(page.locator("#lab-message")).to_contain_text("Round 1")
+        assert "OVER DECLARED EFFORT BUDGET" not in page.locator(".six-card").first.inner_text()
+        assert "HOLD" in page.locator('[data-role="TRIAL"]').inner_text()
+
+        first_approach = page.locator('[data-role="QUESTION"]').inner_text()
+        page.get_by_role("button", name="KEEP Design a tiny field trial").click()
+        expect(page.locator("#card-preview")).to_contain_text("NO EXECUTION AUTHORITY")
+        expect(page.locator("#card-preview")).to_contain_text("HOLD — independent human evidence required")
+
+        page.locator("#scrape").click()
+        expect(page.locator("#lab-message")).to_contain_text("Round 2")
+        assert page.locator('[data-role="QUESTION"]').inner_text() != first_approach
+        expect(page.locator("#card-preview")).not_to_contain_text("KEPT PLANNING DRAFT")
+
+        with page.expect_download() as ablation:
+            page.locator("#dogram-export").click()
+        specimen = json.loads(pathlib.Path(ablation.value.path()).read_text())
+        assert specimen["schema"] == "dogram.specimen/v0"
+        assert specimen["operator"] == "ablate"
+        assert specimen["inputs"]["target"] == {"kind": "node", "node": "approval"}
+        assert "volunteer-led grocery" not in json.dumps(specimen)
+        assert "site permission" not in json.dumps(specimen)
+
+        page.locator("#effort-budget").fill("2")
+        page.locator("#effort-budget").dispatch_event("change")
+        expect(page.locator("#lab-message")).to_contain_text("Round 1")
+        assert "above declared budget" in page.locator('[data-role="DRAFT"]').inner_text()
+        assert "within declared budget" in page.locator('[data-role="QUESTION"]').inner_text()
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        assert page.evaluate("localStorage.length === 0 && sessionStorage.length === 0")
+
         assert all(url.startswith(base) for url in requests), requests
         assert not errors, errors
         print(json.dumps({
