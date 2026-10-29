@@ -1,0 +1,19 @@
+name: VOQAL-015 people and budget audit
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'bridge/first/voqal-people-budget.mjs'
+      - 'tests/voqal-people-budget.test.mjs'
+      - '.github/workflows/voqal-people-budget-015.yml'
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/voqal-people-budget.test.mjs tests/stranger-gauntlet.test.mjs
