@@ -72,7 +72,7 @@ function show(id){active=id;const data=composeCulturePresentation(id);lastData=d
 $('audience').addEventListener('change',e=>show(e.target.value));
 $('previous').addEventListener('click',()=>view(page-1));$('next').addEventListener('click',()=>view(page+1));
 document.addEventListener('keydown',e=>{if(e.target.matches('select,button,input,textarea'))return;if(e.key==='ArrowRight')view(page+1);if(e.key==='ArrowLeft')view(page-1);});
-function saveJson(filename,content){const blob=new Blob([JSON.stringify(content,null,2)+'\\n'],{type:'application/json'});
+function saveJson(filename,content){const blob=new Blob([JSON.stringify(content,null,2)+'\n'],{type:'application/json'});
  const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('print').addEventListener('click',()=>window.print());
 $('pages').addEventListener('click',e=>{if(e.target?.id==='culture-export')saveJson('harmony-culture-seed-'+active+'.json',composeCulturalSeed(active,$('culture-topic').value));});

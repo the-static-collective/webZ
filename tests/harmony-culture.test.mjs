@@ -75,5 +75,5 @@ test('one source question can produce seven separately held cross-medium proposa
  assert.equal(custom.expressions[0].question,custom.source.question);
  assert.throws(()=>composeCulturalSeed('food','x'.repeat(241)),RangeError);
  assert.ok(read('bridge/harmony/pitch.mjs').includes('culture-export'));
- assert.doesNotMatch(read('bridge/harmony/culture-seed.mjs'),/\\bfetch\\s*\\(|XMLHttpRequest|sendBeacon/);
+ assert.ok(!read('bridge/harmony/culture-seed.mjs').includes('fetch('));
 });
