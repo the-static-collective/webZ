@@ -88,8 +88,15 @@ function build(data){
  const links=p(s,'p');a(links,'Inspect passing three-owner workflow and held artifact bundle ↗','https://github.com/the-static-collective/CANNON/actions/runs/40867825635');
  p(s,'p','This proves independently governed reception, not publication, copyright transfer, economic value, PENNY issuance, or a real beneficiary. The two receiver/code PRs remain unmerged experiments.','warning');
  }));
+ created.push(slide('Witnessed review and signed return',s=>{
+ title(s,'17 / SOURCE-PINNED CULTURAL ECONOMY','The tools now execute across eight independent source repositories.','Actual Harmony/GrO media becomes a lemonPRESS HOLD. Native Full Measure tests separately reviewed fictional participation; native PENNY validates zero issued units. GHoT computes a persisted source hash, while reLATTE signs receipt and local HOLD.');
+ const aRow=p(s,'div',undefined,'row');
+ a(aRow,'Original Full Measure × PENNY verification ↗','https://github.com/the-static-collective/CANNON/actions/runs/40869577086');
+ a(aRow,'Original GHoT × signed reLATTE HOLD ↗','https://github.com/the-static-collective/CANNON/actions/runs/40870169565');
+ p(s,'p','No real authenticated participant, verified cultural use, rights release, publication, economic issuance or external exchange is claimed.','warning');
+ }));
  created.push(slide('What to test',s=>{
-  title(s,'17 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  title(s,'18 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
   const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
   p(s,'blockquote',scene.proof);
   p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
