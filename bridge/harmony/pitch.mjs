@@ -55,8 +55,20 @@ function build(data){
   const g=p(s,'div',undefined,'grid');stages.forEach(st=>{const c=p(g,'article',undefined,'card');p(c,'h3',st.title);p(c,'p',st.organs.map(x=>x.name).join(' · '),'small')});
   p(s,'p','A potential host only needs one relevant entrance. The larger system is discoverable without being compulsory.','lead');
  }));
+ created.push(slide('The economics of crafting',s=>{
+ title(s,'14 / MATTER + IDEA + CULTURE','The economy is richer than the price tag.',
+ 'An idea can become seven creative expressions without disappearing. Four pieces of wood cannot be spent twice. Both are attributable particulars—but they require different accounting.');
+ const b=p(s,'div',undefined,'split');
+ const left=p(b,'article',undefined,'card');p(left,'h3','Mattercraft · 42 WOOD');
+ p(left,'p','42 claimed, 39 fictionally counted. The discrepancy remains visible. Burning four is merely a held preview; no ash, heat, conservation measurement or spendable wood is invented.');
+ const right=p(b,'article',undefined,'card');p(right,'h3','Ideacraft · A room that remembers');
+ p(right,'p','One idea may seed a song, film, photo, comic, zine, live event or playable world. A source hash preserves ancestry; real rights and use require a separate human decision.');
+ p(s,'p','GrO encounters. Full Measure witnesses work. PENNY accounts for independently attested stewardship and resource commitments. reLATTE carries bounded proposals. THE BELT is an optional foreign settlement boundary.','lead');
+ const link=p(s,'p');a(link,'Open the live Matter × Idea Craft demonstrator ↗','./craft.html');
+ p(s,'p','No actual NFT mint, price, license, deed or custody proof occurs here.','warning');
+ }));
  created.push(slide('What to test',s=>{
-  title(s,'14 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
+  title(s,'15 / ASK / TEST / RETURN','One honest pilot is stronger than a fictional civilization.',scene.ask);
   const ul=p(s,'ol',undefined,'list');data.proposedPattern.forEach(step=>p(ul,'li',step));
   p(s,'blockquote',scene.proof);
   p(s,'p','Proposal ≠ admission. Rendering ≠ ownership. A signed packet ≠ human identity. Report ≠ independently confirmed result.','warning');
