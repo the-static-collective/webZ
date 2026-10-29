@@ -4,7 +4,7 @@ const el=id=>document.getElementById(id);
 const fields=["context","need","offer","measure","stop"];
 const exportButtons=["download","download-json","copy"];
 let active=null, printable="";
-function status(message,error=false) { el("status").textContent=message; el("status").style.color=error?"#f8b692":"#e4c17c"; }
+function status(message,error=false) { el("status").textContent=message; el("status").dataset.error=String(error); }
 function setReady(ready) { for(const id of exportButtons) el(id).disabled=!ready; }
 function clearPreview() { active=null; printable=""; setReady(false); el("card-list").replaceChildren(); }
 function restore() {
