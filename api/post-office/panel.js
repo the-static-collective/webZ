@@ -58,14 +58,14 @@ function makeSession(secret,now){
   const material='v1.'+String(now)+'.'+randomBytes(16).toString('hex');
   return material+'.'+hmac(secret,'session:'+material);
 }
-function shape(input){
+function shape(input,maxBytes=1024){
   if(Buffer.isBuffer(input))input=input.toString('utf8');
   if(typeof input==='string'){
-    if(Buffer.byteLength(input,'utf8')>1024)return null;
+    if(Buffer.byteLength(input,'utf8')>maxBytes)return null;
     try{input=JSON.parse(input)}catch{return null}
   }
   if(!input||typeof input!=='object'||Array.isArray(input))return null;
-  if(Buffer.byteLength(JSON.stringify(input),'utf8')>1024)return null;
+  if(Buffer.byteLength(JSON.stringify(input),'utf8')>maxBytes)return null;
   return input;
 }
 function keysAre(x,expected){
@@ -107,8 +107,8 @@ export function makePanelHandler({env=process.env,send=fetch,clock=()=>Date.now(
     if(req.headers?.['content-type']?.split(';')[0].trim()!=='application/json'||!sameOrigin(req)){
       return json(res,403,{state:'HOLD',reason:'same-origin-json-required'});
     }
-    const body=shape(req.body);
-    if(!body||typeof body.action!=='string')return json(res,400,{state:'HOLD',reason:'invalid-command'});
+    const body=shape(req.body,30000);
+    if(!body||typeof body.action!=='string'||(!body.action.startsWith('draft-')&&Buffer.byteLength(JSON.stringify(body),'utf8')>1024))return json(res,400,{state:'HOLD',reason:'invalid-command'});
     if(body.action==='request-code'){
       if(!keysAre(body,'action'))return json(res,400,{state:'HOLD',reason:'invalid-command'});
       if(!validInbox(env.POST_OFFICE_TEST_TO)||typeof env.RESEND_API_KEY!=='string'||env.RESEND_API_KEY.length<12){
@@ -165,6 +165,29 @@ export function makePanelHandler({env=process.env,send=fetch,clock=()=>Date.now(
     if(!session)return json(res,401,{state:'LOCKED'});
     if(!safeEqual(req.headers?.['x-post-office-csrf'],session.csrf)){
       return json(res,403,{state:'HOLD',reason:'session-csrf-required'});
+    }
+    if(['draft-list','draft-save','draft-delete'].includes(body.action)){
+      const bridgeUrl=env.POST_OFFICE_DRAFTS_BRIDGE_URL;
+      const bridgeKey=env.POST_OFFICE_DRAFTS_BRIDGE_KEY;
+      if(typeof bridgeUrl!=='string'||!/^https:\/\/[a-z0-9-]+\.supabase\.co\/functions\/v1\/post-office-drafts$/.test(bridgeUrl)
+        ||typeof bridgeKey!=='string'||bridgeKey.length<40){
+        return json(res,503,{state:'HOLD',reason:'private-drafts-not-configured'});
+      }
+      let command;
+      if(body.action==='draft-list'&&keysAre(body,'action'))command={action:'list'};
+      else if(body.action==='draft-save'&&keysAre(body,'action,draft,revision')){
+        command={action:'save',draft:body.draft,revision:body.revision};
+      }else if(body.action==='draft-delete'&&keysAre(body,'action,id,revision')){
+        command={action:'delete',id:body.id,revision:body.revision};
+      }else return json(res,400,{state:'HOLD',reason:'invalid-draft-command'});
+      try{
+        const remote=await send(bridgeUrl,{method:'POST',headers:{
+          'content-type':'application/json','x-post-office-bridge-key':bridgeKey
+        },body:JSON.stringify(command),signal:AbortSignal.timeout(12000)});
+        let result;try{result=await remote.json()}catch{result=null}
+        if(!result||typeof result.state!=='string')return json(res,502,{state:'HOLD',reason:'invalid-drafts-response'});
+        return json(res,remote.status,result);
+      }catch{return json(res,502,{state:'HOLD',reason:'drafts-bridge-unavailable'})}
     }
     if(body.action==='logout'){
       if(!keysAre(body,'action'))return json(res,400,{state:'HOLD',reason:'invalid-command'});
