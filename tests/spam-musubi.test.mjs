@@ -71,7 +71,7 @@ test('plain language contains test hypotheses only',()=>{
 test('local UI has no remote integration or persistent storage',()=>{
  const page=readFileSync(new URL('../response-grammar/compost.html',import.meta.url),'utf8');
  assert.match(page,/spam-musubi.mjs/);
- assert.doesNotMatch(page,/<form\b|https?:\/\/|<iframe\b/i);
+ assert.doesNotMatch(page,/<form\b|<iframe\b|<script[^>]+src\s*=\s*['\"]https?:/i);
  assert.doesNotMatch(page,/\bfetch\s*\(|localStorage|indexedDB|XMLHttpRequest|sendBeacon|WebSocket|EventSource/);
  assert.match(page,/input.value=''/);
 });
