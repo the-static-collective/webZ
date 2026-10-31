@@ -11,7 +11,10 @@ The Next Paper replaces the Daily Slice **as the outward-facing invitation newsp
 - The measure of circulation is useful exchange and voluntary human participation, not impressions.
 
 ## Issue index
-- [000: Local grocery spotted on folding table](000/) — possible future + real TABLE invitation, Waseca.
+- [001: Local bus needs two things nobody’s using](001/) — real 2008 International BE200 / MaxxForce 7 problem, possible ECM donation and temporary RP1210 loan; exact compatibility unverified. Includes [printable field card](001/field-card.html).
+- [000: Local grocery spotted on folding table](000/) — possible future + real TABLE invitation, Waseca (unchanged historical archive).
 
 ## Delivery
-The publication is static HTML. The first invitation uses the already established `us@abundent.org` mailbox and an ordinary mailto link. There is no hidden form, mailing-list enrollment, public submission feed, or automated matching.
+The publication is static HTML. The first and second invitations use the already established `us@abundent.org` mailbox and an ordinary mailto link. There is no hidden form, mailing-list enrollment, public submission feed, or automated matching.
+## Field 001 status and privacy
+Issue 001 concerns an actual privately owned bus, not an already completed repair. The vehicle year/model/engine is used publicly to invite technical leads, but its VIN, precise location, owner identity, diagnostic records and firmware are not published. No Ford PCM is claimed interchangeable. Only exact label/cross-reference and competent technical verification can promote a donor lead. RP1210/NEXIQ family diagnostics support is not itself a programming authorization or a substitute for appropriate software and power safety. Mailbox replies stay private; donors must explicitly agree to any transfers or loans. No automatic outreach, transaction, identity matching or completed outcome is asserted.
