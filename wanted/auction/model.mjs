@@ -36,7 +36,7 @@ export function availableCredits(lab) {
   return lab.walletCredits - used;
 }
 export function phase(want, now = nowTime()) {
-  return want.status === "OPEN" && now >= want.expiresAt ? "EXPIRED" : want.status;
+  return ["OPEN", "SELECTED"].includes(want.status) && now >= want.expiresAt ? "EXPIRED" : want.status;
 }
 function updated(lab, wantId, nextWant, event, at, note) {
   return { ...lab,
