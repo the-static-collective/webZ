@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#142522"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Turn an ordinary real-world need, object or ability into a portable card. Invite a reply, report an action, and get a second person's return. No account or server.">
+<title>Living Cards · Abundent field experiment</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./ui.mjs"></script>
+</head><body>
+<a href="#main" class="skip">Skip to main content</a>
+<header class="top"><a class="brand" href="https://abundent.org/">abundent<span>✳</span></a><nav><a href="#make">Make a card</a><a href="#open">Open one</a><a href="#how">How it works</a></nav><span class="experimental">FIELD EXPERIMENT · 001</span></header>
+<main id="main">
+<section class="hero"><div class="eyebrow">ONE SMALL THING, ONE ACTUAL POSSIBILITY</div>
+<h1>Make a card.<br><em>Make something happen.</em></h1>
+<p class="lead">Have something? Need something? Can do something? Put it on a card, share it with one person, and see if it becomes a real act.</p>
+<div class="badges"><span>No account</span><span>No money</span><span>No invented community</span></div>
+</section>
+<section class="truth"><strong>THIS IS A REAL TOOL WITH A SMALL REACH.</strong><p>Cards and replies live in links you choose to send, not on a public board. Nothing is automatically posted, matched, sold, reserved, or verified. You and the other person decide what actually happens.</p></section>
+<div class="columns">
+<section class="panel" id="make" aria-labelledby="make-title"><div class="eyebrow">01 / REALITY → CARD</div><h2 id="make-title">What's real around you?</h2>
+<form id="new-card">
+<label>I'm describing…<select name="kind"><option value="HAVE">Something I have</option><option value="NEED">Something I need</option><option value="CAN_DO">Something I can do</option></select></label>
+<label>The thing / need / ability<input name="title" required minlength="3" maxlength="90" placeholder="A folding chair I can lend" autocomplete="off"></label>
+<label>Anything someone should know<textarea name="detail" maxlength="240" rows="3" placeholder="Works fine. Available this weekend. No sale involved."></textarea></label>
+<label>General area (not your address)<input name="area" required minlength="3" maxlength="80" placeholder="Waseca area, Minnesota" autocomplete="off"></label>
+<label>Optional deadline<input name="deadline" type="datetime-local"></label>
+<label class="check"><input name="consent" type="checkbox" required><span>This is my own description. I understand sharing the link will share these details, and a card does not prove ownership or permission.</span></label>
+<button type="submit" class="primary">Make my card →</button></form>
+<button id="demo" type="button" class="secondary">Try a clearly fictional example</button>
+</section>
+<section class="panel instructions" id="how"><div class="eyebrow">02 / CARD → ACTION</div><h2>One card can make a round trip.</h2>
+<ol><li><b>Make it.</b><p>Describe one object, need, or capability you actually know about.</p></li>
+<li><b>Carry it.</b><p>Share a link directly to someone you choose. You can also save JSON or print a paper card.</p></li>
+<li><b>Hear back.</b><p>They tap “I can help,” “I'm interested,” “Question,” or “Pass,” then send a response link back.</p></li>
+<li><b>Do the thing.</b><p>Someone acts in the physical world. A person reports what happened; another can confirm or dispute the report.</p></li></ol>
+<div class="callout"><strong>A link is not permission.</strong><p>There is no payment, custody tracking, authenticated identity, or legal transfer here. Physical handoffs require their own clear agreement. Human reports remain self-attested.</p></div>
+</section>
+</div>
+<section class="panel import" id="open"><div class="eyebrow">03 / HAVE A CARD OR RETURN?</div><h2>Open a card link or file.</h2><p>If someone sent you a Living Cards link, simply open it. You can also paste it here or import their JSON file. No login needed.</p>
+<div class="open-grid"><label>Paste a Living Cards link<textarea rows="2" id="paste" placeholder="https://…/#packet=…" spellcheck="false"></textarea></label><button type="button" id="open-link" class="secondary">Open pasted link</button>
+<label class="file-input">Or choose a JSON card<input type="file" id="file" accept=".json,application/json"></label></div>
+</section>
+<section class="viewer" id="viewer" hidden aria-label="Current portable card">
+<div class="view-head"><div><div class="eyebrow">04 / THIS CARD IS IN YOUR HANDS</div><h2>Inspect before acting.</h2></div><button type="button" id="new" class="quiet">Start another</button></div>
+<div class="card" id="card-print">
+<div class="card-top"><span class="card-mark">LIVING <span>CARDS</span></span><span id="card-type"></span></div>
+<div class="card-inner"><div class="card-overline" id="card-kind"></div><h3 id="card-title"></h3><p id="card-detail"></p>
+<div class="card-data"><div><b>General area</b><span id="card-area"></span></div><div><b>Deadline</b><span id="card-deadline"></span></div></div></div>
+<div class="card-foot"><span id="card-state"></span><span id="short-id"></span></div>
+</div>
+<div class="packet"><p id="packet-context"></p><p id="packet-note"></p><p class="fine" id="fingerprint"></p><div class="commands">
+<button id="share" type="button" class="primary">Share this card / return</button>
+<button id="copy" type="button" class="secondary">Copy link</button>
+<button id="download" type="button" class="quiet">Save JSON</button>
+<button id="print" type="button" class="quiet">Print card</button>
+<button id="save-local" type="button" class="quiet">Keep on this device</button>
+</div><div class="link-box"><label>Complete portable link (sharing reveals the card's details)<textarea id="link" rows="3" readonly spellcheck="false"></textarea></label></div>
+</div>
+<div id="actions" class="activity"></div>
+</section>
+<section class="panel" id="saved"><div class="eyebrow">ON THIS DEVICE · OPTIONAL</div><h2>Cards you chose to keep</h2>
+<p class="fine">This list is browser-only, unsynchronized and not a public database. Anyone with your device or a copied link may read the details. Keep no private or sensitive information in a card.</p>
+<div id="local-list"></div><button class="quiet" type="button" id="clear-local">Clear saved cards on this browser</button>
+</section>
+<section class="endnote"><div class="eyebrow">THE FIRST FIELD TEST</div><h2>One real thing. One person. One return.</h2><p>Start with something simple and safe: a spare chair, a book, or a small help request. When someone sends back a response, we've tested whether a card actually helped a real person connect with a real possibility. If a physical act occurs, report it; the other person can confirm or dispute it.</p>
+<p>What broke? Was it useful? You can <a href="mailto:us@abundent.org?subject=Living%20Cards%20field%20feedback">send field feedback</a>. Nothing about a card is emailed automatically.</p>
+</section>
+</main><footer>Living Cards 001 · Cards are representations and invitations, not title, money, consent, or physical possession. No actual users or transactions are claimed.</footer>
+<p id="status" role="status" aria-live="polite"></p>
+</body></html>
