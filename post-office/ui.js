@@ -15,7 +15,7 @@ async function post(body,extra={}){
 }
 async function refresh(){
   const res=await fetch(api,{credentials:'same-origin',cache:'no-store'});
-  if(res.status===401){csrf='';lock.hidden=false;desk.hidden=true;queue.replaceChildren();return}
+  if(res.status===401){csrf='';lock.hidden=false;desk.hidden=true;queue.replaceChildren();draftRows=[];selected=null;return}
   if(!res.ok){announce('HOLD: operator desk unavailable ('+res.status+').');return}
   const data=await res.json();csrf=data.csrf;
   if(data.state!=='AUTHORIZED'||!Array.isArray(data.messages)){announce('HOLD: unexpected desk response.');return}
@@ -56,8 +56,7 @@ async function refresh(){
     });
     card.append(sendBtn);queue.append(card);
   }
-  await loadSavedDrafts();
-  announce('Authorized. Saved drafts are ready to review. Nothing was sent.');
+  if(await loadSavedDrafts())announce('Authorized. Saved drafts are ready to review. Nothing was sent.');
 }
 request.addEventListener('click',async()=>{
   request.disabled=true;announce('Requesting private owner access code…');
@@ -127,17 +126,18 @@ function drawDraftList(){
  if(!draftList.children.length){const p=document.createElement('p');p.className='fine';p.textContent='No saved letters match.';draftList.append(p)}
 }
 async function loadSavedDrafts(){
- if(!csrf)return;
+ if(!csrf)return false;
  try{
    const r=await post({action:'draft-list'},{'X-Post-Office-CSRF':csrf});
    if(!r.ok||r.state!=='OK'||!Array.isArray(r.drafts)){
      announce('HOLD · Private draft storage unavailable: '+(r.reason||r.status)+'.');
-     return;
+     return false;
    }
    draftRows=r.drafts;
    const pick=draftRows.find(d=>d.id===selected?.id)||draftRows[0]||null;
    displayDraft(pick);drawDraftList();
- }catch{announce('HOLD · Private draft storage is unavailable. No drafts were sent.')}
+   return true;
+ }catch{announce('HOLD · Private draft storage is unavailable. No drafts were sent.');return false}
 }
 function validAddress(line){
  return !!line&&line.split(',').every(addr=>/^[^@\s,;<>]+@[^@\s,;<>]+\.[^@\s,;<>]+$/.test(addr.trim()));
