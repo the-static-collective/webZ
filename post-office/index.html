@@ -7,7 +7,7 @@
 <title>Post Office · Abundent operator desk</title>
 <link rel="stylesheet" href="./style.css"><script type="module" src="./ui.js"></script></head>
 <body><main class="shell">
-<header class="mast"><div><div class="eyebrow">ABUNDENT / POST OFFICE 007</div><h1>The Post Office</h1><p>Private operator desk · reviewed organizational correspondence</p></div><span class="seal">NO AUTO-SEND</span></header>
+<header class="mast"><div><div class="eyebrow">ABUNDENT / POST OFFICE 007</div><h1>The Post Office</h1><p>Private operator desk · write, save, and review real outgoing correspondence</p></div><span class="seal">NO AUTO-SEND</span></header>
 <section class="paper" id="lock">
 <h2>Open the operator desk</h2>
 <p>No API token is needed in your browser. Request a code sent to the existing private owner inbox, then enter it here. No new mailbox is created.</p>
@@ -19,6 +19,21 @@
 </section>
 <section class="paper" id="desk" hidden>
 <div class="row"><div><h2>Review the next letter</h2><p>Only source-approved messages can be sent. No free-text recipients or mass mailing.</p></div><button id="logout" type="button" class="quiet">Sign out</button></div>
+<section class="draft-desk" aria-label="Saved email drafts">
+<div class="row"><div><h2>Saved letters</h2><p>Private drafts shared between this operator desk and the assistant's authorized project workspace. Write, edit, save and copy them. Nothing sends automatically.</p></div>
+<div class="actions"><button type="button" id="draft-new">+ New email</button><button type="button" class="quiet" id="draft-reload">Refresh drafts</button></div></div>
+<div class="draft-grid"><aside><label for="draft-filter">Find a letter</label><input type="text" id="draft-filter" placeholder="Nexus, Coalition, church…" maxlength="100"><div id="draft-list" class="draft-list" aria-live="polite"></div></aside>
+<div><form id="draft-editor" hidden autocomplete="off">
+<label for="draft-to">To (optional until sending)</label><input id="draft-to" type="text" maxlength="500" placeholder="someone@example.org" autocomplete="off">
+<label for="draft-subject">Subject</label><input id="draft-subject" type="text" maxlength="250" required>
+<label for="draft-body">Message</label><textarea id="draft-body" rows="13" maxlength="14000" required></textarea>
+<label for="draft-note">Private reminder / follow-up note</label><textarea id="draft-note" rows="3" maxlength="1200"></textarea>
+<label for="draft-state">Readiness</label><select id="draft-state"><option value="DRAFT">Draft — still editing</option><option value="READY">Ready for my review</option><option value="HOLD">Hold — not ready</option></select>
+<p id="draft-when" class="fine"></p>
+<div class="actions"><button type="submit" id="draft-save">Save changes</button><button type="button" id="draft-copy" class="secondary">Copy</button><button type="button" id="draft-email" class="secondary">Open email app</button><button type="button" id="draft-remove" class="quiet">Delete</button></div>
+<p class="fine">Opening your email app prepares a message; it does not prove sending. The From account and recipient must be checked in the email app. Revisit this desk to edit drafts later.</p>
+</form><p id="draft-empty" class="fine">Choose a saved draft or create a new letter.</p></div></div></section>
+<h2>Fixed approved dispatch</h2><p class="fine">The older approved-send mechanism is separate. It cannot send your editable drafts.</p>
 <div id="queue" aria-live="polite"></div>
 </section>
 <p id="status" role="status" aria-live="polite" class="status">Locked. No messages sent.</p>
