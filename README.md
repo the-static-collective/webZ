@@ -36,6 +36,10 @@ The evidence viewer accepts only a bounded `webz/sanitized-maxhinal/v0` public c
 
 Approved design sources remain unchanged: [GENESIS](docs/superpowers/specs/2026-10-06-webz-genesis-001-design.md) and [MAXHINAL/PORCH](docs/superpowers/specs/2026-10-06-webz-maxhinal-porch-001-design.md). The feature PR is stacked on webZ PR #2; it does not merge or deploy its design or alter neighboring approved baselines.
 
+## Living Cards 001 — first real-world round trip
+
+[Open Living Cards](cards/). A mobile, no-account instrument to convert an actual HAVE / NEED / CAN_DO into a portable shareable **unsigned** card; another person can manually return an unverified reply, and an operator can report a real action for a second person to confirm or dispute. No volunteers, server, payment or fabricated demand are prerequisites. All links carry their own data; local saving is opt-in only. The `/cards/` workbench is distinct from source-bound GrO FORAGE and from WANTED financial hypotheses. [Field protocol, privacy and proof gates](docs/LIVING-CARDS-001.md). Tests: `node --test tests/living-cards.test.mjs`.
+
 ## GrO × WALL-E — Field Porch 001
 
 The first opt-in **GrO/FORAGE field crossing** lives at [WEBZ Field Porch](forage/).
