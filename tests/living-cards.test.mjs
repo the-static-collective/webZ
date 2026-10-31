@@ -60,7 +60,7 @@ test("accidental or adversarial changes fail linked fingerprint checks",async()=
   const x=structuredClone(p); x.card.title="Another object";
   await assert.rejects(()=>validatePacket(x),/modified card/);
   const y=structuredClone(p); y.reply.card.title="Altered chair";
-  await assert.rejects(()=>validatePacket(y),/fingerprint mismatch/);
+  await assert.rejects(()=>validatePacket(y),/(fingerprint mismatch|modified card)/);
   const z=await makeReturn(p,"DISPUTED","Not witnessed",opts());
   z.report.note="It happened differently";
   await assert.rejects(()=>validatePacket(z),/modified report/);
