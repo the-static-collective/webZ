@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#090f18">
+<meta name="description" content="Teach a tiny inspectable classifier, grow an idle scout, and propose held community matches. An experimental creative AI classroom.">
+<title>The Question Arcade · a little machine learning</title>
+<link rel="stylesheet" href="./style.css">
+<!-- p5.js is optional: the entire app also works with its offline Canvas fallback. -->
+<script defer src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+<script defer type="module" src="./main.mjs"></script>
+</head><body>
+<a class="skip" href="#learn">Skip to machine controls</a>
+<div class="noise" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="mark" href="./" aria-label="Question Arcade home">Q<span>?</span></a>
+  <div class="wordmark"><strong>THE STATIC COLLECTIVE</strong><small>FIELD EXPERIMENT 001 · OPEN LAB</small></div>
+  <span class="status"><span class="live-dot"></span> LOCAL MACHINE</span>
+</header>
+<main>
+<section class="hero">
+  <p class="eyebrow">WELCOME TO THE LITTLE MACHINE SCHOOL</p>
+  <h1>THE QUESTION<br><em>ARCADE<span class="blink">_</span></em></h1>
+  <p class="intro">A clicker game that really learns. Teach a tiny machine. Watch its guesses improve. Let it scout while you're away. Then discover how careful questions might help people connect.</p>
+  <div class="hero-actions"><a href="#learn" class="btn primary">START TEACHING <span aria-hidden="true">↘</span></a><a href="#rules" class="btn ghost">HOW IT WORKS</a></div>
+  <p class="boundary">NO ACCOUNTS · NO TRACKERS · NO CLOUD TRAINING · FICTIONAL COMMUNITY DATA</p>
+</section>
+<section class="ticker" aria-label="Machine statistics">
+ <div><small>SPARKS EARNED</small><strong id="points">0</strong></div>
+ <div><small>REAL EXAMPLES</small><strong id="lessons">0</strong></div>
+ <div><small>HELD-OUT ACCURACY</small><strong id="accuracy">—</strong></div>
+ <div><small>SCOUT QUEUE</small><strong id="queueCount">0</strong></div>
+</section>
+<section class="lab layout" id="learn" aria-labelledby="machine-title">
+  <div class="cabinet">
+   <div class="cabinet-head"><span>01 / CLASSIFIER</span><span id="cabinetStatus">NEEDS TRAINING</span></div>
+   <div class="screen"><div id="p5-stage" role="img" aria-label="Visual machine observing specimen features and accumulated training examples"><canvas id="fallback" width="720" height="420" aria-hidden="true"></canvas></div><div class="scanlines" aria-hidden="true"></div><span class="screen-corner">ORCHARD-01<br>SIMULATED BIOLOGY</span></div>
+   <div class="cabinet-foot"><span class="led"></span><span id="machineSpeech" aria-live="polite">Hi. I don't know anything yet. Can you teach me?</span></div>
+  </div>
+  <div class="panel control">
+   <div class="panel-head"><span class="chapter">01</span><div><p class="overline">FIRST LESSON</p><h2 id="machine-title">Teach the machine.</h2></div></div>
+   <p class="section-copy">Three imaginary seed species. Look at color, shape, and size. Give examples; the machine learns by comparing the closest ones.</p>
+   <div class="legend" id="legend"></div>
+   <div class="specimen" id="specimen" aria-live="polite"><span class="specimen-icon">?</span><div><small>CURRENT SPECIMEN</small><strong>Nothing observed yet</strong><p>Press OBSERVE to begin.</p></div></div>
+   <div class="buttons"><button id="observe" class="btn primary">① OBSERVE</button><button id="guess" class="btn secondary" disabled>② GUESS</button></div>
+   <p class="overline label-title">③ TEACH / CORRECT THE MODEL</p>
+   <div id="teachButtons" class="label-buttons"></div>
+   <div class="feedback" id="feedback" role="status">Teaching is real. Clicking a wrong answer does not train it.</div>
+   <div class="meter"><div class="meter-track"><div id="meterFill"></div></div><small id="meterText">0 / 9 examples toward routing</small></div>
+  </div>
+</section>
+<section class="lab layout alt" id="scouts" aria-labelledby="scout-title">
+ <div class="panel">
+  <div class="panel-head"><span class="chapter">02</span><div><p class="overline">IDLE LOOP</p><h2 id="scout-title">The night-shift scout.</h2></div></div>
+  <p class="section-copy">Once your model demonstrates skill, it can classify fresh synthetic specimens every 12 seconds—including while this tab is closed. Its guesses queue up. <b>They never turn into training data until a person checks them.</b></p>
+  <p id="scoutLock" class="locked">LOCKED · Teach 6 examples covering all three species and reach 60% holdout accuracy.</p>
+  <div id="scoutQueue" class="scout-list" aria-live="polite"></div>
+ </div>
+ <div class="aside-stat"><span class="eyebrow">A MACHINE WITH DOUBT</span><strong id="accuracyBig">0%</strong><span>ACCURACY ON 45 UNSEEN TEST SPECIMENS</span><p>We test against examples withheld from training. A vote-share number is not a calibrated probability. More examples don't always make the model better.</p><div class="small-chart" id="miniChart" aria-hidden="true"></div></div>
+</section>
+<section class="lab layout" id="router" aria-labelledby="router-title">
+ <div class="panel">
+  <div class="panel-head"><span class="chapter">03</span><div><p class="overline">THE COMMONS CONNECTION</p><h2 id="router-title">From pattern to possibility.</h2></div></div>
+  <p class="section-copy">An entirely fictional Waseca-style exercise. Match a community need to a compatible offer. Every suggestion remains a <b>HOLD</b> until reviewed; this does not contact anyone.</p>
+  <p id="routerLock" class="locked">LOCKED · Teach 9 examples (at least 2 per species) and reach 70% holdout accuracy.</p>
+  <div id="routerWork" hidden>
+   <label class="field-label" for="need">CHOOSE A FICTIONAL COMMUNITY NEED</label>
+   <select id="need"></select>
+   <div id="offers" class="offer-list"></div>
+   <p class="microcopy">Matches start with visible tag overlap and place. Use TEACH YES/NO to train a second tiny k-NN model on fictional pairs; its signal changes ranking but cannot override a no-overlap refusal.</p>
+   <div id="heldPreview" class="held-preview" aria-live="polite">No route held yet.</div>
+   <div class="buttons"><button id="exportHeld" class="btn primary" disabled>EXPORT HELD JSON ↗</button><button id="copyHeld" class="btn secondary" disabled>COPY ENVELOPE</button><a href="./bridge/" class="btn ghost">OPEN RECEIVING DESK ↗</a></div>
+  </div>
+ </div>
+ <div class="aside-stat route-art"><div class="route-circle">? <i>→</i> !</div><p>Ideas are cheap.<br>Permission is not.</p><span>PROPOSE ≠ SEND ≠ VERIFY</span></div>
+</section>
+<section class="lab" id="rules">
+ <div class="rules"><div><p class="overline">HOW THE MACHINE WORKS</p><h2>Real learning.<br><em>Real boundaries.</em></h2></div><div class="rules-copy"><p><strong>LEARN.</strong> A three-nearest-neighbors (k-NN) classifier uses your accepted examples. Each guess lists the actual examples it relied on.</p><p><strong>SCOUT.</strong> The idle loop makes new predictions but never invents truth. You review it before it learns.</p><p><strong>ROUTE.</strong> Community matches are synthetic examples. Exported packets say <code>HOLD</code>, carry their evidence, and claim no consent, sending, or completed outcomes.</p><p><strong>OWN.</strong> Progress stays in this browser's local storage when available. Reset wipes it. No server is contacted for gameplay. The optional p5.js visual library loads from a public CDN when online.</p><div class="buttons"><button id="reset" class="btn ghost danger">RESET LOCAL MACHINE</button><a class="btn ghost" href="../../">RETURN TO webZ ↗</a></div></div></div>
+</section>
+</main>
+<footer><span>QUESTION ARCADE · 001</span><span>PLAY / QUESTION / CORRECT / RETURN</span><span>AN EXPERIMENT, NOT A DEPLOYED COMMUNITY SERVICE</span></footer>
+</body></html>
