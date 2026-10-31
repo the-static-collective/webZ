@@ -56,7 +56,8 @@ async function refresh(){
     });
     card.append(sendBtn);queue.append(card);
   }
-  announce('Authorized. Review each letter before sending. Nothing has been sent by signing in.');
+  await loadSavedDrafts();
+  announce('Authorized. Saved drafts are ready to review. Nothing was sent.');
 }
 request.addEventListener('click',async()=>{
   request.disabled=true;announce('Requesting private owner access code…');
@@ -88,3 +89,114 @@ logout.addEventListener('click',async()=>{
   logout.disabled=false;
 });
 refresh().catch(()=>announce('HOLD · Unable to reach Post Office.'));
+
+
+/* Editable and persistent letters. Stored in private database through authenticated server only. */
+const draftList=byId('draft-list'),draftForm=byId('draft-editor'),draftEmpty=byId('draft-empty');
+const draftFields={recipient:byId('draft-to'),subject:byId('draft-subject'),body:byId('draft-body'),
+ note:byId('draft-note'),status:byId('draft-state')};
+let draftRows=[],selected=null,dirty=false,draftWorking=false;
+function draftText(){
+ return {id:selected.id,recipient:draftFields.recipient.value.trim(),
+  subject:draftFields.subject.value.trim(),body:draftFields.body.value.trim(),
+  note:draftFields.note.value.trim(),status:draftFields.status.value};
+}
+function warnChanges(){return !dirty||confirm('Leave this letter without saving your latest edits?')}
+function displayDraft(d){
+ selected=d;dirty=false;draftForm.hidden=!d;draftEmpty.hidden=!!d;
+ if(!d)return;
+ for(const [field,input] of Object.entries(draftFields))input.value=d[field]|| (field==='status'?'DRAFT':'');
+ byId('draft-when').textContent=d.revision
+   ? 'Saved revision '+d.revision+' · '+new Date(d.updated_at).toLocaleString()
+   : 'New draft — not saved yet';
+ drawDraftList();
+}
+function drawDraftList(){
+ draftList.replaceChildren();
+ const term=byId('draft-filter').value.trim().toLowerCase();
+ for(const d of draftRows){
+   if(term&&![d.recipient,d.subject,d.note,d.body].join(' ').toLowerCase().includes(term))continue;
+   const b=document.createElement('button');b.type='button';b.className='draft-choice';
+   b.setAttribute('aria-current',String(selected?.id===d.id));
+   const head=document.createElement('strong');head.textContent=d.subject;
+   const meta=document.createElement('small');meta.textContent=(d.recipient||'Recipient not chosen')+' · '+d.status;
+   b.append(head,meta);
+   b.addEventListener('click',()=>{if(warnChanges())displayDraft(d)});
+   draftList.append(b);
+ }
+ if(!draftList.children.length){const p=document.createElement('p');p.className='fine';p.textContent='No saved letters match.';draftList.append(p)}
+}
+async function loadSavedDrafts(){
+ if(!csrf)return;
+ try{
+   const r=await post({action:'draft-list'},{'X-Post-Office-CSRF':csrf});
+   if(!r.ok||r.state!=='OK'||!Array.isArray(r.drafts)){
+     announce('HOLD · Private draft storage unavailable: '+(r.reason||r.status)+'.');
+     return;
+   }
+   draftRows=r.drafts;
+   const pick=draftRows.find(d=>d.id===selected?.id)||draftRows[0]||null;
+   displayDraft(pick);drawDraftList();
+ }catch{announce('HOLD · Private draft storage is unavailable. No drafts were sent.')}
+}
+function validAddress(line){
+ return !!line&&line.split(',').every(addr=>/^[^@\s,;<>]+@[^@\s,;<>]+\.[^@\s,;<>]+$/.test(addr.trim()));
+}
+async function saveDraft(){
+ if(!selected||draftWorking)return false;
+ const draft=draftText();
+ if(!draft.subject||!draft.body){announce('Add a subject and message before saving.');return false}
+ if(draft.recipient&&!validAddress(draft.recipient)){announce('Please review the email address.');return false}
+ draftWorking=true;byId('draft-save').disabled=true;
+ try{
+   const r=await post({action:'draft-save',draft,revision:selected.revision??null},{'X-Post-Office-CSRF':csrf});
+   if(r.state!=='OK'||!r.draft){
+     announce('HOLD · '+(r.reason||'Draft was not saved')+'. Refresh before editing if there is a conflict.');
+     return false;
+   }
+   const i=draftRows.findIndex(x=>x.id===r.draft.id);
+   if(i<0)draftRows.unshift(r.draft);else draftRows[i]=r.draft;
+   displayDraft(r.draft);
+   announce('Saved privately · '+r.draft.subject+'. Not sent.');
+   return true;
+ }catch{announce('HOLD · Save failed. Your unsaved text remains in the editor.');return false}
+ finally{draftWorking=false;byId('draft-save').disabled=false}
+}
+for(const input of Object.values(draftFields))input.addEventListener('input',()=>{dirty=true;byId('draft-when').textContent='Unsaved changes'});
+byId('draft-filter').addEventListener('input',drawDraftList);
+byId('draft-reload').addEventListener('click',async()=>{if(warnChanges())await loadSavedDrafts()});
+byId('draft-new').addEventListener('click',()=>{
+ if(!warnChanges())return;
+ const id='letter-'+crypto.randomUUID();
+ displayDraft({id,recipient:'',subject:'',body:'',note:'',status:'DRAFT',revision:null});
+ draftFields.subject.focus();
+});
+draftForm.addEventListener('submit',async event=>{event.preventDefault();await saveDraft()});
+byId('draft-copy').addEventListener('click',async()=>{
+ if(!selected)return;
+ const d=draftText();
+ try{
+   await navigator.clipboard.writeText('To: '+(d.recipient||'[recipient to review]')+'\nSubject: '+d.subject+'\n\n'+d.body);
+   announce('Copied current draft. No email sent.');
+ }catch{announce('Clipboard blocked. Select and copy the draft text manually.')}
+});
+byId('draft-email').addEventListener('click',async()=>{
+ if(!selected)return;
+ const d=draftText();
+ if(!validAddress(d.recipient)){announce('Enter and verify a recipient before opening the email app.');return}
+ if(d.body.length>7000){announce('Long message: use Copy to transfer to your email app without truncation.');return}
+ if(dirty||!selected.revision){if(!await saveDraft())return}
+ const params=new URLSearchParams({subject:d.subject,body:d.body});
+ announce('Preparing mail app · verify the From account and press Send yourself.');
+ window.location.href='mailto:'+d.recipient.split(',').map(x=>x.trim()).join(',')+'?'+params.toString();
+});
+byId('draft-remove').addEventListener('click',async()=>{
+ if(!selected||!confirm('Delete this saved letter? This cannot undo an external email send.'))return;
+ if(selected.revision===null){displayDraft(draftRows[0]||null);return}
+ const id=selected.id,rev=selected.revision;
+ try{
+   const r=await post({action:'draft-delete',id,revision:rev},{'X-Post-Office-CSRF':csrf});
+   if(r.state==='OK'){draftRows=draftRows.filter(d=>d.id!==id);displayDraft(draftRows[0]||null);announce('Deleted saved draft. No email sent.')}
+   else announce('HOLD · '+(r.reason||'Delete failed')+'. Refresh if this changed elsewhere.');
+ }catch{announce('HOLD · Unable to delete; no change confirmed.')}
+});
