@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5edda">
+<meta name="description" content="A real 2008 International bus needs an ECM and temporary access to a programming interface. Two honest questions. Two possible exchanges. Help check the match.">
+<meta property="og:type" content="article"><meta property="og:site_name" content="The Next Paper · Abundent">
+<meta property="og:title" content="LOCAL BUS NEEDS TWO THINGS NOBODY'S USING | The Next Paper">
+<meta property="og:description" content="The bus is real. The repair hasn't happened. Maybe two people with idle parts and tools can help—after compatibility is checked.">
+<meta property="og:url" content="https://abundent.org/paper/001/">
+<meta name="twitter:card" content="summary">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'">
+<title>THE NEXT PAPER · Issue 001 · A real bus needs two things</title>
+<style>
+:root{color-scheme:light;--paper:#f7f0df;--ink:#192b24;--green:#174d3b;--line:#697a67;--red:#9d472e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#e3dfd2;color:var(--ink);font:18px/1.66 Georgia,'Times New Roman',serif}
+a{color:var(--green)}a:focus-visible{outline:3px solid var(--red);outline-offset:4px}
+.sheet{max-width:900px;min-height:100vh;margin:0 auto;background:var(--paper);padding:20px clamp(21px,5.3vw,68px) 32px;box-shadow:0 8px 45px #273a3027}
+.topline,.eyebrow,.meta,.notice,.button,.bottom,nav,.subhead{font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.topline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px;font-size:.72rem;letter-spacing:.04em;font-weight:750}
+.topline a{text-decoration:none}.topline a:hover{text-decoration:underline}
+.masthead{text-align:center;border-bottom:7px double var(--ink);padding:21px 0 17px}
+.masthead .name{display:block;font-size:clamp(3.25rem,11vw,6.5rem);font-weight:bold;letter-spacing:-.077em;line-height:.94}
+.masthead .subhead{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:750;margin-top:15px}
+.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px;border-bottom:1px solid var(--ink);padding:10px 0;font-size:.71rem;font-weight:700;letter-spacing:.04em}
+.eyebrow{color:var(--red);font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin:26px 0 8px}
+h1{font-size:clamp(2.7rem,7.2vw,4.65rem);line-height:1.02;letter-spacing:-.055em;margin:0 0 14px;font-weight:800}
+.deck{font-size:clamp(1.18rem,3vw,1.42rem);line-height:1.33;margin:0 0 25px;font-style:italic}
+.story{border-top:1px solid var(--ink);padding-top:20px}
+.story p{margin:0 0 17px}
+.story .first:first-letter{float:left;font-size:3.45em;line-height:.82;padding:5px 7px 0 0;font-weight:800}
+.pivot{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:clamp(1.4rem,4.4vw,2rem);font-weight:900;line-height:1.25;letter-spacing:-.04em;margin:27px 0; padding:20px 0;border-block:2px solid var(--ink)}
+.invite{border:3px solid var(--green);padding:clamp(19px,4vw,28px);background:#fffaf0;margin:29px 0 20px}
+.invite h2{font-size:clamp(1.55rem,4vw,2.2rem);line-height:1.15;letter-spacing:-.035em;margin:0 0 14px}
+.invite p{margin:0 0 13px}
+.button{display:inline-block;text-align:center;padding:13px 20px;margin:13px 0 8px;background:var(--green);color:white;text-decoration:none;font-weight:800;font-size:.95rem;border:2px solid var(--green)}
+.button:hover{background:#24684e}
+.notice{font-size:.82rem;line-height:1.55;color:#3b4a40}
+.bottom{border-top:7px double var(--ink);padding-top:18px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;font-size:.76rem}
+.bottom a{font-weight:700}
+.future-label{display:inline-block;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:.72rem;letter-spacing:.09em;border:1px solid var(--red);color:var(--red);padding:5px 8px;font-weight:900;transform:rotate(-2deg)}
+@media(min-width:720px){.story{columns:2;column-gap:36px;column-rule:1px solid #abb4a2}.story p,.story .pivot{break-inside:avoid}}
+@media(max-width:500px){body{font-size:17px}.sheet{padding-top:14px}.masthead{padding-top:20px}.topline{font-size:.67rem}.meta{font-size:.67rem}}
+@media print{body{background:white}.sheet{box-shadow:none;max-width:none;padding:0}.button{background:white;color:var(--ink)}}
+</style></head><body><div class="sheet">
+<header>
+ <div class="topline"><a href="https://abundent.org/">← Abundent</a><span>TAKE ONE · PASS IT ON</span><a href="mailto:us@abundent.org?subject=The%20Next%20Paper%20%E2%80%94%20Issue%20001">Write to the paper ↗</a></div>
+ <div class="masthead"><span class="name">The Next<br>Paper</span><div class="subhead">News from a future we haven't made yet.</div></div>
+ <div class="meta"><span>SOUTHERN MINNESOTA</span><span>ISSUE 001 · OCTOBER 31, 2026</span><span>FREE TO READ · FREE TO SHARE</span></div>
+</header>
+<main>
+ <div class="eyebrow">The real-world repair desk &nbsp; / &nbsp; Two possible crossings</div>
+ <h1>LOCAL BUS NEEDS TWO THINGS NOBODY'S USING</h1>
+ <p class="deck">A retired engine computer. A borrowed programming tool. Possibly the smallest repair crew in Minnesota.</p>
+ <div class="future-label">A REAL PROBLEM · A POSSIBLE FUTURE · REPAIR NOT COMPLETE</div>
+ <article class="story" aria-label="Issue 001">
+ <p class="first"><strong>SOUTHERN MINNESOTA —</strong> There is a real bus with a real problem. It's a 2008 International BE200 with a 6.4-liter MaxxForce 7 diesel. Its owner reports a failed engine control module (ECM).</p>
+ <p>The dream is modest: get the bus running again without buying an entirely new pile of equipment.</p>
+ <p>Somewhere, someone may have a compatible ECM inside a vehicle that has already made its last trip. Somewhere else, a mechanic may have a diagnostic interface sitting on a shelf.</p>
+ <p>The owner doesn't necessarily need to buy that second tool. They may only need temporary access.</p>
+ <p>Now imagine two strangers discovering they each hold one missing piece.</p>
+ <p>One has a part. One has a cable. An old bus has another chance.</p>
+ <div class="pivot">That repair hasn't happened.<br>But the problem is real.</div>
+ <p>Here's the trick: stop asking only where to buy a solution. Ask what the world already contains, who is caring for it, and what conditions would make sharing possible.</p>
+ <p>Maybe a scrapyard has a computer that fits. Maybe a diesel technician can lend an interface for an afternoon. Maybe the right person spots the request and corrects a mistaken assumption before anything is shipped.</p>
+ <p>That's the experiment. Not just fixing one vehicle—finding out whether two voluntary exchanges can turn idle resources into useful work.</p>
+ <p>And it begins with an honest technical question, because sharing the wrong part would waste everyone's time.</p>
+ </article>
+ <section class="invite" id="invitation" aria-labelledby="wanted">
+  <div class="eyebrow">The invitation is real · Two separate asks</div>
+  <h2 id="wanted">Got a retired ECM, or a tool you could lend?</h2>
+  <p><strong>ASK 01 — A possibly compatible salvage ECM.</strong> A genuine Navistar/International part for a 2008 MaxxForce 7 would be especially interesting. Please share the <em>part number on the label</em> before offering to remove or ship anything. Compatibility is not confirmed.</p>
+  <a class="button" href="mailto:us@abundent.org?subject=BUS%20ECM%20%E2%80%94%20The%20Next%20Paper%20%E2%80%94%20POSSIBLE%20ECM&amp;body=Hello!%20I%20read%20Issue%20001%20about%20the%202008%20International%20bus.%0A%0AI%20can%20help%20with%3A%20POSSIBLE%20ECM%0A%0AWhat%20I%20have%20%2F%20know%20(model%20or%20part%20label%2C%20not%20private%20VIN)%3A%20%0A%0AApproximate%20region%3A%20%0A%0AIs%20this%20a%20donation%2C%20a%20possible%20short-term%20loan%2C%20or%20technical%20guidance%3F%20%0A%0AAnything%20that%20needs%20to%20be%20checked%20before%20we%20proceed%3F%20%0A%0ANo%20obligation.%20Please%20reply%20to%20discuss%20next%20steps.%0A">I might have an ECM →</a>
+  <p><strong>ASK 02 — Temporary access to an RP1210 vehicle interface.</strong> Navistar has documented NEXIQ USB-Link 1/2, Dearborn DPA 5 and Noregon DLA-series interfaces for its diagnostics software. The required connector, protocol and programming support must be verified for this exact job.</p>
+  <a class="button" href="mailto:us@abundent.org?subject=BUS%20ECM%20%E2%80%94%20The%20Next%20Paper%20%E2%80%94%20RP1210%20TOOL%20LOAN&amp;body=Hello!%20I%20read%20Issue%20001%20about%20the%202008%20International%20bus.%0A%0AI%20can%20help%20with%3A%20RP1210%20TOOL%20LOAN%0A%0AWhat%20I%20have%20%2F%20know%20(model%20or%20part%20label%2C%20not%20private%20VIN)%3A%20%0A%0AApproximate%20region%3A%20%0A%0AIs%20this%20a%20donation%2C%20a%20possible%20short-term%20loan%2C%20or%20technical%20guidance%3F%20%0A%0AAnything%20that%20needs%20to%20be%20checked%20before%20we%20proceed%3F%20%0A%0ANo%20obligation.%20Please%20reply%20to%20discuss%20next%20steps.%0A">I might lend a tool →</a>
+  <p><strong>ALSO WELCOME — A diesel technician who can verify the match.</strong> A shared engine family isn't evidence of ECU interchangeability. A correct part number and a safe service procedure matter more than an enthusiastic guess.</p>
+  <a class="button" href="mailto:us@abundent.org?subject=BUS%20ECM%20%E2%80%94%20The%20Next%20Paper%20%E2%80%94%20COMPATIBILITY%20KNOW-HOW&amp;body=Hello!%20I%20read%20Issue%20001%20about%20the%202008%20International%20bus.%0A%0AI%20can%20help%20with%3A%20COMPATIBILITY%20KNOW-HOW%0A%0AWhat%20I%20have%20%2F%20know%20(model%20or%20part%20label%2C%20not%20private%20VIN)%3A%20%0A%0AApproximate%20region%3A%20%0A%0AIs%20this%20a%20donation%2C%20a%20possible%20short-term%20loan%2C%20or%20technical%20guidance%3F%20%0A%0AAnything%20that%20needs%20to%20be%20checked%20before%20we%20proceed%3F%20%0A%0ANo%20obligation.%20Please%20reply%20to%20discuss%20next%20steps.%0A">I know how to check →</a>
+  <p class="notice"><strong>What this does not do:</strong> It does not reserve, accept, or transfer equipment automatically. No payment or commitment is required to inquire. Please don't publicly post VINs, addresses, keys, firmware, or third-party contact details. We will verify a proposed match privately before arranging custody or use. Do not mail parts unsolicited.</p>
+ </section>
+ <section aria-labelledby="field-notes">
+  <div class="eyebrow">The field notes · Verified / not verified</div>
+  <h2 id="field-notes">A good repair begins with a good question.</h2>
+  <p><strong>Known:</strong> The owner has a 2008 International BE200 with a MaxxForce 7 (6.4L) and reports the ECM needs replacement. The unit has been removed for assessment.</p>
+  <p><strong>Known about tools:</strong> Navistar's published Engine Diagnostics manual lists the NEXIQ USB-Link 1/2, Dearborn DPA 5 and Noregon DLA among tested interfaces. This is evidence for diagnostics compatibility, not a guarantee of unrestricted firmware flashing or programming authority.</p>
+  <p><strong>Not yet verified:</strong> The current ECM's exact label, which salvaged ECM numbers interchange, whether any Ford vehicle computer will work, interface harness and protocol requirements for bench/vehicle connection, or whether existing firmware and software are authentic and appropriate.</p>
+  <p><strong>Correction to the rumor:</strong> Ford's related 6.4L Power Stroke was offered in 2008–2010 <em>Super Duty</em> trucks, not the F-150. Engine ancestry alone does not establish ECM compatibility. A Ford donor is a lead to investigate, not an approved substitute.</p>
+  <p class="notice">Sources: <a href="https://msi.navistar.com/public/ned/4328482.pdf">Navistar Engine Diagnostics user guide, diagnostic interface information</a> · <a href="https://www.ford.com/power-stroke-diesel/">Ford Power Stroke history</a> · <a href="https://www.dieselhub.com/powerstroke/6.4-power-stroke.html">6.4L Super Duty application overview</a>. Source documents describe equipment families; final module selection still requires technical verification.</p>
+ </section>
+ <div class="pivot">The machine can make an invitation.<br>The people decide what crosses.</div>
+ <aside class="invite" aria-labelledby="experiment">
+  <div class="eyebrow">FIELD EXPERIMENT 001 · BOUNDARY INHABITATION</div>
+  <h2 id="experiment">Be the marble. Check both sides.</h2>
+  <p>From the bus: <em>What precise property of the missing part matters?</em> From the donor: <em>What condition makes an offer reasonable?</em> From the borrowed tool: <em>Is access enough, or is ownership necessary?</em> From the crossing: <em>What must each person agree to before anything moves?</em></p>
+  <p>We will record only confirmed steps: exact compatibility checked, willing donor found, loan terms agreed, part actually transferred, and any repair outcome witnessed. An unconfirmed lead stays a lead.</p>
+  <p><a href="https://abundent.org/paper/001/field-card.html">Print the two-ask field card →</a> &nbsp; · &nbsp; <a href="https://abundent.org/paper/000/">Read Issue 000: the folding-table grocery →</a></p>
+ </aside>
+</main>
+<footer class="bottom"><div><strong>THE NEXT PAPER · ISSUE 001</strong><br>The news hasn't happened yet. You're invited.</div><nav aria-label="More"><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fabundent.org%2Fpaper%2F001%2F" target="_blank" rel="noopener noreferrer">Share on Facebook ↗</a> &nbsp; · &nbsp; <a href="mailto:us@abundent.org?subject=The%20Next%20Paper%20%E2%80%94%20Issue%20001%20correction">Report a correction</a> &nbsp; · &nbsp; <a href="https://abundent.org/paper/">Latest issue</a></nav></footer>
+</div></body></html>
