@@ -5,8 +5,8 @@ import { ROOTS, resolvePath, makeCard, asPlainText, SCHEMA } from '../response-g
 
 const original = { context: 'The food shelf needs a delivery', path: ['offer','transport'], note: 'I might have a car Tuesday.' };
 
-test('six human response roots, each meaningfully refined', () => {
-  assert.deepEqual(ROOTS.map(x => x.id), ['notice', 'feel', 'ask', 'offer', 'invite', 'boundary']);
+test('seven human response roots, each meaningfully refined', () => {
+  assert.deepEqual(ROOTS.map(x => x.id), ['notice', 'play', 'feel', 'ask', 'offer', 'invite', 'boundary']);
   for (const root of ROOTS) assert.ok(root.next.length >= 3);
 });
 test('bare acknowledgment works without context; never implies promise', () => {
@@ -81,4 +81,12 @@ test('offline first: no external scripts, forms, storage or analytics', () => {
   assert.match(html,/type="module" src="\.\/app\.mjs"/);
   assert.doesNotMatch(html,/<form\b|https?:\/\/|<iframe\b/i);
   assert.doesNotMatch(app,/\bfetch\s*\(|localStorage|indexedDB|XMLHttpRequest|sendBeacon|WebSocket|new\s+EventSource/);
+});
+
+test('a joking person is not silently treated as a spammer or making an offer', () => {
+  const card = makeCard({ context:'southpark!', path:['play','absurd'], note:'who framed Roger Rabbit' });
+  assert.equal(card.response.kind, 'playful_expression');
+  assert.equal(card.response.own_words, 'who framed Roger Rabbit');
+  assert.equal(card.action, 'NOT_PERFORMED');
+  assert.equal(card.obligation, 'NONE');
 });

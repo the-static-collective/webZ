@@ -13,6 +13,15 @@ export const ROOTS = [
     ],
   },
   {
+    id: 'play', label: "I'm playing with this.", kind: 'playful_expression',
+    next: [
+      { id: 'joke', label: "I'm joking.", kind: 'playful_expression' },
+      { id: 'riff', label: "I'm riffing on an idea.", kind: 'playful_expression' },
+      { id: 'absurd', label: "This is an absurd what-if.", kind: 'playful_expression' },
+      { id: 'tease', label: "I'm teasing, not making an offer.", kind: 'playful_expression' },
+    ],
+  },
+  {
     id: 'feel', label: 'I feel something.', kind: 'self_report',
     next: [
       { id: 'concerned', label: "I'm concerned.", kind: 'self_report', next: [

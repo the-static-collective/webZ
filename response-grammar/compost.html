@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPAM MUSUBI · HEY. Lab</title>
+<style>
+:root{color-scheme:dark;font-family:ui-monospace,Menlo,Consolas,monospace;background:#101b17;color:#f2f3e8}
+*{box-sizing:border-box} body{margin:0}
+main{max-width:760px;margin:auto;padding:1.4rem 1rem 4rem}
+.eyebrow{letter-spacing:.13em;color:#b3cdad;font-size:.75rem}
+h1{font-size:clamp(2.5rem,9vw,5.5rem);line-height:1;margin:1rem 0;color:#e6ffa6}
+h2{font-size:1.25rem}
+p{line-height:1.5}
+.panel{border:1px solid #7b9c81;border-radius:8px;margin:1.2rem 0;padding:1.1rem;background:#19241d}
+label{display:block;font-weight:700;margin-bottom:.6rem}
+textarea{width:100%;min-height:9rem;resize:vertical;background:#0c1410;color:#fff;border:1px solid #9db6a7;border-radius:5px;font:inherit;padding:.75rem}
+button{font:inherit;font-weight:bold;border:1px solid #e6ffa6;border-radius:5px;background:#e6ffa6;color:#112017;padding:.75rem 1rem;cursor:pointer}
+button.secondary{background:transparent;color:#e6ffa6}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.buttons{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.85rem}
+ul{padding-left:1.5rem}li{margin:.6rem 0}
+small,.muted{color:#b8cbbb}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-height:24rem;overflow:auto;background:#0c1410;padding:1rem}
+a{color:#e6ffa6}
+</style>
+<script type="module">
+import { compost, printableRecipes } from './spam-musubi.mjs';
+const input=document.getElementById('paste');
+const result=document.getElementById('result');
+const status=document.getElementById('status');
+const recipes=document.getElementById('recipes');
+const output=document.getElementById('export');
+let prepared=null;
+function clear(){
+  input.value='';prepared=null;
+  result.textContent='No review recipe generated.';
+  recipes.replaceChildren();
+  status.textContent='Input cleared from the form. The page saves nothing.';
+  output.disabled=true;
+}
+document.getElementById('clear').addEventListener('click',clear);
+document.getElementById('sample').addEventListener('click',()=>{
+  input.value='CHECK THIS OUT https://example.invalid/a\nCHECK THIS OUT https://example.invalid/a\nCHECK THIS OUT https://example.invalid/a';
+  status.textContent='Synthetic example loaded. No real spam used.';
+});
+document.getElementById('analyze').addEventListener('click',()=>{
+  try{
+    prepared=compost(input.value);
+    // The raw source is intentionally cleared as soon as the local summary exists.
+    input.value='';
+    result.textContent=JSON.stringify(prepared,null,2);
+    recipes.replaceChildren();
+    for(const item of prepared.recipes){
+      const li=document.createElement('li');
+      li.textContent=item.question+' '+item.expected;
+      recipes.append(li);
+    }
+    output.disabled=false;
+    status.textContent='Raw text cleared. Only source-free test recipes remain in page memory. Not a spam verdict.';
+  }catch(err){
+    prepared=null;output.disabled=true;
+    result.textContent='No test recipe was produced.';
+    recipes.replaceChildren();
+    status.textContent=err.message;
+  }
+});
+output.addEventListener('click',()=>{
+  if(!prepared)return;
+  const file=new Blob([JSON.stringify(prepared,null,2)+'\n'],{type:'application/json'});
+  const url=URL.createObjectURL(file),a=document.createElement('a');
+  a.href=url;a.download='spam-musubi-test-recipes.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status.textContent='Local test recipe download requested. No source message, URL or user identity was included.';
+});
+document.getElementById('plain').addEventListener('click',()=>{
+  if(!prepared)return;
+  result.textContent=printableRecipes(prepared);
+});
+</script>
+</head>
+<body>
+<main>
+<p class="eyebrow">HEY LAB / LOCAL-ONLY EXPERIMENT 002</p>
+<h1>SPAM<br>MUSUBI.</h1>
+<p>Turn unwanted noise into boundary tests — without feeding the trolls or punishing people for being strange.</p>
+<p><strong>NO SUBMISSION. NO AUTOMATIC BAN. NO AI DIAGNOSIS. NO TRACKING.</strong></p>
+<section class="panel" aria-labelledby="step-one">
+<h2 id="step-one">1 · Bring the suspicious thing.</h2>
+<label for="paste">Paste a message you want to inspect (5,000 characters maximum).</label>
+<textarea id="paste" maxlength="5000" placeholder="Your own test text or spam. Avoid private information."></textarea>
+<p class="muted">This tool observes formatting patterns only. It cannot determine whether someone is human, joking, malicious, or a bot. Never paste confidential material or links containing private tokens.</p>
+<div class="buttons">
+<button type="button" id="analyze">Compost it</button>
+<button type="button" id="sample" class="secondary">Load fake example</button>
+<button type="button" id="clear" class="secondary">Clear</button>
+</div>
+<p role="status" aria-live="polite" id="status">Nothing has been collected.</p>
+</section>
+<section class="panel" aria-labelledby="step-two">
+<h2 id="step-two">2 · Harvest the useful test.</h2>
+<p>The contents are discarded after analysis. Only generic testing questions remain.</p>
+<ul id="recipes"></ul>
+<div class="buttons">
+<button type="button" id="export" disabled>Save test recipe</button>
+<button type="button" id="plain" class="secondary">View plain language</button>
+</div>
+<details><summary>Inspect exact content-free output</summary><pre id="result">No review recipe generated.</pre></details>
+</section>
+<section class="panel">
+<h2>3 · Don't feed it back.</h2>
+<p>A weird joke might be a human trying to connect. Repetitive spam might expose a weak boundary. Neither is permission to contact, publicize, shame, or automatically block anyone.</p>
+<p>Moderators would need an independent review and an appeal path before this could affect any actual participant. Nothing here changes live HEY or Porch moderation.</p>
+</section>
+<p class="muted"><a href="./">← HEY. response grammar</a> · Source-owned experimental page. No live connection to Facebook, X, Abundent inboxes, or other systems.</p>
+</main>
+</body>
+</html>
