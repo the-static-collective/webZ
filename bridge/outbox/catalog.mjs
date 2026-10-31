@@ -105,6 +105,65 @@ I'd be interested in learning whether one specific story, distribution problem o
 
 The Static Collective / Abundent`,sourceBase+"webZ/blob/main/docs/BRIDGE-001.md",{kind:"RECONSTRUCTED_TEMPLATE",note:"Reconstructed concept only, not verified verbatim prior draft or actual recipient information."})
 ];
-export const catalog=Object.freeze([...institution,...local]);
+
+const nexusInvitations=[
+seed("nexus-coalition-deb-2026","Nexus / Learning Team","Nexus — Coalition organizer invitation",`Subject: Nexus learning cohort — could we shape a Waseca / Mankato idea together?
+
+Hi Deb,
+
+I've been thinking about the Coalition of Care gathering and how to turn some of those connections into one piece of useful economic work. The next day I attended the Waseca Area Food Cooperative meeting, and I keep seeing a possibility between the Coalition's collaborative approach and the co-op's community-ownership work.
+
+Nexus Community Partners has a Greater Minnesota Community Wealth Building cohort with six learning sessions and a $7,000 stipend for selected groups. The application deadline is November 6.
+
+What if a few willing people explored a small learning team around cooperative food purchasing, local growers, and possible institutional buyers, including churches if that proves useful? I've prepared a one-page conversation starter, but I would much rather have other people help decide what the question should be.
+
+Would you be open to a short conversation this weekend or early next week, or suggest who might be interested? This is an independent invitation, not a request for a Coalition endorsement or commitment.
+
+Thanks,
+Lu`,sourceBase+"webZ/blob/main/bridge/outbox/catalog.mjs",{kind:"NEW_PUBLIC_TEMPLATE",note:"Public-safe draft only. Confirm Nexus program details and correct recipient channel before sending. Attach separate one-page overview if appropriate. No Coalition endorsement or team membership claimed."}),
+seed("nexus-waseca-coop-2026","Nexus / Learning Team","Nexus — Waseca cooperative listening invitation",`Subject: Could the Nexus community wealth-building cohort help with Waseca's next co-op question?
+
+Hi [name],
+
+I appreciated the chance to learn about the Waseca Area Food Cooperative at the October 25 meeting. I have been considering how the co-op's work could connect with interested growers, neighbors, and institutions in the wider region, without changing who owns the co-op or makes its decisions.
+
+I found a Nexus Community Partners learning cohort for Greater Minnesota groups exploring shared ownership and cooperative economics. Selected groups receive a $7,000 stipend and attend six learning sessions. Applications close November 6.
+
+I have a rough one-page idea about cooperative purchasing, producer relationships, and potential institutional participation, but I'd much rather ask what question would actually help the co-op now. Would you be willing to take a look and give me fifteen minutes of feedback? And if a small learning team made sense, who should be part of shaping it?
+
+This is an independent exploration, not a proposal made on the co-op's behalf.
+
+Thanks,
+Lu`,sourceBase+"webZ/blob/main/bridge/outbox/catalog.mjs",{kind:"NEW_PUBLIC_TEMPLATE",note:"Public-safe draft only. Replace [name], verify contact and current co-op priorities. No co-op endorsement, membership agreement or institutional commitment. Attach one-pager separately."}),
+seed("nexus-coalition-mark-2026","Nexus / Learning Team","Nexus — Coalition contact / potential learning partner",`Subject: A practical cooperative-economics idea — would you help test the question?
+
+Hi Mark,
+
+I've kept thinking about the Coalition of Care gathering and the possible work that could come out of it. I went to the Waseca Area Food Cooperative meeting the next day, and the two conversations are starting to connect.
+
+Nexus Community Partners is recruiting Greater Minnesota groups for a community wealth-building learning cohort. The program covers cooperative ownership, economic development, and governance, with six sessions and a $7,000 stipend for selected groups. The application deadline is November 6.
+
+I'm exploring whether a small team could investigate one concrete opportunity: connecting a willing local producer, a community-owned grocery effort, and perhaps an institutional purchaser, with people retaining control of their own decisions and work.
+
+I don't want to assume a team exists or that this is the right project. Would you have time to critique a one-page starting idea, and possibly discuss whether you'd want to participate or recommend someone who would?
+
+Thanks,
+Lu`,sourceBase+"webZ/blob/main/bridge/outbox/catalog.mjs",{kind:"NEW_PUBLIC_TEMPLATE",note:"Public-safe draft only. Verify which Mark is intended and a suitable contact channel; no offer of participation assumed. Nexus details and session commitment require reconfirmation."}),
+seed("nexus-ashley-church-2026","Nexus / Learning Team","Nexus — church food purchasing and co-op exploration",`Subject: A small Waseca cooperative idea — could I get your perspective?
+
+Hi Ashley,
+
+I've been looking at a Greater Minnesota learning opportunity through Nexus Community Partners. It focuses on community-owned economic activity, and I've been thinking about the Waseca Area Food Cooperative and how local institutions might support a community grocery in ways that are more lasting than a one-time fundraiser.
+
+One idea worth exploring is whether interested churches could help create a dependable local purchasing relationship, support co-op membership under the co-op's own rules, or simply host conversations that connect producers and neighbors. No church or co-op has agreed to any of this; I'm at the listening stage.
+
+Nexus is accepting group applications by November 6 for a learning cohort with a $7,000 stipend for selected groups. Would you be willing to tell me whether the idea seems useful, or suggest who understands the church's food purchasing and community-outreach work? No commitment is being requested.
+
+Thanks,
+Lu`,sourceBase+"webZ/blob/main/bridge/outbox/catalog.mjs",{kind:"NEW_PUBLIC_TEMPLATE",note:"Public-safe draft only. Confirm Ashley is the appropriate contact and don't imply church authorization. Distinguish exploration from team invitation; no member voting rights assumed."})
+];
+// PUBLIC templates only: owner-specific contact details and final edits belong in the encrypted local vault.
+
+export const catalog=Object.freeze([...institution,...local,...nexusInvitations]);
 export const originCounts=Object.freeze({institutionDrafts:institution.length,sourceOrReconstructed:local.length,total:catalog.length});
 export function seedById(id){return catalog.find(x=>x.id===id);}
