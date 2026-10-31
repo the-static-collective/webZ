@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d21"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Auction Credits · WANTED / webZ</title>
+<meta name="description" content="Try reverse eBay: fictional buying credits go on a wanted item, finders poke, sellers submit competing quotes, and the buyer chooses. Everything is a no-cash local simulation.">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./auction.css">
+<script type="module" src="./ui.mjs"></script></head><body>
+<a class="skip" href="#main">Skip to the credit experiment</a>
+<header class="topbar"><a class="wordmark" href="../">web<span>Z</span> / WANTED</a><nav aria-label="Related doors"><a href="../">WANTED board</a><a href="../../">webZ</a></nav><span class="flag">PLAY CREDITS · NOT MONEY</span></header>
+<main id="main">
+<section class="hero"><div class="stamp">WANTED-002 / AUCTION-CREDIT LAB</div>
+<h1>Reverse eBay.<br><em>Now with a pulse.</em></h1>
+<p class="lead">In a normal auction, someone posts a thing and buyers chase it. Here, a buyer puts a visible budget on a need. Finders investigate. Sellers make offers. The buyer decides.</p>
+<div class="pills"><span>Budget first</span><span>Possibilities before claims</span><span>Scouts can share the reward</span></div></section>
+<section class="notice" role="note"><strong>THIS IS A FICTIONAL ECONOMIC GAME.</strong>
+<p>All credits on this page are invented, non-redeemable and worth $0. There is no payment account, connected buyer, inventory, real seller, public bidding, escrow, bank balance, or secured sale. Every action happens in this browser only.</p></section>
+<section class="dashboard" aria-label="Fictional credit budget">
+<div class="stat"><span class="stat-label">IMAGINARY WALLET</span><strong id="total">60 C</strong><small>Fixed demo credits; never cash</small></div>
+<div class="stat"><span class="stat-label">UNALLOCATED</span><strong id="available">40 C</strong><small>Can be placed on a wanted item</small></div>
+<div class="stat"><span class="stat-label">ON THIS WANT</span><strong id="on-want">20 C</strong><small>Simulated offer ceiling</small></div>
+<div class="stat"><span class="stat-label">DEMO SPENT</span><strong id="spent">0 C</strong><small>Burned in rehearsal; nobody paid</small></div>
+</section>
+<div class="columns">
+<section class="panel" aria-labelledby="want-title">
+<div class="eyebrow">01 / BUYER OPENS A WANT</div>
+<h2 id="want-title">Working cordless drill + battery</h2>
+<p>Any brand. Charger included. <strong>Fictional buyer</strong> in Southern Minnesota; no individual waiting for this item.</p>
+<div class="ask"><div><span class="stat-label">FICTIONAL MAXIMUM</span><strong id="cap">20 C</strong></div><div><span class="stat-label">ENDS</span><strong id="ends">2h demo</strong></div></div>
+<div class="controls">
+<button id="boost" type="button">+5 C · Boost the want</button>
+<button id="poke" type="button" class="secondary">POKE · Maybe I have it</button>
+</div>
+<p id="poke-count" class="small">0 curious finders (local clicks only). POKE never reserves the order.</p>
+<h3>Split the bounty</h3>
+<p class="small">If one person locates the drill and someone else supplies it, reserve part of the same budget for the scout. It doesn't create extra credits.</p>
+<div class="scout-row"><label for="scout">Fictional scout's share (C)<select id="scout"><option value="0">0 · supplier only</option><option value="2" selected>2 · scout gets 2</option><option value="5">5 · scout gets 5</option></select></label><div class="split"><span>SUPPLIER CAP</span><strong id="supplier-cap">18 C</strong></div></div>
+<p class="ledger-tip">A 20-credit want with a 2-credit scout share leaves a maximum 18-credit offer for the supplier. One budget. Two possible contributions.</p>
+</section>
+<section class="panel" aria-labelledby="bid-title">
+<div class="eyebrow">02 / SELLERS RESPOND</div>
+<h2 id="bid-title">Bid for the work, not for a lottery.</h2>
+<p>Try offering the item. A cheaper bid or faster arrival may be more attractive. Neither automatically wins. The buyer chooses the acceptable offer.</p>
+<form id="offer-form">
+<label>Fictional offer label<input name="name" required minlength="3" maxlength="60" placeholder="Garage shelf / hypothetical" autocomplete="off"></label>
+<div class="two"><label>My quote, in play credits<input name="quote" required type="number" min="1" max="100" step="1" value="18"></label>
+<label>Ready in<select name="etaMinutes"><option value="10">10 min</option><option value="20">20 min</option><option value="35" selected>35 min</option><option value="60">60 min</option><option value="90">90 min</option><option value="120">120 min</option></select></label></div>
+<button type="submit" class="primary">Submit a fictional offer →</button></form>
+<div class="controls"><button type="button" id="example" class="secondary">Load two competing offers</button><button type="button" id="reset" class="quiet">Reset the whole experiment</button></div>
+<p class="small">No offer is sent anywhere; labels can be invented. Seller quotes must fit the buyer's credit cap and deadline.</p>
+</section></div>
+<section class="board" aria-labelledby="offers-title">
+<div class="boardhead"><div class="eyebrow">03 / THE REVERSE AUCTION</div><div id="phase" class="flag">OPEN · FICTIONAL</div></div>
+<h2 id="offers-title">Offers <span id="offer-count" class="counter">0</span></h2>
+<p>Lowest is not necessarily best. In an urgent market, delivery time and condition matter too.</p>
+<div id="offers" class="cards" role="list"></div>
+<div id="no-offers" class="empty"><strong>NO SELLER OFFERS</strong><p>Try the two example offers or enter your own fictional quote.</p></div>
+<div id="selected-panel" class="selection" hidden><h3>Buyer selection (fictional)</h3><p id="selected-note"></p><div class="controls"><button id="confirm" type="button">Buyer confirms · DEMO ONLY</button><button id="reopen" type="button" class="quiet">Reject / reopen</button></div></div>
+<div class="controls"><button id="cancel" type="button" class="quiet">Cancel this fictional order</button></div>
+<p id="status" role="status" aria-live="polite"></p></section>
+<section class="paper-trail"><div class="eyebrow">04 / RECEIPTS, NOT MAKE-BELIEVE SALES</div>
+<h2>What actually happened?</h2><div id="events" class="event-list" aria-label="Local simulated event log"></div></section>
+<section class="closing"><div class="eyebrow">IF WE TRIED IT WITH REAL PEOPLE</div>
+<h2>Three different things called <em>credits</em>.</h2>
+<p><strong>Buying credits</strong> would need genuine, verified funding or authorization; nobody gets a funded listing from typing a number. <strong>Scout credits</strong> could represent an agreed share of a real reward after a confirmed transaction. <strong>Trust credits</strong> could record verified contributions without pretending to be spendable money.</p>
+<p>The practical experiment is not a platform-issued currency. It's a faster way to expose already-existing buying demand, let multiple people contribute to fulfillment, and use one transparent budget. Money rails and actual receipt authority are separate engineering and legal gates.</p>
+<a href="https://github.com/the-static-collective/webZ/blob/feature/wanted-demand-first-001/docs/WANTED-AUCTION-CREDITS-002.md" rel="noopener noreferrer">Read the three auction experiments and release gates ↗</a>
+</section></main>
+<footer>WANTED-002 · ACTUAL MONEY RECEIVED: $0 · FICTIONAL CREDITS: NOT REDEEMABLE · Local simulation ≠ verified demand.</footer>
+</body></html>

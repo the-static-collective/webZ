@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d21">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>WANTED · Buyer-first exchange / webZ</title>
+<meta name="description" content="An experimental buyer-first market: buyers name the need and budget before anyone searches for stock. Device-local rehearsal only; no actual funding or matching.">
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./ui.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the board</a>
+<header class="topbar">
+<a class="wordmark" href="../">web<span>Z</span> / WANTED</a>
+<nav aria-label="Elsewhere"><a href="../commons/">Exchange Desk</a><a href="../">Workshop</a></nav>
+<div class="flag">LAB 001 · NOT LIVE</div>
+</header>
+<main id="main">
+<section class="hero">
+<div class="stamp">BUYERS FIRST / STUFF SECOND</div>
+<h1>Somebody wants it.<br><em>You might have it.</em></h1>
+<p class="lead">Instead of listing things and hoping somebody buys, start with a buyer who says exactly what they need, what they'll pay, and when they need it.</p>
+<div class="pills"><span>$20 is a real target</span><span>2 hours is a real deadline</span><span>A promise is not a payment</span></div>
+<p class="lab-link"><a class="button secondary" href="./auction/">Play the reverse-auction credit experiment →</a></p>
+</section>
+<section class="notice" aria-label="Current limitation">
+<strong>THIS IS A DEVICE-LOCAL EXPERIMENT, NOT A MARKETPLACE.</strong>
+<p>There are no connected buyers, no real-time claim race, no verified funds, no payout, and no public listing. Anything you create stays in this browser. The fictional $20 request is clearly marked as a simulation. Do not exchange money or travel based on it.</p>
+</section>
+<div class="columns">
+<section class="panel" aria-labelledby="open-heading">
+<div class="eyebrow">01 / BUYER MAKES THE ASK</div><h2 id="open-heading">I will pay <span class="accent">$____</span> for…</h2>
+<p>Practice describing a real purchase intent. You can copy it for your own use, but it is not published or funded.</p>
+<form id="make-want">
+<label>What are you buying?<input name="item" required minlength="3" maxlength="100" placeholder="Working 18V drill + battery" autocomplete="off"></label>
+<label>What counts as a match?<textarea name="detail" maxlength="350" rows="3" placeholder="Battery charges; charger included; any brand."></textarea></label>
+<div class="two">
+<label>Price in USD<input name="amount" required type="number" min="1" max="10000" step="0.01" placeholder="20.00"></label>
+<label>Time available<select name="minutes"><option value="30">30 minutes</option><option value="60">1 hour</option><option value="120" selected>2 hours</option><option value="1440">1 day</option><option value="10080">7 days</option></select></label>
+</div>
+<label>General area only<input name="region" required minlength="3" maxlength="90" placeholder="Waseca area — no street address" autocomplete="off"></label>
+<label class="consent"><input type="checkbox" required> I understand this is an unfunded request kept on my device only.</label>
+<button type="submit" class="primary">Keep local buyer intent →</button>
+</form>
+</section>
+<section class="panel how" aria-labelledby="flow-heading">
+<div class="eyebrow">02 / FINDER SEES THE MONEY FIRST</div><h2 id="flow-heading">From “want” to “got it.”</h2>
+<ol>
+<li><b>Buyer sets the deal.</b><span>Item, acceptable condition, price, area, deadline.</span></li>
+<li><b>Real funds are verified.</b><span>A payment provider authorizes them before the word “secured” is used.</span></li>
+<li><b>Finder taps “I have it.”</b><span>One short, server-issued reservation; everybody else sees the hold.</span></li>
+<li><b>Both confirm the exchange.</b><span>Inspection and handoff are separate from payment settlement.</span></li>
+<li><b>Money is released by the provider.</b><span>Availability to the seller depends on provider terms—not a magic instant payout.</span></li>
+</ol>
+<div class="proof">WHAT WE CAN PROVE NOW:<br><strong>THE WORKFLOW, NOT A BUYER OR A DOLLAR.</strong></div>
+<button type="button" id="add-fictional" class="secondary">Load fictional $20 want →</button>
+<p class="small">The fictional card allows a one-device rehearsal of the claim and confirmation sequence. It never represents live demand.</p>
+</section>
+</div>
+<section class="board" id="board" aria-labelledby="board-title">
+<div class="boardhead"><div><div class="eyebrow">03 / THE DEMAND BOARD</div><h2 id="board-title">WANTED <span id="count" class="counter">0</span></h2></div><button id="clear-fictional" type="button" class="quiet">Clear fictional cards</button></div>
+<p id="board-subtitle" class="small">Only your own local requests and fictional rehearsal cards appear here.</p>
+<div id="cards" class="cards" role="list"></div>
+<div id="empty" class="empty"><span>NOTHING WANTED YET</span><p>That is the honest state. We won't fabricate a buyer to make the board look busy.</p></div>
+<p id="status" role="status" aria-live="polite"></p>
+<section id="copybox" class="copybox" hidden><label>Copy the unverified buyer-intent text yourself<textarea id="copytext" readonly rows="7"></textarea></label></section>
+</section>
+<section class="closing">
+<div class="eyebrow">WHAT MAKES THE REAL VERSION DIFFERENT?</div>
+<h2>Not another classifieds feed.<br><em>A queue of funded needs.</em></h2>
+<p>In the live version, unpaid wants never masquerade as committed purchases. A reservation must be atomic across devices. The buyer's money must really be authorized, and claims, refusals, expiry, disputes, and payouts must each have an independent receipt.</p>
+<p><strong>Nothing here has been sold or secured.</strong> This experimental door exists to make the next real crossing testable.</p>
+<a href="https://github.com/the-static-collective/webZ" rel="noopener noreferrer">See the source and pilot contract ↗</a>
+</section>
+</main>
+<footer>WANTED-001 · webZ / The Static Collective · Local proposal ≠ verified demand ≠ secured sale ≠ money received.</footer>
+</body></html>
