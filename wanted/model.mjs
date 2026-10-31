@@ -10,7 +10,7 @@ export function createWant(input, { now = Date.now(), id } = {}) {
   const amount = Number(input.amount);
   const minutes = Number(input.minutes);
   if (item.length < 3 || region.length < 3) throw Error("Give the item and a general region.");
-  if (!Number.isFinite(amount) || amount < 1 || amount > 10000 || Math.round(amount * 100) !== amount * 100) {
+  if (!Number.isFinite(amount) || amount < 1 || amount > 10000 || Math.abs(Math.round(amount * 100) - amount * 100) > 0.00000001) {
     throw Error("Use a dollar amount from $1 to $10,000 (at most two decimals).");
   }
   if (!Number.isInteger(minutes) || minutes < 15 || minutes * 60000 > MAX_HORIZON_MS) {
