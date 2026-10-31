@@ -15,7 +15,7 @@ test("strict input and deadline bounds", () => {
   assert.throws(() => createWant({ ...base, amount: 0 }, { now, id: "a" }));
   assert.throws(() => createWant({ ...base, minutes: 0 }, { now, id: "b" }));
   assert.throws(() => createWant({ ...base, amount: 20.001 }, { now, id: "c" }));
-  assert.equal(createWant({ ...base, amount: 0.29 }, { now, id: "c2" }).amountCents, 29);
+  assert.equal(createWant({ ...base, amount: 20.29 }, { now, id: "c2" }).amountCents, 2029);
   assert.throws(() => createWant({ ...base, region: "X" }, { now, id: "d" }));
 });
 test("fictional hold is ten minutes; never a money claim", () => {
