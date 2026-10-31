@@ -71,6 +71,9 @@ test("expired wants reject offers, and late arrival cannot satisfy deadline", ()
   assert.equal(phase(l.wants[0], now + 7200001), "EXPIRED");
   assert.throws(() => addOffer(l, wantId, seller("Late", 18, 5), now + 7200001), /not open/);
   assert.throws(() => addOffer(l, wantId, seller("Almost", 18, 20), now + 119 * 60000), /after/);
+  const selected = selectOffer(addOffer(l, wantId, seller("Early", 18, 20), now), wantId, "offer-1", now + 10);
+  assert.equal(phase(selected.wants[0], now + 7200001), "EXPIRED");
+  assert.throws(() => confirm(selected, wantId, now + 7200001), /expired/i);
 });
 test("synthetic offer and scout data cannot be used to claim payment", () => {
   let l = addOffer(startLab(now), wantId, seller("Found", 18, 10), now);
