@@ -56,7 +56,7 @@ test("MIT doorway presents the optional physical-output port without a live prin
   assert.match(doc,/RECIPE != PRINTED OBJECT/);
   assert.match(html,/physical part has not been manufactured/i);
   assert.match(html,/script-src 'none'/);
-  assert.doesNotMatch(html,/<script|<form|<input|\\bfetch\\s*\\(/i);
+  assert.doesNotMatch(html,/<script|<form|<input|fetch\s*\(/i);
   assert.equal(d.infinite_fabricator_candidate.status,"HELD_SOFTWARE_ONLY");
   assert.equal(d.infinite_fabricator_candidate.printer_connected,false);
   assert.equal(d.infinite_fabricator_candidate.physical_output_proven,false);
