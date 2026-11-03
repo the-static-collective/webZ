@@ -8,15 +8,15 @@
 import {readFile, writeFile, mkdir, lstat} from 'node:fs/promises';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash, randomBytes} from 'node:crypto';
-import {join, resolve, dirname, relative} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {join, resolve, dirname, relative, sep} from 'node:path';
+import {pathToFileURL, fileURLToPath} from 'node:url';
 import {createInterface} from 'node:readline/promises';
 
 const RELATTE_COMMIT = 'd69a863943e071346527eafc79a63ef332d524af';
 const REVIVAL_COMMIT = 'af1e00c24e3d7c6eb6b1ac39ef59bf894e2385fd';
 const GHOT_COMMIT = '9748a0772c4a13135421c4fa84a9991e0a51e05f';
 const MAX_BYTES = 65536;
-const moduleDir = dirname(new URL(import.meta.url).pathname);
+const moduleDir = dirname(fileURLToPath(import.meta.url));
 
 function requireCondition(value, reason) { if (!value) throw Error(reason); }
 function option(args, name) {
@@ -72,11 +72,6 @@ async function absent(path) {
     throw e;
   }
   throw Error('Refusing to overwrite an existing private identity or receiver directory: '+path);
-}
-function unrelated(a,b) {
-  const x=relative(resolve(a),resolve(b));
-  requireCondition(x==='..'||x.startsWith('..'+'/'),
-    'Trusted enrollment must NOT live inside offered files or receiver directory.');
 }
 async function humanPrompt(title, expected) {
   requireCondition(process.stdin.isTTY && process.stdout.isTTY,
@@ -201,7 +196,7 @@ async function accept(args) {
   // The pinned copy and receiver private data must live outside offer folder.
   for(const dir of [trustDir,receiverRoot]) {
     const r=relative(offerDir,dir);
-    requireCondition(r==='..'||r.startsWith('..'+'/'),
+    requireCondition(r==='..'||r.startsWith('..'+sep),
       'Trust state and private receiver state cannot live inside an offered folder.');
   }
   requireCondition(trustDir!==receiverRoot,'Local trust and receiver homes must be separate.');
@@ -212,7 +207,7 @@ async function accept(args) {
     (synthetic==='CI_SYNTHETIC_INPUT_NOT_HUMAN' ||
       policy.ceremony==='SELF_ATTESTED_OPERATOR_CONSOLE_NOT_IDENTITY_PROOF'),
       'Independent enrollment policy missing, altered or mixed with CI mode.');
-  const {bytes,crossing}=await offered(api,offerDir,trusted,revival);
+  const {bytes,payload,crossing}=await offered(api,offerDir,trusted,revival);
   await absent(receiverRoot);
   const decision=synthetic==='CI_SYNTHETIC_INPUT_NOT_HUMAN'
     ? ensureDecision(option(args,'scripted-test-choice'))
@@ -220,7 +215,10 @@ async function accept(args) {
   let chosen=decision;
   if(!chosen) {
     console.log('Source verified against locally enrolled pin: '+policy.pin);
+    console.log('Source payload SHA-256: '+sha(bytes));
     console.log('Receiving candidate: OPTIONAL GENESIS 1:1-3 HEBREW LEARNING METHOD.');
+    console.log('Revival Gen.1.1 source surface: '+payload.source.corpus.witnesses[0].compiled_text);
+    console.log('OSHB attribution: '+payload.source.oshb_source.license.attribution);
     console.log('Source data retains OSHB text and annotation attribution. Nothing is approved or published.');
     console.log('You may HOLD bytes in local quarantine or REFUSE retention. No ADMIT action exists.');
     requireCondition(process.stdin.isTTY && process.stdout.isTTY,'This decision requires an interactive local terminal.');
