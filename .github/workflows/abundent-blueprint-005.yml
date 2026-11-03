@@ -1,0 +1,55 @@
+name: Abundent Blueprint Bridge 005
+on:
+  push:
+    branches:
+      - feat/abundent-circuit-005-blueprint-bridge
+    paths:
+      - 'pilots/abundent-blueprint-005/**'
+      - '.github/workflows/abundent-blueprint-005.yml'
+  pull_request:
+    paths:
+      - 'pilots/abundent-blueprint-005/**'
+      - '.github/workflows/abundent-blueprint-005.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compile:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.11'
+      - name: Validate calibrated geometry and refusals
+        run: node --test pilots/abundent-blueprint-005/tests/core.test.cjs
+      - name: Rebuild deterministic offline tool
+        run: |
+          python3 pilots/abundent-blueprint-005/build.py
+          git diff --exit-code -- pilots/abundent-blueprint-005/Blueprint_Bridge_005_Offline.html
+      - name: Compile static sample cartridge to Java command draft
+        run: |
+          node pilots/abundent-blueprint-005/convert_cartridge.cjs \
+            pilots/abundent-blueprint-005/samples/demo-cartridge.json \
+            /tmp/abundent-blueprint-test
+          python3 - <<'PY'
+          import json,pathlib
+          d=pathlib.Path('/tmp/abundent-blueprint-test')
+          receipt=json.loads((d/'compilation_receipt.json').read_text())
+          command=(d/'abundent_blueprint_DRAFT.mcfunction').read_text()
+          assert receipt['status']=='HOLD_USER_REVIEW'
+          assert receipt['walls']==72 and receipt['floor']==273
+          assert 'minecraft:glass replace minecraft:stone_bricks' in command
+          assert len(command.splitlines())>100
+          print('DRAFT ONLY: calibrated sample / game commands / no remote execution')
+          PY
+      - name: Browser smoke test
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
+          python3 pilots/abundent-blueprint-005/tests/browser_smoke.py

@@ -1,0 +1,6 @@
+{
+  "name": "abundent-blueprint-bridge-005",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {"test": "node --test tests/core.test.cjs", "build": "python3 build.py"}
+}
