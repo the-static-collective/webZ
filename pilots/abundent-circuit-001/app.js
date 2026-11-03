@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
-  var st, activeTab = 'overview', noticeTimer;
+  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false;
   try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
   catch (_) { st = C.init(); }
   function $(q) { return document.querySelector(q); }
@@ -81,12 +81,64 @@
     function sum(type) {return reported.filter(function (e) {return e.type === type;}).reduce(function (a,e) {return a+e.cents;},0)/100;}
     $('#ecoSummary').innerHTML = '<div class="statrow"><div class="stat"><strong>$' + sum('money_in').toFixed(2) + '</strong><span class="micro">Money in, self-reported</span></div><div class="stat"><strong>$' + sum('money_out').toFixed(2) + '</strong><span class="micro">Money out, self-reported</span></div><div class="stat"><strong>' + n.economy.filter(function (e) {return e.type !== 'money_in' && e.type !== 'money_out';}).length + '</strong><span class="micro">Noncash records</span></div></div><p class="small">Planned money is excluded. These are not bank or payment data.</p>';
     $('#ecoList').innerHTML = n.economy.length ? n.economy.map(function (e) {return '<article class="item"><span class="pill">' + s(e.type) + ' · ' + s(e.status) + '</span><p>' + s(e.description) + '</p>' + (e.cents ? '<p class="small">$' + (e.cents/100).toFixed(2) + ' (self-reported only)</p>' : '') + '</article>';}).join('') : empty('No economic records. Keep money and nonmoney distinct.');
-    $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {return '<article class="item green"><span class="pill done">LOCAL EXECUTION</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: this browser (not GHoT)</p></article>';}).join('') : empty('Run a small task on this device to create a real local execution receipt.');
+    $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {
+       var native = x.actualGHoT === true;
+       return '<article class="item green"><span class="pill done">' + (native ? 'NATIVE GHOT / LOCAL' : 'BROWSER EXECUTION') + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; unsigned local receipt, not an independent witness.' : ' (not GHoT)') + '</p></article>';
+     }).join('') : empty('Run a small task on this device to create a real local execution receipt.');
     $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
     $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
   }
+  function nativeStatus(message, ready) {
+    nativeAvailable = !!ready;
+    var el = $('#ghotStatus'), run = $('#ghotRunButton');
+    if (el) {el.textContent = message; el.className = ready ? 'banner' : 'warning';}
+    if (run) run.disabled = !nativeAvailable || nativePending;
+  }
+  function checkNativeGhot() {
+    if (location.protocol === 'file:') {
+      nativeStatus('Offline file mode. Use ghot_local_server.py with an actual GHoT checkout to enable native execution.', false);
+      return;
+    }
+    fetch('/api/ghot/status', {cache: 'no-store', credentials: 'omit'}).then(function (res) {
+      if (!res.ok) throw Error('No local donor bridge'); return res.json();
+    }).then(function (info) {
+      if (info.nativeGHoT !== true || info.transport !== 'loopback_only' ||
+        info.capabilities.indexOf('system.hash') === -1 || !/^(127\.0\.0\.1|localhost)$/.test(location.hostname))
+        throw Error('Not an approved loopback native bridge.');
+      nativeStatus('LOCAL GHOT DETECTED · Native task runs only when you press the button.', true);
+    }).catch(function () {
+      nativeStatus('No native GHoT on this page. The public preview is browser-only; run the localhost bridge to test the donor.', false);
+    });
+  }
+  function runNativeGhot(form) {
+    if (!nativeAvailable || nativePending) return notify('Native donor not ready.');
+    var currentNode = current(); if (!currentNode) return notify('Create a harbor first.');
+    var text = data(form, 'text');
+    if (!text.trim() || text.length > 1000) return notify('Enter 1–1000 characters.');
+    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder)
+      return notify('This browser lacks Web Crypto digest support; no native receipt can be admitted.');
+    var nodeId = currentNode.id, bytes = new TextEncoder().encode(text), digest;
+    if (bytes.length > 4000) return notify('Text exceeds bridge byte limit.');
+    nativePending = true;
+    nativeStatus('Native GHoT request in progress. The result will be checked before saving.', true);
+    window.crypto.subtle.digest('SHA-256', bytes).then(function (buffer) {
+      digest = Array.from(new Uint8Array(buffer)).map(function (b) {return ('0'+b.toString(16)).slice(-2);}).join('');
+      return fetch('/api/ghot/hash', {method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({text:text}), credentials:'omit'});
+    }).then(function (res) {if(!res.ok) throw Error('Native bridge refused request ('+res.status+').'); return res.json();})
+      .then(function (answer) {
+        if (!answer || answer.nativeGHoT !== true || answer.transport !== 'loopback_only' ||
+            answer.source !== 'GHoT/ghot/reference_node.py') throw Error('Unexpected native bridge response.');
+        safeRun(function () { C.nativeGhotRecord(st, nodeId, bytes.length, answer.receipt, digest); });
+        nativeStatus('NATIVE GHOT RECEIPT CHECKED · recorded only in this browser notebook.', true);
+      }).catch(function (err) {
+        nativeStatus('Native GHoT not completed: '+err.message, true);
+      }).finally(function () {nativePending=false; $('#ghotRunButton').disabled=!nativeAvailable;});
+  }
+
   document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
-    ev.preventDefault(); safeRun(function () { var id = f.getAttribute('data-id'), n = current();
+    ev.preventDefault(); if (action === 'ghot-native') { runNativeGhot(f); return; }
+    safeRun(function () { var id = f.getAttribute('data-id'), n = current();
       if (action === 'create-node') C.createNode(st,data(f,'name'),data(f,'kind'));
       else if (action === 'invite') C.invitation(st,n.id,data(f,'title'),data(f,'description'));
       else if (action === 'project') C.createProject(st,n.id,data(f,'title'),data(f,'purpose'),data(f,'kind'));
@@ -128,4 +180,5 @@
   $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
   $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
   render();
+  checkNativeGhot();
 }());

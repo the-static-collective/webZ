@@ -113,3 +113,18 @@ test('two entirely separate local notebooks can exchange a review-only crossing 
   assert.equal(C.projectView(source,a.id).deeds,0);
   assert.equal(C.projectView(target,b.id).seeds,0);
 });
+
+test('native GHoT receipt is digested, deduplicated, and grants zero Full Measure Deeds',()=>{
+  const {st,a}=setup();
+  const digest='a'.repeat(64);
+  const receipt={kind:'ghot.receipt',version:'0',capability:'system.hash',status:'ok',
+    receipt_id:'receipt-0000-0000',task_id:'task-0000-0000',executor_node_id:'node-native-1',
+    output:{sha256:digest},output_sha256:'b'.repeat(64)};
+  const result=C.nativeGhotRecord(st,a.id,3,receipt,digest);
+  assert.equal(result.actualGHoT,true);assert.equal(result.inputSha256,digest);
+  assert.equal(C.projectView(st,a.id).deeds,0);
+  assert.equal(C.projectView(st,a.id).harvests,0);
+  assert.throws(()=>C.nativeGhotRecord(st,a.id,3,receipt,digest),/Duplicate/);
+  assert.throws(()=>C.nativeGhotRecord(st,a.id,3,{...receipt,output:{sha256:'f'.repeat(64)}},digest),/does not match/);
+  assert.throws(()=>C.nativeGhotRecord(st,a.id,3,{...receipt,status:'error'},digest),/Not a native/);
+});
