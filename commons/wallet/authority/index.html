@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#0c251e">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Owner Authority Desk · Abundent Link Wallet</title>
+<meta name="description" content="Private on-device review of signed WORLD-FORGE-008 project delegation; no server, account, key transfer or production action.">
+<link rel="stylesheet" href="../wallet.css"><link rel="stylesheet" href="./authority.css">
+<script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to owner desk</a>
+<header class="top"><a class="brand" href="../../../">ABUNDENT <span>✳</span><small>THE STATIC COLLECTIVE</small></a>
+<nav aria-label="Public navigation"><a href="../">Link Wallet</a><a href="../../inbox/">Living Inbox</a><a href="../../../">Switchboard</a></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">LINK WALLET 003 / OWNER DESK / PROPOSAL-ONLY</p>
+<h1>Your keys.<br><em>Your decisions.</em></h1>
+<p>A clickable local companion to your encrypted Link Wallet. Import a <strong>public, signed WF008 delegation</strong>; inspect its fingerprint and scope; explicitly pin it; then issue a separate local signed record of HOLD or REFUSE. <strong>No automatic GitHub actions.</strong></p>
+<div class="pillrow"><span>NO SERVER</span><span>SEPARATE KEY</span><span>REVIEW ONLY</span><span>REVOCABLE LOCALLY</span></div>
+<div class="actions"><a class="actionlink" href="../">← Back to encrypted Link Wallet</a><button type="button" class="outline" id="keepWallet">Keep this desk in Link Wallet</button></div>
+</section>
+<div class="boundary" role="note"><strong>The link wallet stores links, not authority.</strong> This desk keeps its *own* browser-local public fingerprint pin, signed revocations and separate nonexportable review-signing key. It never changes your existing encrypted links or vault backup. This desk's metadata is <strong>not encrypted by your wallet passphrase and not included in its backups</strong>. The original owner's private WF008 key stays in the browser where it was created. A signed grant is not independent proof of human identity.</div>
+<section class="panel" aria-labelledby="importTitle">
+<p class="eyebrow">01 / SIGNATURE CHECK</p><h2 id="importTitle">Open an owner's signed grant</h2>
+<p class="fine">Choose your existing <code>WF008-signed-project-delegation.json</code>. It is read in this browser tab only. The file is never sent or automatically saved to IndexedDB.</p>
+<label for="grantFile">Signed public WF008 grant (.json)</label><input id="grantFile" type="file" accept=".json,application/json">
+<div id="grantPreview" class="receiptpreview" hidden aria-live="polite">
+<p><strong>Cryptographic signature:</strong> <span id="signature">Not checked</span></p>
+<p><strong>Public key SHA-256 fingerprint</strong><code id="fp" class="break"></code></p>
+<p><strong>Grant digest</strong><code id="grantHash" class="break"></code></p>
+<p><strong>Valid until</strong> <span id="expiry"></span></p>
+<p><strong>Signed scopes:</strong> <span id="scopes"></span></p>
+<p class="fine">Signature valid means the containing P-256 key signed these bytes. It does not verify the key holder's real-world identity.</p></div>
+</section>
+<section class="panel" aria-labelledby="pinTitle">
+<p class="eyebrow">02 / SEPARATE LOCAL CONFIRMATION</p><h2 id="pinTitle">Recognize this key on this device</h2>
+<p>Before enabling a proposal review, confirm the fingerprint yourself. Checking the file is not enrollment. This recognition is confined to this browser origin and <em>cannot</em> assign legal or third-party permissions.</p>
+<p id="pinState" class="fine">No local recognized key found.</p>
+<label for="confirmFingerprint">Type the complete SHA-256 fingerprint shown above</label>
+<input id="confirmFingerprint" type="text" maxlength="64" minlength="64" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="64 lowercase hexadecimal characters">
+<label class="check"><input id="confirmIntent" type="checkbox"> I intentionally recognize this locally signed grant for proposal review only; I am not claiming independently verified identity.</label>
+<button id="pinButton" class="primary" type="button" disabled>Confirm and pin locally</button>
+</section>
+<section class="panel" aria-labelledby="reviewTitle">
+<p class="eyebrow">03 / HOLDER-LOCAL DECISION</p><h2 id="reviewTitle">Review project assistance</h2>
+<p class="fine">HOLD means the proposal is within the signed scope and may be considered. REFUSE means this desk will not recognize that proposed action. Neither performs the action or admits a cartridge. Review receipts use a <strong>different, browser-local P-256 key</strong>, not your WF008 owner signing key.</p>
+<label for="action">Requested project action</label>
+<select id="action">
+<option value="PROPOSE_PULL_REQUEST">Propose GitHub pull request</option>
+<option value="DRAFT_EXPERIMENT">Draft experimental code</option>
+<option value="SUMMARIZE_VERIFIED_RESULTS">Summarize verified evidence</option>
+<option value="CHECK_MATH">Check calculations</option>
+<option value="COMMUNICATE_PROJECT">Communicate project</option>
+<option value="MERGE_CODE">Merge code (never authorized)</option>
+<option value="SPEND_FUNDS">Spend funds (never authorized)</option>
+<option value="ADMIT_CARTRIDGE">Admit cartridge (never authorized)</option>
+</select>
+<div class="actions">
+<button id="hold" class="primary" type="button" disabled>Sign review HOLD</button>
+<button id="refuse" class="danger" type="button" disabled>Sign REFUSE</button>
+<button id="saveReceipt" class="outline" type="button" disabled>Download latest signed review receipt</button>
+</div>
+<pre id="receipt" aria-label="Current local signed review receipt">No review receipt created.</pre>
+</section>
+<section class="panel" aria-labelledby="revokeTitle">
+<p class="eyebrow">04 / REVOCATION</p><h2 id="revokeTitle">Import the owner's signed withdrawal</h2>
+<p>The original WF008 owner console must sign a revocation with its original key. A separate reviewer cannot sign a withdrawal as the owner. Importing that signed file here blocks later HOLDs <strong>on this device</strong>; it does not notify other receivers or undo previous work.</p>
+<label for="revokeFile">Signed WF008 revocation (.json)</label><input id="revokeFile" type="file" accept=".json,application/json">
+<p id="revocationState" class="fine">No matching signed revocation loaded.</p>
+<div class="actions"><button id="applyRevocation" class="outline" type="button" disabled>Verify and apply local revocation</button></div>
+</section>
+<section class="panel" aria-labelledby="controlsTitle">
+<p class="eyebrow">05 / DEVICE CONTROLS</p><h2 id="controlsTitle">Keep authority local</h2>
+<p class="fine">Clearing this desk deletes its local fingerprint pin, signed revocation copies and **separate review key**. It does not revoke a remote grant, change the original WF008 signer key, or delete the encrypted Link Wallet.</p>
+<button id="clearDesk" class="danger" type="button">Clear local authority desk only</button>
+</section>
+<p id="status" role="status" aria-live="polite">Owner desk initializing.</p>
+<section class="footnote"><p class="eyebrow">THE BOUNDARY</p>
+<p>This is a standalone browser-local review record, <strong>not a native reLATTE R3 receipt</strong>. For native reLATTE local HOLD/REFUSE proofs, use WORLD-FORGE-009's separate verified local receiver. The two are not automatically synchronized. Saving a shortcut in Link Wallet does not save a key, grant, revocation or authority.</p></section>
+</main><footer>ABUNDENT LINK WALLET 003 · SIGNED ≠ IDENTIFIED · HOLD ≠ ACTED · REFUSE ≠ REMOTE REVOCATION</footer>
+</body></html>

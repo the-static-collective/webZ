@@ -1,0 +1,17 @@
+/* Link Wallet 003: inherits wallet palette, accessible mobile receipt controls. */
+.actionlink{display:inline-flex;align-items:center;min-height:45px;border:1px solid #a6ca9a;
+  border-radius:9px;padding:.85rem 1.1rem;font-weight:800;text-decoration:none}
+.actionlink:hover{background:#244e3d}
+.receiptpreview{border:1px solid #729a7e;background:#113426;padding:1rem 1.25rem;border-radius:9px}
+.receiptpreview p{line-height:1.6;overflow-wrap:anywhere}
+.receiptpreview strong{color:#e7d588}
+code,.receiptpreview code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.87em;word-break:break-all}
+.receiptpreview code{display:block;margin:.4rem 0 .8rem;color:#c7efcf}
+.check{display:flex;align-items:flex-start;gap:12px;line-height:1.6;
+  color:var(--cream);font-size:.9rem}
+.check input{width:23px;min-height:23px;margin:0;flex:none;accent-color:#edda95}
+pre{background:#0e3028;border:1px solid #588066;padding:1rem;white-space:pre-wrap;
+  overflow-wrap:anywhere;font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  border-radius:9px;max-height:380px;overflow:auto}
+.break{overflow-wrap:anywhere}
