@@ -1,0 +1,97 @@
+{
+  "schema": "abundent.blueprint.measured-plan/v1",
+  "name": "12m by 8m illustrative workshop",
+  "pixels_per_meter": 32,
+  "wall_height_blocks": 3,
+  "wall_block": "minecraft:stone_bricks",
+  "floor_block": "minecraft:oak_planks",
+  "roof_block": "none",
+  "walls": [
+    {
+      "a": [
+        100,
+        90
+      ],
+      "b": [
+        484,
+        90
+      ]
+    },
+    {
+      "a": [
+        484,
+        90
+      ],
+      "b": [
+        484,
+        346
+      ]
+    },
+    {
+      "a": [
+        484,
+        346
+      ],
+      "b": [
+        100,
+        346
+      ]
+    },
+    {
+      "a": [
+        100,
+        346
+      ],
+      "b": [
+        100,
+        90
+      ]
+    },
+    {
+      "a": [
+        292,
+        90
+      ],
+      "b": [
+        292,
+        346
+      ]
+    },
+    {
+      "a": [
+        100,
+        218
+      ],
+      "b": [
+        292,
+        218
+      ]
+    }
+  ],
+  "openings": [
+    {
+      "type": "door",
+      "at": [
+        292,
+        280
+      ],
+      "width_m": 1
+    },
+    {
+      "type": "door",
+      "at": [
+        290,
+        90
+      ],
+      "width_m": 1
+    },
+    {
+      "type": "window",
+      "at": [
+        484,
+        218
+      ],
+      "width_m": 2
+    }
+  ]
+}
