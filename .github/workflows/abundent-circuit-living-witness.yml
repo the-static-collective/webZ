@@ -1,0 +1,136 @@
+name: Abundent Circuit 005 — Living Witness Signed Crossing
+on:
+  pull_request:
+    paths:
+      - 'pilots/abundent-circuit-001/crossing-005/**'
+      - '.github/workflows/abundent-circuit-living-witness.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-living-witness:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/revival
+          ref: af1e00c24e3d7c6eb6b1ac39ef59bf894e2385fd
+          path: native-revival-donor
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: native-ghot-donor
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/reLATTE
+          ref: d69a863943e071346527eafc79a63ef332d524af
+          path: native-relatte-donor
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.11'
+      - name: Install pinned donor's own runtime dependencies
+        working-directory: native-relatte-donor
+        run: npm ci --ignore-scripts
+      - name: Original Revival source corpus verification suite
+        working-directory: native-revival-donor
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -q
+      - name: Prepare native source corpus, original GHoT, and real reLATTE signed crossing
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/living-witness"
+          python3 pilots/abundent-circuit-001/crossing-005/source_005.py \
+            --revival native-revival-donor --ghot native-ghot-donor \
+            --prepare "$RUNNER_TEMP/living-witness/candidate.json"
+          node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            issue --relatte native-relatte-donor \
+            --candidate "$RUNNER_TEMP/living-witness/candidate.json" \
+            --out "$RUNNER_TEMP/living-witness/offer"
+      - name: Independent receiver A signs local HOLD and retains exact source bytes
+        run: |
+          node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            receive --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-hold" \
+            --decision HOLD --world fictional-receiver-hold
+          node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            verify --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-hold"
+      - name: Independent receiver B signs local REFUSE and retains zero payload bytes
+        run: |
+          node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            receive --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-refuse" \
+            --decision REFUSE --world fictional-receiver-refuse
+          node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            verify --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-refuse"
+          test ! -d "$RUNNER_TEMP/living-witness/receiver-refuse/payloads"
+      - name: Hostile source mutation and cold retained-byte tampering must fail
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -R "$RUNNER_TEMP/living-witness/offer" "$RUNNER_TEMP/living-witness/altered-offer"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          f=Path(os.environ['RUNNER_TEMP'])/'living-witness'/'altered-offer'/'source-payload.json'
+          p=json.loads(f.read_text())
+          p['method']['title']='Forged authority from edited data'
+          f.write_text(json.dumps(p,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+          PY
+          if node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            receive --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/altered-offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-tampered-source" \
+            --decision HOLD --world fictional-receiver-source-tampered; then
+            echo 'Tampered source was not rejected' >&2; exit 1
+          fi
+          cp -R "$RUNNER_TEMP/living-witness/receiver-hold" "$RUNNER_TEMP/living-witness/receiver-tampered-custody"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'living-witness'/'receiver-tampered-custody'/'payloads'
+          files=list(p.glob('*.bin')); assert len(files)==1
+          raw=bytearray(files[0].read_bytes()); raw[0]^=1; files[0].write_bytes(raw)
+          PY
+          if node --experimental-strip-types pilots/abundent-circuit-001/crossing-005/crossing_005.mjs \
+            verify --relatte native-relatte-donor --revival native-revival-donor \
+            --offer "$RUNNER_TEMP/living-witness/offer" \
+            --trusted-key "$RUNNER_TEMP/living-witness/offer/source-public-key.json" \
+            --receiver "$RUNNER_TEMP/living-witness/receiver-tampered-custody"; then
+            echo 'Damaged native retained bytes were not rejected' >&2; exit 1
+          fi
+      - name: Public-safe evidence report; exclude receiver keys and private journals
+        run: |
+          mkdir -p "$RUNNER_TEMP/living-witness/export"
+          cp "$RUNNER_TEMP/living-witness/offer/signed-crossing.json" "$RUNNER_TEMP/living-witness/export/"
+          cp "$RUNNER_TEMP/living-witness/offer/source-payload.json" "$RUNNER_TEMP/living-witness/export/"
+          cp "$RUNNER_TEMP/living-witness/offer/source-public-key.json" "$RUNNER_TEMP/living-witness/export/"
+          cp "$RUNNER_TEMP/living-witness/receiver-hold/circuit-005-report.json" "$RUNNER_TEMP/living-witness/export/hold-report.json"
+          cp "$RUNNER_TEMP/living-witness/receiver-refuse/circuit-005-report.json" "$RUNNER_TEMP/living-witness/export/refuse-report.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: living-witness-005-native-signed-synthetic-proofs
+          path: ${{ runner.temp }}/living-witness/export/*
+          retention-days: 7
