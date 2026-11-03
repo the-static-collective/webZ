@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
-  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false;
+  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false;
   try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
   catch (_) { st = C.init(); }
   function $(q) { return document.querySelector(q); }
@@ -83,7 +83,9 @@
     $('#ecoList').innerHTML = n.economy.length ? n.economy.map(function (e) {return '<article class="item"><span class="pill">' + s(e.type) + ' · ' + s(e.status) + '</span><p>' + s(e.description) + '</p>' + (e.cents ? '<p class="small">$' + (e.cents/100).toFixed(2) + ' (self-reported only)</p>' : '') + '</article>';}).join('') : empty('No economic records. Keep money and nonmoney distinct.');
     $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {
        var native = x.actualGHoT === true;
-       return '<article class="item green"><span class="pill done">' + (native ? 'NATIVE GHOT / LOCAL' : 'BROWSER EXECUTION') + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; unsigned local receipt, not an independent witness.' : ' (not GHoT)') + '</p></article>';
+       var label = !native ? 'BROWSER EXECUTION' : x.transport === 'lan_hmac_v1' ?
+         (x.status === 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' ? 'NATIVE GHOT / PEER LOOPBACK TEST' : 'NATIVE GHOT / LAN WORKER') : 'NATIVE GHOT / LOCAL';
+       return '<article class="item green"><span class="pill done">' + label + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; ' + s(x.witnessClass || 'non-authoritative record') + '.' : ' (not GHoT)') + '</p></article>';
      }).join('') : empty('Run a small task on this device to create a real local execution receipt.');
     $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
     $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
@@ -97,9 +99,9 @@
   function checkNativeGhot() {
     if (location.protocol === 'file:') {
       nativeStatus('Offline file mode. Use ghot_local_server.py with an actual GHoT checkout to enable native execution.', false);
-      return;
+      return Promise.resolve();
     }
-    fetch('/api/ghot/status', {cache: 'no-store', credentials: 'omit'}).then(function (res) {
+    return fetch('/api/ghot/status', {cache: 'no-store', credentials: 'omit'}).then(function (res) {
       if (!res.ok) throw Error('No local donor bridge'); return res.json();
     }).then(function (info) {
       if (info.nativeGHoT !== true || info.transport !== 'loopback_only' ||
@@ -136,8 +138,73 @@
       }).finally(function () {nativePending=false; $('#ghotRunButton').disabled=!nativeAvailable;});
   }
 
+
+  function peerStatus(message, ready) {
+    peerAvailable = !!ready;
+    var status = $('#peerStatus');
+    if (status) { status.textContent = message; status.className = ready ? 'banner' : 'warning'; }
+    if ($('#peerRunForm')) $('#peerRunForm').hidden = !peerAvailable;
+    if ($('#peerUnpairButton')) $('#peerUnpairButton').hidden = !peerAvailable;
+    if ($('#peerRunButton')) $('#peerRunButton').disabled = !peerAvailable || peerPending;
+  }
+  function checkPeer() {
+    if (!nativeAvailable) return peerStatus('Local bridge required. Open the double-click Mac launcher to pair.', false);
+    return fetch('/api/ghot/peer/status', {cache:'no-store', credentials:'omit'})
+      .then(function(r) {if(!r.ok) throw Error('No LAN bridge');return r.json();})
+      .then(function(d) {
+        if (d.paired === true && d.capability === 'system.hash')
+          peerStatus('PAIRED · '+d.workerNodeId+' · '+(d.loopbackTest?'loopback-only test':'private LAN address')+' · only manually requested hash tasks.',true);
+        else peerStatus('No remote worker paired. On the second computer, start the worker and copy its private IP and pairing key here.',false);
+      }).catch(function() {peerStatus('LAN pairing is not available on the public preview.',false);});
+  }
+  function localPost(route, body) {
+    return fetch(route,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',
+      body:JSON.stringify(body)}).then(function(r){if(!r.ok)throw Error('Local bridge refused ('+r.status+').');return r.json();});
+  }
+  function pairRemoteGhot(form) {
+    if (!nativeAvailable || peerPending) return notify('Start the LOCAL bridge before pairing.');
+    var addr=data(form,'url').trim(), key=data(form,'key').trim().toLowerCase();
+    if (!/^http:\/\/(?:10\.|172\.|192\.168\.|127\.)/.test(addr) || !/^[0-9a-f]{64}$/.test(key))
+      return notify('Enter the worker private IPv4 http://IP:7789 and 64-character pairing key.');
+    peerPending=true;
+    peerStatus('Pairing: verifying your second computer and GHoT identity…',false);
+    localPost('/api/ghot/peer/pair',{url:addr,key:key}).then(function(answer){
+      form.elements.namedItem('key').value=''; // never persist the shared secret in the browser notebook
+      if(!answer.paired)throw Error('Remote worker declined pairing.');
+      return checkPeer();
+    }).catch(function(e){peerStatus('Pairing failed. Verify that the worker is running and both machines share a trusted LAN.',false);notify(e.message);})
+      .finally(function(){peerPending=false;if($('#peerRunButton'))$('#peerRunButton').disabled=!peerAvailable;});
+  }
+  function runRemoteGhot(form) {
+    if (!peerAvailable || peerPending) return notify('Pair the remote worker first.');
+    var n=current();if(!n)return notify('Create a harbor before running a task.');
+    var text=data(form,'text'), bytes=new TextEncoder().encode(text), hash;
+    if(!text.trim() || text.length>1000 || bytes.length>4000)return notify('Enter 1–1000 characters of test-only text.');
+    if(!window.crypto || !window.crypto.subtle)return notify('WebCrypto not available.');
+    peerPending=true;peerStatus('Crossing a bounded system.hash task to your paired GHoT worker…',true);
+    window.crypto.subtle.digest('SHA-256',bytes).then(function(d){
+      hash=Array.from(new Uint8Array(d)).map(function(v){return('0'+v.toString(16)).slice(-2);}).join('');
+      return localPost('/api/ghot/peer/hash',{text:text});
+    }).then(function(result){
+      if(!result || result.bridgeVerified!==true || result.nativeGHoT!==true || result.transport!=='lan_hmac_v1')
+        throw Error('Remote response was not checked by the local operator bridge.');
+      C.remoteGhotRecord(st,n.id,bytes.length,result.receipt,hash,result);
+      persist();render();
+      peerStatus('NATIVE GHOT PEER RECEIPT CHECKED · task executed by '+result.workerNodeId+
+        (result.loopbackTest?' (same-machine loopback test)':' (private LAN worker)'),true);
+    }).catch(function(e){peerStatus('Remote task refused or failed; inspect the terminal. '+e.message,true);})
+      .finally(function(){peerPending=false;$('#peerRunButton').disabled=!peerAvailable;});
+  }
+  function unpairRemote() {
+    if(peerPending)return notify('Wait for the current task to finish.');
+    localPost('/api/ghot/peer/unpair',{}).then(function(){peerStatus('Unpaired. No remote worker is currently authorized.',false);})
+      .catch(function(e){notify(e.message);});
+  }
+
   document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
     ev.preventDefault(); if (action === 'ghot-native') { runNativeGhot(f); return; }
+    if (action === 'ghot-peer-pair') { pairRemoteGhot(f); return; }
+    if (action === 'ghot-peer-run') { runRemoteGhot(f); return; }
     safeRun(function () { var id = f.getAttribute('data-id'), n = current();
       if (action === 'create-node') C.createNode(st,data(f,'name'),data(f,'kind'));
       else if (action === 'invite') C.invitation(st,n.id,data(f,'title'),data(f,'description'));
@@ -178,7 +245,8 @@
   $('#importBtn').addEventListener('click',function () {$('#importFile').click();});
   $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
   $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
+  $('#peerUnpairButton').addEventListener('click',unpairRemote);
   $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
   render();
-  checkNativeGhot();
+  checkNativeGhot().then(checkPeer).catch(function() {checkPeer();});
 }());

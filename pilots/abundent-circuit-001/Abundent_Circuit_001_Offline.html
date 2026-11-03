@@ -19,7 +19,16 @@
 <section id="compute" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Bounded local task</h2><p class="small">A genuinely executed, deterministic browser task with a local receipt. Inspired by GHoT's capability/receipt grammar but <b>not delegated to GHoT</b>.</p><form data-act="compute"><div class="formfields"><div><label>Available local capability</label><select name="task"><option value="word_count">Text word count</option><option value="character_count">Character count</option><option value="line_count">Line count</option></select></div><div><label>Input (local only)</label><textarea name="input" maxlength="1000" required placeholder="A song, a welcome note, a short event brief."></textarea></div></div><button class="btn dark">Run here + record result</button></form></div><div class="card"><h2>Native GHoT · local bridge 002</h2><p class="small">Run an actual <code>system.hash</code> on the independent GHoT reference runtime on this computer. Requires the local-only Python launcher and an existing GHoT checkout. The hosted web preview and standalone HTML <b>cannot access a donor</b>.</p>
 <p id="ghotStatus" class="warning" role="status" aria-live="polite">Checking for a local bridge…</p>
 <form data-act="ghot-native"><div class="formfields"><label for="nativeInput">Public-safe test text (GHoT writes a local native task record; no private notes)</label><textarea id="nativeInput" name="text" maxlength="1000" required placeholder="Festival Foundry / one harbor / one next harbor"></textarea></div><button class="btn gold" id="ghotRunButton" type="submit" disabled>Run in native GHoT → check receipt</button></form>
-<p class="small"><strong>Scope:</strong> single allowlisted native hash, 127.0.0.1 only, no remote machines, no remote shell, no payments or physical act. A native execution receipt is <em>not</em> a human-witnessed Deed.</p></div></div><div class="card"><h2>Local execution receipts</h2><div id="computeList"></div></div></section>
+<p class="small"><strong>Scope:</strong> single allowlisted native hash, 127.0.0.1 only, no remote shell, no payments or physical act. A separate opt-in LAN worker is available below. A native execution receipt is <em>not</em> a human-witnessed Deed.</p></div></div><div class="card"><h2>Native GHoT · second computer / LAN worker 003</h2>
+<p class="small">A real remote GHoT executor can receive one explicit, bounded <code>system.hash</code> request from this browser through the local Python bridge. Start <code>start-ghot-lan-worker-mac.command</code> on the other computer. Enter its <strong>private IP and pairing key</strong> below. The pairing key stays in bridge memory, not the browser notebook.</p>
+<p id="peerStatus" class="warning" role="status" aria-live="polite">Checking for remote GHoT pairing…</p>
+<form id="peerPairForm" data-act="ghot-peer-pair"><div class="formfields">
+<label for="peerUrl">Worker address (private LAN only, example: http://192.168.1.42:7789)</label><input id="peerUrl" name="url" type="url" inputmode="url" maxlength="110" autocomplete="off" required placeholder="http://192.168.1.42:7789">
+<label for="peerSecret">Pairing key shown on the second computer's Terminal (64 hexadecimal characters)</label><input id="peerSecret" name="key" type="password" maxlength="64" minlength="64" autocapitalize="off" autocomplete="off" spellcheck="false" required placeholder="64-character private key"></div><button class="btn dark" id="peerPairBtn" type="submit">Pair this computer with remote GHoT</button></form>
+<form data-act="ghot-peer-run" id="peerRunForm" hidden><div class="formfields"><label for="peerTaskText">Test-only text; remote GHoT writes it to the second computer's private task records</label><textarea id="peerTaskText" name="text" maxlength="1000" required placeholder="Festival Foundry / two machines / one verified native hash"></textarea></div><button class="btn gold" type="submit" id="peerRunButton">Execute on the second GHoT computer → verify native receipt</button></form>
+<button class="btn" type="button" id="peerUnpairButton" hidden>Unpair remote worker</button>
+<p class="small"><strong>Boundaries:</strong> manually paired trusted LAN only; per-request HMAC integrity, no pairing secret on the network, no CORS, no arbitrary shell, file execution, payments, fabrication, Deed or organizational authorization. This is plain HTTP: <strong>never send sensitive text or use untrusted Wi-Fi.</strong> A machine ID and a returned receipt cannot establish physical identity by themselves.</p></div>
+<div class="card"><h2>Local execution receipts</h2><div id="computeList"></div></div></section>
 <section id="foundry" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Make a transferable host cartridge</h2><p class="small">Only a separately reviewed-confirmed project can produce a finished local method. Export only text you deliberately want to share.</p><form data-act="cartridge"><div class="formfields"><div><label>Reviewed-confirmed project</label><select id="cartridgeProject" name="projectId" required></select></div><div><label>Reproduction method / steps</label><textarea name="method" required maxlength="1600" placeholder="1. Ask host permission...&#10;2. Set a small budget...&#10;3. Gather and debrief..."></textarea></div><div><label>What failed / remains local / cannot be assumed</label><textarea name="limitations" required maxlength="700" placeholder="Venue access, food permits, insurance, and local authority must be independently decided."></textarea></div></div><button class="btn dark">Author reviewed-method cartridge</button></form></div><div class="card"><h2>The next harbor</h2><p><strong>Copy capacity, never authority.</strong> A cartridge can travel to another node, but becomes only a new proposal there. It cannot carry automatic participants, permissions, payments, funding, witnesses or approval.</p><div class="flow"><span>ONE TABLE</span><b>→</b><span>ONE ACT</span><b>→</b><span>ONE NEXT HARBOR</span></div><p class="small">Try exporting a finished cartridge, switching harbors, and importing. Its status must return to PROPOSED—not CONFIRMED.</p></div></div><div class="card"><h2>Reusable cartridges</h2><div id="cartridgeList"></div></div></section>
 </div><footer class="footer">ABUNDENT CIRCUIT 001 · Prototype only. Native GHoT hash is optionally available only on the localhost bridge. No partner enrollment, verified-human witness, production accounting, remote networking, payments, physical action, or real-world result is implied. Public exports require independent review and consent. Use fictional/non-sensitive data during initial testing.</footer></main><div id="notice" role="status" aria-live="polite"></div>
 <script>
@@ -124,7 +133,7 @@
   // Real donor execution is performed only by ghot_local_server.py calling the
   // independent GHoT reference_node.py. This function validates the returned
   // local bridge receipt, records the digest, and grants ZERO project authority.
-  function nativeGhotRecord(st, id, inputBytes, receipt, expectedHash) {
+  function nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof) {
     var n = node(st, id);
     assert(Number.isSafeInteger(inputBytes) && inputBytes > 0 && inputBytes <= 4000, 'Invalid byte count.');
     assert(typeof expectedHash === 'string' && /^[a-f0-9]{64}$/.test(expectedHash), 'Invalid local input digest.');
@@ -135,14 +144,29 @@
     assert(typeof receipt.task_id === 'string' && /^task-[a-z0-9-]+$/i.test(receipt.task_id), 'Invalid GHoT task ID.');
     assert(typeof receipt.executor_node_id === 'string' && receipt.executor_node_id.length <= 120, 'Invalid native executor.');
     assert(!n.compute.some(function (x) { return x.nativeReceiptId === receipt.receipt_id; }), 'Duplicate GHoT receipt refused.');
+    if (peerProof) {
+      assert(peerProof.transport === 'lan_hmac_v1' && peerProof.bridgeVerified === true,
+        'Remote receipt must be explicitly verified by the local bridge.');
+      assert(peerProof.workerNodeId === receipt.executor_node_id,
+        'The remote executor does not match the paired worker.');
+      assert(typeof peerProof.loopbackTest === 'boolean', 'Missing physical-vs-loopback classification.');
+    }
+    var status = !peerProof ? 'GHOT_NATIVE_EXECUTED_LOCAL' :
+      peerProof.loopbackTest ? 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' : 'GHOT_NATIVE_EXECUTED_LAN';
     var record = {id: next(st, 'native-task'), task: 'system.hash', output: expectedHash,
-      status: 'GHOT_NATIVE_EXECUTED_LOCAL', executor: receipt.executor_node_id,
+      status: status, executor: receipt.executor_node_id, transport: peerProof ? 'lan_hmac_v1' : 'loopback_only',
       inputSha256: expectedHash, inputBytes: inputBytes, nativeReceiptId: receipt.receipt_id,
       nativeTaskId: receipt.task_id, at: now(), actualGHoT: true,
-      witnessClass: 'local donor receipt checked against browser input; unsigned, not independently attested'};
+      witnessClass: peerProof ? 'local bridge HMAC checked worker response, not human identity or real physical topology' :
+        'local donor receipt checked against browser input; unsigned, not independently attested'};
     n.compute.unshift(record);
-    journal(st, 'GHOT_NATIVE_RECEIPT_RECORDED_NO_AUTHORITY', id, record.id);
+    journal(st, peerProof ? 'GHOT_PAIRED_WORKER_RECEIPT_NO_AUTHORITY' : 'GHOT_NATIVE_RECEIPT_RECORDED_NO_AUTHORITY', id, record.id);
     return clone(record);
+  }
+
+  function remoteGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof) {
+    assert(peerProof && peerProof.transport === 'lan_hmac_v1', 'A paired worker proof is required.');
+    return nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof);
   }
 
   function crossing(st, sourceId, pid, destinationId, note) {
@@ -232,7 +256,7 @@
   return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
     init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
     invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
-    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord,
+    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord,
     crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
     makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
 }));
@@ -242,7 +266,7 @@
 (function () {
   'use strict';
   var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
-  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false;
+  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false;
   try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
   catch (_) { st = C.init(); }
   function $(q) { return document.querySelector(q); }
@@ -324,7 +348,9 @@
     $('#ecoList').innerHTML = n.economy.length ? n.economy.map(function (e) {return '<article class="item"><span class="pill">' + s(e.type) + ' · ' + s(e.status) + '</span><p>' + s(e.description) + '</p>' + (e.cents ? '<p class="small">$' + (e.cents/100).toFixed(2) + ' (self-reported only)</p>' : '') + '</article>';}).join('') : empty('No economic records. Keep money and nonmoney distinct.');
     $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {
        var native = x.actualGHoT === true;
-       return '<article class="item green"><span class="pill done">' + (native ? 'NATIVE GHOT / LOCAL' : 'BROWSER EXECUTION') + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; unsigned local receipt, not an independent witness.' : ' (not GHoT)') + '</p></article>';
+       var label = !native ? 'BROWSER EXECUTION' : x.transport === 'lan_hmac_v1' ?
+         (x.status === 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' ? 'NATIVE GHOT / PEER LOOPBACK TEST' : 'NATIVE GHOT / LAN WORKER') : 'NATIVE GHOT / LOCAL';
+       return '<article class="item green"><span class="pill done">' + label + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; ' + s(x.witnessClass || 'non-authoritative record') + '.' : ' (not GHoT)') + '</p></article>';
      }).join('') : empty('Run a small task on this device to create a real local execution receipt.');
     $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
     $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
@@ -338,9 +364,9 @@
   function checkNativeGhot() {
     if (location.protocol === 'file:') {
       nativeStatus('Offline file mode. Use ghot_local_server.py with an actual GHoT checkout to enable native execution.', false);
-      return;
+      return Promise.resolve();
     }
-    fetch('/api/ghot/status', {cache: 'no-store', credentials: 'omit'}).then(function (res) {
+    return fetch('/api/ghot/status', {cache: 'no-store', credentials: 'omit'}).then(function (res) {
       if (!res.ok) throw Error('No local donor bridge'); return res.json();
     }).then(function (info) {
       if (info.nativeGHoT !== true || info.transport !== 'loopback_only' ||
@@ -377,8 +403,73 @@
       }).finally(function () {nativePending=false; $('#ghotRunButton').disabled=!nativeAvailable;});
   }
 
+
+  function peerStatus(message, ready) {
+    peerAvailable = !!ready;
+    var status = $('#peerStatus');
+    if (status) { status.textContent = message; status.className = ready ? 'banner' : 'warning'; }
+    if ($('#peerRunForm')) $('#peerRunForm').hidden = !peerAvailable;
+    if ($('#peerUnpairButton')) $('#peerUnpairButton').hidden = !peerAvailable;
+    if ($('#peerRunButton')) $('#peerRunButton').disabled = !peerAvailable || peerPending;
+  }
+  function checkPeer() {
+    if (!nativeAvailable) return peerStatus('Local bridge required. Open the double-click Mac launcher to pair.', false);
+    return fetch('/api/ghot/peer/status', {cache:'no-store', credentials:'omit'})
+      .then(function(r) {if(!r.ok) throw Error('No LAN bridge');return r.json();})
+      .then(function(d) {
+        if (d.paired === true && d.capability === 'system.hash')
+          peerStatus('PAIRED · '+d.workerNodeId+' · '+(d.loopbackTest?'loopback-only test':'private LAN address')+' · only manually requested hash tasks.',true);
+        else peerStatus('No remote worker paired. On the second computer, start the worker and copy its private IP and pairing key here.',false);
+      }).catch(function() {peerStatus('LAN pairing is not available on the public preview.',false);});
+  }
+  function localPost(route, body) {
+    return fetch(route,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',
+      body:JSON.stringify(body)}).then(function(r){if(!r.ok)throw Error('Local bridge refused ('+r.status+').');return r.json();});
+  }
+  function pairRemoteGhot(form) {
+    if (!nativeAvailable || peerPending) return notify('Start the LOCAL bridge before pairing.');
+    var addr=data(form,'url').trim(), key=data(form,'key').trim().toLowerCase();
+    if (!/^http:\/\/(?:10\.|172\.|192\.168\.|127\.)/.test(addr) || !/^[0-9a-f]{64}$/.test(key))
+      return notify('Enter the worker private IPv4 http://IP:7789 and 64-character pairing key.');
+    peerPending=true;
+    peerStatus('Pairing: verifying your second computer and GHoT identity…',false);
+    localPost('/api/ghot/peer/pair',{url:addr,key:key}).then(function(answer){
+      form.elements.namedItem('key').value=''; // never persist the shared secret in the browser notebook
+      if(!answer.paired)throw Error('Remote worker declined pairing.');
+      return checkPeer();
+    }).catch(function(e){peerStatus('Pairing failed. Verify that the worker is running and both machines share a trusted LAN.',false);notify(e.message);})
+      .finally(function(){peerPending=false;if($('#peerRunButton'))$('#peerRunButton').disabled=!peerAvailable;});
+  }
+  function runRemoteGhot(form) {
+    if (!peerAvailable || peerPending) return notify('Pair the remote worker first.');
+    var n=current();if(!n)return notify('Create a harbor before running a task.');
+    var text=data(form,'text'), bytes=new TextEncoder().encode(text), hash;
+    if(!text.trim() || text.length>1000 || bytes.length>4000)return notify('Enter 1–1000 characters of test-only text.');
+    if(!window.crypto || !window.crypto.subtle)return notify('WebCrypto not available.');
+    peerPending=true;peerStatus('Crossing a bounded system.hash task to your paired GHoT worker…',true);
+    window.crypto.subtle.digest('SHA-256',bytes).then(function(d){
+      hash=Array.from(new Uint8Array(d)).map(function(v){return('0'+v.toString(16)).slice(-2);}).join('');
+      return localPost('/api/ghot/peer/hash',{text:text});
+    }).then(function(result){
+      if(!result || result.bridgeVerified!==true || result.nativeGHoT!==true || result.transport!=='lan_hmac_v1')
+        throw Error('Remote response was not checked by the local operator bridge.');
+      C.remoteGhotRecord(st,n.id,bytes.length,result.receipt,hash,result);
+      persist();render();
+      peerStatus('NATIVE GHOT PEER RECEIPT CHECKED · task executed by '+result.workerNodeId+
+        (result.loopbackTest?' (same-machine loopback test)':' (private LAN worker)'),true);
+    }).catch(function(e){peerStatus('Remote task refused or failed; inspect the terminal. '+e.message,true);})
+      .finally(function(){peerPending=false;$('#peerRunButton').disabled=!peerAvailable;});
+  }
+  function unpairRemote() {
+    if(peerPending)return notify('Wait for the current task to finish.');
+    localPost('/api/ghot/peer/unpair',{}).then(function(){peerStatus('Unpaired. No remote worker is currently authorized.',false);})
+      .catch(function(e){notify(e.message);});
+  }
+
   document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
     ev.preventDefault(); if (action === 'ghot-native') { runNativeGhot(f); return; }
+    if (action === 'ghot-peer-pair') { pairRemoteGhot(f); return; }
+    if (action === 'ghot-peer-run') { runRemoteGhot(f); return; }
     safeRun(function () { var id = f.getAttribute('data-id'), n = current();
       if (action === 'create-node') C.createNode(st,data(f,'name'),data(f,'kind'));
       else if (action === 'invite') C.invitation(st,n.id,data(f,'title'),data(f,'description'));
@@ -419,9 +510,10 @@
   $('#importBtn').addEventListener('click',function () {$('#importFile').click();});
   $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
   $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
+  $('#peerUnpairButton').addEventListener('click',unpairRemote);
   $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
   render();
-  checkNativeGhot();
+  checkNativeGhot().then(checkPeer).catch(function() {checkPeer();});
 }());
 
 </script>

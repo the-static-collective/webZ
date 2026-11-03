@@ -1,4 +1,4 @@
-name: Abundent Circuit 002 — Native GHoT
+name: Abundent Circuit 003 — LAN Native GHoT
 on:
   pull_request:
     paths:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   native-donor:
-    runs-on: ubuntu-24.04 # pinned: Playwright 1.55 lacks Ubuntu 26.04 browser builds
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -37,6 +37,10 @@ jobs:
         env:
           GHOT_REPO: ${{ github.workspace }}/native-ghot-donor
         run: python3 -m unittest discover -s pilots/abundent-circuit-001/tests -p test_native_ghot.py -v
+      - name: Native donor pair / real-GHoT LAN loopback processes + HTTP negative cases
+        env:
+          GHOT_REPO: ${{ github.workspace }}/native-ghot-donor
+        run: python3 -m unittest discover -s pilots/abundent-circuit-001/tests -p test_lan_ghot.py -v
       - name: Install browser smoke dependencies
         run: |
           python -m pip install playwright==1.55.0
@@ -45,3 +49,7 @@ jobs:
         env:
           GHOT_REPO: ${{ github.workspace }}/native-ghot-donor
         run: python3 pilots/abundent-circuit-001/tests/browser_native_ghot.py
+      - name: Paired remote GHoT / full browser / local persistence / unpair
+        env:
+          GHOT_REPO: ${{ github.workspace }}/native-ghot-donor
+        run: python3 pilots/abundent-circuit-001/tests/browser_peer_ghot.py

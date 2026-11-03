@@ -15,10 +15,12 @@ import os
 import re
 import subprocess
 import sys
+import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
+from ghot_lan_protocol import key_from_string, post_signed, private_peer_url
 
 APP_DIR = Path(__file__).resolve().parent
 HASH_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -113,9 +115,81 @@ class Handler(SimpleHTTPRequestHandler):
                     'localhost:' + str(self.server.server_port)}
         return host in expected
 
+    def _peer_status(self) -> dict:
+        binding = getattr(self.server, 'peer_binding', None)
+        if binding is None:
+            return {'paired': False, 'capability': 'system.hash', 'scope': 'LAN_MANUAL_PAIRING_ONLY'}
+        return {'paired': True, 'workerNodeId': binding['workerNodeId'],
+                'workerParticular': binding['workerParticular'],
+                'url': binding['url'], 'capability': 'system.hash',
+                'scope': 'LAN_HMAC_INTEGRITY_ONLY', 'loopbackTest': binding['loopbackTest']}
+
+    def _peer_action(self, action: str, body: dict) -> dict:
+        # The local browser talks only to *its own* 127.0.0.1 bridge. The
+        # operator voluntarily pairs this bridge to one trusted LAN worker.
+        if action == 'pair':
+            if set(body) != {'url', 'key'}:
+                raise ValueError('A private worker IP and pairing key are required.')
+            url = private_peer_url(body['url'])
+            key = key_from_string(body['key'])
+            result = post_signed(url, key, '/v1/pair', {'purpose': 'pair-native-ghot'})
+            wid = result.get('workerNodeId')
+            if (result.get('schema') != 'abundent.ghot.worker/v1' or
+                result.get('capability') != 'system.hash' or
+                not isinstance(wid, str) or not wid.startswith('node-') or len(wid) > 120):
+                raise RuntimeError('Worker did not return a valid native GHoT identity.')
+            bind = {'url': url, 'key': key, 'workerNodeId': wid,
+                    'workerParticular': result.get('workerParticular'),
+                    'loopbackTest': url.startswith('http://127.')}
+            with self.server.peer_lock:
+                self.server.peer_binding = bind
+            return self._peer_status()
+        if action == 'unpair':
+            if body != {}:
+                raise ValueError('Unpair accepts no other fields.')
+            with self.server.peer_lock:
+                self.server.peer_binding = None
+            return self._peer_status()
+        if action != 'hash' or set(body) != {'text'}:
+            raise ValueError('Only system.hash is offered to the remote worker.')
+        text = body['text']
+        if (not isinstance(text, str) or not text.strip() or len(text) > MAX_INPUT or
+            any(ord(ch) < 32 and ch not in '\n\r\t' for ch in text)):
+            raise ValueError('Only 1–1000 characters of non-sensitive test text are allowed.')
+        with self.server.peer_lock:
+            binding = self.server.peer_binding
+        if binding is None:
+            raise ValueError('Pair a remote worker before requesting a task.')
+        result = post_signed(binding['url'], binding['key'], '/v1/hash', {'text': text}, timeout=25)
+        receipt = result.get('receipt') or {}
+        expected = hashlib.sha256(text.encode('utf-8')).hexdigest()
+        expected_output_digest = hashlib.sha256(json.dumps({'sha256': expected}, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+        valid = (result.get('schema') == 'abundent.ghot.execution/v1' and
+                 result.get('capability') == 'system.hash' and
+                 result.get('workerNodeId') == binding['workerNodeId'] and
+                 receipt.get('kind') == 'ghot.receipt' and receipt.get('version') == '0' and
+                 receipt.get('capability') == 'system.hash' and receipt.get('status') == 'ok' and
+                 receipt.get('executor_node_id') == binding['workerNodeId'] and
+                 isinstance(receipt.get('receipt_id'), str) and receipt['receipt_id'].startswith('receipt-') and
+                 isinstance(receipt.get('task_id'), str) and receipt['task_id'].startswith('task-') and
+                 receipt.get('output') == {'sha256': expected} and
+                 receipt.get('output_sha256') == expected_output_digest)
+        if not valid:
+            raise RuntimeError('Remote donor receipt, executor, or input digest failed validation.')
+        with self.server.peer_lock:
+            if binding is not self.server.peer_binding:
+                raise RuntimeError('Peer was changed while task was in progress.')
+        return {'nativeGHoT': True, 'bridgeVerified': True, 'transport': 'lan_hmac_v1',
+                'workerNodeId': binding['workerNodeId'],
+                'loopbackTest': binding['loopbackTest'], 'receipt': receipt,
+                'nonclaims': ['HMAC pairing does not prove physical machine identity',
+                              'No distributed scheduler involved', 'No human witnessed work']}
+
     def do_GET(self) -> None:
         if not self._allow_host():
             return self._json(403, {'error': 'Invalid host.'})
+        if urlsplit(self.path).path == '/api/ghot/peer/status':
+            return self._json(200, self._peer_status())
         if urlsplit(self.path).path == '/api/ghot/status':
             return self._json(200, {'nativeGHoT': True,
                                     'source': 'GHoT/ghot/reference_node.py',
@@ -132,7 +206,9 @@ class Handler(SimpleHTTPRequestHandler):
     def do_POST(self) -> None:
         if not self._allow_host():
             return self._json(403, {'error': 'Invalid host.'})
-        if self.path != '/api/ghot/hash':
+        allowed_routes = {'/api/ghot/hash': 'local', '/api/ghot/peer/pair': 'pair',
+                          '/api/ghot/peer/hash': 'hash', '/api/ghot/peer/unpair': 'unpair'}
+        if self.path not in allowed_routes:
             return self._json(404, {'error': 'Unknown API route.'})
         # Browsers visiting a malicious remote site cannot issue an effective
         # cross-origin POST; no CORS, exact same-origin and application/json.
@@ -152,14 +228,19 @@ class Handler(SimpleHTTPRequestHandler):
             return self._json(413, {'error': 'Request body limit exceeded.'})
         try:
             body = json.loads(self.rfile.read(length).decode('utf-8'))
-            if not isinstance(body, dict) or set(body) != {'text'}:
-                raise ValueError('Only the text field is accepted.')
-            result = execute_native_hash(self.server.ghot_repo, self.server.ghot_home, body['text'])
+            if not isinstance(body, dict):
+                raise ValueError('Expected a single JSON object.')
+            if allowed_routes[self.path] == 'local':
+                if set(body) != {'text'}:
+                    raise ValueError('Only the text field is accepted.')
+                result = execute_native_hash(self.server.ghot_repo, self.server.ghot_home, body['text'])
+            else:
+                result = self._peer_action(allowed_routes[self.path], body)
         except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
             return self._json(400, {'error': str(exc)[:150]})
         except Exception:
-            self.log_error('Native GHoT task failed; inspect GHoT HOME records / local operator logs')
-            return self._json(502, {'error': 'Native GHoT execution failed or receipt was rejected.'})
+            self.log_error('Native GHoT peer/task failed; inspect the LOCAL operator terminal')
+            return self._json(502, {'error': 'Native GHoT peer or receipt check failed. Check the local worker, IP, pairing, and clocks.'})
         return self._json(200, result)
 
     def log_message(self, fmt: str, *args) -> None:
@@ -179,11 +260,14 @@ def serve(repo: Path, *, port: int = 8878, home: Path | None = None) -> None:
     server = ThreadingHTTPServer(('127.0.0.1', port), partial(Handler, directory=str(APP_DIR)))
     server.ghot_repo = checked_ghot_directory(repo)
     server.ghot_home = home
+    server.peer_lock = threading.Lock()
+    server.peer_binding = None  # ephemeral, never written to disk
     print('Abundent Circuit 002 + native GHoT (local only)')
     print('Open: http://127.0.0.1:%d/' % port)
     print('Donor:', str(server.ghot_repo))
     print('GHoT receipts stay in:', str(home))
-    print('Press Ctrl+C to stop; no LAN / internet listener is opened.')
+    print('This local bridge is loopback-only. A separate optional LAN worker may be paired from the browser.')
+    print('Press Ctrl+C to stop; this bridge never opens a public listener.')
     try:
         server.serve_forever()
     except KeyboardInterrupt:

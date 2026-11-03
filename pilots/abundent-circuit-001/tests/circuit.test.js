@@ -128,3 +128,23 @@ test('native GHoT receipt is digested, deduplicated, and grants zero Full Measur
   assert.throws(()=>C.nativeGhotRecord(st,a.id,3,{...receipt,output:{sha256:'f'.repeat(64)}},digest),/does not match/);
   assert.throws(()=>C.nativeGhotRecord(st,a.id,3,{...receipt,status:'error'},digest),/Not a native/);
 });
+
+test('LAN peer record is typed, bounded and never awards a Full Measure Deed',()=>{
+  const {st,a}=setup();
+  const input='one local harbor, another local GHoT';
+  const digest=require('node:crypto').createHash('sha256').update(input).digest('hex');
+  const receipt={kind:'ghot.receipt',version:'0',capability:'system.hash',status:'ok',
+    receipt_id:'receipt-3333',task_id:'task-4444',executor_node_id:'node-remote',
+    output:{sha256:digest}};
+  const bridge={bridgeVerified:true,transport:'lan_hmac_v1',workerNodeId:'node-remote',loopbackTest:false};
+  const rec=C.remoteGhotRecord(st,a.id,Buffer.byteLength(input),receipt,digest,bridge);
+  assert.equal(rec.actualGHoT,true);
+  assert.equal(rec.status,'GHOT_NATIVE_EXECUTED_LAN');
+  assert.equal(rec.transport,'lan_hmac_v1');
+  assert.equal(C.projectView(st,a.id).deeds,0);
+  assert.throws(()=>C.remoteGhotRecord(st,a.id,Buffer.byteLength(input),receipt,digest,bridge),/Duplicate/);
+  assert.throws(()=>C.remoteGhotRecord(st,a.id,Buffer.byteLength(input),
+    {...receipt,receipt_id:'receipt-new',executor_node_id:'node-imposter'},digest,bridge),/remote executor/);
+  assert.throws(()=>C.remoteGhotRecord(st,a.id,Buffer.byteLength(input),
+    {...receipt,receipt_id:'receipt-next'},digest,{...bridge,bridgeVerified:false}),/verified/);
+});

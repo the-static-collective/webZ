@@ -99,7 +99,7 @@
   // Real donor execution is performed only by ghot_local_server.py calling the
   // independent GHoT reference_node.py. This function validates the returned
   // local bridge receipt, records the digest, and grants ZERO project authority.
-  function nativeGhotRecord(st, id, inputBytes, receipt, expectedHash) {
+  function nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof) {
     var n = node(st, id);
     assert(Number.isSafeInteger(inputBytes) && inputBytes > 0 && inputBytes <= 4000, 'Invalid byte count.');
     assert(typeof expectedHash === 'string' && /^[a-f0-9]{64}$/.test(expectedHash), 'Invalid local input digest.');
@@ -110,14 +110,29 @@
     assert(typeof receipt.task_id === 'string' && /^task-[a-z0-9-]+$/i.test(receipt.task_id), 'Invalid GHoT task ID.');
     assert(typeof receipt.executor_node_id === 'string' && receipt.executor_node_id.length <= 120, 'Invalid native executor.');
     assert(!n.compute.some(function (x) { return x.nativeReceiptId === receipt.receipt_id; }), 'Duplicate GHoT receipt refused.');
+    if (peerProof) {
+      assert(peerProof.transport === 'lan_hmac_v1' && peerProof.bridgeVerified === true,
+        'Remote receipt must be explicitly verified by the local bridge.');
+      assert(peerProof.workerNodeId === receipt.executor_node_id,
+        'The remote executor does not match the paired worker.');
+      assert(typeof peerProof.loopbackTest === 'boolean', 'Missing physical-vs-loopback classification.');
+    }
+    var status = !peerProof ? 'GHOT_NATIVE_EXECUTED_LOCAL' :
+      peerProof.loopbackTest ? 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' : 'GHOT_NATIVE_EXECUTED_LAN';
     var record = {id: next(st, 'native-task'), task: 'system.hash', output: expectedHash,
-      status: 'GHOT_NATIVE_EXECUTED_LOCAL', executor: receipt.executor_node_id,
+      status: status, executor: receipt.executor_node_id, transport: peerProof ? 'lan_hmac_v1' : 'loopback_only',
       inputSha256: expectedHash, inputBytes: inputBytes, nativeReceiptId: receipt.receipt_id,
       nativeTaskId: receipt.task_id, at: now(), actualGHoT: true,
-      witnessClass: 'local donor receipt checked against browser input; unsigned, not independently attested'};
+      witnessClass: peerProof ? 'local bridge HMAC checked worker response, not human identity or real physical topology' :
+        'local donor receipt checked against browser input; unsigned, not independently attested'};
     n.compute.unshift(record);
-    journal(st, 'GHOT_NATIVE_RECEIPT_RECORDED_NO_AUTHORITY', id, record.id);
+    journal(st, peerProof ? 'GHOT_PAIRED_WORKER_RECEIPT_NO_AUTHORITY' : 'GHOT_NATIVE_RECEIPT_RECORDED_NO_AUTHORITY', id, record.id);
     return clone(record);
+  }
+
+  function remoteGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof) {
+    assert(peerProof && peerProof.transport === 'lan_hmac_v1', 'A paired worker proof is required.');
+    return nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof);
   }
 
   function crossing(st, sourceId, pid, destinationId, note) {
@@ -207,7 +222,7 @@
   return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
     init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
     invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
-    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord,
+    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord,
     crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
     makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
 }));
