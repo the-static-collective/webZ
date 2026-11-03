@@ -63,7 +63,7 @@ def compile_native_revival(repo: Path, choice: str) -> dict:
         if sha_json(doc[section]) != receipt[key]:
             raise RuntimeError("Native Revival receipt hash did not verify: " + section)
     text = doc["projection"]["content"]["text"]
-    if (doc["witness"].get("locator") != "Gen.1.1"
+    if (doc["witness"].get("locator") != "Genesis 1:1"
         or doc["recipe"].get("id") != "reader-demo"
         or not isinstance(text, str) or not text or len(text) > 1000):
         raise RuntimeError("Unexpected native Revival projection.")
