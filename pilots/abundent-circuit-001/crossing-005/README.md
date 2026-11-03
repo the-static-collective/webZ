@@ -24,7 +24,7 @@ The signing key is generated for this experiment, not an enrolled human identity
 
 ## Reproduction
 
-Use the GitHub Actions workflow at .github/workflows/abundent-circuit-living-witness.yml for the fully pinned test. Local execution requires Python 3.11+, Node 22, Git, the three donor repositories checked out at the exact SHAs above, and the dependencies installed from the native reLATTE package manifest. Mac Mojave compatibility and a physically independent two-device field test are not yet established.
+Use the GitHub Actions workflow at .github/workflows/abundent-circuit-living-witness.yml for the fully pinned test. Local execution requires Python 3.11+, Node 22, Git, the three donor repositories checked out at the exact SHAs above, and reLATTE's runtime dependency installed from the pinned version in its package manifest (there is no npm lockfile at this pin). Mac Mojave compatibility and a physically independent two-device field test are not yet established.
 
 ## Next gate
 
