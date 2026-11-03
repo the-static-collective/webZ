@@ -128,7 +128,18 @@ if(!(await verifyReviewReceipt(r)))process.exit(2);
  wallet=popup.value
  wallet.on("pageerror",lambda e:errors.append(str(e)))
  wallet.get_by_role("heading",name="Your worlds. One keyring.").wait_for()
- wallet.locator("#handoff").wait_for(state="visible")
+ try:
+  wallet.locator("#handoff").wait_for(state="visible",timeout=8000)
+ except Exception:
+  print("WF003_DEBUG_HANDOFF="+json.dumps({
+   "popup_url":wallet.url,"source_url":page.url,
+   "source_status":page.locator("#status").inner_text(),
+   "popup_status":wallet.locator("#status").inner_text(),
+   "opener":wallet.evaluate("Boolean(window.opener)"),
+   "opener_path":wallet.evaluate("(()=>{try{return window.opener?.location?.pathname}catch(e){return String(e)}})()"),
+   "errors":errors
+  }))
+  raise
  assert wallet.locator("#handoffSave").is_disabled()
  assert "Owner Authority Desk" in wallet.locator("#handoffName").inner_text()
  wallet.locator("#createForm input[name=pass]").fill(passphrase)
