@@ -1,0 +1,176 @@
+{
+  "schema": "abundent.blueprint.cartridge/v1",
+  "version": 1,
+  "status": "DRAFT_REQUIRES_OPERATOR_REVIEW",
+  "source": "user_traced_from_reference_image_unverified",
+  "title": "Lantern Commons — two-room demonstration",
+  "createdAt": "2026-11-03T23:53:12.470Z",
+  "onlyUse": "Minecraft Java creative sandbox in a backed-up empty staging area; not actual construction",
+  "plan": {
+    "schema": "abundent.blueprint.tracing/v1",
+    "title": "Lantern Commons — two-room demonstration",
+    "units": "m",
+    "pixelsPerUnit": 30,
+    "unitsPerBlock": 1,
+    "originPixel": {
+      "x": 150,
+      "y": 160
+    },
+    "originBlock": {
+      "x": 0,
+      "y": 70,
+      "z": 0
+    },
+    "wallHeight": 4,
+    "wallMaterial": "minecraft:stone_bricks",
+    "floorMaterial": "minecraft:oak_planks",
+    "imageWidth": 1100,
+    "imageHeight": 710,
+    "lines": [
+      {
+        "kind": "wall",
+        "a": {
+          "x": 150,
+          "y": 160
+        },
+        "b": {
+          "x": 750,
+          "y": 160
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 150,
+          "y": 160
+        },
+        "b": {
+          "x": 150,
+          "y": 520
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 750,
+          "y": 160
+        },
+        "b": {
+          "x": 750,
+          "y": 520
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 150,
+          "y": 520
+        },
+        "b": {
+          "x": 345,
+          "y": 520
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 435,
+          "y": 520
+        },
+        "b": {
+          "x": 750,
+          "y": 520
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 480,
+          "y": 160
+        },
+        "b": {
+          "x": 480,
+          "y": 300
+        }
+      },
+      {
+        "kind": "wall",
+        "a": {
+          "x": 480,
+          "y": 360
+        },
+        "b": {
+          "x": 480,
+          "y": 520
+        }
+      },
+      {
+        "kind": "window",
+        "a": {
+          "x": 215,
+          "y": 160
+        },
+        "b": {
+          "x": 315,
+          "y": 160
+        }
+      },
+      {
+        "kind": "window",
+        "a": {
+          "x": 750,
+          "y": 240
+        },
+        "b": {
+          "x": 750,
+          "y": 330
+        }
+      },
+      {
+        "kind": "floor",
+        "a": {
+          "x": 150,
+          "y": 160
+        },
+        "b": {
+          "x": 750,
+          "y": 520
+        }
+      }
+    ],
+    "measure": {
+      "a": {
+        "x": 150,
+        "y": 130
+      },
+      "b": {
+        "x": 750,
+        "y": 130
+      },
+      "unitsDistance": 20
+    },
+    "sourceClass": "illustrative_demo_not_real_plan"
+  },
+  "summary": {
+    "walls": 72,
+    "floor": 273,
+    "windows": 9,
+    "openings": 0,
+    "bounds": {
+      "minX": 0,
+      "maxX": 20,
+      "minZ": 0,
+      "maxZ": 12
+    },
+    "commands": 103
+  },
+  "explicitNonclaims": [
+    "No photogrammetric or CAD precision",
+    "No structural or code compliance review",
+    "No land or site permission",
+    "No real construction or gameplay completed",
+    "No game command automatically executed",
+    "No human identity, resource or economic transfer"
+  ],
+  "adoption": "NEW local draft; operator must review units, footprint, geometry, permission and conflicts before building"
+}
