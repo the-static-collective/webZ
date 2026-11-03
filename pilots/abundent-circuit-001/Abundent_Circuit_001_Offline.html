@@ -7,7 +7,7 @@
 <body><header class="top"><div class="shell"><div class="eyebrow">The Static Collective / Abundent / field prototype 001</div><h1>The <i>Next Harbor</i></h1><p>An offline-first social-and-production circuit: invite, gather, propose, witness, make a new possibility, and carry a reusable method to another independent community.</p><span class="tag">LOCAL PILOT • NATIVE GHOT ONLY WHEN LAUNCHED FROM LOCAL BRIDGE • NO SIGNED RELATTE / SHARED FULL MEASURE</span>
 <div class="tools"><label for="nodeSelect">Working harbor</label><select id="nodeSelect" aria-label="Working harbor"></select><button class="btn primary" id="newNodeBtn">+ New harbor</button><button class="btn line" id="demoBtn">Load fictional two-harbor demo</button><button class="btn line" id="backupBtn">Backup JSON</button><button class="btn line" id="importBtn">Import JSON</button><input class="sr-only" id="importFile" type="file" accept=".json,application/json"><button class="btn line" id="resetBtn">Reset</button></div>
 </div></header>
-<main class="shell"><div class="tabs" role="tablist" aria-label="Circuit work areas"><button data-tab="overview" role="tab" aria-selected="true">01 · Dashboard</button><button data-tab="gather" role="tab" aria-selected="false">02 · Invite</button><button data-tab="projects" role="tab" aria-selected="false">03 · Build & Grow</button><button data-tab="crossings" role="tab" aria-selected="false">04 · Crossings</button><button data-tab="economy" role="tab" aria-selected="false">05 · Economy</button><button data-tab="compute" role="tab" aria-selected="false">06 · Compute</button><button data-tab="foundry" role="tab" aria-selected="false">07 · Foundry</button></div>
+<main class="shell"><div class="tabs" role="tablist" aria-label="Circuit work areas"><button data-tab="overview" role="tab" aria-selected="true">01 · Dashboard</button><button data-tab="gather" role="tab" aria-selected="false">02 · Invite</button><button data-tab="projects" role="tab" aria-selected="false">03 · Build & Grow</button><button data-tab="crossings" role="tab" aria-selected="false">04 · Crossings</button><button data-tab="economy" role="tab" aria-selected="false">05 · Economy</button><button data-tab="compute" role="tab" aria-selected="false">06 · Compute</button><button data-tab="foundry" role="tab" aria-selected="false">07 · Foundry</button><button data-tab="minecraft" role="tab" aria-selected="false">08 · Minecraft World</button></div>
 <div id="onboard" class="card nodata" hidden><h2>Create the first harbor</h2><p>A harbor is a locally governed gathering or project—not an organizational endorsement. Start with a fictional demo or create your own private test node.</p><form data-act="create-node"><div class="cols"><div><label>Harbor name</label><input name="name" required maxlength="80" placeholder="e.g. Neighborhood Table"></div><div><label>Kind</label><input name="kind" maxlength="60" value="independent community"></div></div><p><button class="btn dark">Create local harbor</button></p></form></div>
 <div id="workspace" hidden>
 <section id="overview" class="section active" role="tabpanel"><div class="banner"><strong>One complete circuit:</strong> invite → propose → human acceptance → report → independent review → GrO affordance → Foundry cartridge → another harbor. Each link is an explicit human choice. <b>All names and receipts here are self-entered local records.</b></div>
@@ -30,6 +30,16 @@
 <p class="small"><strong>Boundaries:</strong> manually paired trusted LAN only; per-request HMAC integrity, no pairing secret on the network, no CORS, no arbitrary shell, file execution, payments, fabrication, Deed or organizational authorization. This is plain HTTP: <strong>never send sensitive text or use untrusted Wi-Fi.</strong> A machine ID and a returned receipt cannot establish physical identity by themselves.</p></div>
 <div class="card"><h2>Local execution receipts</h2><div id="computeList"></div></div></section>
 <section id="foundry" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Make a transferable host cartridge</h2><p class="small">Only a separately reviewed-confirmed project can produce a finished local method. Export only text you deliberately want to share.</p><form data-act="cartridge"><div class="formfields"><div><label>Reviewed-confirmed project</label><select id="cartridgeProject" name="projectId" required></select></div><div><label>Reproduction method / steps</label><textarea name="method" required maxlength="1600" placeholder="1. Ask host permission...&#10;2. Set a small budget...&#10;3. Gather and debrief..."></textarea></div><div><label>What failed / remains local / cannot be assumed</label><textarea name="limitations" required maxlength="700" placeholder="Venue access, food permits, insurance, and local authority must be independently decided."></textarea></div></div><button class="btn dark">Author reviewed-method cartridge</button></form></div><div class="card"><h2>The next harbor</h2><p><strong>Copy capacity, never authority.</strong> A cartridge can travel to another node, but becomes only a new proposal there. It cannot carry automatic participants, permissions, payments, funding, witnesses or approval.</p><div class="flow"><span>ONE TABLE</span><b>→</b><span>ONE ACT</span><b>→</b><span>ONE NEXT HARBOR</span></div><p class="small">Try exporting a finished cartridge, switching harbors, and importing. Its status must return to PROPOSED—not CONFIRMED.</p></div></div><div class="card"><h2>Reusable cartridges</h2><div id="cartridgeList"></div></div></section>
+<section id="minecraft" class="section" role="tabpanel">
+<div class="card"><p class="eyebrow">CIRCUIT 004 · GAME CARRIER</p><h2>The Lantern Commons · Actual vanilla Minecraft</h2>
+<p>A bounded <strong>two-harbor, four-prompt</strong> world rehearsal. Two real in-game levers power two separate redstone lamps. When both glow, the local operator may explicitly ignite the shared festival seal. Re-observe the actual server blocks and have genuine GHoT hash that game observation. <strong>Neither lamp nor GHoT receipt grants a real-world Deed or permission.</strong></p>
+<p id="mcStatus" class="warning" role="status" aria-live="polite">Checking local Minecraft operator bridge…</p>
+<p id="mcPlan" class="small"></p></div>
+<div class="grid two"><div class="card"><h3>01 · Plant the game world</h3><p>Requires your <em>own empty, separate</em> Java creative test world, local RCON, and explicit startup authorization. Preflight checks that all 11 target positions are air before changing a single block. No automatic world clearing, remote access, or saved RCON password.</p><button class="btn dark" id="mcStage" type="button" disabled>Authorize and stage the 10-block Harbor kit</button><p class="micro">The operator must supply the RCON password locally; it never enters the website.</p></div>
+<div class="card"><h3>02 · People choose the levers</h3><p>Enter Minecraft in creative mode. Fly to the rehearsal origin. Two harbors are marked in blue and lime. Each has a lever atop a redstone lamp. Different people <em>may</em> flip each lever, but this code does not authenticate them. The four stations are gold OFFER, emerald NEED, workbench BUILD and amethyst QUESTION.</p><button class="btn dark" id="mcObserve" type="button" disabled>Observe the real world → native GHoT hash</button></div></div>
+<div class="card"><h3>03 · A voluntary world event</h3><p>If both genuine Minecraft lamps are lit, activate the game festival by placing one final sea lantern at the center. A local-only GHoT receipt records the observed game state. This is deliberately <strong>not</strong> a financial credit, physical act, human verified witness, or automatic reLATTE ADMIT.</p><button class="btn gold" id="mcCelebrate" type="button" disabled>Ignite the game festival · explicit approval</button><p id="mcLive" class="banner" aria-live="polite">No game world response yet.</p></div>
+<div class="card"><h3>Evidence from Minecraft</h3><div id="mcObservations"></div></div>
+</section>
 </div><footer class="footer">ABUNDENT CIRCUIT 001 · Prototype only. Native GHoT hash is optionally available only on the localhost bridge. No partner enrollment, verified-human witness, production accounting, remote networking, payments, physical action, or real-world result is implied. Public exports require independent review and consent. Use fictional/non-sensitive data during initial testing.</footer></main><div id="notice" role="status" aria-live="polite"></div>
 <script>
 /* Abundent Circuit 001 — local-only deterministic pilot model. No authentication or live integrations. */
@@ -68,7 +78,7 @@
   function journal(st, kind, n, ref) { st.journal.unshift({kind: kind, node: n, ref: ref, at: now()}); st.journal = st.journal.slice(0, 400); }
   function createNode(st, label, kind) {
     var n = {id: next(st, 'harbor') + '-' + publicId(), label: s(label, 80), kind: s(kind || 'independent', 60),
-      invites: [], projects: [], inbox: [], returns: [], outbox: [], economy: [], compute: [], cartridges: []};
+      invites: [], projects: [], inbox: [], returns: [], outbox: [], economy: [], compute: [], cartridges: [], minecraft: []};
     st.nodes.push(n); st.active = n.id; journal(st, 'HARBOR_CREATED', n.id, n.id); return n;
   }
   function invitation(st, id, title, text) {
@@ -169,6 +179,49 @@
     return nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof);
   }
 
+  // Game-only observations: the native RCON bridge reads the actual Minecraft
+  // world and the independently executed GHoT hash covers those exact bytes.
+  // Neither computer receipt is a human witness, a community Deed, or a grant.
+  function minecraftRecord(st, id, response, payloadDigest) {
+    var n = node(st, id), game = response && response.game,
+      donor = response && response.nativeGHoT, receipt = donor && donor.receipt;
+    assert(response && response.schema === 'abundent.minecraft.ghot-return/v0' &&
+      response.receiverDisposition === 'HOLD' && response.socialEffect === 'NONE', 'Game evidence cannot admit real-world effects.');
+    assert(game && game.schema === 'abundent.minecraft.game-observation/v0' &&
+      game.destination_disposition === 'HOLD' && game.real_world_result === false &&
+      game.human_independence_verified === false && game.project_deed_effect === false &&
+      game.economy_effect === false, 'Game observation cannot create real-world claims.');
+    assert(typeof game.plan_digest === 'string' && /^[a-f0-9]{64}$/.test(game.plan_digest) &&
+      typeof game.observed_state_sha256 === 'string' && /^[a-f0-9]{64}$/.test(game.observed_state_sha256),
+      'Invalid game observation digest.');
+    assert(['HOLD_INCOMPLETE_GAME_WORLD', 'WAITING_FOR_HARBORS', 'BOTH_HARBOR_LAMPS_LIT',
+      'HOLD_SEAL_WITHOUT_TWO_SIGNALS', 'FESTIVAL_LIT_IN_GAME'].indexOf(game.game_state) >= 0,
+      'Unknown game world state.');
+    assert([true,false,null].indexOf(game.lamp_a_lit) >= 0 &&
+      [true,false,null].indexOf(game.lamp_b_lit) >= 0 &&
+      typeof game.festival_center_lit === 'boolean', 'Malformed lamp observation.');
+    assert(donor.nativeGHoT === true && donor.transport === 'loopback_only' &&
+      receipt && receipt.kind === 'ghot.receipt' && receipt.capability === 'system.hash' &&
+      receipt.status === 'ok' && receipt.output && receipt.output.sha256 === payloadDigest,
+      'Native GHoT hash does not match browser-verified game observation.');
+    assert(/^[a-f0-9]{64}$/.test(payloadDigest), 'Invalid independently calculated digest.');
+    assert(typeof receipt.receipt_id === 'string' && receipt.receipt_id.startsWith('receipt-'),
+      'Invalid native GHoT receipt id.');
+    if(!Array.isArray(n.minecraft)) n.minecraft = [];
+    assert(n.minecraft.length < 100, 'Minecraft local notebook limit reached.');
+    assert(!n.minecraft.some(function(x){return x.nativeReceiptId === receipt.receipt_id;}), 'Duplicate native game receipt refused.');
+    var record={id:next(st,'minecraft-observation'),status:'GAME_ONLY_HOLD',
+      gameState:game.game_state,planDigest:game.plan_digest,observedStateSha256:game.observed_state_sha256,
+      lampA:game.lamp_a_lit,lampB:game.lamp_b_lit,festival:game.festival_center_lit,
+      nativeReceiptId:receipt.receipt_id,executor:receipt.executor_node_id,
+      ghotPayloadDigest:payloadDigest,at:now(),actualMinecraftReadback:true,actualGHoT:true,
+      receiverDisposition:'HOLD',humanWitnessVerified:false,socialEffect:false,
+      witnessClass:'operator-local RCON readback and independent native GHoT hash; not an authenticated human witness'};
+    n.minecraft.unshift(record);
+    journal(st,'MINECRAFT_NATIVE_HOLD_NO_REAL_WORLD_AUTHORITY',id,record.id);
+    return clone(record);
+  }
+
   function crossing(st, sourceId, pid, destinationId, note) {
     var source = node(st, sourceId), destination = st.nodes.find(function (x) { return x.id === destinationId; }), p = project(st, sourceId, pid);
     destinationId = s(destinationId, 80);
@@ -249,6 +302,7 @@
       ['invites','projects','inbox','returns','outbox','economy','compute','cartridges'].forEach(function (k) {
         assert(Array.isArray(n[k]) && n[k].length <= 500, 'Invalid ' + k + ' collection.');
       });
+      if (n.minecraft !== undefined) assert(Array.isArray(n.minecraft) && n.minecraft.length <= 100, 'Invalid Minecraft records.');
     });
     assert(v.active === null || seen.has(v.active), 'Invalid active harbor.');
     return true;
@@ -256,7 +310,7 @@
   return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
     init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
     invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
-    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord,
+    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord, minecraftRecord: minecraftRecord,
     crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
     makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
 }));
@@ -266,7 +320,7 @@
 (function () {
   'use strict';
   var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
-  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false;
+  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false, minecraftEnabled = false, mcPending = false;
   try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
   catch (_) { st = C.init(); }
   function $(q) { return document.querySelector(q); }
@@ -352,6 +406,9 @@
          (x.status === 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' ? 'NATIVE GHOT / PEER LOOPBACK TEST' : 'NATIVE GHOT / LAN WORKER') : 'NATIVE GHOT / LOCAL';
        return '<article class="item green"><span class="pill done">' + label + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; ' + s(x.witnessClass || 'non-authoritative record') + '.' : ' (not GHoT)') + '</p></article>';
      }).join('') : empty('Run a small task on this device to create a real local execution receipt.');
+    if($('#mcObservations')) $('#mcObservations').innerHTML = (n.minecraft || []).length ? (n.minecraft || []).map(function(x){
+      return '<article class="item blue"><span class="pill held">GAME ONLY · HOLD</span><h3>'+esc(x.gameState.replace(/_/g,' '))+'</h3><p>Lamp A: '+s(x.lampA)+' · Lamp B: '+s(x.lampB)+' · Festival: '+s(x.festival)+'</p><p class="micro">Minecraft readback · Native GHoT '+s(x.nativeReceiptId)+' · no human/real-world deed</p></article>';
+    }).join('') : empty('No native Minecraft observations in this harbor.');
     $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
     $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
   }
@@ -466,6 +523,55 @@
       .catch(function(e){notify(e.message);});
   }
 
+  function mcNotice(text,enabled) {
+    minecraftEnabled=!!enabled;
+    var e=$('#mcStatus'); if(e){e.textContent=text;e.className=enabled?'banner':'warning';}
+    ['mcStage','mcObserve','mcCelebrate'].forEach(function(id){var btn=$('#'+id); if(btn)btn.disabled=!enabled || mcPending;});
+  }
+  function mcStart() {
+    fetch('/api/minecraft/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('No local Minecraft bridge');return r.json();}).then(function(status){
+      if(!status.enabled)return mcNotice('Minecraft disabled. Use the separate empty-demo-world launcher on your own local Minecraft Java server.',false);
+      return fetch('/api/minecraft/plan',{cache:'no-store',credentials:'omit'}).then(function(r){return r.json();}).then(function(plan){
+        $('#mcPlan').textContent='Fixed rehearsal origin: '+plan.origin.join(', ')+' · '+plan.anchors.length+' staged blocks · two lamps/levers · one optional festival seal.';
+        mcNotice('NATIVE MINECRAFT ARMED · RCON localhost only. Use ONLY your own completely empty rehearsal world. Server state has not been checked yet.',true);
+      });
+    }).catch(function(){mcNotice('Minecraft unavailable in the public/offline version. Open the locally configured Minecraft bridge to enable it.',false);});
+  }
+  function mcAction(route,confirmText) {
+    if(!minecraftEnabled||mcPending)return notify('Native Minecraft bridge is not enabled or busy.');
+    if(confirmText && !confirm('Only your own EMPTY, authorized, dedicated creative-world server. No existing builds nearby. Continue?'))return;
+    mcPending=true;mcNotice('Sending bounded request to the actual vanilla Minecraft RCON server…',true);
+    var active=current(), body=confirmText?{confirm:confirmText}:{};
+    fetch('/api/minecraft/'+route,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(data){if(!r.ok)throw Error(data.error||'Minecraft request refused ('+r.status+').');return data;});})
+      .then(function(answer){
+        if(route==='stage'){
+          if(answer.state!=='STAGED'||!answer.readback)throw Error('Minecraft staging was not confirmed.');
+          $('#mcLive').textContent='Staged '+answer.blocks_changed+' real blocks. '+answer.readback.game_state+'. Enter the world and flip the TWO levers to cooperate.';
+          return;
+        }
+        if(!answer.game || !answer.nativeGHoT || typeof answer.payload!=='string' || !window.crypto || !crypto.subtle)
+          throw Error('Native Minecraft/GHoT evidence not complete; cannot record.');
+        var data=new TextEncoder().encode(answer.payload);
+        return crypto.subtle.digest('SHA-256',data).then(function(bits){
+          var digest=Array.from(new Uint8Array(bits)).map(function(v){return('0'+v.toString(16)).slice(-2);}).join('');
+          // The exact values covered by the native GHoT hash must match the separately
+          // displayed game observation; a signed hash itself proves no human claim.
+          var fromGame={schema:answer.game.schema,plan_digest:answer.game.plan_digest,
+            observed_state_sha256:answer.game.observed_state_sha256,game_state:answer.game.game_state,
+            lamp_a_lit:answer.game.lamp_a_lit,lamp_b_lit:answer.game.lamp_b_lit,
+            festival_center_lit:answer.game.festival_center_lit,
+            destination_disposition:answer.game.destination_disposition};
+          var obj=JSON.parse(answer.payload);
+          Object.keys(fromGame).forEach(function(k){if(obj[k]!==fromGame[k])throw Error('Game observation and GHoT hash disagree.');});
+          C.minecraftRecord(st,active.id,answer,digest);persist();render();
+          $('#mcLive').textContent='REAL MINECRAFT READBACK: '+answer.game.game_state+' · A '+answer.game.lamp_a_lit+' · B '+answer.game.lamp_b_lit+' · seal '+answer.game.festival_center_lit+' · GHoT receipt '+answer.nativeGHoT.receipt.receipt_id+' · HOLD only.';
+        });
+      }).then(function(){mcNotice('Minecraft last action completed; only game-world effects and local receipt references were recorded.',true);})
+      .catch(function(e){mcNotice('Minecraft action refused or incomplete: '+e.message,true);})
+      .finally(function(){mcPending=false;['mcStage','mcObserve','mcCelebrate'].forEach(function(id){var b=$('#'+id);if(b)b.disabled=!minecraftEnabled;});});
+  }
+
   document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
     ev.preventDefault(); if (action === 'ghot-native') { runNativeGhot(f); return; }
     if (action === 'ghot-peer-pair') { pairRemoteGhot(f); return; }
@@ -511,9 +617,13 @@
   $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
   $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
   $('#peerUnpairButton').addEventListener('click',unpairRemote);
+  $('#mcStage').addEventListener('click',function(){mcAction('stage','I AUTHORIZE TEST WORLD STAGING');});
+  $('#mcObserve').addEventListener('click',function(){mcAction('observe',null);});
+  $('#mcCelebrate').addEventListener('click',function(){mcAction('celebrate','I AUTHORIZE GAME CELEBRATION');});
   $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
   render();
   checkNativeGhot().then(checkPeer).catch(function() {checkPeer();});
+  mcStart();
 }());
 
 </script>

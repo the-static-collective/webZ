@@ -21,6 +21,8 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 from ghot_lan_protocol import key_from_string, post_signed, private_peer_url
+from minecraft_foundry import VanillaRcon, blueprint, observe as observe_minecraft, stage as stage_minecraft, celebrate as celebrate_minecraft, witness_text, RconError
+
 
 APP_DIR = Path(__file__).resolve().parent
 HASH_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -45,6 +47,8 @@ def execute_native_hash(repo: Path, ghot_home: Path, text: str) -> dict:
     ghot_home.mkdir(parents=True, exist_ok=True, mode=0o700)
     env = dict(os.environ)
     env['GHOT_HOME'] = str(ghot_home.resolve())
+    env.pop('ABUNDENT_MC_RCON_PASSWORD', None)
+    env.pop('ABUNDENT_MC_WORLD_AUTHORIZATION', None)
     try:
         completed = subprocess.run(
             [sys.executable, str(repo / 'ghot' / 'reference_node.py'), 'hash', text],
@@ -185,9 +189,56 @@ class Handler(SimpleHTTPRequestHandler):
                 'nonclaims': ['HMAC pairing does not prove physical machine identity',
                               'No distributed scheduler involved', 'No human witnessed work']}
 
+    def _mc_state(self):
+        plan = getattr(self.server, 'minecraft_plan', blueprint())
+        enabled = bool(getattr(self.server, 'minecraft_enabled', False))
+        return {'enabled':enabled, 'schema':'abundent.minecraft.bridge/v0',
+                'game':'Minecraft Java vanilla (RCON)', 'operator':'loopback only',
+                'origin':plan['origin'], 'plan_digest':hashlib.sha256(json.dumps(plan,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
+                'limits':['Dedicated empty rehearsal world only','No player identity proofs',
+                          'No Full Measure Deed, money, permits, land, or remote actuation']}
+
+    def _minecraft_action(self, action: str, body: dict) -> dict:
+        if not getattr(self.server, 'minecraft_enabled', False):
+            raise ValueError('Minecraft rehearsal was not explicitly enabled at local startup.')
+        plan = self.server.minecraft_plan
+        if action == 'stage' and body != {'confirm':'I AUTHORIZE TEST WORLD STAGING'}:
+            raise ValueError('Explicit rehearsal-world stage confirmation required.')
+        if action == 'celebrate' and body != {'confirm':'I AUTHORIZE GAME CELEBRATION'}:
+            raise ValueError('Explicit in-game celebration confirmation required.')
+        if action == 'observe' and body != {}:
+            raise ValueError('Observation accepts no external arguments.')
+        if action not in ('stage', 'observe','celebrate'):
+            raise ValueError('Unrecognized Minecraft action.')
+        # Serializes RCON action and readback; never uses browser-selected
+        # addresses, coordinates, block identifiers, console commands, or paths.
+        with self.server.minecraft_lock:
+            with VanillaRcon(self.server.minecraft_rcon_password,port=self.server.minecraft_rcon_port) as conn:
+                if action == 'stage':
+                    result = stage_minecraft(conn.command,plan,authorized=True)
+                    result['readback'] = observe_minecraft(conn.command,plan)
+                    return result
+                if action == 'observe':
+                    observed = observe_minecraft(conn.command,plan)
+                else:
+                    observed = celebrate_minecraft(conn.command,plan,authorized=True)
+            # Native GHoT is a *separate executable donor* that records one
+            # hash task and a bounded checked receipt. Its hash is NOT a human
+            # witness, cryptographic Minecraft signature, or social admission.
+            payload = witness_text(observed)
+            donor = execute_native_hash(self.server.ghot_repo,self.server.ghot_home,payload)
+            return {'schema':'abundent.minecraft.ghot-return/v0', 'game':observed,
+                    'nativeGHoT':donor, 'payload':payload,
+                    'witnessClass':'same local RCON operator + independently executed GHoT hash',
+                    'socialEffect':'NONE', 'receiverDisposition':'HOLD'}
+
     def do_GET(self) -> None:
         if not self._allow_host():
             return self._json(403, {'error': 'Invalid host.'})
+        if urlsplit(self.path).path == '/api/minecraft/status':
+            return self._json(200,self._mc_state())
+        if urlsplit(self.path).path == '/api/minecraft/plan':
+            return self._json(200,getattr(self.server,'minecraft_plan',blueprint()))
         if urlsplit(self.path).path == '/api/ghot/peer/status':
             return self._json(200, self._peer_status())
         if urlsplit(self.path).path == '/api/ghot/status':
@@ -207,7 +258,9 @@ class Handler(SimpleHTTPRequestHandler):
         if not self._allow_host():
             return self._json(403, {'error': 'Invalid host.'})
         allowed_routes = {'/api/ghot/hash': 'local', '/api/ghot/peer/pair': 'pair',
-                          '/api/ghot/peer/hash': 'hash', '/api/ghot/peer/unpair': 'unpair'}
+                          '/api/ghot/peer/hash': 'hash', '/api/ghot/peer/unpair': 'unpair',
+                          '/api/minecraft/stage':'mc:stage', '/api/minecraft/observe':'mc:observe',
+                          '/api/minecraft/celebrate':'mc:celebrate'}
         if self.path not in allowed_routes:
             return self._json(404, {'error': 'Unknown API route.'})
         # Browsers visiting a malicious remote site cannot issue an effective
@@ -230,13 +283,15 @@ class Handler(SimpleHTTPRequestHandler):
             body = json.loads(self.rfile.read(length).decode('utf-8'))
             if not isinstance(body, dict):
                 raise ValueError('Expected a single JSON object.')
-            if allowed_routes[self.path] == 'local':
+            if allowed_routes[self.path].startswith('mc:'):
+                result = self._minecraft_action(allowed_routes[self.path][3:], body)
+            elif allowed_routes[self.path] == 'local':
                 if set(body) != {'text'}:
                     raise ValueError('Only the text field is accepted.')
                 result = execute_native_hash(self.server.ghot_repo, self.server.ghot_home, body['text'])
             else:
                 result = self._peer_action(allowed_routes[self.path], body)
-        except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        except (ValueError, PermissionError, RconError, UnicodeDecodeError, json.JSONDecodeError) as exc:
             return self._json(400, {'error': str(exc)[:150]})
         except Exception:
             self.log_error('Native GHoT peer/task failed; inspect the LOCAL operator terminal')
@@ -248,7 +303,8 @@ class Handler(SimpleHTTPRequestHandler):
         super().log_message(fmt, *args)
 
 
-def serve(repo: Path, *, port: int = 8878, home: Path | None = None) -> None:
+def serve(repo: Path, *, port: int = 8878, home: Path | None = None,
+          mc_enabled: bool = False, mc_rcon_port: int = 25575, mc_origin: tuple = (0,70,0)) -> None:
     if port < 1024 or port > 65535:
         raise ValueError('Port must be between 1024 and 65535.')
     if home is None:
@@ -262,11 +318,21 @@ def serve(repo: Path, *, port: int = 8878, home: Path | None = None) -> None:
     server.ghot_home = home
     server.peer_lock = threading.Lock()
     server.peer_binding = None  # ephemeral, never written to disk
+    server.minecraft_enabled = bool(mc_enabled)
+    server.minecraft_plan = blueprint(*mc_origin)
+    server.minecraft_lock = threading.Lock()
+    server.minecraft_rcon_port = mc_rcon_port
+    server.minecraft_rcon_password = os.environ.get('ABUNDENT_MC_RCON_PASSWORD','') if mc_enabled else ''
+    if mc_enabled and (os.environ.get('ABUNDENT_MC_WORLD_AUTHORIZATION') != 'EMPTY_TEST_WORLD' or
+                       not server.minecraft_rcon_password):
+        server.server_close()
+        raise ValueError('Minecraft requires ABUNDENT_MC_WORLD_AUTHORIZATION=EMPTY_TEST_WORLD and nonempty private RCON password.')
     print('Abundent Circuit 002 + native GHoT (local only)')
     print('Open: http://127.0.0.1:%d/' % port)
     print('Donor:', str(server.ghot_repo))
     print('GHoT receipts stay in:', str(home))
     print('This local bridge is loopback-only. A separate optional LAN worker may be paired from the browser.')
+    print('Minecraft native world:', 'ENABLED on explicit empty demo world' if mc_enabled else 'DISABLED (safe default)')
     print('Press Ctrl+C to stop; this bridge never opens a public listener.')
     try:
         server.serve_forever()
@@ -281,9 +347,17 @@ def cli() -> int:
     parser.add_argument('--ghot', required=True, help='Path to existing checkout of the GHoT repository')
     parser.add_argument('--port', type=int, default=8878)
     parser.add_argument('--ghot-home', help='Private location to store native GHoT records')
+    parser.add_argument('--minecraft-empty-demo-world', action='store_true',
+                        help='Enable RCON only after explicitly authorizing your own dedicated empty Java test world')
+    parser.add_argument('--minecraft-rcon-port', type=int, default=25575)
+    parser.add_argument('--minecraft-origin-x', type=int, default=0)
+    parser.add_argument('--minecraft-origin-y', type=int, default=70)
+    parser.add_argument('--minecraft-origin-z', type=int, default=0)
     args = parser.parse_args()
     serve(checked_ghot_directory(args.ghot), port=args.port,
-          home=Path(args.ghot_home) if args.ghot_home else None)
+          home=Path(args.ghot_home) if args.ghot_home else None,
+          mc_enabled=args.minecraft_empty_demo_world, mc_rcon_port=args.minecraft_rcon_port,
+          mc_origin=(args.minecraft_origin_x,args.minecraft_origin_y,args.minecraft_origin_z))
     return 0
 
 

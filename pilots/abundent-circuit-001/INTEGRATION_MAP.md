@@ -57,3 +57,8 @@ transport, signed reLATTE settlement, real-world work, or physical fabrication.
 Next donor-native gate: operate two genuine independent GHoT bodies, inspect
 capability selection and remote receipt provenance, and test refusal if a body
 loses eligibility; only then consider Workbench/Static OS orchestration.
+
+
+### Native Minecraft Java rehearsal (Circuit 004)
+
+Proposed / now executable adapter: Abundent local browser -> allowlisted `ghot_local_server.py` route -> `minecraft_foundry.py` stdlib RCON -> official vanilla Java test world -> actual lever/lamp readback -> real GHoT `system.hash` donor output -> locally stored `GAME_ONLY_HOLD` reference. The hosted website cannot use RCON. The separate test world is operator-owned and never inferred from any third-party harbor. No fake game event makes a reLATTE ADMIT, local human Deed, money, or physical change. See `RELEASE_NOTES_004.md`.

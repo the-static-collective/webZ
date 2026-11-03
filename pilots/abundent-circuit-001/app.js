@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
-  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false;
+  var st, activeTab = 'overview', noticeTimer, nativeAvailable = false, nativePending = false, peerAvailable = false, peerPending = false, minecraftEnabled = false, mcPending = false;
   try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
   catch (_) { st = C.init(); }
   function $(q) { return document.querySelector(q); }
@@ -87,6 +87,9 @@
          (x.status === 'GHOT_NATIVE_EXECUTED_PEER_LOOPBACK_TEST' ? 'NATIVE GHOT / PEER LOOPBACK TEST' : 'NATIVE GHOT / LAN WORKER') : 'NATIVE GHOT / LOCAL';
        return '<article class="item green"><span class="pill done">' + label + '</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: ' + s(native ? x.executor : 'this browser') + (native ? ' · native receipt: ' + s(x.nativeReceiptId) + '<br>Input digest only; ' + s(x.witnessClass || 'non-authoritative record') + '.' : ' (not GHoT)') + '</p></article>';
      }).join('') : empty('Run a small task on this device to create a real local execution receipt.');
+    if($('#mcObservations')) $('#mcObservations').innerHTML = (n.minecraft || []).length ? (n.minecraft || []).map(function(x){
+      return '<article class="item blue"><span class="pill held">GAME ONLY · HOLD</span><h3>'+esc(x.gameState.replace(/_/g,' '))+'</h3><p>Lamp A: '+s(x.lampA)+' · Lamp B: '+s(x.lampB)+' · Festival: '+s(x.festival)+'</p><p class="micro">Minecraft readback · Native GHoT '+s(x.nativeReceiptId)+' · no human/real-world deed</p></article>';
+    }).join('') : empty('No native Minecraft observations in this harbor.');
     $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
     $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
   }
@@ -201,6 +204,55 @@
       .catch(function(e){notify(e.message);});
   }
 
+  function mcNotice(text,enabled) {
+    minecraftEnabled=!!enabled;
+    var e=$('#mcStatus'); if(e){e.textContent=text;e.className=enabled?'banner':'warning';}
+    ['mcStage','mcObserve','mcCelebrate'].forEach(function(id){var btn=$('#'+id); if(btn)btn.disabled=!enabled || mcPending;});
+  }
+  function mcStart() {
+    fetch('/api/minecraft/status',{cache:'no-store',credentials:'omit'}).then(function(r){if(!r.ok)throw Error('No local Minecraft bridge');return r.json();}).then(function(status){
+      if(!status.enabled)return mcNotice('Minecraft disabled. Use the separate empty-demo-world launcher on your own local Minecraft Java server.',false);
+      return fetch('/api/minecraft/plan',{cache:'no-store',credentials:'omit'}).then(function(r){return r.json();}).then(function(plan){
+        $('#mcPlan').textContent='Fixed rehearsal origin: '+plan.origin.join(', ')+' · '+plan.anchors.length+' staged blocks · two lamps/levers · one optional festival seal.';
+        mcNotice('NATIVE MINECRAFT ARMED · RCON localhost only. Use ONLY your own completely empty rehearsal world. Server state has not been checked yet.',true);
+      });
+    }).catch(function(){mcNotice('Minecraft unavailable in the public/offline version. Open the locally configured Minecraft bridge to enable it.',false);});
+  }
+  function mcAction(route,confirmText) {
+    if(!minecraftEnabled||mcPending)return notify('Native Minecraft bridge is not enabled or busy.');
+    if(confirmText && !confirm('Only your own EMPTY, authorized, dedicated creative-world server. No existing builds nearby. Continue?'))return;
+    mcPending=true;mcNotice('Sending bounded request to the actual vanilla Minecraft RCON server…',true);
+    var active=current(), body=confirmText?{confirm:confirmText}:{};
+    fetch('/api/minecraft/'+route,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(data){if(!r.ok)throw Error(data.error||'Minecraft request refused ('+r.status+').');return data;});})
+      .then(function(answer){
+        if(route==='stage'){
+          if(answer.state!=='STAGED'||!answer.readback)throw Error('Minecraft staging was not confirmed.');
+          $('#mcLive').textContent='Staged '+answer.blocks_changed+' real blocks. '+answer.readback.game_state+'. Enter the world and flip the TWO levers to cooperate.';
+          return;
+        }
+        if(!answer.game || !answer.nativeGHoT || typeof answer.payload!=='string' || !window.crypto || !crypto.subtle)
+          throw Error('Native Minecraft/GHoT evidence not complete; cannot record.');
+        var data=new TextEncoder().encode(answer.payload);
+        return crypto.subtle.digest('SHA-256',data).then(function(bits){
+          var digest=Array.from(new Uint8Array(bits)).map(function(v){return('0'+v.toString(16)).slice(-2);}).join('');
+          // The exact values covered by the native GHoT hash must match the separately
+          // displayed game observation; a signed hash itself proves no human claim.
+          var fromGame={schema:answer.game.schema,plan_digest:answer.game.plan_digest,
+            observed_state_sha256:answer.game.observed_state_sha256,game_state:answer.game.game_state,
+            lamp_a_lit:answer.game.lamp_a_lit,lamp_b_lit:answer.game.lamp_b_lit,
+            festival_center_lit:answer.game.festival_center_lit,
+            destination_disposition:answer.game.destination_disposition};
+          var obj=JSON.parse(answer.payload);
+          Object.keys(fromGame).forEach(function(k){if(obj[k]!==fromGame[k])throw Error('Game observation and GHoT hash disagree.');});
+          C.minecraftRecord(st,active.id,answer,digest);persist();render();
+          $('#mcLive').textContent='REAL MINECRAFT READBACK: '+answer.game.game_state+' · A '+answer.game.lamp_a_lit+' · B '+answer.game.lamp_b_lit+' · seal '+answer.game.festival_center_lit+' · GHoT receipt '+answer.nativeGHoT.receipt.receipt_id+' · HOLD only.';
+        });
+      }).then(function(){mcNotice('Minecraft last action completed; only game-world effects and local receipt references were recorded.',true);})
+      .catch(function(e){mcNotice('Minecraft action refused or incomplete: '+e.message,true);})
+      .finally(function(){mcPending=false;['mcStage','mcObserve','mcCelebrate'].forEach(function(id){var b=$('#'+id);if(b)b.disabled=!minecraftEnabled;});});
+  }
+
   document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
     ev.preventDefault(); if (action === 'ghot-native') { runNativeGhot(f); return; }
     if (action === 'ghot-peer-pair') { pairRemoteGhot(f); return; }
@@ -246,7 +298,11 @@
   $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
   $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
   $('#peerUnpairButton').addEventListener('click',unpairRemote);
+  $('#mcStage').addEventListener('click',function(){mcAction('stage','I AUTHORIZE TEST WORLD STAGING');});
+  $('#mcObserve').addEventListener('click',function(){mcAction('observe',null);});
+  $('#mcCelebrate').addEventListener('click',function(){mcAction('celebrate','I AUTHORIZE GAME CELEBRATION');});
   $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
   render();
   checkNativeGhot().then(checkPeer).catch(function() {checkPeer();});
+  mcStart();
 }());
