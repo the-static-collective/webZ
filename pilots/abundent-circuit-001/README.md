@@ -1,3 +1,7 @@
+# Circuit 006 · Two-Person First Crossing Field Kit
+
+**New experiment:** [open the printable offline field checklist](crossing-006/START_HERE.html) or [follow the exact two-computer field card](crossing-006/FIELD_CARD.md). This layers independently confirmed public-key fingerprint enrollment, an operator's explicit HOLD/REFUSE choice, actual native reLATTE signed source/receiver receipts, and source-side return verification over pinned Revival OSHB and GHoT work. **CI simulates two operators on one runner; no physical two-device or independently verified human event is claimed.** No admission, real Full Measure writes, money movement, or production deployment.
+
 # Circuit 005 · The Living Witness
 
 **Native source-backed signed review-only crossing:** [the Living Witness field runbook](crossing-005/README.md) documents the pinned actual Revival OSHB Genesis 1:1–3 corpus, original GHoT hash computation, and genuine reLATTE P-256 signed source bundle with two separate native local HOLD/REFUSE receivers. The code demonstrates byte integrity, independent source re-derivation and receiver-local decisions but **not** real human identity, physical machines, a church gathering, theological authority, project adoption, or native Full Measure writes. This remains a stacked draft experiment; no merge or deployment.
