@@ -1,0 +1,78 @@
+name: Abundent Circuit 004 — Native Revival Commons Crossing
+on:
+  pull_request:
+    paths:
+      - 'pilots/abundent-circuit-001/crossing-004/**'
+      - '.github/workflows/abundent-circuit-revival.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-crossing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/revival
+          ref: af1e00c24e3d7c6eb6b1ac39ef59bf894e2385fd
+          path: native-revival-donor
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: the-static-collective/GHoT
+          ref: 9748a0772c4a13135421c4fa84a9991e0a51e05f
+          path: native-ghot-donor
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.11'
+      - name: Run model and adversarial tests
+        run: |
+          node --test pilots/abundent-circuit-001/crossing-004/tests/crossing.test.mjs
+          node --test pilots/abundent-circuit-001/tests/circuit.test.js
+      - name: Run pinned Revival own tests
+        working-directory: native-revival-donor
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -q
+      - name: Compile two genuine native Revival projections; run genuine native GHoT
+        run: |
+          python pilots/abundent-circuit-001/crossing-004/run_004.py \
+            --revival native-revival-donor --ghot native-ghot-donor \
+            --choice default --output "$RUNNER_TEMP/circuit-004-default.json"
+          python pilots/abundent-circuit-001/crossing-004/run_004.py \
+            --revival native-revival-donor --ghot native-ghot-donor \
+            --choice elohim --output "$RUNNER_TEMP/circuit-004-elohim.json"
+          python pilots/abundent-circuit-001/crossing-004/run_004.py \
+            --verify "$RUNNER_TEMP/circuit-004-default.json"
+          python pilots/abundent-circuit-001/crossing-004/run_004.py \
+            --verify "$RUNNER_TEMP/circuit-004-elohim.json"
+      - name: Check same witness, different choice, independent unapproved receiving harbor
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])
+          a=json.loads((p/'circuit-004-default.json').read_text())
+          b=json.loads((p/'circuit-004-elohim.json').read_text())
+          r=lambda e: e['nativeDonors']['revival']
+          assert r(a)['nativeResult']['receipt']['witness_sha256']==r(b)['nativeResult']['receipt']['witness_sha256']
+          assert r(a)['nativeResult']['receipt']['projection_sha256']!=r(b)['nativeResult']['receipt']['projection_sha256']
+          assert 'God' in r(a)['compiledText'] and 'Elohim' in r(b)['compiledText']
+          for proof in (a,b):
+              assert proof['humanVerified'] is False and proof['eventOccurred'] is False
+              assert proof['localCopies']['destination']['nodes'][0]['projects'][0]['state']=='PROPOSED'
+              assert proof['signedRelatte'] is False and proof['nativeFullMeasureWrites'] is False
+          print('PASS: choice alters projection, not source; no transferred local authority.')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: circuit-004-fictional-native-donor-proofs
+          path: ${{ runner.temp }}/circuit-004-*.json
+          retention-days: 7

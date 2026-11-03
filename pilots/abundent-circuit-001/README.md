@@ -1,3 +1,7 @@
+# Circuit 004 · Native Revival Commons Crossing
+
+**New experimental source proof:** [Revival × Fellowship Commons](crossing-004/README.md) compiles a pinned donor Revival Genesis 1:1 demonstration projection, hashes it through **actual pinned GHoT**, then drives the original Circuit core through two independent fictional harbor notebooks: invitation → project → HOLD/return → *scripted* separate review → method cartridge → new unapproved proposal. Choice changes the Revival projection, not the held source. No real event, human witness, spiritual authority, signed reLATTE transport, native Full Measure write or production deployment is claimed.
+
 # Circuit 003 · PAIRED LAN GHoT
 
 **Open `START_HERE.html` for the Mac-first two-computer field trial.** The two-process/native-GHoT execution slice is in `RELEASE_NOTES_003.md`, with a printable checklist in `TWO_COMPUTERS_FIELD_CARD.md`. Two real computers require a human-run field test; the CI proof uses two independent processes on one runner. No public release is implied.
