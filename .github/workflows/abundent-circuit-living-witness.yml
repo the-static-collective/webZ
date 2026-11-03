@@ -40,7 +40,7 @@ jobs:
           python-version: '3.11'
       - name: Install pinned donor's own runtime dependencies
         working-directory: native-relatte-donor
-        run: npm ci --ignore-scripts
+        run: npm install --ignore-scripts --no-save --no-package-lock --omit=dev
       - name: Original Revival source corpus verification suite
         working-directory: native-revival-donor
         env:
