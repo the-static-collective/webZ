@@ -96,6 +96,30 @@
       output: output, status: 'EXECUTED_LOCALLY', at: now(), actualGHoT: false};
     n.compute.unshift(receipt); journal(st, 'BOUNDED_LOCAL_COMPUTE', id, receipt.id); return receipt;
   }
+  // Real donor execution is performed only by ghot_local_server.py calling the
+  // independent GHoT reference_node.py. This function validates the returned
+  // local bridge receipt, records the digest, and grants ZERO project authority.
+  function nativeGhotRecord(st, id, inputBytes, receipt, expectedHash) {
+    var n = node(st, id);
+    assert(Number.isSafeInteger(inputBytes) && inputBytes > 0 && inputBytes <= 4000, 'Invalid byte count.');
+    assert(typeof expectedHash === 'string' && /^[a-f0-9]{64}$/.test(expectedHash), 'Invalid local input digest.');
+    assert(receipt && receipt.kind === 'ghot.receipt' && receipt.version === '0' &&
+      receipt.capability === 'system.hash' && receipt.status === 'ok', 'Not a native GHoT hash receipt.');
+    assert(receipt.output && receipt.output.sha256 === expectedHash, 'GHoT output does not match locally checked input.');
+    assert(typeof receipt.receipt_id === 'string' && /^receipt-[a-z0-9-]+$/i.test(receipt.receipt_id), 'Invalid GHoT receipt ID.');
+    assert(typeof receipt.task_id === 'string' && /^task-[a-z0-9-]+$/i.test(receipt.task_id), 'Invalid GHoT task ID.');
+    assert(typeof receipt.executor_node_id === 'string' && receipt.executor_node_id.length <= 120, 'Invalid native executor.');
+    assert(!n.compute.some(function (x) { return x.nativeReceiptId === receipt.receipt_id; }), 'Duplicate GHoT receipt refused.');
+    var record = {id: next(st, 'native-task'), task: 'system.hash', output: expectedHash,
+      status: 'GHOT_NATIVE_EXECUTED_LOCAL', executor: receipt.executor_node_id,
+      inputSha256: expectedHash, inputBytes: inputBytes, nativeReceiptId: receipt.receipt_id,
+      nativeTaskId: receipt.task_id, at: now(), actualGHoT: true,
+      witnessClass: 'local donor receipt checked against browser input; unsigned, not independently attested'};
+    n.compute.unshift(record);
+    journal(st, 'GHOT_NATIVE_RECEIPT_RECORDED_NO_AUTHORITY', id, record.id);
+    return clone(record);
+  }
+
   function crossing(st, sourceId, pid, destinationId, note) {
     var source = node(st, sourceId), destination = st.nodes.find(function (x) { return x.id === destinationId; }), p = project(st, sourceId, pid);
     destinationId = s(destinationId, 80);
@@ -183,7 +207,7 @@
   return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
     init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
     invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
-    projectView: projectView, economy: economy, compute: compute,
+    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord,
     crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
     makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
 }));

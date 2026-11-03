@@ -33,3 +33,25 @@ Status: integration proposal with a runnable local field slice. Not native donor
 - **L4 — Reproduction:** independently hosted second node runs a gathering with a method cartridge and records what did and did not carry.
 
 **Zero-cost test comes first.** Do not require an account, paid model, service-role key, website deployment, or centralized platform for the initial social test.
+
+## First actual donor interface landed — Circuit 002 / GHoT native local hash
+
+**GHoT source-owned runtime:** `GHoT/ghot/reference_node.py hash <text>`.
+**Circuit-owned bridge:** `ghot_local_server.py`; localhost-only HTTP; no GHoT
+source modification. The bridge checks `kind=ghot.receipt`,
+`capability=system.hash`, native task and receipt IDs, `status=ok`, and a
+SHA-256 match. A separately checked browser WebCrypto digest must also match
+before Circuit creates `GHOT_NATIVE_EXECUTED_LOCAL` notebook record with
+`actualGHoT:true`. No grant of a Full Measure Deed follows from compute alone.
+
+**Source responsibility:** native GHoT task + receipt, its own persistence.
+**Adapter responsibility:** one opt-in bounded donor call, local receipt check.
+**Circuit responsibility:** record reference and nonclaims; no human truth
+promotion. **Operator responsibility:** provide a real GHoT checkout, a compatible
+Python runtime, and decide whether any input should be hashed at all.
+
+Native **one-body** GHoT ≠ multi-node GHoT, verified human identity, encrypted
+transport, signed reLATTE settlement, real-world work, or physical fabrication.
+Next donor-native gate: operate two genuine independent GHoT bodies, inspect
+capability selection and remote receipt provenance, and test refusal if a body
+loses eligibility; only then consider Workbench/Static OS orchestration.

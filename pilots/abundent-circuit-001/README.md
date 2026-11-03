@@ -70,3 +70,81 @@ The reproducible single-file HTML is generated from `index.html`, `core.js` and 
 **Threats / unresolved:** no accounts, multi-party auth, signature verification, tamper-resistant journal, encryption, secure backups, user data erasure across copies, remote messaging, permission registry, real-money audit, human identity verification, or event-specific legal approvals. The local pilot is for non-sensitive planning and rehearsal. Never interpret it as a live co-op, festival, church, or civic service.
 
 **Source concepts:** `the-static-collective/webZ`, `full-measure-world-layer`, `GrO`, `reLATTE`, `GHoT`, `static-workbench`, `static-os`, `Jubilee-Campfire`, `Jubilee-treasury`; user-owned Festival Foundry charters in Drive. This project does not make any donor's source, runtime or governance subordinate to its own.
+
+---
+
+## Circuit 002 — first REAL donor integration: native GHoT on localhost
+
+**Added Nov 3, 2026 — executable donor bridge, not a simulation of GHoT.**
+The optional 002 bridge calls **the original `GHoT/ghot/reference_node.py`** as a child
+process. It executes GHoT's allowlisted `system.hash` capability and reads
+GHoT's own `ghot.receipt` JSON. The bridge checks the native receipt, computes
+its own SHA-256 of the submitted text, and preserves the native receipt ID and
+executor ID in Circuit's local notebook. GHoT itself writes original task and
+receipt records under the local `GHOT_HOME/records` directory.
+
+**What is actually integrated:** `Circuit browser → localhost HTTP bridge →
+GHoT original reference_node.py → GHoT task + native receipt → browser-side
+SHA-256 check → Circuit notebook native task record`.
+
+The bridge never changes a Full Measure Deed or GrO affordance, sends a payment,
+creates a human witness, signs a reLATTE crossing, executes a remote/LAN task,
+opens a shell to arbitrary user input, or activates fabrication hardware.
+Neither an unsigned native receipt nor a typed human name is independent proof
+of anything happening outside the computer.
+
+### Easy Mac route (Mojave or newer, if compatible Python 3.10+ is installed)
+
+1. Download this Circuit folder and the **separate** official GHoT repository:
+   <https://github.com/the-static-collective/GHoT> (download its GitHub ZIP,
+   extract it to a folder called `GHoT`, ideally next to this folder).
+2. Double-click `start-native-ghot-mac.command` from Finder. macOS may ask you
+   to approve a downloaded script; inspect it first. The launcher **does not**
+   install packages, download code, or create a network service beyond
+   `127.0.0.1` on your computer. It locates the GHoT checkout or opens a Finder
+   folder chooser. It requires Python 3.10+ and an installed `openssl` command.
+3. It opens `http://127.0.0.1:8878/`. Create a fictional harbor and select
+   **06 · Compute → Native GHoT**. The status should read `LOCAL GHOT DETECTED`.
+   Enter one **public-safe test phrase** and press **Run in native GHoT**.
+4. The result displays `NATIVE GHOT / LOCAL`, the execution body's node ID,
+   and the native receipt ID. On your Mac, native records stay under
+   `~/.abundent-circuit/ghot-home/records` and remain private to your machine.
+   Terminate the Terminal session with `Ctrl+C` to stop the localhost server.
+
+### Manual Linux/macOS route
+
+```sh
+python3 build.py
+python3 ghot_local_server.py --ghot /absolute/path/to/GHoT --port 8878
+# Open http://127.0.0.1:8878/ in a browser on THAT computer.
+```
+
+The old hosted `abundent-circuit-001-preview.vercel.app` and standalone
+`file://` HTML keep working but cannot execute GHoT; use the loopback launcher
+for donor-native work. No source checkout is bundled into this repository.
+
+### Tests
+
+```sh
+node --test tests/circuit.test.js
+python3 -m unittest discover -s tests -p 'test_native_ghot.py' -v
+# Set GHOT_REPO to an actual donor checkout to test the independent native runtime:
+GHOT_REPO=/absolute/path/to/GHoT python3 -m unittest discover -s tests -p 'test_native_ghot.py' -v
+# Optional browser integration (requires Playwright and Chromium):
+GHOT_REPO=/absolute/path/to/GHoT python3 tests/browser_native_ghot.py
+```
+
+Without `GHOT_REPO`, the Python HTTP tests explicitly use the **test-only
+fixture**, not the real donor. CI checks out a pinned GHoT source revision and
+runs native tests. On restricted test runners, browser navigation to loopback
+may be prohibited by administrator policy; such a failure is not evidence that
+native GHoT executed or that the live web preview supports local execution.
+
+Security and operations: The adapter binds only to IPv4 `127.0.0.1`, checks
+Host and Origin, accepts only `application/json`, imposes strict input and
+request limits, uses subprocess argument arrays (not shell execution), has a
+15-second GHoT timeout, exposes exactly one donor capability, and does not
+serve GHoT private state. Text is stored by the **GHoT runtime** in its local
+native task records, so do not submit personally identifying or confidential
+material. This is a **single-operator experimental bridge**, not a
+multi-user authenticated remote execution platform or an attestation service.
