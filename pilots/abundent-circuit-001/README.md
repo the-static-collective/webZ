@@ -1,3 +1,7 @@
+# Circuit 003 · PAIRED LAN GHoT
+
+**Open `START_HERE.html` for the Mac-first two-computer field trial.** The two-process/native-GHoT execution slice is in `RELEASE_NOTES_003.md`, with a printable checklist in `TWO_COMPUTERS_FIELD_CARD.md`. Two real computers require a human-run field test; the CI proof uses two independent processes on one runner. No public release is implied.
+
 # Abundent Circuit 001 — The Next Harbor
 
 **Status:** runnable **local field pilot**, not an operational multi-user social network, verified-human witnessing system, native donor composition, money platform, or safety-certified event organizer.

@@ -1,3 +1,5 @@
+**Circuit 003 update:** The native donor now has an optional bounded, HMAC-paired remote `system.hash` worker. It is not the GHoT automatic distributed capability composer; node authority, reLATTE signing, human witnessing and independent physical-device operation remain separate tests. See `RELEASE_NOTES_003.md`.
+
 # Circuit 001 — Native Donor Adapter Roadmap
 
 Status: integration proposal with a runnable local field slice. Not native donor integration.
