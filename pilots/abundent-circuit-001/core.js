@@ -34,7 +34,7 @@
   function journal(st, kind, n, ref) { st.journal.unshift({kind: kind, node: n, ref: ref, at: now()}); st.journal = st.journal.slice(0, 400); }
   function createNode(st, label, kind) {
     var n = {id: next(st, 'harbor') + '-' + publicId(), label: s(label, 80), kind: s(kind || 'independent', 60),
-      invites: [], projects: [], inbox: [], returns: [], outbox: [], economy: [], compute: [], cartridges: []};
+      invites: [], projects: [], inbox: [], returns: [], outbox: [], economy: [], compute: [], cartridges: [], minecraft: []};
     st.nodes.push(n); st.active = n.id; journal(st, 'HARBOR_CREATED', n.id, n.id); return n;
   }
   function invitation(st, id, title, text) {
@@ -135,6 +135,49 @@
     return nativeGhotRecord(st, id, inputBytes, receipt, expectedHash, peerProof);
   }
 
+  // Game-only observations: the native RCON bridge reads the actual Minecraft
+  // world and the independently executed GHoT hash covers those exact bytes.
+  // Neither computer receipt is a human witness, a community Deed, or a grant.
+  function minecraftRecord(st, id, response, payloadDigest) {
+    var n = node(st, id), game = response && response.game,
+      donor = response && response.nativeGHoT, receipt = donor && donor.receipt;
+    assert(response && response.schema === 'abundent.minecraft.ghot-return/v0' &&
+      response.receiverDisposition === 'HOLD' && response.socialEffect === 'NONE', 'Game evidence cannot admit real-world effects.');
+    assert(game && game.schema === 'abundent.minecraft.game-observation/v0' &&
+      game.destination_disposition === 'HOLD' && game.real_world_result === false &&
+      game.human_independence_verified === false && game.project_deed_effect === false &&
+      game.economy_effect === false, 'Game observation cannot create real-world claims.');
+    assert(typeof game.plan_digest === 'string' && /^[a-f0-9]{64}$/.test(game.plan_digest) &&
+      typeof game.observed_state_sha256 === 'string' && /^[a-f0-9]{64}$/.test(game.observed_state_sha256),
+      'Invalid game observation digest.');
+    assert(['HOLD_INCOMPLETE_GAME_WORLD', 'WAITING_FOR_HARBORS', 'BOTH_HARBOR_LAMPS_LIT',
+      'HOLD_SEAL_WITHOUT_TWO_SIGNALS', 'FESTIVAL_LIT_IN_GAME'].indexOf(game.game_state) >= 0,
+      'Unknown game world state.');
+    assert([true,false,null].indexOf(game.lamp_a_lit) >= 0 &&
+      [true,false,null].indexOf(game.lamp_b_lit) >= 0 &&
+      typeof game.festival_center_lit === 'boolean', 'Malformed lamp observation.');
+    assert(donor.nativeGHoT === true && donor.transport === 'loopback_only' &&
+      receipt && receipt.kind === 'ghot.receipt' && receipt.capability === 'system.hash' &&
+      receipt.status === 'ok' && receipt.output && receipt.output.sha256 === payloadDigest,
+      'Native GHoT hash does not match browser-verified game observation.');
+    assert(/^[a-f0-9]{64}$/.test(payloadDigest), 'Invalid independently calculated digest.');
+    assert(typeof receipt.receipt_id === 'string' && receipt.receipt_id.startsWith('receipt-'),
+      'Invalid native GHoT receipt id.');
+    if(!Array.isArray(n.minecraft)) n.minecraft = [];
+    assert(n.minecraft.length < 100, 'Minecraft local notebook limit reached.');
+    assert(!n.minecraft.some(function(x){return x.nativeReceiptId === receipt.receipt_id;}), 'Duplicate native game receipt refused.');
+    var record={id:next(st,'minecraft-observation'),status:'GAME_ONLY_HOLD',
+      gameState:game.game_state,planDigest:game.plan_digest,observedStateSha256:game.observed_state_sha256,
+      lampA:game.lamp_a_lit,lampB:game.lamp_b_lit,festival:game.festival_center_lit,
+      nativeReceiptId:receipt.receipt_id,executor:receipt.executor_node_id,
+      ghotPayloadDigest:payloadDigest,at:now(),actualMinecraftReadback:true,actualGHoT:true,
+      receiverDisposition:'HOLD',humanWitnessVerified:false,socialEffect:false,
+      witnessClass:'operator-local RCON readback and independent native GHoT hash; not an authenticated human witness'};
+    n.minecraft.unshift(record);
+    journal(st,'MINECRAFT_NATIVE_HOLD_NO_REAL_WORLD_AUTHORITY',id,record.id);
+    return clone(record);
+  }
+
   function crossing(st, sourceId, pid, destinationId, note) {
     var source = node(st, sourceId), destination = st.nodes.find(function (x) { return x.id === destinationId; }), p = project(st, sourceId, pid);
     destinationId = s(destinationId, 80);
@@ -215,6 +258,7 @@
       ['invites','projects','inbox','returns','outbox','economy','compute','cartridges'].forEach(function (k) {
         assert(Array.isArray(n[k]) && n[k].length <= 500, 'Invalid ' + k + ' collection.');
       });
+      if (n.minecraft !== undefined) assert(Array.isArray(n.minecraft) && n.minecraft.length <= 100, 'Invalid Minecraft records.');
     });
     assert(v.active === null || seen.has(v.active), 'Invalid active harbor.');
     return true;
@@ -222,7 +266,7 @@
   return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
     init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
     invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
-    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord,
+    projectView: projectView, economy: economy, compute: compute, nativeGhotRecord: nativeGhotRecord, remoteGhotRecord: remoteGhotRecord, minecraftRecord: minecraftRecord,
     crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
     makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
 }));

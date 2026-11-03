@@ -148,3 +148,47 @@ test('LAN peer record is typed, bounded and never awards a Full Measure Deed',()
   assert.throws(()=>C.remoteGhotRecord(st,a.id,Buffer.byteLength(input),
     {...receipt,receipt_id:'receipt-next'},digest,{...bridge,bridgeVerified:false}),/verified/);
 });
+
+test('Minecraft native game-only receipt remains HOLD with zero real-world Deeds',()=>{
+  const {st,a}=setup();
+  const game={schema:'abundent.minecraft.game-observation/v0',
+    plan_digest:'c'.repeat(64),observed_state_sha256:'d'.repeat(64),
+    game_state:'FESTIVAL_LIT_IN_GAME',lamp_a_lit:true,lamp_b_lit:true,festival_center_lit:true,
+    destination_disposition:'HOLD',real_world_result:false,human_independence_verified:false,
+    project_deed_effect:false,economy_effect:false};
+  const hash='a'.repeat(64);
+  const receipt={kind:'ghot.receipt',capability:'system.hash',status:'ok',
+    receipt_id:'receipt-game-001',executor_node_id:'node-test',output:{sha256:hash}};
+  const answer={schema:'abundent.minecraft.ghot-return/v0',game,
+    nativeGHoT:{nativeGHoT:true,transport:'loopback_only',receipt},
+    receiverDisposition:'HOLD',socialEffect:'NONE'};
+  const record=C.minecraftRecord(st,a.id,answer,hash);
+  assert.equal(record.actualMinecraftReadback,true);
+  assert.equal(record.actualGHoT,true);
+  assert.equal(record.receiverDisposition,'HOLD');
+  assert.equal(C.projectView(st,a.id).deeds,0);
+  assert.equal(C.projectView(st,a.id).harvests,0);
+  assert.throws(()=>C.minecraftRecord(st,a.id,answer,hash),/Duplicate/);
+  assert.equal(C.checkStore(st),true);
+});
+
+test('Minecraft rejects claimed money, Deed, fake GHoT and future-authority hints',()=>{
+  const {st,a}=setup();
+  const hash='a'.repeat(64);
+  const make=()=>({schema:'abundent.minecraft.ghot-return/v0',receiverDisposition:'HOLD',socialEffect:'NONE',
+    game:{schema:'abundent.minecraft.game-observation/v0',plan_digest:'a'.repeat(64),
+      observed_state_sha256:'b'.repeat(64),game_state:'BOTH_HARBOR_LAMPS_LIT',lamp_a_lit:true,lamp_b_lit:true,
+      festival_center_lit:false,destination_disposition:'HOLD',real_world_result:false,
+      human_independence_verified:false,project_deed_effect:false,economy_effect:false},
+    nativeGHoT:{nativeGHoT:true,transport:'loopback_only',receipt:{kind:'ghot.receipt',
+      capability:'system.hash',status:'ok',receipt_id:'receipt-good',
+      output:{sha256:hash}}}});
+  const changed=make();changed.game.project_deed_effect=true;
+  assert.throws(()=>C.minecraftRecord(st,a.id,changed,hash),/real-world claims/);
+  const money=make();money.game.economy_effect=true;
+  assert.throws(()=>C.minecraftRecord(st,a.id,money,hash),/real-world claims/);
+  const spoofed=make();spoofed.nativeGHoT.receipt.output.sha256='c'.repeat(64);
+  assert.throws(()=>C.minecraftRecord(st,a.id,spoofed,hash),/does not match/);
+  const admit=make();admit.receiverDisposition='ADMIT';
+  assert.throws(()=>C.minecraftRecord(st,a.id,admit,hash),/cannot admit/);
+});

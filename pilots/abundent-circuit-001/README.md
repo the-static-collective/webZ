@@ -152,3 +152,12 @@ serve GHoT private state. Text is stored by the **GHoT runtime** in its local
 native task records, so do not submit personally identifying or confidential
 material. This is a **single-operator experimental bridge**, not a
 multi-user authenticated remote execution platform or an attestation service.
+
+
+## Circuit 004 · The Lantern Commons (real Minecraft Java carrier)
+
+The native Minecraft adapter adds an **eighth browser work area** backed by opt-in localhost RCON on a **separate, empty, dedicated Java creative world**. When enabled with `ABUNDENT_MC_WORLD_AUTHORIZATION=EMPTY_TEST_WORLD`, it stages ten fixed blocks after checking that every target is empty. Two native Minecraft levers power two distinct redstone lamps; only after *both* are observed may an explicitly authorized action place the festival sea lantern. A fresh vanilla RCON readback is hashed by the **actual independently checked-out GHoT `reference_node.py`**, and the Circuit holds a game-only native receipt reference. Game completion is not an authenticated human act or real-world Deed.
+
+See `MINECRAFT_004_FIELD_CARD.md` and double-click `start-minecraft-foundry-mac.command` for a compatible Mac operator. See `.github/workflows/abundent-circuit-minecraft-004.yml` for a pinned official Mojang 26.1.1 Java server test; this field kit does **not** redistribute Minecraft JARs. The older Mojave Mac is unlikely to host the current Java server; a separate compatible Minecraft server plus an approved localhost SSH tunnel is an option.
+
+The previous 007 Riff-Raft verified Minecraft game-world observations on reLATTE are credited as ancestry; Circuit 004 is a distinct new festival rehearsal, **not** a signature verification of the saved 007 archive. Neither project is merged or granted authority by this integration.
