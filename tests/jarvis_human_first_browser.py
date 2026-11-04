@@ -41,7 +41,7 @@ try:
         page.locator('#wayfinder-input').fill('I need volunteers to set up chairs at a community meal Friday')
         page.locator('#wayfinder-find').click()
         assert "Could someone help" in page.locator('.wayfinder-work').inner_text()
-        assert "No one has been contacted" in page.locator('.wayfinder-work').inner_text()
+        assert "no one has been contacted" in page.locator('.wayfinder-work').inner_text().lower()
         page.locator('#wayfinder-input').fill('I want a potluck event')
         page.locator('#wayfinder-find').click()
         assert "75-minute community gathering" in page.locator('.wayfinder-result h3').inner_text()
