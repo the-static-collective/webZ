@@ -16,7 +16,7 @@ const roleSelect=document.getElementById('role');
 const offerInput=document.getElementById('offer');
 const invite=document.getElementById('invite');
 function setRole(role){
- if(!Object.hasOwn(ROLES,role))return false;
+ if(!Object.prototype.hasOwnProperty.call(ROLES,role))return false;
  roleSelect.value=role;
  roleSelect.dispatchEvent(new Event('input',{bubbles:true}));
  choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.jubileeRole===role)));
