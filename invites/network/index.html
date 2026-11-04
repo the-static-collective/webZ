@@ -13,6 +13,22 @@
 <p class="lede">Put something possible into the world. Let people answer, build on it, and optionally be notified. A proposed match becomes mutually acknowledged only when both sides use separate private receipts.</p>
 <p class="sub">No account. No automatic invitations sent to your contacts. Public words are public: never include personal information, children, addresses, or sensitive stories.</p>
 </section>
+<section id="quick-post-panel" class="panel" hidden aria-labelledby="quick-post-title">
+<div class="eyebrow">PUT SOMETHING ON THE TABLE · RIGHT HERE</div>
+<h2 id="quick-post-title">What are you bringing?</h2>
+<p>A question, an offer, a need, an idea, a song—anything public-safe. You can post it from this page without going back to make another invitation.</p>
+<label for="quick-words">In your own words</label>
+<textarea id="quick-words" rows="3" maxlength="240" placeholder="I can play twenty minutes of acoustic guitar tonight…"></textarea>
+<p><strong>Could it happen now?</strong> We prefer NOW, but you decide.</p>
+<div class="when-choices" role="group" aria-label="When is your public invitation possible?">
+<button type="button" data-quick-when="now" aria-pressed="false">NOW</button>
+<button type="button" data-quick-when="soon" aria-pressed="false">SOON</button>
+<button type="button" data-quick-when="open" aria-pressed="true">ANY TIME</button>
+</div>
+<button id="quick-next" class="primary" type="button">Review my public post →</button>
+<p class="tiny">Nothing is published yet. The next step lets you review the text and explicitly consent before it is saved for others to find.</p>
+<p id="quick-status" role="status" aria-live="polite"></p>
+</section>
 <section id="publish-panel" class="panel" hidden>
 <div class="eyebrow">STEP 2 OF 2 · PUT IT ON THE PUBLIC BOARD</div>
 <h2>Publish so others can find it</h2>
@@ -32,7 +48,7 @@
 </section>
 <section id="browse-panel" class="panel" hidden>
 <div class="eyebrow">PUBLIC BOARD · ACTUAL SAVED POSTS</div><h2>See what's on the table</h2>
-<p class="post-something"><strong>Have something to offer, ask, or build?</strong> <a href="../">Make an invitation and publish it →</a></p>
+<p class="post-something"><strong>Ready to contribute?</strong> Use the box above to publish right here, or <a href="../">use the portable invitation tool</a> first if you prefer.</p>
 <p>What's the broad area of your interest? These are unverified possibilities, not guaranteed openings.</p>
 <div class="selectors"><label for="browse-lane">Topic</label><select id="browse-lane"><option value="any" selected>All topics</option><option value="creative">Music & creativity</option><option value="food">Food & sharing</option><option value="make">Making & repair</option><option value="transport">Rides & transport</option><option value="question">Questions & learning</option><option value="open">Other possibilities</option></select>
 <label for="browse-role">Show me</label><select id="browse-role"><option value="open" selected>Everything in this topic</option><option value="offer">Needs I might help with</option><option value="need">Offers I could use</option></select></div>
