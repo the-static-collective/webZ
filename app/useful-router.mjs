@@ -52,20 +52,20 @@ export function routeUsefulWork(raw) {
   if (privateLike(input)) return {status:'PRIVACY_HOLD',heading:'Keep private details private',body:'Remove contact details, street addresses, passwords or other identifiers, then describe the task without naming anyone. Nothing has been sent.',next:'You can describe the goal without identifying a person.',blocker:'POTENTIALLY_PRIVATE_INPUT',capability:null,connection:null};
   if (input.length<5) return {status:'HOLD',heading:'What are you trying to do?',body:'A few more words about the task will let me check which of the existing tools can actually help.',next:'Describe the object, goal, or first useful result.',blocker:'TOO_SHORT',capability:null,connection:null};
   // Explicit safeguards: do not turn urgent or material scarcity into a recipe.
-  if(match(/\\b(immediate danger|being threatened|not safe tonight|nowhere to sleep|no place to sleep|domestic violence|in danger right now)\\b/i,lower))
+  if(match(/\b(immediate danger|being threatened|not safe tonight|nowhere to sleep|no place to sleep|domestic violence|in danger right now)\b/i,lower))
     return {status:'HOLD',heading:'This page cannot dispatch real-world help.',
       body:'I can prepare local drafts and guides, but I cannot contact a shelter, verify nearby help, or protect someone in immediate danger. If the danger is immediate, contact local emergency services or a trusted nearby person. This page has not notified anyone.',
       next:'If it is safe to do so, choose a trusted person or established local service you can contact directly.',
       blocker:'NO_AUTHENTICATED_REAL_WORLD_RESPONDER',capability:null,connection:null};
-  if(match(/\\b(no food|nothing to eat|out of food|food shelf|food bank|need groceries|cannot afford food|can.t afford groceries)\\b/i,lower))
+  if(match(/\b(no food|nothing to eat|out of food|food shelf|food bank|need groceries|cannot afford food|can.t afford groceries)\b/i,lower))
     return canned('food','A specific food request, ready to share',
-      'Could someone help with a simple meal or shelf-stable groceries today? I am looking for practical food access, not a recipe. Please reply only with what you can actually offer so we can agree on a safe handoff.\\n\\nThis is a draft only. No food provider, volunteer or delivery has been contacted or verified.',
+      'Could someone help with a simple meal or shelf-stable groceries today? I am looking for practical food access, not a recipe. Please reply only with what you can actually offer so we can agree on a safe handoff.\n\nThis is a draft only. No food provider, volunteer or delivery has been contacted or verified.',
       'Choose a trusted person or verified local food program to contact; no request has been sent.',
       null,'LOCAL_PARTIAL');
-  if(match(/\\b(sync|synchroniz|integrat|automat|connect)\\w*\\b/i,lower) &&
-     match(/\\b(grownby|squarespace|storefront|mailing list|newsletter|email platform|crm)\\b/i,lower))
+  if(match(/\b(sync|synchroniz|integrat|automat|connect)\w*\b/i,lower) &&
+     match(/\b(grownby|squarespace|storefront|mailing list|newsletter|email platform|crm)\b/i,lower))
     return canned('newsletter','A safe first integration test, not a fake live sync',
-      'SOURCE: identify the exact storefront change you need to observe (for example, a new public item).\\nDESTINATION: identify the exact opt-in email action that should follow.\\nTEST: use one synthetic record and an explicitly permitted receiver account.\\nBOUNDARY: require manual owner approval, idempotency and a visible HOLD/REFUSE path before any real recipient message.\\nRETURN: record whether the destination actually accepted the test record, without calling that inbox delivery.\\n\\nreLATTE COMMUTER documents the underlying pattern, but no real GrownBy, Squarespace or mailing provider is connected here.',
+      'SOURCE: identify the exact storefront change you need to observe (for example, a new public item).\nDESTINATION: identify the exact opt-in email action that should follow.\nTEST: use one synthetic record and an explicitly permitted receiver account.\nBOUNDARY: require manual owner approval, idempotency and a visible HOLD/REFUSE path before any real recipient message.\nRETURN: record whether the destination actually accepted the test record, without calling that inbox delivery.\n\nreLATTE COMMUTER documents the underlying pattern, but no real GrownBy, Squarespace or mailing provider is connected here.',
       'Test with synthetic data and explicit account-owner permission before considering real contacts.',
       {label:'Inspect reLATTE COMMUTER specification',href:SOURCE.commuter,note:'Documented synthetic profile. Not connected to a provider.'},'LOCAL_PARTIAL');
 
