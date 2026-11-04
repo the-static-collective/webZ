@@ -9,6 +9,22 @@
 <section class="hero"><p class="eyebrow">THE STATIC COLLECTIVE / JUBILEE CIRCUIT 001 / OPEN INVITATION</p><h1>The road brings<br><em>the feast.</em></h1>
 <p class="lead">Festivals gather the village. Churches and neighbors sustain it. Communities lead the work. <strong>Music carries the culture between them.</strong></p>
 <p>A traveling celebration that leaves one useful thing behind—and carries its next invitation as a song.</p>
+<section class="jubilee-first" aria-labelledby="jubilee-first-title">
+<p class="eyebrow">YOUR FIRST MOVE</p>
+<h2 id="jubilee-first-title">What could you bring?</h2>
+<p>Pick one thing. You can change your mind or leave without sending anything.</p>
+<div class="role-quick" role="group" aria-label="Pick a way to join in">
+<button type="button" data-jubilee-role="song" aria-pressed="false">A song</button>
+<button type="button" data-jubilee-role="food" aria-pressed="false">Food or kitchen help</button>
+<button type="button" data-jubilee-role="host" aria-pressed="false">A gathering place</button>
+<button type="button" data-jubilee-role="crew" aria-pressed="false">Event skills</button>
+<button type="button" data-jubilee-role="tech" aria-pressed="false">Tools or repair</button>
+<button type="button" data-jubilee-role="steward" aria-pressed="false">Time to organize</button>
+<button type="button" data-jubilee-role="translate" aria-pressed="false">Teaching or translation</button>
+<a href="../week/">Just here to listen ↗</a>
+</div>
+<div class="jubilee-say"><label for="jubilee-quick-text">Or say it your way</label><div class="jubilee-say-row"><input id="jubilee-quick-text" type="text" maxlength="240" autocomplete="off" placeholder="I could play guitar at a community supper…"><button type="button" id="jubilee-quick-next">Continue with my idea →</button></div><p id="jubilee-quick-status" role="status" aria-live="polite">Private to this page until you choose otherwise. Nothing is sent.</p></div>
+</section>
 <div class="actions"><a class="button primary" href="#invite">Bring something ↘</a><a class="button" href="#field-table">Run a two-hour gathering</a><a class="button" href="./revival/">Open the 20-county Revival Atlas ↗</a><a class="button" href="./wood/">Winter Warmth · firewood bank field kit ↗</a><a class="button" href="../week/">Hear a week together ↗</a></div>
 <p class="notice"><b>PROPOSED, NOT ENROLLED.</b> No festival, congregation, Ghanaian community or song creator is represented as a confirmed partner. This page collects no submissions.</p></section>
 <section class="section" id="song"><p class="eyebrow">01 / THE THREAD</p><h2>One song. Many voices.<br>One useful thing.</h2>
@@ -35,7 +51,7 @@
 <section class="section shade" id="invite"><p class="eyebrow">04 / A LETTER TO THE NEXT TABLE</p><h2>What could you bring?</h2>
 <p>Prepare a public, organization-level invitation on this device. It is not submitted, stored, or shared automatically. Inspect the draft before opening your own email client.</p>
 <form id="invitation-form"><div class="grid"><label>How would you like to participate?<select id="role" required>
-<option value="song">Bring a song or rhythm</option><option value="host">Host a field table</option><option value="food">Share food or kitchen skills</option><option value="crew">Bring festival production skills</option><option value="tech">Offer repair, energy or communications skills</option><option value="steward">Explore local stewardship</option><option value="translate">Translate or teach across cultures</option></select></label>
+<option value="" selected disabled>Choose a way to help</option><option value="song">Bring a song or rhythm</option><option value="host">Host a field table</option><option value="food">Share food or kitchen skills</option><option value="crew">Bring festival production skills</option><option value="tech">Offer repair, energy or communications skills</option><option value="steward">Explore local stewardship</option><option value="translate">Translate or teach across cultures</option></select></label>
 <label>Broad region (optional)<input id="region" type="text" maxlength="70" autocomplete="off" placeholder="e.g. Southern Minnesota"></label></div>
 <label>One public, non-personal idea or offer<textarea id="offer" maxlength="240" rows="4" required placeholder="We could host a small music-and-food table."></textarea></label>
 <label class="check"><input id="public-only" type="checkbox" required> This draft contains no private names, contacts, addresses, case details, or sensitive locations.</label>
