@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#12271f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="One small action, one portable card, one honest return. A local-first Abundent experiment.">
+<title>First Circle · Abundent</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to the experiment</a>
+<header class="top"><a href="../" class="brand">✳ ABUNDENT</a><span>FIRST CIRCLE <b>001</b></span></header>
+<main id="main">
+<div class="eyebrow">SMALL ACTIONS · REAL RETURNS · NO ACCOUNT</div>
+<h1>Something good can<br><em>start right here.</em></h1>
+<p class="lead">Choose a direction. We'll make one small next step into a card you can carry. No worksheets, sign-ups, or promises we can't prove.</p>
+<div class="boundary"><strong>This is an offline-style guided prototype, not a live AI chat.</strong> Your words are not transmitted. Keep names, addresses, personal crises, and private records out of this experiment. A report is not independent confirmation.</div>
+
+<section id="choose" class="panel" aria-labelledby="choose-title">
+<p class="kicker">01 / YOUR MOVE</p><h2 id="choose-title">Where should we start?</h2>
+<div class="choices">
+<button type="button" data-direction="need"><span class="icon">↙</span><strong>I need something</strong><small>Ask for a small hand</small><span class="arrow">→</span></button>
+<button type="button" data-direction="offer"><span class="icon">↗</span><strong>I have something</strong><small>Offer time, knowledge, or a resource</small><span class="arrow">→</span></button>
+<button type="button" data-direction="play"><span class="icon">✳</span><strong>Let's play</strong><small>Try a tiny experiment</small><span class="arrow">→</span></button>
+</div></section>
+
+<section id="talk" class="panel" hidden aria-labelledby="talk-title">
+<p class="kicker">02 / A SHORT CONVERSATION</p>
+<div class="bubble from">One small step is enough.</div>
+<div id="talk-title" class="bubble prompt" role="heading" aria-level="2"></div>
+<div id="earlier" class="bubble yours" hidden></div>
+<form id="talk-form"><label for="answer" id="answer-label">Your answer</label>
+<textarea id="answer" rows="3" maxlength="220" required placeholder="Say it your way…"></textarea>
+<div id="suggestions" class="suggestions" aria-label="Quick answers"></div>
+<div class="row"><button id="back" class="ghost" type="button">← Back</button><button class="primary" type="submit" id="continue">Continue →</button></div></form>
+<p class="fine">You can type normally or tap a suggestion. Nothing is sent to us.</p>
+</section>
+
+<section id="card-panel" class="panel" hidden aria-labelledby="card-title">
+<p class="kicker">03 / YOUR PORTABLE CARD</p>
+<div class="card" id="card-print"><div class="card-top"><span>✳ FIRST CIRCLE</span><span id="card-tag">DRAFT</span></div>
+<h2 id="card-title">A small beginning.</h2><p id="card-message" class="card-message"></p>
+<div class="card-next"><span>ONE POSSIBLE NEXT STEP</span><strong id="card-action"></strong></div>
+<p id="card-id" class="mono"></p></div>
+<p id="card-origin" class="fine">This is an unsigned personal draft. It is not posted, matched, or independently verified.</p>
+<div class="row wrap"><button id="save" class="primary" type="button">Keep on this device</button><button id="download" type="button">Download card ↓</button><button id="copy" type="button">Copy share text</button></div>
+<p id="save-state" class="fine">Not saved. You can download a portable JSON copy to return on another device.</p>
+<div class="divider"></div><p class="kicker">04 / COME BACK WITH A RESULT</p>
+<h2>What happened when you tried?</h2>
+<div id="returns" class="return-list"></div>
+<div class="return-choices" id="return-choices">
+<button type="button" data-outcome="worked">It worked ✓</button>
+<button type="button" data-outcome="not-yet">Not yet ↻</button>
+<button type="button" data-outcome="different">Something else happened ↗</button></div>
+<form id="return-form" hidden><label for="return-note" id="return-label">What happened? (optional)</label>
+<textarea id="return-note" maxlength="280" rows="2" placeholder="Only share non-sensitive details…"></textarea>
+<div class="row"><button class="ghost" type="button" id="cancel-return">Cancel</button><button class="primary" type="submit">Record my report</button></div>
+<p class="fine">Your report stays self-attested. It is never automatically accepted as proof of fulfillment.</p></form>
+<div id="method-zone" class="method-zone" hidden><p class="kicker">05 / LET EXPERIENCE BECOME A POSSIBILITY</p>
+<h2>A possible reusable method</h2><p id="method-text"></p><p class="fine">Proposal only. A real reviewer and a local recipient would still need to assess this before reuse.</p>
+<button id="method" type="button">Propose a reusable method →</button></div>
+<div class="row last-row"><button id="new" class="ghost" type="button">+ Start another circle</button><button id="erase" class="ghost danger" type="button">Erase saved copy</button></div>
+</section>
+
+<section class="panel import-panel" aria-labelledby="return-title"><p class="kicker">RE-ENTRY / ANOTHER PHONE OR ANOTHER DAY</p>
+<h2 id="return-title">Already have a card?</h2>
+<p>Open a card you downloaded earlier. A checksum catches accidental changes; it is <strong>not</strong> a signature or proof that the reported event happened.</p>
+<label class="file-button">Open a First Circle JSON card <input type="file" id="import" accept=".json,application/json"></label>
+</section>
+<p id="status" class="status" role="status" aria-live="polite">Ready when you are.</p>
+</main>
+<footer><strong>ONE ACT ≠ VERIFIED OUTCOME.</strong> <span>Local drafts · explicit returns · reusable proposals, never automatic authority.</span><a href="../">Back to webZ ↗</a></footer>
+</body></html>
