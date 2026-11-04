@@ -1,0 +1,50 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const page=readFileSync(new URL('../invites/network/index.html',import.meta.url),'utf8');
+const client=readFileSync(new URL('../invites/network/network.mjs',import.meta.url),'utf8');
+const server=readFileSync(new URL('../backend/invitation-network-002/index.ts',import.meta.url),'utf8');
+const start=readFileSync(new URL('../invites/index.html',import.meta.url),'utf8');
+const invitation=readFileSync(new URL('../invites/app.mjs',import.meta.url),'utf8');
+test('invitation chain can opt into public discussion without forced intake',()=>{
+ assert.match(start,/id="network-publish"/);
+ assert.match(invitation,/new URL\('\.\/network\/#i='/);
+ assert.match(page,/id="publish-consent"/);
+ assert.match(page,/id="reply-consent"/);
+ assert.match(page,/id="publish-panel"/);
+ assert.match(page,/id="thread-panel"/);
+ assert.ok(page.indexOf('id="publish-panel"')<page.indexOf('id="thread-panel"'));
+});
+test('all three effects have explicit consent and no claims of verified identities',()=>{
+ for(const action of ['publish','reply','watch','poll','unwatch','discover','propose-match','confirm-match','withdraw','report'])assert.ok(server.includes(action));
+ assert.match(server,/b\.consent!==true/);
+ assert.match(page,/two distinct private receipts|separate private receipts/i);
+ assert.match(page,/Closed-tab push, SMS and email are not connected yet/);
+ assert.match(server,/realWorldOutcomeVerified:false/);
+ assert.match(server,/email:false,push:false/);
+ assert.match(client,/Notification\.permission==='granted'/);
+ assert.match(client,/watch-remember/);
+ assert.match(client,/localStorage\.setItem/);
+ assert.match(client,/localStorage\.removeItem/);
+ assert.match(page,/id="watch-stop"/);
+});
+test('server code strictly confines frontend origin and avoids returning private record hashes',()=>{
+ assert.match(server,/const ORIGINS=new Set/);
+ assert.match(server,/https:\/\/abundent\.org/);
+ assert.doesNotMatch(server,/access-control-allow-origin["']?\s*[:=]\s*["']\*/);
+ assert.match(server,/PUBLIC_SAFE_WORDS_ONLY/);
+ assert.match(server,/ic02_consume_quota/);
+ assert.match(server,/SAME_ORIGIN_NOT_REQUIRED|ORIGIN_NOT_ALLOWED/);
+ assert.match(server,/TWO_CAPABILITY_RECEIPTS_ONLY/);
+ assert.doesNotMatch(client,/SUPABASE_SERVICE_ROLE_KEY/);
+ assert.doesNotMatch(page,/<script[^>]+src="https:/);
+});
+test('published content uses text nodes, scripts parse, and no external module is required',()=>{
+ assert.match(client,/textContent=/);
+ assert.doesNotMatch(client,/\.innerHTML\s*=/);
+ assert.doesNotMatch(client,/document\.write\(/);
+ const normalized=client.replace(/^import .*;\s*$/gm,'');
+ assert.doesNotThrow(()=>new Function(normalized));
+ const backend=server.replace(/^import .*;\s*$/gm,'');
+ assert.doesNotThrow(()=>new Function(backend));
+});
