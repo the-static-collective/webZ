@@ -16,3 +16,5 @@
 .highlight-post strong{display:block;margin-bottom:10px;color:#1e5437}
 #browse-results article{overflow-wrap:anywhere}
 @media(max-width:620px){.published-confirmation .buttons{display:grid;grid-template-columns:1fr}.published-confirmation .buttons button{width:100%}}
+
+#quick-next{width:100%;font-size:1.08rem;min-height:61px;line-height:1.35}
