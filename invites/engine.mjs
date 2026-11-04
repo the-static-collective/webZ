@@ -31,7 +31,7 @@ export function detectMode(s){
 export function inferLane(s){
  const v=text(s).toLowerCase();
  if(/\b(guitar|song|music|sing|drum|concert|record|perform|live set|video)\b/.test(v))return 'creative';
- if(/\b(vegetable|fish|food|meal|grocery|pantry|soup|produce)\b/.test(v))return 'food';
+ if(/\b(vegetables?|fish|food|meals?|grocery|pantry|soup|produce)\b/.test(v))return 'food';
  if(/\b(ride|drive|transport|deliver|car|bus)\b/.test(v))return 'transport';
  if(/\b(repair|fix|build|code|tool|computer|bike|equipment)\b/.test(v))return 'make';
  if(/\b(question|why|how|what|learn|wonder|explain)\b/.test(v)||v.endsWith('?'))return 'question';
