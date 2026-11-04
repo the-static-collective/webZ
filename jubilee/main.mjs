@@ -41,7 +41,7 @@ function showMoment(line,next,title){
  momentTitle.focus();
 }
 document.getElementById('jubilee-moment-copy').addEventListener('click',async()=>{
- const text=momentLine.textContent;
+ const text=momentLine.textContent+'\n\n'+momentNext.textContent;
  if(!text)return;
  try{
   if(!navigator.clipboard?.writeText)throw Error('No clipboard API');
@@ -69,7 +69,7 @@ choiceButtons.forEach(button=>button.addEventListener('click',()=>{
  offerInput.dispatchEvent(new Event('input',{bubbles:true}));
  const kit=makeFieldKit(role);
  if(!auditFieldKit(kit).pass)throw Error('Kit not ready');
- showMoment(kit.body,kit.limit,kit.title);
+ showMoment(seed.line,kit.body,kit.title);
 }));
 roleSelect.addEventListener('change',()=>{
  choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.jubileeRole===roleSelect.value)));
@@ -85,7 +85,7 @@ quickNext.addEventListener('click',()=>{
  try{
   const kit=makeFieldKit(Object.prototype.hasOwnProperty.call(ROLES,roleSelect.value)?roleSelect.value:'open',text);
   if(!auditFieldKit(kit).pass)throw Error('Kit not ready');
-  showMoment(kit.body,kit.limit,kit.title);
+  showMoment(text,kit.body,kit.title);
  }catch(e){quickStatus.textContent=e.message;return;}
  quickStatus.textContent='A prepared local kit exists below; nothing was sent or saved.';
 });
