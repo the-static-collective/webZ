@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101e20"><meta name="referrer" content="no-referrer">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Play with an evolving fictional village. Fork 12 scripted neighbors, mutate cooperation strategies, compare isolated and commons worlds.">
+<title>COMMONS//EVOLVE — A Tiny Civilization Laboratory</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head><body>
+<header class="top"><a class="logo" href="../">✳ <strong>ABUNDENT</strong><span>/ WORLDS</span></a><div class="top-right"><span class="status-dot"></span> LOCAL SIMULATION <span class="build">002</span></div></header>
+<main>
+<section class="hero" aria-labelledby="title"><div class="eyebrow">LANTERN // COMMONS SELF-PLAY 002</div>
+<h1 id="title">Fork a world.<br><em>Grow a better one.</em></h1>
+<p class="subtitle">Twelve fictional neighbors. Scarce food. Different personalities. Competing cooperation strategies. Your job: run a civilization through changing conditions, then let the best strategies produce the next generation.</p>
+<div class="disclosure"><span class="disclosure-icon">◇</span><div><strong>This is a game experiment—not a real society or AI consciousness.</strong> All twelve residents are deterministic scripts, and "evolution" means bounded algorithmic search. No account, network, recruiting, real-world transactions, external actions, or actual Minecraft server.</div></div>
+</section>
+<section class="directors" aria-labelledby="director-title"><div class="section-h"><span class="eyebrow">01 / WORLD DIRECTOR</span><h2 id="director-title">Set the conditions</h2></div>
+<div class="director-controls"><label for="league-seed">EVOLUTION SEED <input id="league-seed" type="number" value="2026" min="0" max="999999" step="1"></label>
+<label for="trial-seed">VILLAGE SEED <input id="trial-seed" type="number" value="41" min="0" max="999999" step="1"></label>
+<label for="climate">WORLD EVENT <select id="climate"><option value="combined" selected>Storm + drought</option><option value="normal">Normal season</option><option value="drought">Drought</option><option value="storm">Storm</option></select></label></div>
+<div class="toolbar"><button class="big primary" id="start" type="button">▶ Start the first generation</button><button class="big accent" id="evolve" type="button" disabled>↗ Evolve another generation</button><button class="small-btn" id="duel" type="button" disabled>↻ Re-run trial</button><button class="small-btn" id="export" type="button" disabled>↓ Export cartridge</button></div>
+<p id="status" class="status" role="status" aria-live="polite">Ready to begin. Start a generation to populate the village.</p>
+</section>
+<section id="results" hidden>
+<div class="section-h"><span class="eyebrow">02 / THE LEAGUE</span><h2>Eight strategies. One generation.</h2><p class="help">Each strategy faces the same four training worlds. Its score combines rations met, hunger, waste, travel effort, and the least-fed resident. Unseen test worlds are shown separately; scores encode our chosen rules, not universal values.</p></div>
+<div class="headline-metrics"><div class="metric"><span>GENERATION</span><strong id="generation">01</strong></div><div class="metric"><span>BEST TRAINING SCORE</span><strong id="training">—</strong></div><div class="metric"><span>UNSEEN WORLDS</span><strong id="holdout">—</strong></div><div class="metric"><span>ISOLATION BASELINE</span><strong id="baseline">—</strong></div></div>
+<div class="leaders" id="leaders" aria-label="Strategy leaderboard"></div>
+<div class="lineage"><h3>Inheritance trail</h3><div id="history" class="history"></div><p>Each round preserves the top two candidates, mutates bounded traits in their descendants, and adds one random challenger. New worlds do not rewrite their ancestors.</p></div>
+<div class="section-h trial-header"><span class="eyebrow">03 / WORLD FORK</span><h2>The same village. Two futures.</h2><p class="help">One village seed is played under isolation and the current winning strategy. Consent refusals remain possible, and every imaginary resource transfer is accounted for.</p></div>
+<div class="worlds"><article class="world iso"><div class="world-head"><span class="tag">TIMELINE A / CONTROL</span><span class="tag muted">NO EXCHANGE</span></div><h3>Every home alone</h3><p>Residents keep what they produce. No transfers, no shared construction.</p><div class="grid" id="grid-a" role="img" aria-label="8 by 8 grid of twelve isolated fictional neighbors"></div><div class="world-metrics" id="metrics-a"></div><div class="events" id="events-a"></div></article>
+<article class="world common"><div class="world-head"><span class="tag">TIMELINE B / CHAMPION</span><span class="tag live">VOLUNTARY COMMONS</span></div><h3 id="champion-title">An evolving strategy</h3><p id="champion-genes">Willing agents may share resources; refusal remains respected.</p><div class="grid" id="grid-b" role="img" aria-label="8 by 8 grid of twelve scripted neighbors under an evolving cooperation policy"></div><div class="world-metrics" id="metrics-b"></div><div class="events" id="events-b"></div></article></div>
+<div class="verdict"><span class="eyebrow">THE CONSEQUENCE</span><strong id="verdict">—</strong><p id="verdict-note"></p></div>
+</section><footer><div>COMMONS SELF-PLAY 002 · GAME ONLY · ONE OPERATOR</div><p>Inspired by our Lantern Minecraft world-cartridge work: repeatable seeds, branch histories, director events, accountable material, and experiments that can be reproduced. No live Minecraft protocol or real human confirmation is asserted. <a href="../commons-selfplay/">Previous self-play lab ↗</a></p></footer>
+</main>
+</body></html>
