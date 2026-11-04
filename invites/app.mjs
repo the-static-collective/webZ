@@ -106,7 +106,7 @@ async function copy(value,id,fallback){
   await navigator.clipboard.writeText(value);
   status(id,'Copied. Nothing has been posted automatically.');
  }catch{
-  if(fallback){fallback.focus();fallback.select();}
+  if(fallback){fallback.focus();if(typeof fallback.select==='function')fallback.select();}
   status(id,'Clipboard unavailable. Select the visible text and copy it manually.');
  }
 }
