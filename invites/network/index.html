@@ -13,32 +13,62 @@
 <p class="lede">Put something possible into the world. Let people answer, build on it, and optionally be notified. A proposed match becomes mutually acknowledged only when both sides use separate private receipts.</p>
 <p class="sub">No account. No automatic invitations sent to your contacts. Public words are public: never include personal information, children, addresses, or sensitive stories.</p>
 </section>
+<section id="quick-post-panel" class="panel" hidden aria-labelledby="quick-post-title">
+<div class="eyebrow">PUT SOMETHING ON THE TABLE · RIGHT HERE</div>
+<h2 id="quick-post-title">What are you bringing?</h2>
+<p>A question, an offer, a need, an idea, a song—anything public-safe. You can post it from this page without going back to make another invitation.</p>
+<label for="quick-words">In your own words</label>
+<textarea id="quick-words" rows="3" maxlength="240" placeholder="I can play twenty minutes of acoustic guitar tonight…"></textarea>
+<p><strong>Could it happen now?</strong> We prefer NOW, but you decide.</p>
+<div class="when-choices" role="group" aria-label="When is your public invitation possible?">
+<button type="button" data-quick-when="now" aria-pressed="false">NOW</button>
+<button type="button" data-quick-when="soon" aria-pressed="false">SOON</button>
+<button type="button" data-quick-when="open" aria-pressed="true">ANY TIME</button>
+</div>
+<button id="quick-next" class="primary" type="button">Review my public post →</button>
+<p class="tiny">Nothing is published yet. The next step lets you review the text and explicitly consent before it is saved for others to find.</p>
+<p id="quick-status" role="status" aria-live="polite"></p>
+</section>
 <section id="publish-panel" class="panel" hidden>
-<div class="eyebrow">YOU HAVE AN INVITATION</div>
-<h2>Make it a public conversation?</h2>
+<div class="eyebrow">STEP 2 OF 2 · PUT IT ON THE PUBLIC BOARD</div>
+<h2>Publish so others can find it</h2>
+<p class="publish-steps"><strong>✓ You made an invitation.</strong><br><strong>Next:</strong> Confirm that it can be posted publicly. Then it gets a persistent conversation and appears in the network's discovery results.</p>
 <blockquote id="publish-words"></blockquote><p id="publish-when" class="tiny"></p>
 <p>People can read and reply for up to 30 days. Public responses are not automatically verified. You can withdraw using a private receipt, but someone may already have copied your words.</p>
-<label for="publish-intent">What are you bringing?</label><select id="publish-intent">
+<label for="publish-intent">This is mostly… <span class="field-hint">(helps people find it)</span></label><select id="publish-intent">
 <option value="offer">I'm offering something</option>
 <option value="need">I could use something</option>
 <option value="question">I'm asking or exploring</option>
 <option value="open">A possibility with no fixed role</option>
 </select>
 <label class="check"><input type="checkbox" id="publish-consent"><span>I want these words published openly for replies. They contain no private information or promises on anyone else's behalf.</span></label>
-<button type="button" id="publish-button" class="primary">Publish this conversation →</button>
+<button type="button" id="publish-button" class="primary">Yes, post this publicly so people can find it →</button>
+<p class="tiny">Until you press this, your invitation is still link-only. This button is the actual persistent-post action, not a preview.</p>
 <p id="publish-status" role="status" aria-live="polite"></p>
 </section>
 <section id="browse-panel" class="panel" hidden>
-<div class="eyebrow">DISCOVER</div><h2>Find an open possibility</h2>
+<div class="eyebrow">PUBLIC BOARD · ACTUAL SAVED POSTS</div><h2>See what's on the table</h2>
+<p class="post-something"><strong>Ready to contribute?</strong> Use the box above to publish right here, or <a href="../">use the portable invitation tool</a> first if you prefer.</p>
 <p>What's the broad area of your interest? These are unverified possibilities, not guaranteed openings.</p>
-<div class="selectors"><label for="browse-lane">Topic</label><select id="browse-lane"><option value="creative">Music & creativity</option><option value="food">Food & sharing</option><option value="make">Making & repair</option><option value="transport">Rides & transport</option><option value="question">Questions & learning</option><option value="open">Other possibilities</option></select>
-<label for="browse-role">I'm looking to</label><select id="browse-role"><option value="need">Offer help to a need</option><option value="offer">Find an offer</option><option value="open">Browse broadly</option></select></div>
-<button type="button" class="primary" id="browse-button">Find real public invitations →</button>
+<div class="selectors"><label for="browse-lane">Topic</label><select id="browse-lane"><option value="any" selected>All topics</option><option value="creative">Music & creativity</option><option value="food">Food & sharing</option><option value="make">Making & repair</option><option value="transport">Rides & transport</option><option value="question">Questions & learning</option><option value="open">Other possibilities</option></select>
+<label for="browse-role">Show me</label><select id="browse-role"><option value="open" selected>Everything in this topic</option><option value="offer">Needs I might help with</option><option value="need">Offers I could use</option></select></div>
+<button type="button" class="primary" id="browse-button">Show public posts →</button>
 <div id="browse-results" class="thread-posts" aria-live="polite"></div>
 <p id="browse-status" role="status" aria-live="polite"></p>
 <a href="../">Or create a new invitation →</a>
 </section>
 <section id="thread-panel" class="panel" hidden>
+<section id="published-confirmation" class="published-confirmation" aria-labelledby="published-title" hidden>
+<p class="eyebrow">POSTED SUCCESSFULLY · STORED ON THE NETWORK</p>
+<h2 id="published-title">It's public. People can find it.</h2>
+<p>Your invitation is now saved for a public conversation, not just carried in a link. It appears under its topic in the public board until it expires (up to 30 days) or you withdraw it.</p>
+<p class="buttons"><a id="published-find" class="publish-board-link" href="./?browse=1">See my post in the public board →</a></p>
+<label for="published-link">The public conversation link people should share</label>
+<input id="published-link" type="text" readonly>
+<div class="buttons"><button type="button" id="published-copy">Copy public conversation link</button><button type="button" id="published-save">Save private owner receipt</button></div>
+<p class="tiny">Keep your owner receipt private. It controls withdrawal and match acknowledgments; it is not the link you send to others.</p>
+<p id="published-status" role="status" aria-live="polite"></p>
+</section>
 <p class="eyebrow">PUBLIC CONVERSATION · SELF-DECLARED</p><p id="thread-time" class="availability"></p>
 <h2 id="thread-title">An invitation</h2><blockquote id="thread-words"></blockquote>
 <p id="thread-meta" class="tiny"></p>

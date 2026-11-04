@@ -132,13 +132,26 @@ async function unwatch(b,req){
  if(error)failure("UNSUBSCRIBE_UNAVAILABLE",503);
  return {state:"UNSUBSCRIBED",deleted:Boolean(data),notice:"The watch receipt and associated queued notifications have been deleted. No further in-app alerts will be delivered to it."};
 }
+async function lookupPublic(b,req){
+ exact(b,["action","invitationId"]);
+ if(typeof b.invitationId!=="string"||!PUBLIC_ID.test(b.invitationId))failure("INVALID_INVITATION_ID");
+ await quota(req,"read");
+ const {data,error}=await db.from("ic02_threads")
+  .select("id,lane,intent,state,expires_at")
+  .eq("invitation_id",b.invitationId).eq("state","PUBLIC")
+  .gt("expires_at",new Date().toISOString()).maybeSingle();
+ if(error)failure("LOOKUP_UNAVAILABLE",503);
+ return {schema:"abundent/invitation-publication-lookup/v1",published:Boolean(data),
+  threadId:data?.id||null,lane:data?.lane||null,intent:data?.intent||null};
+}
 async function discover(b,req){
  exact(b,["action","lane","intent"]);
- if(!LANES.has(b.lane)||!INTENTS.has(b.intent))failure("INVALID_DISCOVERY");
+ if(!(LANES.has(b.lane)||b.lane==="any")||!INTENTS.has(b.intent))failure("INVALID_DISCOVERY");
  await quota(req,"discover");
  const counterpart=b.intent==="offer"?"need":b.intent==="need"?"offer":null;
- const query=db.from("ic02_threads").select("id,invitation_id,words,lane,timing,intent,state,created_at,expires_at")
-  .eq("lane",b.lane).eq("state","PUBLIC").gt("expires_at",new Date().toISOString()).order("created_at",{ascending:false}).limit(50);
+ let query=db.from("ic02_threads").select("id,invitation_id,words,lane,timing,intent,state,created_at,expires_at")
+  .eq("state","PUBLIC").gt("expires_at",new Date().toISOString()).order("created_at",{ascending:false}).limit(50);
+ if(b.lane!=="any")query=query.eq("lane",b.lane);
  const {data,error}=await (counterpart?query.eq("intent",counterpart):query);
  if(error)failure("DISCOVERY_UNAVAILABLE",503);
  const results=(data||[]).sort((a,b)=>(a.timing==="now"?1:0)===(b.timing==="now"?1:0)?Date.parse(b.created_at)-Date.parse(a.created_at):(a.timing==="now"?-1:1)).slice(0,QUERY_LIMIT).map(project);
@@ -236,7 +249,7 @@ Deno.serve(async req=>{
  try{
   const b=await body(req);
   if(!b||typeof b.action!=="string")failure("INVALID_ACTION");
-  const actions={publish:create,read:readThread,reply:respond,watch,poll,unwatch,discover,"propose-match":proposeMatch,"confirm-match":confirmMatch,withdraw,report};
+  const actions={publish:create,read:readThread,reply:respond,watch,poll,unwatch,lookup:lookupPublic,discover,"propose-match":proposeMatch,"confirm-match":confirmMatch,withdraw,report};
   if(!Object.prototype.hasOwnProperty.call(actions,b.action))failure("UNKNOWN_ACTION");
   const result=await actions[b.action](b,req);
   return reply(result,b.action==="publish"||b.action==="reply"||b.action==="watch"?201:200,origin);
