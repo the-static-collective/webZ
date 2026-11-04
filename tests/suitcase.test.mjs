@@ -16,7 +16,7 @@ test("two separate nonexportable keys produce independently verifiable portable 
 test("tampering with details, key fingerprint, digest and signature cannot pass",async()=>{
  const a=await newRoom("Village issuer key","PERSON");
  const good=await sign(a,"OFFER",{title:"Safe bounded handoff",description:"Only a public synthetic packet for review.",scope:"No resources may change hands without explicit permission.",toFingerprint:"",expiresAt:new Date(Date.now()+86400000).toISOString()});
- for(const mod of [p=>p.payload.body.title="Changed after signing",p=>p.digest="0".repeat(64),p=>p.signature="A"+p.signature.slice(1),p=>p.payload.issuer.fingerprint="0".repeat(64),p=>p.payload.issuer.publicKey.d="private-key-leak"]){
+ for(const mod of [p=>p.payload.body.title="Changed after signing",p=>p.digest="0".repeat(64),p=>p.signature=(p.signature[0]==="A"?"B":"A")+p.signature.slice(1),p=>p.payload.issuer.fingerprint="0".repeat(64),p=>p.payload.issuer.publicKey.d="private-key-leak"]){
  const bad=structuredClone(good);mod(bad);await assert.rejects(()=>verify(bad));}
 });
 test("wrong recipient, expired and same-key dispositions cannot count",async()=>{
