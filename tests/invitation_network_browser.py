@@ -83,33 +83,33 @@ try:
   assert page.locator('#thread-panel').is_hidden()
   page.locator('#publish-consent').check()
   page.locator('#publish-button').click()
-  assert page.locator('#thread-panel').is_visible()
-  assert 'THREAD OWNER KEY' in page.locator('#receipt-preview').inner_text()
+  expect(page.locator('#thread-panel')).to_be_visible(timeout=7000)
+  expect(page.locator('#receipt-preview')).to_contain_text('THREAD OWNER KEY')
   assert page.url.endswith('?thread='+THREAD),page.url
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
   page.locator('#watch-start').click()
-  assert 'WATCH NOTIFICATION KEY' in page.locator('#receipt-preview').inner_text()
-  assert page.locator('#watch-key').input_value()==WATCH
+  expect(page.locator('#receipt-preview')).to_contain_text('WATCH NOTIFICATION KEY')
+  expect(page.locator('#watch-key')).to_have_value(WATCH)
   page.locator('#reply-kind').select_option('need')
   page.locator('#reply-words').fill('I need one acoustic set for a neighborhood supper this week.')
   page.locator('#reply-consent').check()
   page.locator('#reply-send').click()
-  assert 'PUBLIC REPLY RECEIVED' in page.locator('#reply-status').inner_text()
-  assert page.locator('#thread-posts article').count()==1
-  assert 'PUBLIC RESPONSE KEY' in page.locator('#receipt-preview').inner_text()
+  expect(page.locator('#reply-status')).to_contain_text('PUBLIC REPLY RECEIVED')
+  expect(page.locator('#thread-posts article')).to_have_count(1)
+  expect(page.locator('#receipt-preview')).to_contain_text('PUBLIC RESPONSE KEY')
   page.locator('#thread-posts button').click()
-  assert page.locator('#matching-panel').is_visible()
+  expect(page.locator('#matching-panel')).to_be_visible()
   page.locator('#match-key').fill(OWNER)
   page.locator('#match-propose').click()
-  assert page.locator('#match-id').input_value()==MATCH
+  expect(page.locator('#match-id')).to_have_value(MATCH)
   page.locator('#match-confirm').click()
-  assert 'PROPOSED' in page.locator('#match-status').inner_text()
+  expect(page.locator('#match-status')).to_contain_text('PROPOSED')
   page.locator('#match-key').fill(REPLY)
   page.locator('#match-confirm').click()
-  assert 'MUTUALLY_ACKNOWLEDGED' in page.locator('#match-status').inner_text()
-  assert 'MUTUALLY_ACKNOWLEDGED' in page.locator('#thread-posts').inner_text()
+  expect(page.locator('#match-status')).to_contain_text('MUTUALLY_ACKNOWLEDGED')
+  expect(page.locator('#thread-posts')).to_contain_text('MUTUALLY_ACKNOWLEDGED')
   page.locator('#watch-stop').click()
-  assert page.locator('#watch-key').input_value()==''
+  expect(page.locator('#watch-key')).to_have_value('')
   assert page.evaluate('localStorage.length')==0
   assert 'unwatch' in calls and 'poll' in calls and 'confirm-match' in calls
   assert not errors,errors
