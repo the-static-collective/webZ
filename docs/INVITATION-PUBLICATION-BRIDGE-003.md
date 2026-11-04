@@ -10,6 +10,7 @@ A visitor can successfully create a portable, shareable invitation on `/invites/
 - `/invites/network/#i=...`: shows the exact words, a concise classification and explicit public consent **before** sending a publish request. Publishing is the actual persistent storage action; the consent checkbox is never auto-selected.
 - On HTTP success, the visitor sees a **POSTED SUCCESSFULLY** proof block at the top of their public thread: public conversation URL, an actionable link to the public board filtered to the post's topic, and an explicit private owner receipt download. No duplicate key transmission in the share URL.
 - Reopening the original portable link later and following the public route will `lookup` the invitation ID, read the existing public conversation if available, and **never create a duplicate**. The lookup returns no private keys or unpublished text.
+- `/invites/network/` now also accepts a new sentence and availability **directly on the public desk**. The visitor can review and explicitly consent to publication right there—no circular trip through the original invitation page required.
 - `/invites/network/?browse=1` defaults to **all topics** and **all intentions**, and loads saved public posts automatically. Filter language now corresponds correctly to the backend counterpart rule: **Needs I might help with** queries for needs, and **Offers I could use** queries for offers. The public board uses deliberately unverified self-declared content. A post highlight lets the author see their own new publication among listed results when it is included in the result window.
 
 ## Backend
@@ -20,7 +21,7 @@ Backwards-compatible extension to `invitation-network-002` (no new tables): `loo
 
 - Live Edge Function was probed for `discover(any,open)` and `lookup(unpublished-id)`; both returned HTTP 200 and expected schemas.
 - `tests/invitation_publication_bridge.test.mjs` covers the link-only → public boundary, labels, lookup and visible receipt proof.
-- `tests/invitation_network_browser.py` now proves that a post is discovered from a second browser page, marked on the public board, and that reopening the **original** invitation resolves to the same public thread without posting twice.
+- `tests/invitation_network_browser.py` now proves direct desk composition without auto-posting, that a post is discovered from a second browser page, marked on the public board, and that reopening the **original** invitation resolves to the same public thread without posting twice.
 - Production publication remains gated on Node + mobile-browser CI.
 
 The public board may legitimately be empty; a displayed candidate is not a verified participant, available resource, or confirmed match.
