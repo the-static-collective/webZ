@@ -42,7 +42,9 @@ try:
            'readiness':'LOCAL_LIBRARY','delivers':'A synthetic, source-owned signed crossing prototype, not a running farm or real email connection.',
            'entry':{'kind':'SOURCE_REFERENCE','href':'https://github.com/the-static-collective/reLATTE/blob/main/docs/COMMUTER-001.md'},
            'sourcePath':'docs/COMMUTER-001.md',
-           'requires':'A provider account, real consent, owner policy, and a separately authorized destination adapter.'}]}
+           'requires':'A provider account, real consent, owner policy, and a separately authorized destination adapter.',
+           'contract':{'inputHint':'signed.source-event/v1','outputHint':'receiver.disposition/v1',
+             'invocation':'NOT_CONNECTED_TO_JARVIS','receipt':'SIGNED_SYNTHETIC_TEST_ONLY','effect':'NO_CROSS_PROJECT_EFFECT'}}]}
         fixtures={index_url:index_data,webz_url:webz_data,relatte_url:relatte_data}
         def intercept_public_catalog(route):
             value=fixtures.get(route.request.url)
