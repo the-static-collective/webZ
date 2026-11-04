@@ -18,3 +18,28 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0a1715;border:1px so
 #status{color:var(--accent);font-weight:600}#status[data-kind=error]{color:#ffbca8}.small{font-size:.85rem;color:var(--soft)}footer{border-top:1px solid var(--line);color:var(--soft);margin-bottom:2rem}
 @media(max-width:640px){.cards,.grid{grid-template-columns:1fr}.tile{padding:.7rem 1rem}header{align-items:start}}
 @media print{body{color:#000;background:#fff}.section,.tile{background:#fff;color:#000;border-color:#666}button,.actions,header nav{display:none}pre{max-height:none;color:#000;background:#fff}#status{color:#000}}
+
+
+/* HUMAN FIRST 002 — one useful next step before the administrative machinery */
+.entry-surface{border:1px solid #8fae82;border-radius:18px;background:#21483b;padding:clamp(18px,3.6vw,30px);margin:1.2rem 0 1.6rem}
+.entry-surface h2{font-size:clamp(1.75rem,3vw,2.35rem);letter-spacing:-.035em;margin:.5rem 0}
+.entry-lede{color:#e3f3d8;max-width:48ch;margin:0 0 1.4rem}
+.entry-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.entry-choices button,.entry-choices a{border:2px solid transparent;background:#e6f0dd;color:#183627;display:flex;flex-direction:column;gap:8px;text-align:left;text-decoration:none;border-radius:13px;min-height:114px;padding:19px;font:inherit;cursor:pointer}
+.entry-choices strong{font-size:clamp(1rem,2vw,1.25rem);line-height:1.3}
+.entry-choices span{font-size:.85rem;line-height:1.4;color:#3d5947}
+.entry-choices button:hover,.entry-choices a:hover{border-color:var(--gold);background:#fff9e4}
+.entry-choices button:focus-visible,.entry-choices a:focus-visible,.quick-categories button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.need-quick{margin-top:18px;padding:20px;background:#112c24;border-radius:12px}
+.need-quick label{font-size:1.1rem}
+.need-quick input{background:#fffdf5;color:#10261c}
+.quick-label{font-size:.9rem;font-weight:800;margin:.9rem 0 .35rem}
+.quick-categories{display:flex;flex-wrap:wrap;gap:8px}
+.quick-categories button{font-size:.87rem;padding:8px 12px;border:1px solid #b7cda6;background:#e6f0dd}
+.quick-categories button[aria-pressed=true]{background:var(--gold);border-color:var(--gold)}
+.advanced-form{margin:1.1rem 0;border:1px solid var(--line);border-radius:13px;padding:1rem}
+.advanced-form>summary{cursor:pointer;font-size:1.05rem;font-weight:800;line-height:1.45;list-style:revert;padding:.65rem}
+.advanced-form[open]>summary{margin-bottom:1.1rem}
+#quick-status{margin:12px 0 2px}
+@media(max-width:640px){.entry-choices{grid-template-columns:1fr}.entry-choices a,.entry-choices button{min-height:82px;padding:16px}.need-quick{padding:15px}.quick-categories button{min-height:44px}.entry-surface{margin:.8rem 0}}
+@media print{.entry-surface,.advanced-form>summary,.need-quick{display:none!important}.advanced-form{border:0;padding:0}}
