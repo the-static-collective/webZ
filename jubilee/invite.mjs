@@ -2,7 +2,7 @@ export const ROLES=Object.freeze({song:"Bring a song or rhythm",host:"Host a fie
 const clean=(value,max)=>String(value??"").replace(/\s+/g," ").trim().slice(0,max);
 export function prepareInvitation({role,region,offer,publicOnly}){
  if(publicOnly!==true)throw new Error("Confirm that the text is public and non-personal.");
- if(!Object.hasOwn(ROLES,role))throw new Error("Choose a valid participation role.");
+ if(!Object.prototype.hasOwnProperty.call(ROLES,role))throw new Error("Choose a valid participation role.");
  const place=clean(region,70),idea=clean(offer,240),whole=place+" "+idea;
  if(idea.length<12)throw new Error("Describe one concrete public idea (12 characters minimum).");
  if(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(whole)||/(?:\+?\d[\s().-]*){9,}/.test(whole)||/(?:guest name|client name|shelter address|street address|apartment number)\s*:/i.test(whole))throw new Error("Remove contact details or sensitive personal/location information.");
