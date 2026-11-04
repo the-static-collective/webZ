@@ -25,13 +25,15 @@ const commuter={
   delivers:'A documented signed crossing with independent receiver-owned HOLD; no live farm or email adapter.',
   entry:{kind:'SOURCE_REFERENCE',href:'https://github.com/the-static-collective/reLATTE/blob/main/docs/COMMUTER-001.md'},
   sourcePath:'docs/COMMUTER-001.md',
-  requires:'Needs independently approved provider accounts, consent checks and an explicitly authorized receiver.'
+  requires:'Needs independently approved provider accounts, consent checks and an explicitly authorized receiver.',
+  contract:{inputHint:'signed.source-event/v1',outputHint:'receiver.disposition/v1',invocation:'NOT_CONNECTED_TO_JARVIS',receipt:'SIGNED_SYNTHETIC_TEST_ONLY',effect:'NO_CROSS_PROJECT_EFFECT'}
  }]
 };
 const clone=x=>structuredClone(x);
 test('source-owner passport and index have strict fail-closed bounded shapes',()=>{
  assert.equal(validateIndex(directory).sources.length,2);
  assert.equal(validatePassport(passport,'the-static-collective/webZ').capabilities.length,3);
+ assert.equal(passport.capabilities[0].contract.effect,'NO_CROSS_PROJECT_EFFECT');
  assert.equal(validatePassport(commuter,'the-static-collective/reLATTE').capabilities.length,1);
  assert.throws(()=>validatePassport(passport,'the-static-collective/reLATTE'),/UNTRUSTED/);
  for(const broken of [
@@ -51,6 +53,9 @@ test('no executable or cross-owner URL is admitted from a passport',()=>{
  const bad3=clone(commuter);
  bad3.capabilities[0].readiness='LIVE';
  assert.throws(()=>validatePassport(bad3,'the-static-collective/reLATTE'),/INVALID_CAPABILITY_ENTRY/);
+ const badInvocation=clone(passport);
+ badInvocation.capabilities[0].contract.invocation='RUN_NOW';
+ assert.throws(()=>validatePassport(badInvocation,'the-static-collective/webZ'),/UNAUTHORIZED_EXECUTION_CLAIM/);
  const bad4=clone(passport);
  bad4.capabilities[0].sourcePath='../.env';
  assert.throws(()=>validatePassport(bad4,'the-static-collective/webZ'),/INVALID_CAPABILITY_ENTRY/);
