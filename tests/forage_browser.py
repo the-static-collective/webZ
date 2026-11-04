@@ -40,6 +40,8 @@ try:
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("request", lambda req: requests.append(req.url))
         page.goto(base)
+        # The human-first home keeps technical destinations behind an optional menu.
+        page.locator(".nav-more summary").click()
         page.get_by_role("link", name="Field Porch · GrO").click()
         page.get_by_role("heading", name="The world has a pantry. Not a free-for-all.").wait_for()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")

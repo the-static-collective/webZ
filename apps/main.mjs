@@ -67,3 +67,37 @@ function render(){
   }
 }
 renderFilters(); search.addEventListener('input',render);render();
+
+
+/* BUTTONS BEFORE WORKSHEETS: top-level directions act on the existing directory.
+   Nothing typed in the quick search leaves this page or enters the wallet. */
+const directory=document.getElementById('directory');
+const quick=document.getElementById('quick-search');
+const quickFind=document.getElementById('quick-find');
+function displayDirectory(){
+  filters.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));
+  render();
+  if(directory)directory.scrollIntoView({block:'start',behavior:'auto'});
+}
+document.querySelectorAll('[data-intent-category]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    category=button.dataset.intentCategory;
+    if(!categories.some(([id])=>id===category))category='all';
+    search.value='';
+    if(quick)quick.value='';
+    document.querySelectorAll('[data-intent-category]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
+    displayDirectory();
+  });
+});
+function searchFromTop(){
+  if(!quick)return;
+  search.value=quick.value.trim().slice(0,80);
+  category='all';
+  document.querySelectorAll('[data-intent-category]').forEach(other=>other.setAttribute('aria-pressed','false'));
+  displayDirectory();
+  search.focus();
+}
+if(quickFind&&quick){
+  quickFind.addEventListener('click',searchFromTop);
+  quick.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();searchFromTop();}});
+}
