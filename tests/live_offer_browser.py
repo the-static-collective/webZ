@@ -1,7 +1,7 @@
 """Smoke-test the real browser artifact. Remote private receiver is mocked; no submissions."""
 import json, pathlib, threading, time, shutil
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 class Handler(SimpleHTTPRequestHandler):
  def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT),**kw)
@@ -50,7 +50,7 @@ try:
   # Record microphone (fake hardware) and produce a media blob.
   page.locator('[data-action="record-audio"]').click()
   page.locator('#record-start').click()
-  page.wait_for_function("!document.getElementById('record-stop').disabled",timeout=10000)
+  expect(page.locator('#record-stop')).to_be_enabled(timeout=10000)
   page.wait_for_timeout(1600)
   page.locator('#record-stop').click()
   page.locator('#record-download').wait_for(state='visible',timeout=15000)
