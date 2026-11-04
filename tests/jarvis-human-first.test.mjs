@@ -31,7 +31,7 @@ test('People requesting help for a community meal get a complete draft and no fa
   assert.equal(r.capability.id,'volunteer');
   assert.equal(r.status,'LOCAL_WORK_PREPARED');
   assert.match(r.body,/Could someone help/);
-  assert.match(r.body,/No one has been contacted/);
+  assert.match(r.body,/no one has been contacted/i);
 });
 test('An offer gets an actual shareable draft without being published',()=>{
   const r=routeUsefulWork('I can help carry groceries');
