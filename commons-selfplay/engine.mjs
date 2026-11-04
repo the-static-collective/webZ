@@ -205,5 +205,13 @@ export async function verifyPair(pair){
  if(a.parentHash!==pair.parent.contentHash||b.parentHash!==pair.parent.contentHash||
    a.policy!=='isolated'||b.policy!=='commons'||a.day!==b.day||a.day-root.day!==pair.days)
    throw Error('Cartridge family does not agree with its declared parent.');
+ // Cold re-run is stronger than comparing hashes alone: both children must be
+ // reproducible from the exact parent under the named policy and event.
+ const replay=await experiment(pair.parent,pair.days,pair.intervention);
+ if(replay.isolated.contentHash!==pair.isolated.contentHash||
+    replay.commons.contentHash!==pair.commons.contentHash||
+    digestInput(replay.isolatedScore)!==digestInput(pair.isolatedScore)||
+    digestInput(replay.commonsScore)!==digestInput(pair.commonsScore))
+   throw Error('A child, event deck or displayed result diverges from cold replay.');
  return true;
 }
