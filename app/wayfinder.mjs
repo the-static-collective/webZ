@@ -1,4 +1,5 @@
 import {routeUsefulWork} from './useful-router.mjs';
+import {discoverPassports,matchPassports,passportStatusLabel} from './passport-discovery.mjs';
 // Human First 001: local suggestions only. Never sends, stores, or posts what someone types.
 const DOORS = Object.freeze({
   ask: Object.freeze({label:'Start a private conversation',href:'https://hello.abundent.org/',note:'An invitation to begin, not a submitted request.'}),
@@ -15,6 +16,20 @@ export function suggestDoor(value){
   if(/\b(food|grocer|garden|support|meal|help)\b/.test(text))return DOORS.ask;
   return DOORS.explore;
 }
+let latestQuestion=0;
+let publishedSnapshot=null;
+let snapshotAt=0;
+let inflight=null;
+function readPublishedCapabilities(){
+ const now=Date.now();
+ if(publishedSnapshot && now-snapshotAt<60_000)return Promise.resolve(publishedSnapshot);
+ if(inflight)return inflight;
+ inflight=discoverPassports().then(result=>{
+  publishedSnapshot=result;snapshotAt=Date.now();return result;
+ }).finally(()=>{inflight=null;});
+ return inflight;
+}
+
 export function initWayfinder(doc){
   const input=doc.getElementById('wayfinder-input');
   const button=doc.getElementById('wayfinder-find');
@@ -33,7 +48,9 @@ export function initWayfinder(doc){
     return a;
   };
   function show(){
-    const result=routeUsefulWork(input.value);
+    const current=++latestQuestion;
+    const asked=input.value;
+    const result=routeUsefulWork(asked);
     answer.replaceChildren();
     if(!result){
       answer.append(element('p','fine','Tell me what you need done, or choose one of the options above.'));
@@ -77,6 +94,47 @@ export function initWayfinder(doc){
       block.append(details);
     }
     answer.append(block);
+    // This source read happens *after* the local useful answer is visible.
+    // It sends no question text: only a fixed public GitHub index and
+    // allowlisted owner-owned JSON passports are fetched.
+    if(result.status==='PRIVACY_HOLD'||result.blocker==='NO_AUTHENTICATED_REAL_WORLD_RESPONDER')return;
+    const zone=element('section','wayfinder-passport-zone');
+    zone.append(element('p','fine','Checking published descriptions of other tools…'));
+    block.append(zone);
+    readPublishedCapabilities().then(observation=>{
+      if(current!==latestQuestion)return; // older remote response cannot change newer intent
+      zone.replaceChildren();
+      const matches=matchPassports(observation,asked);
+      if(!matches.length){
+        const line=observation.passports.length
+          ? 'No additional matching tool was found in the currently published descriptions.'
+          : 'No project passports could be checked. The local answer above still stands.';
+        zone.append(element('p','fine',line));
+        return;
+      }
+      zone.append(element('h4','wayfinder-passport-title','Other machinery you could use, if needed'));
+      const note=element('p','fine','Published project descriptions, not live availability or consent. Nothing was opened, sent, enrolled or executed.');
+      zone.append(note);
+      for(const found of matches){
+        const row=element('article','wayfinder-passport');
+        row.append(element('strong','',found.title),
+          element('div','wayfinder-readiness',passportStatusLabel(found.readiness)),
+          element('p','',found.delivers));
+        const details=element('details','wayfinder-passport-requires');
+        details.append(element('summary','','What would still be required?'),
+          element('p','fine',found.requires));
+        row.append(details);
+        const action=found.entry.kind==='WEBZ_LOCAL_LINK'?'Open this tool →':'Read the project-owned source →';
+        row.append(fixedLink(action,found.entry.href));
+        zone.append(row);
+      }
+      if(observation.failures.length){
+        zone.append(element('p','fine',observation.passports.length+' of '+observation.sourceCount+' project passports loaded. Others unavailable or rejected; these are not invented matches.'));
+      }
+    }).catch(()=>{
+      if(current===latestQuestion)zone.replaceChildren(
+        element('p','fine','Could not check the public project catalog. No user message was sent and the local work above still stands.'));
+    });
   }
   button.textContent='See what we can do →';
   button.addEventListener('click',show);
