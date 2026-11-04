@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>Human Entry 001 · Buttons First</title>
+<style>
+:root{--ink:#203743;--muted:#567077;--paper:#f3f5ee;--white:#fffefa;--line:#cad8d2;--green:#116b5b;--green2:#17483f;--soft:#e5f3e8;--red:#a83e38;--amber:#fff1ce}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:13px 17px;font-weight:750;background:var(--green);color:#fff;min-height:47px}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #bf892a;outline-offset:3px}
+button.secondary{background:#e5efe9;color:var(--green2);border:1px solid #b6cac2}button.danger{background:var(--red)}button:disabled{opacity:.46;cursor:not-allowed}
+header{background:var(--green2);color:#fff;padding:26px max(18px,calc((100% - 930px)/2));}header h1{font-size:clamp(1.9rem,5vw,2.9rem);margin:4px 0}header p{max-width:760px;color:#d5e7df;margin:6px 0 0}
+main{max-width:970px;margin:0 auto;padding:18px 16px 60px}.eyebrow{font-size:.75rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--green)}
+.notice{background:var(--amber);border:1px solid #d6b775;border-radius:12px;padding:12px 15px;margin-bottom:16px;font-size:.89rem}
+.hero,.panel{border:1px solid var(--line);background:var(--white);border-radius:18px;box-shadow:0 6px 16px #1642380d}.hero{padding:clamp(18px,4vw,34px)}.panel{padding:19px}
+.progress{display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:.83rem;color:var(--muted);margin-bottom:16px}.progress strong{background:#e5f3e8;color:var(--green);border-radius:99px;padding:5px 11px}
+.speech{background:#eaf4ee;border-radius:18px 18px 18px 5px;padding:18px 21px;max-width:700px;margin-bottom:18px}.speech h2{font-size:clamp(1.32rem,3.5vw,1.75rem);margin:0 0 6px}.speech p{margin:0;color:#365f59}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}.actions button{margin:0;max-width:100%;text-align:left}.wide{width:100%;text-align:center!important}
+.composer{display:flex;gap:8px;align-items:center;margin:14px 0}.composer[hidden]{display:none}.composer input{min-width:0;flex:1;background:white;border:1px solid #9fbcb2;border-radius:12px;padding:13px 14px;min-height:49px}.composer button{white-space:nowrap}.hint{font-size:.85rem;color:var(--muted)}
+.mini{font-size:.82rem;color:var(--muted);margin-top:14px}.summary{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0 0;font-size:.9rem}.summary span{display:inline-block;background:#f2f5ef;border:1px solid #dae7df;padding:7px 12px;border-radius:10px}
+.subheading{font-size:1.05rem;margin:0 0 10px}.roles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:15px}
+.role{min-height:100px;display:flex;flex-direction:column;gap:6px;background:#edf3ee;color:var(--ink);border:1px solid #becfc5;border-radius:13px;padding:11px;text-align:left}.role[aria-pressed="true"]{outline:3px solid var(--green);outline-offset:1px}.role em{font-size:.73rem;color:#766a45;font-style:normal;font-weight:700}.role .person{font-size:.77rem;color:var(--green2);word-break:break-word}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}details{margin-top:16px}details summary{cursor:pointer;font-weight:750;padding:8px 0}details p{font-size:.85rem;color:var(--muted)}
+#log{margin:8px 0;padding-left:22px;font-size:.83rem;color:var(--muted);max-height:200px;overflow:auto}#log li{padding:3px 0}#inspectResult{white-space:pre-wrap;overflow-wrap:anywhere}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+footer{font-size:.82rem;color:var(--muted);padding-top:24px}.p{margin:0}
+@media(max-width:760px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}.composer{flex-direction:column;align-items:stretch}.composer button{width:100%}}
+@media(max-width:450px){.roles{grid-template-columns:repeat(2,minmax(0,1fr))}.actions{flex-direction:column}.actions button{width:100%}}
+@media print{button,.composer,details{display:none}body{background:white}.hero,.panel{box-shadow:none}}
+</style></head>
+<body>
+<header><div style="font-size:.76rem;letter-spacing:.14em;font-weight:900">STATIC FIELD · HUMAN ENTRY 001</div><h1>The Five Empty Chairs</h1><p>One question. A few buttons. People can join later. No forms to conquer first.</p></header>
+<main>
+<div class="notice"><strong>Local rehearsal / planning only.</strong> Names are labels, not verified people or consent. Nothing here approves a real gathering, records verified work, issues credits, or signs a reLATTE receipt. Use fictional or public-safe information only.</div>
+<section class="hero"><div class="progress"><strong id="stage">DRAFT</strong><span id="mode">No participants yet</span></div>
+<div class="speech" aria-live="polite"><div class="eyebrow" id="promptTag">First question</div><h2 id="prompt">What would you like to try?</h2><p id="context"></p></div>
+<div class="actions" id="suggestions"></div>
+<form class="composer" id="composer"><label class="visually-hidden" for="reply">Your reply</label><input id="reply" maxlength="400" autocomplete="off" placeholder="Or type a short reply…" aria-label="Reply to the current question"><button type="submit">Send ↗</button></form>
+<div class="hint" id="helper">You can leave every chair empty until you have someone to ask.</div>
+<div class="summary" id="summary"></div>
+</section>
+<div class="columns"><section class="panel"><div class="eyebrow">The five chairs</div><h3 class="subheading">Tap a chair to fill it — or leave it empty.</h3><div class="roles" id="roles"></div><p class="mini">A role label is self-reported. A role can be assigned later, until it has recorded an action. Independent witness and review remain separate.</p></section>
+<section class="panel"><div class="eyebrow">What happened here?</div><h3 class="subheading">Local trace, not outside proof</h3><ol id="log"><li>Nothing recorded yet.</li></ol><div class="actions"><button type="button" id="export" class="secondary">Export note</button><button type="button" id="new" class="secondary">Start over</button></div><details><summary>Inspect an exported note (read-only)</summary><input type="file" id="inspect" accept=".json,application/json" aria-label="Inspect a JSON note"><p id="inspectResult">No note inspected.</p></details></section></div>
+<footer>This page makes no network requests and stores its activity only in this browser when local storage is available. This isn't an AI chat or an identity verifier; the conversation is a guided local interface. Exact signed two-machine ceremonies remain separate in Circuit 006.</footer>
+</main>
+<script>
+(function(){'use strict';
+var SCHEMA='static-field.human-entry-001/v1';
+var KEY='static-field-human-entry-001-v1';
+var ROLES=[['host','Host','Permits activity'],['steward','Steward','Coordinates'],['participant','Participant','Chooses to help'],['witness','Witness','Reports observation'],['reviewer','Reviewer','Reviews independently']];
+var TRANSITIONS=[
+ {from:'DRAFT',to:'HOST_AUTHORIZED',role:'host',verb:'authorize the proposed scope'},
+ {from:'HOST_AUTHORIZED',to:'STEWARD_SCOPED',role:'steward',verb:'accept bounded coordination'},
+ {from:'STEWARD_SCOPED',to:'PARTICIPANT_ACCEPTED',role:'participant',verb:'volunteer explicitly'},
+ {from:'PARTICIPANT_ACCEPTED',to:'WORK_REPORTED',role:'participant',verb:'report the work (self-attested)'},
+ {from:'WORK_REPORTED',to:'WITNESS_RECORDED',role:'witness',verb:'record an independent observation'},
+ {from:'WITNESS_RECORDED',to:'REVIEW_CONFIRMED',role:'reviewer',verb:'confirm the local report'}];
+function clean(value,max){return String(value==null?'':value).trim().slice(0,max);}
+function newBoard(){return {schema:SCHEMA,id:'entry-'+Date.now()+'-'+Math.floor(Math.random()*1000000),title:'',description:'',stage:'DRAFT',mode:'UNVERIFIED_LOCAL_NOTE',roles:{host:'',steward:'',participant:'',witness:'',reviewer:''},events:[]};}
+function next(board){for(var i=0;i<TRANSITIONS.length;i++)if(TRANSITIONS[i].from===board.stage)return TRANSITIONS[i];return null;}
+function distinct(board,role){var current=clean(board.roles[role],70).toLowerCase();if(!current)return false;
+ if(role==='witness'&&current===clean(board.roles.participant,70).toLowerCase())return false;
+ if(role==='reviewer'){for(var i=0;i<3;i++){var comp=['participant','steward','witness'][i];if(current===clean(board.roles[comp],70).toLowerCase())return false;}}return true;}
+function canAdvance(board){var step=next(board);if(!step)return 'Activity is finished or refused.';
+ if(!clean(board.title,110))return 'Enter a short activity title.';
+ if(!clean(board.description,400))return 'Record the bounded scope.';
+ if(!clean(board.roles[step.role],70))return 'Chair empty: '+step.role+'.';
+ if(!distinct(board,step.role))return 'Independent witness/reviewer role conflict. Assign a different self-reported label.';return '';}
+function record(board,role,kind,stage,note){board.events.push({number:board.events.length+1,kind:kind,role:role,actor:clean(board.roles[role],70),stage:stage,note:clean(note,150),at:new Date().toISOString(),provenance:'LOCAL_BUTTON_PRESS_SELF_ATTESTED'});}
+function advance(board){var reason=canAdvance(board);if(reason)throw Error(reason);var step=next(board);board.stage=step.to;record(board,step.role,'ADVANCE',step.to,step.verb);return board;}
+function refuse(board,role,note){if(!next(board))throw Error('Cannot refuse a terminal activity.');if(ROLES.map(function(r){return r[0];}).indexOf(role)<0||!clean(board.roles[role],70))throw Error('Only a filled chair can refuse.');board.stage='REFUSED';record(board,role,'REFUSE','REFUSED',note||'No explanation provided');return board;}
+function validShape(board){return board && board.schema===SCHEMA&&typeof board.id==='string'&&typeof board.title==='string'&&typeof board.description==='string'&&typeof board.stage==='string'&&['DRAFT','HOST_AUTHORIZED','STEWARD_SCOPED','PARTICIPANT_ACCEPTED','WORK_REPORTED','WITNESS_RECORDED','REVIEW_CONFIRMED','REFUSED'].indexOf(board.stage)>=0&&board.roles&&ROLES.every(function(r){return typeof board.roles[r[0]]==='string';})&&Array.isArray(board.events)&&board.events.length<=40&&board.events.every(function(e){return e&&typeof e.kind==='string'&&typeof e.role==='string';});}
+function packet(board){return {schema:'static-field.human-entry-001-note/v1',issuedAt:new Date().toISOString(),issuer:'UNAUTHENTICATED_LOCAL_BROWSER',signature:'NONE',status:'UNSIGNED_NOTE_NOT_FIELD_PROOF',board:JSON.parse(JSON.stringify(board)),caution:'Unsigned self-attested local notes do not prove people, authority, observation, work, or physical custody.'};}
+window.HumanEntry001={newBoard:newBoard,next:next,canAdvance:canAdvance,advance:advance,refuse:refuse,validShape:validShape,packet:packet};
+var board=newBoard(),ui={role:null,refusing:false,showOwn:false};
+try{var saved=localStorage.getItem(KEY);if(saved){var parsed=JSON.parse(saved);if(validShape(parsed))board=parsed;}}catch(e){}
+function el(id){return document.getElementById(id);}function txt(id,v){el(id).textContent=v;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(board));}catch(e){}}
+function locked(role){return !next(board)||board.events.some(function(e){return e.role===role;});}
+function button(label,fn,kind){var b=document.createElement('button');b.type='button';b.textContent=label;b.className=kind||'';b.addEventListener('click',fn);el('suggestions').appendChild(b);}
+function setActivity(title,scope){board.title=title;board.description=scope||'';ui.role=null;save();render();}
+function setRole(role,value){if(locked(role)){render();return;}board.roles[role]=clean(value,70);ui.role=null;ui.refusing=false;save();render();}
+function selectedRole(){var n=next(board);return ui.role|| (n?n.role:null);}
+function render(){txt('stage',board.stage.replace(/_/g,' '));txt('mode',board.mode==='FICTIONAL_REHEARSAL'?'Fictional rehearsal':'Local, unverified plan');
+ var suggestions=el('suggestions');suggestions.textContent='';var prompt='',context='',tag='',hint='',placeholder='Or type a short reply…';
+ var nextStep=next(board),role=selectedRole();el('reply').value='';
+ var terminal=!nextStep;
+ if(terminal){tag='Finished';prompt=board.stage==='REFUSED'?'A refusal is a valid ending.':'The local rehearsal is complete.';context='You can keep or inspect the unsigned note. This does not certify any real action.';button('Export note',exportNote);button('Start a new activity',newActivity,'secondary');hint='No automatic rewards, credits, new participants, or authority.';el('composer').hidden=true;}
+ else if(ui.refusing){tag='Free choice';prompt='Someone wants to say no?';context='Choose a filled chair to record refusal. No explanation needed.';
+ ROLES.forEach(function(r){if(board.roles[r[0]])button('REFUSE as '+r[1],function(){refuse(board,r[0],'No reason required');ui.refusing=false;save();render();},'danger');});
+ button('Go back',function(){ui.refusing=false;render();},'secondary');el('composer').hidden=true;hint='No one needs to justify a refusal.';}
+ else if(!board.title){tag='One click to begin';prompt='What could we do together?';context='Pick a tiny activity, or describe your own in one line.';
+ button('Set up a welcome table',function(){setActivity('Set up a welcome table','Planning only; venue, equipment, people and spending are not authorized.');});
+ button('Help with music setup',function(){setActivity('Help with music setup','Planning only; sound equipment and venue use require separate permission.');},'secondary');
+ button('Organize a food handoff',function(){setActivity('Organize a food handoff','Planning only; food handling, supplies, venue, and delivery require separate approval.');},'secondary');
+ button('▶ Try a fictional rehearsal',function(){demo();},'secondary');placeholder='Or type your own idea…';tag='Start here';el('composer').hidden=false;hint='The example buttons create proposals only, not approved events.';}
+ else if(!board.description){tag='One boundary';prompt='What is this allowed to be?';context='A boundary matters more than a long worksheet. You can add a short sentence.';
+ button('Just planning — nothing approved',function(){board.description='Planning only. No one, venue, supplies, funds or work are authorized.';save();render();});
+ button('Fictional practice only',function(){board.description='Fictional rehearsal only. No actual people, labor, money or event authority.';board.mode='FICTIONAL_REHEARSAL';save();render();},'secondary');
+ placeholder='Or type a boundary in your words…';el('composer').hidden=false;}
+ else if(role&&ui.role&&locked(role)){tag='Already recorded';prompt='This chair has already acted.';context='The recorded label is fixed for this activity. Make a new activity if you need to change past actors.';button('Back to next step',function(){ui.role=null;render();},'secondary');el('composer').hidden=true;}
+ else if(role&&(!board.roles[role]||ui.role)){var roleTitle=ROLES.filter(function(r){return r[0]===role;})[0];tag='Empty chair · '+roleTitle[1];prompt=board.roles[role]?'Change '+roleTitle[1]+' label?':'Who might take the '+roleTitle[1]+' chair?';context='You can leave it empty. Typing a name only makes a local label; it does not enroll anyone or record consent.';
+ button('Leave chair empty',function(){if(!locked(role))board.roles[role]='';ui.role=null;save();render();},'secondary');
+ if(board.mode==='FICTIONAL_REHEARSAL')button('Use fictional '+roleTitle[1],function(){setRole(role,'Fictional '+roleTitle[1]);});
+ if(board.roles[role])button('Keep '+board.roles[role],function(){ui.role=null;render();},'secondary');
+ placeholder='Type a local label for '+roleTitle[1]+'…';el('composer').hidden=false;hint='A filled role label never proves identity or permission.';}
+ else if(role&&!board.roles[role]){var rt=ROLES.filter(function(r){return r[0]===role;})[0];tag='Waiting for a person';prompt='The '+rt[1]+' chair is still empty.';context='That is okay. Nothing advances until you choose to record a label.';
+ button('Add a '+rt[1]+' label',function(){ui.role=role;render();});
+ button('Save it for later',exportNote,'secondary');button('Try a fictional run instead',demo,'secondary');
+ el('composer').hidden=false;placeholder='Or type a label for '+rt[1]+'…';}
+ else if(role){tag='One action at a time';prompt='Ready for the '+role+' step?';context='Record: '+nextStep.verb+'. This press is self-attested, not verified real-world participation.';
+ var reason=canAdvance(board);button('✓ Record '+nextStep.to.replace(/_/g,' ').toLowerCase(),function(){try{advance(board);save();render();}catch(e){txt('helper',e.message);}},'');
+ button('No — record a refusal',function(){ui.refusing=true;render();},'secondary');button('Leave it for later',exportNote,'secondary');el('composer').hidden=true;hint=reason||'Proceeding records one local, unverified action.';}
+ txt('promptTag',tag);txt('prompt',prompt);txt('context',context);txt('helper',hint);el('reply').placeholder=placeholder;
+ var sm=el('summary');sm.textContent='';if(board.title){var s=document.createElement('span');s.textContent='Activity: '+board.title;sm.appendChild(s);}if(board.description){var d=document.createElement('span');d.textContent='Boundary: '+board.description;sm.appendChild(d);}
+ var roleHost=el('roles');roleHost.textContent='';ROLES.forEach(function(r){var b=document.createElement('button');b.type='button';b.className='role';b.setAttribute('aria-pressed',ui.role===r[0]?'true':'false');b.setAttribute('aria-label',r[1]+(board.roles[r[0]]?' filled':' empty'));var n=document.createElement('strong');n.textContent=r[1];b.appendChild(n);var k=document.createElement('em');k.textContent=locked(r[0])?'RECORDED / LOCKED':board.roles[r[0]]?'LABEL SET':'EMPTY';b.appendChild(k);var p=document.createElement('span');p.className='person';p.textContent=board.roles[r[0]]||'Tap to edit';b.appendChild(p);b.onclick=function(){ui.refusing=false;ui.role=r[0];render();el('reply').focus();};roleHost.appendChild(b);});
+ var log=el('log');log.textContent='';if(!board.events.length){var l=document.createElement('li');l.textContent='No steps recorded. Empty chairs are allowed.';log.appendChild(l);}board.events.forEach(function(e){var li=document.createElement('li');li.textContent=e.number+'. '+e.stage+' · '+e.role+(e.kind==='REFUSE'?' · refused':'');log.appendChild(li);});}
+function submitMessage(v){v=clean(v,400);if(!v)return;if(!board.title){board.title=v.slice(0,110);}else if(!board.description){board.description=v;}else {var role=selectedRole();if(!role||locked(role)){txt('helper','This step does not accept a reply. Use the buttons above.');return;}setRole(role,v);return;}save();render();}
+el('composer').addEventListener('submit',function(e){e.preventDefault();submitMessage(el('reply').value);});
+function demo(){if(board.events.length&&!confirm('Replace this local activity with a fictional example?'))return;board=newBoard();board.mode='FICTIONAL_REHEARSAL';board.title='Fictional rehearsal: welcome table';board.description='Fictional setup only; no actual venue, work, money, volunteers or gathering are approved.';board.roles={host:'Harbor',steward:'Moss',participant:'River',witness:'Juniper',reviewer:'Lantern'};ui={role:null,refusing:false};save();render();}
+function newActivity(){if(board.events.length&&!confirm('Start a new local activity? Export first if you want the current note.'))return;board=newBoard();ui={role:null,refusing:false};save();render();}
+function exportNote(){var blob=new Blob([JSON.stringify(packet(board),null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='HUMAN_ENTRY_001_UNSIGNED_'+board.id.replace(/[^a-z0-9-]/gi,'_')+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},2500);}
+el('export').addEventListener('click',exportNote);el('new').addEventListener('click',newActivity);
+el('inspect').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;if(f.size>65536){txt('inspectResult','Refused: file exceeds 64 KiB.');return;}var reader=new FileReader();reader.onload=function(){try{var data=JSON.parse(String(reader.result));if(!data||data.schema!=='static-field.human-entry-001-note/v1'||data.signature!=='NONE'||!validShape(data.board))throw Error('Unexpected note shape');txt('inspectResult','READ ONLY — UNSIGNED — NOT ADOPTED\nActivity: '+clean(data.board.title,110)+'\nClaimed stage: '+data.board.stage+'\nActions: '+data.board.events.length+'\nHuman identity and real events: NOT VERIFIED');}catch(e){txt('inspectResult','Refused inspection: '+e.message);}};reader.onerror=function(){txt('inspectResult','Could not read file.');};reader.readAsText(f);});
+render();
+})();
+</script></body></html>
