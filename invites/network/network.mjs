@@ -1,10 +1,37 @@
-import {decodeInvite} from '../engine.mjs';
+import {decodeInvite,detectMode,makeInvite} from '../engine.mjs';
 const API='https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/invitation-network-002';
 const $=id=>document.getElementById(id);
 const KEY=/^[A-Za-z0-9_-]{43}$/;
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 let draft=null,thread=null,selectedPost=null,watchKey='',cursor=0,pollTimer=null,polling=false;
 let receipts=[];
+let quickWhen='open',quickWhenManual=false;
+function newInvitationId(){
+ const bytes=new Uint8Array(16);crypto.getRandomValues(bytes);
+ bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
+ const h=[...bytes].map(v=>v.toString(16).padStart(2,'0')).join('');
+ return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+}
+function setQuickWhen(mode){
+ quickWhen=mode;
+ document.querySelectorAll('[data-quick-when]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.quickWhen===mode)));
+}
+document.querySelectorAll('[data-quick-when]').forEach(b=>b.addEventListener('click',()=>{
+ quickWhenManual=true;setQuickWhen(b.dataset.quickWhen);
+}));
+$('quick-words').addEventListener('input',()=>{
+ if(!quickWhenManual)setQuickWhen(detectMode($('quick-words').value));
+ note('quick-status','');
+});
+$('quick-next').addEventListener('click',()=>{
+ try{
+  const invitation=makeInvite({words:$('quick-words').value,when:quickWhen,originId:newInvitationId()});
+  showPublish(invitation);
+  $('publish-panel').scrollIntoView({block:'start',behavior:'auto'});
+  note('quick-status','');
+ }catch(e){note('quick-status',e.message)}
+});
+
 const safeId=x=>typeof x==='string'&&UUID.test(x);
 const note=(id,msg)=>{$(id).textContent=msg;};
 function el(tag,value,css=''){
@@ -35,7 +62,7 @@ async function copy(text,id){
  catch{note(id,'Clipboard not available. Select and copy the visible text instead.')}
 }
 const state=()=>{
- $('publish-panel').hidden=true;$('browse-panel').hidden=true;$('thread-panel').hidden=true;
+ $('quick-post-panel').hidden=true;$('publish-panel').hidden=true;$('browse-panel').hidden=true;$('thread-panel').hidden=true;
 };
 function showPublish(invitation){
  draft=invitation;state();
@@ -62,7 +89,7 @@ function showPublish(invitation){
    note('network-status','Could not check for an earlier public post: '+e.message+'. You may still choose to publish.');
  });
 }
-function showBrowse(){state();$('browse-panel').hidden=false;note('network-status','These are saved public invitations. Browse, answer, or post a new one.');}
+function showBrowse(){state();$('quick-post-panel').hidden=false;$('browse-panel').hidden=false;note('network-status','These are saved public invitations. Browse, answer, or post a new one.');}
 function showPublicationProof(t,fresh){
  const box=$('published-confirmation');
  box.hidden=false;
@@ -92,7 +119,7 @@ function updateMatchPanel(post,match){
 async function openThread(id,{keepBrowse=false}={}){
  const result=await request({action:'read',threadId:id});
  thread=result;selectedPost=null;
- $('publish-panel').hidden=true;$('thread-panel').hidden=false;
+ $('quick-post-panel').hidden=true;$('publish-panel').hidden=true;$('thread-panel').hidden=false;
  if(!keepBrowse)$('browse-panel').hidden=true;
  $('thread-time').textContent=timeLabel(result.thread);
  $('thread-words').textContent=result.thread.words;
