@@ -69,7 +69,7 @@ try:
   assert requests[0]['kind']=='offer' and 'guitar' in requests[0]['particular']
   assert page.locator('#receipt-id').input_value().startswith('123e')
   page.locator('#receipt-check').click()
-  assert 'reviewed' in page.locator('#receipt-reply').inner_text()
+  expect(page.locator('#receipt-reply')).to_contain_text('reviewed',timeout=10000)
   assert len(requests)==2 and requests[-1]['action']=='status'
   # No raw offer text saved in localStorage.
   assert page.evaluate('localStorage.length')==0
