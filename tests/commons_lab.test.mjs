@@ -59,7 +59,7 @@ test('export deliberately carries no real-world evidence claims',()=>{
  assert.match(exported.warning,/FICTIONAL/);
  assert.equal(exported.record.effects.networkCalls,0);
  assert.throws(()=>exportRehearsal({...newRehearsal(),mode:'LIVE'}),/synthetic/);
- assert.throws(()=>advance({...newRehearsal(),effects:{realParticipants:1,published:false,signed:false}},'probe'),/not a supported/);
+ assert.throws(()=>advance({...newRehearsal(),effects:{realParticipants:1,published:false,signed:false}},'probe'),/supported simulation/i);
 });
 test('browser UI has zero networking and labels fiction in both content and download',()=>{
  const page=readFileSync(new URL('../commons-lab/index.html',import.meta.url),'utf8');
