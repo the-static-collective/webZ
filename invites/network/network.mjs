@@ -24,7 +24,7 @@ function privateReceipt(label,key,details){
  receipts.push({label,key,...details});
  const rows=receipts.map(x=>x.label+'\n'+Object.entries(x).filter(([k])=>k!=='label').map(([k,v])=>k+': '+v).join('\n')).join('\n\n');
  $('receipt-preview').textContent='ABUNDENT PRIVATE RECEIPTS — NEVER SHARE THESE KEYS\n\n'+rows+'\n\nThis copy is held only in this open page until saved.';
- $('receipt-preview').scrollIntoView({block:'nearest',behavior:'auto'});
+ // A receipt is still prepared below, but never pull the visitor away from the publish result.
 }
 function download(filename,content){
  const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));
@@ -46,9 +46,39 @@ function showPublish(invitation){
   /\b(question|why|how|what|wonder)\b/i.test(invitation.words)?'question':'offer';
  $('publish-intent').value=guess;
  $('publish-consent').checked=false;
- note('network-status','Nothing has been published.');
+ note('network-status','Checking whether this invitation was already posted…');
+ request({action:'lookup',invitationId:invitation.id}).then(async result=>{
+  if(!result.published){
+   if(draft===invitation&&!$('publish-panel').hidden)
+    note('network-status','Not posted publicly yet. Only pressing the publish button below saves it for discovery.');
+   return;
+  }
+  if(draft!==invitation||$('publish-panel').hidden)return;
+  await openThread(result.threadId);
+  showPublicationProof(thread.thread,false);
+  note('network-status','This invitation is already public. Its conversation has been opened, and no duplicate was posted.');
+ }).catch(e=>{
+  if(draft===invitation&&!$('publish-panel').hidden)
+   note('network-status','Could not check for an earlier public post: '+e.message+'. You may still choose to publish.');
+ });
 }
-function showBrowse(){state();$('browse-panel').hidden=false;note('network-status','Browse published invitations or start your own.');}
+function showBrowse(){state();$('browse-panel').hidden=false;note('network-status','These are saved public invitations. Browse, answer, or post a new one.');}
+function showPublicationProof(t,fresh){
+ const box=$('published-confirmation');
+ box.hidden=false;
+ $('published-title').textContent=fresh?"It's public. People can find it.":"Already posted — here is its live conversation.";
+ $('published-link').value=link(t);
+ const url=new URL('./',location.href);
+ url.searchParams.set('browse','1');
+ url.searchParams.set('lane',t.lane);
+ url.searchParams.set('intent','open');
+ url.searchParams.set('highlight',t.id);
+ $('published-find').href=url.href;
+ $('published-save').hidden=!receipts.some(x=>x.label==='THREAD OWNER KEY'&&x.threadId===t.id);
+ note('published-status',fresh?'Saved on the network, ready for other people to discover and reply.':'A public conversation already exists for this original invitation.');
+ box.scrollIntoView({behavior:'auto',block:'start'});
+}
+
 function link(t){return new URL('./?thread='+encodeURIComponent(t.id),location.href).href;}
 function timeLabel(t){return t.timing==='now'?'AVAILABLE NOW — unverified':t.timing==='soon'?'AVAILABLE SOON — unverified':'OPEN TIMING — ask first';}
 function updateMatchPanel(post,match){
@@ -92,9 +122,11 @@ async function browse(){
  $('browse-results').replaceChildren();
  try{
   const result=await request({action:'discover',lane:$('browse-lane').value,intent:$('browse-role').value});
-  if(!result.candidates.length)$('browse-results').append(el('p','No matching public invitations at the moment. You can create the first.'));
+  if(!result.candidates.length)$('browse-results').append(el('p','No matching public posts yet. Nothing is broken; someone can make the first one.'));
   for(const t of result.candidates){
    const row=el('article','');
+   const highlight=new URLSearchParams(location.search).get('highlight');
+   if(highlight===t.id){row.classList.add('highlight-post');row.append(el('strong','✓ This is the post you published.'));}
    row.append(el('h4',timeLabel(t)));row.append(el('p',t.words));
    row.append(aLink(link(t),'Open public conversation →'));
    $('browse-results').append(row);
@@ -103,6 +135,16 @@ async function browse(){
  }catch(e){note('browse-status','Browse unavailable: '+e.message);}
 }
 $('browse-button').addEventListener('click',browse);
+$('published-copy').addEventListener('click',()=>copy($('published-link').value,'published-status'));
+$('published-save').addEventListener('click',()=>{
+ const t=thread?.thread;
+ const key=receipts.find(x=>x.label==='THREAD OWNER KEY'&&x.threadId===t?.id);
+ if(!key){note('published-status','Owner receipt is no longer in this tab. Keep any receipt you saved earlier.');return;}
+ const content='ABUNDENT PRIVATE THREAD OWNER RECEIPT — DO NOT SHARE\n\n'+
+  'Owner key: '+key.key+'\nThread ID: '+key.threadId+'\nPublic link: '+key.publicLink+'\n';
+ download('abundent-private-thread-owner-receipt.txt',content);
+ note('published-status','Private owner receipt saved to a file. Keep it private; share the public conversation link instead.');
+});
 $('publish-button').addEventListener('click',async()=>{
  if(!draft)return;
  if(!$('publish-consent').checked){note('publish-status','Choose public publication consent first.');return}
@@ -113,8 +155,12 @@ $('publish-button').addEventListener('click',async()=>{
   const t=result.thread;
   privateReceipt('THREAD OWNER KEY',result.ownerKey,{threadId:t.id,publicLink:link(t)});
   history.replaceState(null,'',link(t));
-  await openThread(t.id);
-  note('network-status','PUBLIC · Conversation created. Save your owner receipt. It can close the thread or confirm a proposed match.');
+  try{await openThread(t.id)}catch(e){
+   $('publish-panel').hidden=true;$('thread-panel').hidden=false;
+   note('network-status','Posting succeeded, but the new thread could not be loaded: '+e.message);
+  }
+  showPublicationProof(t,true);
+  note('network-status','POSTED · The invitation is saved, publicly discoverable, and ready for replies. Save your private owner receipt.');
  }catch(e){note('publish-status',e.message);}finally{button.disabled=false}
 });
 $('reply-send').addEventListener('click',async()=>{
@@ -135,7 +181,7 @@ $('thread-refresh').addEventListener('click',async()=>{
 });
 $('thread-discover').addEventListener('click',async()=>{
  if(!thread)return;
- $('browse-lane').value=thread.thread.lane;$('browse-role').value=thread.thread.intent;
+ $('browse-lane').value=thread.thread.lane;$('browse-role').value='open';
  $('browse-panel').hidden=false;await browse();$('browse-panel').scrollIntoView({block:'start',behavior:'auto'});
 });
 $('match-propose').addEventListener('click',async()=>{
@@ -254,6 +300,12 @@ if(requested){
  try{
   const hash=new URLSearchParams(location.hash.slice(1));
   if(hash.has('i'))showPublish(decodeInvite(hash.get('i')));
-  else showBrowse();
+  else{
+   showBrowse();
+   const lane=params.get('lane');
+   if(['any','creative','food','transport','make','question','open'].includes(lane))$('browse-lane').value=lane;
+   $('browse-role').value='open';
+   browse();
+  }
  }catch(e){showBrowse();note('network-status','Could not read the portable invitation: '+e.message)}
 }
