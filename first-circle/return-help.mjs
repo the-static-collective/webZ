@@ -1,6 +1,7 @@
 // Field Return 003 — a self-report can trigger another *prepared* useful step.
 // Pure projection from existing portable card, no new authority, storage or network.
 import { validateCard } from "./core.mjs";
+import { resumePreparedKit } from "./jubilee-resume.mjs";
 
 function result(title, body, status = "BOUNDED_GUIDE") {
   return Object.freeze({ title, body, status });
@@ -40,6 +41,9 @@ export function prepareReturnHelp(card) {
     return result("Second playable round · reduce the resources",
       "Use the same experiment, but now allow only one ordinary item and five minutes. Minute 0–1: pick the item and one problem. Minute 1–3: make one reversible test or paper simulation. Minute 3–4: add a 'no money' constraint. Minute 4–5: compare the two versions and record one observation. This is an already-defined alternative game, not another instruction to design a game.");
   }
+  // An imported Jubilee kit needs another kit, not an unrelated invitation.
+  const kit = card.message === card.work.title ? resumePreparedKit(card.work.title) : null;
+  if (kit) return kit;
   if (card.direction === "offer" || /volunteer|helper|extra hand/.test(source)) {
     return result("Second ready-to-send version · one bounded request",
       "Original offer or need: " + card.message + "\nConcrete limit or step: " + card.nextStep +
