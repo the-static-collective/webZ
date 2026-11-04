@@ -76,7 +76,7 @@ try:
   page.locator('#create-invite').click()
   assert page.locator('#invitation-panel').is_visible()
   assert page.locator('#network-publish').is_visible()
-  assert 'not a public post' in page.locator('#create-panel').inner_text()
+  assert 'not a public post' in page.locator('#create-panel').text_content()
   original_url=page.url
   page.locator('#network-publish').click()
   try:
