@@ -1,7 +1,7 @@
 # CIRCULATION 005 — The first 50 people
 
 **Date:** 2026-11-04  
-**Status:** Operator-held launch preparation. **No public campaign has been posted, no analytics installed, and no partnerships enrolled.**  
+**Status (revised Nov 4):** One first Facebook invitation was reported **PUBLISHED** by Metricool at 1:34 PM Central. The dedicated One Thing Quest is now implemented in this PR but is **not yet publicly deployed or independently phone-proven**. No web analytics are installed, no independently verified field outcome is claimed, and no partnerships are enrolled.  
 **Scope:** Abundent / webZ human entrances. This is a distribution and field-measurement protocol, not a new social network or backend.
 
 ## The useful promise
@@ -18,6 +18,14 @@ Do not explain the Static Collective architecture before the visitor has a usefu
 - `/invites/`: local shareable invitation with an *optional separate* network desk. A link-carried invitation is not proof of publication or delivery. Source: `invites/index.html`.
 - `/jubilee/live/`: reviewed local offers and practical outputs. The page's actual public availability must be checked.
 - JAR;VIS: the separate public/local tool surfaces have different maturity and privacy boundaries. Do not claim they share a backend or perform automatic human matching.
+
+## The first immediate crossing — One Thing 006
+
+**Current action path:** `https://abundent.org/one-thing/` **after merge and deployment proof**.
+
+The visitor identifies one real object, skill, safe food surplus, time/space, or need; gets a specific three-step action; records actual progress as self-report; optionally carries a public-safe link to the already existing Invitation Chain / Network. There is no automatic match or publication. The execution contract and CI/phone tests live at `docs/ONE-THING-006.md`.
+
+**Metricool state at the last read:** One introductory Facebook post `PUBLISHED` Nov 4 at 1:34 PM Central, using the live Hello Porch. A second One Thing post was created as a **draft** for Nov 4 at 4:00 PM; it should be updated to the new quest URL **only after** the public route is verified. Nov 9 and 11 remain drafts. Traffic, click counts, conversions and independent outcomes remain **UNKNOWN** until measured.
 
 ## Preflight / HOLD until checked
 
