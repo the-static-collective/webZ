@@ -3,7 +3,7 @@ Remote backend is intercepted; the test never writes public production data.
 """
 import json, pathlib, threading, datetime
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 class Handler(SimpleHTTPRequestHandler):
  def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
@@ -75,7 +75,10 @@ try:
   assert page.locator('#invitation-panel').is_visible()
   assert page.locator('#network-publish').is_visible()
   page.locator('#network-publish').click()
-  assert page.locator('#publish-panel').is_visible()
+  try:
+   expect(page.locator('#publish-panel')).to_be_visible(timeout=7000)
+  except Exception:
+   raise AssertionError({'url':page.url,'status':page.locator('#network-status').inner_text(),'errors':errors})
   assert 'acoustic guitar' in page.locator('#publish-words').inner_text()
   assert page.locator('#thread-panel').is_hidden()
   page.locator('#publish-consent').check()
