@@ -53,8 +53,8 @@ export function routeUsefulWork(raw) {
   if (input.length<5) return {status:'HOLD',heading:'What are you trying to do?',body:'A few more words about the task will let me check which of the existing tools can actually help.',next:'Describe the object, goal, or first useful result.',blocker:'TOO_SHORT',capability:null,connection:null};
   // Order matters: a person asking volunteers to cook is asking for people, not a recipe.
   if(match(/\b(i can|i could|i have|i offer|i want to help|i'd like to help|donate|lend|offer my|offer an)\b/i,lower))
-    return packageWork('offer',prepareWork('offer',input,'Time and conditions to be confirmed by me before anyone relies on this offer.'));
-  if(match(/\b(volunteer|helpers?|extra hands?|recruit|need people|help set up|help clean up|staff an event)\b/i,lower))
+    return packageWork('offer',prepareWork('offer',input.replace(/^i (?:can|could|have|offer|want to help)\s+/i,'').replace(/[.!?]+$/,'')||input,'Time and conditions to be confirmed by me before anyone relies on this offer'));
+  if(match(/\b(volunteers?|helpers?|extra hands?|recruit|need people|help set up|help clean up|staff an event)\b/i,lower))
     return packageWork('volunteer',prepareWork('need',input,input));
   if(match(/\b(fix|repair|broken|not working|won.t|doesn.t work|flat tire|flat tyre|drain|won.t charge|won.t start|troubleshoot)\b/i,lower))
     return packageWork('repair',prepareWork('need', /\b(fix|repair|broken|not working|troubleshoot|malfunction)\b/i.test(input)?input:input.slice(0,195)+' not working',input));
