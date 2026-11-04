@@ -12,6 +12,7 @@
 <h1>What if anything<br><em>could be an invitation?</em></h1>
 <p class="lede">A song. Spare produce. A question. A repair. A ride. A new invention. One person's possibility can become another person's next useful act.</p>
 <p class="sub">Not a signup. Not an event planner. Just a shareable doorway with the right to act, ask, pass, transform, or decline.</p>
+<p class="browse-early"><a href="./network/?browse=1">See invitations already posted by people →</a> <span>Public conversations you can actually answer.</span></p>
 </section>
 <section id="create-panel" class="panel" aria-labelledby="create-title">
 <div class="eyebrow">START ONE</div><h2 id="create-title">What's possible?</h2>
@@ -23,17 +24,26 @@
 <button type="button" data-when="soon" aria-pressed="false">SOON</button>
 <button type="button" data-when="open" aria-pressed="true">ANY TIME</button>
 </div>
-<button id="create-invite" class="primary" type="button">Make this an invitation →</button>
+<button id="create-invite" class="primary" type="button">Make my invitation →</button>
+<p class="tiny"><strong>First it becomes a shareable link, not a public post.</strong> You decide separately whether to publish it so strangers can find it.</p>
 <p class="tiny">Only put words here that you're comfortable sharing in a public link. No addresses, phone numbers, children's details, or private case information. The page does not send or store your text on a server.</p>
 <p id="create-status" role="status" aria-live="polite"></p>
 </section>
 <section id="invitation-panel" class="panel" hidden aria-labelledby="invitation-title">
-<div class="eyebrow">AN INVITATION · ANYTHING COUNTS</div>
+<div class="eyebrow">YOUR INVITATION IS READY · LINK-ONLY SO FAR</div>
 <p id="invite-when" class="availability"></p>
 <h2 id="invitation-title">The possibility</h2>
 <blockquote id="invite-message"></blockquote>
 <p id="invite-chain" class="tiny"></p>
 <p class="tiny">Self-declared and unverified. This link does not establish permission, availability, custody, a reservation, a real match, or a commitment. Keep invitations non-sensitive.</p>
+<section class="network-go" aria-labelledby="network-publish-title">
+<p class="eyebrow">NEXT CHOICE · PUBLIC OR LINK-ONLY?</p>
+<h3 id="network-publish-title">Want people to find this invitation?</h3>
+<p><strong>It's a link right now—not a public post.</strong> To make it discoverable and give it a persistent conversation, choose to publish it. You'll see your exact words again and approve public posting before anything is saved.</p>
+<a id="network-publish" class="button-publish" href="./network/">Publish it so people can find and reply →</a>
+<p class="tiny">Or keep it link-only; the action buttons and sharing tools below still work.</p>
+<a class="board-link" href="./network/?browse=1">See what people have already posted →</a>
+</section>
 <h3>What can you do with it?</h3>
 <div id="invite-actions" class="action-grid" role="group" aria-label="Choose a voluntary response"></div>
 <section id="action-panel" class="action-panel" hidden>
@@ -57,7 +67,7 @@
 <p class="tiny">This is a prepared response, not a delivered message. Share it back through the conversation or app where the invitation reached you. The original inviter has not been notified.</p>
 <div class="buttons"><button id="copy-response" type="button">Copy response</button><button id="share-response" type="button">Share response</button><button id="save-response" type="button">Save response file</button></div>
 </div>
-<div class="network-go"><h3>Want this to become a real public conversation?</h3><p>People can reply, request notifications, and propose two-sided matches. Publishing is optional and requires a separate explicit public consent.</p><a id="network-publish" class="primary" href="./network/">Open the public conversation desk →</a><a href="./network/">Or browse conversations already underway →</a></div><div class="share-area">
+<div class="share-area">
 <h3>Carry this invitation</h3>
 <p>The link is portable. Forward the original only if you want to; the receiver can make their own choice.</p>
 <label for="invitation-link">Public link</label><textarea id="invitation-link" readonly rows="3"></textarea>
@@ -67,7 +77,7 @@
 </section>
 <section class="fineprint"><p>NEW · The optional <a href="./network/">public conversation network</a> stores public threads for up to 30 days, delivers consented in-app updates while the page remains open, and supports explicit two-sided match receipts.</p>
 <h2>Not an attention trap.</h2><p>Every path is valid. Doing something now is welcome, not compulsory. Passing an invitation doesn't enroll a friend. Declining creates no penalty. A new idea can grow as a fork without silently rewriting the original.</p>
-<p>This first version is a <strong>link-carried network</strong>, not a hosted social feed. It cannot tell you who opened an invitation or guarantee that a reply reaches its creator. Future receiving and matching infrastructure must be explicitly permissioned before it is connected.</p>
+<p>An invitation starts as an optional link-only interaction. If you explicitly publish it using the button above, it also gets a persistent public conversation, discovery, and opt-in in-app notices. Nothing on this page publishes or transmits your words automatically.</p>
 </section>
 </main><footer>ANYTHING CAN INVITE. NOTHING CAN COMPEL. <a href="../jubilee/">Jubilee</a> · <a href="../">Abundent</a></footer>
 </body></html>
