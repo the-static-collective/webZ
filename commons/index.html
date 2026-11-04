@@ -3,27 +3,55 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#0c1918">
-<title>Porchlight Commons | Exchange Desk</title><link rel="stylesheet" href="./style.css"><script type="module" src="./main.mjs"></script>
+<title>Porchlight Commons | Exchange Desk</title><link rel="stylesheet" href="./style.css"><script type="module" src="./main.mjs"></script><script type="module" src="./entry.mjs"></script>
 </head><body>
 <header><a class="brand" href="../">WEBZ / PORCHLIGHT COMMONS</a><nav aria-label="Related doors"><a href="../bridge/">Between Rooms · Institution Bridge</a> · <a href="../tomorrow/">Stewardship invitations</a> · <a href="../jubilee/">Jubilee Circuit</a> · <a href="mailto:us@abundent.org?subject=Porchlight%20Commons">Contact</a></nav></header>
 <main><div class="eyebrow">Global Crossing 001 / Minnesota ↔ Ghana / prototype</div>
 <h1>What's missing here may exist elsewhere.</h1>
 <p class="lead">An exchange desk for community organizations to compare local supply, distant resources, and reusable know-how. Begin with one bounded need; never exchange somebody's private case file.</p>
-<section class="section"><p class="eyebrow">NEW · LIVING RECEIVER 001</p><h2>The receiving community decides</h2><p>Open a portable need or method card, choose HOLD / REFUSE / ACCEPT FOR LOCAL REVIEW, and return an unsigned response or unverified report without making an account. Works on phones with printable JSON; nothing is sent automatically.</p><p><a href="./receiver/">Open the Offline Living Receiver →</a> · <a href="./inbox/">Open the persistent private Living Inbox →</a> · <a href="./wallet/">Keep your links in the encrypted wallet →</a></p></section><div class="cards">
+<section class="entry-surface" aria-labelledby="entry-question">
+<p class="eyebrow">ONE SMALL STEP IS ENOUGH</p>
+<h2 id="entry-question">What brings you here?</h2>
+<p class="entry-lede">No worksheet to begin. Choose one thing. You can leave at any point.</p>
+<div class="entry-choices">
+<button id="begin-need" type="button" aria-expanded="false" aria-controls="need-quick"><strong>We could use something</strong><span>Start with one public, organization-level need.</span></button>
+<a href="https://hello.abundent.org/porch/?kind=offer"><strong>I have something to offer</strong><span>Open a separate human porch; nothing is sent automatically.</span></a>
+<a href="./receiver/"><strong>I want to review a card</strong><span>See a local HOLD, REFUSE, or review flow.</span></a>
+<a href="#how-it-works"><strong>I'm just looking</strong><span>Explore without signing up.</span></a>
+</div>
+<p class="demo-entrance"><button id="quick-fictional" type="button">Try a fictional example · one tap →</button><span class="small">No real provider or volunteer is involved.</span></p>
+<div id="need-quick" class="need-quick" hidden>
+<label for="quick-summary">What could a community organization use?</label>
+<input id="quick-summary" type="text" maxlength="160" autocomplete="off" placeholder="For example, a way to share extra vegetables…" aria-describedby="quick-safety">
+<p id="quick-safety" class="small">Public, non-personal words only. No names, contact details, exact addresses, or private case histories.</p>
+<p class="quick-label">What kind of thing is it? Tap one.</p>
+<div id="quick-categories" class="quick-categories" role="group" aria-label="Kind of community need">
+<button type="button" data-quick-kind="food" aria-pressed="false">Food</button>
+<button type="button" data-quick-kind="energy" aria-pressed="false">Energy</button>
+<button type="button" data-quick-kind="transport" aria-pressed="false">Transport</button>
+<button type="button" data-quick-kind="tools" aria-pressed="false">Tools</button>
+<button type="button" data-quick-kind="communication" aria-pressed="false">Communication</button>
+<button type="button" data-quick-kind="practice" aria-pressed="false">Know-how</button>
+<button type="button" data-quick-kind="shelter-support" aria-pressed="false">Shelter support</button>
+</div>
+<div class="actions"><button id="quick-continue" type="button">Continue with the details →</button></div>
+<p id="quick-status" role="status" aria-live="polite" class="small">Nothing has been sent or saved.</p>
+</div>
+</section><section class="section"><p class="eyebrow">NEW · LIVING RECEIVER 001</p><h2>The receiving community decides</h2><p>Open a portable need or method card, choose HOLD / REFUSE / ACCEPT FOR LOCAL REVIEW, and return an unsigned response or unverified report without making an account. Works on phones with printable JSON; nothing is sent automatically.</p><p><a href="./receiver/">Open the Offline Living Receiver →</a> · <a href="./inbox/">Open the persistent private Living Inbox →</a> · <a href="./wallet/">Keep your links in the encrypted wallet →</a></p></section><div class="cards" id="how-it-works">
   <div class="tile"><strong>01 / LISTEN</strong><p>A local steward defines an organizational need.</p></div>
   <div class="tile"><strong>02 / COMPARE</strong><p>Consider local purchase, responsible transfer, and knowledge exchange.</p></div>
   <div class="tile"><strong>03 / RETURN</strong><p>Partner approvals and independently confirmed outcomes belong to real people.</p></div>
 </div>
 <div class="alert"><strong>Demonstration only.</strong> This page has no accounts, backend, partners, service placement, sending, or live matching. Nothing is saved or transmitted. Never enter names, contact details, client records, shelter addresses, or sensitive locations. Exported cards require human inspection.</div>
-<section class="section"><h2>Build one organizational HOLD card</h2>
+<details id="need-details" class="advanced-form"><summary>Build or inspect a complete local HOLD card</summary><section class="section"><h2>Build one organizational HOLD card</h2>
 <form id="exchange-form">
 <fieldset><legend>Need / organization-level only</legend><div class="grid">
-<label>General region<input name="region" required maxlength="80" value="Nima / Accra, Ghana (proposed)" autocomplete="off"></label>
+<label>General region<input name="region" required maxlength="80" placeholder="A broad region only" autocomplete="off"></label>
 <label>Category<select name="category"><option value="food">Food</option><option value="energy">Energy / heat</option><option value="communication">Communication</option><option value="transport">Transport</option><option value="tools">Tools</option><option value="shelter-support">Shelter support</option><option value="practice">Reusable practice</option></select></label>
-<label>Public, non-personal need<input name="summary" required maxlength="160" value="Shelf-stable food parcels for a locally approved distribution circuit" autocomplete="off"></label>
-<label>Quantity<input name="quantity" type="number" min="1" max="100000" value="30" required></label>
+<label>Public, non-personal need<input name="summary" required maxlength="160" placeholder="A non-personal description of the need" autocomplete="off"></label>
+<label>Quantity<input name="quantity" type="number" min="1" max="100000" placeholder="Approximate amount" required></label>
 <label>Unit<select name="unit"><option value="parcels">Parcels</option><option value="kg">Kilograms</option><option value="meals">Meals</option><option value="items">Items</option><option value="hours">Hours</option><option value="kWh">kWh</option><option value="sessions">Sessions</option></select></label>
-<label>Time window<select name="window"><option value="30-days">Within 30 days</option><option value="7-days">Within 7 days</option><option value="exploratory">Exploratory, not urgent</option></select></label>
+<label>Time window<select name="window"><option value="exploratory">Exploratory, not urgent</option><option value="30-days">Within 30 days</option><option value="7-days">Within 7 days</option></select></label>
 </div></fieldset>
 <fieldset><legend>Compare possible pathways (optional estimates, USD)</legend>
 <p class="small">Include full landed costs, delivery, maintenance, licensing and local opportunity costs before marking reviewed. A price estimate is not a quote or a commitment.</p>
@@ -34,7 +62,7 @@
 <div class="actions"><button type="submit">Build HOLD card</button><button id="clear" class="secondary" type="button">Clear</button></div></form>
 <p role="status" aria-live="polite" id="status">No crossing has been proposed or authorized.</p>
 </section>
-<section class="section"><h2>Inspect before sharing</h2><p class="small">This packet is explicitly unverified. For actual participation: obtain a named organization's approval, independent lived-experience review, written scope and privacy limits, then use its existing volunteer/donation process. A reported delivery is never an independently confirmed receipt.</p>
+</details><section class="section"><h2>Inspect before sharing</h2><p class="small">This packet is explicitly unverified. For actual participation: obtain a named organization's approval, independent lived-experience review, written scope and privacy limits, then use its existing volunteer/donation process. A reported delivery is never an independently confirmed receipt.</p>
 <div class="actions"><button id="download" disabled>Export local JSON draft</button><button id="print" class="secondary" disabled>Print reviewed card</button></div>
 <pre id="result" aria-label="Proposed exchange packet">No draft created.</pre>
 </section>
