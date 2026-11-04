@@ -23,7 +23,15 @@
 <button type="button" data-jubilee-role="translate" aria-pressed="false">Teaching or translation</button>
 <a href="../week/">Just here to listen ↗</a>
 </div>
-<div class="jubilee-say"><label for="jubilee-quick-text">Or say it your way</label><div class="jubilee-say-row"><input id="jubilee-quick-text" type="text" maxlength="240" autocomplete="off" placeholder="I could play guitar at a community supper…"><button type="button" id="jubilee-quick-next">Continue with my idea →</button></div><p id="jubilee-quick-status" role="status" aria-live="polite">Private to this page until you choose otherwise. Nothing is sent.</p></div>
+<div class="jubilee-say"><label for="jubilee-quick-text">Or say it your way</label><div class="jubilee-say-row"><input id="jubilee-quick-text" type="text" maxlength="240" autocomplete="off" placeholder="I could play guitar at a community supper…"><button type="button" id="jubilee-quick-next">Show me what it could become →</button></div><p id="jubilee-quick-status" role="status" aria-live="polite">Private to this page until you choose otherwise. Nothing is sent.</p></div>
+<div class="jubilee-moment" id="jubilee-moment" hidden aria-live="polite">
+<p class="eyebrow">HERE'S SOMETHING YOU CAN USE</p>
+<h3 id="jubilee-moment-title">Your first useful line</h3>
+<blockquote id="jubilee-moment-line"></blockquote>
+<p id="jubilee-moment-next"></p>
+<div class="actions"><button class="button primary" id="jubilee-moment-copy" type="button">Copy this line</button><button class="button" id="jubilee-moment-personalize" type="button">Make it mine (optional) →</button></div>
+<p id="jubilee-moment-status" role="status"></p>
+</div>
 </section>
 <div class="actions"><a class="button primary" href="#invite">Bring something ↘</a><a class="button" href="#field-table">Run a two-hour gathering</a><a class="button" href="./revival/">Open the 20-county Revival Atlas ↗</a><a class="button" href="./wood/">Winter Warmth · firewood bank field kit ↗</a><a class="button" href="../week/">Hear a week together ↗</a></div>
 <p class="notice"><b>PROPOSED, NOT ENROLLED.</b> No festival, congregation, Ghanaian community or song creator is represented as a confirmed partner. This page collects no submissions.</p></section>
@@ -49,7 +57,7 @@
 <li><time>110–120</time><div><b>Send the next song</b><p>Invite the next community to answer and choose its own useful act.</p></div></li></ol>
 <div class="actions"><button class="button primary" id="print-kit" type="button">Print the table</button><a class="button" href="../commons/">Open Porchlight resource exchange ↗</a></div></section>
 <section class="section shade" id="invite"><p class="eyebrow">04 / A LETTER TO THE NEXT TABLE</p><h2>What could you bring?</h2>
-<p>Prepare a public, organization-level invitation on this device. It is not submitted, stored, or shared automatically. Inspect the draft before opening your own email client.</p>
+<p>This full invitation composer is optional. You can use the idea from the top of the page without filling this in. Prepare a public, organization-level invitation on this device. It is not submitted, stored, or shared automatically. Inspect the draft before opening your own email client.</p>
 <form id="invitation-form"><div class="grid"><label>How would you like to participate?<select id="role" required>
 <option value="" selected disabled>Choose a way to help</option><option value="song">Bring a song or rhythm</option><option value="host">Host a field table</option><option value="food">Share food or kitchen skills</option><option value="crew">Bring festival production skills</option><option value="tech">Offer repair, energy or communications skills</option><option value="steward">Explore local stewardship</option><option value="translate">Translate or teach across cultures</option></select></label>
 <label>Broad region (optional)<input id="region" type="text" maxlength="70" autocomplete="off" placeholder="e.g. Southern Minnesota"></label></div>
