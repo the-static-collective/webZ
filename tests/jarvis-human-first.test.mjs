@@ -57,6 +57,24 @@ test('Newsletter routing produces work, not false live farm integration',()=>{
   assert.match(r.body,/Only send to people who have opted in/);
   assert.match(r.connection.note,/no real farm/);
 });
+test('Urgent requests are not accidentally converted into a pantry recipe or fake service',()=>{
+  const urgent=routeUsefulWork('I am in danger right now and need a safe place tonight');
+  assert.equal(urgent.status,'HOLD');
+  assert.equal(urgent.blocker,'NO_AUTHENTICATED_REAL_WORLD_RESPONDER');
+  assert.doesNotMatch(urgent.body,/INGREDIENTS:/);
+  const scarce=routeUsefulWork('I have no food and need groceries');
+  assert.equal(scarce.status,'LOCAL_PARTIAL');
+  assert.match(scarce.body,/practical food access/);
+  assert.doesNotMatch(scarce.body,/dry rice/);
+});
+test('Existing provider integration code maps to a specific synthetic test, not a newsletter send',()=>{
+  const r=routeUsefulWork('Can you sync GrownBy to an email newsletter?');
+  assert.equal(r.capability.id,'newsletter');
+  assert.equal(r.status,'LOCAL_PARTIAL');
+  assert.match(r.body,/one synthetic record/);
+  assert.match(r.body,/no real GrownBy/);
+});
+
 test('Unknown tasks, secrets, and insufficient requests fail to a truthful state',()=>{
   assert.equal(routeUsefulWork(''),null);
   assert.equal(routeUsefulWork('ok').status,'HOLD');
