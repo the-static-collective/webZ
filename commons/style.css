@@ -43,3 +43,5 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0a1715;border:1px so
 #quick-status{margin:12px 0 2px}
 @media(max-width:640px){.entry-choices{grid-template-columns:1fr}.entry-choices a,.entry-choices button{min-height:82px;padding:16px}.need-quick{padding:15px}.quick-categories button{min-height:44px}.entry-surface{margin:.8rem 0}}
 @media print{.entry-surface,.advanced-form>summary,.need-quick{display:none!important}.advanced-form{border:0;padding:0}}
+
+.demo-entrance{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0 0}.demo-entrance button{background:#f1d894;min-height:44px}.demo-entrance .small{margin:0}
