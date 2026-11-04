@@ -9,7 +9,7 @@ const REPOS=Object.freeze({webZ:'webz',BananaSpork:'garden',reLATTE:'relatte','J
 const READINESS=new Set(['LOCAL_BROWSER','SOURCE_REVIEW','LOCAL_OPERATOR','LOCAL_LIBRARY','LOCAL_APP_UNVERIFIED','DOCUMENTED_ONLY','RESEARCH_ONLY']);
 const WEBZ_ROUTES=new Set(['./first-circle/','./glean/','./jubilee/']);
 const STATUS_LABELS=Object.freeze({
-  LOCAL_BROWSER:'Browser tool · available in this project',
+  LOCAL_BROWSER:'Browser-based tool · availability not checked',
   SOURCE_REVIEW:'Source-guided tool · needs input and consent',
   LOCAL_OPERATOR:'Local operator setup required',
   LOCAL_LIBRARY:'Developer integration · not connected',
@@ -64,12 +64,20 @@ export function validatePassport(raw,expectedRepository){
  const ids=new Set();
  const accepted=[];
  for(const c of raw.capabilities){
-  keys(c,['id','title','intents','readiness','delivers','entry','sourcePath','requires']);
+  keys(c,['id','title','intents','readiness','delivers','entry','sourcePath','requires','contract']);
   if(!str(c.id,5,80)||!c.id.startsWith(REPOS[name]+'.')||
      !/^[a-z][a-z0-9.-]+$/.test(c.id)||ids.has(c.id)||
      !str(c.title,8,100)||!READINESS.has(c.readiness)||!str(c.delivers,35,420)||
      !sourcePathOk(c.sourcePath)||!str(c.requires,40,420)||!safeHref(c.entry,name)||
      !Array.isArray(c.intents)||c.intents.length<2||c.intents.length>16)throw Error('INVALID_CAPABILITY_ENTRY');
+  keys(c.contract,['inputHint','outputHint','invocation','receipt','effect']);
+  for(const key of ['inputHint','outputHint']){
+   if(typeof c.contract[key]!=='string'||!/^[a-z][a-z0-9.-]+\/v[0-9]+$/.test(c.contract[key])||c.contract[key].length>90)throw Error('BAD_DESCRIPTIVE_CONTRACT');
+  }
+  if(c.contract.invocation!=='NOT_CONNECTED_TO_JARVIS'||
+     c.contract.effect!=='NO_CROSS_PROJECT_EFFECT'||
+     !['NONE','LOCAL_SELF_REPORT','LOCAL_UNSIGNED','SIGNED_SYNTHETIC_TEST_ONLY'].includes(c.contract.receipt))
+     throw Error('UNAUTHORIZED_EXECUTION_CLAIM');
   const intents=new Set();
   for(const phrase of c.intents){
    if(!str(phrase,3,40)||!/^[a-z0-9][a-z0-9 '-]*$/.test(phrase)||intents.has(phrase))throw Error('INVALID_INTENT_HINT');
@@ -78,7 +86,7 @@ export function validatePassport(raw,expectedRepository){
   ids.add(c.id);
   accepted.push(Object.freeze({id:c.id,title:c.title,intents:[...c.intents],readiness:c.readiness,
     delivers:c.delivers,entry:{...c.entry},sourcePath:c.sourcePath,requires:c.requires,
-    repository:raw.repository,version:raw.version,availability:'NOT_OBSERVED'}));
+    repository:raw.repository,version:raw.version,availability:'NOT_OBSERVED',contract:{...c.contract}}));
  }
  return Object.freeze({repository:raw.repository,version:raw.version,capabilities:accepted});
 }
