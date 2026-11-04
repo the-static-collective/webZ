@@ -1,5 +1,6 @@
 import { createCard, validateCard, recordReturn, proposeMethod,
   exportCard, importCard, shareText } from "./core.mjs";
+import { workContext, prepareWork, auditWork } from "./work.mjs";
 
 const $ = id => document.getElementById(id);
 const STORE = "abundent-first-circle-001";
@@ -13,11 +14,6 @@ const EXAMPLES = {
   need: ["Help with a meal", "Advice on fixing something", "One extra volunteer"],
   offer: ["An hour of help", "A useful skill", "A tool I can lend"],
   play: ["A tiny potluck", "A neighborhood music night", "A cleanup game"]
-};
-const STEPS = {
-  need: ["Ask one trusted person", "Make a simple invitation", "Try a smaller version"],
-  offer: ["Offer it to one person", "Write a short public invitation", "Try a one-hour pilot"],
-  play: ["Invite one collaborator", "Try a ten-minute version", "Make a paper prototype"]
 };
 const OUTCOME_TEXT = {
   worked: "It worked (self-reported)", "not-yet": "Not yet (self-reported)",
@@ -41,21 +37,21 @@ function button(label, handler) {
 function renderTalk() {
   show("talk");
   const first = phase === "message";
-  $("talk-title").textContent = first ? QUESTIONS[direction] : "What's the smallest next move you can actually try?";
-  $("answer-label").textContent = first ? "Say it your way" : "One possible next step";
+  $("talk-title").textContent = first ? QUESTIONS[direction] : workContext(direction, firstMessage).prompt;
+  $("answer-label").textContent = first ? "Say it your way" : "One detail so we can do useful work";
   $("earlier").hidden = first;
   $("earlier").textContent = first ? "" : firstMessage;
   $("answer").maxLength = first ? 220 : 160;
   $("answer").value = "";
   $("answer").placeholder = first ? "Tell us in one sentence…" : "Start with one small action…";
   $("suggestions").replaceChildren();
-  const examples = first ? EXAMPLES[direction] : STEPS[direction];
+  const examples = first ? EXAMPLES[direction] : workContext(direction, firstMessage).examples;
   for (const suggestion of examples) {
     $("suggestions").append(button(suggestion, () => {
       $("answer").value = suggestion; $("answer").focus();
     }));
   }
-  $("continue").textContent = first ? "Next question →" : "Make my card →";
+  $("continue").textContent = first ? "One more question →" : "Do the useful part →";
   $("answer").focus();
 }
 function choose(kind) {
@@ -78,11 +74,23 @@ function renderCard() {
   $("card-title").textContent = LABELS[card.direction] + ".";
   $("card-message").textContent = card.message;
   $("card-action").textContent = card.nextStep;
-  $("card-tag").textContent = card.returns.length ? "RETURN RECORDED" : "PERSONAL DRAFT";
+  $("card-tag").textContent = card.returns.length ? "RETURN RECORDED" : card.work ? "WORK PREPARED" : "LEGACY DRAFT";
+  $("work-section").hidden = !card.work;
+  if (card.work) {
+    $("work-title").textContent = card.work.title;
+    $("work-body").textContent = card.work.body;
+    $("work-state").textContent = card.work.status === "UNRESOLVED"
+      ? "Underlying need unresolved · prepared partial material only"
+      : card.work.status === "READY_TO_USE_DRAFT"
+        ? "Complete local draft · not sent or accepted"
+        : "Bounded local guide · not a verified real-world result";
+  }
   $("card-id").textContent = "CARD " + card.id.slice(0, 8).toUpperCase() + " · UNSIGNED";
-  $("card-origin").textContent = imported
-    ? "Imported card. Checksum matched, but origin, identity, and outcomes are unverified."
-    : "This is an unsigned personal draft. It has not been sent, matched, or independently verified.";
+  $("card-origin").textContent = !card.work
+    ? "This is a legacy 001 card: it saved a suggested task, but prepared no useful work. Tap Start another circle to use the corrected assistant."
+    : imported
+      ? "Imported card. Checksum matched, but origin, identity, and outcomes are unverified."
+      : "Prepared local material only. It has not been sent, matched, independently verified, or completed in the world.";
   $("save-state").textContent = saved
     ? "Saved in this browser on this device. Export a copy if you need it elsewhere."
     : "Not saved on this device. Download a JSON copy for another day or device.";
@@ -97,8 +105,9 @@ function renderCard() {
     if (entry.note) p.append(document.createTextNode(" — " + entry.note));
     $("returns").append(p);
   });
-  $("method-zone").hidden = !card.returns.length;
-  if (card.returns.length) {
+  const canPropose = !!card.work && !!card.returns.length && card.work.status !== "UNRESOLVED" && card.returns.at(-1).outcome === "worked";
+  $("method-zone").hidden = !canPropose;
+  if (canPropose) {
     $("method-text").textContent = card.method
       ? card.method.text
       : "Your report might help someone else. Proposing a method does not approve or publish it.";
@@ -116,9 +125,14 @@ $("talk-form").addEventListener("submit", event => {
     firstMessage = text; phase = "step"; renderTalk(); return;
   }
   try {
-    card = createCard(direction, firstMessage, text);
+    const prepared = prepareWork(direction, firstMessage, text);
+    const audit = auditWork(prepared);
+    if (!audit.pass) throw new Error("This result has no prepared work: " + audit.reason);
+    card = createCard(direction, firstMessage, prepared.nextStep, prepared.work);
     imported = false; saved = false;
-    renderCard(); status("Card created locally. Save it or download it to keep it.");
+    renderCard(); status(audit.reason === "PARTIAL_WITH_BLOCKER"
+      ? "A usable partial draft is prepared; the underlying need remains unresolved."
+      : "Actual local work is prepared below. This is not field-proof or completion of an external action.");
   } catch (err) { status(err.message, true); }
 });
 $("back").addEventListener("click", () => {

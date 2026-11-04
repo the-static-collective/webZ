@@ -3,17 +3,17 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer"><meta name="theme-color" content="#12271f">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="description" content="One small action, one portable card, one honest return. A local-first Abundent experiment.">
+<meta name="description" content="One request, prepared useful work, an honest return. An offline-first Abundent experiment.">
 <title>First Circle · Abundent</title>
 <link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
 </head><body>
 <a class="skip" href="#main">Skip to the experiment</a>
-<header class="top"><a href="../" class="brand">✳ ABUNDENT</a><span>FIRST CIRCLE <b>001</b></span></header>
+<header class="top"><a href="../" class="brand">✳ ABUNDENT</a><span>FIRST CIRCLE <b>002</b></span></header>
 <main id="main">
-<div class="eyebrow">SMALL ACTIONS · REAL RETURNS · NO ACCOUNT</div>
+<div class="eyebrow">USEFUL WORK FIRST · REAL RETURNS · NO ACCOUNT</div>
 <h1>Something good can<br><em>start right here.</em></h1>
-<p class="lead">Choose a direction. We'll make one small next step into a card you can carry. No worksheets, sign-ups, or promises we can't prove.</p>
-<div class="boundary"><strong>This is an offline-style guided prototype, not a live AI chat.</strong> Your words are not transmitted. Keep names, addresses, personal crises, and private records out of this experiment. A report is not independent confirmation.</div>
+<p class="lead">Choose a direction. We prepare a useful piece of work, not a task telling you to prepare one. Carry it as a card and report what happened.</p>
+<div class="boundary"><strong>Local deterministic assistance, not a live AI chat.</strong> Your words are not transmitted. Keep names, addresses, personal crises, and private records out of this experiment. A report is not independent confirmation.</div>
 
 <section id="choose" class="panel" aria-labelledby="choose-title">
 <p class="kicker">01 / YOUR MOVE</p><h2 id="choose-title">Where should we start?</h2>
@@ -39,13 +39,14 @@
 <p class="kicker">03 / YOUR PORTABLE CARD</p>
 <div class="card" id="card-print"><div class="card-top"><span>✳ FIRST CIRCLE</span><span id="card-tag">DRAFT</span></div>
 <h2 id="card-title">A small beginning.</h2><p id="card-message" class="card-message"></p>
-<div class="card-next"><span>ONE POSSIBLE NEXT STEP</span><strong id="card-action"></strong></div>
+<div class="card-next"><span>FIRST ACTION YOU CAN TAKE</span><strong id="card-action"></strong></div>
+<div class="work-in-card" id="work-section" hidden><span class="work-label">WORK ALREADY PREPARED</span><h3 id="work-title"></h3><p id="work-body" class="work-body"></p><p id="work-state" class="work-state"></p></div>
 <p id="card-id" class="mono"></p></div>
-<p id="card-origin" class="fine">This is an unsigned personal draft. It is not posted, matched, or independently verified.</p>
+<p id="card-origin" class="fine">The prepared material stays local. It has not been sent or independently verified.</p>
 <div class="row wrap"><button id="save" class="primary" type="button">Keep on this device</button><button id="download" type="button">Download card ↓</button><button id="copy" type="button">Copy share text</button></div>
-<p id="save-state" class="fine">Not saved. You can download a portable JSON copy to return on another device.</p>
-<div class="divider"></div><p class="kicker">04 / COME BACK WITH A RESULT</p>
-<h2>What happened when you tried?</h2>
+<p id="save-state" class="fine">Not saved. Download a JSON copy to keep the prepared work.</p>
+<div class="divider"></div><p class="kicker">04 / REPORT WHAT ACTUALLY HAPPENED</p>
+<h2>What happened after using the prepared work?</h2>
 <div id="returns" class="return-list"></div>
 <div class="return-choices" id="return-choices">
 <button type="button" data-outcome="worked">It worked ✓</button>
