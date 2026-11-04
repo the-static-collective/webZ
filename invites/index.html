@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#183d33"><meta name="description" content="Anything can be an invitation: an offer, question, repair, meal, song, task, or new possibility. Make one link, pass it on, respond or build on it. No account.">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>The Invitation Chain · Abundent</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to invitation</a>
+<header><a class="brand" href="../">ABUNDENT <span>· THE INVITATION CHAIN</span></a><nav><a href="../jubilee/live/">LIVE OFFER</a><a href="../first-circle/">DO USEFUL WORK</a><a href="../">HOME</a></nav></header>
+<main id="main">
+<section class="hero">
+<p class="eyebrow">INVITATION CHAIN 001 · START WITH POSSIBILITY</p>
+<h1>What if anything<br><em>could be an invitation?</em></h1>
+<p class="lede">A song. Spare produce. A question. A repair. A ride. A new invention. One person's possibility can become another person's next useful act.</p>
+<p class="sub">Not a signup. Not an event planner. Just a shareable doorway with the right to act, ask, pass, transform, or decline.</p>
+</section>
+<section id="create-panel" class="panel" aria-labelledby="create-title">
+<div class="eyebrow">START ONE</div><h2 id="create-title">What's possible?</h2>
+<label for="invite-words">Tell it in your own words.</label>
+<textarea id="invite-words" rows="3" maxlength="240" placeholder="I have extra vegetables available for a neighbor today…"></textarea>
+<div class="rowline"><p>Could it happen <strong>now</strong>?</p><p class="tiny">We hope so. We never assume.</p></div>
+<div class="when-choices" role="group" aria-label="When is the invitation available?">
+<button type="button" data-when="now" aria-pressed="false">YES · NOW</button>
+<button type="button" data-when="soon" aria-pressed="false">SOON</button>
+<button type="button" data-when="open" aria-pressed="true">ANY TIME</button>
+</div>
+<button id="create-invite" class="primary" type="button">Make this an invitation →</button>
+<p class="tiny">Only put words here that you're comfortable sharing in a public link. No addresses, phone numbers, children's details, or private case information. The page does not send or store your text on a server.</p>
+<p id="create-status" role="status" aria-live="polite"></p>
+</section>
+<section id="invitation-panel" class="panel" hidden aria-labelledby="invitation-title">
+<div class="eyebrow">AN INVITATION · ANYTHING COUNTS</div>
+<p id="invite-when" class="availability"></p>
+<h2 id="invitation-title">The possibility</h2>
+<blockquote id="invite-message"></blockquote>
+<p id="invite-chain" class="tiny"></p>
+<p class="tiny">Self-declared and unverified. This link does not establish permission, availability, custody, a reservation, a real match, or a commitment. Keep invitations non-sensitive.</p>
+<h3>What can you do with it?</h3>
+<div id="invite-actions" class="action-grid" role="group" aria-label="Choose a voluntary response"></div>
+<section id="action-panel" class="action-panel" hidden>
+<h3 id="action-title"></h3><p id="action-intro"></p>
+<div id="action-tool" hidden class="tool"></div>
+<div id="response-compose" hidden>
+<label for="response-words">Your words, not ours</label>
+<textarea id="response-words" rows="3" maxlength="240" placeholder="I can help by…"></textarea>
+<button id="make-response" type="button" class="primary">Prepare my response →</button>
+</div>
+<div id="fork-compose" hidden>
+<label for="fork-words">What possibility grows from this one?</label>
+<textarea id="fork-words" rows="3" maxlength="240" placeholder="I could bring a second ingredient…"></textarea>
+<div class="when-choices" role="group" aria-label="Availability for your new invitation"><button type="button" data-fork-when="now" aria-pressed="false">NOW</button><button type="button" data-fork-when="soon" aria-pressed="false">SOON</button><button type="button" data-fork-when="open" aria-pressed="true">ANY TIME</button></div>
+<button id="make-fork" type="button" class="primary">Make a linked invitation →</button>
+</div>
+<p id="action-status" role="status" aria-live="polite"></p>
+</section>
+<div id="response-result" class="result" hidden>
+<h3>Your response exists</h3><pre id="response-preview"></pre>
+<p class="tiny">This is a prepared response, not a delivered message. Share it back through the conversation or app where the invitation reached you. The original inviter has not been notified.</p>
+<div class="buttons"><button id="copy-response" type="button">Copy response</button><button id="share-response" type="button">Share response</button><button id="save-response" type="button">Save response file</button></div>
+</div>
+<div class="share-area">
+<h3>Carry this invitation</h3>
+<p>The link is portable. Forward the original only if you want to; the receiver can make their own choice.</p>
+<label for="invitation-link">Public link</label><textarea id="invitation-link" readonly rows="3"></textarea>
+<div class="buttons"><button id="copy-invite" type="button">Copy link</button><button id="share-invite" type="button">Share link</button><button id="save-invite" type="button">Save invitation file</button><button id="new-invite" type="button" class="quiet">Start a different invitation</button></div>
+<p id="share-status" role="status" aria-live="polite"></p>
+</div>
+</section>
+<section class="fineprint">
+<h2>Not an attention trap.</h2><p>Every path is valid. Doing something now is welcome, not compulsory. Passing an invitation doesn't enroll a friend. Declining creates no penalty. A new idea can grow as a fork without silently rewriting the original.</p>
+<p>This first version is a <strong>link-carried network</strong>, not a hosted social feed. It cannot tell you who opened an invitation or guarantee that a reply reaches its creator. Future receiving and matching infrastructure must be explicitly permissioned before it is connected.</p>
+</section>
+</main><footer>ANYTHING CAN INVITE. NOTHING CAN COMPEL. <a href="../jubilee/">Jubilee</a> · <a href="../">Abundent</a></footer>
+</body></html>
