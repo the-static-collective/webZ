@@ -57,7 +57,7 @@ export function routeUsefulWork(raw) {
   if(match(/\b(volunteer|helpers?|extra hands?|recruit|need people|help set up|help clean up|staff an event)\b/i,lower))
     return packageWork('volunteer',prepareWork('need',input,input));
   if(match(/\b(fix|repair|broken|not working|won.t|doesn.t work|flat tire|flat tyre|drain|won.t charge|won.t start|troubleshoot)\b/i,lower))
-    return packageWork('repair',prepareWork('need',input,input));
+    return packageWork('repair',prepareWork('need', /\b(fix|repair|broken|not working|troubleshoot|malfunction)\b/i.test(input)?input:input.slice(0,195)+' not working',input));
   if(match(/\b(food|hungry|meal|cook|dinner|lunch|breakfast|groceries|pantry|rice|beans|recipe)\b/i,lower))
     return packageWork('food',prepareWork('need',input,'Two servings using basic pantry ingredients; adjust for known dietary needs.'));
   if(match(/\b(newsletter|mailing list|email update|subscriber|grownby|squarespace|farm email|crm)\b/i,lower))
