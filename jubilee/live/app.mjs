@@ -6,7 +6,7 @@ const $ = id => document.getElementById(id);
 const API = 'https://kbhqacsdvjsstzyplqij.supabase.co/functions/v1/porch-receiver-009';
 const KIND = {music:'music / performance', food:'food / community resources', transport:'transport', tools:'practical skills', question:'question', general:'an open offer'};
 const CAPTION = { 'record-audio':'Request mic only when you start. Download a real local audio file.', 'record-video':'Request camera/mic only when you start. Download a real local video.', art:'Produce a downloadable typographic PNG on this device.',catalog:'Export a portable description of your contribution or recording.',announce:'Prepare an announcement you choose where to share.', 'private-offer':'Explicitly submit only your text to an existing human review queue.',later:'Create a calendar file on this device; no scheduler or signup.',stream:'Bring your own livestream link; this site does not host a stream.' };
-const state = {when:'unspecified', feedback:{}, plan:null, media:null, mediaURL:null, artURL:null, catalogURL:null, calendarURL:null, recorder:null, stream:null, timer:null, start:0, receipt:null, lastAction:null};
+const state = {when:'unspecified', manualWhen:false, feedback:{}, plan:null, media:null, mediaURL:null, artURL:null, catalogURL:null, calendarURL:null, recorder:null, stream:null, timer:null, start:0, receipt:null, lastAction:null};
 const panelIDs = ['record-panel','art-panel','catalog-panel','announcement-panel','calendar-panel','review-panel','receipt-panel'];
 const text = () => $('offer-text').value.trim().slice(0,420);
 const status = t => { $('work-status').textContent = t; };
@@ -17,16 +17,17 @@ function link(id,url,name){const a=$(id);a.href=url;a.download=name;a.hidden=fal
 function resetURL(key){if(state[key]){URL.revokeObjectURL(state[key]);state[key]=null;}}
 function showPanel(id){ for(const name of panelIDs)if(name!=='receipt-panel')$(name).hidden=name!==id;
  if(id)$(id).hidden=false;}
-function plan(){state.plan=propose(text(),CARTRIDGE,{when:state.when,feedback:state.feedback});
+function plan(){state.plan=propose(text(),CARTRIDGE,{when:state.manualWhen?state.when:null,feedback:state.feedback});
+ if(!state.manualWhen){state.when=state.plan.intent.when;document.querySelectorAll('[data-when]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.when===state.when)));}
  $('interpretation').textContent=`I hear ${KIND[state.plan.intent.kind]}; ${state.plan.intent.when==='unspecified'?'timing is yours to choose':state.plan.intent.when}. ${state.plan.intent.nowCandidate?'Doing something now is available if you want it.':'No pressure to act immediately.'} This is a suggestion, not a classification you have to accept.`;
  const deck=$('action-deck');deck.replaceChildren();for(const action of state.plan.actions){const b=document.createElement('button');b.type='button';b.dataset.action=action.id;const title=document.createElement('strong');title.textContent=action.label;const note=document.createElement('span');note.textContent=CAPTION[action.id];b.append(title,note);b.addEventListener('click',()=>perform(action.id));deck.append(b);}
  if(!state.plan.actions.length) $('deck-note').textContent='No available action for this choice. Change the timing or description.';
  else $('deck-note').textContent=`${state.plan.actions.length} real action paths. You can change timing at any point. No wrong answers.`;
 }
-function selectWhen(when){state.when=when;document.querySelectorAll('[data-when]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.when===when)));plan();}
+function selectWhen(when){state.manualWhen=true;state.when=when;document.querySelectorAll('[data-when]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.when===when)));plan();}
 $('open-offer').addEventListener('click',()=>{plan();$('action-deck').scrollIntoView({block:'start',behavior:'smooth'});});
 $('offer-text').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('open-offer').click();}});
-document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{$('offer-text').value=b.dataset.sample;state.when='unspecified';document.querySelectorAll('[data-when]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.when===state.when)));plan();}));
+document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{$('offer-text').value=b.dataset.sample;state.when='unspecified';state.manualWhen=false;document.querySelectorAll('[data-when]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.when===state.when)));plan();}));
 document.querySelectorAll('[data-when]').forEach(b=>b.addEventListener('click',()=>selectWhen(b.dataset.when)));
 function credit(id){state.lastAction=id;state.feedback=learn(state.feedback,id);if($('remember-preferences').checked)savePreferences();}
 function nextSteps(id){const entry=CARTRIDGE.actions.find(a=>a.id===id);const where=$('next-actions');where.replaceChildren();
