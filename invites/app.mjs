@@ -9,6 +9,7 @@ const getId=()=>{
  return s.slice(0,8)+'-'+s.slice(8,12)+'-'+s.slice(12,16)+'-'+s.slice(16,20)+'-'+s.slice(20);
 };
 let current=null,responseText='',selectedAction='',when='open',forkWhen='open',manualWhen=false;
+const docSafePublish=()=>document.getElementById('network-publish');
 const publicRoot=()=>new URL('./',location.href);
 function invitationUrl(invite) {
  const url=publicRoot();url.hash='i='+encodeInvite(invite);return url.href;
@@ -38,6 +39,7 @@ function displayInvite(invite,changeURL=true){
   'A branch of a previous invitation. '+invite.trail.length+' step(s) of self-declared ancestry. No provenance has been authenticated.':
   'Original invitation. Its public link can be carried, answered, or forked.';
  $('invitation-link').value=invitationUrl(invite);
+ const publishLink=docSafePublish();publishLink.href=new URL('./network/#i='+encodeInvite(invite),location.href).href;
  const area=$('invite-actions');area.replaceChildren();
  for(const action of actionsFor(invite)){
   const button=document.createElement('button');
