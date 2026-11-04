@@ -1,5 +1,6 @@
 import {prepareInvitation,ROLES} from "./invite.mjs";
 import {makeFieldKit,auditFieldKit} from "./field-kit.mjs";
+import {installCarry} from "./carry.mjs";
 const form=document.getElementById("invitation-form"),out=document.getElementById("prepared"),status=document.getElementById("compose-status"),email=document.getElementById("email-draft");
 function reset(){email.removeAttribute("href");email.classList.add("disabled");email.setAttribute("aria-disabled","true");status.textContent="Draft changed; prepare again to review before sharing.";}
 form.addEventListener("submit",event=>{event.preventDefault();try{
@@ -90,3 +91,5 @@ quickNext.addEventListener('click',()=>{
  quickStatus.textContent='A prepared local kit exists below; nothing was sent or saved.';
 });
 quickText.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();quickNext.click();}});
+
+installCarry();
