@@ -86,9 +86,11 @@ function renderCard() {
         : "Bounded local guide · not a verified real-world result";
   }
   $("card-id").textContent = "CARD " + card.id.slice(0, 8).toUpperCase() + " · UNSIGNED";
-  $("card-origin").textContent = imported
-    ? "Imported card. Checksum matched, but origin, identity, and outcomes are unverified."
-    : "This is an unsigned personal draft. It has not been sent, matched, or independently verified.";
+  $("card-origin").textContent = !card.work
+    ? "This is a legacy 001 card: it saved a suggested task, but prepared no useful work. Tap Start another circle to use the corrected assistant."
+    : imported
+      ? "Imported card. Checksum matched, but origin, identity, and outcomes are unverified."
+      : "Prepared local material only. It has not been sent, matched, independently verified, or completed in the world.";
   $("save-state").textContent = saved
     ? "Saved in this browser on this device. Export a copy if you need it elsewhere."
     : "Not saved on this device. Download a JSON copy for another day or device.";
@@ -103,7 +105,7 @@ function renderCard() {
     if (entry.note) p.append(document.createTextNode(" — " + entry.note));
     $("returns").append(p);
   });
-  const canPropose = !!card.returns.length && (!card.work || (card.work.status !== "UNRESOLVED" && card.returns.at(-1).outcome === "worked"));
+  const canPropose = !!card.work && !!card.returns.length && card.work.status !== "UNRESOLVED" && card.returns.at(-1).outcome === "worked";
   $("method-zone").hidden = !canPropose;
   if (canPropose) {
     $("method-text").textContent = card.method
