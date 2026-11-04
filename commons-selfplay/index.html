@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#132a23"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Commons Self-Play · Two World Forks</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head><body>
+<header><a href="../">✳ ABUNDENT</a><span>COMMONS SELF-PLAY 001 · GAME ONLY</span></header>
+<main>
+<div class="eyebrow">WORLD CARTRIDGES / TWO INDEPENDENT TIMELINES</div>
+<h1>What happens when<br><em>neighbors cooperate?</em></h1>
+<p class="intro">Build a tiny fictional village, fork it into <strong>the same world under two different policies</strong>, then watch scripted neighbors encounter scarcity, refuse help, share food, and build infrastructure. Every fork is kept; neither can rewrite its parent.</p>
+<p class="boundary"><strong>Not real people. Not AI models.</strong> Twelve deterministic game actors follow simple consent and survival rules. The simulated village is not a Minecraft server, and a content hash is not a signature. No network, accounts, contact, grants, real-world outcomes, or actual Jubilee rewards.</p>
+
+<section class="controls-panel" aria-label="World builder">
+<h2>World director</h2>
+<div class="inputs">
+<label>Seed<input id="seed" type="number" min="0" max="999999" step="1" value="41"></label>
+<label>Days to simulate<input id="days" type="number" min="1" max="14" step="1" value="7"></label>
+<label>World event<select id="event"><option value="none">Normal days</option><option value="drought">Drought on day 2</option><option value="storm" selected>Storm on day 2</option><option value="relief">6 operator-created food units on day 2</option></select></label>
+</div><div class="actions"><button class="primary" id="new-world">Create a new seed world</button></div>
+<label for="parent">Fork from preserved cartridge<select id="parent"></select></label>
+<p class="muted">Choose an earlier snapshot to continue its history. Previous worlds are never overwritten.</p>
+<div class="actions"><button class="primary" id="simulate">Fork and run both worlds →</button><button id="download" disabled>Download world family (.json) ↓</button>
+<label class="file-button">Inspect exported family<input id="import" type="file" accept=".json,application/json"></label></div>
+<p id="status" role="status" aria-live="polite"></p>
+</section>
+<section id="compare" hidden aria-labelledby="compare-title">
+<h2 id="compare-title">Two outcomes from one starting world</h2>
+<div class="summary"><span>Independent scenario branches</span><strong id="diff"></strong></div>
+<div class="worlds">
+<article class="world isolated"><p class="kicker">FORK A · ISOLATED</p><h3>Every household for itself</h3><p>Scripted actors consume their own stocks, but do not donate or coordinate infrastructure.</p><div id="map-a" class="block-map" aria-label="Isolated village map"></div><p class="worldstat" id="stats-a"></p><p class="hash" id="hash-a"></p><div class="log" id="log-a"></div></article>
+<article class="world commons"><p class="kicker">FORK B · VOLUNTARY COMMONS</p><h3>Offer, refuse, cooperate</h3><p>Scripted consent is required. Reachable surplus can be given; separate volunteers can contribute to one shared bridge.</p><div id="map-b" class="block-map" aria-label="Commons village map"></div><p class="worldstat" id="stats-b"></p><p class="hash" id="hash-b"></p><div class="log" id="log-b"></div></article>
+</div>
+<div class="evidence"><h3>What survived?</h3><p id="result"></p><p>These are <strong>toy-world measurements</strong>, not predictions of how real communities behave. Differences are consequences of the declared policies and scripts.</p></div>
+</section>
+<footer>Borrowed from the Minecraft cartridge experiments: versioned worlds, alternate timelines, director events, observable resource conservation, independent roles, and replayable traces. <a href="../commons-lab/">Try the smaller two-role lab ↗</a></footer>
+</main></body></html>
