@@ -50,7 +50,7 @@ try:
   # Record microphone (fake hardware) and produce a media blob.
   page.locator('[data-action="record-audio"]').click()
   page.locator('#record-start').click()
-  page.locator('#record-stop').wait_for(state='enabled',timeout=10000)
+  page.wait_for_function("!document.getElementById('record-stop').disabled",timeout=10000)
   page.wait_for_timeout(1600)
   page.locator('#record-stop').click()
   page.locator('#record-download').wait_for(state='visible',timeout=15000)
