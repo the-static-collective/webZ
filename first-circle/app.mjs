@@ -1,5 +1,6 @@
 import { createCard, validateCard, recordReturn, proposeMethod,
   exportCard, importCard, shareText } from "./core.mjs";
+import { prepareReturnHelp } from "./return-help.mjs";
 import { workContext, prepareWork, auditWork } from "./work.mjs";
 
 const $ = id => document.getElementById(id);
@@ -85,6 +86,32 @@ function renderCard() {
         ? "Complete local draft · not sent or accepted"
         : "Bounded local guide · not a verified real-world result";
   }
+  // Reconstructable continuation: the prior self-report may yield a second useful step.
+  let continuation = document.getElementById("continuation");
+  if (!continuation) {
+    continuation = document.createElement("section");
+    continuation.id = "continuation";
+    continuation.className = "return-help";
+    const location = document.getElementById("card-id");
+    location.parentNode.insertBefore(continuation, location);
+  }
+  continuation.replaceChildren();
+  const another = prepareReturnHelp(card);
+  continuation.hidden = !another;
+  if (another) {
+    const label = document.createElement("span");
+    label.className = "work-label";
+    label.textContent = "ADDITIONAL WORK AFTER YOUR RETURN";
+    const title = document.createElement("h3");
+    title.textContent = another.title;
+    const body = document.createElement("p");
+    body.className = "work-body";
+    body.textContent = another.body;
+    const scope = document.createElement("p");
+    scope.className = "work-state";
+    scope.textContent = another.status === "UNRESOLVED" ? "Still unresolved; no fabricated fix." : "Another local guide, not a verified result.";
+    continuation.append(label,title,body,scope);
+  }
   $("card-id").textContent = "CARD " + card.id.slice(0, 8).toUpperCase() + " · UNSIGNED";
   $("card-origin").textContent = !card.work
     ? "This is a legacy 001 card: it saved a suggested task, but prepared no useful work. Tap Start another circle to use the corrected assistant."
@@ -158,7 +185,8 @@ $("download").addEventListener("click", async () => {
 });
 $("copy").addEventListener("click", async () => {
   try {
-    await navigator.clipboard.writeText(shareText(card));
+    const again = prepareReturnHelp(card);
+    await navigator.clipboard.writeText(shareText(card) + (again ? "\n\nADDITIONAL LOCAL WORK\n" + again.title + "\n" + again.body : ""));
     status("Share text copied. It does not contain your return notes.");
   } catch { status("Clipboard unavailable. Try Download card instead.", true); }
 });
