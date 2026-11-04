@@ -25,3 +25,10 @@ test('canonical domain offers robots discovery without rewriting hello review-ca
   assert.match(robots, /User-agent: \*/);
   assert.match(robots, /Sitemap: https:\/\/abundent\.org\/sitemap\.xml/);
 });
+
+test('first-action choices lead straight to actual human Porch paths', () => {
+  const html = read('index.html');
+  assert.match(html, /https:\/\/hello\.abundent\.org\/porch\/\?kind=need/);
+  assert.match(html, /https:\/\/hello\.abundent\.org\/porch\/\?kind=offer/);
+  assert.doesNotMatch(html, /<strong>I can help<\/strong><span>See ways to take part/);
+});
