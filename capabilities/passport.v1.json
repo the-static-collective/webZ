@@ -1,0 +1,103 @@
+{
+  "schema": "jarvis.capability-passport/v1",
+  "repository": "the-static-collective/webZ",
+  "version": "2026-11-04.1",
+  "authority": "PUBLIC_DESCRIPTION_ONLY_NOT_RUNTIME_OR_PERMISSION",
+  "availability": "NOT_OBSERVED",
+  "capabilities": [
+    {
+      "id": "webz.first-circle",
+      "title": "Make a useful first step",
+      "intents": [
+        "repair",
+        "fix",
+        "help",
+        "meal",
+        "food",
+        "recipe",
+        "volunteer",
+        "offer",
+        "give",
+        "task",
+        "work"
+      ],
+      "readiness": "LOCAL_BROWSER",
+      "delivers": "Prepares bounded guides, drafts and short games in the browser, without contacting anyone.",
+      "entry": {
+        "kind": "WEBZ_LOCAL_LINK",
+        "href": "./first-circle/"
+      },
+      "sourcePath": "first-circle/work.mjs",
+      "requires": "You choose whether to save or share; a draft does not fulfill the underlying need.",
+      "contract": {
+        "inputHint": "human.intent/v1",
+        "outputHint": "local.work/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "LOCAL_SELF_REPORT",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
+    },
+    {
+      "id": "webz.glean",
+      "title": "Prepare a consented surplus handoff",
+      "intents": [
+        "surplus",
+        "extra fish",
+        "fish",
+        "extra food",
+        "leftovers",
+        "glean",
+        "donate produce",
+        "food to share",
+        "share resources",
+        "give away food"
+      ],
+      "readiness": "SOURCE_REVIEW",
+      "delivers": "Inspects separately prepared surplus/quest records and can draft a limited postcard; not a live resource match.",
+      "entry": {
+        "kind": "WEBZ_LOCAL_LINK",
+        "href": "./glean/"
+      },
+      "sourcePath": "glean/bridge.mjs",
+      "requires": "Requires a source-owned offer, separate receiver, safe handling, and explicit human consent.",
+      "contract": {
+        "inputHint": "owner.released-surplus/v0",
+        "outputHint": "local.invitation-draft/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "NONE",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
+    },
+    {
+      "id": "webz.jubilee",
+      "title": "Run a small community music or gathering activity",
+      "intents": [
+        "potluck",
+        "gathering",
+        "music",
+        "concert",
+        "church",
+        "worship",
+        "festival",
+        "community night",
+        "fellowship",
+        "event"
+      ],
+      "readiness": "LOCAL_BROWSER",
+      "delivers": "Offers local, printable event tools and a voluntary hosting guide; no venue or artists automatically booked.",
+      "entry": {
+        "kind": "WEBZ_LOCAL_LINK",
+        "href": "./jubilee/"
+      },
+      "sourcePath": "jubilee/index.html",
+      "requires": "Host controls venue, accessibility, safety, attendance and rights.",
+      "contract": {
+        "inputHint": "human.intent/v1",
+        "outputHint": "local.host-kit/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "NONE",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
+    }
+  ]
+}
