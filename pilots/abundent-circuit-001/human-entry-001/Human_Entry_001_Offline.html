@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Human Entry 001 · The Five Empty Chairs</title>
+<style>
+:root {--ink:#1c3540;--muted:#546b70;--paper:#f4f5ed;--white:#fffef9;--line:#cedbd2;--accent:#0c695c;--amber:#eed49d;--red:#9c3c35}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:#163e45;color:white;padding:36px max(20px,calc((100% - 1060px)/2)) 28px}
+header h1{font-size:clamp(2rem,5vw,3.1rem);margin:.16em 0}.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:750}
+header p{max-width:760px;margin:8px 0 0;color:#dbe8df}main{max-width:1100px;margin:0 auto;padding:23px 18px 60px}
+.notice{background:var(--amber);border:1px solid #c3a35b;padding:14px 18px;border-radius:10px;margin-bottom:19px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.chairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px}
+.panel,.chair{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 5px 15px #173f4610}.chair{min-height:175px}
+.chair .number{font-size:.75rem;color:var(--accent);font-weight:800;letter-spacing:.07em}.chair h3{margin:7px 0 0;font-size:1.13rem}
+.chair p{font-size:.83rem;color:var(--muted);min-height:38px;margin:4px 0 8px}.chair .tag{font-size:.74rem;font-weight:700;color:var(--red)}
+h2{font-size:1.27rem;margin:0 0 13px}label{display:block;font-weight:650;font-size:.9rem;margin:8px 0 4px}input,textarea,select{width:100%;padding:9px 11px;background:white;color:var(--ink);border:1px solid #94aca8;border-radius:7px;font:inherit}input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #c18e25;outline-offset:2px}
+button{border:0;background:var(--accent);color:white;border-radius:8px;padding:11px 15px;font:inherit;font-weight:740;cursor:pointer;margin:5px 6px 5px 0}button.alt{background:#285360}button.neutral{background:#e4ede8;color:#244a4d;border:1px solid #b4c9c0}button.danger{background:var(--red)}button:disabled{opacity:.42;cursor:not-allowed}
+.small{font-size:.85rem;color:var(--muted)}.status{font-weight:800;color:var(--accent);letter-spacing:.06em}.history{padding-left:20px;max-height:280px;overflow:auto}.history li{padding:5px 0;border-bottom:1px solid #e3e8df;font-size:.9rem}
+code{background:#e6eee8;border-radius:4px;padding:2px 4px;word-break:break-word}#inspection{white-space:pre-wrap;overflow-wrap:anywhere}footer{border-top:1px solid var(--line);margin-top:20px;padding-top:15px;color:var(--muted);font-size:.84rem}
+@media(max-width:740px){.grid{grid-template-columns:1fr}header{padding:25px 20px}}@media print{button,input[type=file]{display:none}body{background:white}.panel,.chair{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><div class="kicker">STATIC FIELD · EXPERIMENT 001 · LOCAL ONLY</div><h1>Five Empty Chairs</h1>
+<p>Prepare one useful act. Leave every human role unclaimed until somebody actually chooses to take it. A voluntary refusal counts as a legitimate outcome.</p></header>
+<main>
+<div class="notice"><strong>Boundary:</strong> Offline planning and fictional rehearsal, not identity verification, an actual volunteer enrollment system, a signed reLATTE receipt, an event approval, a financial instrument, or proof of work. Typed names and exported JSON are self-reported and can be forged. Do not enter private personal information.</div>
+<section class="panel" style="margin-bottom:16px"><h2>01 · The activity</h2>
+<div class="grid"><div><label for="title">Small, concrete activity</label><input id="title" maxlength="110" placeholder="Example: set up a welcome table"><label for="description">Scope / boundary</label><textarea id="description" rows="3" maxlength="400" placeholder="What is needed, and what is not authorized?"></textarea></div>
+<div><div class="kicker" style="color:var(--accent)">Local board</div><div class="status" id="status" aria-live="polite">DRAFT</div><p class="small" id="nextText"></p><button id="demo" class="neutral">Load fictional rehearsal</button><button id="reset" class="neutral">Clear board</button><p class="small">This browser may save the board locally. Nothing is sent to a server. Save a copy if local storage is unavailable or cleared.</p></div></div></section>
+<section class="panel" style="margin-bottom:16px"><h2>02 · The five chairs</h2><p class="small">An empty chair is not an error. The system must stop at the exact step that needs that chair. Role labels below are not verified identities. For this first proof, witness and reviewer must be different from the participant, and reviewer must be distinct from the steward and witness.</p><div class="chairs" id="chairs"></div></section>
+<div class="grid"><section class="panel"><h2>03 · One bounded crossing</h2><div id="actionPrompt" aria-live="polite"></div><button id="advance">Record next local step</button><hr style="border:0;border-top:1px solid var(--line);margin:17px 0">
+<label for="refuseRole">A filled chair may refuse</label><select id="refuseRole"></select><label for="refuseNote">Optional public-safe explanation</label><input id="refuseNote" maxlength="150" placeholder="No explanation required"><button id="refuse" class="danger">Record REFUSE</button><p class="small">REFUSE terminates this local activity; it does not penalize the participant or authorize a substitute.</p></section>
+<section class="panel"><h2>04 · The trace</h2><ol class="history" id="history" aria-live="polite"></ol><p class="small">These entries record buttons pressed in this browser. The log is editable by anyone with file access and is not independently witnessed.</p></section></div>
+<section class="panel" style="margin-top:16px"><h2>05 · A portable, inspectable note</h2><p>Export a local <strong>unsigned</strong> receipt to inspect or carry elsewhere. Importing a note is <em>read-only inspection</em>, not an instruction to this board and not an authorized return. For genuine signed keys, independent HOLD/REFUSE and two-machine checks, use Circuit 006's separate native field kit on compatible devices.</p><button id="export" class="alt">Export unsigned JSON note</button><label for="inspectFile">Inspect a JSON note (will not adopt it)</label><input id="inspectFile" type="file" accept=".json,application/json"><p id="inspection" class="small" aria-live="polite">No external note inspected.</p></section>
+<footer>No network requests. No external contacts. No real participants were enrolled by the software. Planned local human participation remains unverified until separate, consent-based field evidence exists. Compatible with ordinary recent browsers; on older Mojave browsers verify storage and download behavior locally.</footer>
+</main>
+<script>
+(function(){'use strict';
+var SCHEMA='static-field.human-entry-001/v1';
+var KEY='static-field-human-entry-001-v1';
+var ROLES=[
+ ['host','Host','Permits this particular activity'],
+ ['steward','Steward','Bounds and coordinates the task'],
+ ['participant','Participant','Chooses whether to help'],
+ ['witness','Witness','Reports an observation, not a conclusion'],
+ ['reviewer','Reviewer','Independently evaluates the report']
+];
+var TRANSITIONS=[
+ {from:'DRAFT',to:'HOST_AUTHORIZED',role:'host',verb:'authorize the proposed scope'},
+ {from:'HOST_AUTHORIZED',to:'STEWARD_SCOPED',role:'steward',verb:'accept bounded coordination'},
+ {from:'STEWARD_SCOPED',to:'PARTICIPANT_ACCEPTED',role:'participant',verb:'volunteer explicitly'},
+ {from:'PARTICIPANT_ACCEPTED',to:'WORK_REPORTED',role:'participant',verb:'report the work (self-attested)'},
+ {from:'WORK_REPORTED',to:'WITNESS_RECORDED',role:'witness',verb:'record an independent observation'},
+ {from:'WITNESS_RECORDED',to:'REVIEW_CONFIRMED',role:'reviewer',verb:'confirm the local report'}
+];
+function clean(value,max){return String(value==null?'':value).trim().slice(0,max);}
+function newBoard(){return {schema:SCHEMA,id:'entry-'+Date.now()+'-'+Math.floor(Math.random()*1000000),
+ title:'',description:'',stage:'DRAFT',mode:'UNVERIFIED_LOCAL_NOTE',roles:{host:'',steward:'',participant:'',witness:'',reviewer:''},events:[]};}
+function next(board){for(var i=0;i<TRANSITIONS.length;i++){if(TRANSITIONS[i].from===board.stage)return TRANSITIONS[i];}return null;}
+function distinct(board,role){var current=clean(board.roles[role],70).toLowerCase();if(!current)return false;
+ if(role==='witness' && current===clean(board.roles.participant,70).toLowerCase())return false;
+ if(role==='reviewer'){for(var i=0;i<3;i++){var compared=['participant','steward','witness'][i];if(current===clean(board.roles[compared],70).toLowerCase())return false;}}
+ return true;}
+function canAdvance(board){var step=next(board);if(!step)return 'Activity is finished or refused.';
+ if(!clean(board.title,110))return 'Enter a short activity title.';
+ if(!clean(board.description,400))return 'Record the bounded scope.';
+ if(!clean(board.roles[step.role],70))return 'Chair empty: '+step.role+'.';
+ if(!distinct(board,step.role))return 'Independent witness/reviewer role conflict. Assign a different self-reported label.';
+ return '';}
+function record(board,role,kind,stage,note){board.events.push({number:board.events.length+1,kind:kind,
+ role:role,actor:clean(board.roles[role],70),stage:stage,note:clean(note,150),at:new Date().toISOString(),
+ provenance:'LOCAL_BUTTON_PRESS_SELF_ATTESTED'});}
+function advance(board){var reason=canAdvance(board);if(reason)throw Error(reason);
+ var step=next(board);board.stage=step.to;record(board,step.role,'ADVANCE',step.to,step.verb);return board;}
+function refuse(board,role,note){if(!next(board))throw Error('Cannot refuse a terminal activity.');
+ if(ROLES.map(function(r){return r[0];}).indexOf(role)<0 || !clean(board.roles[role],70))throw Error('Only a filled chair can refuse.');
+ board.stage='REFUSED';record(board,role,'REFUSE','REFUSED',note||'No explanation provided');return board;}
+function validShape(board){return board && board.schema===SCHEMA && typeof board.id==='string' &&
+ typeof board.title==='string' && typeof board.description==='string' &&
+ typeof board.stage==='string' && ['DRAFT','HOST_AUTHORIZED','STEWARD_SCOPED','PARTICIPANT_ACCEPTED','WORK_REPORTED','WITNESS_RECORDED','REVIEW_CONFIRMED','REFUSED'].indexOf(board.stage)>=0 &&
+ board.roles && ROLES.every(function(r){return typeof board.roles[r[0]]==='string';}) &&
+ Array.isArray(board.events) && board.events.length<=40 && board.events.every(function(e){return e && typeof e.kind==='string' && typeof e.role==='string';});}
+function packet(board){return {schema:'static-field.human-entry-001-note/v1',issuedAt:new Date().toISOString(),
+ issuer:'UNAUTHENTICATED_LOCAL_BROWSER',signature:'NONE',status:'UNSIGNED_NOTE_NOT_FIELD_PROOF',
+ board:JSON.parse(JSON.stringify(board)),caution:'This unsigned, self-attested JSON is not proof of identity, authority, independent observation, real work, or physical custody.'};}
+window.HumanEntry001={newBoard:newBoard,next:next,canAdvance:canAdvance,advance:advance,refuse:refuse,validShape:validShape,packet:packet};
+var board=newBoard();try{var saved=localStorage.getItem(KEY);if(saved){var parsed=JSON.parse(saved);if(validShape(parsed))board=parsed;}}catch(e){}
+function el(id){return document.getElementById(id);}function txt(node,value){node.textContent=value;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(board));}catch(e){}}
+function render(){el('title').value=board.title;el('description').value=board.description;txt(el('status'),board.stage.replace(/_/g,' '));
+ var nextStep=next(board);txt(el('nextText'),nextStep?'Next: '+nextStep.role+' — '+nextStep.verb+'.':'Terminal local state. The trace remains inspectable.');
+ var chairs=el('chairs');while(chairs.firstChild)chairs.removeChild(chairs.firstChild);
+ ROLES.forEach(function(r,i){var box=document.createElement('div');box.className='chair';
+ var num=document.createElement('div');num.className='number';txt(num,'CHAIR 0'+(i+1));box.appendChild(num);
+ var h=document.createElement('h3');txt(h,r[1]);box.appendChild(h);
+ var p=document.createElement('p');txt(p,r[2]);box.appendChild(p);
+ var tag=document.createElement('div');tag.className='tag';txt(tag,board.roles[r[0]]?'ASSIGNED · SELF-REPORTED':'EMPTY · NO AUTHORITY');box.appendChild(tag);
+ var label=document.createElement('label');txt(label,'Local role label');label.htmlFor='role-'+r[0];box.appendChild(label);
+ var field=document.createElement('input');field.id='role-'+r[0];field.maxLength=70;field.value=board.roles[r[0]];field.disabled=board.stage!=='DRAFT';
+ field.placeholder='Leave empty until assigned';field.addEventListener('change',function(){board.roles[r[0]]=clean(field.value,70);save();setTimeout(render,0);});box.appendChild(field);chairs.appendChild(box);});
+ el('title').disabled=board.stage!=='DRAFT';el('description').disabled=board.stage!=='DRAFT';
+ var reason=canAdvance(board);txt(el('actionPrompt'),nextStep?'Current step: '+nextStep.role+' must '+nextStep.verb+'. '+(reason||'This is only a local self-attested button press.'):'No further steps allowed.');
+ el('advance').disabled=!!reason;el('advance').textContent=nextStep?'Record '+nextStep.to.replace(/_/g,' '):'Activity closed';
+ var refuseSelect=el('refuseRole'),selected=refuseSelect.value;while(refuseSelect.firstChild)refuseSelect.removeChild(refuseSelect.firstChild);
+ ROLES.forEach(function(r){if(board.roles[r[0]]){var opt=document.createElement('option');opt.value=r[0];txt(opt,r[1]+' · '+board.roles[r[0]]);refuseSelect.appendChild(opt);}});
+ if(Array.from(refuseSelect.options).some(function(o){return o.value===selected;}))refuseSelect.value=selected;
+ el('refuse').disabled=!nextStep||refuseSelect.options.length===0;
+ var log=el('history');while(log.firstChild)log.removeChild(log.firstChild);
+ if(!board.events.length){var none=document.createElement('li');txt(none,'No recorded actions. All human participation remains unverified.');log.appendChild(none);}
+ board.events.forEach(function(evt){var item=document.createElement('li');txt(item,evt.number+'. '+evt.stage+' · '+evt.role+' ('+evt.actor+') · '+evt.provenance+(evt.kind==='REFUSE'?' · '+evt.note:''));log.appendChild(item);});}
+function changed(field,key,max){el(field).addEventListener('change',function(){if(board.stage!=='DRAFT')return;board[key]=clean(el(field).value,max);save();setTimeout(render,0);});}
+changed('title','title',110);changed('description','description',400);
+el('advance').addEventListener('click',function(){try{advance(board);save();render();}catch(e){alert(e.message);}});
+el('refuse').addEventListener('click',function(){try{refuse(board,el('refuseRole').value,el('refuseNote').value);save();render();}catch(e){alert(e.message);}});
+el('demo').addEventListener('click',function(){if(board.events.length && !confirm('Replace the current local board with a fictional rehearsal?'))return;
+ board=newBoard();board.mode='FICTIONAL_REHEARSAL';board.title='Rehearsal: prepare a welcome table';board.description='Fictional setup only. No actual venue, volunteer, supplies, money, or gathering are authorized.';
+ board.roles={host:'Harbor',steward:'Moss',participant:'River',witness:'Juniper',reviewer:'Lantern'};save();render();});
+el('reset').addEventListener('click',function(){if(!confirm('Clear this local activity and trace? Export first if you want to keep the note.'))return;board=newBoard();save();render();});
+el('export').addEventListener('click',function(){var bytes=JSON.stringify(packet(board),null,2)+'\n';var url=URL.createObjectURL(new Blob([bytes],{type:'application/json'}));
+ var a=document.createElement('a');a.href=url;a.download='HUMAN_ENTRY_001_UNSIGNED_'+board.id.replace(/[^a-z0-9-]/gi,'_')+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},2500);});
+el('inspectFile').addEventListener('change',function(){var file=this.files && this.files[0];if(!file)return;var display=el('inspection');
+ if(file.size>65536){txt(display,'REFUSED INSPECTION: file exceeds 64 KiB.');return;}var reader=new FileReader();reader.onload=function(){try{var data=JSON.parse(String(reader.result));
+ if(!data||data.schema!=='static-field.human-entry-001-note/v1'||data.signature!=='NONE'||!validShape(data.board))throw Error('Unexpected or altered note shape.');
+ txt(display,'READ-ONLY · UNSIGNED · NOT ADOPTED\nActivity: '+clean(data.board.title,110)+'\nStage claimed: '+data.board.stage+'\nLocal actions claimed: '+data.board.events.length+'\nIdentity and event occurrence: NOT VERIFIED');
+ }catch(e){txt(display,'REFUSED INSPECTION: '+e.message);}};reader.onerror=function(){txt(display,'File could not be read.');};reader.readAsText(file);});
+render();
+})();
+</script>
+</body>
+</html>
