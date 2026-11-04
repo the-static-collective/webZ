@@ -196,6 +196,21 @@ $('watch-start').addEventListener('click',async()=>{
  }catch(e){note('watch-status','Could not subscribe: '+e.message)}
 });
 $('watch-resume').addEventListener('click',()=>beginPoll($('watch-key').value.trim()));
+$('watch-stop').addEventListener('click',async()=>{
+ const key=watchKey||$('watch-key').value.trim();
+ if(!KEY.test(key)){note('watch-status','No watch receipt is active.');return}
+ try{
+  const result=await request({action:'unwatch',watchKey:key});
+  if(pollTimer)clearInterval(pollTimer);pollTimer=null;watchKey='';cursor=0;
+  if(thread){try{localStorage.removeItem('ic02:watch:'+thread.thread.id)}catch{}}
+  $('watch-key').value='';$('watch-remember').checked=false;
+  $('watch-events').replaceChildren();
+  receipts=receipts.filter(r=>!(r.label==='WATCH NOTIFICATION KEY'&&r.key===key));
+  $('receipt-preview').textContent=receipts.length?'ABUNDENT PRIVATE RECEIPTS — NEVER SHARE THESE KEYS\n\n'+receipts.map(x=>x.label+'\n'+Object.entries(x).filter(([k])=>k!=='label').map(([k,v])=>k+': '+v).join('\n')).join('\n\n'):'No private receipts created in this tab.';
+  note('watch-status',result.notice);
+ }catch(e){note('watch-status','Could not unsubscribe: '+e.message)}
+});
+
 $('watch-browser').addEventListener('click',async()=>{
  if(typeof Notification==='undefined'){note('watch-status','This browser cannot show alerts. On-page updates still work.');return}
  try{
