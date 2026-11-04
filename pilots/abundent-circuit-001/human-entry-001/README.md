@@ -1,6 +1,12 @@
 # STATIC FIELD — HUMAN ENTRY 001: Five Empty Chairs
 
-**Status:** offline local experiment. Run by double-clicking `Human_Entry_001_Offline.html`. No server, account, installation, database, external API, or package download is required. Designed to be legible on phone screens and usable in a browser on a Mac; macOS 10.14.6 Mojave browser compatibility and localStorage/file downloads require actual device testing.
+**Status:** offline local experiment. The button-first version is `Human_Entry_001_Buttons.html`; the original form-style baseline is `Human_Entry_001_Offline.html`. No server, account, installation, database, external API, or package download is required. Designed to be legible on phone screens and usable in a browser on a Mac; macOS 10.14.6 Mojave browser compatibility and localStorage/file downloads require actual device testing.
+
+## Button-first alternative (November 3, 2026)
+
+**Start here for a lower-friction trial:** open `Human_Entry_001_Buttons.html`. It replaces the initial worksheet layout with one contextual question, large action buttons, one optional conversational reply box, tappable role cards, and progressive disclosure. A fictional example takes one tap; a user can leave chairs empty and return later. Local role labels are still **not** human identity, verified consent or proof of work. It shares the same browser storage key and JSON note schema as the original; only one version should be used at a time in the same browser profile. This is a *guided offline interface*, not an AI chatbot. Browser-level Playwright/Chromium `set_content` checks passed the draft-to-review flow and a terminal refusal; actual Mojave Finder launch, storage persistence and device-level downloads remain unverified.
+
+**Interaction principle:** Buttons before forms; one conversational reply before multi-field worksheets. Offer an understandable next action, with undo/refusal and an optional details view. Do not force people to complete administrative setup to explore.
 
 ## Purpose
 
