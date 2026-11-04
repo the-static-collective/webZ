@@ -1,0 +1,91 @@
+<!doctype html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173b31">
+<meta name="description" content="A public conversation can grow from any invitation. Receive replies, opt into in-app alerts, and mutually acknowledge possible matches.">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://kbhqacsdvjsstzyplqij.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="./network.css">
+<script type="module" src="./network.mjs"></script>
+<title>Invitation Network · Abundent</title></head>
+<body><a class="skip" href="#main">Skip to conversation</a>
+<header><a class="brand" href="../../">ABUNDENT <span>· INVITATIONS THAT RESPOND</span></a><nav><a href="../">MAKE AN INVITATION</a><a href="../../jubilee/live/">LIVE OFFER</a><a href="../../">HOME</a></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">INVITATION NETWORK 002</p><h1>An invitation can<br><em>become a conversation.</em></h1>
+<p class="lede">Put something possible into the world. Let people answer, build on it, and optionally be notified. A proposed match becomes mutually acknowledged only when both sides use separate private receipts.</p>
+<p class="sub">No account. No automatic invitations sent to your contacts. Public words are public: never include personal information, children, addresses, or sensitive stories.</p>
+</section>
+<section id="publish-panel" class="panel" hidden>
+<div class="eyebrow">YOU HAVE AN INVITATION</div>
+<h2>Make it a public conversation?</h2>
+<blockquote id="publish-words"></blockquote><p id="publish-when" class="tiny"></p>
+<p>People can read and reply for up to 30 days. Public responses are not automatically verified. You can withdraw using a private receipt, but someone may already have copied your words.</p>
+<label for="publish-intent">What are you bringing?</label><select id="publish-intent">
+<option value="offer">I'm offering something</option>
+<option value="need">I could use something</option>
+<option value="question">I'm asking or exploring</option>
+<option value="open">A possibility with no fixed role</option>
+</select>
+<label class="check"><input type="checkbox" id="publish-consent"><span>I want these words published openly for replies. They contain no private information or promises on anyone else's behalf.</span></label>
+<button type="button" id="publish-button" class="primary">Publish this conversation →</button>
+<p id="publish-status" role="status" aria-live="polite"></p>
+</section>
+<section id="browse-panel" class="panel" hidden>
+<div class="eyebrow">DISCOVER</div><h2>Find an open possibility</h2>
+<p>What's the broad area of your interest? These are unverified possibilities, not guaranteed openings.</p>
+<div class="selectors"><label for="browse-lane">Topic</label><select id="browse-lane"><option value="creative">Music & creativity</option><option value="food">Food & sharing</option><option value="make">Making & repair</option><option value="transport">Rides & transport</option><option value="question">Questions & learning</option><option value="open">Other possibilities</option></select>
+<label for="browse-role">I'm looking to</label><select id="browse-role"><option value="need">Offer help to a need</option><option value="offer">Find an offer</option><option value="open">Browse broadly</option></select></div>
+<button type="button" class="primary" id="browse-button">Find real public invitations →</button>
+<div id="browse-results" class="thread-posts" aria-live="polite"></div>
+<p id="browse-status" role="status" aria-live="polite"></p>
+<a href="../">Or create a new invitation →</a>
+</section>
+<section id="thread-panel" class="panel" hidden>
+<p class="eyebrow">PUBLIC CONVERSATION · SELF-DECLARED</p><p id="thread-time" class="availability"></p>
+<h2 id="thread-title">An invitation</h2><blockquote id="thread-words"></blockquote>
+<p id="thread-meta" class="tiny"></p>
+<div class="thread-bar"><button id="thread-refresh" type="button">Refresh conversation</button><button id="thread-discover" type="button">Find related possibilities</button><a href="../">Create a different invitation</a></div>
+<section aria-labelledby="replies-heading"><h3 id="replies-heading">What people brought back</h3>
+<div id="thread-posts" class="thread-posts" aria-live="polite"></div></section>
+<section id="write-panel" class="action-panel">
+<h3>Add something useful</h3><p>Every reply can be an offer, a need, a question, or an actual step. Your response is published only if you choose to send it.</p>
+<label for="reply-kind">My response is</label><select id="reply-kind"><option value="offer">I can offer something</option><option value="need">I could use something</option><option value="question">I have a question</option><option value="act">I can take a step now</option><option value="open">Another possibility</option></select>
+<label for="reply-words">In your own words</label><textarea rows="3" id="reply-words" maxlength="240" placeholder="I can help with one useful thing…"></textarea>
+<label class="check"><input id="reply-consent" type="checkbox"><span>Publish this public-safe response. No private contact details or commitments from other people.</span></label>
+<button type="button" class="primary" id="reply-send">Add my response →</button><p id="reply-status" role="status" aria-live="polite"></p>
+</section>
+<section id="matching-panel" class="action-panel" hidden><h3>Two-sided acknowledgment</h3>
+<p id="match-intro"></p><label for="match-key">Your private thread or response receipt</label>
+<input id="match-key" type="password" autocomplete="off" placeholder="43-character receipt key">
+<button id="match-propose" type="button">Propose a match between these two contributions</button>
+<label for="match-id">Match receipt ID</label><input id="match-id" type="text" placeholder="Match ID appears after proposal">
+<button id="match-confirm" type="button">Confirm using my private receipt</button>
+<p id="match-status" role="status" aria-live="polite"></p>
+<p class="tiny">Confirmation proves possession of separate capability receipts, not the identities of two people, the safety of a meeting, or delivery of a resource.</p></section>
+<section id="notices-panel" class="action-panel">
+<h3>Hear when someone responds</h3>
+<p>Choose to receive automatic in-app updates while this page is open. Nothing is sent to your contacts. Closed-tab push, SMS and email are not connected yet.</p>
+<button id="watch-start" type="button" class="primary">Notify me while I'm here</button>
+<label for="watch-key">Or resume an existing private watch receipt</label>
+<input id="watch-key" type="password" autocomplete="off" placeholder="Paste your private 43-character watch key">
+<div class="buttons"><button id="watch-resume" type="button">Resume notifications</button><button id="watch-stop" type="button">Stop notifications</button><button id="watch-browser" type="button">Enable browser alert while open</button></div>
+<label class="check"><input id="watch-remember" type="checkbox"><span>Remember my watch receipt on this device (optional). Otherwise it disappears when this tab closes.</span></label>
+<p id="watch-status" role="status" aria-live="polite"></p>
+<div id="watch-events" class="thread-posts" aria-live="polite"></div>
+</section>
+<section id="privacy-panel" class="action-panel"><h3>Your private receipts</h3>
+<p>Save any keys you receive. They authorize withdrawal, match decisions, or notification checks. These keys are not identities, and this service cannot recover a lost key.</p>
+<pre id="receipt-preview">No private receipts created in this tab.</pre>
+<div class="buttons"><button id="receipt-copy" type="button">Copy receipts</button><button id="receipt-save" type="button">Save receipt file</button></div>
+<label for="withdraw-key">Withdraw an invitation or reply with its own private key</label><input type="password" id="withdraw-key" autocomplete="off" placeholder="Paste thread owner or reply receipt">
+<label for="withdraw-post">Reply ID (leave blank to close whole thread)</label><input id="withdraw-post" type="text" placeholder="Optional reply UUID">
+<button id="withdraw-button" type="button" class="quiet">Withdraw my entry</button><p id="withdraw-status" role="status" aria-live="polite"></p>
+</section>
+<section class="action-panel"><h3>Report an unsafe public entry</h3>
+<p>Reports can cause an entry to be hidden if multiple distinct reports are received. Reports are not proof of wrongdoing.</p>
+<label for="report-post">Reply ID (leave blank to report whole thread)</label><input id="report-post" type="text" placeholder="Optional reply UUID">
+<label for="report-reason">Reason</label><select id="report-reason"><option value="private">Private information</option><option value="unsafe">Unsafe or threatening</option><option value="spam">Spam or misleading</option></select>
+<button type="button" id="report-button">Report</button><p id="report-status" role="status"></p></section>
+</section>
+<p id="network-status" role="status" aria-live="polite"></p>
+<section class="fineprint"><h2>Receipts, not assumptions.</h2><p>Threads and responses persist in Supabase and can be opened from another device. Notifications appear automatically while the page is open and the person has opted in. A candidate becomes mutually acknowledged only after distinct thread and reply receipt confirmations. No automated matching asserts a real-world outcome.</p></section>
+</main><footer>INVITE. RECEIVE. RESPOND. CONTINUE. <a href="../">The Invitation Chain</a></footer>
+</body></html>
