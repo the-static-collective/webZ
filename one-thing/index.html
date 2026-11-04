@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#152b22">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Find one thing you already have. Turn it into one useful act today. The free, account-free Abundent One Thing Quest makes a practical three-step plan on your device.">
+<meta property="og:type" content="website"><meta property="og:title" content="ONE THING · Do something useful today"><meta property="og:description" content="A spare tool. A skill. Fifteen minutes. One real thing can start something good. No account. No automatic sharing.">
+<meta property="og:url" content="https://abundent.org/one-thing/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://abundent.org/one-thing/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>ONE THING · Do something useful today · Abundent</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./quest.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the quest</a>
+<header class="top"><a class="brand" href="../">✳ ABUNDENT</a><nav><a href="../first-circle/">First Circle</a><a href="../invites/">Invitation Chain</a></nav><span class="edition">FIELD QUEST / 006</span></header>
+<main id="main">
+<section class="hero">
+<p class="eyebrow">THE ANTI-CAMPAIGN / FREE / NO ACCOUNT</p>
+<h1>One thing.<br><em>One useful act.</em></h1>
+<p class="lede">The internet has enough followers. Find one thing in your world that could do somebody some good. Let's make the next move real.</p>
+<div class="handrail"><b>It counts even if you never share it.</b> This tool makes a practical plan right here. It does not find a real person, send a message, or verify an outcome.</div>
+<div class="pulse" aria-label="Quest stages"><span class="live">01 Find it</span><span>02 Do something</span><span>03 Tell the truth</span></div>
+</section>
+<section class="panel" id="start">
+<div class="kicker">YOUR FIRST MOVE</div><h2>What have you got?</h2><p>Think: garage, kitchen, garden, pocket, calendar, or something you know how to do.</p>
+<div class="choices" role="group" aria-label="What kind of thing?">
+<button type="button" data-kind="material" aria-pressed="true">A thing or tool <small>Parts, equipment, useful leftovers</small></button>
+<button type="button" data-kind="food" aria-pressed="false">Food or garden <small>Produce, seeds, safe surplus</small></button>
+<button type="button" data-kind="skill" aria-pressed="false">A skill <small>Fifteen minutes of know-how</small></button>
+<button type="button" data-kind="space" aria-pressed="false">Time or space <small>A table, an hour, a useful corner</small></button>
+<button type="button" data-kind="need" aria-pressed="false">I need one thing <small>A tool, help, or missing step</small></button>
+</div>
+<label for="thing" class="field-label">Name ONE real thing. No private information.</label>
+<textarea id="thing" maxlength="180" rows="2" placeholder="A spare working screwdriver set…"></textarea>
+<div class="examples" id="examples" aria-label="Examples to try"></div>
+<fieldset class="timing"><legend>When might this be possible?</legend>
+<label><input type="radio" name="when" value="now" checked> Today</label>
+<label><input type="radio" name="when" value="soon"> This week</label>
+<label><input type="radio" name="when" value="open"> Ask first</label>
+</fieldset>
+<button class="primary wide" type="button" id="make">Show me my next useful step →</button>
+<p id="entry-status" class="status" role="status" aria-live="polite">Nothing sent. Your words stay in this browser.</p>
+<p class="fine">Do not enter names, contact details, precise locations, children's information, sensitive records or anything unsafe to offer. This is a local planning tool, not a public posting form.</p>
+</section>
+
+<section class="panel result" id="quest" hidden aria-label="Your One Thing Quest">
+<div class="result-head"><div><p class="kicker">QUEST CREATED · LOCAL ONLY</p><h2 id="quest-headline"></h2></div><span class="stamp" id="quest-stage">PREPARED</span></div>
+<p class="thing-quote" id="quest-thing"></p>
+<p class="quest-question" id="quest-question"></p>
+<h3>Three moves. Start at the top.</h3>
+<div id="steps" class="steps"></div>
+<p id="progress-status" class="status" role="status" aria-live="polite"></p>
+<div class="result-actions"><button id="print" type="button">Print / save as PDF</button><button id="keep" type="button">Keep on this device</button><button id="reset" type="button">Start a different thing</button></div>
+<p id="keep-status" class="fine">Not saved. This quest disappears when the tab closes unless you choose to keep it.</p>
+<div class="divider"></div>
+<div class="kicker">RETURN · NOT A SCOREBOARD</div>
+<h3>What actually happened?</h3>
+<p>No pretend wins. A step you marked complete is still your own report, not an independent confirmation.</p>
+<div class="outcomes" role="group" aria-label="Record what happened">
+<button type="button" data-outcome="worked" aria-pressed="false">Something worked</button>
+<button type="button" data-outcome="not-yet" aria-pressed="false">Not yet</button>
+<button type="button" data-outcome="different" aria-pressed="false">Something else</button>
+</div>
+<label class="field-label" for="outcome-note">A short non-sensitive observation (optional)</label>
+<textarea id="outcome-note" maxlength="220" rows="2" placeholder="I checked the item and it still works…"></textarea>
+<button id="make-report" type="button" class="primary">Prepare my honest return →</button>
+<pre id="report" class="report" hidden></pre>
+<div class="result-actions"><button id="copy-report" type="button" hidden>Copy return</button><button id="save-report" type="button" hidden>Save return as text</button></div>
+<p id="return-status" class="status" role="status" aria-live="polite"></p>
+<div class="divider"></div>
+<div class="kicker">OPTIONAL · CIRCULATE, DON'T COMPEL</div>
+<h3>Could someone else use this?</h3>
+<p>Only if you choose, turn your public-safe description into an existing Invitation Chain card. Review every word. The link itself carries your words. You can also decide whether to open a separate, consent-based public conversation.</p>
+<blockquote id="public-preview"></blockquote>
+<div class="result-actions"><a id="make-invitation" class="cta-link" target="_blank" rel="noopener noreferrer" href="../invites/">Open shareable invitation ↗</a><a id="review-public" class="cta-link muted" target="_blank" rel="noopener noreferrer" href="../invites/network/">Review for public conversation ↗</a></div>
+<p id="invite-status" class="fine">No link sent; nothing published automatically. Public conversations are separate and require explicit consent.</p>
+</section>
+<section class="closing"><p class="eyebrow">OUR ACTUAL TARGET</p><h2>Useful actions, not follower counts.</h2><p>Real materials + real skills + voluntary cooperation = a world made from what already exists. Even an honest “not yet” tells us something.</p><a href="../first-circle/">Try the wider First Circle workbench ↗</a></section>
+</main>
+<footer><span>ONE THING / SELF-REPORTED ≠ VERIFIED / PRIVACY FIRST</span><a href="../">ABUNDENT HOME ↗</a></footer>
+</body></html>

@@ -25,3 +25,13 @@
 
 /* The natural-language help box is the primary entry. Project doors are secondary. */
 .first-move .say-it{margin:17px 0 25px;padding:4px 0 25px;border-top:0;border-bottom:1px solid #6e8a75}
+
+/* ONE THING 006 — a consequence-first entry, before the technical workshop. */
+.quest-entry{margin:22px 0 18px;padding:clamp(24px,5vw,45px);border-radius:22px;background:#e8d3a9;border:2px solid #253b2a;color:#172d22;box-shadow:5px 7px 0 #244432;overflow-wrap:anywhere}
+.quest-entry .eyebrow{color:#365b42}
+.quest-entry h2{font-size:clamp(29px,4.2vw,51px);letter-spacing:-.05em;line-height:1.13;margin:14px 0}
+.quest-entry h2 em{font-style:normal;color:#a64a22}
+.quest-entry p{font-size:clamp(15px,1.9vw,18px);line-height:1.6;max-width:710px}
+.quest-entry .button{background:#16392b;color:#fffdf5;border-radius:11px;padding:17px 20px;font-size:15px;box-shadow:0 3px 0 #091c11}
+.quest-entry .fine{font-size:11px;color:#425a4b;max-width:670px;margin:15px 0 0}
+@media(max-width:700px){.quest-entry{margin:12px -8px 17px;border-radius:16px;padding:24px 20px;box-shadow:3px 4px 0 #244432}.quest-entry .button{width:100%;text-align:center}}
