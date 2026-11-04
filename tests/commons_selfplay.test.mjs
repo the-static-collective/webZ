@@ -94,7 +94,7 @@ test('the browser is local-only, safe text nodes, honest simulation markers',()=
  assert.match(html,/connect-src 'none'/);
  assert.match(html,/Not AI models/);
  assert.match(html,/hash is not a signature/);
- assert.match(html,/Scripted actors/);
+ assert.match(html,/Scripted consent/);
  assert.match(client,/textContent/);
  assert.match(client,/replaceChildren/);
  assert.match(client,/FAKE-WORLD-/);
