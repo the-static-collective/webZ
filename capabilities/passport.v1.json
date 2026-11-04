@@ -28,7 +28,14 @@
         "href": "./first-circle/"
       },
       "sourcePath": "first-circle/work.mjs",
-      "requires": "You choose whether to save or share; a draft does not fulfill the underlying need."
+      "requires": "You choose whether to save or share; a draft does not fulfill the underlying need.",
+      "contract": {
+        "inputHint": "human.intent/v1",
+        "outputHint": "local.work/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "LOCAL_SELF_REPORT",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
     },
     {
       "id": "webz.glean",
@@ -52,7 +59,14 @@
         "href": "./glean/"
       },
       "sourcePath": "glean/bridge.mjs",
-      "requires": "Requires a source-owned offer, separate receiver, safe handling, and explicit human consent."
+      "requires": "Requires a source-owned offer, separate receiver, safe handling, and explicit human consent.",
+      "contract": {
+        "inputHint": "owner.released-surplus/v0",
+        "outputHint": "local.invitation-draft/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "NONE",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
     },
     {
       "id": "webz.jubilee",
@@ -76,7 +90,14 @@
         "href": "./jubilee/"
       },
       "sourcePath": "jubilee/index.html",
-      "requires": "Host controls venue, accessibility, safety, attendance and rights."
+      "requires": "Host controls venue, accessibility, safety, attendance and rights.",
+      "contract": {
+        "inputHint": "human.intent/v1",
+        "outputHint": "local.host-kit/v1",
+        "invocation": "NOT_CONNECTED_TO_JARVIS",
+        "receipt": "NONE",
+        "effect": "NO_CROSS_PROJECT_EFFECT"
+      }
     }
   ]
 }
