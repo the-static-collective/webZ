@@ -141,7 +141,7 @@ export function matchPassports(observation,input,{limit=3}={}){
   for(const c of p.capabilities){
    const hits=c.intents.filter(t=>phrasePresent(query,t));
    if(!hits.length)continue;
-   const total=hits.reduce((n,t)=>n+2+(t.includes(' ')?3:0)+Math.min(t.length,24)/24,n=0);
+   const total=hits.reduce((n,t)=>n+2+(t.includes(' ')?3:0)+Math.min(t.length,24)/24,0);
    all.push({...c,score:total+(rank[c.readiness]||0),matchedHints:hits});
   }
  }
