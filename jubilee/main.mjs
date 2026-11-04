@@ -15,6 +15,44 @@ const choiceButtons=[...document.querySelectorAll('[data-jubilee-role]')];
 const roleSelect=document.getElementById('role');
 const offerInput=document.getElementById('offer');
 const invite=document.getElementById('invite');
+
+const ROLE_SEEDS=Object.freeze({
+ song:{line:'I could bring one song to a small community gathering. Who would like to build a short set together?',next:'First ask the people organizing a gathering whether music would be welcome.'},
+ host:{line:'Could a welcoming local space host a small evening of music, food and conversation? Permission would come first.',next:'Start by asking the steward of a possible venue what is actually possible.'},
+ food:{line:'Could we bring a shared pot of soup to a neighborhood table? Who could help with ingredients and kitchen space?',next:'Ask a real kitchen coordinator what is needed before planning food service.'},
+ crew:{line:'I could help set up basic sound or chairs for a small gathering. Is there an organizer who wants a hand?',next:'Find the existing event organizer before promising work.'},
+ tech:{line:'I could help check a small repair or equipment need. What is one safe task a steward could review?',next:'Ask the relevant owner to define a safe, specific task.'},
+ steward:{line:'I could help organize one small gathering. What useful outcome would local participants actually want?',next:'Invite a local decision maker to define the purpose before recruiting.'},
+ translate:{line:'I could share one useful skill or help translate a public invitation. Who would benefit from a short session?',next:'Ask a participant what would be genuinely helpful and get permission before publishing.'}
+});
+const moment=document.getElementById('jubilee-moment');
+const momentLine=document.getElementById('jubilee-moment-line');
+const momentTitle=document.getElementById('jubilee-moment-title');
+const momentNext=document.getElementById('jubilee-moment-next');
+const momentStatus=document.getElementById('jubilee-moment-status');
+function showMoment(line,next,title){
+ momentTitle.textContent=title||'Here is a useful first line.';
+ momentLine.textContent=line;
+ momentNext.textContent=next||'Copy it if useful, or make it your own. Nothing has been sent.';
+ momentStatus.textContent='A suggestion, not an RSVP, confirmation, or commitment.';
+ moment.hidden=false;
+ momentTitle.setAttribute('tabindex','-1');
+ momentTitle.focus();
+}
+document.getElementById('jubilee-moment-copy').addEventListener('click',async()=>{
+ const text=momentLine.textContent;
+ if(!text)return;
+ try{
+  if(!navigator.clipboard?.writeText)throw Error('No clipboard API');
+  await navigator.clipboard.writeText(text);
+  momentStatus.textContent='Copied locally. You choose where, whether and with whom to share it.';
+ }catch{momentStatus.textContent='Clipboard unavailable. Select the visible line and copy it manually.';}
+});
+document.getElementById('jubilee-moment-personalize').addEventListener('click',()=>{
+ invite.scrollIntoView({behavior:'auto',block:'start'});
+ offerInput.focus();
+});
+
 function setRole(role){
  if(!Object.prototype.hasOwnProperty.call(ROLES,role))return false;
  roleSelect.value=role;
@@ -23,9 +61,12 @@ function setRole(role){
  return true;
 }
 choiceButtons.forEach(button=>button.addEventListener('click',()=>{
- if(!setRole(button.dataset.jubileeRole))return;
- invite.scrollIntoView({behavior:'auto',block:'start'});
- offerInput.focus();
+ const role=button.dataset.jubileeRole;
+ if(!setRole(role))return;
+ const seed=ROLE_SEEDS[role];
+ offerInput.value=seed.line;
+ offerInput.dispatchEvent(new Event('input',{bubbles:true}));
+ showMoment(seed.line,seed.next,ROLES[role]+' — your first move');
 }));
 roleSelect.addEventListener('change',()=>{
  choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.jubileeRole===roleSelect.value)));
@@ -38,8 +79,7 @@ quickNext.addEventListener('click',()=>{
  if(text.length<12){quickStatus.textContent='Tell us one useful thing in a sentence (12 characters minimum).';quickText.focus();return;}
  offerInput.value=text;
  offerInput.dispatchEvent(new Event('input',{bubbles:true}));
- invite.scrollIntoView({behavior:'auto',block:'start'});
- quickStatus.textContent='Your idea is in the local composer. Choose how you would participate, then review the public-only confirmation. Nothing sent.';
- if(!roleSelect.value)roleSelect.focus();else offerInput.focus();
+ showMoment(text,'Here is your line exactly as written. Copy it or choose to add details later.','Your idea, ready to use');
+ quickStatus.textContent='That is a usable starting line. Nothing sent or saved.';
 });
 quickText.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();quickNext.click();}});
