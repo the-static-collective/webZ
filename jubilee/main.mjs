@@ -64,12 +64,12 @@ function setRole(role){
 choiceButtons.forEach(button=>button.addEventListener('click',()=>{
  const role=button.dataset.jubileeRole;
  if(!setRole(role))return;
- const seed=ROLE_SEEDS[role];
+ const kit=makeFieldKit(role);
+ const seed={...ROLE_SEEDS[role],next:kit.body};
  offerInput.value=seed.line;
  offerInput.dispatchEvent(new Event('input',{bubbles:true}));
- const kit=makeFieldKit(role);
  if(!auditFieldKit(kit).pass)throw Error('Kit not ready');
- showMoment(seed.line,kit.body,kit.title);
+ showMoment(seed.line,seed.next,kit.title);
 }));
 roleSelect.addEventListener('change',()=>{
  choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.jubileeRole===roleSelect.value)));
