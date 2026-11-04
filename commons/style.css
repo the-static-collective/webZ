@@ -45,3 +45,23 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0a1715;border:1px so
 @media print{.entry-surface,.advanced-form>summary,.need-quick{display:none!important}.advanced-form{border:0;padding:0}}
 
 .demo-entrance{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0 0}.demo-entrance button{background:#f1d894;min-height:44px}.demo-entrance .small{margin:0}
+
+
+/* HUMAN FIRST 004: feel the decision first; administrative intake is optional. */
+.play-scene{background:#e8f0dd;color:#153729;border:2px solid #9abb89;border-radius:18px;padding:clamp(20px,4vw,34px);margin:2rem 0}
+.play-scene .eyebrow{color:#45694a}.play-scene h2{font-size:clamp(1.5rem,4vw,2.55rem);max-width:32ch;letter-spacing:-.035em}
+.play-intro{font-size:1rem;line-height:1.6}.play-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:1.5rem 0}
+.play-actions button{border:2px solid transparent;min-height:80px;padding:14px 18px;font-size:clamp(.95rem,1.7vw,1.16rem);border-radius:13px;text-align:center;background:#194f38;color:#fffef1;cursor:pointer}
+.play-actions button:hover,.play-actions button[aria-pressed=true]{background:#af6b31;border-color:#f3e6b6;color:white}
+.play-actions button:focus-visible,.play-again:focus-visible,#play-copy:focus-visible,.optional-intake summary:focus-visible{outline:3px solid #b45816;outline-offset:3px}
+.play-outcome{background:#fffdf4;color:#163b2a;padding:22px;border:2px solid #a4b99b;border-radius:14px}
+.play-outcome h3{font-size:1.4rem;margin:.2rem 0 1rem}.play-outcome p{line-height:1.6}.play-script-label{font-weight:800;font-size:.9rem}
+#play-script{margin:8px 0 16px;padding:16px;border-left:4px solid #b37a39;background:#e9eddf;font-style:normal}
+#play-copy{background:#1f573b;color:#fffdf1;margin-right:10px;min-height:44px}.play-again{background:transparent;border:1px solid #1f573b;color:#143d2a;min-height:44px}
+#play-status{font-size:.85rem}.play-disclaimer{font-size:.79rem;line-height:1.5;color:#506a56;margin:1.1rem 0 0}
+.optional-intake{margin:1.4rem 0;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.optional-intake>summary{cursor:pointer;line-height:1.5;font-weight:800;list-style:revert;min-height:44px;padding:10px}
+.optional-intake[open]>summary{margin-bottom:12px}
+@media(max-width:640px){.play-actions{grid-template-columns:1fr 1fr;gap:8px}.play-actions button{min-height:86px;font-size:.9rem;padding:12px 8px}.play-outcome{padding:16px}}
+@media(max-width:370px){.play-actions{grid-template-columns:1fr}}
+@media print{.play-scene,.optional-intake>summary{display:none!important}}

@@ -24,9 +24,14 @@ try:
   page.locator('[data-jubilee-role="food"]').click()
   assert page.locator('#role').input_value()=='food'
   assert page.locator('[data-jubilee-role="food"]').get_attribute('aria-pressed')=='true'
+  assert page.locator('#jubilee-moment').is_visible()
+  assert 'pot of soup' in page.locator('#jubilee-moment-line').inner_text()
+  assert page.locator('#email-draft').get_attribute('href') is None
+  assert page.locator('#public-only').is_checked() is False
   page.locator('#jubilee-quick-text').fill('We could bring a pot of soup to a neighborhood supper.')
   page.locator('#jubilee-quick-next').click()
   assert page.locator('#offer').input_value()=='We could bring a pot of soup to a neighborhood supper.'
+  assert page.locator('#jubilee-moment-line').inner_text()=='We could bring a pot of soup to a neighborhood supper.'
   assert not page.locator('#public-only').is_checked()
   assert page.locator('#email-draft').get_attribute('href') is None
   page.locator('#invitation-form button[type="submit"]').click()
