@@ -51,8 +51,10 @@ def backend(route):
   data={'schema':'abundent/invitation-match-receipt-v1','match':m,'notice':'Two distinct keys have acknowledged the possibility.'}
  elif action=='unwatch':
   data={'state':'UNSUBSCRIBED','deleted':True,'notice':'Watch removed.'}
+ elif action=='lookup':
+  data={'schema':'abundent/invitation-publication-lookup/v1','published':bool(published and published['invitationId']==b['invitationId']),'threadId':THREAD if published else None}
  elif action=='discover':
-  data={'candidates':[]}
+  data={'candidates':[published] if published and (b['lane']=='any' or b['lane']==published['lane']) and b['intent']=='open' else []}
  elif action=='withdraw':
   data={'state':'WITHDRAWN','notice':'Hidden from the public service.'}
  elif action=='report':
@@ -74,6 +76,8 @@ try:
   page.locator('#create-invite').click()
   assert page.locator('#invitation-panel').is_visible()
   assert page.locator('#network-publish').is_visible()
+  assert 'not a public post' in page.locator('#create-panel').inner_text()
+  original_url=page.url
   page.locator('#network-publish').click()
   try:
    expect(page.locator('#publish-panel')).to_be_visible(timeout=7000)
@@ -84,7 +88,28 @@ try:
   page.locator('#publish-consent').check()
   page.locator('#publish-button').click()
   expect(page.locator('#thread-panel')).to_be_visible(timeout=7000)
+  expect(page.locator('#published-confirmation')).to_be_visible()
+  expect(page.locator('#published-confirmation')).to_contain_text('People can find it')
+  assert page.locator('#published-find').get_attribute('href')
+  assert page.locator('#published-link').input_value().endswith('?thread='+THREAD)
   expect(page.locator('#receipt-preview')).to_contain_text('THREAD OWNER KEY')
+  # A second visitor can see the newly published item through discovery.
+  public_board=browser.new_page(viewport={'width':390,'height':844})
+  public_board.route('**/functions/v1/invitation-network-002',backend)
+  public_board.goto(page.locator('#published-find').get_attribute('href'))
+  expect(public_board.locator('#browse-panel')).to_be_visible()
+  expect(public_board.locator('#browse-results article')).to_have_count(1,timeout=7000)
+  expect(public_board.locator('#browse-results')).to_contain_text('acoustic guitar song')
+  expect(public_board.locator('.highlight-post')).to_have_count(1)
+  # The original portable invitation now resolves to its real public conversation.
+  old_link=browser.new_page(viewport={'width':390,'height':844})
+  old_link.route('**/functions/v1/invitation-network-002',backend)
+  old_link.goto(original_url)
+  old_link.locator('#network-publish').click()
+  expect(old_link.locator('#thread-panel')).to_be_visible(timeout=7000)
+  expect(old_link.locator('#published-confirmation')).to_contain_text('Already posted')
+  assert calls.count('publish')==1
+  old_link.close();public_board.close()
   assert page.url.endswith('?thread='+THREAD),page.url
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
   page.locator('#watch-start').click()
