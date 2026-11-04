@@ -110,6 +110,19 @@ try:
   expect(old_link.locator('#published-confirmation')).to_contain_text('Already posted')
   assert calls.count('publish')==1
   old_link.close();public_board.close()
+  # The public desk works from a fresh visit too—no circular return to the first tool.
+  direct=browser.new_page(viewport={'width':390,'height':844})
+  direct.route('**/functions/v1/invitation-network-002',backend)
+  direct.goto(base+'invites/network/')
+  expect(direct.locator('#quick-post-panel')).to_be_visible()
+  direct.locator('#quick-words').fill('I can repair a guitar today, if someone needs it.')
+  assert direct.locator('[data-quick-when="now"]').get_attribute('aria-pressed')=='true'
+  direct.locator('#quick-next').click()
+  expect(direct.locator('#publish-panel')).to_be_visible()
+  expect(direct.locator('#publish-words')).to_contain_text('repair a guitar')
+  assert direct.locator('#publish-consent').is_checked() is False
+  assert calls.count('publish')==1
+  direct.close()
   assert page.url.endswith('?thread='+THREAD),page.url
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
   page.locator('#watch-start').click()
