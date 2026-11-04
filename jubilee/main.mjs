@@ -1,4 +1,5 @@
 import {prepareInvitation,ROLES} from "./invite.mjs";
+import {makeFieldKit,auditFieldKit} from "./field-kit.mjs";
 const form=document.getElementById("invitation-form"),out=document.getElementById("prepared"),status=document.getElementById("compose-status"),email=document.getElementById("email-draft");
 function reset(){email.removeAttribute("href");email.classList.add("disabled");email.setAttribute("aria-disabled","true");status.textContent="Draft changed; prepare again to review before sharing.";}
 form.addEventListener("submit",event=>{event.preventDefault();try{
@@ -34,13 +35,13 @@ function showMoment(line,next,title){
  momentTitle.textContent=title||'Here is a useful first line.';
  momentLine.textContent=line;
  momentNext.textContent=next||'Copy it if useful, or make it your own. Nothing has been sent.';
- momentStatus.textContent='A suggestion, not an RSVP, confirmation, or commitment.';
+ momentStatus.textContent='A complete local kit, not proof of a real-world event.';
  moment.hidden=false;
  momentTitle.setAttribute('tabindex','-1');
  momentTitle.focus();
 }
 document.getElementById('jubilee-moment-copy').addEventListener('click',async()=>{
- const text=momentLine.textContent;
+ const text=momentLine.textContent+'\n\n'+momentNext.textContent;
  if(!text)return;
  try{
   if(!navigator.clipboard?.writeText)throw Error('No clipboard API');
@@ -63,10 +64,12 @@ function setRole(role){
 choiceButtons.forEach(button=>button.addEventListener('click',()=>{
  const role=button.dataset.jubileeRole;
  if(!setRole(role))return;
- const seed=ROLE_SEEDS[role];
+ const kit=makeFieldKit(role);
+ const seed={...ROLE_SEEDS[role],next:kit.body};
  offerInput.value=seed.line;
  offerInput.dispatchEvent(new Event('input',{bubbles:true}));
- showMoment(seed.line,seed.next,ROLES[role]+' — your first move');
+ if(!auditFieldKit(kit).pass)throw Error('Kit not ready');
+ showMoment(seed.line,seed.next,kit.title);
 }));
 roleSelect.addEventListener('change',()=>{
  choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.jubileeRole===roleSelect.value)));
@@ -79,7 +82,11 @@ quickNext.addEventListener('click',()=>{
  if(text.length<12){quickStatus.textContent='Tell us one useful thing in a sentence (12 characters minimum).';quickText.focus();return;}
  offerInput.value=text;
  offerInput.dispatchEvent(new Event('input',{bubbles:true}));
- showMoment(text,'Here is your line exactly as written. Copy it or choose to add details later.','Your idea, ready to use');
- quickStatus.textContent='That is a usable starting line. Nothing sent or saved.';
+ try{
+  const kit=makeFieldKit(Object.prototype.hasOwnProperty.call(ROLES,roleSelect.value)?roleSelect.value:'open',text);
+  if(!auditFieldKit(kit).pass)throw Error('Kit not ready');
+  showMoment(text,kit.body,kit.title);
+ }catch(e){quickStatus.textContent=e.message;return;}
+ quickStatus.textContent='A prepared local kit exists below; nothing was sent or saved.';
 });
 quickText.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();quickNext.click();}});

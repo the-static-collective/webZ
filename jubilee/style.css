@@ -26,3 +26,8 @@
 .jubilee-moment p{font-size:.93rem}.jubilee-moment .button{border-color:#1c4e2a;color:#173e2b;background:transparent}
 .jubilee-moment .button.primary{background:#174e33;color:#fff8df}.jubilee-moment .button:focus-visible{outline:3px solid #a66b2f;outline-offset:3px}
 #jubilee-moment-status{font-size:.79rem;color:#526c52}
+
+/* Prepared field kits preserve step boundaries and stay readable on phones. */
+#jubilee-moment-line{white-space:pre-line;overflow-wrap:anywhere;font-family:system-ui,sans-serif;font-size:1rem;font-weight:500;line-height:1.6;}
+
+#jubilee-moment-next{white-space:pre-line;overflow-wrap:anywhere;font-size:.95rem;line-height:1.55;max-height:45rem;overflow-y:auto;border-top:1px solid #a7c698;padding:14px 4px;}

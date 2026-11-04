@@ -6,3 +6,6 @@
 .work-body{white-space:pre-line;overflow-wrap:anywhere;font-size:15px;line-height:1.6;margin:0;color:#24382a}
 .work-state{font-size:12px;line-height:1.4;border:1px solid #bdcda8;border-radius:9px;padding:9px 11px;color:#446046;background:#e7eed4;margin:16px 0 0}
 @media print{.work-in-card{display:block!important}.work-body{color:#000}.work-state{color:#000}}
+
+/* Prepared continuations, reconstructed from reported outcomes. */
+.return-help{margin-top:22px;padding:19px;border-top:2px solid #bacda4;background:#e6edd4;border-radius:12px}.return-help h3{font-size:19px;color:#20402b;margin:10px 0}.return-help .work-body{white-space:pre-line;color:#263c2c}.return-help .work-state{background:#f2f5e9}
