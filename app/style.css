@@ -22,3 +22,6 @@
 .wayfinder-result .wayfinder-evidence summary{cursor:pointer;font-weight:720}
 .wayfinder-result .wayfinder-evidence p{margin:7px 0}
 @media(max-width:700px){.wayfinder-answer .wayfinder-result{padding:16px}}
+
+/* The natural-language help box is the primary entry. Project doors are secondary. */
+.first-move .say-it{margin:17px 0 25px;padding:4px 0 25px;border-top:0;border-bottom:1px solid #6e8a75}
