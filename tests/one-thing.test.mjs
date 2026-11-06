@@ -55,10 +55,13 @@ test('return is a truthful self-report and blocks contact details',()=>{
  assert.throws(()=>fieldReport(quest,[],'delivered'));
 });
 
-test('quest UI has no automatic external network, public post or third-party analytics',()=>{
+test('quest UI has no automatic external network or public post; opt-in bridge separate',()=>{
  const html=source('one-thing/index.html');
  const js=source('one-thing/quest.mjs');
- assert.match(html,/connect-src 'none'/);
+ assert.match(html,/connect-src 'self'/);
+ assert.match(html,/id="observation-opt-in"/);
+ assert.match(html,/Off by default/);
+ assert.match(html,/observation-ui\.mjs/);
  assert.match(html,/referrer" content="no-referrer"/);
  assert.match(html,/Only if you choose/);
  assert.doesNotMatch(js,/\bfetch\s*\(|XMLHttpRequest|sendBeacon/);
