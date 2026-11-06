@@ -131,6 +131,7 @@ function begin(){
   showQuest(plan);
   tell('entry-status','A working three-step quest was prepared here. Nothing transmitted.');
   writeSaved();
+  document.dispatchEvent(new Event('one-thing:quest-prepared'));
  }catch(error){tell('entry-status',error.message);$('thing').focus()}
 }
 $('make').addEventListener('click',begin);
@@ -157,6 +158,7 @@ $('make-report').addEventListener('click',()=>{
   $('copy-report').hidden=false;$('save-report').hidden=false;
   tell('return-status','Prepared on this device only. No independent confirmation or automatic publication.');
   writeSaved();
+  document.dispatchEvent(new Event('one-thing:return-prepared'));
  }catch(error){tell('return-status',error.message)}
 });
 $('copy-report').addEventListener('click',async()=>{
