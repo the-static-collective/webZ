@@ -61,7 +61,7 @@ test('quest UI has no automatic external network or public post; opt-in bridge s
  assert.match(html,/connect-src 'self'/);
  assert.match(html,/id="observation-opt-in"/);
  assert.match(html,/Off by default/);
- assert.match(html,/observation-ui\\.mjs/);
+ assert.match(html,/observation-ui\.mjs/);
  assert.match(html,/referrer" content="no-referrer"/);
  assert.match(html,/Only if you choose/);
  assert.doesNotMatch(js,/\bfetch\s*\(|XMLHttpRequest|sendBeacon/);
