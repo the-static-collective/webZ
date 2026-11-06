@@ -10,10 +10,11 @@
 <meta property="og:url" content="https://abundent.org/one-thing/">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://abundent.org/one-thing/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>ONE THING · Do something useful today · Abundent</title>
 <link rel="stylesheet" href="./style.css">
 <script type="module" src="./quest.mjs"></script>
+<script type="module" src="./observation-ui.mjs"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the quest</a>
@@ -42,6 +43,11 @@
 <label><input type="radio" name="when" value="now" checked> Today</label>
 <label><input type="radio" name="when" value="soon"> This week</label>
 <label><input type="radio" name="when" value="open"> Ask first</label>
+</fieldset>
+<fieldset class="observation-optin"><legend>OPTIONAL · HELP US TEST THIS TOOL</legend>
+<label for="observation-opt-in"><input type="checkbox" id="observation-opt-in"> Share anonymous quest progress with the operators</label>
+<p class="fine">Off by default. Only for NEW quests after you opt in: our server may relay “quest prepared” and “return prepared” with a random, temporary journey ID to PostHog. Never your words, notes, resource, contact information, outcome choice, or URL. No cookies, page tracking or session recording from this feature. Our hosting provider still receives normal connection information. Uncheck to stop future sends; events already accepted cannot be unsent here.</p>
+<p id="observation-status" class="status" role="status" aria-live="polite">Off. Your quest and return work fully without sharing.</p>
 </fieldset>
 <button class="primary wide" type="button" id="make">Show me my next useful step →</button>
 <p id="entry-status" class="status" role="status" aria-live="polite">Nothing sent. Your words stay in this browser.</p>
