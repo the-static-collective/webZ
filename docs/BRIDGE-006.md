@@ -1,5 +1,7 @@
 # BRIDGE-006 — First Real Crossing / First External Acknowledgement
 
+**ADDITIONAL VOQAL-007 PROPOSAL (2026-10-29):** The 2026-10-28 wording below records the *earlier* public candidate. A later private Still Here v6 application (unapproved and not submitted) and recent MIT/CANNON/HARMONY/STATIC OS work exposed a larger human-first **First Circle Foundry** possibility. The new [VOQAL-007 public-safe proposal](./VOQAL-FIRST-CIRCLE-FOUNDRY-007.md) reframes Voqal around independently governable social founding methods, beginning with isolated adults/fathers needing safe first human contact. It is **not an alternate submission, a launched support group, approved private testimony, or verified community co-design**. Public model and draft now surface this prospective candidate; applicant decides whether to adopt it, and the independent WANSC inquiry remains distinct.
+
 **Reviewed:** 2026-10-28. **Current status:** source verified; individual fellowship application **NOT SUBMITTED**; first local institutional inquiry **NOT SENT**; all partnerships and field results **NOT ESTABLISHED**.
 
 ## Two independently governed doors
@@ -12,7 +14,7 @@ Voqal's primary [program page](https://voqalpartners.org/fellowship/) and [2027 
 
 According to the program's official guide, section limits: project title 200 characters; description 750; Impact 10,000; Project Summary 7,500; Resources 5,000; Idea Origin 5,000; AI use 5,000; coaching 1,500; supporting links 500; anything else 2,500. A budget is required as a planning document, though the fellowship says it is not used in its evaluation.
 
-**Core project:** Between Rooms is an owner-governed infrastructure experiment: community-determined food access is the initial question; open tools and source-pinned instruments are contributions; real local consent and independent review are the missing work. The project must avoid claiming adoption from existing GitHub code or from attendance at a community meeting.
+**Earlier core project (historical candidate, preserved for ancestry):** Between Rooms proposed owner-governed infrastructure and community-determined food access as the initial question. The current **VOQAL-007 applicant-unapproved proposal** instead centers **Still Here — The First Circle Foundry**, a low-disclosure first-contact and co-governance method for adults lacking trusted networks. Between Rooms remains a possible separately governed infrastructure source, not a second simultaneous fellowship pilot. In either version, real consent and independent evaluation are missing; attendance or code cannot be represented as institutional endorsement.
 
 **Working $30k illustration:** $12k founder time, $6k compensated participant review, $3.5k approved travel and field meetings, $2.5k accessibility, $2k paper and low-tech materials, $2k equipment/hosting, $2k legal/insurance/safety = **$30k**. These are estimates, not promised spending; revisit with real collaborators and applicant.
 
