@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>HEY. — Response Grammar 001</title>
+  <style>
+    :root { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #f1f1dd; background: #0e1519; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 90% 0%, #253b36 0, transparent 36rem), #0e1519; }
+    main { width: min(100%, 760px); margin: auto; padding: 1.35rem clamp(1rem, 4vw, 2rem) 5rem; }
+    .strap { text-transform: uppercase; letter-spacing: .16em; color: #a7c1ad; font-size: .74rem; }
+    h1 { font-size: clamp(4.6rem, 15vw, 8rem); line-height: .85; margin: .9rem 0 1.1rem; color: #dfff8b; letter-spacing: -.075em; }
+    h2 { font-size: 1.25rem; margin: 0 0 1rem; }
+    p { line-height: 1.5; }
+    .lede { font-size: clamp(1.1rem, 2.8vw, 1.45rem); max-width: 40rem; }
+    .muted, .hint { color: #b6c5be; font-size: .88rem; }
+    .card { margin: 1.5rem 0; border: 1px solid #64736b; background: #151f22; border-radius: 8px; padding: clamp(1rem, 3vw, 1.4rem); }
+    label { display: block; font-weight: 700; margin: .8rem 0 .45rem; }
+    textarea, input { background: #0b1215; border: 1px solid #85968d; border-radius: 4px; padding: .8rem; width: 100%; color: #f1f1dd; font: inherit; font-size: 1rem; }
+    input:focus, textarea:focus, button:focus-visible, summary:focus-visible { outline: 3px solid #dfff8b; outline-offset: 2px; }
+    .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); gap: .7rem; }
+    button { cursor: pointer; font: inherit; font-size: 1rem; padding: .85rem 1rem; background: #dfff8b; color: #102019; border: 1px solid #dfff8b; border-radius: 6px; font-weight: 700; text-align: left; min-height: 3rem; }
+    button:hover { background: #f0ffcb; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    button.secondary { background: transparent; color: #f1f1dd; border-color: #8fa398; }
+    .actions { display: flex; gap: .7rem; flex-wrap: wrap; }
+    .actions button { flex: 1 1 165px; }
+    #trail { overflow-wrap: anywhere; padding: .7rem 0; color: #dfff8b; min-height: 2.5rem; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #0b1215; border: 1px solid #344b48; border-radius: 4px; padding: 1rem; max-height: 24rem; overflow-y: auto; font-size: .83rem; }
+    #plain-preview { background: #0b1215; padding: .75rem; min-height: 2rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+    footer { border-top: 1px dashed #5a6e64; padding-top: 1.2rem; font-size: .84rem; color: #b6c5be; }
+    .badge { display: inline-block; border: 1px solid #dfff8b; color: #dfff8b; padding: .25rem .45rem; font-size: .8rem; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<main>
+  <p class="strap">abundent / experimental / no account</p>
+  <h1>HEY.</h1>
+  <p class="lede">A little response can mean something. Start with one click. Get specific only if you want to.</p>
+  <p><span class="badge">PRIVATE ON THIS DEVICE</span> <span class="badge">NOT SENT</span></p>
+  <section class="card" aria-labelledby="first">
+    <h2 id="first">1 · What are you responding to?</h2>
+    <label for="context">A post, question, need, or person (optional)</label>
+    <textarea id="context" rows="2" maxlength="240" placeholder="For example: Someone asked for help moving boxes. (Example only.)"></textarea>
+    <p class="hint">Don't enter confidential details. This stays in page memory unless you explicitly copy or download it.</p>
+  </section>
+  <section class="card" aria-labelledby="second">
+    <h2 id="second">2 · What would you like to say?</h2>
+    <p id="trail" aria-live="polite">Start anywhere.</p>
+    <div id="choices" class="choices"></div>
+    <p><button class="secondary" type="button" id="back">← One step back</button></p>
+    <label for="note">In your own words (optional, 180 characters)</label>
+    <textarea id="note" rows="2" maxlength="180" placeholder="Your own words are always allowed."></textarea>
+    <p class="hint">A feeling isn't a promise. An offer isn't acceptance. A click never proves action.</p>
+  </section>
+  <section class="card" aria-labelledby="third">
+    <h2 id="third">3 · Your response, still yours</h2>
+    <div id="status" role="status" aria-live="polite">No selection yet.</div>
+    <p class="hint">Words you can choose to share:</p>
+    <div id="plain-preview" tabindex="0" aria-label="Selectable plain-text response"></div>
+    <div class="actions" style="margin-top:1rem">
+      <button id="copy-text" type="button" disabled>Copy these words</button>
+      <button id="download-json" class="secondary" type="button" disabled>Save draft JSON</button>
+      <button id="reset" class="secondary" type="button">Start over / clear</button>
+    </div>
+    <details style="margin-top:1rem"><summary>Inspect the portable response card</summary><pre id="preview">Choose a response to preview a card.</pre></details>
+  </section>
+  <footer>
+    <strong>Nothing is posted, measured, ranked, matched, or delivered.</strong>
+    This is a local experiment, not a live messaging service. A response card makes no claim about identity, agreement, consent to contact, or completed work. If you share a copy elsewhere, clearing this page cannot revoke that copy.
+  </footer>
+</main>
+</body>
+</html>
