@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>The Question Arcade · receiving desk</title><link rel="stylesheet" href="../style.css"></head><body>
+<header class="topbar"><a href="../" class="mark">Q<span>?</span></a><div class="wordmark"><strong>THE QUESTION ARCADE</strong><small>INDEPENDENT LOCAL RECEIVING DESK · EXPERIMENT</small></div><span class="status">NO NETWORK SENDING</span></header>
+<main><section class="hero" style="padding-bottom:32px"><p class="eyebrow">04 / BETWEEN MACHINES</p><h1 style="font-size:clamp(3.1rem,8vw,6rem)">THE HELD<br><em>RECEIVER_</em></h1><p class="intro">Export a fictional HOLD packet from the game. Open it here. This independent validator refuses forged authority and checks the simulation evidence before marking it inspectable.</p></section>
+<section class="lab layout"><div class="panel"><div class="panel-head"><span class="chapter">04</span><div><p class="overline">LOCAL IMPORT</p><h2>Inspect the crossing.</h2></div></div><label class="field-label" for="packet">CHOOSE A JSON EXPORT (12 KB MAX)</label><input id="packet" type="file" accept="application/json,.json" style="max-width:100%;margin-bottom:18px"><p class="microcopy">No file is sent, stored remotely, authenticated, or published. Any accepted packet stays synthetic.</p><div id="result" class="held-preview" role="status">No envelope inspected yet.</div></div><div class="aside-stat"><span class="eyebrow">A DIFFERENT DESK</span><strong style="font-size:clamp(3rem,7vw,6rem);letter-spacing:-.05em" id="disposition">HOLD</strong><p>Even a valid packet is <b>not</b> evidence of a real neighbor or a completed exchange. A JAR;VIS production adapter would need its own consent, identity, data retention, and steward review.</p><a class="btn secondary" href="../#router">BACK TO THE GAME ↗</a></div></section></main>
+<footer><span>RECEIVER EXPERIMENT</span><span>SIMULATION ONLY · NO ADMIT / NO SEND / NO PUBLISH</span></footer>
+<script type="module">
+import {inspectHeld} from './held-receiver.mjs';
+document.getElementById('packet').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ const result=document.getElementById('result');const disposition=document.getElementById('disposition');
+ if(file.size>12288){disposition.textContent='REFUSE';result.textContent='File over 12KB limit. No action.';return}
+ try{const data=JSON.parse(await file.text());const reviewed=inspectHeld(data);disposition.textContent=reviewed.status;result.textContent=JSON.stringify(reviewed,null,2)}
+ catch{disposition.textContent='REFUSE';result.textContent='Invalid JSON. No action.'}
+});
+</script></body></html>
