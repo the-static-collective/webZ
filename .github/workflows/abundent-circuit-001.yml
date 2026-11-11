@@ -1,0 +1,23 @@
+name: Abundent Circuit 001
+on:
+  pull_request:
+    paths:
+      - 'pilots/abundent-circuit-001/**'
+      - '.github/workflows/abundent-circuit-001.yml'
+  workflow_dispatch:
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Circuit core tests
+        run: node --test pilots/abundent-circuit-001/tests/circuit.test.js
+      - name: Verify checked-in offline bundle
+        run: |
+          cd pilots/abundent-circuit-001
+          cp Abundent_Circuit_001_Offline.html /tmp/circuit-checked-in.html
+          python3 build.py
+          cmp -s /tmp/circuit-checked-in.html Abundent_Circuit_001_Offline.html

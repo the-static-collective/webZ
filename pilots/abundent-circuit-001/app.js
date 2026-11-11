@@ -1,0 +1,131 @@
+(function () {
+  'use strict';
+  var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
+  var st, activeTab = 'overview', noticeTimer;
+  try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
+  catch (_) { st = C.init(); }
+  function $(q) { return document.querySelector(q); }
+  function esc(v) { return String(v === null || v === undefined ? '' : v).replace(/[&<>"']/g, function (c) {
+    return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c];
+  }); }
+  function empty(text) { return '<div class="empty">' + esc(text) + '</div>'; }
+  function s(v) { return esc(v); }
+  function notify(message) { var el = $('#notice'); el.textContent = message; el.className = 'on';
+    clearTimeout(noticeTimer); noticeTimer = setTimeout(function () { el.className = ''; }, 4800); }
+  function persist() { try { localStorage.setItem(STOREKEY, JSON.stringify(st)); } catch (_) { notify('Local storage unavailable. Export a backup before leaving.'); } }
+  function data(form, key) { var field = form.elements.namedItem(key); return field ? String(field.value) : ''; }
+  function button(act, text, id, style) { return '<button class="btn ' + (style || 'btn') + '" data-click="' + esc(act) + '" data-id="' + esc(id) + '">' + esc(text) + '</button>'; }
+  function form(act, id, fields, label) { return '<form data-act="' + act + '" data-id="' + esc(id) + '"><div class="formfields">' + fields +
+     '</div><button class="btn primary">' + esc(label) + '</button></form>'; }
+  function input(name, placeholder, max, required) { return '<label>' + esc(placeholder) + '</label><input name="' + esc(name) + '" maxlength="' + max + '" ' + (required ? 'required ' : '') + 'placeholder="' + esc(placeholder) + '">'; }
+  function textarea(name, label, max) { return '<label>' + esc(label) + '</label><textarea name="' + esc(name) + '" maxlength="' + max + '" required></textarea>'; }
+  function current() { return st.active ? C.node(st, st.active) : null; }
+  function safeRun(fn) { try { fn(); persist(); render(); } catch (err) { notify('Not completed: ' + err.message); } }
+  function demo() { if (st.nodes.length && !confirm('Add two fictional demonstration harbors to the existing local notebook?')) return;
+    var a = C.createNode(st, 'Fictional Fellowship Harbor', 'community gathering');
+    var b = C.createNode(st, 'Fictional Maker Workshop', 'maker collective');
+    C.invitation(st, a.id, 'Come to a pretend music-and-garden gathering', 'Bring a song, a question, or just yourself. This is a fictional test invitation.');
+    C.createProject(st, a.id, 'Sample Lantern Festival', 'Practice a small, free festival; venue and people are fictional.', 'festival');
+    C.createProject(st, b.id, 'Sample Workshop', 'Practice preparing a portable event flyer.', 'maker');
+    st.active = a.id; persist(); render(); notify('Two fictional harbors loaded. Try the project and crossing flows.'); }
+  function download(filename, content, mime) { var blob = new Blob([content], {type: mime || 'application/json'});
+    var url = URL.createObjectURL(blob); var a = document.createElement('a'); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.parentNode.removeChild(a); setTimeout(function () { URL.revokeObjectURL(url); }, 9000); }
+  function asJson(obj, filename) { download(filename, JSON.stringify(obj, null, 2) + '\n', 'application/json'); }
+  function readFile(file, done) { if (!file || file.size > 3000000) return notify('File missing or above 3 MB limit.');
+    var r = new FileReader(); r.onload = function () { try { done(JSON.parse(r.result)); } catch (e) { notify('Import refused: ' + e.message); } };
+    r.onerror = function () { notify('Could not read this file.'); }; r.readAsText(file); }
+  function importObject(raw) { var schema = raw && raw.schema, n = current();
+    if (schema === C.SCHEMA) { C.checkStore(raw); if (!confirm('Replace every local harbor and notebook entry with this unauthenticated backup?')) return; st = raw; }
+    else if (schema === C.CROSSING) { if (!n) throw Error('Create a receiving harbor first.'); C.receive(st, n.id, raw); activeTab = 'crossings'; }
+    else if (schema === C.RETURN) { if (!n) throw Error('Create a source harbor first.'); C.receiveReturn(st, n.id, raw); activeTab = 'crossings'; }
+    else if (schema === C.CARTRIDGE) { if (!n) throw Error('Create an adopting harbor first.'); C.adopt(st, n.id, raw); activeTab = 'projects'; }
+    else throw Error('Unsupported JSON schema.');
+    persist(); render(); notify('Local import accepted for inspection; no external identity was authenticated.'); }
+  function render() { var n = current(); $('#onboard').hidden = !!n; $('#workspace').hidden = !n;
+    $('#nodeSelect').innerHTML = st.nodes.length ? st.nodes.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === st.active ? ' selected':'') + '>' + esc(x.label) + '</option>'; }).join('') : '<option>No harbor yet</option>';
+    document.querySelectorAll('[data-tab]').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-tab') === activeTab ? 'true' : 'false'); });
+    document.querySelectorAll('.section').forEach(function (sec) { sec.className = 'section' + (sec.id === activeTab ? ' active' : ''); });
+    if (!n) return;
+    var view = C.projectView(st, n.id);
+    $('#metrics').innerHTML = [['Harbors', st.nodes.length], ['Invitations (draft)', n.invites.length], ['Proposed / ongoing', view.quests],
+      ['Reviewed-confirmed', view.deeds], ['Crossings on HOLD', n.inbox.filter(function (x) { return x.disposition === 'HOLD'; }).length], ['Transferable methods', n.cartridges.length]]
+      .map(function (x) { return '<div class="card"><p class="tiny-head">' + esc(x[0]) + '</p><p class="metric">' + x[1] + '</p></div>'; }).join('');
+    $('#harborInfo').innerHTML = '<p><strong>' + esc(n.label) + '</strong> · ' + esc(n.kind) + '</p><p class="micro">Public routing address (copy to an inviter on another device; not proof of identity): <code>' + esc(n.id) + '</code></p>';
+    $('#journal').innerHTML = st.journal.length ? st.journal.slice(0, 8).map(function (e) { return '<p class="micro"><b>' + esc(e.kind.replace(/_/g, ' ')) + '</b> · ' + esc(e.node) + '<br>' + esc(e.at.slice(0, 16)) + '</p>'; }).join('') : empty('No local work recorded yet.');
+    $('#invites').innerHTML = n.invites.length ? n.invites.map(function (v) { return '<article class="item"><span class="pill proposed">UNSENT DRAFT</span><h3>' + s(v.title) + '</h3><p>' + s(v.text) + '</p>' + button('download-invite', 'Download invitation', v.id, 'btn') + '</article>'; }).join('') : empty('No invitations drafted here yet.');
+    $('#fullMeasure').innerHTML = '<div class="statrow">' + [['Seeds',view.seeds],['Quests',view.quests],['Deeds',view.deeds],['Harvests',view.harvests],['Gifts',view.gifts],['Witness labels',view.witness]].map(function (x) {
+      return '<div class="stat"><strong>' + x[1] + '</strong><span class="micro">' + s(x[0]) + '</span></div>'; }).join('') + '</div>';
+    $('#affordances').innerHTML = view.affordances.length ? view.affordances.map(function (a) {return '<div class="item"><strong>' + s(a.name) + '</strong><p class="micro">Source ' + s(a.from) + ' · Self-attested review; not verified identity</p></div>'; }).join('') : empty('An independently labeled review can open the first proposed affordance.');
+    $('#projectsList').innerHTML = n.projects.length ? n.projects.map(function (p) {
+      var pill = p.state === 'CONFIRMED' ? 'done' : p.state === 'DISPUTED' ? 'refuse' : p.state === 'PROPOSED' ? 'proposed' : 'held';
+      var html = '<article class="item seed"><span class="pill ' + pill + '">' + s(p.state) + '</span><span class="micro"> · ' + s(p.id) + ' / ' + s(p.kind) + '</span><h3>' + s(p.title) + '</h3><p>' + s(p.purpose) + '</p>';
+      if (p.parent) html += '<p class="lineage">Adapted from: ' + s(p.parent) + ' — no inherited authority.</p>';
+      if (p.state === 'PROPOSED') html += form('accept', p.id, input('actor','Person actually accepting the task',80,true) + textarea('scope','Exact bounded scope + local permission',400), 'Record self-attested acceptance');
+      if (p.state === 'ACCEPTED') html += '<p class="micro">Accepted by: ' + s(p.actor) + ' · Scope: ' + s(p.scope) + '</p>' + form('report', p.id, input('actor','Repeat accepting actor label',80,true) + textarea('report','Describe what was actually done',800),'Report work (not yet confirmed)');
+      if (p.state === 'REPORTED') html += '<p><b>Reported by ' + s(p.actor) + ':</b> ' + s(p.report) + '</p>' + form('confirm',p.id,input('reviewer','Different reviewing person label',80,true) + '<label>Review</label><select name="result"><option value="CONFIRMED">Confirm</option><option value="DISPUTED">Dispute</option></select>' + '<label>Capability opened if confirmed</label><textarea name="capability" maxlength="140"></textarea>', 'Record separate reviewer disposition');
+      if (p.state === 'CONFIRMED' || p.state === 'DISPUTED') html += '<p class="small"><b>' + s(p.reviewer) + '</b> entered ' + s(p.outcome) + '. ' + (p.capability ? 'Proposed new capacity: ' + s(p.capability) : '') + '</p>';
+      return html + '</article>';
+    }).join('') : empty('Plant a seed to begin. Nothing becomes a Deed without a separate reviewer label.');
+    $('#crossProject').innerHTML = n.projects.map(function (p) { return '<option value="' + s(p.id) + '">' + s(p.title) + ' (' + s(p.state) + ')</option>'; }).join('') || '<option value="">Create a seed first</option>';
+    $('#crossDest').innerHTML = st.nodes.filter(function (x) {return x.id !== n.id;}).map(function (x) {return '<option value="' + s(x.id) + '">' + s(x.label) + '</option>';}).join('') + '<option value="__external__">External harbor on another device (paste address below)</option>';
+    $('#inbound').innerHTML = n.inbox.length ? n.inbox.map(function (x) {
+      var html = '<article class="item blue"><span class="pill ' + (x.disposition === 'HOLD' ? 'held' : x.disposition === 'REFUSE' ? 'refuse' : 'done') + '">' + s(x.disposition) + '</span><h3>' + s(x.packet.proposal.title) + '</h3><p>' + s(x.packet.proposal.purpose) + '</p><p class="micro">From ' + s(x.packet.sourceLabel) + ' · ' + s(x.packet.id) + '</p>';
+      if (x.disposition === 'HOLD') html += form('decide',x.id,'<label>Disposition</label><select name="decision"><option value="ADMIT_FOR_REVIEW">Admit for review only</option><option value="REFUSE">Refuse</option></select>' + input('reviewer','Receiving steward label',80,true) + textarea('response','Why this disposition / local constraints',350),'Record local decision');
+      else html += '<p class="small">' + s(x.response) + '</p>' + button('download-return','Download return',x.id,'btn') +
+          button('deliver-return', 'Return in this browser (demo)',x.id,'btn line');
+      return html + '</article>';
+    }).join('') : empty('No packets yet. Export a crossing from another harbor, switch here, and import.');
+    $('#outbound').innerHTML = n.outbox.length ? n.outbox.map(function (x) {return '<article class="item"><span class="pill ' + (x.replies.length ? 'done' : 'proposed') + '">' + (x.replies.length ? 'RETURN RECEIVED' : 'NOT DELIVERED AUTOMATICALLY') + '</span><h3>' + s(x.packet.proposal.title) + '</h3><p class="micro">To ' + s(x.packet.destinationLabel) + '</p>' + button('download-cross','Download packet',x.id,'btn') + button('deliver-cross','Deliver in this browser (demo)',x.id,'btn line') + (x.replies.length ? '<p class="small">' + s(x.replies[0].decision) + ': ' + s(x.replies[0].note) + '</p>' : '') + '</article>'; }).join('') : empty('No outbound candidates.');
+    var reported = n.economy.filter(function (e) {return e.status === 'SELF_REPORTED';});
+    function sum(type) {return reported.filter(function (e) {return e.type === type;}).reduce(function (a,e) {return a+e.cents;},0)/100;}
+    $('#ecoSummary').innerHTML = '<div class="statrow"><div class="stat"><strong>$' + sum('money_in').toFixed(2) + '</strong><span class="micro">Money in, self-reported</span></div><div class="stat"><strong>$' + sum('money_out').toFixed(2) + '</strong><span class="micro">Money out, self-reported</span></div><div class="stat"><strong>' + n.economy.filter(function (e) {return e.type !== 'money_in' && e.type !== 'money_out';}).length + '</strong><span class="micro">Noncash records</span></div></div><p class="small">Planned money is excluded. These are not bank or payment data.</p>';
+    $('#ecoList').innerHTML = n.economy.length ? n.economy.map(function (e) {return '<article class="item"><span class="pill">' + s(e.type) + ' · ' + s(e.status) + '</span><p>' + s(e.description) + '</p>' + (e.cents ? '<p class="small">$' + (e.cents/100).toFixed(2) + ' (self-reported only)</p>' : '') + '</article>';}).join('') : empty('No economic records. Keep money and nonmoney distinct.');
+    $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {return '<article class="item green"><span class="pill done">LOCAL EXECUTION</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: this browser (not GHoT)</p></article>';}).join('') : empty('Run a small task on this device to create a real local execution receipt.');
+    $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
+    $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
+  }
+  document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
+    ev.preventDefault(); safeRun(function () { var id = f.getAttribute('data-id'), n = current();
+      if (action === 'create-node') C.createNode(st,data(f,'name'),data(f,'kind'));
+      else if (action === 'invite') C.invitation(st,n.id,data(f,'title'),data(f,'description'));
+      else if (action === 'project') C.createProject(st,n.id,data(f,'title'),data(f,'purpose'),data(f,'kind'));
+      else if (action === 'accept') C.accept(st,n.id,id,data(f,'actor'),data(f,'scope'));
+      else if (action === 'report') C.report(st,n.id,id,data(f,'actor'),data(f,'report'));
+      else if (action === 'confirm') C.confirm(st,n.id,id,data(f,'reviewer'),data(f,'result'),data(f,'capability'));
+      else if (action === 'crossing') { var dest=data(f,'destination'); if(dest === '__external__') dest=data(f,'externalId'); C.crossing(st,n.id,data(f,'projectId'),dest,data(f,'note')); }
+      else if (action === 'economy') { var type=data(f,'type'), dollars=type==='money_in'||type==='money_out' ? Number(data(f,'dollars')) : 0;
+        if (!Number.isFinite(dollars) || dollars < 0 || Math.round(dollars*100) / 100 !== dollars) throw Error('Enter nonnegative dollars and cents.');
+        C.economy(st,n.id,type,data(f,'description'),Math.round(dollars*100),data(f,'status')); }
+      else if (action === 'compute') C.compute(st,n.id,data(f,'task'),data(f,'input'));
+      else if (action === 'decide') C.decide(st,n.id,id,data(f,'decision'),data(f,'reviewer'),data(f,'response'));
+      else if (action === 'cartridge') C.cartridge(st,n.id,data(f,'projectId'),data(f,'method'),data(f,'limitations'));
+      else throw Error('Unknown form.');
+      notify('Saved locally. This is not an external or institutional action.');
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    var tab = ev.target.closest('[data-tab]'); if (tab) { activeTab = tab.getAttribute('data-tab'); render(); window.scrollTo(0,0); return; }
+    var b = ev.target.closest('[data-click]'); if (!b) return; var action = b.getAttribute('data-click'), id = b.getAttribute('data-id');
+    safeRun(function () {var n=current(), item, other;
+      if (action === 'download-invite') {item=n.invites.find(function (x) {return x.id===id;}); download('Abundent_Invitation_' + id + '.txt',item.title+'\nFrom: '+item.from+'\n'+item.text+'\n\nOptional invitation only; no auto-enrollment.\n','text/plain');}
+      else if (action === 'download-cross' || action === 'deliver-cross') { item=n.outbox.find(function (x) {return x.id===id;}); if (action === 'download-cross') asJson(item.packet, 'Circuit_Crossing_' + id + '.json');
+        else {other=C.node(st,item.packet.destination); C.receive(st,other.id,item.packet); notify('Delivered to ' + other.label + ' HOLD queue in same browser demo.');} }
+      else if (action === 'download-return' || action === 'deliver-return') {item=C.makeReturn(st,n.id,id); if (action === 'download-return') asJson(item,'Circuit_Return_' + id + '.json');
+        else {C.receiveReturn(st,item.destination,item); notify('Self-attested return delivered locally.');} }
+      else if (action === 'download-card') {item=n.cartridges.find(function (x) {return x.id===id;}); asJson(item,'Circuit_Cartridge_' + id + '.json');}
+      else throw Error('Unknown action.');
+    });
+  });
+  document.querySelectorAll('[data-tab]').forEach(function (b) {b.setAttribute('type','button');});
+  $('#nodeSelect').addEventListener('change',function () {st.active = this.value; persist(); render();});
+  $('#newNodeBtn').addEventListener('click', function () {var label=prompt('Name of this independent harbor (no affiliation implied):');
+    if (!label) return; safeRun(function () {C.createNode(st,label,'independent local group');});});
+  $('#demoBtn').addEventListener('click',function () {safeRun(demo);});
+  $('#backupBtn').addEventListener('click',function () {asJson(st,'Abundent_Circuit001_PRIVATE_Backup.json'); notify('Private local backup downloaded. Do not publish it.');});
+  $('#importBtn').addEventListener('click',function () {$('#importFile').click();});
+  $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
+  $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
+  $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
+  render();
+}());

@@ -1,0 +1,6 @@
+{
+  "name": "abundent-circuit-001",
+  "private": true,
+  "type": "commonjs",
+  "description": "Isolate the offline Circuit pilot tests from webZ's root ES module scope."
+}

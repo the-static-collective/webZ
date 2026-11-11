@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102536"><title>Abundent Circuit 001 — The Next Harbor</title>
+<style>
+:root{--navy:#0e2635;--ink:#193541;--muted:#526c75;--cream:#f9f6ec;--paper:#fffdfa;--line:#cad8d4;--teal:#206b64;--mint:#caebd8;--gold:#e8ba5d;--coral:#b65c4d;--white:#fff;--shadow:0 10px 28px rgba(22,51,59,.10)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f0f4f0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.42;font-size:15px}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:10px 14px;font-weight:750;transition:filter .12s}button:hover{filter:brightness(.96)}button:disabled{opacity:.46;cursor:not-allowed}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}input,textarea,select{width:100%;border:1px solid #a9beb9;border-radius:8px;padding:10px 11px;background:white;color:#17343e;min-width:0}textarea{resize:vertical;min-height:65px}label{display:block;font-size:.8rem;font-weight:700;color:#385560;margin-bottom:5px}.small{font-size:.82rem;color:var(--muted)}.micro{font-size:.72rem;color:var(--muted)}.shell{max-width:1190px;margin:auto;padding:0 21px}.top{background:linear-gradient(115deg,#092130,#204d54);color:#f9f8f1;border-bottom:5px solid #d8ad54}.top .shell{padding-top:23px;padding-bottom:23px}.eyebrow{font-size:.72rem;font-weight:850;text-transform:uppercase;letter-spacing:.16em;color:#eac777}h1{font-family:Georgia,serif;font-size:clamp(2.1rem,5.2vw,4.1rem);font-weight:700;letter-spacing:-.032em;margin:4px 0 5px;line-height:1.04}h1 i{color:#c9e9ce;font-style:normal}.top p{max-width:780px;color:#d0e7e2;margin:8px 0}.top .tag{display:inline-block;margin-top:8px;background:rgba(230,184,96,.12);color:#ffe7ab;border:1px solid #a58a55;padding:6px 11px;border-radius:20px;font-size:.75rem}.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:17px}.tools select{max-width:300px}.tools label{color:#dcebe5;margin:0}.btn{background:#e1ebe5;color:#173640}.btn.primary{background:#bce5d0}.btn.gold{background:#efc974}.btn.red{background:#f5ddd5;color:#7c291f}.btn.dark{background:var(--navy);color:white}.btn.line{border:1px solid #bbcbc5;background:transparent;color:inherit}.tools .btn.line{border-color:#708e96;color:white}.tabs{display:flex;gap:6px;overflow-x:auto;margin:18px 0 22px;padding-bottom:6px}.tabs button{white-space:nowrap;background:#e0e9e4;color:#39555d;font-size:.87rem}.tabs button[aria-selected=true]{background:var(--navy);color:white}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:13px;padding:19px;min-width:0;margin-bottom:15px}.card h2{font-family:Georgia,serif;font-size:1.4rem;line-height:1.15;margin:0 0 8px}.card h3{font-size:1.07rem;margin:0 0 8px}.card p{margin:6px 0 11px}.metric{font-family:Georgia,serif;font-size:2rem;color:#156359;margin:2px 0}.wash{background:#eff6ec}.seed{border-left:5px solid #d3a858}.blue{border-left:5px solid #4f8e9d}.green{border-left:5px solid #4f9c70}.warning{background:#fff5df;border:1px solid #dfc892;padding:13px;border-radius:9px;color:#69512c}.banner{background:#e3f3e9;border:1px solid #bfdccf;padding:14px 16px;border-radius:9px;margin-bottom:14px}.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.stack{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.stack>*{flex-shrink:0}.formfields{display:grid;gap:10px;margin-bottom:12px}.item{border:1px solid #d8e3dc;border-radius:10px;padding:13px;margin:11px 0;background:#fff}.item h3{margin:1px 0 7px}.item p{margin:4px 0 7px;overflow-wrap:anywhere}.item .stack{margin-top:11px}.pill{display:inline-block;border-radius:25px;padding:3px 9px;background:#e5efe9;color:#255c50;font-size:.7rem;font-weight:850;letter-spacing:.03em}.pill.held{background:#fff0c8;color:#80531a}.pill.done{background:#d9f2df;color:#166136}.pill.refuse{background:#ffe4e0;color:#903e2c}.pill.proposed{background:#eee8f4;color:#684c84}.empty{padding:24px;border:1px dashed #a8bbb5;border-radius:9px;color:#557076;background:#f8fbf8}.statrow{display:flex;gap:11px;flex-wrap:wrap}.stat{flex:1;min-width:135px;background:#ecf5ec;padding:10px;border-radius:8px}.stat strong{display:block;font-family:Georgia,serif;color:#225a54;font-size:1.45rem}form{margin:0}.section{display:none}.section.active{display:block}.rule{border-top:1px solid #d7e2db;margin:14px 0}.flow{display:flex;align-items:center;flex-wrap:wrap;gap:7px;color:#1c6560;font-size:.77rem;font-weight:800;letter-spacing:.035em}.flow span{background:#e5f0e7;padding:8px 10px;border-radius:7px}.flow b{color:#9b6b26}.footer{font-size:.77rem;color:#647b7d;border-top:1px solid #bdceca;padding:18px 0 42px;margin-top:20px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}#notice{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;max-width:calc(100% - 28px);min-width:190px;background:#143947;color:#fff;border:2px solid #77b69e;box-shadow:0 8px 35px #173b4040;padding:12px 18px;border-radius:8px;z-index:10;display:none}#notice.on{display:block}.lineage{font-size:.77rem;word-break:break-word;color:#64827b}.hint{margin-bottom:14px}details{border-top:1px solid #d7e2dd;margin-top:12px;padding-top:12px}summary{font-weight:700;cursor:pointer;color:#245f5b}code{font-size:.78rem;word-break:break-word}input[type=file]{width:220px;padding:7px}.nodata{padding:24px;background:#fcfbf5;border:1px dashed #c5b98e;border-radius:10px} .tiny-head{letter-spacing:.08em;font-size:.73rem;color:#5d787c;text-transform:uppercase;font-weight:850;margin:0 0 8px}
+@media(max-width:760px){.grid,.grid.two,.cols{grid-template-columns:1fr}.shell{padding-left:14px;padding-right:14px}.card{padding:15px}.tools{align-items:flex-start}.tools select{max-width:100%}.tabs{margin-top:12px}.stat{min-width:102px}}@media print{.top,.tabs,.tools,.no-print,button,form,#notice{display:none!important}body{background:white}.section{display:block!important}.card{box-shadow:none;break-inside:avoid}.shell{max-width:100%;padding:0}}
+</style></head>
+<body><header class="top"><div class="shell"><div class="eyebrow">The Static Collective / Abundent / field prototype 001</div><h1>The <i>Next Harbor</i></h1><p>An offline-first social-and-production circuit: invite, gather, propose, witness, make a new possibility, and carry a reusable method to another independent community.</p><span class="tag">LOCAL PILOT • NO ACCOUNTS • NO LIVE GHOT / RELATTE / FULL MEASURE INTEGRATION</span>
+<div class="tools"><label for="nodeSelect">Working harbor</label><select id="nodeSelect" aria-label="Working harbor"></select><button class="btn primary" id="newNodeBtn">+ New harbor</button><button class="btn line" id="demoBtn">Load fictional two-harbor demo</button><button class="btn line" id="backupBtn">Backup JSON</button><button class="btn line" id="importBtn">Import JSON</button><input class="sr-only" id="importFile" type="file" accept=".json,application/json"><button class="btn line" id="resetBtn">Reset</button></div>
+</div></header>
+<main class="shell"><div class="tabs" role="tablist" aria-label="Circuit work areas"><button data-tab="overview" role="tab" aria-selected="true">01 · Dashboard</button><button data-tab="gather" role="tab" aria-selected="false">02 · Invite</button><button data-tab="projects" role="tab" aria-selected="false">03 · Build & Grow</button><button data-tab="crossings" role="tab" aria-selected="false">04 · Crossings</button><button data-tab="economy" role="tab" aria-selected="false">05 · Economy</button><button data-tab="compute" role="tab" aria-selected="false">06 · Compute</button><button data-tab="foundry" role="tab" aria-selected="false">07 · Foundry</button></div>
+<div id="onboard" class="card nodata" hidden><h2>Create the first harbor</h2><p>A harbor is a locally governed gathering or project—not an organizational endorsement. Start with a fictional demo or create your own private test node.</p><form data-act="create-node"><div class="cols"><div><label>Harbor name</label><input name="name" required maxlength="80" placeholder="e.g. Neighborhood Table"></div><div><label>Kind</label><input name="kind" maxlength="60" value="independent community"></div></div><p><button class="btn dark">Create local harbor</button></p></form></div>
+<div id="workspace" hidden>
+<section id="overview" class="section active" role="tabpanel"><div class="banner"><strong>One complete circuit:</strong> invite → propose → human acceptance → report → independent review → GrO affordance → Foundry cartridge → another harbor. Each link is an explicit human choice. <b>All names and receipts here are self-entered local records.</b></div>
+<div class="grid" id="metrics"></div><div class="grid two"><div class="card"><h2>Current harbor</h2><div id="harborInfo"></div><div class="flow"><span>INVITE</span><b>→</b><span>ACT</span><b>→</b><span>WITNESS</span><b>→</b><span>REPRODUCE</span></div></div><div class="card"><h2>Activity record</h2><div id="journal"></div></div></div><div class="card"><h2>Truth boundaries</h2><p>Separate human witnesses are named, not authenticated. Local computation is real browser execution, <b>not GHoT</b>. Crossings are review-only JSON, <b>not signed reLATTE</b>. Economic records are <b>not payments</b>. Full Measure/GrO displays are projections, <b>not writes to their native engines</b>.</p></div></section>
+<section id="gather" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Invite somebody into a possibility</h2><p class="small">Create a public-safe draft for voluntary hand-to-hand sharing. This does not send messages or enroll anyone.</p><form data-act="invite"><div class="formfields"><div><label>Invitation title</label><input name="title" required maxlength="120" placeholder="Come make a tiny neighborhood festival"></div><div><label>What you're inviting people to explore</label><textarea name="description" required maxlength="360" placeholder="Meet neighbors, listen to music, and maybe plan a gathering of your own."></textarea></div></div><button class="btn dark">Prepare invitation</button></form></div><div class="card"><h2>Invitation chain</h2><p>This is a <strong>consent-based invitation door</strong>, not a growth quota. A receiver may pass, ignore it, or begin a separate conversation.</p><div class="warning">No names, private needs, phone numbers, or sensitive stories in public invitation text.</div></div></div><div class="card"><h2>Draft invitations</h2><div id="invites"></div></div></section>
+<section id="projects" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Plant a seed</h2><p class="small">A proposed project does not yet obligate anyone.</p><form data-act="project"><div class="formfields"><div><label>Project / gathering</label><input name="title" required maxlength="120" placeholder="Little Friday music workshop"></div><div><label>Purpose and scope</label><textarea name="purpose" required maxlength="400" placeholder="Host one free, accessible two-hour community gathering, subject to approvals."></textarea></div><div><label>Kind</label><select name="kind"><option value="festival">Festival</option><option value="gathering">Gathering</option><option value="food">Food / garden</option><option value="maker">Maker / physical work</option><option value="other">Other</option></select></div></div><button class="btn dark">Create proposed seed</button></form></div><div class="card wash"><h2>Full Measure × GrO</h2><p class="small">A local, non-authoritative projection of projects and independently labeled review.</p><div id="fullMeasure"></div><h3>Possibilities opened</h3><div id="affordances"></div></div></div><div class="card"><h2>Project ledger</h2><div id="projectsList"></div></div></section>
+<section id="crossings" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Propose a cross-harbor question</h2><p class="small">Typed review-only packet; destination starts on HOLD. No real people, payments, or permissions cross.</p><form data-act="crossing"><div class="formfields"><div><label>Which proposed or completed seed?</label><select name="projectId" id="crossProject" required></select></div><div><label>Receiving harbor</label><select name="destination" id="crossDest" required></select></div><div><label>External receiving harbor ID (only when selected above)</label><input name="externalId" maxlength="80" placeholder="Paste public harbor ID from other device"></div><div><label>Public-safe note (optional)</label><textarea name="note" maxlength="300" placeholder="Would your team like to review this possibility?"></textarea></div></div><button class="btn dark">Prepare crossing</button></form></div><div class="card"><h2>Independent receiver</h2><p>A crossing's arrival does not commit the receiver. <strong>ADMIT FOR REVIEW</strong> means the question may be considered; it does not authorize people, budgets, venues or projects.</p><div class="warning">This one-browser demo has separate node records, not independently authenticated organizations. For a cross-device pilot, copy the receiving harbor ID into the external address field; download and manually deliver the JSON packet. Both parties still choose separately.</div></div></div><div class="grid two"><div class="card"><h2>Incoming · Customs desk</h2><div id="inbound"></div></div><div class="card"><h2>Outbound · Returns</h2><div id="outbound"></div></div></div></section>
+<section id="economy" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Separate economic instruments</h2><p class="small">This is bookkeeping for a future pilot, not a wallet, currency, fundraising site, marketplace or settled transaction system.</p><form data-act="economy"><div class="formfields"><div><label>Record class</label><select name="type" id="ecoType"><option value="gift">Noncash gift</option><option value="equipment">Equipment / facility capacity</option><option value="exchange_proposal">Possible voluntary exchange</option><option value="money_in">Ordinary money received (self-reported)</option><option value="money_out">Ordinary money spent (self-reported)</option></select></div><div><label>Description</label><textarea name="description" maxlength="220" required placeholder="Borrowed folding chairs; not a transfer of ownership"></textarea></div><div><label>Dollar amount (money records only)</label><input name="dollars" id="ecoAmount" type="number" min="0" max="1000000" step="0.01" value="0" disabled></div><div><label>Status</label><select name="status"><option value="PLANNED">Planned only</option><option value="SELF_REPORTED">Self-reported occurrence (not audited)</option></select></div></div><button class="btn dark">Record separately</button></form></div><div class="card"><h2>Accounts without conflation</h2><div id="ecoSummary"></div><div class="warning">A Jubilee play ticket is never redeemable as money here; needs, offers, gifts, physical custody and actual payments remain distinct records.</div></div></div><div class="card"><h2>Economic notes</h2><div id="ecoList"></div></div></section>
+<section id="compute" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Bounded local task</h2><p class="small">A genuinely executed, deterministic browser task with a local receipt. Inspired by GHoT's capability/receipt grammar but <b>not delegated to GHoT</b>.</p><form data-act="compute"><div class="formfields"><div><label>Available local capability</label><select name="task"><option value="word_count">Text word count</option><option value="character_count">Character count</option><option value="line_count">Line count</option></select></div><div><label>Input (local only)</label><textarea name="input" maxlength="1000" required placeholder="A song, a welcome note, a short event brief."></textarea></div></div><button class="btn dark">Run here + record result</button></form></div><div class="card"><h2>GHoT / Static OS / Workbench seam</h2><p>The next native adapter should run a GHoT capability by explicitly authorized task ID, verify its receipt, and hand results into Workbench. This local pilot makes no shell calls, cannot recruit devices, and has no printer or filesystem execution.</p><p class="small">The production OS, distributed execution plane and fabrication machinery remain independent engineering gates.</p></div></div><div class="card"><h2>Local execution receipts</h2><div id="computeList"></div></div></section>
+<section id="foundry" class="section" role="tabpanel"><div class="grid two"><div class="card"><h2>Make a transferable host cartridge</h2><p class="small">Only a separately reviewed-confirmed project can produce a finished local method. Export only text you deliberately want to share.</p><form data-act="cartridge"><div class="formfields"><div><label>Reviewed-confirmed project</label><select id="cartridgeProject" name="projectId" required></select></div><div><label>Reproduction method / steps</label><textarea name="method" required maxlength="1600" placeholder="1. Ask host permission...&#10;2. Set a small budget...&#10;3. Gather and debrief..."></textarea></div><div><label>What failed / remains local / cannot be assumed</label><textarea name="limitations" required maxlength="700" placeholder="Venue access, food permits, insurance, and local authority must be independently decided."></textarea></div></div><button class="btn dark">Author reviewed-method cartridge</button></form></div><div class="card"><h2>The next harbor</h2><p><strong>Copy capacity, never authority.</strong> A cartridge can travel to another node, but becomes only a new proposal there. It cannot carry automatic participants, permissions, payments, funding, witnesses or approval.</p><div class="flow"><span>ONE TABLE</span><b>→</b><span>ONE ACT</span><b>→</b><span>ONE NEXT HARBOR</span></div><p class="small">Try exporting a finished cartridge, switching harbors, and importing. Its status must return to PROPOSED—not CONFIRMED.</p></div></div><div class="card"><h2>Reusable cartridges</h2><div id="cartridgeList"></div></div></section>
+</div><footer class="footer">ABUNDENT CIRCUIT 001 · Prototype only. No partner enrollment, validated human identity, production accounting, payment processing, safety certification, automatic networking, live integration, or real-world outcome is implied. Public exports require independent review and consent. Use fictional/non-sensitive data during initial testing.</footer></main><div id="notice" role="status" aria-live="polite"></div>
+<script>
+/* Abundent Circuit 001 — local-only deterministic pilot model. No authentication or live integrations. */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.AbundentCircuit = factory();
+}(this, function () {
+  'use strict';
+  var SCHEMA = 'abundent.circuit.local/v1';
+  var CROSSING = 'abundent.circuit.crossing/v1';
+  var RETURN = 'abundent.circuit.return/v1';
+  var CARTRIDGE = 'abundent.circuit.cartridge/v1';
+  var KINDS = ['festival', 'gathering', 'food', 'maker', 'other'];
+  var ECONOMY = ['gift', 'money_in', 'money_out', 'exchange_proposal', 'equipment'];
+  function assert(ok, message) { if (!ok) throw new Error(message); }
+  function s(v, max) {
+    assert(typeof v === 'string', 'Expected text.');
+    var x = v.trim(); assert(x.length && x.length <= (max || 160), 'Text must be 1–' + (max || 160) + ' characters.');
+    assert(!/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(x), 'Control characters not permitted.');
+    return x;
+  }
+  function optional(v, max) { return v ? s(v, max) : ''; }
+  function clone(v) { return JSON.parse(JSON.stringify(v)); }
+  function now() { return new Date().toISOString(); }
+  function publicId() {
+    var bytes = new Uint8Array(12);
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) crypto.getRandomValues(bytes);
+    else if (typeof require === 'function') { var b = require('node:crypto').randomBytes(12); for (var i=0; i<12; i++) bytes[i]=b[i]; }
+    else throw new Error('Secure randomness unavailable; cannot create portable harbor identity.');
+    return Array.from(bytes).map(function (x) { return ('0'+x.toString(16)).slice(-2); }).join('');
+  }
+  function init() { return {schema: SCHEMA, seq: 0, active: null, nodes: [], journal: []}; }
+  function next(st, kind) { st.seq += 1; return kind + '-' + st.seq; }
+  function node(st, id) { var n = st.nodes.find(function (e) { return e.id === id; }); assert(n, 'Unknown harbor.'); return n; }
+  function project(st, id, pid) { var p = node(st, id).projects.find(function (e) { return e.id === pid; }); assert(p, 'Unknown project.'); return p; }
+  function journal(st, kind, n, ref) { st.journal.unshift({kind: kind, node: n, ref: ref, at: now()}); st.journal = st.journal.slice(0, 400); }
+  function createNode(st, label, kind) {
+    var n = {id: next(st, 'harbor') + '-' + publicId(), label: s(label, 80), kind: s(kind || 'independent', 60),
+      invites: [], projects: [], inbox: [], returns: [], outbox: [], economy: [], compute: [], cartridges: []};
+    st.nodes.push(n); st.active = n.id; journal(st, 'HARBOR_CREATED', n.id, n.id); return n;
+  }
+  function invitation(st, id, title, text) {
+    var n = node(st, id); var v = {id: next(st, 'invite'), title: s(title, 120), text: s(text, 360),
+      from: n.label, source: id, at: now(), scope: 'public_safe_invitation_only', status: 'UNSENT_DRAFT'};
+    n.invites.unshift(v); journal(st, 'INVITATION_DRAFTED', id, v.id); return v;
+  }
+  function createProject(st, id, title, purpose, kind, parent) {
+    var n = node(st, id); assert(KINDS.indexOf(kind) >= 0, 'Unknown project type.');
+    var p = {id: next(st, 'seed'), title: s(title, 120), purpose: s(purpose, 400), kind: kind,
+      at: now(), state: 'PROPOSED', parent: optional(parent || '', 150),
+      actor: null, scope: null, report: null, reviewer: null, outcome: null, capability: null};
+    n.projects.unshift(p); journal(st, 'SEED_PROPOSED', id, p.id); return p;
+  }
+  function accept(st, id, pid, actor, scope) {
+    var p = project(st, id, pid); assert(p.state === 'PROPOSED', 'Only a proposed seed can be accepted.');
+    p.actor = s(actor, 80); p.scope = s(scope, 400); p.state = 'ACCEPTED';
+    journal(st, 'HUMAN_ACCEPTANCE_SELF_ATTESTED', id, pid); return p;
+  }
+  function report(st, id, pid, actor, text) {
+    var p = project(st, id, pid); assert(p.state === 'ACCEPTED', 'Only accepted work can be reported.');
+    assert(s(actor, 80).toLowerCase() === p.actor.toLowerCase(), 'Report actor must match accepting actor label.');
+    p.report = s(text, 800); p.state = 'REPORTED'; journal(st, 'WORK_REPORTED_UNVERIFIED', id, pid); return p;
+  }
+  function confirm(st, id, pid, reviewer, result, capability) {
+    var p = project(st, id, pid); assert(p.state === 'REPORTED', 'Only reported work may be reviewed.');
+    var r = s(reviewer, 80); assert(r.toLowerCase() !== p.actor.toLowerCase(), 'A separate reviewer label is required.');
+    assert(result === 'CONFIRMED' || result === 'DISPUTED', 'Invalid review disposition.');
+    p.reviewer = r; p.state = result; p.outcome = result;
+    if (result === 'CONFIRMED') p.capability = s(capability, 140);
+    journal(st, 'REVIEW_' + result + '_SELF_ATTESTED', id, pid); return p;
+  }
+  function projectView(st, id) {
+    var n = node(st, id), deeds = n.projects.filter(function (p) { return p.state === 'CONFIRMED'; });
+    return {seeds: n.projects.length, deeds: deeds.length, harvests: deeds.length,
+      gifts: n.economy.filter(function (e) { return e.type === 'gift'; }).length,
+      quests: n.projects.filter(function (p) { return p.state !== 'CONFIRMED' && p.state !== 'DISPUTED'; }).length,
+      witness: deeds.length, affordances: deeds.filter(function (p) { return p.capability; }).map(function (p) {
+        return {from: p.id, name: p.capability, review: 'separate reviewer label; identity unverified'};
+      })};
+  }
+  function economy(st, id, type, description, cents, status) {
+    var n = node(st, id); assert(ECONOMY.indexOf(type) >= 0, 'Unknown economic category.');
+    assert(status === 'PLANNED' || status === 'SELF_REPORTED', 'Unknown record status.');
+    assert(Number.isSafeInteger(cents) && cents >= 0 && cents <= 100000000, 'Invalid nonnegative cents amount.');
+    if (type !== 'money_in' && type !== 'money_out') assert(cents === 0, 'Non-money records cannot acquire a monetary balance.');
+    var e = {id: next(st, 'economic'), type: type, description: s(description, 220), cents: cents,
+      status: status, at: now(), disclaimer: 'recorded locally; not audited or settled'};
+    n.economy.unshift(e); journal(st, 'ECONOMY_' + type.toUpperCase(), id, e.id); return e;
+  }
+  // Deliberately bounded, local in-browser task. This is a GHoT-shaped task specimen, NOT the GHoT runtime.
+  function compute(st, id, task, input) {
+    var n = node(st, id), v = s(input, 1000), output;
+    assert(['word_count', 'character_count', 'line_count'].indexOf(task) >= 0, 'Unsupported compute task.');
+    if (task === 'word_count') output = v.split(/\s+/).filter(Boolean).length;
+    if (task === 'character_count') output = v.length;
+    if (task === 'line_count') output = v.split(/\r?\n/).length;
+    var receipt = {id: next(st, 'task'), executor: 'this_browser_only', task: task, input: v,
+      output: output, status: 'EXECUTED_LOCALLY', at: now(), actualGHoT: false};
+    n.compute.unshift(receipt); journal(st, 'BOUNDED_LOCAL_COMPUTE', id, receipt.id); return receipt;
+  }
+  function crossing(st, sourceId, pid, destinationId, note) {
+    var source = node(st, sourceId), destination = st.nodes.find(function (x) { return x.id === destinationId; }), p = project(st, sourceId, pid);
+    destinationId = s(destinationId, 80);
+    assert(source.id !== destinationId, 'Different harbors required.');
+    var pack = {schema: CROSSING, id: next(st, 'cross'), source: source.id, sourceLabel: source.label,
+      destination: destinationId, destinationLabel: destination ? destination.label : destinationId, at: now(),
+      proposal: {seed: p.id, title: p.title, purpose: p.purpose, kind: p.kind},
+      note: optional(note || '', 300), permission: 'REVIEW_ONLY',
+      nonclaims: ['No authentication', 'Not an accepted task', 'No funds or people transferred']};
+    source.outbox.unshift({id: pack.id, packet: clone(pack), replies: []});
+    journal(st, 'CROSSING_DRAFTED_NOT_DELIVERED', sourceId, pack.id); return clone(pack);
+  }
+  function validateCrossing(packet) {
+    assert(packet && packet.schema === CROSSING, 'Not a Circuit crossing.');
+    assert(/^cross-[0-9]+$/.test(packet.id), 'Invalid crossing ID.');
+    s(packet.source, 80); s(packet.destination, 80); s(packet.sourceLabel, 80); s(packet.destinationLabel, 80);
+    assert(packet.source !== packet.destination, 'Not cross-harbor.');
+    assert(packet.permission === 'REVIEW_ONLY', 'Packet scope refused.');
+    assert(packet.proposal && KINDS.indexOf(packet.proposal.kind) >= 0, 'Invalid proposal.');
+    s(packet.proposal.seed, 90); s(packet.proposal.title, 120); s(packet.proposal.purpose, 400);
+    optional(packet.note || '', 300); return true;
+  }
+  function receive(st, toId, packet) {
+    var n = node(st, toId); validateCrossing(packet);
+    assert(packet.destination === toId, 'Crossing addressed to another harbor.');
+    assert(!n.inbox.some(function (x) { return x.packet.source === packet.source && x.packet.id === packet.id; }), 'Replay/duplicate packet refused.');
+    assert(n.inbox.length < 300, 'Receiver queue limit reached.');
+    var v = {id: next(st, 'inbound'), packet: clone(packet), disposition: 'HOLD', reviewer: null, response: ''};
+    n.inbox.unshift(v); journal(st, 'RECEIVED_HOLD', toId, v.id); return v;
+  }
+  function decide(st, toId, inboundId, decision, reviewer, response) {
+    var n = node(st, toId), v = n.inbox.find(function (x) { return x.id === inboundId; });
+    assert(v, 'Unknown inbound packet.'); assert(v.disposition === 'HOLD', 'Only HOLD can be decided.');
+    assert(['ADMIT_FOR_REVIEW', 'REFUSE'].indexOf(decision) >= 0, 'Invalid disposition.');
+    v.disposition = decision; v.reviewer = s(reviewer, 80); v.response = s(response, 350);
+    journal(st, 'RECEIVER_' + decision, toId, v.id); return clone(v);
+  }
+  function makeReturn(st, toId, inboundId) {
+    var n = node(st, toId), v = n.inbox.find(function (x) { return x.id === inboundId; });
+    assert(v && v.disposition !== 'HOLD', 'Receiver must decide before return.');
+    return {schema: RETURN, crossingId: v.packet.id, source: toId,
+      destination: v.packet.source, decision: v.disposition, note: v.response,
+      reviewerLabel: v.reviewer, at: now(), claim: 'self-attested disposition; not signed or identity-verified'};
+  }
+  function receiveReturn(st, sourceId, ret) {
+    var n = node(st, sourceId); assert(ret && ret.schema === RETURN && ret.destination === sourceId, 'Wrong return target.');
+    assert(['ADMIT_FOR_REVIEW', 'REFUSE'].indexOf(ret.decision) >= 0, 'Invalid return disposition.');
+    s(ret.source, 80); s(ret.crossingId, 90); s(ret.note, 350); s(ret.reviewerLabel, 80);
+    var out = n.outbox.find(function (x) { return x.id === ret.crossingId; });
+    assert(out && out.packet.destination === ret.source, 'Return has no matching outbound crossing.');
+    assert(!out.replies.length, 'A reply for this crossing was already received.');
+    out.replies.push(clone(ret)); journal(st, 'RETURN_RECEIVED_NOT_FULFILLMENT', sourceId, ret.crossingId); return out;
+  }
+  function cartridge(st, id, pid, method, limitations) {
+    var n = node(st, id), p = project(st, id, pid);
+    assert(p.state === 'CONFIRMED', 'Only reviewed-confirmed seeds can form a finished cartridge.');
+    var card = {schema: CARTRIDGE, id: next(st, 'cartridge'), title: p.title,
+      method: s(method, 1600), knownLimits: s(limitations, 700), sourceNode: n.label,
+      sourceSeed: p.id, capability: p.capability, category: p.kind, at: now(),
+      witnessClass: 'separate typed reviewer label; NOT verified identity or outcome',
+      reuseRule: 'adoption makes a NEW proposal; no transferred authority, endorsement, budget, permit or consent'};
+    n.cartridges.unshift(card); journal(st, 'METHOD_CARTRIDGE_AUTHORED_LOCAL', id, card.id); return clone(card);
+  }
+  function adopt(st, id, card) {
+    assert(card && card.schema === CARTRIDGE, 'Not a Circuit cartridge.');
+    s(card.title, 120); s(card.method, 1600); s(card.knownLimits, 700);
+    assert(KINDS.indexOf(card.category) >= 0, 'Invalid cartridge category.');
+    var p = createProject(st, id, card.title, 'Local adaptation proposed: ' + card.method.slice(0, 350), card.category,
+      s(card.sourceNode || 'unknown', 80) + ' / ' + s(card.sourceSeed, 90));
+    journal(st, 'CARTRIDGE_ADOPTED_AS_UNAPPROVED_SEED', id, p.id); return p;
+  }
+  function checkStore(v) {
+    assert(v && v.schema === SCHEMA && Array.isArray(v.nodes) && Array.isArray(v.journal), 'Invalid local backup.');
+    assert(v.nodes.length <= 100 && v.journal.length <= 400, 'Backup exceeds supported limits.');
+    assert(Number.isSafeInteger(v.seq) && v.seq >= 0, 'Invalid sequence counter.');
+    var seen = new Set(); v.nodes.forEach(function (n) {
+      assert(n && typeof n.id === 'string' && !seen.has(n.id), 'Invalid or repeated harbor.'); seen.add(n.id);
+      ['invites','projects','inbox','returns','outbox','economy','compute','cartridges'].forEach(function (k) {
+        assert(Array.isArray(n[k]) && n[k].length <= 500, 'Invalid ' + k + ' collection.');
+      });
+    });
+    assert(v.active === null || seen.has(v.active), 'Invalid active harbor.');
+    return true;
+  }
+  return {SCHEMA: SCHEMA, CROSSING: CROSSING, RETURN: RETURN, CARTRIDGE: CARTRIDGE,
+    init: init, checkStore: checkStore, node: node, project: project, createNode: createNode,
+    invitation: invitation, createProject: createProject, accept: accept, report: report, confirm: confirm,
+    projectView: projectView, economy: economy, compute: compute,
+    crossing: crossing, validateCrossing: validateCrossing, receive: receive, decide: decide,
+    makeReturn: makeReturn, receiveReturn: receiveReturn, cartridge: cartridge, adopt: adopt, clone: clone};
+}));
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var C = window.AbundentCircuit; var STOREKEY = 'abundent-circuit001-local-v1';
+  var st, activeTab = 'overview', noticeTimer;
+  try { var stored = JSON.parse(localStorage.getItem(STOREKEY) || 'null'); C.checkStore(stored); st = stored; }
+  catch (_) { st = C.init(); }
+  function $(q) { return document.querySelector(q); }
+  function esc(v) { return String(v === null || v === undefined ? '' : v).replace(/[&<>"']/g, function (c) {
+    return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c];
+  }); }
+  function empty(text) { return '<div class="empty">' + esc(text) + '</div>'; }
+  function s(v) { return esc(v); }
+  function notify(message) { var el = $('#notice'); el.textContent = message; el.className = 'on';
+    clearTimeout(noticeTimer); noticeTimer = setTimeout(function () { el.className = ''; }, 4800); }
+  function persist() { try { localStorage.setItem(STOREKEY, JSON.stringify(st)); } catch (_) { notify('Local storage unavailable. Export a backup before leaving.'); } }
+  function data(form, key) { var field = form.elements.namedItem(key); return field ? String(field.value) : ''; }
+  function button(act, text, id, style) { return '<button class="btn ' + (style || 'btn') + '" data-click="' + esc(act) + '" data-id="' + esc(id) + '">' + esc(text) + '</button>'; }
+  function form(act, id, fields, label) { return '<form data-act="' + act + '" data-id="' + esc(id) + '"><div class="formfields">' + fields +
+     '</div><button class="btn primary">' + esc(label) + '</button></form>'; }
+  function input(name, placeholder, max, required) { return '<label>' + esc(placeholder) + '</label><input name="' + esc(name) + '" maxlength="' + max + '" ' + (required ? 'required ' : '') + 'placeholder="' + esc(placeholder) + '">'; }
+  function textarea(name, label, max) { return '<label>' + esc(label) + '</label><textarea name="' + esc(name) + '" maxlength="' + max + '" required></textarea>'; }
+  function current() { return st.active ? C.node(st, st.active) : null; }
+  function safeRun(fn) { try { fn(); persist(); render(); } catch (err) { notify('Not completed: ' + err.message); } }
+  function demo() { if (st.nodes.length && !confirm('Add two fictional demonstration harbors to the existing local notebook?')) return;
+    var a = C.createNode(st, 'Fictional Fellowship Harbor', 'community gathering');
+    var b = C.createNode(st, 'Fictional Maker Workshop', 'maker collective');
+    C.invitation(st, a.id, 'Come to a pretend music-and-garden gathering', 'Bring a song, a question, or just yourself. This is a fictional test invitation.');
+    C.createProject(st, a.id, 'Sample Lantern Festival', 'Practice a small, free festival; venue and people are fictional.', 'festival');
+    C.createProject(st, b.id, 'Sample Workshop', 'Practice preparing a portable event flyer.', 'maker');
+    st.active = a.id; persist(); render(); notify('Two fictional harbors loaded. Try the project and crossing flows.'); }
+  function download(filename, content, mime) { var blob = new Blob([content], {type: mime || 'application/json'});
+    var url = URL.createObjectURL(blob); var a = document.createElement('a'); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.parentNode.removeChild(a); setTimeout(function () { URL.revokeObjectURL(url); }, 9000); }
+  function asJson(obj, filename) { download(filename, JSON.stringify(obj, null, 2) + '\n', 'application/json'); }
+  function readFile(file, done) { if (!file || file.size > 3000000) return notify('File missing or above 3 MB limit.');
+    var r = new FileReader(); r.onload = function () { try { done(JSON.parse(r.result)); } catch (e) { notify('Import refused: ' + e.message); } };
+    r.onerror = function () { notify('Could not read this file.'); }; r.readAsText(file); }
+  function importObject(raw) { var schema = raw && raw.schema, n = current();
+    if (schema === C.SCHEMA) { C.checkStore(raw); if (!confirm('Replace every local harbor and notebook entry with this unauthenticated backup?')) return; st = raw; }
+    else if (schema === C.CROSSING) { if (!n) throw Error('Create a receiving harbor first.'); C.receive(st, n.id, raw); activeTab = 'crossings'; }
+    else if (schema === C.RETURN) { if (!n) throw Error('Create a source harbor first.'); C.receiveReturn(st, n.id, raw); activeTab = 'crossings'; }
+    else if (schema === C.CARTRIDGE) { if (!n) throw Error('Create an adopting harbor first.'); C.adopt(st, n.id, raw); activeTab = 'projects'; }
+    else throw Error('Unsupported JSON schema.');
+    persist(); render(); notify('Local import accepted for inspection; no external identity was authenticated.'); }
+  function render() { var n = current(); $('#onboard').hidden = !!n; $('#workspace').hidden = !n;
+    $('#nodeSelect').innerHTML = st.nodes.length ? st.nodes.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === st.active ? ' selected':'') + '>' + esc(x.label) + '</option>'; }).join('') : '<option>No harbor yet</option>';
+    document.querySelectorAll('[data-tab]').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-tab') === activeTab ? 'true' : 'false'); });
+    document.querySelectorAll('.section').forEach(function (sec) { sec.className = 'section' + (sec.id === activeTab ? ' active' : ''); });
+    if (!n) return;
+    var view = C.projectView(st, n.id);
+    $('#metrics').innerHTML = [['Harbors', st.nodes.length], ['Invitations (draft)', n.invites.length], ['Proposed / ongoing', view.quests],
+      ['Reviewed-confirmed', view.deeds], ['Crossings on HOLD', n.inbox.filter(function (x) { return x.disposition === 'HOLD'; }).length], ['Transferable methods', n.cartridges.length]]
+      .map(function (x) { return '<div class="card"><p class="tiny-head">' + esc(x[0]) + '</p><p class="metric">' + x[1] + '</p></div>'; }).join('');
+    $('#harborInfo').innerHTML = '<p><strong>' + esc(n.label) + '</strong> · ' + esc(n.kind) + '</p><p class="micro">Public routing address (copy to an inviter on another device; not proof of identity): <code>' + esc(n.id) + '</code></p>';
+    $('#journal').innerHTML = st.journal.length ? st.journal.slice(0, 8).map(function (e) { return '<p class="micro"><b>' + esc(e.kind.replace(/_/g, ' ')) + '</b> · ' + esc(e.node) + '<br>' + esc(e.at.slice(0, 16)) + '</p>'; }).join('') : empty('No local work recorded yet.');
+    $('#invites').innerHTML = n.invites.length ? n.invites.map(function (v) { return '<article class="item"><span class="pill proposed">UNSENT DRAFT</span><h3>' + s(v.title) + '</h3><p>' + s(v.text) + '</p>' + button('download-invite', 'Download invitation', v.id, 'btn') + '</article>'; }).join('') : empty('No invitations drafted here yet.');
+    $('#fullMeasure').innerHTML = '<div class="statrow">' + [['Seeds',view.seeds],['Quests',view.quests],['Deeds',view.deeds],['Harvests',view.harvests],['Gifts',view.gifts],['Witness labels',view.witness]].map(function (x) {
+      return '<div class="stat"><strong>' + x[1] + '</strong><span class="micro">' + s(x[0]) + '</span></div>'; }).join('') + '</div>';
+    $('#affordances').innerHTML = view.affordances.length ? view.affordances.map(function (a) {return '<div class="item"><strong>' + s(a.name) + '</strong><p class="micro">Source ' + s(a.from) + ' · Self-attested review; not verified identity</p></div>'; }).join('') : empty('An independently labeled review can open the first proposed affordance.');
+    $('#projectsList').innerHTML = n.projects.length ? n.projects.map(function (p) {
+      var pill = p.state === 'CONFIRMED' ? 'done' : p.state === 'DISPUTED' ? 'refuse' : p.state === 'PROPOSED' ? 'proposed' : 'held';
+      var html = '<article class="item seed"><span class="pill ' + pill + '">' + s(p.state) + '</span><span class="micro"> · ' + s(p.id) + ' / ' + s(p.kind) + '</span><h3>' + s(p.title) + '</h3><p>' + s(p.purpose) + '</p>';
+      if (p.parent) html += '<p class="lineage">Adapted from: ' + s(p.parent) + ' — no inherited authority.</p>';
+      if (p.state === 'PROPOSED') html += form('accept', p.id, input('actor','Person actually accepting the task',80,true) + textarea('scope','Exact bounded scope + local permission',400), 'Record self-attested acceptance');
+      if (p.state === 'ACCEPTED') html += '<p class="micro">Accepted by: ' + s(p.actor) + ' · Scope: ' + s(p.scope) + '</p>' + form('report', p.id, input('actor','Repeat accepting actor label',80,true) + textarea('report','Describe what was actually done',800),'Report work (not yet confirmed)');
+      if (p.state === 'REPORTED') html += '<p><b>Reported by ' + s(p.actor) + ':</b> ' + s(p.report) + '</p>' + form('confirm',p.id,input('reviewer','Different reviewing person label',80,true) + '<label>Review</label><select name="result"><option value="CONFIRMED">Confirm</option><option value="DISPUTED">Dispute</option></select>' + '<label>Capability opened if confirmed</label><textarea name="capability" maxlength="140"></textarea>', 'Record separate reviewer disposition');
+      if (p.state === 'CONFIRMED' || p.state === 'DISPUTED') html += '<p class="small"><b>' + s(p.reviewer) + '</b> entered ' + s(p.outcome) + '. ' + (p.capability ? 'Proposed new capacity: ' + s(p.capability) : '') + '</p>';
+      return html + '</article>';
+    }).join('') : empty('Plant a seed to begin. Nothing becomes a Deed without a separate reviewer label.');
+    $('#crossProject').innerHTML = n.projects.map(function (p) { return '<option value="' + s(p.id) + '">' + s(p.title) + ' (' + s(p.state) + ')</option>'; }).join('') || '<option value="">Create a seed first</option>';
+    $('#crossDest').innerHTML = st.nodes.filter(function (x) {return x.id !== n.id;}).map(function (x) {return '<option value="' + s(x.id) + '">' + s(x.label) + '</option>';}).join('') + '<option value="__external__">External harbor on another device (paste address below)</option>';
+    $('#inbound').innerHTML = n.inbox.length ? n.inbox.map(function (x) {
+      var html = '<article class="item blue"><span class="pill ' + (x.disposition === 'HOLD' ? 'held' : x.disposition === 'REFUSE' ? 'refuse' : 'done') + '">' + s(x.disposition) + '</span><h3>' + s(x.packet.proposal.title) + '</h3><p>' + s(x.packet.proposal.purpose) + '</p><p class="micro">From ' + s(x.packet.sourceLabel) + ' · ' + s(x.packet.id) + '</p>';
+      if (x.disposition === 'HOLD') html += form('decide',x.id,'<label>Disposition</label><select name="decision"><option value="ADMIT_FOR_REVIEW">Admit for review only</option><option value="REFUSE">Refuse</option></select>' + input('reviewer','Receiving steward label',80,true) + textarea('response','Why this disposition / local constraints',350),'Record local decision');
+      else html += '<p class="small">' + s(x.response) + '</p>' + button('download-return','Download return',x.id,'btn') +
+          button('deliver-return', 'Return in this browser (demo)',x.id,'btn line');
+      return html + '</article>';
+    }).join('') : empty('No packets yet. Export a crossing from another harbor, switch here, and import.');
+    $('#outbound').innerHTML = n.outbox.length ? n.outbox.map(function (x) {return '<article class="item"><span class="pill ' + (x.replies.length ? 'done' : 'proposed') + '">' + (x.replies.length ? 'RETURN RECEIVED' : 'NOT DELIVERED AUTOMATICALLY') + '</span><h3>' + s(x.packet.proposal.title) + '</h3><p class="micro">To ' + s(x.packet.destinationLabel) + '</p>' + button('download-cross','Download packet',x.id,'btn') + button('deliver-cross','Deliver in this browser (demo)',x.id,'btn line') + (x.replies.length ? '<p class="small">' + s(x.replies[0].decision) + ': ' + s(x.replies[0].note) + '</p>' : '') + '</article>'; }).join('') : empty('No outbound candidates.');
+    var reported = n.economy.filter(function (e) {return e.status === 'SELF_REPORTED';});
+    function sum(type) {return reported.filter(function (e) {return e.type === type;}).reduce(function (a,e) {return a+e.cents;},0)/100;}
+    $('#ecoSummary').innerHTML = '<div class="statrow"><div class="stat"><strong>$' + sum('money_in').toFixed(2) + '</strong><span class="micro">Money in, self-reported</span></div><div class="stat"><strong>$' + sum('money_out').toFixed(2) + '</strong><span class="micro">Money out, self-reported</span></div><div class="stat"><strong>' + n.economy.filter(function (e) {return e.type !== 'money_in' && e.type !== 'money_out';}).length + '</strong><span class="micro">Noncash records</span></div></div><p class="small">Planned money is excluded. These are not bank or payment data.</p>';
+    $('#ecoList').innerHTML = n.economy.length ? n.economy.map(function (e) {return '<article class="item"><span class="pill">' + s(e.type) + ' · ' + s(e.status) + '</span><p>' + s(e.description) + '</p>' + (e.cents ? '<p class="small">$' + (e.cents/100).toFixed(2) + ' (self-reported only)</p>' : '') + '</article>';}).join('') : empty('No economic records. Keep money and nonmoney distinct.');
+    $('#computeList').innerHTML = n.compute.length ? n.compute.map(function (x) {return '<article class="item green"><span class="pill done">LOCAL EXECUTION</span><h3>' + s(x.task.replace(/_/g,' ')) + ': ' + s(x.output) + '</h3><p class="micro">' + s(x.id) + ' · executor: this browser (not GHoT)</p></article>';}).join('') : empty('Run a small task on this device to create a real local execution receipt.');
+    $('#cartridgeProject').innerHTML = n.projects.filter(function (p) {return p.state === 'CONFIRMED';}).map(function (p) {return '<option value="' + s(p.id) + '">' + s(p.title) + '</option>';}).join('') || '<option value="">A reviewed-confirmed seed is required</option>';
+    $('#cartridgeList').innerHTML = n.cartridges.length ? n.cartridges.map(function (x) {return '<article class="item green"><h3>' + s(x.title) + '</h3><p>' + s(x.method) + '</p><p class="small"><b>Limits:</b> ' + s(x.knownLimits) + '</p>' + button('download-card', 'Download portable JSON', x.id, 'btn') + '</article>';}).join('') : empty('A confirmed useful act plus an intentionally authored method creates a cartridge.');
+  }
+  document.addEventListener('submit', function (ev) { var f = ev.target, action = f.getAttribute('data-act'); if (!action) return;
+    ev.preventDefault(); safeRun(function () { var id = f.getAttribute('data-id'), n = current();
+      if (action === 'create-node') C.createNode(st,data(f,'name'),data(f,'kind'));
+      else if (action === 'invite') C.invitation(st,n.id,data(f,'title'),data(f,'description'));
+      else if (action === 'project') C.createProject(st,n.id,data(f,'title'),data(f,'purpose'),data(f,'kind'));
+      else if (action === 'accept') C.accept(st,n.id,id,data(f,'actor'),data(f,'scope'));
+      else if (action === 'report') C.report(st,n.id,id,data(f,'actor'),data(f,'report'));
+      else if (action === 'confirm') C.confirm(st,n.id,id,data(f,'reviewer'),data(f,'result'),data(f,'capability'));
+      else if (action === 'crossing') { var dest=data(f,'destination'); if(dest === '__external__') dest=data(f,'externalId'); C.crossing(st,n.id,data(f,'projectId'),dest,data(f,'note')); }
+      else if (action === 'economy') { var type=data(f,'type'), dollars=type==='money_in'||type==='money_out' ? Number(data(f,'dollars')) : 0;
+        if (!Number.isFinite(dollars) || dollars < 0 || Math.round(dollars*100) / 100 !== dollars) throw Error('Enter nonnegative dollars and cents.');
+        C.economy(st,n.id,type,data(f,'description'),Math.round(dollars*100),data(f,'status')); }
+      else if (action === 'compute') C.compute(st,n.id,data(f,'task'),data(f,'input'));
+      else if (action === 'decide') C.decide(st,n.id,id,data(f,'decision'),data(f,'reviewer'),data(f,'response'));
+      else if (action === 'cartridge') C.cartridge(st,n.id,data(f,'projectId'),data(f,'method'),data(f,'limitations'));
+      else throw Error('Unknown form.');
+      notify('Saved locally. This is not an external or institutional action.');
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    var tab = ev.target.closest('[data-tab]'); if (tab) { activeTab = tab.getAttribute('data-tab'); render(); window.scrollTo(0,0); return; }
+    var b = ev.target.closest('[data-click]'); if (!b) return; var action = b.getAttribute('data-click'), id = b.getAttribute('data-id');
+    safeRun(function () {var n=current(), item, other;
+      if (action === 'download-invite') {item=n.invites.find(function (x) {return x.id===id;}); download('Abundent_Invitation_' + id + '.txt',item.title+'\nFrom: '+item.from+'\n'+item.text+'\n\nOptional invitation only; no auto-enrollment.\n','text/plain');}
+      else if (action === 'download-cross' || action === 'deliver-cross') { item=n.outbox.find(function (x) {return x.id===id;}); if (action === 'download-cross') asJson(item.packet, 'Circuit_Crossing_' + id + '.json');
+        else {other=C.node(st,item.packet.destination); C.receive(st,other.id,item.packet); notify('Delivered to ' + other.label + ' HOLD queue in same browser demo.');} }
+      else if (action === 'download-return' || action === 'deliver-return') {item=C.makeReturn(st,n.id,id); if (action === 'download-return') asJson(item,'Circuit_Return_' + id + '.json');
+        else {C.receiveReturn(st,item.destination,item); notify('Self-attested return delivered locally.');} }
+      else if (action === 'download-card') {item=n.cartridges.find(function (x) {return x.id===id;}); asJson(item,'Circuit_Cartridge_' + id + '.json');}
+      else throw Error('Unknown action.');
+    });
+  });
+  document.querySelectorAll('[data-tab]').forEach(function (b) {b.setAttribute('type','button');});
+  $('#nodeSelect').addEventListener('change',function () {st.active = this.value; persist(); render();});
+  $('#newNodeBtn').addEventListener('click', function () {var label=prompt('Name of this independent harbor (no affiliation implied):');
+    if (!label) return; safeRun(function () {C.createNode(st,label,'independent local group');});});
+  $('#demoBtn').addEventListener('click',function () {safeRun(demo);});
+  $('#backupBtn').addEventListener('click',function () {asJson(st,'Abundent_Circuit001_PRIVATE_Backup.json'); notify('Private local backup downloaded. Do not publish it.');});
+  $('#importBtn').addEventListener('click',function () {$('#importFile').click();});
+  $('#importFile').addEventListener('change',function (ev) {var f=this.files[0]; if(f) readFile(f,importObject);this.value='';});
+  $('#resetBtn').addEventListener('click',function () {if(confirm('Delete all locally saved Circuit data? Export a private backup first if needed.')) {st=C.init();activeTab='overview';persist();render();notify('Local notebook cleared.');}});
+  $('#ecoType').addEventListener('change',function () {$('#ecoAmount').disabled = !/money_in|money_out/.test(this.value);});
+  render();
+}());
+
+</script>
+</body></html>
