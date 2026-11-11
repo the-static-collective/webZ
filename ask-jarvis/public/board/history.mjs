@@ -74,11 +74,29 @@ async function loadHistory(append=false){
   render();
   message(items.length?items.length+' reviewed contributions shown · '+(scope==='all'?'all threads':LABEL[scope]):
    'The reviewed public history is currently empty. Unreviewed contributions are never shown.');
+  window.dispatchEvent(new CustomEvent('workboard-reviewed-history',{detail:{
+   entries:items.map(e=>({id:e.id,thread:e.thread,parentId:e.parentId,kind:e.kind,
+    text:e.text,status:e.status,createdAt:e.createdAt,publishedAt:e.publishedAt})),
+   scope,complete:!cursor
+  }}));
  }catch{
   if(!append){items=[];render();}
   message('The shared history could not be loaded. Local drafting still works. You can try Refresh.');
+  window.dispatchEvent(new Event('workboard-history-error'));
  }finally{busy=false;$('history-refresh').disabled=false;$('history-more').disabled=false;}
 }
+window.addEventListener('workboard-compose-candidate',e=>{
+ const d=e.detail||{};
+ if(!isKnown(d.thread)||typeof d.text!=='string'||d.text.length<12||d.text.length>400)return;
+ selectScope(d.thread);
+ $('history-thread').value=d.thread;
+ $('history-kind').value='proposal';
+ $('history-text').value=d.text;
+ $('history-consent').checked=false;
+ reply.value='';
+ $('history-post-status').textContent='An action suggestion has become an editable draft. You must approve its wording and separately consent before submitting it for review.';
+ $('history-text').focus({preventScroll:true});
+});
 $('history-scope').addEventListener('change',e=>selectScope(e.target.value));
 $('history-refresh').addEventListener('click',()=>{cursor=null;void loadHistory(false);});
 $('history-more').addEventListener('click',()=>void loadHistory(true));
