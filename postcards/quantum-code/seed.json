@@ -1,0 +1,33 @@
+{
+  "schema": "webz/postcard-seed/v0",
+  "id": "postcard-zero-quantum-code-001",
+  "source": {
+    "title": "Quantum Code (Heartfelt Hybrid Mix)",
+    "creator_tag": "thestaticcollective",
+    "suno_song_id": "010bc866-6eba-4b6b-8e2e-fdf64917d14c",
+    "url": "https://suno.com/song/010bc866-6eba-4b6b-8e2e-fdf64917d14c",
+    "file_sha256": "28ad7d77f0da36e41ca8fa6fe82a36e3a0ad5862f652ca237e3ae680f553d072",
+    "audio_duration_seconds_approx": 207.312,
+    "file_tags": {
+      "TXXX_comment_created": "2026-10-06T21:20:34Z",
+      "COMM_created": "2026-10-06T18:25:52.349720+00:00"
+    }
+  },
+  "claims": {
+    "artifact_fingerprint": "computed from user-supplied MP3",
+    "provenance_tags": "read from MP3, not independently authenticated",
+    "time_disagreement": "retained, not reconciled",
+    "cover_art": "embedded in source MP3; not hosted in repository",
+    "lyrics": "embedded in source MP3; excerpts only",
+    "reLATTE_signatures": "none",
+    "world_admission": "none",
+    "remote_transport": "none",
+    "audio_hosting": "external Suno source; local file playback after SHA-256 comparison"
+  },
+  "boundaries": [
+    "Presentation controls are provisional.",
+    "No AI-generated images or new worlds are represented as already existing.",
+    "All contributions are ephemeral unsigned offers with explicit local admission.",
+    "The public site route requires deployment before printed QR codes should target it."
+  ]
+}
