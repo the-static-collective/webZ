@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#18251f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>a week together · field station</title><link rel="stylesheet" href="./field.css"><script type="module" src="./ui.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to field station</a>
+<header><a href="../">← Listening room</a><span>THE STATIC FIELD / SPECIMEN 001</span></header>
+<main id="main"><div class="hero"><p class="eyebrow">A WEEK TOGETHER · PORTABLE SONG FIELD STATION</p>
+<h1>One song.<br><em>Eleven windows.</em></h1><p>Fourteen tracks live in seven letters. This desk shows what the public album actually tells us, and keeps the unwitnessed things unwitnessed.</p></div>
+<section aria-labelledby="record-heading"><h2 id="record-heading">Choose the record</h2><label for="track">Track</label><select id="track"></select>
+<p id="context" class="context" aria-live="polite"></p><div class="actions"><a id="song-link" target="_blank" rel="noopener noreferrer">Open source song ↗</a><a href="../#letters">Read its letter ↗</a></div></section>
+<section aria-labelledby="windows-heading"><h2 id="windows-heading">Eleven windows</h2><p>Editorial pairing is not evidence of musical ancestry. Empty windows are invitations to investigate, not permission to invent.</p><dl id="windows" class="windows"></dl></section>
+<section aria-labelledby="notes-heading"><h2 id="notes-heading">Leave a witnessed note</h2>
+<p>Notes are unsigned, local human assertions. They do not become song metadata, publication, or another person's truth. Do not include private information.</p>
+<label for="kind">What kind of entry?</label><select id="kind"><option value="observation">What I directly observed</option><option value="interpretation">My interpretation</option><option value="question">A question, not a fact</option></select>
+<label for="note">Your words (up to 500 characters)</label><textarea id="note" maxlength="500" rows="4" placeholder="What did you actually hear, see, or wonder?"></textarea>
+<button id="add" type="button">Place note on this desk</button><ul id="notes" aria-live="polite"></ul></section>
+<section aria-labelledby="carry-heading"><h2 id="carry-heading">Carry a copy across</h2>
+<p>Export a local JSON parcel, move it to another computer, and inspect it there. A matching hash checks internal consistency only. Import always enters <strong>HOLD</strong>, never automatic acceptance.</p>
+<div class="actions"><button id="export" type="button">Export this song's notes</button><label for="import">Inspect parcel (JSON)</label><input id="import" type="file" accept=".json,application/json"></div>
+<p id="status" class="status" role="status" aria-live="polite">No parcel imported.</p><div id="held" hidden><pre id="preview"></pre><button id="admit" type="button">Place held notes on desk</button><button id="refuse" type="button">Discard held parcel</button></div></section>
+<footer>Experimental sidecar, not a canonical Vault or signed reLATTE receiver. No telemetry, backend, automatic submission, or browser persistence.</footer></main></body></html>
