@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#27392f">
+<meta name="description" content="The Missing Ingredient: a playable, fictional community food circular. A local-first experiment in meals, offers, witness, print and radio.">
+<title>The Missing Ingredient · A LemonPRESS Field Circular</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#workbench">Skip to the field workbench</a>
+<div class="safety" role="note"><span class="blip"></span><strong>FICTIONAL FIELD DEMONSTRATION</strong><span>No actual food inventory, offers, appointments, donations, broadcasts, or partner affiliation.</span></div>
+<header class="masthead wrap">
+ <a class="brand" href="https://abundent.org/" target="_blank" rel="noopener">abundent<span class="accent">.</span></a>
+ <span class="mast-center">LEMONPRESS <span aria-hidden="true">×</span> THE LIVING TABLE</span>
+ <span class="mast-no">FIELD EDITION <b>001</b></span>
+</header>
+<main id="workbench">
+ <section class="hero wrap">
+   <div class="hero-text">
+     <p class="eyebrow">THINGS WE CAN MAKE TOGETHER / ISSUE <span id="issueTop">000</span></p>
+     <h1>THE MISSING<br><em>INGREDIENT<span class="dot">.</span></em></h1>
+     <p class="intro">A recipe becomes a question. A question finds a possible answer. A confirmed act becomes the next issue.</p>
+     <div class="hero-actions"><a class="button primary" href="#pantry">Start with dinner <span>↓</span></a><a class="button ghost" href="#paper">See the paper <span>↗</span></a></div>
+   </div>
+   <div class="hero-mark" aria-hidden="true"><div class="mark-ring">A RECIPE IS AN INVITATION • A RECIPE IS AN INVITATION •</div><div class="lemon-shape"><i></i><i></i></div><span>NOT FOR SALE<br>NOT YET FINISHED</span></div>
+ </section>
+ <div class="ticker"><div class="ticker-inner">NOURISH THE TABLE <span>✳</span> ASK THE NEIGHBORS <span>✳</span> MAKE NO FALSE PROMISES <span>✳</span> BRING THE ANSWER HOME <span>✳</span> NO ACCOUNTS REQUIRED <span>✳</span></div></div>
+ <section class="work wrap" aria-label="Interactive fictional meal-to-issue workbench">
+  <div class="section-heading"><span class="step-no">01 / THE PANTRY</span><div><h2>What can we cook?</h2><p>Choose a fictional dinner. Mark exactly what this imaginary kitchen has, lacks, or doesn't know yet.</p></div></div>
+  <div class="recipes" id="recipes" aria-label="Choose a recipe"></div>
+  <div class="pantry-wrap" id="pantry">
+   <div class="pantry-header"><div><p class="eyebrow">NOURISH / REVIEWED REQUIREMENTS</p><h3 id="pantryTitle">The Good Neighbor Soup</h3><p id="recipeSubtitle"></p></div><label class="serves">SERVES <select id="serves"><option value="2">2 people</option><option value="4">4 people</option><option value="6">6 people</option></select></label></div>
+   <div class="pantry-help"><span class="status-key have">● ON HAND</span><span class="status-key missing">● MISSING</span><span class="status-key unknown">● UNKNOWN</span></div>
+   <div id="ingredients" class="ingredients"></div>
+   <div class="pantry-summary" id="pantrySummary" role="status"></div>
+  </div>
+  <div class="section-heading second"><span class="step-no">02 / THE POSSIBLE ANSWER</span><div><h2>A neighbor might know.</h2><p>JAR;VIS-style explainable matching. Every basket below is invented. A match is only a suggestion, never a pledge.</p></div></div>
+  <div class="match-panel">
+    <div class="match-side"><p class="eyebrow">SELECT THE QUESTION</p><h3>What's missing?</h3><div id="focusPicker"></div><p class="fine">Only ingredients explicitly marked <b>missing</b> can request a sample match. “Unknown” stays unknown.</p></div>
+    <div class="offers-side"><div class="offers-head"><span>FICTIONAL SHARED BASKET</span><span id="matchCount">0 CANDIDATES</span></div><div id="offers" class="offers"></div></div>
+  </div>
+  <div class="section-heading second"><span class="step-no">03 / THE HANDOFF</span><div><h2>What actually happened?</h2><p>Rehearse the difference between suggestion, acceptance, reporting, and independent acknowledgement.</p></div></div>
+  <div class="witness">
+    <div class="witness-top"><div><p class="eyebrow">JUBILEE × FULL MEASURE / ONE BROWSER</p><h3 id="phaseTitle">Nothing has been promised.</h3><p id="phaseHint"></p></div><strong id="phaseBadge" class="phase">DRAFT</strong></div>
+    <div class="progress" aria-label="Handoff progress"><span data-stage="proposed">PROPOSED</span><span data-stage="accepted">ACCEPTED</span><span data-stage="reported">REPORTED</span><span data-stage="confirmed">CONFIRMED</span></div>
+    <div id="handoffActions" class="handoff-actions"></div>
+    <div class="witness-note">The helper and recipient buttons simulate different roles, not different authenticated people. Nothing here can prove a real-world delivery, confer membership, or issue a financial credit.</div>
+    <div class="receipt-head"><span class="eyebrow">LOCAL DEMO RECEIPT TAPE</span><span>ONE BROWSER / UNVERIFIED</span></div><ol id="receipts" class="receipts"></ol>
+  </div>
+  <div class="section-heading second"><span class="step-no">04 / THE PRESS</span><div><h2>Give the story a door.</h2><p>One rehearsal, two publications: a folded-looking grocery circular and a short radio cue. Neither is an official notice.</p></div></div>
+  <div class="press-grid">
+    <section class="paper" id="paper" aria-label="Printable community food circular">
+      <div class="paper-top"><span>LEMONPRESS / THE FIELD</span><span>NO. <span id="paperNo">000</span> • FICTION ONLY</span></div>
+      <div class="paper-title"><small>THE WEEKLY QUESTION OF WHAT WE HAVE</small><h2>THE MISSING<br>INGREDIENT.</h2><span class="paper-round">✳</span></div>
+      <div class="paper-line">WHAT WE COULD COOK THIS WEEK</div>
+      <h3 id="printRecipe"></h3><p id="printSubtitle"></p>
+      <div id="printIngredients" class="print-ingredients"></div>
+      <div class="paper-recipe"><h4>HOW IT COMES TOGETHER</h4><ol id="printSteps"></ol></div>
+      <div class="paper-bottom"><div><h4>ONE OPEN QUESTION</h4><p id="printQuestion"></p></div><div><h4>WHAT THE DEMO SHOWED</h4><p id="printReturn"></p></div></div>
+      <footer>READER ADVISORY: SIDE EFFECTS MAY INCLUDE NEIGHBORS. <b>NO INVENTORY · NO ENDORSEMENT · NO PUBLIC REQUEST</b></footer>
+    </section>
+    <aside class="press-tools">
+      <div class="press-tool"><div class="tool-icon">▤</div><p class="eyebrow">LEMONPRESS / PHYSICAL EDITION</p><h3>A real sheet of paper.</h3><p>Print the selected recipe, what's missing, and the state of this fictional handoff. Change the recipe; the paper changes.</p><button class="button primary wide" id="printBtn">Print the circular ↗</button></div>
+      <div class="press-tool radio-tool"><div class="tool-icon">◉</div><p class="eyebrow">KINSHIP / LEMON RADIO — DRAFT ONLY</p><h3>The radio hears it.</h3><p>This is a 20–40 second concept cue. Nothing is transmitted; Kinship isn't connected or represented as an authorizing partner.</p><pre id="radioText" class="radio-text"></pre><button class="button small" id="copyRadio">Copy radio script</button></div>
+      <div class="press-tool"><div class="tool-icon">↶</div><p class="eyebrow">OPEN WINDOW / YOUR LOCAL MARGIN</p><h3>What should the next table ask?</h3><label for="margin">Your private editorial thought (stays in this browser)</label><textarea id="margin" maxlength="500" rows="3" placeholder="What would make the next issue more useful? Do not enter private identifying details."></textarea><p class="fine">Never included in exports, radio scripts or shared links. Not sent to any server.</p></div>
+      <div class="press-tool"><div class="tool-icon">⤴</div><p class="eyebrow">RETURN / THE NEXT TABLE</p><h3>Keep the loop moving.</h3><p>Export a synthetic, non-identifying rehearsal receipt, copy a fiction-only recipe link, or begin another edition.</p><div class="stack-actions"><button id="exportBtn" class="button small">Export demo JSON</button><button id="shareBtn" class="button small">Copy next-table link</button><button id="nextBtn" class="button small">Next edition →</button><button id="clearBtn" class="text-button">Clear this local rehearsal</button></div></div>
+    </aside>
+  </div>
+ </section>
+ <section class="architecture wrap" aria-label="Project lineage and boundaries"><p class="eyebrow">WHAT ACTUALLY GOT SMASHED TOGETHER</p><h2>One machine, many independent organs.</h2><div class="organ-grid"><div><b>NOURISH KIDS</b><span>Have / Missing / Unknown</span></div><div><b>JAR;VIS</b><span>Explainable candidate match</span></div><div><b>JUBILEE + FULL MEASURE</b><span>Offer / report / human return</span></div><div><b>reLATTE</b><span>Separate stages and local receipt</span></div><div><b>LEMONPRESS</b><span>Printable changing edition</span></div><div><b>STATIC LIVE / KINSHIP</b><span>Radio script, not a broadcast</span></div><div><b>GrO</b><span>Small act opens a next possibility</span></div><div><b>TABLE & ROAD</b><span>One table to another</span></div></div><p class="boundaries"><strong>PROVENANCE:</strong> This is a new self-contained illustrative adapter inspired by the projects above. It does not import their production runtimes or communicate with them. All sample suppliers and kitchens are fictional. All state is browser-local. There are no accounts, payments, push messages, verified identities, real offers, inventory, participant tracking or live radio connections. It is not a Coalition of Care, Waseca grocery, church or Kinship program.</p></section>
+</main>
+<footer class="site-footer wrap"><span>LEMONPRESS · BOOKS WITH SIDE EFFECTS</span><span>AN INDEPENDENT STATIC COLLECTIVE EXPERIMENT · 2026</span><a href="https://github.com/the-static-collective/webZ" target="_blank" rel="noopener">SEE THE ROOTS ↗</a></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>
