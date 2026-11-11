@@ -1,0 +1,64 @@
+name: Link Wallet 003 owner delegation bridge — browser and encryption boundary
+on:
+  push:
+    branches: [feature/link-wallet-003-owner-delegation-desk]
+    paths:
+      - 'commons/wallet/**'
+      - 'tests/link-wallet-authority.test.mjs'
+      - 'tests/wallet_authority_browser.py'
+      - '.github/workflows/link-wallet-003-owner-desk.yml'
+      - 'apps/**'
+  pull_request:
+    paths:
+      - 'commons/wallet/**'
+      - 'tests/link-wallet-authority.test.mjs'
+      - 'tests/wallet_authority_browser.py'
+      - '.github/workflows/link-wallet-003-owner-desk.yml'
+      - 'apps/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-desk:
+    name: synthetic owner P256 proof, mobile browser and existing encrypted Link Wallet
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Strict owner grant, recipient pin, revoke, receipt hostile tests
+        run: node --test tests/link-wallet-authority.test.mjs
+      - name: Existing Link Wallet crypto and directed handoff regression
+        run: node --test tests/link-wallet.test.mjs tests/link-wallet-handoff.test.mjs
+      - name: Build reviewable portable static Abundent
+        run: |
+          npm --prefix apps test
+          npm --prefix apps run build
+          test -f apps/dist/commons/wallet/index.html
+          test -f apps/dist/commons/wallet/authority/index.html
+          test -f apps/dist/commons/wallet/authority/core.mjs
+          test -f apps/dist/commons/wallet/authority/delegation-core.mjs
+          test -f apps/dist/commons/wallet/authority/store.mjs
+          test -f apps/dist/commons/wallet/authority/app.mjs
+      - name: Install Chromium Playwright dependencies
+        run: |
+          python -m pip install -r tests/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Real synthetic mobile Chromium owner desk and encrypted wallet shortcut integration
+        run: |
+          python tests/wallet_authority_browser.py
+          python tests/wallet_browser.py
+          python tests/wallet_handoff_browser.py
+      - name: Verify that real owner keys and grants were not committed
+        run: |
+          test ! -e commons/wallet/authority/WF008-signed-project-delegation.json
+          test ! -e commons/wallet/authority/private-jwk.json
+          test ! -e commons/wallet/authority/user-enrollment.json
+          test ! -e commons/wallet/authority/user-receipt.json

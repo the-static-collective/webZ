@@ -66,6 +66,11 @@ jobs:
           test -f apps/dist/commons/wallet/store.mjs
           test -f apps/dist/commons/wallet/app.mjs
           test -f apps/dist/commons/wallet/handoff.mjs
+          test -f apps/dist/commons/wallet/authority/index.html
+          test -f apps/dist/commons/wallet/authority/app.mjs
+          test -f apps/dist/commons/wallet/authority/core.mjs
+          test -f apps/dist/commons/wallet/authority/delegation-core.mjs
+          test -f apps/dist/commons/wallet/authority/store.mjs
           test -f apps/dist/bridge/outbox/index.html
           test -f apps/dist/bridge/outbox/catalog.mjs
           test -f apps/dist/bridge/outbox/core.mjs

@@ -24,7 +24,8 @@ function canReceive(){
  try{
   if(!window.opener||window.opener.closed||window.opener.location.origin!==location.origin)return false;
   const openerPath=window.opener.location.pathname;
-  return openerPath.endsWith("/commons/inbox/")||
+  return openerPath.endsWith("/commons/wallet/authority/")||
+     openerPath.endsWith("/commons/inbox/")||
      openerPath.endsWith("/commons/")||
      openerPath.endsWith("/apps/")||openerPath==="/";
  }catch{return false}
