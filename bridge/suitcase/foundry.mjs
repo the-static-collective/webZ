@@ -1,3 +1,4 @@
+import {assessDisposition} from "./protocol.mjs";
 // SUITCASE-002: local analysis of signed packets; not a shared directory or legal entity register.
 // All inputs are assumed signature-verified first. This module NEVER confers real-world authority.
 export function assessGenesis(genesis,parcels){
@@ -32,11 +33,7 @@ export function discover(parcels,now=Date.now()){
 }
 export function linkedDisposition(p,parcels){
   if(p?.payload?.kind!=="DISPOSITION")return false;
-  const o=parcels.find(x=>x.digest===p.payload.body.onDigest);
-  return Boolean(o&&o.payload.kind==="OFFER"&&
-    o.payload.issuer.fingerprint!==p.payload.issuer.fingerprint&&
-    (!o.payload.body.toFingerprint||o.payload.body.toFingerprint===p.payload.issuer.fingerprint)&&
-    Date.parse(p.payload.at)<=Date.parse(o.payload.body.expiresAt));
+  return assessDisposition(p,parcels.find(x=>x.digest===p.payload.body.onDigest)).matched;
 }
 export function localEvidence(room,parcels){
   const own=foundingFor(room.fingerprint,parcels);
