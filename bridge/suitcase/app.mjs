@@ -1,5 +1,5 @@
 // SUITCASE-001. Public-safe peer-to-peer signed file exchange. NO fetch, email or shared database.
-import {newRoom,sign,verify,addressedTo,mayAnswer,fingerprint,hash,identity,manifestFromIntent} from "./protocol.mjs";
+import {newRoom,sign,verify,addressedTo,mayAnswer,assessDisposition,fingerprint,hash,identity,manifestFromIntent} from "./protocol.mjs";
 import {rooms,packets,addRoom,addPacket} from "./store.mjs";
 import {NODE_KINDS,nodeById,hostBody} from "./nodes.mjs";
 const $=id=>document.getElementById(id);
@@ -13,12 +13,11 @@ function currentRoom(id){const r=localRooms.find(x=>x.roomId===id);if(!r)throw E
 function currentPacket(digest){const p=localPackets.find(x=>x.digest===digest);if(!p)throw Error("Choose a saved signed envelope first");return p}
 function short(fp){return fp.slice(0,13)+"…"+fp.slice(-8)}
 function selectRooms(){const opts=localRooms.map(x=>[x.roomId,x.label+" · "+short(x.fingerprint)]);for(const id of ["offer-sender","reply-room","node-room"])chooseOptions(id,opts,"Create a local room first")}
-function responseAssessment(p){const src=localPackets.find(x=>x.digest===p.payload.body.onDigest);
- if(!src||src.payload.kind!=="OFFER")return "Source offer not present here: receipt UNMATCHED (signature does not prove the event).";
- if(src.payload.issuer.fingerprint===p.payload.issuer.fingerprint)return "INVALID RELATION: sender cannot independently respond to itself.";
- if(src.payload.body.toFingerprint&&src.payload.body.toFingerprint!==p.payload.issuer.fingerprint)return "INVALID RELATION: response came from a different key than the addressed recipient.";
- if(Date.parse(p.payload.at)>Date.parse(src.payload.body.expiresAt))return "Response was signed after the offer expiration.";
- return "Response cryptographically references the local offer. Key identity and real-world authority remain UNVERIFIED.";
+function relation(p){return assessDisposition(p,localPackets.find(x=>x.digest===p.payload.body.onDigest))}
+function responseAssessment(p){const a=relation(p);
+ if(a.status==="UNMATCHED_OFFER")return "Source offer not present here: receipt UNMATCHED (signature does not prove the event).";
+ if(!a.matched)return "INVALID RELATION: "+a.status+".";
+ return "Response cryptographically references the local offer. "+(a.status==="MATCHED_OPEN_OFFER"?"Open offer; no preselected receiving key. ":"Addressed receiving key matches. ")+"Key identity and real-world authority remain UNVERIFIED.";
 }
 function renderRooms(){const mount=$("room-list");mount.replaceChildren();$("room-count").textContent=String(localRooms.length);
  if(!localRooms.length){mount.append(el("p","No keys created yet. A phone can make its own room here."));return}
@@ -44,10 +43,11 @@ function render(){selectRooms();renderRooms();renderPackets();selectOffers();ren
 $("room-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{if(!$("room-consent").checked)throw Error("Explicit device-owner acknowledgment required");const room=await newRoom($("room-label").value,$("room-kind").value);await addRoom(room);await load();$("room-label").value="";$("room-consent").checked=false;report("New local signing identity created. Organization affiliation remains UNVERIFIED.")})});
 $("offer-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{const room=currentRoom($("offer-sender").value),address=$("offer-to").value.trim(),at=new Date();const expiry=new Date(at.getTime()+14*86400000).toISOString();if(address&&!/^[a-f0-9]{64}$/.test(address))throw Error("Receiver address must be a 64-character public-key fingerprint");if(address===room.fingerprint)throw Error("A room cannot address itself as independent receiver");
  const packet=await sign(room,"OFFER",{title:$("offer-title").value.trim(),description:$("offer-description").value.trim(),scope:$("offer-scope").value.trim(),toFingerprint:address,expiresAt:expiry});await addPacket(packet,"CREATED_HERE");await load();report("Signed offer saved on THIS DEVICE. Download JSON to move it; nobody has received it yet.")})});
-$("reply-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{const room=currentRoom($("reply-room").value),offer=currentPacket($("reply-offer").value);if(!mayAnswer(offer,room))throw Error("This room may not answer this offer: same key, wrong address or expired");const response=await sign(room,"DISPOSITION",{onDigest:offer.digest,decision:$("reply-decision").value,note:$("reply-note").value.trim()});await addPacket(response,"CREATED_HERE");await load();report("Receiver key signed "+response.payload.body.decision+". Not sent or authorized. Download its JSON for the original sender.")})});
+$("reply-form").addEventListener("submit",event=>{event.preventDefault();guard(async()=>{const room=currentRoom($("reply-room").value),offer=currentPacket($("reply-offer").value);if(!mayAnswer(offer,room))throw Error("This room may not answer this offer: same key, wrong address or expired");const response=await sign(room,"DISPOSITION",{onDigest:offer.digest,decision:$("reply-decision").value,note:$("reply-note").value.trim()});const assessed=assessDisposition(response,offer);if(!assessed.matched)throw Error(assessed.status);await addPacket(response,"CREATED_HERE");await load();report("Receiver key signed "+response.payload.body.decision+". Not sent or authorized. Download its JSON for the original sender.")})});
 $("import").addEventListener("change",event=>{const input=event.currentTarget;guard(async()=>{const file=input.files?.[0];if(!file)throw Error("Select signed JSON");if(file.size>13000)throw Error("Packet exceeds 13 KB");const result=await verify(await file.text());const p=result.packet;
- if(p.payload.kind==="DISPOSITION"){const source=localPackets.find(x=>x.digest===p.payload.body.onDigest);if(source&&source.payload.kind==="OFFER"){if(source.payload.issuer.fingerprint===p.payload.issuer.fingerprint)throw Error("Sender's own key cannot supply independent disposition");if(source.payload.body.toFingerprint&&source.payload.body.toFingerprint!==p.payload.issuer.fingerprint)throw Error("Disposition does not match addressed receiving key")}}
- const saved=await addPacket(p,"IMPORTED_UNTRUSTED_IDENTITY");await load();report(saved?"Valid P-256 signature. Imported from an UNVERIFIED real-world identity; no external permission proved.":"Signed packet already present locally; no duplicate created.")
+ const assessment=p.payload.kind==="DISPOSITION"?relation(p):null;
+ if(assessment&&!assessment.matched&&assessment.status!=="UNMATCHED_OFFER")throw Error(assessment.status);
+ const saved=await addPacket(p,"IMPORTED_UNTRUSTED_IDENTITY");await load();report(saved&&assessment?.status==="UNMATCHED_OFFER"?"Valid P-256 signature; UNMATCHED offer, retained as unresolved evidence.":saved?"Valid P-256 signature. Imported from an UNVERIFIED real-world identity; no external permission proved.":"Signed packet already present locally; no duplicate created.")
  }).finally(()=>{input.value=""})});
 $("sign-node").onclick=()=>guard(async()=>{const room=currentRoom($("node-room").value),packet=await sign(room,"HOST_INTENT",hostBody(selectedNode));await addPacket(packet,"CREATED_HERE");await load();report("UNVERIFIED host proposal signed. This is NOT permission, installation or a running node.")});
 $("print-node").onclick=()=>window.print();
